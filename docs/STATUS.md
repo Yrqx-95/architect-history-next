@@ -217,7 +217,9 @@
 - ✅ 文档同步：`DATA_SCHEMA.md`、`UI_RULES.md`、`CONTENT_RULES.md` 记录简繁模型、移动端规则和内容口径
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
 - ✅ 本地响应验证：`/zh/search?q=tokyo`、`/zh/architect/aalto` 均返回 200，并输出简繁启动脚本与中文显示控件
-- ⏳ 待验证：移动端 375/390/430px 截图与正式部署 `/zh/search?q=tokyo`、`/zh/architect/aalto`
+- ✅ 部署验证：提交 `0bffb58` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-ju8wht35i-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`/zh/search?q=tokyo` 与 `/zh/architect/aalto` 均返回 200，并输出简繁启动脚本与中文显示控件
+- ⏳ 待验证：移动端 375/390/430px 截图
 
 ### 当前 docs/ 结构（10 个文档）
 ```
