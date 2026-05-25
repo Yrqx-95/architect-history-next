@@ -9,6 +9,8 @@ import MobileNav from '@/components/MobileNav'
 import PageTransition from '@/components/PageTransition'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import SmoothScroll from '@/components/SmoothScroll'
+import ChineseScriptProvider from '@/components/ChineseScriptProvider'
+import ChineseScriptToggle from '@/components/ChineseScriptToggle'
 
 const LANGS = ['zh', 'en', 'ja'] as const
 
@@ -53,10 +55,14 @@ export default async function LangLayout({ children, params }: {
           __html: `(function(){var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.dataset.theme=t;document.documentElement.classList.toggle('dark',d)})()`
         }} />
         <script dangerouslySetInnerHTML={{
+          __html: `(function(){var c=localStorage.getItem('chineseScript')||'system';if(c!=='hans'&&c!=='hant'&&c!=='system')c='system';var langs=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||''];var hant=langs.some(function(l){return /zh-(tw|hk|mo|hant)/i.test(l)});var s=c==='system'?(hant?'hant':'hans'):c;document.documentElement.dataset.zhScriptChoice=c;document.documentElement.dataset.zhScript=s})()`
+        }} />
+        <script dangerouslySetInnerHTML={{
           __html: `window.__nextErrorLog=[];window.addEventListener('error',function(e){var info={message:e.message,filename:e.filename,lineno:e.lineno,colno:e.colno,errorName:e.error?e.error.name:'',errorStack:e.error&&e.error.stack?e.error.stack.substring(0,1000):''};window.__nextErrorLog.push(info);console.error('[Diagnostic] JS Error:',JSON.stringify(info,null,2))})`
         }} />
       </head>
       <body className="min-h-screen bg-app font-sans text-primary antialiased">
+        <ChineseScriptProvider lang={lang} />
         <SmoothScroll>
           {/* Desktop Nav */}
           <nav className="sticky top-0 z-50 border-b border-subtle bg-nav backdrop-blur">
@@ -79,11 +85,14 @@ export default async function LangLayout({ children, params }: {
 
               {/* Right side controls */}
               <div className="flex items-center gap-1.5 sm:gap-2 ml-auto">
-                <ThemeToggle labels={{
-                  system: lang === 'en' ? 'System' : lang === 'ja' ? '自動' : '系统',
-                  dark: t(lang, 'dark'),
-                  light: t(lang, 'light'),
-                }} />
+                <div className="hidden items-center gap-2 sm:flex">
+                  <ChineseScriptToggle lang={lang} />
+                  <ThemeToggle labels={{
+                    system: lang === 'en' ? 'System' : lang === 'ja' ? '自動' : '系统',
+                    dark: t(lang, 'dark'),
+                    light: t(lang, 'light'),
+                  }} />
+                </div>
                 <LanguageSwitcher lang={lang} />
                 {/* Mobile nav trigger */}
                 <MobileNav lang={lang} />

@@ -79,6 +79,18 @@
 **迁移方向：**
 稳定后可迁移为 `architect_articles`、`architect_portraits`、`architect_representative_works` 三张表，或一个 `architect_content` JSONB 表。迁移前仓库 overlay 仍是唯一编辑源。
 
+### Chinese Script Overlay（中文简繁显示层）
+
+繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：
+
+| 值 | 说明 |
+|------|------|
+| system | 默认值；`zh-TW`、`zh-Hant`、`zh-HK`、`zh-MO` 浏览器语言显示繁体，其余显示简体 |
+| hans | 强制简体 |
+| hant | 强制台湾繁体 |
+
+显示层使用 `opencc-js` 的 `cn -> twp` 转换规则覆盖 UI 文案、Supabase 中文字段、仓库 overlay 长文、placeholder、alt 与 aria-label。未来精品内容可增加 `zh_hant`、`summary_hant`、`sections_hant` 等人工繁体字段；读取规则为人工繁体优先，没有时自动从简体转换。
+
 ### Building（建筑）
 
 | 字段 | 类型 | 必填 | 说明 |

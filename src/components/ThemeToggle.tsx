@@ -17,7 +17,7 @@ function applyTheme(theme: ThemeChoice) {
   html.classList.toggle('dark', theme === 'dark' || (theme === 'system' && prefersDark))
 }
 
-export default function ThemeToggle({ labels }: { labels: { system: string; dark: string; light: string } }) {
+export default function ThemeToggle({ labels, compact = false }: { labels: { system: string; dark: string; light: string }; compact?: boolean }) {
   const [theme, setTheme] = useState<ThemeChoice>(getStoredTheme)
 
   useEffect(() => {
@@ -44,13 +44,13 @@ export default function ThemeToggle({ labels }: { labels: { system: string; dark
   ]
 
   return (
-    <div className="inline-flex rounded-full border border-default bg-surface-muted p-0.5 text-xs text-muted shadow-semantic-card" aria-label="Theme" suppressHydrationWarning>
+    <div className={`inline-flex rounded-full border border-default bg-surface-muted p-0.5 text-xs text-muted shadow-semantic-card ${compact ? 'w-full' : ''}`} aria-label="Theme" suppressHydrationWarning>
       {options.map(option => (
         <button
           key={option.value}
           type="button"
           onClick={() => chooseTheme(option.value)}
-          className={`rounded-full px-2.5 py-1 transition-colors sm:px-3 ${
+          className={`min-h-8 rounded-full px-2.5 py-1 transition-colors ${compact ? 'flex-1' : 'sm:px-3'} ${
             theme === option.value
               ? 'bg-surface-raised text-primary shadow-subtle'
               : 'hover:bg-surface hover:text-primary'

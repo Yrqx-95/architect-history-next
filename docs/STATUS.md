@@ -208,6 +208,17 @@
 - ✅ 部署验证：提交 `5b2d382` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-oinu7cak2-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`/zh/architect/aalto`、`/ja/architect/aalto`、`/zh/architect/kenzo-tange`、`/ja/architect/kenzo-tange` 均返回 200 并显示精品内容；`/zh/architect/adolf-loos` 保持普通页面
 
+### 第十一阶段：中文简繁切换与移动端导航重做
+- ✅ 中文 `/zh` 保持单一路由，新增页内 `简 / 繁 / 系统` 显示选择，不新增 `/zh-tw`
+- ✅ `localStorage.chineseScript` 支持 `system | hans | hant`，首屏脚本根据浏览器语言设置 `data-zh-script`
+- ✅ 使用 `opencc-js` 台湾繁体规则自动转换 UI 文案、内容文字、placeholder、alt 与 aria-label
+- ✅ 桌面端语言切换保持中文/英文/日文，中文页额外显示简繁 segmented control
+- ✅ 移动端 MobileNav 改为抽屉菜单，搜索、主导航、语言、中文显示和主题分区展示，触控高度按 44px 设计
+- ✅ 文档同步：`DATA_SCHEMA.md`、`UI_RULES.md`、`CONTENT_RULES.md` 记录简繁模型、移动端规则和内容口径
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地响应验证：`/zh/search?q=tokyo`、`/zh/architect/aalto` 均返回 200，并输出简繁启动脚本与中文显示控件
+- ⏳ 待验证：移动端 375/390/430px 截图与正式部署 `/zh/search?q=tokyo`、`/zh/architect/aalto`
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/
