@@ -205,6 +205,8 @@
 - ✅ 代表作卡片复用现有 BuildingCard，并通过本地 cover 数据合并显示可信作品图
 - ✅ `npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
 - ✅ 本地访问验证：`/zh/architect/aalto`、`/ja/architect/aalto`、`/zh/architect/kenzo-tange`、`/ja/architect/kenzo-tange` 均显示长文、肖像、代表作和参考资料；`/zh/architect/adolf-loos` 不显示空精品区
+- ✅ 部署验证：提交 `5b2d382` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-oinu7cak2-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`/zh/architect/aalto`、`/ja/architect/aalto`、`/zh/architect/kenzo-tange`、`/ja/architect/kenzo-tange` 均返回 200 并显示精品内容；`/zh/architect/adolf-loos` 保持普通页面
 
 ### 当前 docs/ 结构（10 个文档）
 ```
