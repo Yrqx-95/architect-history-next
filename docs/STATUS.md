@@ -230,7 +230,8 @@
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
 - ✅ 本地响应验证：`/zh`、`/zh/architect/le-corbusier`、`/ja/architect/tadao-ando` 均返回 200；中文/日文长文、代表作导读和参考资料已输出
 - ⚠️ 移动端截图待补：Browser 插件创建本地 tab 时停在 `about:blank` 超时，本轮先完成命令层验证
-- ⏳ 待验证：生产部署 Ready 后正式域名检查
+- ✅ 部署验证：提交 `227c516` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-3aasyty3o-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`/zh`、`/zh/architect/le-corbusier`、`/ja/architect/tadao-ando` 均返回 200，并输出首页移动端安全边距 class 与第二批精品内容
 
 ### 当前 docs/ 结构（10 个文档）
 ```
