@@ -39,23 +39,35 @@ export default async function StylePage({ params }: { params: Promise<{ lang: st
 
   return (
     <PageShell>
-      <h1 className="heading-display mb-2">{styleName}</h1>
+      <header className="section">
+        <p className="eyebrow mb-4">{t(lang, 'styles')}</p>
+        <h1 className="heading-display mb-3">{styleName}</h1>
+        {era && <p className="body-sm">{displayName(era, lang)}</p>}
+      </header>
 
-      <div className="flex items-center gap-3 mb-6 mt-4 text-sm flex-wrap">
-        <Badge active>{architects.length} {t(lang, 'architects')}</Badge>
-        <Badge active>{buildings.length} {t(lang, 'buildings')}</Badge>
-        {era && <Badge active>{displayName(era, lang)}</Badge>}
+      <div className="mb-8 grid gap-3 sm:grid-cols-3">
+        {[
+          [architects.length, t(lang, 'architects')],
+          [buildings.length, t(lang, 'buildings')],
+          [childStyles.length, lang === 'en' ? 'Substyles' : lang === 'ja' ? '下位様式' : '子风格'],
+        ].map(([value, label]) => (
+          <div key={label} className="rounded-md border border-subtle bg-surface px-4 py-3 shadow-semantic-card">
+            <p className="label">{label}</p>
+            <p className="mt-3 font-serif-display text-4xl leading-none text-primary">{value}</p>
+          </div>
+        ))}
       </div>
 
       {(parentStyle || childStyles.length > 0) && (
-        <div className="mb-8 text-sm">
+        <section className="section border-t border-subtle pt-10 sm:pt-12">
+          <SectionHeading title={lang === 'en' ? 'Style relations' : lang === 'ja' ? '様式の関係' : '风格关系'} />
           {parentStyle && (
-            <p className="text-stone-500">
-              ← <Link href={`${prefix}/browse/style/${parentStyle.slug}`} className="hover:text-stone-700 dark:hover:text-stone-300 underline">{displayName(parentStyle, lang)}</Link>
+            <p className="body-sm">
+              ← <Link href={`${prefix}/browse/style/${parentStyle.slug}`} className="text-accent underline underline-offset-4">{displayName(parentStyle, lang)}</Link>
             </p>
           )}
           {childStyles.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="mt-4 flex flex-wrap gap-2">
               {childStyles.map(cs => (
                 <Link key={cs.id} href={`${prefix}/browse/style/${cs.slug}`}>
                   <Badge>→ {displayName(cs, lang)}</Badge>
@@ -63,14 +75,14 @@ export default async function StylePage({ params }: { params: Promise<{ lang: st
               ))}
             </div>
           )}
-        </div>
+        </section>
       )}
 
       {architects.length > 0 && (
         <Reveal>
-          <section className="mb-10">
+          <section className="section border-t border-subtle pt-10 sm:pt-12">
             <SectionHeading title={`${t(lang, 'architects')} (${architects.length})`} />
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
               {architects.map(a => <ArchitectCard key={a.id} architect={a} lang={lang} />)}
             </div>
           </section>
@@ -79,7 +91,7 @@ export default async function StylePage({ params }: { params: Promise<{ lang: st
 
       {buildings.length > 0 && (
         <Reveal>
-          <section>
+          <section className="section border-t border-subtle pt-10 sm:pt-12">
             <SectionHeading title={`${t(lang, 'buildings')} (${buildings.length})`} />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {buildings.slice(0, 18).map(b => (
@@ -87,7 +99,7 @@ export default async function StylePage({ params }: { params: Promise<{ lang: st
                   architectName={archMap.get(b.architect_slug || '') || ''} />
               ))}
             </div>
-            {buildings.length > 18 && <p className="text-center text-sm text-stone-400 mt-4">+{buildings.length - 18} more</p>}
+            {buildings.length > 18 && <p className="caption mt-4 text-center">+{buildings.length - 18} more</p>}
           </section>
         </Reveal>
       )}

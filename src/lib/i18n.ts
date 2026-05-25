@@ -47,6 +47,8 @@ const dict: Record<string, Record<Lang, string>> = {
   // --- 信息字段 ---
   location:    { zh: '位置',       en: 'Location',    ja: '場所' },
   year:        { zh: '建成年份',   en: 'Year',        ja: '竣工年' },
+  lifeSpan:    { zh: '生卒年份',   en: 'Life span',   ja: '生没年' },
+  nationality: { zh: '国籍 / 地区', en: 'Nationality / Region', ja: '国籍・地域' },
   type:        { zh: '类型',       en: 'Type',        ja: '類型' },
   style:       { zh: '风格',       en: 'Style',       ja: '様式' },
   area:        { zh: '面积',       en: 'Area',        ja: '面積' },

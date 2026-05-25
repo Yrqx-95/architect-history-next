@@ -11,7 +11,7 @@ export default function ArchitectCard({ architect, lang }: { architect: Architec
 
   return (
     <Link href={`${prefix}/architect/${architect.slug}`}
-      className="group block border-t border-subtle px-0 py-3 transition-colors hover:border-default focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--ui-accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[color:var(--ui-bg)] sm:py-3.5">
+      className="group block min-h-[6.25rem] rounded-md border border-subtle bg-surface px-3.5 py-3 transition-colors hover:border-default hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--ui-accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[color:var(--ui-bg)] sm:py-3.5">
       <h3 className="line-clamp-2 break-words text-sm font-medium leading-snug text-primary transition-colors group-hover:text-accent sm:text-[0.95rem]">{name}</h3>
       {(years || architect.era_slug) && (
         <p className="mt-1.5 text-[0.7rem] leading-relaxed text-muted">

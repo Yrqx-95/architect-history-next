@@ -233,6 +233,16 @@
 - ✅ 部署验证：提交 `227c516` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-3aasyty3o-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`/zh`、`/zh/architect/le-corbusier`、`/ja/architect/tadao-ando` 均返回 200，并输出首页移动端安全边距 class 与第二批精品内容
 
+### 第十三阶段：人物字段语义修正与分类浏览层级化
+- ✅ 建筑师详情页 metadata 修正：人物使用 `生卒年份`、`国籍 / 地区`，不再复用建筑详情的 `建成年份`、`位置`
+- ✅ `/browse` 重做为分层档案入口：顶部路径卡、建筑师谱系、建筑作品索引、历史/风格/类型索引、地域入口
+- ✅ 建筑师索引卡增加 surface、边框和作品/时代信息，减少纯文本堆叠感
+- ✅ era/style/type/country 分类详情页统一为分段式浏览：统计块、关联分类、建筑师、建筑作品各自成区
+- ✅ 文档同步：`UI_RULES.md` 记录分类浏览必须先给路径与层级，禁止无序平铺
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地响应验证：`/zh/architect/le-corbusier` 输出 `生卒年份`、`国籍 / 地区`；`/zh/browse` 输出 `建筑师谱系`、`建筑作品索引`、`历史、风格与类型`
+- ⚠️ Browser 插件仍在创建本地 tab 时停在 `about:blank` 超时，本轮未完成截图级验证
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/

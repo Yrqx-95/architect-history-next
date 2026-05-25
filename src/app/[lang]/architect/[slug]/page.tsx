@@ -91,8 +91,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
 
   const metaRows = [
-    { label: t(lang, 'year'), value: architect.birth_year ? `${architect.birth_year} – ${architect.death_year || t(lang, 'present')}` : null },
-    { label: t(lang, 'location'), value: architect.nationalities?.join(', ') || null },
+    { label: t(lang, 'lifeSpan'), value: architect.birth_year ? `${architect.birth_year} – ${architect.death_year || t(lang, 'present')}` : null },
+    { label: t(lang, 'nationality'), value: architect.nationalities?.join(', ') || null },
     { label: t(lang, 'style'), value: architect.style_slugs?.join(', ') || null },
     { label: t(lang, 'eras'), value: architect.era_slug || null },
     { label: t(lang, 'education'), value: architect.education || null },

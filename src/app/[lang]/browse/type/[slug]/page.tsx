@@ -6,6 +6,7 @@ import { displayName } from '@/lib/types'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
 import BuildingCard from '@/components/BuildingCard'
+import SectionHeading from '@/components/SectionHeading'
 
 export const dynamicParams = true
 
@@ -37,20 +38,29 @@ export default async function TypePage({ params }: { params: Promise<{ lang: str
 
   return (
     <PageShell>
-      <h1 className="heading-1 mb-2">{nameText}</h1>
-      <p className="caption mb-6">{filteredBldgs.length} {t(lang, 'buildings')}</p>
+      <header className="section">
+        <p className="eyebrow mb-4">{t(lang, 'types')}</p>
+        <h1 className="heading-display mb-3">{nameText}</h1>
+        <p className="body-sm">{filteredBldgs.length} {t(lang, 'buildings')}</p>
+      </header>
 
       {filteredBldgs.length > 0 ? (
         <Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <section className="section border-t border-subtle pt-10 sm:pt-12">
+            <SectionHeading
+              title={t(lang, 'buildings')}
+              description={lang === 'en' ? 'Works grouped by program and use.' : lang === 'ja' ? '用途とプログラムで束ねた作品。' : '按建筑用途与功能组织的作品。'}
+            />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
             {filteredBldgs.map(b => (
               <BuildingCard key={b.id} building={b} lang={lang}
                 architectName={archMap.get(b.architect_slug || '') || ''} />
             ))}
-          </div>
+            </div>
+          </section>
         </Reveal>
       ) : (
-        <p className="text-stone-400 py-8 text-center">{t(lang, 'noResults')}</p>
+        <p className="body-sm py-8 text-center">{t(lang, 'noResults')}</p>
       )}
     </PageShell>
   )
