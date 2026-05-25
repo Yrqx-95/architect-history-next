@@ -15,9 +15,44 @@ import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
 import ArchitectCard from '@/components/ArchitectCard'
 import ArchitectDeepArticle from '@/components/ArchitectDeepArticle'
+import SafeImage from '@/components/SafeImage'
+import ImageAttribution from '@/components/ImageAttribution'
 
 export const revalidate = 86400
 export const dynamicParams = true
+
+function ArchitectPortraitFigure({
+  content,
+  lang,
+  className = '',
+}: {
+  content: NonNullable<ReturnType<typeof getArchitectContent>>
+  lang: string
+  className?: string
+}) {
+  return (
+    <figure className={`overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card ${className}`}>
+      <div className="relative aspect-[4/3] max-h-64 bg-surface-muted lg:aspect-[1/1] lg:max-h-60">
+        <SafeImage
+          src={content.portrait.url}
+          alt={localizedContent(content.portrait.alt, lang)}
+          fill
+          className="object-cover"
+          sizes="(max-width: 1024px) 100vw, 16rem"
+        />
+      </div>
+      <figcaption className="space-y-1.5 px-3 py-2.5">
+        <p className="caption">{localizedContent(content.portrait.alt, lang)}</p>
+        <ImageAttribution
+          photographer={content.portrait.author}
+          license={content.portrait.license}
+          sourceUrl={content.portrait.source_url}
+          tone="dark"
+        />
+      </figcaption>
+    </figure>
+  )
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
   const { lang, slug } = await params
@@ -77,6 +112,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
           <h1 className="heading-display">{nameText}</h1>
           {architect.name_en !== nameText && <p className="text-sm leading-relaxed text-secondary">{architect.name_en}</p>}
 
+          {contentOverlay && <ArchitectPortraitFigure content={contentOverlay} lang={lang} className="lg:hidden" />}
+
           {bioText && (
             <div className="prose prose-stone dark:prose-invert body-large max-w-none">
               {bioText}
@@ -91,6 +128,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
         <div className="lg:col-span-1">
           <div className="lg:sticky lg:top-20">
+            {contentOverlay && <ArchitectPortraitFigure content={contentOverlay} lang={lang} className="mb-5 hidden lg:block" />}
             <p className="eyebrow mb-3">{t(lang, 'overview')}</p>
             <MetadataPanel rows={metaRows} />
           </div>

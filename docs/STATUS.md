@@ -221,6 +221,17 @@
 - ✅ 正式域名验证：`/zh/search?q=tokyo` 与 `/zh/architect/aalto` 均返回 200，并输出简繁启动脚本与中文显示控件
 - ⏳ 待验证：移动端 375/390/430px 截图
 
+### 第十二阶段：移动端首屏与建筑师内容第二批
+- ✅ 移动端首页 hero 调整安全边距：文字不再与白色装饰边框同线贴合，metadata 改为带轻背景的独立信息块
+- ✅ 建筑师精品页肖像上移并缩小：桌面端放在 overview/metadata 上方，移动端放在姓名后、正文前；长文章区移除重复大肖像
+- ✅ 新增第二批 5 位精品建筑师 overlay：`le-corbusier`、`mies-van-der-rohe`、`frank-lloyd-wright`、`louis-kahn`、`tadao-ando`
+- ✅ 每位第二批建筑师包含中文/日文摘要、3 个长文 section、核心思想、人物肖像、3 个代表作导读和文末来源
+- ✅ 第二批代表作均使用站内已有 building slug，并确认 Supabase 主图或已有图片 override 可回填作品图
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地响应验证：`/zh`、`/zh/architect/le-corbusier`、`/ja/architect/tadao-ando` 均返回 200；中文/日文长文、代表作导读和参考资料已输出
+- ⚠️ 移动端截图待补：Browser 插件创建本地 tab 时停在 `about:blank` 超时，本轮先完成命令层验证
+- ⏳ 待验证：生产部署 Ready 后正式域名检查
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/

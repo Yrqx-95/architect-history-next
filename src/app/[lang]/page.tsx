@@ -110,22 +110,22 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   return (
     <div>
       <CinematicHero imageUrl={heroImage} imageAlt={heroName}>
-        <div className="grid gap-8 sm:grid-cols-[minmax(0,1fr)_18rem] sm:items-end">
+        <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_18rem] sm:items-end sm:gap-8">
           <div>
             <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-paper-100/62 sm:text-xs">
               {lang === 'en' ? 'Featured work' : lang === 'ja' ? '特集作品' : '本期作品'}
             </p>
-            <h1 className="max-w-4xl text-4xl font-semibold leading-[1.02] text-paper-100 sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl text-[2.35rem] font-semibold leading-[1.04] text-paper-100 sm:text-6xl sm:leading-[1.02] lg:text-7xl">
               {heroName}
             </h1>
             {heroDescription && (
-              <p className="mt-6 max-w-2xl text-sm leading-relaxed text-paper-100/76 sm:text-base">
+              <p className="mt-5 max-w-2xl text-sm leading-relaxed text-paper-100/78 sm:mt-6 sm:text-base">
                 {heroDescription}
               </p>
             )}
           </div>
           {heroMeta.length > 0 && (
-            <dl className="grid grid-cols-2 gap-x-5 gap-y-4 border-t border-paper-100/20 pt-5 text-paper-100/72 sm:block sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+            <dl className="grid grid-cols-2 gap-x-5 gap-y-4 rounded-sm border border-paper-100/18 bg-warm-950/12 p-4 text-paper-100/76 backdrop-blur-[2px] sm:block sm:border-l sm:border-t-0 sm:border-r-0 sm:border-b-0 sm:bg-transparent sm:p-0 sm:pl-6 sm:backdrop-blur-none">
               {heroArchitectName && (
                 <div className="sm:mb-5">
                   <dt className="text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42">
