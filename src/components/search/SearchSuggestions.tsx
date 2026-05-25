@@ -20,7 +20,7 @@ export default function SearchSuggestions({ lang, suggestions, onSelect }: Searc
           key={suggestion.label}
           type="button"
           onClick={() => onSelect(suggestion.value)}
-          className="rounded-full border border-warm-200/80 px-3 py-1.5 text-xs text-warm-600 transition-colors hover:border-warm-400 hover:text-warm-800 dark:border-charcoal-700 dark:text-warm-300 dark:hover:border-charcoal-500 dark:hover:text-paper-100"
+          className="rounded-full border border-default bg-surface px-3 py-1.5 text-xs text-secondary transition-colors hover:bg-surface-muted hover:text-primary"
         >
           {suggestion.label}
         </button>

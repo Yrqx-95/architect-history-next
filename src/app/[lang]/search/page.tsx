@@ -24,7 +24,7 @@ export default async function SearchPage({ params }: { params: Promise<{ lang: s
       </Suspense>
 
       {/* Discovery entry points — shown before search */}
-      <div id="search-discover" className="border-t border-warm-200 dark:border-charcoal-700 pt-10 sm:pt-12 mt-6">
+      <div id="search-discover" className="mt-6 border-t border-subtle pt-10 sm:pt-12">
         <p className="eyebrow mb-6">
           {lang === 'en' ? 'Or browse by category' : lang === 'ja' ? 'またはカテゴリで探す' : '或按分类浏览'}
         </p>
@@ -36,7 +36,7 @@ export default async function SearchPage({ params }: { params: Promise<{ lang: s
             <div className="space-y-1">
               {eras.slice(0, 8).map(e => (
                 <Link key={e.id} href={`${prefix}/browse/era/${e.slug}`}
-                  className="block body-sm py-0.5 hover:text-warm-600 dark:hover:text-warm-300 transition-colors">
+                  className="block body-sm py-0.5 transition-colors hover:text-accent">
                   {displayName(e, lang)}
                 </Link>
               ))}
@@ -49,7 +49,7 @@ export default async function SearchPage({ params }: { params: Promise<{ lang: s
             <div className="space-y-1">
               {styles.slice(0, 8).map(s => (
                 <Link key={s.id} href={`${prefix}/browse/style/${s.slug}`}
-                  className="block body-sm py-0.5 hover:text-warm-600 dark:hover:text-warm-300 transition-colors">
+                  className="block body-sm py-0.5 transition-colors hover:text-accent">
                   {displayName(s, lang)}
                 </Link>
               ))}
@@ -62,14 +62,14 @@ export default async function SearchPage({ params }: { params: Promise<{ lang: s
             <div className="space-y-1 mb-4">
               {types.slice(0, 6).map(ty => (
                 <Link key={ty.id} href={`${prefix}/browse/type/${ty.slug}`}
-                  className="block body-sm py-0.5 hover:text-warm-600 dark:hover:text-warm-300 transition-colors">
+                  className="block body-sm py-0.5 transition-colors hover:text-accent">
                   {displayName(ty, lang)}
                 </Link>
               ))}
             </div>
             <h3 className="heading-4 mb-3 mt-5">{t(lang, 'countries')}</h3>
             <Link href={`${prefix}/browse/country`}
-              className="body-sm hover:text-warm-600 dark:hover:text-warm-300 transition-colors">
+              className="body-sm transition-colors hover:text-accent">
               {t(lang, 'viewAll')} →
             </Link>
           </div>

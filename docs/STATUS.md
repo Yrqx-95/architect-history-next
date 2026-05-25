@@ -56,6 +56,8 @@
 - 间距系统：section-sm/ section/ section-lg/ section-xl + gutter + rhythm
 - 动画：page-enter / reveal / fade-in（滚动驱动）
 - 暗色模式全支持
+- 主题系统重做为 `system / light / dark` 三态，默认跟随系统
+- 新增语义色 token：页面背景、surface、输入框、边框、正文、辅助文字、反白文字和交互强调成套切换
 
 ### 图片治理（截至 2026-05-25）
 - 图片策展策略：image-policy.ts（受信任来源 + 开放许可检查）
@@ -181,6 +183,17 @@
 - ✅ 搜索输入框 placeholder、图标、结果计数和元信息增强可读性
 - ✅ 本地验证 `/zh`、`/zh/search?q=tokyo`、`/zh/browse`、`/zh/timeline` 响应正常，SSR HTML 不再包含主要低对比文字类
 - ✅ `npm run lint` 通过（剩余 2 个 `<img>` 性能 warning），`npm run build` 通过（3177 页面）
+
+### 第九阶段：主题系统与奢侈品极简 UI 重做
+- ✅ `ThemeToggle` 改为三态 segmented control：系统 / 亮 / 暗
+- ✅ `localStorage.theme` 支持 `system | light | dark`，根布局首屏脚本按用户选择或系统偏好设置 `.dark`
+- ✅ `globals.css` 新增语义主题 token，暗色模式同步切换背景、surface、输入框、边框、正文和辅助文字
+- ✅ 搜索页 header、搜索框、suggestion chip、结果计数、空状态和分类浏览入口改用可读语义层级
+- ✅ 建筑师档案页 biography、英文名、metadata panel、core ideas、timeline 年份/城市和 works count 改用语义层级
+- ✅ 浏览页、建筑详情页、共用卡片、面包屑、语言切换和移动菜单同步接入语义色，减少同类低对比回归
+- ✅ 本轮验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地访问验证：`/zh/search?q=tokyo`、`/zh/architect/aalto`、`/zh/browse`、`/zh` 均返回 200，搜索页/建筑师页/浏览页不再输出旧低对比 `dark:text-warm-300`
+- 🔄 待部署验证：push 到 GitHub `main` 后等待 Vercel Ready，并检查正式域名搜索页和建筑师页
 
 ### 当前 docs/ 结构（10 个文档）
 ```

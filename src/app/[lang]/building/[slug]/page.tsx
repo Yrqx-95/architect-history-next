@@ -46,7 +46,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   const sigText = displayText(building.significance, lang)
 
   const metaRows = [
-    { label: t(lang, 'architects'), value: architect ? <Link href={`${prefix}/architect/${architect.slug}`} className="hover:text-warm-700 dark:hover:text-warm-300 underline decoration-warm-300 dark:decoration-charcoal-600 underline-offset-2">{architect.name_zh || architect.name_en}</Link> : null },
+    { label: t(lang, 'architects'), value: architect ? <Link href={`${prefix}/architect/${architect.slug}`} className="underline decoration-[color:var(--ui-border)] underline-offset-2 transition-colors hover:text-accent">{architect.name_zh || architect.name_en}</Link> : null },
     { label: t(lang, 'year'), value: building.year_start ? `${building.year_start}${building.year_end ? ` – ${building.year_end}` : ''}` : null },
     { label: t(lang, 'location'), value: building.city && building.country ? `${building.city}, ${building.country}` : building.city || building.country || null },
     { label: t(lang, 'type'), value: building.type_slug || null },
@@ -75,7 +75,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         <div className="lg:col-span-2 flow">
           <h1 className="heading-display">{nameText}</h1>
           {building.name_en !== nameText && (
-            <p className="text-sm text-warm-600 dark:text-warm-300">{building.name_en}</p>
+            <p className="text-sm leading-relaxed text-secondary">{building.name_en}</p>
           )}
 
           {sigText && <PullQuote>{sigText}</PullQuote>}
@@ -128,7 +128,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
       {/* Related buildings */}
       {related.length > 0 && (
         <Reveal>
-          <section className="border-t border-warm-200 dark:border-charcoal-700 pt-10 sm:pt-12">
+          <section className="border-t border-subtle pt-10 sm:pt-12">
             <div className="flex items-end justify-between mb-6">
               <div>
                 <h2 className="heading-3">{t(lang, 'relatedBuildings')}</h2>

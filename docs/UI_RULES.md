@@ -1,7 +1,7 @@
 # UI_RULES.md — 设计规范
 
-> 本项目 UI 目标：**建筑杂志感 + 高信息密度 + 专业 typography**  
-> 参考气质：ArchDaily / Dezeen / Aesop / MUJI
+> 本项目 UI 目标：**奢侈品极简 + 高可读建筑档案 + 专业 typography**
+> 参考气质：Aesop / COS / 一流建筑设计事务所官网
 
 ## 色彩
 
@@ -31,8 +31,10 @@ ochre      (#b8964a)  — 备选强调（评级、标签）
 - 大面积背景仅用 paper/warm/charcoal 色系
 - clay/terracotta/ochre 仅在交互元素（hover、active badge、decorative line）上使用
 - 不要用纯黑 (#000) 或纯白 (#fff) 做大面积背景
-- 暗模式使用 charcoal 系列，保持相同的层级逻辑
-- 正文、caption、metadata、eyebrow 不使用 `text-warm-400` 或 `dark:text-charcoal-400/500` 承载信息；最低对比默认使用 warm-600 / warm-300
+- 主题默认跟随系统，用户可在 `系统 / 亮 / 暗` 三态中手动选择
+- 暗模式必须同步改变页面背景、surface、输入框、边框、正文和辅助文字
+- 正文、caption、metadata、eyebrow、年份、城市、搜索提示等信息文字必须使用语义层级：`text-primary` / `text-secondary` / `text-muted`
+- 禁止用 `text-warm-400`、`dark:text-charcoal-400/500` 或任何接近背景色的浅灰承载信息；浅灰只可用于装饰线、占位骨架、非必要符号
 
 ## Typography
 
@@ -74,7 +76,7 @@ ochre      (#b8964a)  — 备选强调（评级、标签）
 - 正文段落用 `.flow` 容器管理垂直节奏（margin-bottom: 1.625rem）
 - 中文字体需要 `Noto Serif SC` fallback
 - 日文字体需要 `Noto Serif JP` fallback
-- 署名信息必须用 `.metadata`，不要额外降到 `text-warm-400` 或 `dark:text-charcoal-400`
+- 署名信息必须用 `.metadata`，不要额外降到 `text-warm-400`、`dark:text-charcoal-400` 或自定义低对比色
 
 ## Spacing
 
@@ -141,11 +143,11 @@ xl (≥1280px): 4-6 列
 │   [image]    │  aspect-[4/3] sm:aspect-[3/2]，SafeImage fill + object-cover
 │   architect  │  0.68rem uppercase tracking-[0.12em] (仅当有architectName时显示)
 │   name        │  text-base sm:text-lg font-medium line-clamp-2
-│   location·year│ text-xs text-warm-600 / dark:text-warm-300
+│   location·year│ text-xs text-muted
 └──────────────┘
 ```
 
-- 背景：warm-100 (亮) / charcoal-900 (暗)
+- 背景：`bg-surface-muted`
 - hover：scale-[1.015] on image, text color transition
 - transition：500ms ease-out on image
 - border-radius：rounded-md (0.5rem)

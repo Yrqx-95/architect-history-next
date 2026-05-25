@@ -17,7 +17,7 @@ export default function ContinueExploring({ groups }: { groups: ExploreGroup[] }
   if (!visible.length) return null
 
   return (
-    <section className="border-t border-warm-200 dark:border-charcoal-700 pt-12 sm:pt-16 pb-8">
+    <section className="border-t border-subtle pb-8 pt-12 sm:pt-16">
       <p className="eyebrow mb-8">Continue Exploring</p>
 
       <div className="space-y-10 sm:space-y-12">
@@ -26,7 +26,7 @@ export default function ContinueExploring({ groups }: { groups: ExploreGroup[] }
             <div className="flex items-end justify-between mb-4">
               <h3 className="heading-4">{group.label}</h3>
               {group.href && (
-                <Link href={group.href} className="text-xs text-warm-600 transition-colors hover:text-warm-800 dark:text-warm-300 dark:hover:text-paper-100">
+                <Link href={group.href} className="text-xs text-muted transition-colors hover:text-accent">
                   View all &rarr;
                 </Link>
               )}
@@ -34,8 +34,8 @@ export default function ContinueExploring({ groups }: { groups: ExploreGroup[] }
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {group.items.slice(0, 4).map(item => (
                 <Link key={item.id} href={item.href}
-                  className="card-hover group block p-4 bg-paper-100 dark:bg-charcoal-800 rounded-lg">
-                  <span className="block text-sm font-medium text-warm-700 dark:text-warm-200 group-hover:text-warm-600 dark:group-hover:text-warm-300 transition-colors line-clamp-2">
+                  className="card-hover group block rounded-md border border-subtle bg-surface p-4">
+                  <span className="line-clamp-2 block text-sm font-medium text-primary transition-colors group-hover:text-accent">
                     {item.title}
                   </span>
                   {item.subtitle && (

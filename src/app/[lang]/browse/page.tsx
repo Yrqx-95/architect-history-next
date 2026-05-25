@@ -68,12 +68,12 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
               const name = displayName(a, lang)
               return (
                 <Link key={a.id} href={`${prefix}/architect/${a.slug}`}
-                  className="group block border-t border-warm-200/70 py-4 transition-colors hover:border-warm-400/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-warm-400 focus-visible:ring-offset-4 focus-visible:ring-offset-paper-100 dark:border-charcoal-700/80 dark:hover:border-charcoal-500 dark:focus-visible:ring-offset-charcoal-950 sm:py-5">
-                  <h3 className="text-base font-medium leading-snug text-warm-800 transition-colors group-hover:text-warm-600 dark:text-paper-100 dark:group-hover:text-warm-300">{name}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-warm-600 dark:text-warm-300">
+                  className="group block border-t border-subtle py-4 transition-colors hover:border-default focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--ui-accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[color:var(--ui-bg)] sm:py-5">
+                  <h3 className="text-base font-medium leading-snug text-primary transition-colors group-hover:text-accent">{name}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted">
                     {a.birth_year || '?'} – {a.death_year || t(lang, 'present')}
                   </p>
-                  <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.7rem] leading-relaxed text-warm-600 dark:text-warm-300">
+                  <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.7rem] leading-relaxed text-muted">
                     {count > 0 && <span>{count} {lang === 'en' ? 'buildings' : lang === 'ja' ? '作品' : '座建筑'}</span>}
                     {a.era_slug && <span>{a.era_slug}</span>}
                   </div>
@@ -127,7 +127,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
           Browse by category — filter sections
           ============================================================ */}
       <Reveal>
-        <section className="section border-t border-warm-200 dark:border-charcoal-700 pt-10 sm:pt-12">
+        <section className="section border-t border-subtle pt-10 sm:pt-12">
           <SectionHeading
             title={lang === 'en' ? 'Browse by category' : lang === 'ja' ? 'カテゴリで探す' : '按分类浏览'}
           />
@@ -137,8 +137,8 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
             <FilterBlock title={t(lang, 'styles')} items={styles} lang={lang} prefix={`${prefix}/browse/style`} showAll />
             <FilterBlock title={t(lang, 'types')} items={types} lang={lang} prefix={`${prefix}/browse/type`} />
             <div>
-              <h3 className="font-semibold text-warm-700 dark:text-paper-100 mb-3">{t(lang, 'countries')}</h3>
-              <Link href={`${prefix}/browse/country`} className="body-sm hover:text-warm-600 dark:hover:text-warm-300 transition-colors">
+              <h3 className="mb-3 font-semibold text-primary">{t(lang, 'countries')}</h3>
+              <Link href={`${prefix}/browse/country`} className="body-sm transition-colors hover:text-accent">
                 {t(lang, 'viewAll')} →
               </Link>
             </div>
@@ -159,11 +159,11 @@ function FilterBlock({ title, items, lang, prefix, showAll }: {
   const display = showAll ? items : items.slice(0, 10)
   return (
     <div>
-      <h3 className="font-semibold text-warm-700 dark:text-paper-100 mb-3">{title}</h3>
+      <h3 className="mb-3 font-semibold text-primary">{title}</h3>
       <div className="space-y-1">
         {display.map(item => (
           <Link key={item.id} href={`${prefix}/${item.slug}`}
-            className="block body-sm py-0.5 hover:text-warm-600 dark:hover:text-warm-300 transition-colors">
+            className="block body-sm py-0.5 transition-colors hover:text-accent">
             {displayName(item, lang)}
           </Link>
         ))}

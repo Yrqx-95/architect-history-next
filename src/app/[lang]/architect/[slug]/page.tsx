@@ -64,7 +64,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 section">
         <div className="lg:col-span-2 flow">
           <h1 className="heading-display">{nameText}</h1>
-          {architect.name_en !== nameText && <p className="text-sm text-warm-600 dark:text-warm-300">{architect.name_en}</p>}
+          {architect.name_en !== nameText && <p className="text-sm leading-relaxed text-secondary">{architect.name_en}</p>}
 
           {bioText && (
             <div className="prose prose-stone dark:prose-invert body-large max-w-none">
@@ -93,7 +93,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
             <h2 className="heading-3 mb-5">{t(lang, 'coreIdeas')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {coreIdeas.map((idea, i) => (
-                <div key={i} className="bg-paper-100 dark:bg-charcoal-800 rounded-lg border border-warm-200 dark:border-charcoal-700 px-5 py-4 body-sm">
+                <div key={i} className="rounded-md border border-subtle bg-surface px-5 py-4 body-sm shadow-semantic-card">
                   {idea}
                 </div>
               ))}
@@ -105,7 +105,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
       {/* Influences */}
       {(influencesList.length > 0 || influencedList.length > 0) && (
         <Reveal>
-          <section className="section border-t border-warm-200 dark:border-charcoal-700 pt-10 sm:pt-12">
+          <section className="section border-t border-subtle pt-10 sm:pt-12">
             <h2 className="heading-3 mb-6">{t(lang, 'relatedArchitects')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               {influencesList.length > 0 && (
@@ -132,7 +132,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
       {/* Works */}
       {buildings.length > 0 && (
         <Reveal>
-          <section className="border-t border-warm-200 dark:border-charcoal-700 pt-10 sm:pt-12">
+          <section className="border-t border-subtle pt-10 sm:pt-12">
             <div className="flex items-end justify-between mb-6">
               <div>
                 <h2 className="heading-3">{t(lang, 'works')}</h2>
@@ -141,14 +141,14 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
             </div>
 
             {/* Timeline */}
-            <div className="relative pl-6 sm:pl-8 mb-10 border-l-2 border-warm-200 dark:border-charcoal-700">
+            <div className="relative mb-10 border-l-2 border-subtle pl-6 sm:pl-8">
               <div className="space-y-4 sm:space-y-5">
                 {sortedBuildings.slice(0, 15).map(b => (
                   <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="block relative group">
-                    <div className="absolute -left-[26px] sm:-left-[34px] top-1 w-3 h-3 rounded-full bg-paper-100 dark:bg-charcoal-950 border-2 border-warm-400 dark:border-charcoal-500 group-hover:border-warm-700 dark:group-hover:border-warm-300 transition-colors" />
-                    <span className="mr-2 font-mono text-xs text-warm-600 dark:text-warm-300">{b.year_start || '?'}</span>
-                    <span className="text-sm font-medium text-warm-700 dark:text-warm-200 group-hover:text-warm-900 dark:group-hover:text-paper-100 transition-colors">{b.name_zh || b.name_en}</span>
-                    {b.city && <span className="ml-2 text-xs text-warm-600 dark:text-warm-300">{b.city}</span>}
+                    <div className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-[color:var(--ui-text-soft)] bg-app transition-colors group-hover:border-[color:var(--ui-accent)] sm:-left-[34px]" />
+                    <span className="mr-2 font-mono text-xs text-muted">{b.year_start || '?'}</span>
+                    <span className="text-sm font-medium text-primary transition-colors group-hover:text-accent">{b.name_zh || b.name_en}</span>
+                    {b.city && <span className="ml-2 text-xs text-muted">{b.city}</span>}
                   </Link>
                 ))}
               </div>

@@ -23,7 +23,7 @@ export default function MobileNav({ lang }: { lang: string }) {
   return (
     <>
       <button
-        className="sm:hidden p-1.5 rounded-lg hover:bg-warm-100 dark:hover:bg-charcoal-800 transition-colors"
+        className="rounded-lg p-1.5 transition-colors hover:bg-surface-muted sm:hidden"
         onClick={() => setOpen(!open)}
         aria-label="Menu"
       >
@@ -38,26 +38,26 @@ export default function MobileNav({ lang }: { lang: string }) {
       {open && (
         <div className="fixed inset-0 top-14 z-40 sm:hidden">
           <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setOpen(false)} />
-          <div className="relative bg-paper-100 dark:bg-charcoal-900 border-t border-warm-200 dark:border-charcoal-700 shadow-elevated">
+          <div className="relative border-t border-subtle bg-surface shadow-elevated">
             <div className="px-4 py-3 space-y-1">
               <Link href={prefix + '/'} onClick={() => setOpen(false)}
-                className="block px-3 py-2.5 rounded-lg text-sm font-medium hover:bg-warm-100 dark:hover:bg-charcoal-800">{t(lang, 'home')}</Link>
+                className="block rounded-lg px-3 py-2.5 text-sm font-medium text-primary hover:bg-surface-muted">{t(lang, 'home')}</Link>
               <Link href={prefix + '/browse'} onClick={() => setOpen(false)}
-                className="block px-3 py-2.5 rounded-lg text-sm hover:bg-warm-100 dark:hover:bg-charcoal-800">{t(lang, 'browse')}</Link>
+                className="block rounded-lg px-3 py-2.5 text-sm text-secondary hover:bg-surface-muted hover:text-primary">{t(lang, 'browse')}</Link>
               <Link href={prefix + '/timeline'} onClick={() => setOpen(false)}
-                className="block px-3 py-2.5 rounded-lg text-sm hover:bg-warm-100 dark:hover:bg-charcoal-800">{t(lang, 'timeline')}</Link>
+                className="block rounded-lg px-3 py-2.5 text-sm text-secondary hover:bg-surface-muted hover:text-primary">{t(lang, 'timeline')}</Link>
 
-              <hr className="my-2 border-warm-200 dark:border-charcoal-700" />
+              <hr className="my-2 border-subtle" />
 
               <form action={prefix + '/search'} className="px-3" onSubmit={() => setOpen(false)}>
                 <input type="text" name="q" placeholder={t(lang, 'searchPlaceholder')}
-                  className="w-full pl-8 pr-3 py-2 text-sm rounded-full border border-warm-300 dark:border-charcoal-700 bg-warm-50 dark:bg-charcoal-800 focus:outline-none focus:border-warm-500" />
+                  className="w-full rounded-full border border-default bg-surface-raised py-2 pl-8 pr-3 text-sm text-primary placeholder:text-muted focus:border-default focus:outline-none focus:ring-2 focus:ring-[color:var(--ui-focus)]" />
               </form>
 
               <div className="flex gap-1 px-3 pt-2">
                 {LANGS.map(l => (
                   <Link key={l} href={localizedPath(l)} onClick={() => setOpen(false)}
-                    className={`rounded px-2.5 py-1.5 text-xs transition-colors ${lang === l ? 'bg-warm-800 text-paper-100 dark:bg-paper-100 dark:text-warm-900' : 'text-warm-700 hover:bg-warm-100 dark:text-warm-300 dark:hover:bg-charcoal-800'}`}>
+                    className={`rounded px-2.5 py-1.5 text-xs transition-colors ${lang === l ? 'bg-[color:var(--ui-text-primary)] text-inverse' : 'text-muted hover:bg-surface-muted hover:text-primary'}`}>
                     {l === 'zh' ? '中文' : l === 'en' ? 'EN' : '日本語'}
                   </Link>
                 ))}

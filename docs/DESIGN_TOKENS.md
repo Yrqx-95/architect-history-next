@@ -1,7 +1,7 @@
 # DESIGN_TOKENS.md — 设计令牌系统
 
 > 本文件是项目的**唯一设计权威**。所有 UI 开发必须基于此文件中的令牌。  
-> 源文件：`src/app/globals.css`（Tailwind v4 @theme 指令）
+> 源文件：`src/app/globals.css`（Tailwind v4 @theme 指令 + 语义主题变量）
 
 ## 色彩系统
 
@@ -37,17 +37,37 @@ terracotta  #c17d5a  — 备选强调
 ochre       #b8964a  — 备选强调（评级、标签）
 ```
 
+### 语义主题 Token
+
+UI 不直接依赖零散 `dark:text-*` 补丁，而是使用语义 token。默认主题为 `system`，根据 `prefers-color-scheme` 自动决定是否给根节点加 `.dark`；用户可手动切换 `system / light / dark`。
+
+| Token / Utility | 用途 |
+|------|------|
+| `--ui-bg` / `.bg-app` | 页面背景 |
+| `--ui-surface` / `.bg-surface` | 面板、普通卡片 |
+| `--ui-surface-muted` / `.bg-surface-muted` | 输入框周边、弱分区、占位图背景 |
+| `--ui-surface-raised` / `.bg-surface-raised` | 输入框、浮起控件 |
+| `--ui-border` / `.border-default` | 可见边框、输入框边框 |
+| `--ui-border-subtle` / `.border-subtle` | 分隔线、列表边框 |
+| `--ui-text-primary` / `.text-primary` | 标题、关键文本 |
+| `--ui-text-secondary` / `.text-secondary` | 正文、说明文字 |
+| `--ui-text-muted` / `.text-muted` | metadata、caption、年份、城市 |
+| `--ui-text-soft` / `.text-soft` | 装饰性符号，不承载必要信息 |
+| `--ui-text-inverse` / `.text-inverse` | 深色底上的反白文字 |
+| `--ui-accent` / `.text-accent` | hover、active、可交互强调 |
+
 ### 使用规则
 
 | 用途 | 亮模式 | 暗模式 |
 |------|--------|--------|
-| 页面背景 | paper-50 | charcoal-950 |
-| 卡片背景 | paper-100 | charcoal-800 |
-| 标题文字 | warm-800 | paper-100 |
-| 正文 | warm-700 | warm-200 |
-| 次要文字 | warm-600 | warm-300 |
-| 边框/分隔 | warm-200 | charcoal-700 |
-| 强调（交互） | clay | clay-light |
+| 页面背景 | `--ui-bg` | `--ui-bg` |
+| 卡片/面板背景 | `--ui-surface` | `--ui-surface` |
+| 输入框背景 | `--ui-surface-raised` | `--ui-surface-raised` |
+| 标题文字 | `--ui-text-primary` | `--ui-text-primary` |
+| 正文/说明 | `--ui-text-secondary` | `--ui-text-secondary` |
+| metadata/caption | `--ui-text-muted` | `--ui-text-muted` |
+| 边框/分隔 | `--ui-border-subtle` | `--ui-border-subtle` |
+| 强调（交互） | `--ui-accent` | `--ui-accent` |
 
 ## Typography
 
@@ -83,7 +103,9 @@ ochre       #b8964a  — 备选强调（评级、标签）
 - 每个页面仅一个 heading-display 或 heading-1
 - section 标题使用 heading-2
 - 正文段落用 `.flow` 管理垂直节奏
-- 署名信息必须用 `.metadata`，实际颜色为 warm-600 / warm-300，避免低对比
+- 署名信息必须用 `.metadata`，实际颜色来自 `--ui-text-muted`，不得降到接近背景的浅灰
+- `.caption` / `.metadata` / `.eyebrow` / `.body-sm` 都是信息性文字，必须可读；`warm-400`、`charcoal-400/500` 只允许用于非必要装饰
+- 主题切换必须使用三态 `system / light / dark`，不得把暗色模式实现成只改字体颜色
 - 不使用自定义 font-size（用预定义 class）
 
 ## Spacing
@@ -220,12 +242,12 @@ xl: ≥1280px  — 标准桌面
 │              │  SafeImage fill + object-cover
 │   architect  │  0.68rem uppercase tracking-[0.12em] (可选)
 │   name       │  text-base sm:text-lg font-medium line-clamp-2
-│   loc · year │  text-xs text-warm-600 / dark:text-warm-300
+│   loc · year │  text-xs text-muted
 └──────────────┘
 
 根部常量：
 - border-radius: rounded-md (0.5rem)
-- 图片 bg: warm-100 (亮) / charcoal-900 (暗)
+- 图片 bg: bg-surface-muted
 - hover: scale-[1.015] on image, text color transition
 - transition: 500ms ease-out (image), 200ms (text)
 - 无边框，无阴影
@@ -238,4 +260,4 @@ xl: ≥1280px  — 标准桌面
 3. 建筑卡片使用 BuildingCard 组件，不要页面内自行实现卡片布局
 4. 容器使用 container-wide/content/read/narrow
 5. 彩色元素仅使用 clay/terracotta/ochre，禁止其他强调色
-6. 暗模式使用 .dark 前缀的 class，不要自己写 dark: 内联样式
+6. 暗模式通过语义 token 成套改变背景、surface、边框、正文和辅助文字；新增 UI 不再堆叠零散 `dark:text-*`
