@@ -2,9 +2,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
-import { getArchitects } from '@/lib/data'
+import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
 import { getArchitectRelations } from '@/lib/relations'
 import { displayName } from '@/lib/types'
+import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import MetadataPanel from '@/components/MetadataPanel'
@@ -13,6 +14,7 @@ import Reveal from '@/components/Reveal'
 import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
 import ArchitectCard from '@/components/ArchitectCard'
+import ArchitectDeepArticle from '@/components/ArchitectDeepArticle'
 
 export const revalidate = 86400
 export const dynamicParams = true
@@ -22,7 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const rels = await getArchitectRelations(slug)
   if (!rels) return { title: 'Not Found' }
   const name = displayName(rels.architect, lang)
-  const details = [rels.architect.birth_year, rels.architect.nationalities?.join(', ')].filter(Boolean).join(' · ')
+  const overlay = getArchitectContent(slug)
+  const details = overlay
+    ? localizedContent(overlay.summary, lang)
+    : [rels.architect.birth_year, rels.architect.nationalities?.join(', ')].filter(Boolean).join(' · ')
   return { title: name, description: details || undefined }
 }
 
@@ -38,10 +43,16 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
   const { architect, buildings, relatedArchitects: related, relatedBuildings, influencesList, influencedList, era } = rels
   const prefix = `/${lang}`
+  const contentOverlay = getArchitectContent(slug)
+  const allBuildingsWithCovers = contentOverlay ? await getBuildingsWithCovers() : []
+  const coverBySlug = new Map(allBuildingsWithCovers.map(building => [building.slug, building]))
+  const buildingsWithCovers = buildings.map(building => coverBySlug.get(building.slug) || building)
 
   const nameText = displayName(architect, lang)
-  const bioText = lang === 'ja' ? (architect.bio_ja || architect.bio_en) : lang === 'en' ? architect.bio_en : (architect.bio_zh || architect.bio_en)
-  const coreIdeas: string[] = Array.isArray(architect.core_ideas) ? architect.core_ideas : []
+  const bioText = contentOverlay
+    ? localizedContent(contentOverlay.summary, lang)
+    : lang === 'ja' ? (architect.bio_ja || architect.bio_en) : lang === 'en' ? architect.bio_en : (architect.bio_zh || architect.bio_en)
+  const coreIdeas: string[] = contentOverlay ? [] : Array.isArray(architect.core_ideas) ? architect.core_ideas : []
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
 
   const metaRows = [
@@ -85,6 +96,13 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
           </div>
         </div>
       </div>
+
+      {/* Core Ideas */}
+      {contentOverlay && (
+        <Reveal>
+          <ArchitectDeepArticle content={contentOverlay} lang={lang} works={allBuildingsWithCovers} />
+        </Reveal>
+      )}
 
       {/* Core Ideas */}
       {coreIdeas.length > 0 && (
@@ -156,7 +174,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
             <p className="eyebrow mb-4">{lang === 'en' ? 'All works' : lang === 'ja' ? '全作品' : '全部作品'}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-              {buildings.map(b => <BuildingCard key={b.id} building={b} lang={lang} />)}
+              {buildingsWithCovers.map(b => <BuildingCard key={b.id} building={b} lang={lang} />)}
             </div>
           </section>
         </Reveal>

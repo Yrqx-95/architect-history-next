@@ -35,6 +35,41 @@
 - ❌ bio 中包含 HTML 标签
 - ❌ 用 Wikidata ID 代替真实姓名
 
+## 建筑师长文 Overlay 规范
+
+第一阶段长文不直接写入 Supabase，而是使用仓库 overlay：`src/lib/architect-content.ts`。运行时按 `architect.slug` 合并到建筑师详情页；无 overlay 的建筑师保持原页面。
+
+### 第一批对象
+
+```
+alvar-aalto
+kenzo-tange
+richard-neutra
+marcel-breuer
+alvaro-siza-vieira
+```
+
+`aalto` 是 `alvar-aalto` 的旧/短 slug alias，详情页必须同样显示 Aalto 精品内容。
+
+### 必填结构
+
+每个 overlay 必须包含：
+- `summary.zh` / `summary.ja`：页头摘要和 SEO 描述
+- `sections[]`：至少 3 个长文 section；每个 section 中文和日文至少 2 段
+- `core_ideas.zh` / `core_ideas.ja`：4 条左右核心思想
+- `representative_works[]`：固定 3 个站内作品 slug，并提供中文/日文导读
+- `portrait`：人物肖像 URL、作者、license、source_url、三语 alt
+- `sources[]`：文末来源，至少 3 条可追溯资料
+
+### 写作口径
+
+- ✅ 来源驱动 + 原创改写：可参考官方基金会、Pritzker、博物馆/大学资料、Wikidata/Wikimedia
+- ✅ 中文和日文优先，英文只作为最低回退
+- ✅ 长文应解释建筑思想、场地/社会背景、代表作之间的关系
+- ❌ 不直接复制 Wikipedia 段落
+- ❌ 不编造奖项、年份、地点、影响关系
+- ❌ 不把 1500 字长文塞入 `bio_*` 单字段
+
 ## 图片规范
 
 ### 命名
@@ -75,6 +110,18 @@ detail      — 细部
 aerial      — 鸟瞰
 other       — 其他
 ```
+
+### 建筑师肖像
+
+人物肖像只允许使用可追溯来源：
+- Wikimedia Commons 且 license 为 Public domain、CC BY、CC BY-SA 等可用授权
+- 官方基金会、事务所、大学、博物馆、档案馆开放图片
+- 必须记录 author / license / source_url
+
+禁用：
+- ❌ 社交媒体、Pinterest、无来源转载图
+- ❌ CC BY-NC / CC BY-ND
+- ❌ 只有图片 URL、没有来源页和作者/机构信息
 
 ### 禁用
 

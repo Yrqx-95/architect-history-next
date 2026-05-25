@@ -196,6 +196,16 @@
 - ✅ 部署验证：提交 `5a60682` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-8a3kyuvsd-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://architect-history-next.vercel.app/zh/search?q=tokyo`、`/zh/architect/aalto`、`/zh/browse`、`/zh` 均返回 200；搜索页、建筑师页、浏览页已输出语义主题层级
 
+### 第十阶段：建筑师与作品内容精品化第一阶段
+- ✅ 新增仓库内容 overlay：5 位首批建筑师 `alvar-aalto`、`kenzo-tange`、`richard-neutra`、`marcel-breuer`、`alvaro-siza-vieira`
+- ✅ `aalto` 作为 `alvar-aalto` 的页面 alias，共用 Aalto 精品内容
+- ✅ 每位建筑师包含中文/日文摘要、长文 sections、核心思想、人物肖像、3 个代表作导读和文末来源
+- ✅ 建筑师详情页新增精品长文区、人物肖像、代表作导读和 Sources/参考资料
+- ✅ 人物肖像采用 Wikimedia Commons/Wikidata 可追溯文件，记录 author、license、source_url
+- ✅ 代表作卡片复用现有 BuildingCard，并通过本地 cover 数据合并显示可信作品图
+- ✅ `npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地访问验证：`/zh/architect/aalto`、`/ja/architect/aalto`、`/zh/architect/kenzo-tange`、`/ja/architect/kenzo-tange` 均显示长文、肖像、代表作和参考资料；`/zh/architect/adolf-loos` 不显示空精品区
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/
@@ -221,9 +231,9 @@ docs/
 ## 下一步优先级
 
 ### 立即（本周）
-1. 统一数据库中的 type_slug 为 slug
-2. 清理 22 个 overrides 重叠条目
-3. 压缩 1MB 以上本地缓存 JPG
+1. 完成建筑师内容精品化第一阶段部署验证
+2. 统一数据库中的 type_slug 为 slug
+3. 清理 22 个 overrides 重叠条目
 
 ### 短期（两周内）
 4. 拆分 ImageGallery 过大组件

@@ -13,7 +13,7 @@ export default function ImageAttribution({
 
   const textClass = tone === 'light'
     ? 'text-paper-100/56 hover:text-paper-100'
-    : 'text-warm-600 hover:text-warm-800 dark:text-warm-300 dark:hover:text-paper-100'
+    : 'text-muted hover:text-accent'
 
   const content = (
     <>

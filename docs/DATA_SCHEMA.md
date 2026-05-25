@@ -62,6 +62,23 @@
 - `influences` / `influenced` 使用 slug 列表；`relations.ts` 已统一风格/时代的 slug-based 匹配
 - `core_ideas` 是自由的 string[]，缺少结构化的 id/key 引用
 
+### Architect Content Overlay（仓库内容层）
+
+第一阶段精品内容不修改 Supabase schema，使用 `src/lib/architect-content.ts` 按 `architect.slug` 提供长文 overlay。该层用于承载 Supabase 当前不适合存放的编辑型内容。
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| slug | string | 对应 architects.slug |
+| summary | Record<zh/ja/en,string> | 页头摘要、SEO 描述 |
+| core_ideas | Record<zh/ja/en,string[]> | 本地化核心思想 |
+| portrait | object | 人物肖像 URL、author、license、source_url、alt |
+| sections | array | 长文 section，每节含本地化标题和段落数组 |
+| representative_works | array | 3 个站内 building slug + 本地化导读 |
+| sources | array | 文末来源标题和 URL |
+
+**迁移方向：**
+稳定后可迁移为 `architect_articles`、`architect_portraits`、`architect_representative_works` 三张表，或一个 `architect_content` JSONB 表。迁移前仓库 overlay 仍是唯一编辑源。
+
 ### Building（建筑）
 
 | 字段 | 类型 | 必填 | 说明 |
@@ -156,6 +173,16 @@ architect_influences (architect_id, influenced_id, relationship_type)
 - `quality_status`: candidate → approved → rejected
 
 **当前状态**：数据继续以 `local-image-overrides.json` (198条) + `image-overrides.json` (39条) 形式存储在 JSON 文件中。22 个建筑在两个文件中均有条目（本地优先）。
+
+## Portrait Images（人物肖像）
+
+人物肖像当前不在 Supabase `images` 表中，因为该表只关联 `building_id`。第一阶段肖像随 `Architect Content Overlay` 存储，字段包含 `url`、`author`、`license`、`source_url` 和本地化 `alt`。
+
+后续若迁移数据库，建议新增 `architect_images` 或通用 `entity_images` 表，支持：
+- `entity_type`: architect/building/style/era
+- `entity_slug`
+- `image_role`: portrait/hero/supporting
+- `url_original`, `photographer`, `license`, `source_url`
 
 ## 数据质量问题
 
