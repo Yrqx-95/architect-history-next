@@ -1,0 +1,254 @@
+{
+  "beijing-daxing-airport": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Interior_of_Beijing_Daxing_International_Airport_20191005.jpg",
+    "cover_photographer": "Tyg728",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Interior_of_Beijing_Daxing_International_Airport_20191005.jpg"
+  },
+  "aspen-art-museum": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Aspen_Art_Museum_by_Shigeru_Ban.jpg",
+    "cover_photographer": "Bkthomson16",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Aspen_Art_Museum_by_Shigeru_Ban.jpg"
+  },
+  "cardboard-cathedral": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Cardboard_Cathedral%2C_Christchurch%2C_New_Zealand.jpg",
+    "cover_photographer": "Michal Klajban",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Cardboard_Cathedral,_Christchurch,_New_Zealand.jpg"
+  },
+  "cctv-headquarters": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Beijing_CCTV_building.jpg",
+    "cover_photographer": "CNHowey",
+    "cover_license": "CC0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Beijing_CCTV_building.jpg"
+  },
+  "copenhill": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Copenhill_5.jpg",
+    "cover_photographer": "kallerna",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Copenhill_5.jpg"
+  },
+  "gckeyaki-terrace": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tokyo_Midtown_%2811420987086%29.jpg",
+    "cover_photographer": "Guilhem Vellut",
+    "cover_license": "CC BY 2.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Tokyo_Midtown_(11420987086).jpg"
+  },
+  "louis-vuitton-fondation": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Fondation_Louis_Vuitton_20160413_South_01.jpg",
+    "cover_photographer": "Tosek",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Fondation_Louis_Vuitton_20160413_South_01.jpg"
+  },
+  "national-stadium-tokyo": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Japan_National_Stadium_2024_1.jpg",
+    "cover_photographer": "Akonnchiroll",
+    "cover_license": "CC BY 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Japan_National_Stadium_2024_1.jpg"
+  },
+  "whitney-museum": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Whitney_Museum_of_American_Art_August_2024.jpg",
+    "cover_photographer": "Kidfly182",
+    "cover_license": "CC BY 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Whitney_Museum_of_American_Art_August_2024.jpg"
+  },
+  "apple-park": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Aerial_view_of_Apple_Park.jpg",
+    "cover_photographer": "Daniel L. Lu (user:dllu)",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Apple_Park.jpg"
+  },
+  "villa-savoye": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Ville-Savoye.JPG",
+    "cover_photographer": "Pascal3012",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Ville-Savoye.JPG"
+  },
+  "walt-disney-concert-hall": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Walt_Disney_Concert_Hall_July_2022.JPG",
+    "cover_photographer": "Benoît Prieur",
+    "cover_license": "CC0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Walt_Disney_Concert_Hall_July_2022.JPG"
+  },
+  "dancing-house": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Prague_-_Dancing_House.jpg",
+    "cover_photographer": "Maros M r a z (Maros)",
+    "cover_license": "CC BY-SA 3.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Prague_-_Dancing_House.jpg"
+  },
+  "salk-institute": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Salk_institute_2014.jpg",
+    "cover_photographer": "Cristina Bejarano",
+    "cover_license": "CC BY 2.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Salk_institute_2014.jpg"
+  },
+  "elbphilharmonie": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Elbphilharmonie_Hamburg.jpg",
+    "cover_photographer": "Der Wolf im Wald",
+    "cover_license": "CC BY-SA 3.0 de",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Elbphilharmonie_Hamburg.jpg"
+  },
+  "va-dundee": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/The_V%5EA_Museum%2C_Dundee_-_geograph.org.uk_-_5915039.jpg",
+    "cover_photographer": "GeographBot",
+    "cover_license": "CC BY-SA 2.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:The_V%5EA_Museum,_Dundee_-_geograph.org.uk_-_5915039.jpg"
+  },
+  "pompidou-centre": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/View_from_the_Centre_Pompidou_2.jpg",
+    "cover_photographer": "DiscoA340",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:View_from_the_Centre_Pompidou_2.jpg"
+  },
+  "burj-khalifa": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Burj_Khalifa_(16260269606).jpg",
+    "cover_photographer": "Laika ac",
+    "cover_license": "CC BY-SA 2.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_(16260269606).jpg"
+  },
+  "empire-state-building": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Empire_State_Building_pano.jpg",
+    "cover_photographer": "Daniel Schwen",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Empire_State_Building_pano.jpg"
+  },
+  "taj-mahal": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Taj_Mahal%2C_Agra%2C_India_edit2.jpg",
+    "cover_photographer": "Yann / King of Hearts",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Taj_Mahal,_Agra,_India_edit2.jpg"
+  },
+  "colosseum": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
+    "cover_photographer": "Diliff",
+    "cover_license": "CC BY-SA 2.5",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Colosseum_in_Rome,_Italy_-_April_2007.jpg"
+  },
+  "chrysler-building": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Manhattan_from_Weehawken%2C_NJ.jpg",
+    "cover_photographer": "Dmitry Avdeev",
+    "cover_license": "CC BY-SA 3.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Manhattan_from_Weehawken,_NJ.jpg"
+  },
+  "flatiron-building": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/New_York_City_(New_York%2C_USA)%2C_Empire_State_Building%2C_Blick_auf_Flatiron_Building_--_2012_--_6459.jpg",
+    "cover_photographer": "Dietmar Rabich",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:New_York_City_(New_York,_USA),_Empire_State_Building,_Blick_auf_Flatiron_Building_--_2012_--_6459.jpg"
+  },
+  "notre-dame": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Cath%C3%A9drale_Notre_Dame%2C_Paris_30_September_2015.jpg",
+    "cover_photographer": "Antonin Subtil",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Cath%C3%A9drale_Notre_Dame,_Paris_30_September_2015.jpg"
+  },
+  "pantheon": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Pantheon_Rom_1_cropped.jpg",
+    "cover_photographer": "Rabax63",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Pantheon_Rom_1_cropped.jpg"
+  },
+  "ronchamp": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Chapelle_Notre-Dame-du_Haut_05.jpg",
+    "cover_photographer": "Unknown author",
+    "cover_license": "Public domain",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Chapelle_Notre-Dame-du_Haut_05.jpg"
+  },
+  "guggenheim-museum": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Solomon_R._Guggenheim_Museum_skylight.jpg",
+    "cover_photographer": "T meltzer",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Solomon_R._Guggenheim_Museum_skylight.jpg"
+  },
+  "habitat-67": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Habitat_67_2019_dllu_01.jpg",
+    "cover_photographer": "Daniel L. Lu (user:dllu)",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Habitat_67_2019_dllu_01.jpg"
+  },
+  "boston-city-hall": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Boston_city_hall.jpg",
+    "cover_photographer": "Daniel Schwen",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Boston_city_hall.jpg"
+  },
+  "royal-ontario-museum": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Royal_Ontario_Museum_in_Fall_2021.jpg",
+    "cover_photographer": "Maksim Sokolov (Maxergon)",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Royal_Ontario_Museum_in_Fall_2021.jpg"
+  },
+  "the-shard": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/0/07/The_Shard_from_the_Sky_Garden_2015.jpg",
+    "cover_photographer": "Colin",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:The_Shard_from_the_Sky_Garden_2015.jpg"
+  },
+  "hearst-tower": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Hearst_Tower_(August_2024).jpg",
+    "cover_photographer": "Dreamword",
+    "cover_license": "CC BY 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Hearst_Tower_(August_2024).jpg"
+  },
+  "30-st-mary-axe": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/3/34/30_St_Mary_Axe_-_The_Gherkin_from_Leadenhall_St_-_Nov_2006.jpg",
+    "cover_photographer": "Diliff",
+    "cover_license": "CC BY-SA 3.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:30_St_Mary_Axe_-_The_Gherkin_from_Leadenhall_St_-_Nov_2006.jpg"
+  },
+  "high-line": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/High_Line_New_York_August_2013.jpg",
+    "cover_photographer": "King of Hearts",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:High_Line_New_York_August_2013.jpg"
+  },
+  "bradbury-building": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Interior_of_the_Bradbury_Building_dllu.jpg",
+    "cover_photographer": "Daniel L. Lu (user:dllu)",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Bradbury_Building_dllu.jpg"
+  },
+  "gamble-house": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Gamble_House_2016-1.jpg",
+    "cover_photographer": "Cullen328",
+    "cover_license": "CC BY-SA 3.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Gamble_House_2016-1.jpg"
+  },
+  "unite-dhabitation": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/View_from_the_Cit%C3%A9_radieuse_towards_the_sea_with_%C3%8Eles_du_Frioul,_Marseille.jpg",
+    "cover_photographer": "Carl Ha",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:View_from_the_Cit%C3%A9_radieuse_towards_the_sea_with_%C3%8Eles_du_Frioul,_Marseille.jpg"
+  },
+  "lotus-temple": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Lotus_temple_in_Delhi%2C_India_(2018).jpg",
+    "cover_photographer": "eclicks_by_bunny",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Lotus_temple_in_Delhi,_India_(2018).jpg"
+  },
+  "museo-soumaya": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Museo_Soumaya%2C_Ciudad_de_M%C3%A9xico%2C_M%C3%A9xico%2C_2015-07-18%2C_DD_12.JPG",
+    "cover_photographer": "Diego Delso",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Museo_Soumaya,_Ciudad_de_M%C3%A9xico,_M%C3%A9xico,_2015-07-18,_DD_12.JPG"
+  },
+  "harpa-concert-hall": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Harpa_harpa_01.jpg",
+    "cover_photographer": "H. Zell",
+    "cover_license": "CC BY-SA 3.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Harpa_harpa_01.jpg"
+  },
+  "barbican-estate": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Barbican_Estate_2018-09-22.jpg",
+    "cover_photographer": "Colin",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Barbican_Estate_2018-09-22.jpg"
+  },
+  "vessel": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Hudson_Yards_Vessel_2019.jpg",
+    "cover_photographer": "Antony-22",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_Vessel_2019.jpg"
+  }
+}
