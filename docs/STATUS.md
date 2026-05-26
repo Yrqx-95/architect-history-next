@@ -243,6 +243,17 @@
 - ✅ 本地响应验证：`/zh/architect/le-corbusier` 输出 `生卒年份`、`国籍 / 地区`；`/zh/browse` 输出 `建筑师谱系`、`建筑作品索引`、`历史、风格与类型`
 - ⚠️ Browser 插件仍在创建本地 tab 时停在 `about:blank` 超时，本轮未完成截图级验证
 
+### 第十四阶段：截图反馈修复与分类可用性补强
+- ✅ 首页与卡片图片在暗色模式下保持原图亮度、对比和饱和度，不再被主题整体压暗
+- ✅ 首页 hero/精选区移动端间距调整：图片、标题、metadata 和署名之间保留更清晰的呼吸感
+- ✅ 新增 `taxonomy.ts`，分类匹配兼容 slug、name_en、name_zh、name_ja，修复旧数据用显示名导致的空分类
+- ✅ `/browse` 过滤无内容的 era/style/type 入口，并省略 `0 建筑师`、`0 建筑` 等失望计数
+- ✅ `/browse/type/[slug]` 与 relations 查询同步使用 taxonomy 匹配，分类详情页能找到旧数据对应内容
+- ✅ 非中文页面清除中文简繁状态；日文 `displayText` 不再回退到中文，避免日语页出现繁体中文
+- ✅ 文档同步：`UI_RULES.md` 增加图片暗色规则、分类页空入口/0 计数禁用规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地响应验证：`/zh`、`/ja`、`/zh/browse`、`/ja/browse` 均返回 200；`/zh/browse` 不再输出真实 `0 建筑师 / 0 建筑` 计数；日语页未检出繁体中文泄漏
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/

@@ -11,6 +11,7 @@ import {
   getBuildingImages,
   getArchitectBySlug, getBuildingBySlug,
 } from '@/lib/data'
+import { listMatchesTaxonomy, matchesTaxonomy } from '@/lib/taxonomy'
 import type {
   ArchitectRelations, BuildingRelations, StyleRelations, EraRelations,
 } from '@/lib/types'
@@ -31,8 +32,8 @@ export const getArchitectRelations = cache(async (slug: string): Promise<Archite
   if (!architect) return null
 
   const buildings = allBuildings.filter(b => b.architect_slug === slug)
-  const styles = allStyles.filter(s => architect.style_slugs?.includes(s.slug))
-  const era = allEras.find(e => architect.era_slug === e.slug) || null
+  const styles = allStyles.filter(s => listMatchesTaxonomy(architect.style_slugs, s))
+  const era = allEras.find(e => matchesTaxonomy(architect.era_slug, e)) || null
 
   const influenceIds = new Set(architect.influences || [])
   const influencedIds = new Set(architect.influenced || [])
@@ -43,7 +44,7 @@ export const getArchitectRelations = cache(async (slug: string): Promise<Archite
   const relatedArchitects = allArchs.filter(a =>
     a.slug !== slug && (
       relatedIds.has(a.slug) ||
-      (architect.era_slug && a.era_slug === architect.era_slug) ||
+      (era && matchesTaxonomy(a.era_slug, era)) ||
       architect.style_slugs?.some(s => a.style_slugs?.includes(s))
     )
   ).slice(0, 8)
@@ -73,8 +74,8 @@ export const getBuildingRelations = cache(async (slug: string): Promise<Building
   if (!building) return null
 
   const architect = allArchs.find(a => a.slug === building.architect_slug) || null
-  const styles = allStyles.filter(s => building.style_slugs?.includes(s.slug))
-  const era = allEras.find(e => building.era_slug === e.slug) || null
+  const styles = allStyles.filter(s => listMatchesTaxonomy(building.style_slugs, s))
+  const era = allEras.find(e => matchesTaxonomy(building.era_slug, e)) || null
   const images = await getBuildingImages(building.id)
 
   const relatedBuildings = allBuildings.filter(b =>
@@ -99,8 +100,8 @@ export const getStyleRelations = cache(async (slug: string): Promise<StyleRelati
   const style = allStyles.find(s => s.slug === slug)
   if (!style) return null
 
-  const architects = allArchs.filter(a => a.style_slugs?.includes(style.slug))
-  const buildings = allBuildings.filter(b => b.style_slugs?.includes(style.slug))
+  const architects = allArchs.filter(a => listMatchesTaxonomy(a.style_slugs, style))
+  const buildings = allBuildings.filter(b => listMatchesTaxonomy(b.style_slugs, style))
   const parentStyle = style.parent_slug ? allStyles.find(s => s.slug === style.parent_slug) || null : null
   const childStyles = allStyles.filter(s => s.parent_slug === slug)
   const era = style.era_slug ? allEras.find(e => e.slug === style.era_slug) || null : null
@@ -121,10 +122,10 @@ export const getEraRelations = cache(async (slug: string): Promise<EraRelations 
   if (!era) return null
 
   const styles = allStyles.filter(s => s.era_slug === slug)
-  const architects = allArchs.filter(a => a.era_slug === slug)
+  const architects = allArchs.filter(a => matchesTaxonomy(a.era_slug, era))
   const buildings = allBuildings.filter(b => {
     const a = allArchs.find(x => x.slug === b.architect_slug)
-    return b.era_slug === slug || a?.era_slug === slug
+    return matchesTaxonomy(b.era_slug, era) || matchesTaxonomy(a?.era_slug, era)
   })
 
   return { era, styles, architects, buildings }

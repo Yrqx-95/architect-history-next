@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getTypes, getBuildingsWithCovers, getArchitects } from '@/lib/data'
 import { displayName } from '@/lib/types'
+import { matchesTaxonomy } from '@/lib/taxonomy'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
 import BuildingCard from '@/components/BuildingCard'
@@ -33,8 +34,7 @@ export default async function TypePage({ params }: { params: Promise<{ lang: str
 
   const nameText = displayName(type, lang)
   const archMap = new Map(architects.map(a => [a.slug, a.name_zh || a.name_en]))
-  const validTypeKeys = new Set([type.slug, type.name_en, type.name_zh].filter(Boolean))
-  const filteredBldgs = buildings.filter(b => b.type_slug ? validTypeKeys.has(b.type_slug) : false)
+  const filteredBldgs = buildings.filter(b => matchesTaxonomy(b.type_slug, type))
 
   return (
     <PageShell>

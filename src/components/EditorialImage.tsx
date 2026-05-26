@@ -35,7 +35,7 @@ export default function EditorialImage({
       alt={alt}
       sizes={sizes}
       loading={loading || 'lazy'}
-      className={`absolute inset-0 h-full w-full object-cover ${className}`}
+      className={`absolute inset-0 h-full w-full object-cover opacity-100 brightness-100 contrast-100 saturate-100 mix-blend-normal ${className}`}
       onError={() => setFailed(true)}
     />
   )

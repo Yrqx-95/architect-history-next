@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getCounts, getFeaturedBuildingsWithCovers } from '@/lib/data'
 import { displayName, displayText } from '@/lib/types'
+import { matchesTaxonomy } from '@/lib/taxonomy'
 import SectionHeading from '@/components/SectionHeading'
 import CinematicHero from '@/components/CinematicHero'
 import Reveal from '@/components/Reveal'
@@ -31,7 +32,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const prefix = `/${lang}`
 
   const activeEras = eras.filter(e =>
-    architects.some(a => a.era_slug === e.name_en || a.era_slug === e.name_zh)
+    architects.some(a => matchesTaxonomy(a.era_slug, e))
   ).slice(0, 8)
 
   const allBuildings = await getBuildingsWithCovers()
@@ -164,7 +165,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       </CinematicHero>
 
       {/* Archive entry */}
-      <section className="section pt-0">
+      <section className="section pt-4 sm:pt-0">
         <div className="grid gap-4 border-y border-warm-200/80 py-5 dark:border-charcoal-700/80 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-center">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
@@ -174,8 +175,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               [counts.countries, lang === 'en' ? 'Countries' : lang === 'ja' ? '地域' : '国家 / 地区'],
             ].map(([value, label]) => (
               <div key={label} className="min-w-0">
-                <p className="font-serif-display text-3xl leading-none text-warm-800 dark:text-paper-100">{value}</p>
-                <p className="mt-1 text-[0.68rem] uppercase tracking-[0.14em] text-warm-600 dark:text-warm-300">{label}</p>
+                <p className="font-serif-display text-3xl leading-none text-primary">{value}</p>
+                <p className="label mt-1">{label}</p>
               </div>
             ))}
           </div>
@@ -212,7 +213,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                     className="h-full w-full transition duration-500 ease-out group-hover:scale-[1.012]"
                   />
                 </div>
-                <div className="mt-2">
+                <div className="mt-4">
                   <ImageAttribution
                     photographer={featuredLead.cover_photographer}
                     license={featuredLead.cover_license}
@@ -220,14 +221,14 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                     tone="dark"
                   />
                 </div>
-                <div className="mt-5 grid gap-4 border-b border-warm-200/70 pb-6 dark:border-charcoal-700 sm:grid-cols-[minmax(0,1fr)_12rem]">
+                <div className="mt-6 grid gap-4 border-b border-subtle pb-7 sm:grid-cols-[minmax(0,1fr)_12rem]">
                   <div>
-                    <p className="mb-2 text-[0.68rem] uppercase tracking-[0.14em] text-warm-600 dark:text-warm-300">
+                    <p className="label mb-2">
                       {lang === 'en' ? 'Featured building' : lang === 'ja' ? '特集建築' : '精选建筑'}
                     </p>
-                    <h2 className="text-2xl font-medium leading-tight text-warm-800 dark:text-paper-100 sm:text-3xl">{displayName(featuredLead, lang)}</h2>
+                    <h2 className="text-2xl font-medium leading-tight text-primary sm:text-3xl">{displayName(featuredLead, lang)}</h2>
                   </div>
-                  <p className="text-xs leading-relaxed text-warm-600 dark:text-warm-300">
+                  <p className="caption">
                     {[architects.find(a => a.slug === featuredLead.architect_slug) ? displayName(architects.find(a => a.slug === featuredLead.architect_slug) || {}, lang) : '', featuredLead.year_start, [featuredLead.city, featuredLead.country].filter(Boolean).join(', ')].filter(Boolean).join(' · ')}
                   </p>
                 </div>

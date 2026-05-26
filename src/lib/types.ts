@@ -235,7 +235,9 @@ export function displayText(
   lang: string
 ): string {
   if (!obj) return ''
-  return obj[lang] || obj['en'] || obj['zh'] || Object.values(obj)[0] || ''
+  if (lang === 'ja') return obj['ja'] || obj['en'] || ''
+  if (lang === 'en') return obj['en'] || obj['zh'] || ''
+  return obj['zh'] || obj['en'] || Object.values(obj)[0] || ''
 }
 
 export function lifeSpan(birth: number | null, death: number | null): string {

@@ -54,9 +54,15 @@ export default async function LangLayout({ children, params }: {
         <script dangerouslySetInnerHTML={{
           __html: `(function(){var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.dataset.theme=t;document.documentElement.classList.toggle('dark',d)})()`
         }} />
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(){var c=localStorage.getItem('chineseScript')||'system';if(c!=='hans'&&c!=='hant'&&c!=='system')c='system';var langs=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||''];var hant=langs.some(function(l){return /zh-(tw|hk|mo|hant)/i.test(l)});var s=c==='system'?(hant?'hant':'hans'):c;document.documentElement.dataset.zhScriptChoice=c;document.documentElement.dataset.zhScript=s})()`
-        }} />
+        {lang === 'zh' ? (
+          <script dangerouslySetInnerHTML={{
+            __html: `(function(){var c=localStorage.getItem('chineseScript')||'system';if(c!=='hans'&&c!=='hant'&&c!=='system')c='system';var langs=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||''];var hant=langs.some(function(l){return /zh-(tw|hk|mo|hant)/i.test(l)});var s=c==='system'?(hant?'hant':'hans'):c;document.documentElement.dataset.zhScriptChoice=c;document.documentElement.dataset.zhScript=s})()`
+          }} />
+        ) : (
+          <script dangerouslySetInnerHTML={{
+            __html: `(function(){document.documentElement.removeAttribute('data-zh-script-choice');document.documentElement.removeAttribute('data-zh-script')})()`
+          }} />
+        )}
         <script dangerouslySetInnerHTML={{
           __html: `window.__nextErrorLog=[];window.addEventListener('error',function(e){var info={message:e.message,filename:e.filename,lineno:e.lineno,colno:e.colno,errorName:e.error?e.error.name:'',errorStack:e.error&&e.error.stack?e.error.stack.substring(0,1000):''};window.__nextErrorLog.push(info);console.error('[Diagnostic] JS Error:',JSON.stringify(info,null,2))})`
         }} />

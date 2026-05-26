@@ -108,7 +108,11 @@ export function subscribeChineseScript(listener: () => void) {
 
 export default function ChineseScriptProvider({ lang }: { lang: string }) {
   useEffect(() => {
-    if (lang !== 'zh') return
+    if (lang !== 'zh') {
+      document.documentElement.removeAttribute('data-zh-script-choice')
+      document.documentElement.removeAttribute('data-zh-script')
+      return
+    }
 
     const apply = () => {
       const choice = getStoredChoice()
