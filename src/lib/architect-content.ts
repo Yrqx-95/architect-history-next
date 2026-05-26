@@ -1162,6 +1162,378 @@ const overlays: Record<string, ArchitectContentOverlay> = {
       { title: 'Wikidata: Lina Bo Bardi', url: 'https://www.wikidata.org/wiki/Q268143' },
     ],
   },
+  'norman-foster': {
+    slug: 'norman-foster',
+    summary: {
+      zh: '诺曼·福斯特把高技派结构、企业总部、交通基础设施和可持续技术整合成清晰的现代建筑语言。他的作品常以轻量结构、可读细部和高效平面，把工程逻辑转化为公共形象。',
+      ja: 'ノーマン・フォスターは、ハイテック構造、企業本社、交通インフラ、環境技術を明快な近代建築言語へ統合した。軽い構造、読み取れる細部、効率的な平面によって、工学的な論理を公共的なイメージへ変換する。',
+      en: 'Norman Foster turns structural clarity, infrastructure, and environmental systems into a legible modern architecture.',
+    },
+    core_ideas: {
+      zh: ['结构与设备的可读性', '企业建筑的公共形象', '轻量化与大跨度空间', '技术、效率和环境策略整合'],
+      ja: ['構造と設備の可読性', '企業建築の公共的イメージ', '軽量化と大スパン空間', '技術、効率、環境戦略の統合'],
+      en: ['Legible technology', 'Corporate civic image', 'Lightweight spans', 'Integrated environmental systems'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Norman_Foster_dresden_061110.jpg',
+      author: 'bigbug21',
+      license: 'CC BY-SA 2.5',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Norman_Foster_dresden_061110.jpg',
+      alt: { zh: '诺曼·福斯特肖像', ja: 'ノーマン・フォスターの肖像', en: 'Portrait of Norman Foster' },
+    },
+    sections: [
+      {
+        title: { zh: '高技派不是炫技，而是秩序', ja: 'ハイテックは誇示ではなく秩序である', en: 'High-tech as order' },
+        paragraphs: {
+          zh: [
+            '福斯特的建筑常被归入高技派，但他的技术表达并不是把构件堆到表面，而是让结构、设备、交通和空间组织变得清楚可读。梁、桁架、玻璃、核心筒和机电系统不是隐藏的后台，而是共同形成建筑的公共面貌。',
+            '这种方法在企业总部和交通建筑中尤其有效。复杂机构需要高效运转，同时又要向城市展示开放、透明和可信的形象。福斯特把工程逻辑转化为秩序感，使建筑既像机器，也像城市中的公共大厅。',
+          ],
+          ja: [
+            'フォスターの建築はハイテックに分類されるが、技術表現は部材を表面に積み上げることではない。構造、設備、交通、空間構成を明快に読み取れるようにすることである。梁、トラス、ガラス、コア、機械設備は隠された裏側ではなく、建築の公共的な顔をつくる。',
+            'この方法は企業本社や交通建築で特に力を発揮する。複雑な組織は効率的に動く必要があり、同時に都市へ開放性、透明性、信頼性を示す必要がある。フォスターは工学的な論理を秩序感へ変え、建築を機械であり公共ホールでもあるものにした。',
+          ],
+          en: ['Foster makes structure, services, and circulation visible as architectural order.'],
+        },
+      },
+      {
+        title: { zh: '从银行大厅到城市基础设施', ja: '銀行ホールから都市インフラへ', en: 'From banking halls to infrastructure' },
+        paragraphs: {
+          zh: [
+            '香港汇丰银行总部把悬挂结构、开放大堂和可变办公层结合起来，让一座金融建筑呈现出基础设施般的尺度。后来从斯坦斯特德机场到米约大桥，福斯特继续把建筑扩展到交通与工程系统之中。',
+            '这些作品共同说明，他关心的不只是外观轻盈，而是空间如何高效运作。人流、结构跨度、自然光、维护方式和城市可见性被同时考虑，建筑成为复杂系统的清晰界面。',
+          ],
+          ja: [
+            '香港上海銀行本店は、吊り構造、開かれた大ホール、可変的なオフィス階を組み合わせ、金融建築にインフラのような尺度を与えた。その後、スタンステッド空港からミヨー橋まで、フォスターは建築を交通と工学のシステムへ広げていく。',
+            'これらの作品は、彼が外観の軽さだけでなく、空間の運用効率を重視していることを示す。人流、構造スパン、自然光、維持管理、都市からの見え方が同時に考えられ、建築は複雑なシステムの明快なインターフェースになる。',
+          ],
+          en: ['Foster’s buildings often operate as infrastructure with civic clarity.'],
+        },
+      },
+      {
+        title: { zh: '环境技术与城市形象', ja: '環境技術と都市イメージ', en: 'Environmental image' },
+        paragraphs: {
+          zh: [
+            '福斯特的后期作品频繁把环境策略纳入形象生产。德国国会大厦穹顶以参观路线、自然采光和通风机制表达民主透明性；小黄瓜大厦则把空气流动、结构网格和城市天际线结合为一个可识别符号。',
+            '这种做法也有争议：技术形象可能被企业品牌吸收，绿色策略也可能成为地标叙事的一部分。但福斯特的重要性正在于，他把工程、可持续和公共可见性放在同一个建筑问题中处理。',
+          ],
+          ja: [
+            '後期のフォスター作品では、環境戦略が建築のイメージに組み込まれる。ドイツ国会議事堂のドームは、見学動線、自然光、換気の仕組みによって民主的な透明性を表す。ガーキンは空気の流れ、構造グリッド、都市のスカイラインを一つの記号にした。',
+            'この方法には議論もある。技術的なイメージは企業ブランドに吸収され、環境戦略もランドマークの物語になる。しかしフォスターの重要性は、工学、持続可能性、公共的可視性を同じ建築問題として扱った点にある。',
+          ],
+          en: ['Foster links environmental systems to civic and corporate identity.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'hongkong-bank', note: { zh: '以外露结构、开放大堂和模块化办公层重塑金融总部的公共形象。', ja: '露出した構造、開かれたホール、モジュール化されたオフィス階で金融本部の公共像をつくる。', en: 'A banking headquarters expressed as open infrastructure.' } },
+      { slug: 'reichstag-dome', note: { zh: '玻璃穹顶把参观流线、自然光和政治透明性的象征合并在一起。', ja: 'ガラスドームが見学動線、自然光、政治的透明性の象徴を結びつける。', en: 'A dome that joins public route, daylight, and democratic symbolism.' } },
+      { slug: 'the-gherkin', note: { zh: '以结构网格和通风策略塑造伦敦天际线中的环境技术图标。', ja: '構造グリッドと換気戦略によって、ロンドンのスカイラインに環境技術のアイコンをつくる。', en: 'An environmental and structural icon in London’s skyline.' } },
+    ],
+    sources: [
+      { title: 'Foster + Partners: HSBC Main Building', url: 'https://www.fosterandpartners.com/projects/hsbc-main-building' },
+      { title: 'Foster + Partners: Reichstag, New German Parliament', url: 'https://www.fosterandpartners.com/projects/reichstag-new-german-parliament' },
+      { title: 'The Pritzker Architecture Prize: Norman Foster', url: 'https://www.pritzkerprize.com/laureates/1999' },
+      { title: 'Wikidata: Norman Foster', url: 'https://www.wikidata.org/wiki/Q104898' },
+    ],
+  },
+  'shigeru-ban': {
+    slug: 'shigeru-ban',
+    summary: {
+      zh: '坂茂以纸管、木结构、临时建筑和灾后空间闻名。他把轻材料和快速建造转化为严肃建筑实践，证明建筑不仅服务纪念性和市场，也能回应避难、社区与可持续问题。',
+      ja: '坂茂は紙管、木構造、仮設建築、災害後の空間で知られる。軽い素材と迅速な建設を本格的な建築実践へ変え、建築が記念性や市場だけでなく、避難、共同体、持続可能性に応答できることを示した。',
+      en: 'Shigeru Ban uses paper, timber, and temporary systems to connect architecture with relief, community, and sustainability.',
+    },
+    core_ideas: {
+      zh: ['纸管与轻质结构', '灾后空间与社会责任', '临时性也可以有尊严', '材料创新服务人的使用'],
+      ja: ['紙管と軽量構造', '災害後の空間と社会的責任', '仮設にも尊厳を与える', '素材の革新を人の使用へ向ける'],
+      en: ['Paper and lightweight structure', 'Disaster relief', 'Dignified temporariness', 'Material innovation for use'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Shigeru_Ban.jpg',
+      author: '準建築人手札網站',
+      license: 'CC BY 2.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Shigeru_Ban.jpg',
+      alt: { zh: '坂茂肖像', ja: '坂茂の肖像', en: 'Portrait of Shigeru Ban' },
+    },
+    sections: [
+      {
+        title: { zh: '轻材料的严肃性', ja: '軽い素材の真剣さ', en: 'Serious lightness' },
+        paragraphs: {
+          zh: [
+            '坂茂最具辨识度的材料是纸管。纸在建筑中通常被视为脆弱、临时、低成本，但坂茂通过结构计算、节点设计和防火处理，让纸管进入住宅、展厅、教堂和救灾建筑。材料的轻，并不意味着建筑的轻率。',
+            '他的材料实验总是与使用方式相连。纸管便宜、可回收、易运输，也能快速组装，因此特别适合临时空间和灾后场景。坂茂的贡献在于把这种实用性提升为建筑伦理：临时建筑也应有空间质量和人的尊严。',
+          ],
+          ja: [
+            '坂茂を特徴づける素材は紙管である。紙は建築では弱く、仮設的で、低コストなものと見なされがちだが、坂は構造計算、接合部、防火処理によって、紙管を住宅、展示、教会、救援建築へ導入した。素材の軽さは建築の軽率さを意味しない。',
+            '彼の素材実験は常に使い方と結びつく。紙管は安価で、リサイクル可能で、運びやすく、素早く組み立てられるため、仮設空間や災害後の状況に適している。坂の貢献は、その実用性を建築倫理へ高めた点にある。仮設建築にも空間の質と人間の尊厳が必要である。',
+          ],
+          en: ['Ban turns lightweight, recyclable materials into serious architecture.'],
+        },
+      },
+      {
+        title: { zh: '灾后建筑不是次等建筑', ja: '災害後の建築は二級品ではない', en: 'Relief architecture with dignity' },
+        paragraphs: {
+          zh: [
+            '从难民隔间到纸教堂、纸管住宅和基督城纸板教堂，坂茂持续参与灾后和临时建筑实践。他拒绝把临时空间当作最低标准的棚屋，而是尽可能提供秩序、隐私、采光和集体记忆。',
+            '这种实践扩展了建筑师的社会角色。建筑不只是等待大型委托的专业服务，也可以介入紧急状态，用简单系统迅速改善人的处境。坂茂让“可建造、可运输、可负担”成为设计美学的一部分。',
+          ],
+          ja: [
+            '避難所の間仕切り、紙の教会、紙管住宅、クライストチャーチの紙の大聖堂まで、坂は災害後と仮設建築に継続的に関わってきた。仮設空間を最低限の小屋として扱わず、秩序、プライバシー、採光、集団的記憶をできる限り与える。',
+            'この実践は建築家の社会的役割を広げた。建築は大きな委託を待つ専門サービスだけでなく、緊急時に介入し、単純なシステムで人の状況を改善できる。坂は「建てやすい、運びやすい、負担できる」ことを設計美学の一部にした。',
+          ],
+          en: ['Ban treats emergency space as architecture deserving order, privacy, and care.'],
+        },
+      },
+      {
+        title: { zh: '木、纸与公共建筑', ja: '木、紙、公共建築', en: 'Timber, paper, public buildings' },
+        paragraphs: {
+          zh: [
+            '坂茂并不只做临时建筑。蓬皮杜梅斯中心、阿斯彭美术馆和富士山世界遗产中心都显示他对木结构、编织表皮和公共动线的兴趣。轻材料在这些项目中不再只是应急手段，而是形成建筑形象和空间体验的主角。',
+            '他的建筑常把结构做得清楚而亲近。木格、纸管和编织外皮让使用者意识到建筑如何被组装，也让技术带有手工温度。坂茂因此把可持续性从口号变成可触摸的空间经验。',
+          ],
+          ja: [
+            '坂は仮設建築だけをつくるわけではない。ポンピドゥー・センター・メス、アスペン美術館、富士山世界遺産センターは、木構造、編まれた外皮、公共動線への関心を示す。軽い素材は応急手段ではなく、建築の像と空間体験をつくる主役になる。',
+            '彼の建築は構造を分かりやすく、親しみやすく見せる。木格子、紙管、編み込まれた外皮は、建築がどのように組み立てられているかを利用者に伝え、技術に手仕事の温度を与える。持続可能性は標語ではなく、触れられる空間経験になる。',
+          ],
+          en: ['Ban’s public buildings make timber and light construction spatially legible.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'cardboard-cathedral', note: { zh: '以纸管结构回应地震后的礼拜和城市记忆，临时性中保留庄重感。', ja: '紙管構造で震災後の礼拝と都市の記憶に応答し、仮設性の中に厳粛さを保つ。', en: 'A paper-tube cathedral that gives dignity to temporary recovery.' } },
+      { slug: 'pompidou-metz', note: { zh: '木质编织屋顶覆盖展览与城市公共空间，把轻结构变成文化地标。', ja: '木の編み込み屋根が展示と都市公共空間を覆い、軽い構造を文化的ランドマークにする。', en: 'A woven timber roof turned into a cultural landmark.' } },
+      { slug: 'mt-fuji-center', note: { zh: '倒置锥体与水面反射共同组织富士山观看经验。', ja: '反転した円錐と水面の反射が、富士山を見る経験を構成する。', en: 'A timber cone and reflection frame the experience of Mount Fuji.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Shigeru Ban', url: 'https://www.pritzkerprize.com/laureates/2014' },
+      { title: 'Shigeru Ban Architects', url: 'https://www.shigerubanarchitects.com/' },
+      { title: 'Centre Pompidou-Metz', url: 'https://www.centrepompidou-metz.fr/en' },
+      { title: 'Wikidata: Shigeru Ban', url: 'https://www.wikidata.org/wiki/Q526725' },
+    ],
+  },
+  'carlo-scarpa': {
+    slug: 'carlo-scarpa',
+    summary: {
+      zh: '卡洛·斯卡帕以细部、材料接缝、展陈空间和历史建筑改造闻名。他的建筑不是宏大体量的宣言，而是在石、水、金属、混凝土和旧墙之间制造极其精确的观看与触摸经验。',
+      ja: 'カルロ・スカルパは、細部、素材の接合、展示空間、歴史建築の改修で知られる。彼の建築は巨大な量塊の宣言ではなく、石、水、金属、コンクリート、古い壁の間に精密な見る経験と触れる経験をつくる。',
+      en: 'Carlo Scarpa shaped architecture through detail, material joints, exhibition craft, and historic intervention.',
+    },
+    core_ideas: {
+      zh: ['细部作为空间核心', '新旧材料的精确相遇', '展陈设计与建筑合一', '水、石、金属和光的触觉秩序'],
+      ja: ['細部を空間の中心にする', '新旧素材の精密な出会い', '展示設計と建築の一体化', '水、石、金属、光の触覚的秩序'],
+      en: ['Detail as space', 'Precise old-new joints', 'Exhibition architecture', 'Tactile order'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Carlo_Scarpa_1954.jpg',
+      author: 'Mario De Biasi / Mondadori Publishers',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Carlo_Scarpa_1954.jpg',
+      alt: { zh: '卡洛·斯卡帕肖像', ja: 'カルロ・スカルパの肖像', en: 'Portrait of Carlo Scarpa' },
+    },
+    sections: [
+      {
+        title: { zh: '细部不是装饰', ja: '細部は装飾ではない', en: 'Detail is not decoration' },
+        paragraphs: {
+          zh: [
+            '斯卡帕的建筑需要近距离阅读。台阶边缘、金属嵌条、石材转角、水槽厚度、门轴和玻璃固定件都被处理成空间事件。细部不是附属装饰，而是决定人如何停步、观看、触摸和转身的装置。',
+            '这种细部意识来自威尼斯的工艺传统、现代主义构成和他对展览设计的长期经验。斯卡帕让材料之间保持可见缝隙，使新旧、轻重、粗细、湿干之间的差异变成建筑的节奏。',
+          ],
+          ja: [
+            'スカルパの建築は近くで読む必要がある。階段の端、金属の埋め込み、石の角、水盤の厚み、扉の軸、ガラスの固定金物が空間的な出来事として扱われる。細部は付属的な装飾ではなく、人が立ち止まり、見て、触れ、向きを変えるための装置である。',
+            'この細部への意識は、ヴェネツィアの工芸伝統、近代主義的な構成、展示設計の経験から生まれた。スカルパは素材の間に見える隙間を残し、新旧、軽重、粗密、湿乾の差異を建築のリズムに変える。',
+          ],
+          en: ['Scarpa makes joints, edges, and thresholds into spatial events.'],
+        },
+      },
+      {
+        title: { zh: '历史建筑中的插入', ja: '歴史建築への挿入', en: 'Intervening in history' },
+        paragraphs: {
+          zh: [
+            '斯卡帕处理历史建筑时，很少假装新东西不存在。他会让新的混凝土、金属、木材和旧石墙保持距离，同时又通过比例和路径把它们联系起来。奎里尼·斯坦帕利亚基金会就是这种方法的典型：水、桥、入口和展厅被重新组织，旧建筑获得新的城市接口。',
+            '他的历史观不是复原主义，而是一种精确的共存。新元素不模仿过去，也不粗暴覆盖过去，而是在相邻处清楚表明自己的时代。正因为这种克制，斯卡帕的改造常显得比完整新建更有张力。',
+          ],
+          ja: [
+            'スカルパは歴史建築を扱うとき、新しいものが存在しないふりをしない。新しいコンクリート、金属、木、古い石壁の間に距離を残しながら、比例と経路によって結びつける。クェリーニ・スタンパリア財団はその典型で、水、橋、入口、展示室が再構成され、古い建物が新しい都市的接点を得る。',
+            '彼の歴史観は復元主義ではなく、精密な共存である。新しい要素は過去を模倣せず、乱暴に覆いもしない。隣り合う場所で自らの時代を明確に示す。その抑制によって、スカルパの改修は完全な新築よりも強い緊張を持つことがある。',
+          ],
+          en: ['Scarpa inserts new work into old fabric through precise distance and proportion.'],
+        },
+      },
+      {
+        title: { zh: '墓园、展览与慢速动线', ja: '墓地、展示、遅い動線', en: 'Slow movement' },
+        paragraphs: {
+          zh: [
+            '布里昂墓园把斯卡帕的主题推到极致：水池、混凝土、圆环、路径和植物共同形成缓慢的纪念空间。这里没有单一正面，只有一步步被安排的接近、转折和停留。',
+            '他的展览空间也类似。作品不是被挂在中性背景上，而是与支架、墙面、光线和人的行走距离发生关系。斯卡帕让观看变慢，让建筑重新成为触觉和时间的艺术。',
+          ],
+          ja: [
+            'ブリオン墓地はスカルパの主題を極限まで押し出す。水盤、コンクリート、円環、経路、植物が、ゆっくりとした記念空間をつくる。単一の正面はなく、一歩ずつ近づき、曲がり、留まる経験が組み立てられる。',
+            '彼の展示空間も同様である。作品は中立的な背景に掛けられるだけではなく、支持体、壁面、光、人の歩く距離と関係する。スカルパは見る行為を遅くし、建築を触覚と時間の芸術へ戻した。',
+          ],
+          en: ['Scarpa slows movement so that viewing becomes tactile and temporal.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'brion-tomb', note: { zh: '水、混凝土、圆环和路径共同构成缓慢而精确的纪念空间。', ja: '水、コンクリート、円環、経路が、ゆっくりと精密な記念空間をつくる。', en: 'A slow memorial landscape of water, concrete, and path.' } },
+      { slug: 'fondazione-querini-stampalia', note: { zh: '在威尼斯旧建筑中插入桥、水、入口和展陈系统，新旧共存而不互相伪装。', ja: 'ヴェネツィアの古い建物に橋、水、入口、展示システムを挿入し、新旧を偽装せず共存させる。', en: 'A precise old-new intervention in Venice.' } },
+      { slug: 'olivetti-exhibition-centre-in-venice', note: { zh: '以楼梯、材料和展陈细部把小空间转化为可缓慢阅读的建筑。', ja: '階段、素材、展示細部によって小さな空間をゆっくり読める建築へ変える。', en: 'A small showroom transformed through stair, material, and detail.' } },
+    ],
+    sources: [
+      { title: 'Fondazione Querini Stampalia: Carlo Scarpa Area', url: 'https://www.querinistampalia.org/en/museum/carlo-scarpa-area/' },
+      { title: 'MAXXI: Carlo Scarpa', url: 'https://www.maxxi.art/en/focus-on/carlo-scarpa/' },
+      { title: 'Wikidata: Carlo Scarpa', url: 'https://www.wikidata.org/wiki/Q315406' },
+    ],
+  },
+  'kengo-kuma': {
+    slug: 'kengo-kuma',
+    summary: {
+      zh: '隈研吾以木、竹、石、瓦、织物和细小构件重新思考建筑的“消隐”。他的作品不是让建筑消失，而是把体量分解为材料、阴影、缝隙和地方工艺，让建筑与街道和地景发生更柔和的关系。',
+      ja: '隈研吾は木、竹、石、瓦、布、小さな部材によって建築の「消える」あり方を考え直した。建築をなくすのではなく、量塊を素材、影、隙間、地域の技術へ分解し、街路や風景との柔らかな関係をつくる。',
+      en: 'Kengo Kuma dissolves mass through material, craft, shadow, and small-scale components.',
+    },
+    core_ideas: {
+      zh: ['消隐建筑与弱化体量', '地方材料和工艺再组织', '细小构件形成大尺度空间', '街道、阴影与过滤性的立面'],
+      ja: ['建築を消し量塊を弱める', '地域素材と工芸の再構成', '小さな部材で大きな空間をつくる', '街路、影、濾過する立面'],
+      en: ['Anti-object architecture', 'Local materials', 'Small components', 'Filtered facades'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Kengo_Kuma_at_Strelka_Institute.jpg',
+      author: 'Strelka Institute for Media, Architecture and Design',
+      license: 'CC BY 2.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Kengo_Kuma_at_Strelka_Institute.jpg',
+      alt: { zh: '隈研吾肖像', ja: '隈研吾の肖像', en: 'Portrait of Kengo Kuma' },
+    },
+    sections: [
+      {
+        title: { zh: '反对建筑成为孤立物', ja: '建築が孤立物になることへの抵抗', en: 'Against isolated objects' },
+        paragraphs: {
+          zh: [
+            '隈研吾常把自己的方法描述为让建筑消隐。这里的消隐不是取消建筑，而是反对建筑以巨大、光滑、封闭的体量压倒场所。他更愿意把建筑拆解为许多可感知的小构件，让阴影、缝隙和材料纹理参与空间。',
+            '这种态度与日本传统建筑、地方工艺和当代城市经验都有关。木格、竹编、石片、瓦片和金属网不只是表皮图案，而是调节光线、尺度和街道关系的工具。',
+          ],
+          ja: [
+            '隈研吾は自らの方法を建築を消すこととして語ることが多い。ここでの「消える」は建築をなくすことではなく、巨大で滑らかで閉じた量塊が場所を圧倒することへの抵抗である。建築を多数の小さな部材へ分解し、影、隙間、素材の質感を空間に参加させる。',
+            'この姿勢は日本の伝統建築、地域工芸、現代都市の経験と関係している。木格子、竹編み、石片、瓦、金属メッシュは単なる外皮の模様ではなく、光、尺度、街路との関係を調整する道具である。',
+          ],
+          en: ['Kuma dissolves building mass into small components, shadow, and texture.'],
+        },
+      },
+      {
+        title: { zh: '材料作为气候与城市过滤器', ja: '気候と都市を濾過する素材', en: 'Material as filter' },
+        paragraphs: {
+          zh: [
+            '隈研吾的材料选择常带有地方性，但他并不只是复兴传统材料。材料被重新编码为当代建筑系统：木条可以形成遮阳立面，瓦片可以变成半透明屏障，石材可以被切薄、悬挂或叠合。',
+            '因此他的建筑经常像过滤器。室内外、公共私密、建筑街道之间不是硬边界，而是通过层层材料过渡。浅草文化观光中心把竖向公共功能叠成街道尺度的木构表情，V&A Dundee 则用水平纹理回应海岸地景。',
+          ],
+          ja: [
+            '隈の素材選択には地域性があるが、伝統素材を単に復興するわけではない。素材は現代建築のシステムとして再編される。木の小片は日射を調整する立面になり、瓦は半透明のスクリーンになり、石は薄く切られ、吊られ、重ねられる。',
+            'そのため彼の建築はしばしばフィルターのように働く。内外、公私、建築と街路の間は硬い境界ではなく、素材の層を通じて移行する。浅草文化観光センターは垂直に重なる公共機能を街路スケールの木の表情にし、V&Aダンディーは水平のテクスチャで海岸の風景に応答する。',
+          ],
+          en: ['Kuma uses material layers to filter light, climate, street, and landscape.'],
+        },
+      },
+      {
+        title: { zh: '大尺度中的小构件', ja: '大きなスケールの中の小さな部材', en: 'Small parts, large scale' },
+        paragraphs: {
+          zh: [
+            '隈研吾面对大型项目时，仍试图避免整块体量。新国立竞技场通过木檐、水平层叠和绿化弱化体育场的巨大尺度，使它更接近公园和城市边界的连续体。',
+            '这种策略也会受到批评：材料语言容易成为可复制的品牌。但在最好的作品中，隈研吾确实把材料从装饰表皮推进到空间组织，让建筑在城市中显得更柔软、更可接近。',
+          ],
+          ja: [
+            '隈は大規模プロジェクトでも、一枚岩の量塊を避けようとする。新国立競技場では、木の庇、水平に重なる層、緑化によってスタジアムの巨大さを弱め、公園と都市境界の連続体へ近づけた。',
+            'この戦略には批判もある。素材の言語が再利用可能なブランドになりやすいからである。しかし優れた作品では、素材は装飾的な外皮を越えて空間を組織し、建築を都市の中でより柔らかく、近づきやすいものにしている。',
+          ],
+          en: ['Kuma scales small components up to civic buildings while trying to weaken mass.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'asakusa-culture-center', note: { zh: '以层叠木构表情回应浅草街道尺度，把垂直公共功能做成可亲近的城市界面。', ja: '重なる木の表情で浅草の街路尺度に応答し、垂直の公共機能を親しみやすい都市界面にする。', en: 'A stacked civic facade scaled to Asakusa’s street life.' } },
+      { slug: 'v-and-a-dundee', note: { zh: '水平纹理和地景体量回应海岸环境，使博物馆像被风和水切削的岩层。', ja: '水平のテクスチャと地形的な量塊が海岸環境に応答し、風と水に削られた岩層のような美術館をつくる。', en: 'A coastal museum shaped like layered terrain.' } },
+      { slug: 'national-stadium-tokyo', note: { zh: '以木檐、绿化和水平层叠减弱大型体育场的压迫感。', ja: '木の庇、緑化、水平の層によって大型スタジアムの圧迫感を弱める。', en: 'A large stadium softened by timber eaves and planted layers.' } },
+    ],
+    sources: [
+      { title: 'Kengo Kuma & Associates', url: 'https://kkaa.co.jp/' },
+      { title: 'V&A Dundee: Architecture', url: 'https://www.vam.ac.uk/dundee/info/architecture' },
+      { title: 'Wikidata: Kengo Kuma', url: 'https://www.wikidata.org/wiki/Q717496' },
+    ],
+  },
+  'niemeyer': {
+    slug: 'niemeyer',
+    summary: {
+      zh: '奥斯卡·尼迈耶把钢筋混凝土的可塑性推向曲线、广场和国家想象。他的建筑从巴西利亚到圣保罗、尼泰罗伊，不断把现代主义从直线功能主义中释放出来，转向身体、天空和公共纪念性。',
+      ja: 'オスカー・ニーマイヤーは、鉄筋コンクリートの可塑性を曲線、広場、国家的想像力へ押し広げた。ブラジリアからサンパウロ、ニテロイまで、近代主義を直線的な機能主義から解放し、身体、空、公共的記念性へ向けた。',
+      en: 'Oscar Niemeyer used reinforced concrete to make modernism curvilinear, monumental, and civic.',
+    },
+    core_ideas: {
+      zh: ['混凝土曲线与身体感', '现代主义中的公共纪念性', '建筑、广场和国家形象', '轻盈屋顶与雕塑化结构'],
+      ja: ['コンクリート曲線と身体感覚', '近代主義の公共的記念性', '建築、広場、国家像', '軽い屋根と彫刻的構造'],
+      en: ['Concrete curves', 'Civic monumentality', 'Architecture and national image', 'Sculptural structure'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Oscar_Niemeyer_1968b.jpg',
+      author: 'Unknown / Mondadori Publishers',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Oscar_Niemeyer_1968b.jpg',
+      alt: { zh: '奥斯卡·尼迈耶肖像', ja: 'オスカー・ニーマイヤーの肖像', en: 'Portrait of Oscar Niemeyer' },
+    },
+    sections: [
+      {
+        title: { zh: '曲线中的现代主义', ja: '曲線の中の近代主義', en: 'Curvilinear modernism' },
+        paragraphs: {
+          zh: [
+            '尼迈耶反对把现代建筑简化为直线、盒子和严格功能主义。他认为曲线更接近巴西地景、身体和自由的想象。钢筋混凝土使这种曲线得以成为屋顶、柱、壳体和广场中的巨大姿态。',
+            '这种现代主义并不软弱。相反，它具有强烈纪念性和公共可见性。建筑通过大跨度、薄壳、悬挑和开阔平台，与天空、地平线和人群活动建立关系。',
+          ],
+          ja: [
+            'ニーマイヤーは、近代建築を直線、箱、厳格な機能主義に限定することに反対した。曲線はブラジルの風景、身体、自由な想像力に近いと考えた。鉄筋コンクリートは、その曲線を屋根、柱、シェル、広場の大きな身振りにした。',
+            'この近代主義は弱いものではない。むしろ強い記念性と公共的可視性を持つ。建築は大スパン、薄いシェル、キャンチレバー、開いたプラットフォームによって、空、地平線、人々の活動と関係する。',
+          ],
+          en: ['Niemeyer made modernism curvilinear through concrete, sky, and civic scale.'],
+        },
+      },
+      {
+        title: { zh: '巴西利亚：建筑与国家舞台', ja: 'ブラジリア：建築と国家の舞台', en: 'Brasília as stage' },
+        paragraphs: {
+          zh: [
+            '巴西利亚是理解尼迈耶不可绕开的项目。与卢西奥·科斯塔的城市规划一起，尼迈耶的国会、教堂、宫殿和广场为新首都建立了视觉秩序。建筑不只是功能容器，而是国家现代化的舞台。',
+            '这些建筑的力量来自清晰的形象：碗状议会、细柱宫殿、开放广场和壳体教堂。它们常被批评距离日常生活过远，但也确实塑造了二十世纪最完整的现代主义国家景观之一。',
+          ],
+          ja: [
+            'ブラジリアはニーマイヤーを理解するうえで避けられないプロジェクトである。ルシオ・コスタの都市計画とともに、国会議事堂、大聖堂、宮殿、広場は新首都の視覚秩序をつくった。建築は機能の容器ではなく、国家の近代化を示す舞台となる。',
+            'これらの建築の力は、明快な像にある。皿状の議会、細い柱の宮殿、開いた広場、シェル状の聖堂。日常生活から遠いと批判されることもあるが、20世紀で最も完全な近代主義的国家景観の一つを形づくったことは確かである。',
+          ],
+          en: ['Brasília made architecture a stage for national modernity.'],
+        },
+      },
+      {
+        title: { zh: '轻盈、政治与晚期生命力', ja: '軽やかさ、政治、晩年の生命力', en: 'Lightness and longevity' },
+        paragraphs: {
+          zh: [
+            '尼迈耶的作品常同时具有轻盈和政治性。他长期保持左翼立场，也在流亡和回归之间继续实践。圣保罗的科潘大厦、尼泰罗伊当代艺术博物馆等作品显示，他的曲线并非只属于国家纪念物，也可以进入城市住宅、文化建筑和海湾地景。',
+            '他的影响不在于让所有建筑都变成曲线，而在于证明现代主义可以有感性、欲望和公共戏剧性。混凝土不必沉重，它也可以像线条一样在天空中展开。',
+          ],
+          ja: [
+            'ニーマイヤーの作品は、軽やかさと政治性を同時に持つ。彼は長く左派的立場を保ち、亡命と帰国の間でも実践を続けた。サンパウロのコパン、ニテロイ現代美術館などは、曲線が国家的記念物だけでなく、都市住宅、文化施設、湾岸の風景にも入り得ることを示す。',
+            '彼の影響は、すべての建築を曲線にすることではない。近代主義が感性、欲望、公共的な劇性を持ち得ることを証明した点にある。コンクリートは重いだけではなく、線のように空へ伸びることもできる。',
+          ],
+          en: ['Niemeyer proved concrete modernism could be sensual, political, and light.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'brasilia-cathedral', note: { zh: '以混凝土肋架和玻璃组织向天展开的宗教空间，是巴西利亚最具诗性的建筑之一。', ja: 'コンクリートのリブとガラスによって空へ開く宗教空間をつくる、ブラジリアで最も詩的な建築の一つ。', en: 'A cathedral opening upward through concrete ribs and glass.' } },
+      { slug: 'national-congress-brazil', note: { zh: '碗状体量、双塔和广场共同塑造新首都的国家政治图像。', ja: '皿状の量塊、双塔、広場が新首都の政治的イメージをつくる。', en: 'A civic image of towers, bowls, and open plaza.' } },
+      { slug: 'copan-building', note: { zh: '波浪形住宅巨构把曲线带入高密度城市生活。', ja: '波打つ集合住宅が、曲線を高密度な都市生活へ持ち込む。', en: 'A wave-like housing megastructure in dense urban life.' } },
+    ],
+    sources: [
+      { title: 'Encyclopaedia Britannica: Oscar Niemeyer', url: 'https://www.britannica.com/biography/Oscar-Niemeyer' },
+      { title: 'Wikidata: Oscar Niemeyer', url: 'https://www.wikidata.org/wiki/Q155793' },
+      { title: 'UNESCO: Brasília', url: 'https://whc.unesco.org/en/list/445/' },
+    ],
+  },
 }
 
 const overlayAliases: Record<string, string> = {

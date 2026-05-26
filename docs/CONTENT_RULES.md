@@ -83,6 +83,18 @@ lina-bo-bardi
 
 第三批优先选择站内已有 3 个以上代表作且 image registry 有可信作品图的建筑师。肖像必须记录 Wikimedia Commons、官方机构或博物馆/基金会等可追溯来源；若某位建筑师缺少明确授权肖像，不为赶进度使用无来源图片。
 
+### 第四批对象
+
+```
+norman-foster
+shigeru-ban
+carlo-scarpa
+kengo-kuma
+niemeyer
+```
+
+第四批延续“站内代表作 + 可信作品图 + 可追溯肖像”的筛选原则。若候选建筑师的站内作品归属存在疑点，例如代表作被错误归到该建筑师名下，应暂缓加入精品 overlay，先修正基础数据。
+
 ### 必填结构
 
 每个 overlay 必须包含：

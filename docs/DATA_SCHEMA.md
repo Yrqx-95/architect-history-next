@@ -76,7 +76,7 @@
 | representative_works | array | 3 个站内 building slug + 本地化导读 |
 | sources | array | 文末来源标题和 URL |
 
-第二批精品内容新增 `le-corbusier`、`mies-van-der-rohe`、`frank-lloyd-wright`、`louis-kahn`、`tadao-ando`；第三批新增 `zaha-hadid`、`im-pei`、`renzo-piano`、`frank-gehry`、`lina-bo-bardi`。每个代表作 slug 必须能被 `getBuildingsWithCovers()` 解析到站内建筑，并应有 Supabase 主图或审核后的本地/远程图片 override。
+第二批精品内容新增 `le-corbusier`、`mies-van-der-rohe`、`frank-lloyd-wright`、`louis-kahn`、`tadao-ando`；第三批新增 `zaha-hadid`、`im-pei`、`renzo-piano`、`frank-gehry`、`lina-bo-bardi`；第四批新增 `norman-foster`、`shigeru-ban`、`carlo-scarpa`、`kengo-kuma`、`niemeyer`。每个代表作 slug 必须能被 `getBuildingsWithCovers()` 解析到站内建筑，并应有 Supabase 主图或审核后的本地/远程图片 override。
 
 **迁移方向：**
 稳定后可迁移为 `architect_articles`、`architect_portraits`、`architect_representative_works` 三张表，或一个 `architect_content` JSONB 表。迁移前仓库 overlay 仍是唯一编辑源。
