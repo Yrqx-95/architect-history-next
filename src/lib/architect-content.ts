@@ -787,6 +787,381 @@ const overlays: Record<string, ArchitectContentOverlay> = {
       { title: 'Wikidata: Tadao Ando', url: 'https://www.wikidata.org/wiki/Q293725' },
     ],
   },
+  'zaha-hadid': {
+    slug: 'zaha-hadid',
+    summary: {
+      zh: '扎哈·哈迪德把建筑从稳定盒子推向连续地形、流体结构和城市速度。她的作品并不只是曲线造型，而是把动线、结构、地面和屋顶压缩成一种具有方向感的空间场。',
+      ja: 'ザハ・ハディドは、建築を安定した箱から連続する地形、流動的な構造、都市の速度へ押し出した。曲線の造形だけでなく、動線、構造、地面、屋根を方向性をもつ空間場として統合した。',
+      en: 'Zaha Hadid transformed buildings into continuous fields of movement, structure, and urban energy.',
+    },
+    core_ideas: {
+      zh: ['以流动地形组织建筑', '用结构表达速度与方向', '把城市动线转化为空间形态', '从绘画式构想到数字建造'],
+      ja: ['流動する地形として建築を組織する', '構造で速度と方向を表す', '都市の動線を空間形態へ変える', '絵画的構想からデジタル建設へ'],
+      en: ['Fluid fields', 'Movement as form', 'Urban circulation', 'Digital construction'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Zaha_Hadid_in_Heydar_Aliyev_Cultural_center_in_Baku_nov_2013.jpg',
+      author: 'Dmitry Ternovoy',
+      license: 'FAL',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Zaha_Hadid_in_Heydar_Aliyev_Cultural_center_in_Baku_nov_2013.jpg',
+      alt: { zh: '扎哈·哈迪生肖像', ja: 'ザハ・ハディドの肖像', en: 'Portrait of Zaha Hadid' },
+    },
+    sections: [
+      {
+        title: { zh: '从纸上先锋到可建造的城市地形', ja: '紙上の前衛から建設可能な都市地形へ', en: 'From paper space to built terrain' },
+        paragraphs: {
+          zh: [
+            '哈迪德早期以绘画、轴测图和解构式构图闻名。那些尖锐的视角和破碎的平面并不是单纯的视觉实验，而是在寻找一种摆脱正交房间的建筑语言：地面可以折叠，墙体可以成为坡道，屋顶可以延伸为城市中的连续表面。',
+            '随着数字建模、结构计算和大型幕墙技术成熟，她的空间构想逐渐转化为可建造的公共建筑。广州大剧院、海达尔·阿利耶夫中心和北京大兴机场都显示出同一种野心：建筑不是静态对象，而是组织人流、视线和城市事件的连续场。',
+          ],
+          ja: [
+            'ハディドは初期から絵画、アクソノメトリック、脱構築的な構図で知られた。鋭い視点と断片化した平面は視覚実験にとどまらず、直交する部屋から離れる建築言語の探求だった。地面は折れ、壁はスロープになり、屋根は都市へ伸びる連続面となる。',
+            'デジタルモデリング、構造解析、大規模な外装技術が成熟すると、その構想は公共建築として実現し始めた。広州大劇院、ヘイダル・アリエフ・センター、北京大興国際空港はいずれも、建築を静止した物体ではなく、人流、視線、都市的出来事を組織する場として扱う。',
+          ],
+          en: ['Hadid moved from radical drawings to buildings that organize movement as continuous terrain.'],
+        },
+      },
+      {
+        title: { zh: '曲线不是装饰，而是动线', ja: '曲線は装飾ではなく動線である', en: 'Curves as circulation' },
+        paragraphs: {
+          zh: [
+            '哈迪德作品中最容易被误解的是曲线。曲面、折板和流线形外壳并不只是品牌化外观，它们通常承担着导向、汇聚、分流和延迟抵达的功能。人在建筑中的移动，被转译成地面高差、天花曲率、柱网密度和光线变化。',
+            '这种方法在机场、剧院、文化中心等大体量公共项目中尤其有效。建筑必须处理大量人群和复杂程序，哈迪德用连续表面降低空间割裂感，同时也制造强烈的方向性。她的建筑因此常像城市基础设施，而不只是一个可拍照的外形。',
+          ],
+          ja: [
+            'ハディド作品で誤解されやすいのは曲線である。曲面、折板、流線形の外皮はブランド化された見た目だけではなく、誘導、集合、分流、到達の遅延を担う。人の移動は、床の高低差、天井の曲率、柱の密度、光の変化へ翻訳される。',
+            'この方法は空港、劇場、文化センターのような大規模公共建築で力を発揮する。多くの人と複雑なプログラムを処理するため、連続面は空間の分断を弱め、同時に強い方向性をつくる。彼女の建築は、撮影される形態である以上に都市インフラに近い。',
+          ],
+          en: ['Hadid’s curves guide, gather, divide, and delay movement through large public programs.'],
+        },
+      },
+      {
+        title: { zh: '争议与影响', ja: '議論と影響', en: 'Debate and influence' },
+        paragraphs: {
+          zh: [
+            '哈迪德的建筑也伴随争议：成本、施工难度、城市尺度和标志性建筑的政治经济都不断被讨论。但这些争议并未削弱她在建筑史中的位置，反而说明她的作品位于全球城市竞争、数字设计和公共地标生产的交汇点。',
+            '她的重要性在于证明女性建筑师也可以主导超大尺度公共项目，并把先锋形式推入主流建造体系。今天许多机场、文化中心和商业综合体使用流线、连续地面和参数化表皮，其语言都绕不开哈迪德打开的路径。',
+          ],
+          ja: [
+            'ハディドの建築には、コスト、施工の難しさ、都市スケール、アイコン建築の政治経済をめぐる議論がつきまとう。しかしその議論は彼女の位置を弱めるのではなく、作品がグローバル都市競争、デジタルデザイン、公共的ランドマークの生産の交点にあることを示している。',
+            '彼女の重要性は、女性建築家が超大規模公共プロジェクトを率い、前衛的な形式を主流の建設システムへ押し込めることを証明した点にある。今日の空港、文化施設、複合開発に見られる流線、連続床、パラメトリックな外皮は、ハディドが開いた道を避けて通れない。',
+          ],
+          en: ['Hadid’s impact lies in bringing radical spatial language into global public construction.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'heydar-aliyev-center', note: { zh: '以连续白色表皮把广场、墙体和屋顶合并，形成几乎无缝的公共地形。', ja: '白い連続皮膜が広場、壁、屋根を一体化し、継ぎ目の少ない公共地形をつくる。', en: 'A seamless civic terrain of plaza, wall, and roof.' } },
+      { slug: 'guangzhou-opera-house', note: { zh: '用河岸石块般的体量和折面动线组织剧场、城市景观与观演体验。', ja: '河岸の石のような量塊と折れた動線が、劇場、都市景観、鑑賞体験を組織する。', en: 'A fractured riverside opera house shaped by movement.' } },
+      { slug: 'beijing-daxing-airport', note: { zh: '把巨型交通枢纽压缩为放射状流线，让航站楼成为可导航的连续内部城市。', ja: '巨大な交通結節点を放射状の流れへ圧縮し、ターミナルを読みやすい内部都市にした。', en: 'A radial terminal designed as an interior city.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Zaha Hadid', url: 'https://www.pritzkerprize.com/laureates/2004' },
+      { title: 'Zaha Hadid Architects: Heydar Aliyev Center', url: 'https://www.zaha-hadid.com/architecture/heydar-aliyev-centre/' },
+      { title: 'Zaha Hadid Architects: Guangzhou Opera House', url: 'https://www.zaha-hadid.com/architecture/guangzhou-opera-house/' },
+      { title: 'Wikidata: Zaha Hadid', url: 'https://www.wikidata.org/wiki/Q47780' },
+    ],
+  },
+  'im-pei': {
+    slug: 'im-pei',
+    summary: {
+      zh: '贝聿铭以清晰几何、精确比例和公共机构建筑闻名。他的作品常在现代主义抽象与历史场所之间保持克制张力，让玻璃、石材、金属和光线共同建立庄重而可亲近的公共空间。',
+      ja: 'I・M・ペイは明快な幾何、精密な比例、公共機関の建築で知られる。近代主義の抽象性と歴史的な場所の間に抑制された緊張を保ち、ガラス、石、金属、光によって厳粛で近づきやすい公共空間をつくった。',
+      en: 'I. M. Pei balanced geometric clarity, institutional dignity, and historic context.',
+    },
+    core_ideas: {
+      zh: ['几何秩序与公共庄重', '在历史场所中插入现代结构', '光作为空间组织者', '以克制材料表达纪念性'],
+      ja: ['幾何秩序と公共的な品格', '歴史的場所への近代構造の挿入', '空間を組織する光', '抑制された素材による記念性'],
+      en: ['Geometric clarity', 'Modernity in historic settings', 'Light as organizer', 'Institutional monumentality'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/3/39/Itzhak_Perlman_with_I.M._Pei%2C_architect%2C_looking_at_model_of_NYC_Convention_Center_%2803124v%29_%28cropped%29.jpg',
+      author: 'Bernard Gotfryd',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Itzhak_Perlman_with_I.M._Pei,_architect,_looking_at_model_of_NYC_Convention_Center_(03124v)_(cropped).jpg',
+      alt: { zh: '贝聿铭肖像', ja: 'I・M・ペイの肖像', en: 'Portrait of I. M. Pei' },
+    },
+    sections: [
+      {
+        title: { zh: '现代主义的礼仪感', ja: '近代主義の礼節', en: 'Modernism with ceremony' },
+        paragraphs: {
+          zh: [
+            '贝聿铭的现代主义很少追求激烈姿态。他更关心几何秩序如何给公共机构一种稳定、清晰、可信的形象。三角形、方形、中庭、轴线和光井在他的作品中反复出现，但这些元素并不冰冷；它们服务于参观、集会、教育和纪念。',
+            '这种礼仪感来自他对比例和材料的控制。无论是美术馆、银行总部还是博物馆扩建，贝聿铭都倾向于让建筑在城市中保持端正的姿态，同时把最强的空间经验留给内部的光线、台阶、庭院或大厅。',
+          ],
+          ja: [
+            'ペイの近代主義は、過激な姿勢を前面に出すことが少ない。彼が重視したのは、幾何秩序が公共機関に安定し、明快で信頼できる像を与える方法だった。三角形、正方形、中庭、軸線、光井戸は繰り返し現れるが、それらは冷たい記号ではなく、鑑賞、集会、教育、記念のために働く。',
+            'この礼節は比例と素材の制御から生まれる。美術館、銀行本部、博物館の増築において、建築は都市に対して端正に立ち、最も強い体験は内部の光、階段、庭、中庭、ホールに託される。',
+          ],
+          en: ['Pei used geometry to give public institutions clarity, calm, and dignity.'],
+        },
+      },
+      {
+        title: { zh: '历史场所中的现代插入', ja: '歴史的場所への近代的挿入', en: 'Modern insertions' },
+        paragraphs: {
+          zh: [
+            '卢浮宫金字塔是贝聿铭最具争议也最成功的作品之一。玻璃金字塔把地下入口、博物馆流线和宫殿庭院连接起来，以最抽象的几何回应最厚重的历史场所。它不仿古，也不逃避冲突，而是用透明度和比例降低新旧之间的对抗。',
+            '这种策略也出现在华盛顿国家美术馆东馆。三角形基地被转化成清晰的结构与展览系统，尖锐几何最终服务于人的移动和艺术观看。贝聿铭的历史观不是复制过去，而是在历史边上建立一种可被当代使用的秩序。',
+          ],
+          ja: [
+            'ルーヴルのピラミッドは、ペイの中でも最も議論を呼び、同時に最も成功した作品の一つである。ガラスのピラミッドは地下入口、博物館の動線、宮殿の中庭を結び、最も抽象的な幾何で最も重い歴史的場所に応答した。古典を模倣せず、衝突から逃げず、透明性と比例によって新旧の対立を和らげた。',
+            '同じ姿勢はワシントンのナショナル・ギャラリー東館にも見られる。三角形の敷地は構造と展示の明快なシステムへ変えられ、鋭い幾何は人の移動と芸術鑑賞に奉仕する。ペイにとって歴史とは複製するものではなく、その横に現代が使える秩序をつくる対象だった。',
+          ],
+          en: ['Pei inserted modern geometry into historic sites without imitation.'],
+        },
+      },
+      {
+        title: { zh: '跨文化现代性', ja: '横断的な近代性', en: 'Cross-cultural modernity' },
+        paragraphs: {
+          zh: [
+            '贝聿铭的职业轨迹跨越中国、美国、欧洲和中东。他的建筑没有简单使用地域符号，而是在抽象几何、材料质感和场所仪式之间寻找共同语言。香港中银大厦的三角结构把城市天际线、金融形象和结构效率叠合在一起。',
+            '晚期的美秀美术馆和伊斯兰艺术博物馆进一步显示，他并不把文化理解为表面装饰，而是通过进入路径、光线控制、庭院关系和材料重量来组织经验。贝聿铭的现代性因此具有一种外交式的克制：明确、自信，但不喧哗。',
+          ],
+          ja: [
+            'ペイの仕事は中国、アメリカ、ヨーロッパ、中東を横断した。地域的な記号を単純に貼り付けるのではなく、抽象幾何、素材の質感、場所の儀礼の間に共通言語を探した。香港の中国銀行タワーでは、三角形の構造が都市のスカイライン、金融機関のイメージ、構造効率を重ねている。',
+            '晩年の美秀美術館やイスラム美術館では、文化を表面装飾ではなく、アプローチ、光の制御、中庭関係、素材の重さによって経験として構成した。ペイの近代性には外交的な抑制がある。明快で自信がありながら、過度に声高ではない。',
+          ],
+          en: ['Pei’s global work translated culture through route, light, geometry, and material weight.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'louvre-pyramid', note: { zh: '以透明几何重组卢浮宫入口和参观流线，是现代插入历史场所的经典案例。', ja: '透明な幾何によってルーヴルの入口と動線を再編した、歴史的場所への近代的挿入の代表例。', en: 'A transparent geometric entry within a historic court.' } },
+      { slug: 'east-building-national-gallery', note: { zh: '把三角形基地转化为展览、结构和中庭系统，几何秩序服务于艺术观看。', ja: '三角形の敷地を展示、構造、中庭のシステムへ変え、幾何秩序を鑑賞体験に結びつけた。', en: 'A triangular plan turned into a museum system.' } },
+      { slug: 'bank-of-china-tower', note: { zh: '以三角结构和锐利天际线塑造金融机构形象，也改变了香港高层建筑的视觉秩序。', ja: '三角形の構造と鋭いスカイラインで金融機関の像をつくり、香港の高層景観を変えた。', en: 'A structural skyline marker for Hong Kong.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: I. M. Pei', url: 'https://www.pritzkerprize.com/laureates/1983' },
+      { title: 'Louvre: The Pyramid', url: 'https://www.louvre.fr/en/explore/the-palace/the-pyramid' },
+      { title: 'National Gallery of Art: East Building', url: 'https://www.nga.gov/visit/east-building.html' },
+      { title: 'Wikidata: I. M. Pei', url: 'https://www.wikidata.org/wiki/Q46868' },
+    ],
+  },
+  'renzo-piano': {
+    slug: 'renzo-piano',
+    summary: {
+      zh: '伦佐·皮亚诺把高技派的结构透明度转化为更细腻的城市修复和公共空间营造。他的建筑常以轻盈构造、精确细部和温和的城市尺度，连接技术、文化机构与日常使用。',
+      ja: 'レンゾ・ピアノは、ハイテックの構造的透明性を、より繊細な都市修復と公共空間づくりへ変換した。軽やかな構法、精密な細部、穏やかな都市スケールによって、技術、文化施設、日常利用を結びつける。',
+      en: 'Renzo Piano turns technical clarity into humane cultural and urban architecture.',
+    },
+    core_ideas: {
+      zh: ['轻盈构造与精密细部', '文化建筑作为城市客厅', '技术可见但不过度炫耀', '用光线和剖面组织公共生活'],
+      ja: ['軽い構法と精密な細部', '文化建築を都市の居間にする', '技術を見せながら誇示しすぎない', '光と断面で公共生活を組織する'],
+      en: ['Light construction', 'Civic cultural rooms', 'Visible but restrained technology', 'Section and light'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Renzo_Piano%2C_portrait.jpg',
+      author: 'Cirone-Musi / Festival della Scienza, Genova',
+      license: 'CC BY-SA 2.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Renzo_Piano,_portrait.jpg',
+      alt: { zh: '伦佐·皮亚诺肖像', ja: 'レンゾ・ピアノの肖像', en: 'Portrait of Renzo Piano' },
+    },
+    sections: [
+      {
+        title: { zh: '从蓬皮杜到城市修复', ja: 'ポンピドゥーから都市修復へ', en: 'From Pompidou to repair' },
+        paragraphs: {
+          zh: [
+            '皮亚诺因与理查德·罗杰斯合作的蓬皮杜中心成名。那座建筑把结构、管线、交通和展厅关系翻到外部，使博物馆像一台面向城市开放的文化机器。它激进、明亮，也把公共广场重新带回巴黎中心。',
+            '但皮亚诺后来的道路并没有停在高技派姿态上。他逐渐把技术透明度转化为更温和的城市修复方法：建筑可以很精密，却不必压倒城市；细部可以很先进，却应让人感到可进入、可停留、可使用。',
+          ],
+          ja: [
+            'ピアノはリチャード・ロジャースとのポンピドゥー・センターで広く知られるようになった。構造、設備、交通、展示空間を外部へ反転させ、博物館を都市へ開かれた文化機械のようにした。急進的で明るく、パリ中心部に公共広場を取り戻した。',
+            'しかしその後のピアノは、ハイテックの姿勢にとどまらない。技術的な透明性を、より穏やかな都市修復へ変えていった。建築は精密でありながら都市を圧倒せず、細部は先進的でありながら、人が入り、留まり、使える場所をつくる。',
+          ],
+          en: ['Piano transformed high-tech exposure into a gentler practice of civic repair.'],
+        },
+      },
+      {
+        title: { zh: '光线、剖面与文化机构', ja: '光、断面、文化施設', en: 'Light, section, institutions' },
+        paragraphs: {
+          zh: [
+            '皮亚诺的美术馆和文化建筑往往从剖面开始。屋顶如何过滤天光，楼层如何形成连续公共路径，展厅如何在安静背景中服务艺术，都是他反复处理的问题。梅尼尔收藏馆、惠特尼美术馆和保罗·克利中心都体现了这种以光线和结构细部组织参观节奏的方法。',
+            '他的技术不是为了让建筑显得复杂，而是为了让复杂性退后。屋顶构件、遮阳、结构节点和玻璃幕墙被精确调校，使使用者最终感受到的是稳定的光、可理解的方向和舒适的公共尺度。',
+          ],
+          ja: [
+            'ピアノの美術館や文化施設は、しばしば断面から考えられる。屋根が天光をどう濾過するか、階がどのように連続する公共ルートをつくるか、展示室が静かな背景として芸術を支えるかが重要である。メニル・コレクション、ホイットニー美術館、パウル・クレー・センターには、光と構造細部で鑑賞のリズムを組み立てる方法が見える。',
+            '技術は建築を複雑に見せるためではなく、複雑さを背後へ退かせるためにある。屋根部材、日射制御、構造ジョイント、ガラス外皮が精密に調整され、利用者は安定した光、分かりやすい方向、快適な公共スケールを感じる。',
+          ],
+          en: ['Piano uses section, roof, and detail to make cultural buildings calm and legible.'],
+        },
+      },
+      {
+        title: { zh: '轻盈不是轻薄', ja: '軽やかさは薄さではない', en: 'Lightness with substance' },
+        paragraphs: {
+          zh: [
+            '皮亚诺常被描述为轻盈，但他的轻盈并不等于轻薄。它来自对重力、材料、接缝和城市边界的细致处理。建筑看似安静，是因为许多技术判断已经被隐藏在结构与构造秩序中。',
+            '这种态度使他能够跨越机场、图书馆、高层、博物馆和城市更新。无论尺度大小，皮亚诺都倾向于让建筑成为城市生活的温和支架，而不是一次性的造型宣言。',
+          ],
+          ja: [
+            'ピアノはしばしば軽やかだと言われるが、その軽さは薄さではない。重力、素材、接合部、都市との境界を丁寧に扱うことから生まれる。建築が静かに見えるのは、多くの技術的判断が構造と構法の秩序の中に収められているからである。',
+            'この姿勢によって、彼は空港、図書館、高層、博物館、都市再生を横断できる。尺度に関わらず、建築を一度きりの造形宣言ではなく、都市生活を支える穏やかな骨組みにしようとする。',
+          ],
+          en: ['Piano’s lightness is a disciplined handling of gravity, detail, and city life.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'centre-pompidou', note: { zh: '把结构、设备和流线外露，创造面向城市的文化机器和公共广场。', ja: '構造、設備、動線を外部化し、都市へ開かれた文化機械と広場をつくった。', en: 'A cultural machine opened to the city.' } },
+      { slug: 'menil-collection', note: { zh: '用轻柔屋顶过滤自然光，使美术馆成为安静而精确的观看环境。', ja: '柔らかな屋根で自然光を濾過し、静かで精密な鑑賞環境をつくる。', en: 'A calm museum shaped by filtered daylight.' } },
+      { slug: 'shard', note: { zh: '以分裂玻璃表皮塑造伦敦天际线，同时容纳混合城市功能。', ja: '分節されたガラス外皮でロンドンのスカイラインをつくり、複合的な都市機能を収める。', en: 'A mixed-use tower cut into London’s skyline.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Renzo Piano', url: 'https://www.pritzkerprize.com/laureates/1998' },
+      { title: 'Renzo Piano Building Workshop: Centre Pompidou', url: 'https://www.rpbw.com/project/centre-georges-pompidou' },
+      { title: 'Renzo Piano Building Workshop: The Menil Collection', url: 'https://www.rpbw.com/project/the-menil-collection' },
+      { title: 'Wikidata: Renzo Piano', url: 'https://www.wikidata.org/wiki/Q190148' },
+    ],
+  },
+  'frank-gehry': {
+    slug: 'frank-gehry',
+    summary: {
+      zh: '弗兰克·盖里把日常材料、破碎体量和城市事件感转化为强烈的建筑语言。从洛杉矶住宅实验到毕尔巴鄂古根海姆，他不断挑战建筑如何在粗粝、流动与公共吸引力之间取得平衡。',
+      ja: 'フランク・ゲーリーは、日常的な素材、断片化した量塊、都市的な出来事性を強い建築言語へ変えた。ロサンゼルスの住宅実験からビルバオ・グッゲンハイムまで、粗さ、流動性、公共的な吸引力の均衡を問い続けた。',
+      en: 'Frank Gehry turns fragmentation, rough material, and civic spectacle into architectural events.',
+    },
+    core_ideas: {
+      zh: ['破碎体量与城市事件', '从日常材料到钛金属表皮', '建筑作为公共吸引力', '用数字工具建造复杂曲面'],
+      ja: ['断片化した量塊と都市的出来事', '日常素材からチタン外皮へ', '公共的な吸引力としての建築', 'デジタル工具による複雑曲面の建設'],
+      en: ['Fragmented massing', 'Everyday to titanium materials', 'Civic spectacle', 'Digital fabrication'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Frank_Gehry%2C_Viljo_Revell_Centenary_reception%2C_2010_%28S2311_fl2969_it0089%29_%28cropped%29.jpg',
+      author: 'City of Toronto / Jose San Juan',
+      license: 'Attribution',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Frank_Gehry,_Viljo_Revell_Centenary_reception,_2010_(S2311_fl2969_it0089)_(cropped).jpg',
+      alt: { zh: '弗兰克·盖生肖像', ja: 'フランク・ゲーリーの肖像', en: 'Portrait of Frank Gehry' },
+    },
+    sections: [
+      {
+        title: { zh: '从粗粝住宅到城市地标', ja: '粗い住宅から都市のランドマークへ', en: 'From rough houses to landmarks' },
+        paragraphs: {
+          zh: [
+            '盖里的早期住宅和工作室实验常使用胶合板、链网、金属板等普通材料，把建筑从精致完成品拉回到正在被改造的状态。破碎、拼贴和临时性不是缺陷，而是洛杉矶城市日常的一部分。',
+            '后来这些实验被放大到博物馆、音乐厅和基金会建筑中。体量仍然破碎，表皮变得更精密，城市影响也更强。盖里把建筑变成事件：它吸引人靠近、绕行、拍照、进入，也迫使城市重新组织自己的公共形象。',
+          ],
+          ja: [
+            'ゲーリーの初期住宅やスタジオ実験は、合板、金網、金属板など普通の材料を使い、建築を完成した精密品ではなく、改造され続ける状態へ戻した。断片化、コラージュ、仮設性は欠点ではなく、ロサンゼルスの日常的な都市性の一部だった。',
+            '後年、その実験は美術館、音楽ホール、財団施設へ拡大される。量塊はなお断片化し、外皮は精密になり、都市への影響は大きくなる。ゲーリーは建築を出来事に変えた。人は近づき、回り込み、撮影し、内部へ入り、都市は自らの公共的な像を組み替えられる。',
+          ],
+          en: ['Gehry scaled rough material experiments into civic landmarks.'],
+        },
+      },
+      {
+        title: { zh: '毕尔巴鄂效应与它的复杂性', ja: 'ビルバオ効果とその複雑さ', en: 'The Bilbao effect' },
+        paragraphs: {
+          zh: [
+            '毕尔巴鄂古根海姆让盖里成为全球地标建筑的象征。钛金属表皮、河岸位置和雕塑化体量共同制造出强烈的城市转型叙事。所谓“毕尔巴鄂效应”让许多城市相信，一座文化建筑可以改变旅游、投资和城市身份。',
+            '但盖里的价值并不只在经济效应。更重要的是，他展示了复杂曲面如何通过数字工具、造船式制造和精密施工转化为真实建筑。建筑的自由形态不再只是纸上幻想，而成为城市可运营的公共空间。',
+          ],
+          ja: [
+            'ビルバオ・グッゲンハイムは、ゲーリーを世界的なランドマーク建築の象徴にした。チタンの外皮、川沿いの位置、彫刻的な量塊が、強い都市再生の物語を生んだ。「ビルバオ効果」は、多くの都市に文化建築が観光、投資、都市アイデンティティを変え得ると信じさせた。',
+            'しかしゲーリーの価値は経済効果だけではない。複雑な曲面がデジタルツール、造船的な製作、精密な施工によって実建築へ変わることを示した点が重要である。自由な形態は紙上の夢ではなく、都市で運用される公共空間になった。',
+          ],
+          en: ['Bilbao showed how complex form, fabrication, and urban narrative could converge.'],
+        },
+      },
+      {
+        title: { zh: '音乐、运动与表皮', ja: '音楽、動き、外皮', en: 'Music, movement, skin' },
+        paragraphs: {
+          zh: [
+            '迪士尼音乐厅和路易威登基金会说明盖里对表皮的兴趣并不只是图像。金属板、玻璃帆和层叠体量形成进入建筑前的运动经验，也影响内部声学、展览和公共大厅的组织。',
+            '盖里的建筑常被批评为过度标志化，但它们也扩大了公众对建筑的期待：建筑可以粗糙、戏剧化、像雕塑一样可绕行，同时仍然承担音乐、艺术和城市聚会的实际功能。',
+          ],
+          ja: [
+            'ウォルト・ディズニー・コンサートホールやルイ・ヴィトン財団は、ゲーリーの外皮への関心が単なる画像ではないことを示す。金属板、ガラスの帆、重なる量塊は、建物へ入る前から運動の経験をつくり、内部の音響、展示、公共ホールの組織にも関わる。',
+            'ゲーリーの建築は過度にアイコン化していると批判されることもある。しかし同時に、建築への公共的な期待を広げた。建築は粗く、劇的で、彫刻のように回り込めるものでありながら、音楽、芸術、都市の集会という実際の機能を担える。',
+          ],
+          en: ['Gehry’s skins create movement before and within the building.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'guggenheim-bilbao', note: { zh: '钛金属曲面与河岸城市更新结合，成为二十世纪末地标建筑讨论的核心案例。', ja: 'チタンの曲面と川沿いの都市再生が結びつき、20世紀末のランドマーク建築を語る中心例となった。', en: 'A titanium landmark tied to urban transformation.' } },
+      { slug: 'walt-disney-concert-hall', note: { zh: '以起伏金属表皮和复杂大厅组织音乐、城市广场与内部声学。', ja: 'うねる金属外皮と複雑なホール構成が、音楽、都市広場、内部音響を結びつける。', en: 'A concert hall where metal skin and acoustic space meet.' } },
+      { slug: 'louis-vuitton-fondation', note: { zh: '玻璃帆片包裹展览空间，把基金会建筑变成公园中的移动景观。', ja: 'ガラスの帆が展示空間を包み、公園の中の動く風景として財団建築をつくる。', en: 'Glass sails around galleries in a park setting.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Frank Gehry', url: 'https://www.pritzkerprize.com/laureates/1989' },
+      { title: 'Guggenheim Bilbao: The Building', url: 'https://www.guggenheim-bilbao.eus/en/the-building' },
+      { title: 'Walt Disney Concert Hall: Architecture', url: 'https://www.laphil.com/about/our-venues/about-the-walt-disney-concert-hall' },
+      { title: 'Wikidata: Frank Gehry', url: 'https://www.wikidata.org/wiki/Q180374' },
+    ],
+  },
+  'lina-bo-bardi': {
+    slug: 'lina-bo-bardi',
+    summary: {
+      zh: '莉娜·博·巴尔迪把现代建筑、民间文化和公共生活连接起来。她在巴西的作品拒绝把现代主义做成精英风格，而是用混凝土、木材、展陈、剧场和开放空间创造真正可被市民占用的场所。',
+      ja: 'リナ・ボ・バルディは、近代建築、民衆文化、公共生活を結びつけた。ブラジルでの仕事は近代主義をエリートの様式にせず、コンクリート、木、展示、劇場、開かれた空間によって市民が使いこなせる場所をつくった。',
+      en: 'Lina Bo Bardi connected modern architecture, popular culture, and democratic public life.',
+    },
+    core_ideas: {
+      zh: ['现代主义与民间文化并置', '公共空间可以被市民占用', '粗粝材料中的社会温度', '展览、剧场和建筑作为同一实践'],
+      ja: ['近代主義と民衆文化の併置', '市民が使いこなす公共空間', '粗い素材の中の社会的な温度', '展示、劇場、建築を一つの実践として扱う'],
+      en: ['Popular modernism', 'Public occupation', 'Social warmth in rough materials', 'Exhibition and architecture'],
+    },
+    portrait: {
+      url: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Lina_Bo_Bardi.jpg',
+      author: 'Instituto Lina Bo e P. M. Bardi',
+      license: 'CC BY-SA',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Lina_Bo_Bardi.jpg',
+      alt: { zh: '莉娜·博·巴尔迪肖像', ja: 'リナ・ボ・バルディの肖像', en: 'Portrait of Lina Bo Bardi' },
+    },
+    sections: [
+      {
+        title: { zh: '从意大利现代主义到巴西公共文化', ja: 'イタリア近代主義からブラジルの公共文化へ', en: 'From Italy to Brazilian public culture' },
+        paragraphs: {
+          zh: [
+            '博·巴尔迪在意大利接受建筑与编辑训练，战后移居巴西后，她的现代主义不再只是形式和技术问题，而与手工艺、民间文化、展览和城市公共生活发生关系。她把建筑看作文化生产的框架，而不是孤立的艺术品。',
+            '这种转变使她的作品具有少见的开放性。玻璃屋住宅以轻盈结构面对热带地景，而圣保罗艺术博物馆和 SESC 庞培亚则把粗粝结构交给公众使用。建筑不是替市民规定行为，而是提供可被重新解释的场所。',
+          ],
+          ja: [
+            'ボ・バルディはイタリアで建築と編集の訓練を受け、戦後ブラジルへ移住した。そこで彼女の近代主義は形式や技術だけでなく、手工芸、民衆文化、展示、都市の公共生活と結びつくようになった。建築を孤立した芸術品ではなく、文化生産の枠組みとして捉えた。',
+            'この転換によって作品は独特の開放性を得る。ガラスの家は軽い構造で熱帯の風景に向き合い、サンパウロ美術館と SESC ポンペイアは粗い構造を市民の使用へ差し出す。建築は行動を規定するのではなく、再解釈できる場所を提供する。',
+          ],
+          en: ['Bo Bardi turned modernism into a framework for culture, craft, and public life.'],
+        },
+      },
+      {
+        title: { zh: '悬空博物馆与开放地面', ja: '浮かぶ美術館と開かれた地面', en: 'The suspended museum' },
+        paragraphs: {
+          zh: [
+            '圣保罗艺术博物馆最强的动作是把展厅抬起，把城市地面留给公众。巨大的红色结构跨越广场，使博物馆既是文化机构，也是城市遮蔽、集会和观看的公共平台。',
+            '这种做法体现了博·巴尔迪的民主性：公共性不只发生在买票后的内部展厅，也发生在建筑下方的空地、临时活动和城市日常中。结构的粗壮并没有制造距离，反而释放出可被使用的地面。',
+          ],
+          ja: [
+            'サンパウロ美術館で最も強い操作は、展示室を持ち上げ、都市の地面を市民へ残すことである。巨大な赤い構造が広場をまたぎ、美術館は文化施設であると同時に、日陰、集会、眺めの公共プラットフォームになる。',
+            'ここにはボ・バルディの民主性が表れている。公共性は入場後の展示室だけでなく、建物の下の空地、仮設的な活動、都市の日常にも生まれる。構造の力強さは距離をつくらず、使える地面を解放する。',
+          ],
+          en: ['MASP lifts the museum to give the city a public ground.'],
+        },
+      },
+      {
+        title: { zh: 'SESC 庞培亚：粗粝中的快乐', ja: 'SESCポンペイア：粗さの中の喜び', en: 'SESC Pompéia' },
+        paragraphs: {
+          zh: [
+            'SESC 庞培亚由旧工厂改造而来，博·巴尔迪保留工业遗存，并加入混凝土塔楼、桥廊、剧场、泳池、餐厅和活动空间。这里的现代性不是白色、洁净和排除杂音，而是允许身体、声音、游戏和社区活动共同存在。',
+            '它也是理解博·巴尔迪最好的入口。建筑不追求完美表面，而追求社会关系的强度。粗糙混凝土、暴露结构和自由活动并置，使场所既有纪念性，也有日常快乐。',
+          ],
+          ja: [
+            'SESCポンペイアは旧工場を改修したプロジェクトである。ボ・バルディは産業遺構を残し、コンクリートの塔、連絡橋、劇場、プール、食堂、活動空間を加えた。ここでの近代性は白く清潔で雑音を排除するものではなく、身体、音、遊び、地域活動が共存する状態である。',
+            'この建築は彼女を理解する最良の入口でもある。完璧な表面ではなく、社会関係の強度を求めている。粗いコンクリート、露出した構造、自由な活動が並び、場所は記念性と日常の喜びを同時に持つ。',
+          ],
+          en: ['SESC Pompéia turns an industrial site into a social and cultural commons.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'glass-house', note: { zh: '轻盈玻璃盒子悬在热带地景中，连接住宅、自然和现代生活实验。', ja: '軽いガラスの箱が熱帯の風景に浮かび、住居、自然、近代生活の実験を結ぶ。', en: 'A glass house suspended in tropical landscape.' } },
+      { slug: 'sao-paulo-museum-of-art', note: { zh: '把展厅抬升以释放城市地面，使博物馆成为广场和公共平台。', ja: '展示室を持ち上げて都市の地面を解放し、美術館を広場と公共プラットフォームにした。', en: 'A museum lifted to create civic ground.' } },
+      { slug: 'sesc-pompeia', note: { zh: '旧工厂、混凝土塔和社区活动并置，展现粗粝而民主的公共建筑。', ja: '旧工場、コンクリート塔、地域活動を重ね、粗く民主的な公共建築を示す。', en: 'An industrial site remade as a democratic cultural commons.' } },
+    ],
+    sources: [
+      { title: 'Instituto Bardi / Casa de Vidro', url: 'https://institutobardi.org.br/' },
+      { title: 'MASP: Museum building', url: 'https://masp.org.br/en/about/building' },
+      { title: 'SESC Pompeia', url: 'https://www.sescsp.org.br/unidades/pompeia/' },
+      { title: 'Wikidata: Lina Bo Bardi', url: 'https://www.wikidata.org/wiki/Q268143' },
+    ],
+  },
 }
 
 const overlayAliases: Record<string, string> = {

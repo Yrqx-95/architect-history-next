@@ -254,6 +254,15 @@
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
 - ✅ 本地响应验证：`/zh`、`/ja`、`/zh/browse`、`/ja/browse` 均返回 200；`/zh/browse` 不再输出真实 `0 建筑师 / 0 建筑` 计数；日语页未检出繁体中文泄漏
 
+### 第十五阶段：建筑师内容精品化第三批
+- ✅ 新增第三批 5 位精品建筑师 overlay：`zaha-hadid`、`im-pei`、`renzo-piano`、`frank-gehry`、`lina-bo-bardi`
+- ✅ 每位包含中文/日文摘要、3 个长文 section、核心思想、人物肖像、3 个代表作导读和文末来源
+- ✅ 第三批代表作均确认存在于站内 image registry：Hadid、Pei、Piano、Gehry、Bo Bardi 各 3 个作品 slug 有作品图记录
+- ✅ 肖像采用 Wikimedia Commons 或可追溯机构来源，记录 author、license、source_url 与三语 alt
+- ✅ 文档同步：`CONTENT_RULES.md` 与 `DATA_SCHEMA.md` 记录第三批对象与 overlay 范围
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地响应验证：`/zh/architect/zaha-hadid`、`/ja/architect/zaha-hadid`、`/zh/architect/im-pei`、`/zh/architect/renzo-piano`、`/zh/architect/frank-gehry`、`/zh/architect/lina-bo-bardi` 均返回 200，并输出长文、肖像、代表作和来源
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/

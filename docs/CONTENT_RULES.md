@@ -71,6 +71,18 @@ tadao-ando
 
 第二批沿用第一批结构，但要优先补足站内已有代表作，保证 3 个 `representative_works` 都能进入站内建筑详情页，并至少有 Supabase 主图或审核后的 override 图片。
 
+### 第三批对象
+
+```
+zaha-hadid
+im-pei
+renzo-piano
+frank-gehry
+lina-bo-bardi
+```
+
+第三批优先选择站内已有 3 个以上代表作且 image registry 有可信作品图的建筑师。肖像必须记录 Wikimedia Commons、官方机构或博物馆/基金会等可追溯来源；若某位建筑师缺少明确授权肖像，不为赶进度使用无来源图片。
+
 ### 必填结构
 
 每个 overlay 必须包含：
