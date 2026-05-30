@@ -15,15 +15,15 @@ import ChineseScriptToggle from '@/components/ChineseScriptToggle'
 const LANGS = ['zh', 'en', 'ja'] as const
 
 export const metadata: Metadata = {
-  title: { default: 'Architect History', template: '%s | Architect History' },
-  description: 'Explore important buildings, architects, and spatial ideas from architectural history. 探索世界建筑史中的重要建筑、建筑师与空间思想。',
-  metadataBase: new URL('https://architect-history-next.vercel.app'),
+  title: { default: 'Archistory', template: '%s | Archistory' },
+  description: 'Archistory is an online archive of architecture, people, and time. 建筑、人物与时代的在线档案。',
+  metadataBase: new URL('https://archistory.app'),
   openGraph: {
-    title: 'Architect History — World Architecture Archive',
-    description: '63+ architects · 350+ buildings · Analysis in 3 languages. A curated database of architectural history.',
+    title: 'Archistory — Architecture in Time',
+    description: 'An online archive of architecture, people, and time.',
     type: 'website',
     locale: 'zh_CN',
-    siteName: 'Architect History',
+    siteName: 'Archistory',
   },
   icons: { icon: '/favicon.svg' },
   robots: { index: true, follow: true },
@@ -73,7 +73,7 @@ export default async function LangLayout({ children, params }: {
           {/* Desktop Nav */}
           <nav className="sticky top-0 z-50 border-b border-subtle bg-nav backdrop-blur">
             <div className="max-w-7xl mx-auto px-4 h-14 flex items-center gap-3 sm:gap-6">
-              <Link href={prefix + '/'} className="shrink-0 text-base font-bold tracking-tight text-primary sm:text-lg">Arch History</Link>
+              <Link href={prefix + '/'} className="shrink-0 text-base font-bold tracking-tight text-primary sm:text-lg">Archistory</Link>
 
               {/* Desktop links - hidden on mobile */}
               <div className="hidden sm:flex items-center gap-4 sm:gap-6">
@@ -138,7 +138,7 @@ export default async function LangLayout({ children, params }: {
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'search')}</h4>
                 <div className="space-y-1.5">
                   <Link href={`${prefix}/search`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'searchPlaceholder')}</Link>
-                  <p className="caption mt-3">{t(lang, 'siteName')} &copy; 2026</p>
+                  <p className="caption mt-3">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>
                 </div>
               </div>
             </div>

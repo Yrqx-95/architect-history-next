@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params
   return {
     title: t(lang, 'browse'),
-    description: lang === 'en' ? 'Browse architects, buildings, styles, eras, and building types.' : lang === 'ja' ? '建築家、建築、様式、時代、建築種別を閲覧。' : '浏览建筑师、建筑、风格、时代与建筑类型。',
+    description: lang === 'en' ? 'Enter Archistory through architects, works, periods, styles, types, and regions.' : lang === 'ja' ? '建築家、作品、時代、様式、類型、地域から Archistory へ入る。' : '从建筑师、作品、时代、风格、类型与地域进入 Archistory。',
   }
 }
 
@@ -195,7 +195,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
         <section id="building-index" className="section border-t border-subtle pt-10 sm:pt-12">
           <SectionHeading
             title={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'}
-            description={lang === 'en' ? 'Browse representative works, building types, and regions.' : lang === 'ja' ? '代表作、建築種別、地域から探す。' : '从代表作、建筑类型和地域继续探索。'}
+            description={lang === 'en' ? 'Read representative works through type, place, and authorship.' : lang === 'ja' ? '代表作を、類型、場所、作者性から読む。' : '从类型、地域与作者关系阅读代表作品。'}
           />
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

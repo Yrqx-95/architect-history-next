@@ -352,6 +352,16 @@
 - ✅ `npm run build` 通过（55 位建筑师）
 - ☐ 部署到 Vercel
 
+### 第二十六阶段：Archistory 品牌文案 Step 1
+- ✅ 主品牌统一为 `Archistory`
+- ✅ 中文正式名统一为 `建筑时间档案`，日文正式名统一为 `建築時間アーカイブ`
+- ✅ 英文传播口径统一为 `Architecture in Time`
+- ✅ 导航栏目从工具站口径改为策展口径：`分类浏览` → `档案`，`时间轴` → `时间`
+- ✅ 建筑师详情阅读区文案统一：`建筑师长文` → `建筑师档案`，`代表作导读` → `作品阅读`，`核心思想` → `思想线索`
+- ✅ 参考方向：MoMA / CCA 的 collection/archive 入口逻辑，Dezeen 的短导航口径，Aesop/COS 式克制品牌语言
+- ✅ 本地验证：`npm run lint` 通过（仅保留既有 `<img>` warning），`npm run build` 通过（3177 pages）
+- ☐ 本阶段待部署
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/

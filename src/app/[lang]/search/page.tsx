@@ -26,7 +26,7 @@ export default async function SearchPage({ params }: { params: Promise<{ lang: s
       {/* Discovery entry points — shown before search */}
       <div id="search-discover" className="mt-6 border-t border-subtle pt-10 sm:pt-12">
         <p className="eyebrow mb-6">
-          {lang === 'en' ? 'Or browse by category' : lang === 'ja' ? 'またはカテゴリで探す' : '或按分类浏览'}
+          {lang === 'en' ? 'Or enter the archive' : lang === 'ja' ? 'またはアーカイブへ' : '或进入档案'}
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">

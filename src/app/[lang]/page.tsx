@@ -16,7 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params
   return {
     title: t(lang, 'hero'),
-    description: lang === 'en' ? 'A curated database of architectural history — explore buildings, architects, styles, and ideas across time and geography.' : lang === 'ja' ? '建築史の精選データベース — 時代と地域を超えて、建築・建築家・様式・思想を探索します。' : '一部精选的建筑历史数据库 — 跨越时代与地域，探索建筑、建筑师、风格与思想。',
+    description: lang === 'en'
+      ? 'Archistory is an online archive of architecture, people, and time.'
+      : lang === 'ja'
+      ? 'Archistory は、建築、人物、時代を読むオンライン・アーカイブです。'
+      : 'Archistory 是建筑、人物与时代的在线档案。',
   }
 }
 
@@ -89,7 +93,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       href: `${prefix}/timeline`,
     },
     {
-      title: lang === 'en' ? 'Trace authorship' : lang === 'ja' ? '作者性をたどる' : '追踪建筑师谱系',
+      title: lang === 'en' ? 'Trace authorship' : lang === 'ja' ? '作者性をたどる' : '阅读人物谱系',
       body: lang === 'en'
         ? 'Follow architects through built works, movements, influences, and recurring spatial questions.'
         : lang === 'ja'
@@ -103,7 +107,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         ? 'Use names, places, styles, or building types to enter the collection directly.'
         : lang === 'ja'
         ? '名称、場所、様式、建築種別からコレクションへ入る。'
-        : '通过名称、地点、风格或建筑类型直接进入资料库。',
+        : '通过名称、地点、风格或类型直接进入档案。',
       href: `${prefix}/search`,
     },
   ]

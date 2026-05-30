@@ -22,8 +22,8 @@ export default function ArchitectDeepArticle({
     .filter(Boolean) as Array<(typeof content.representative_works)[number] & { building: BuildingWithCover }>
 
   const sourceTitle = lang === 'ja' ? '参考資料' : lang === 'en' ? 'Sources' : '参考资料'
-  const worksTitle = lang === 'ja' ? '代表作の読み方' : lang === 'en' ? 'Representative works' : '代表作导读'
-  const articleLabel = lang === 'ja' ? '建築家ノート' : lang === 'en' ? 'Architectural note' : '建筑师长文'
+  const worksTitle = lang === 'ja' ? '作品を読む' : lang === 'en' ? 'Reading the works' : '作品阅读'
+  const articleLabel = lang === 'ja' ? '建築家アーカイブ' : lang === 'en' ? 'Architect dossier' : '建筑师档案'
   const sectionLabel = lang === 'ja' ? '章' : lang === 'en' ? 'Sections' : '章节'
 
   return (
@@ -35,7 +35,7 @@ export default function ArchitectDeepArticle({
       {content.core_ideas.zh.length > 0 && (
         <div className="mb-16">
           <h2 className="text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-muted mb-6">
-            {lang === 'ja' ? '設計思想' : lang === 'en' ? 'Core ideas' : '核心思想'}
+            {lang === 'ja' ? '思想の手がかり' : lang === 'en' ? 'Ideas' : '思想线索'}
           </h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {localizedContent(content.core_ideas, lang).map((idea, i) => (

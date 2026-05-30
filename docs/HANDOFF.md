@@ -6,7 +6,7 @@
 
 ## 项目速览
 
-**世界建筑史档案 (World Architecture Archive)** — 三语（zh / en / ja）建筑知识平台，以"建筑杂志感"为设计语言。
+**Archistory / 建筑时间档案 (Architecture in Time)** — 三语（zh / en / ja）建筑知识平台，以"建筑杂志感"为设计语言。
 
 | 项 | 值 |
 |---|-----|

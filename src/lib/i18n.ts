@@ -13,18 +13,18 @@ const dict: Record<string, Record<Lang, string>> = {
   home:        { zh: '首页',       en: 'Home',        ja: 'ホーム' },
   search:      { zh: '搜索',       en: 'Search',      ja: '検索' },
   map:         { zh: '地图',       en: 'Map',         ja: '地図' },
-  browse:      { zh: '分类浏览',   en: 'Browse',      ja: '分類閲覧' },
-  timeline:    { zh: '时间轴',     en: 'Timeline',    ja: '年表' },
+  browse:      { zh: '档案',       en: 'Archive',     ja: 'アーカイブ' },
+  timeline:    { zh: '时间',       en: 'Time',        ja: '時間' },
   architects:  { zh: '建筑师',     en: 'Architects',  ja: '建築家' },
   buildings:   { zh: '建筑',       en: 'Buildings',   ja: '建築' },
-  styles:      { zh: '风格流派',   en: 'Styles',      ja: '様式' },
-  eras:        { zh: '历史时期',   en: 'Eras',        ja: '時代' },
+  styles:      { zh: '风格',       en: 'Styles',      ja: '様式' },
+  eras:        { zh: '时代',       en: 'Periods',     ja: '時代' },
   countries:   { zh: '国家地区',   en: 'Countries',   ja: '国・地域' },
-  types:       { zh: '建筑类型',   en: 'Building Types', ja: '建築種別' },
+  types:       { zh: '类型',       en: 'Types',       ja: '類型' },
 
   // --- 首页 ---
-  hero:        { zh: '世界建筑史档案', en: 'World Architecture Archive', ja: '世界建築史アーカイブ' },
-  heroSub:     { zh: '建筑师 · 建筑作品 · 三语深度分析', en: 'Architects · Buildings · Analysis in 3 Languages', ja: '建築家 · 建築 · 三言語による詳細分析' },
+  hero:        { zh: 'Archistory', en: 'Archistory', ja: 'Archistory' },
+  heroSub:     { zh: '建筑、人物与时代的在线档案', en: 'Architecture, people, and time in one archive.', ja: '建築、人物、時代を読むオンライン・アーカイブ' },
   featured:    { zh: '精选建筑',   en: 'Featured Buildings', ja: '注目の建築' },
   startExplore:{ zh: '开始探索',   en: 'Start Exploring', ja: '探索を始める' },
 
@@ -38,7 +38,7 @@ const dict: Record<string, Record<Lang, string>> = {
   influences:  { zh: '受谁影响',   en: 'Influenced by', ja: '影響を受けた' },
   influenced:  { zh: '影响了谁',   en: 'Influenced',  ja: '影響を与えた' },
   education:   { zh: '教育背景',   en: 'Education',   ja: '教育' },
-  coreIdeas:   { zh: '核心思想',   en: 'Core Ideas',  ja: '核心思想' },
+  coreIdeas:   { zh: '思想线索',   en: 'Ideas',       ja: '思想の手がかり' },
   keywords:    { zh: '关键词',     en: 'Keywords',    ja: 'キーワード' },
   viewAll:     { zh: '查看全部',   en: 'View All',    ja: 'すべて見る' },
   viewArchitect:{ zh: '查看建筑师', en: 'View Architect', ja: '建築家を見る' },
@@ -65,7 +65,7 @@ const dict: Record<string, Record<Lang, string>> = {
   noResults:   { zh: '未找到匹配结果', en: 'No results found', ja: '該当結果がありません' },
   searchPlaceholder: { zh: '搜索建筑师或建筑...', en: 'Search architects or buildings...', ja: '建築家や建築を検索...' },
   searchResults: { zh: '搜索结果', en: 'Search Results', ja: '検索結果' },
-  browseCategory: { zh: '按分类浏览', en: 'Browse by category', ja: '分類から探す' },
+  browseCategory: { zh: '进入档案', en: 'Enter the archive', ja: 'アーカイブへ' },
   searchIntro: {
     zh: '输入建筑、建筑师、城市、国家、年代、类型或风格关键词。',
     en: 'Search by building, architect, city, country, year, type, or style.',
@@ -74,14 +74,14 @@ const dict: Record<string, Record<Lang, string>> = {
   searchSuggestions: { zh: '常用入口', en: 'Common entries', ja: 'よく使う入口' },
   searchEmptyTitle: { zh: '从一个线索开始', en: 'Start with a clue', ja: '手がかりから始める' },
   searchEmptyBody: {
-    zh: '可以输入城市、建筑类型、时代、风格或建筑师姓名。',
+    zh: '可以输入城市、类型、时代、风格或建筑师姓名。',
     en: 'Try a city, building type, era, style, or architect name.',
     ja: '都市、建築種別、時代、様式、建築家名を試してください。',
   },
   searchNoResultsHint: {
-    zh: '换一个拼写、城市、年代或分类词，或者从分类浏览继续。',
-    en: 'Try another spelling, city, year, or category term, or continue through browse.',
-    ja: '別の綴り、都市、年代、カテゴリ語を試すか、分類閲覧へ進んでください。',
+    zh: '换一个拼写、城市、年代或线索，或者进入档案继续浏览。',
+    en: 'Try another spelling, city, year, or clue, or continue through the archive.',
+    ja: '別の綴り、都市、年代、手がかりを試すか、アーカイブへ進んでください。',
   },
   resultsFound: { zh: '条结果', en: 'results', ja: '件の結果' },
   countriesIntro: {
@@ -97,7 +97,7 @@ const dict: Record<string, Record<Lang, string>> = {
   countriesAndRegions: { zh: '个国家与地区', en: 'countries and regions', ja: 'の国・地域' },
 
   // --- 时间轴 ---
-  timelineTitle: { zh: '建筑史时间轴', en: 'Architectural Timeline', ja: '建築史年表' },
+  timelineTitle: { zh: '建筑时间', en: 'Architecture in Time', ja: '建築の時間' },
   architectsTimeline: { zh: '建筑师编年', en: 'Architects Timeline', ja: '建築家年表' },
   buildingsTimeline: { zh: '建筑编年',   en: 'Buildings Timeline',  ja: '建築年表' },
   birth:       { zh: '生',         en: 'b.',          ja: '生' },
@@ -111,7 +111,7 @@ const dict: Record<string, Record<Lang, string>> = {
   dark:        { zh: '暗色',       en: 'Dark',        ja: 'ダーク' },
   light:       { zh: '亮色',       en: 'Light',       ja: 'ライト' },
   searchBtn:   { zh: '搜索',       en: 'Search',      ja: '検索' },
-  siteName:    { zh: '建筑史档案', en: 'Architect History', ja: '建築史アーカイブ' },
+  siteName:    { zh: '建筑时间档案', en: 'Archistory', ja: '建築時間アーカイブ' },
   totalArchitects: { zh: '位建筑师', en: ' Architects', ja: '人の建築家' },
   totalBuildings:  { zh: '座建筑',   en: ' Buildings',  ja: 'の建築' },
 
