@@ -371,7 +371,8 @@
 - ✅ 地点显示对日语优先使用 `Intl.DisplayNames` 的国家/地区名称；没有可靠国家代码且字段明显是中文时，只保留年份或隐藏地点
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
 - ✅ 本地响应验证：`/ja`、`/ja/browse`、`/ja/building/beijing-daxing-airport` 未再显示首页中文说明、中文简繁控件或中文深度分析；建筑详情相关卡片不再显示 `波尔图 / 葡萄牙 / 华盛顿 / 美国` 等中文地点
-- ☐ 部署到 Vercel 并验证 `https://archistory.app/ja`、`/ja/browse`、`/ja/building/beijing-daxing-airport`
+- ✅ 部署验证：提交 `b1416f0` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-1hlfe6tez-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/ja`、`/ja/browse`、`/ja/building/beijing-daxing-airport` 均返回 200；可见 HTML 未检出中文简繁控件、中文深度分析或中文地点 fallback
 
 ### 当前 docs/ 结构（10 个文档）
 ```
