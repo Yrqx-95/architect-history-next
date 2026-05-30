@@ -8,8 +8,6 @@ import { displayName } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
-import MetadataPanel from '@/components/MetadataPanel'
-import Badge from '@/components/Badge'
 import Reveal from '@/components/Reveal'
 import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
@@ -31,18 +29,18 @@ function ArchitectPortraitFigure({
   className?: string
 }) {
   return (
-    <figure className={`overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card ${className}`}>
-      <div className="relative aspect-[4/3] max-h-64 bg-surface-muted lg:aspect-[1/1] lg:max-h-60">
+    <figure className={`overflow-hidden rounded-sm ${className}`}>
+      <div className="relative aspect-[3/4] bg-surface-muted">
         <SafeImage
           src={content.portrait.url}
           alt={localizedContent(content.portrait.alt, lang)}
           fill
           className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 16rem"
+          sizes="(max-width: 1024px) 100vw, 36rem"
         />
       </div>
-      <figcaption className="space-y-1.5 px-3 py-2.5">
-        <p className="caption">{localizedContent(content.portrait.alt, lang)}</p>
+      <figcaption className="mt-2.5 flex items-start justify-between gap-3">
+        <p className="text-xs leading-relaxed text-muted max-w-[70%]">{localizedContent(content.portrait.alt, lang)}</p>
         <ImageAttribution
           photographer={content.portrait.author}
           license={content.portrait.license}
@@ -106,50 +104,101 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
         { label: nameText },
       ]} />
 
-      {/* Header */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 section">
-        <div className="lg:col-span-2 flow">
-          <h1 className="heading-display">{nameText}</h1>
-          {architect.name_en !== nameText && <p className="text-sm leading-relaxed text-secondary">{architect.name_en}</p>}
+      {/* ============================================================
+          Hero — asymmetric editorial grid
+          ============================================================ */}
+      <section className="section-sm pb-0 sm:section">
+        <div className="grid gap-x-12 gap-y-10 lg:grid-cols-12 lg:items-start">
 
-          {contentOverlay && <ArchitectPortraitFigure content={contentOverlay} lang={lang} className="lg:hidden" />}
+          {/* —— Left column: text content (7/12) —— */}
+          <div className="lg:col-span-7">
 
-          {bioText && (
-            <div className="prose prose-stone dark:prose-invert body-large max-w-none">
-              {bioText}
+            {/* Name block */}
+            <div>
+              <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-serif font-normal leading-[1.08] tracking-normal text-primary">
+                {nameText}
+              </h1>
+              {architect.name_en && architect.name_en !== nameText && (
+                <p className="mt-2 text-sm font-medium tracking-widest uppercase text-muted">{architect.name_en}</p>
+              )}
             </div>
-          )}
 
-          <div className="flex flex-wrap gap-1.5">
-            {architect.era_slug && <Badge active>{architect.era_slug}</Badge>}
-            {architect.style_slugs?.map(s => <Badge key={s}>{s}</Badge>)}
+            {/* Portrait — mobile only, after name */}
+            {contentOverlay && (
+              <div className="mt-8 lg:hidden">
+                <ArchitectPortraitFigure content={contentOverlay} lang={lang} />
+              </div>
+            )}
+
+            {/* Bio — editorial pull-text with subtle left accent */}
+            {bioText && (
+              <div className="mt-8 border-l-2 border-[color:var(--ui-accent)] pl-5 sm:pl-6">
+                <p className="text-base leading-relaxed text-secondary max-w-[52rem] sm:text-lg sm:leading-relaxed">
+                  {bioText}
+                </p>
+              </div>
+            )}
+
+            {/* Metadata ribbon — horizontal, no card */}
+            {metaRows.length > 0 && (
+              <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs">
+                {metaRows.map((row, i) => (
+                  <span key={i} className="inline-flex items-center gap-1.5 text-muted">
+                    <span className="font-medium uppercase tracking-widest text-soft" style={{ fontSize: '0.625rem' }}>{row.label}</span>
+                    <span className="text-secondary">{row.value}</span>
+                    {i < metaRows.length - 1 && (
+                      <span className="ml-1.5 inline-block h-1 w-1 rounded-full bg-[color:var(--ui-border)]" aria-hidden="true" />
+                    )}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Style / Era tags */}
+            <div className="mt-5 flex flex-wrap gap-1.5">
+              {architect.era_slug && (
+                <span className="inline-flex items-center rounded-full border border-subtle bg-surface-muted px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-muted">
+                  {architect.era_slug}
+                </span>
+              )}
+              {architect.style_slugs?.map(s => (
+                <span key={s} className="inline-flex items-center rounded-full border border-subtle bg-surface-muted px-3 py-1 text-[0.7rem] uppercase tracking-wider text-soft">
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* —— Right column: portrait (5/12) —— */}
+          <div className="hidden lg:block lg:col-span-5">
+            {contentOverlay && (
+              <div className="lg:sticky lg:top-24">
+                <ArchitectPortraitFigure content={contentOverlay} lang={lang} />
+              </div>
+            )}
           </div>
         </div>
+      </section>
 
-        <div className="lg:col-span-1">
-          <div className="lg:sticky lg:top-20">
-            {contentOverlay && <ArchitectPortraitFigure content={contentOverlay} lang={lang} className="mb-5 hidden lg:block" />}
-            <p className="eyebrow mb-3">{t(lang, 'overview')}</p>
-            <MetadataPanel rows={metaRows} />
-          </div>
-        </div>
-      </div>
-
-      {/* Core Ideas */}
+      {/* ============================================================
+          Deep Article — overlay content
+          ============================================================ */}
       {contentOverlay && (
         <Reveal>
           <ArchitectDeepArticle content={contentOverlay} lang={lang} works={allBuildingsWithCovers} />
         </Reveal>
       )}
 
-      {/* Core Ideas */}
+      {/* ============================================================
+          Core Ideas — non-overlay fallback
+          ============================================================ */}
       {coreIdeas.length > 0 && (
         <Reveal>
-          <section className="section">
-            <h2 className="heading-3 mb-5">{t(lang, 'coreIdeas')}</h2>
+          <section className="section border-t border-subtle">
+            <h2 className="heading-3 mb-6">{t(lang, 'coreIdeas')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {coreIdeas.map((idea, i) => (
-                <div key={i} className="rounded-md border border-subtle bg-surface px-5 py-4 body-sm shadow-semantic-card">
+                <div key={i} className="rounded-sm border border-subtle bg-surface px-5 py-4 body-sm shadow-semantic-card">
                   {idea}
                 </div>
               ))}
@@ -158,10 +207,12 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
         </Reveal>
       )}
 
-      {/* Influences */}
+      {/* ============================================================
+          Influences / Influenced
+          ============================================================ */}
       {(influencesList.length > 0 || influencedList.length > 0) && (
         <Reveal>
-          <section className="section border-t border-subtle pt-10 sm:pt-12">
+          <section className="section border-t border-subtle">
             <h2 className="heading-3 mb-6">{t(lang, 'relatedArchitects')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
               {influencesList.length > 0 && (
@@ -185,10 +236,12 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
         </Reveal>
       )}
 
-      {/* Works */}
+      {/* ============================================================
+          Works — timeline + card grid
+          ============================================================ */}
       {buildings.length > 0 && (
         <Reveal>
-          <section className="border-t border-subtle pt-10 sm:pt-12">
+          <section className="section border-t border-subtle">
             <div className="flex items-end justify-between mb-6">
               <div>
                 <h2 className="heading-3">{t(lang, 'works')}</h2>
@@ -197,7 +250,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
             </div>
 
             {/* Timeline */}
-            <div className="relative mb-10 border-l-2 border-subtle pl-6 sm:pl-8">
+            <div className="relative mb-12 border-l-2 border-subtle pl-6 sm:pl-8">
               <div className="space-y-4 sm:space-y-5">
                 {sortedBuildings.slice(0, 15).map(b => (
                   <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="block relative group">
@@ -219,7 +272,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
       )}
 
       {/* ============================================================
-          Continue Exploring — curated cross-links
+          Continue Exploring
           ============================================================ */}
       <ContinueExploring groups={[
         ...(influencesList.length > 0 ? [{

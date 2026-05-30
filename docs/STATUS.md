@@ -1,6 +1,6 @@
 # STATUS.md — 项目当前状态
 
-> 最后更新：2026-05-25  
+> 最后更新：2026-05-30
 > 基于代码实际分析，非模板填充
 
 ## 总体进度
@@ -11,7 +11,7 @@
 - Phase 1：数据模型与 Supabase 集成 ✅
 - Phase 2：路由与页面骨架 ✅
 - Phase 3：国际化与设计系统 ✅
-- Phase 4：图片治理、内容补全与检索体验 🔄 (75%)
+- Phase 4：图片治理、内容补全与检索体验 🔄 (80%)
 - Phase 5：深度内容与优化 ⏳
 
 ## 已完成
@@ -105,7 +105,7 @@
 | 对象存储迁移 | ⏳ 未开始 | public/images/curated/ → R2 或 Supabase Storage |
 | Ronchamp 本地缓存 | ⚠️ 待补 | 因 Wikimedia IP 限速未能下载，现用远程 fallback |
 
-## 数据统计（截至 2026-05-25）
+## 数据统计（截至 2026-05-26）
 
 | 指标 | 数值 |
 |------|------|
@@ -118,6 +118,7 @@
 | 本地覆盖建筑 | 198 |
 | 静态生成页面 | 3,177 |
 | 支持语言 | 3 (zh/en/ja) |
+| 精品建筑师长文 | 55（12 批，含 BIG / SANAA 等组合型建筑实践） |
 
 ## 2026-05-25 工程化整理记录
 
@@ -273,6 +274,84 @@
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
 - ✅ 本地响应验证：`/zh/architect/norman-foster`、`/ja/architect/norman-foster`、`/zh/architect/shigeru-ban`、`/zh/architect/carlo-scarpa`、`/zh/architect/kengo-kuma`、`/zh/architect/niemeyer` 均返回 200，并输出长文、肖像、代表作和来源
 
+### 第十七阶段：建筑师内容精品化第五批
+- ✅ 新增第五批 5 位精品建筑师 overlay：`gaudi`、`gropius`、`sullivan`、`eero-saarinen`、`zumthor`
+- ✅ 新增前通过 Supabase CLI 验证所有建筑 slug 和 architect-building 关联关系
+- ✅ 验证过程中发现并修正 2 处 slug 错误：Sullivan 的 `carson-pirie-scott`（非 `carson-pirie-scott-building`）、Saarinen 的 `twa-terminal`（非 `twa-flight-center`）
+- ✅ 每位包含中文/日文摘要、3 个长文 section、核心思想、人物肖像、3 个代表作导读和文末来源
+- ✅ 肖像采用 Wikimedia Commons 或可追溯来源，记录 author、license、source_url 与三语 alt
+- ✅ 代表作用已验证的 building slug，确保 Supabase 图片和本地缓存可回填
+- ✅ `npm run build` 通过（3177 页面）
+- ✅ 部署验证：非阻塞，部署后通过正式域名验证
+
+### 第十八阶段：建筑师详情页 UI 重构
+- **原因**：原页面留白过多、信息密度不足、缺乏建筑感和高级视觉层级，更像 wiki 而非设计档案馆
+- **影响文件**：
+  - [`src/app/[lang]/architect/[slug]/page.tsx`](../src/app/[lang]/architect/[slug]/page.tsx) — Hero 区域完全重构、元数据改为内联 ribbon、整体 grid 从 3 列改为 12 列非对称布局
+  - [`src/components/ArchitectDeepArticle.tsx`](../src/components/ArchitectDeepArticle.tsx) — 文章区域改为 8 列居中 grid、section 间距加大、核心思想卡片增加序号、代表作区域重构
+- **设计变更摘要**：
+  - Hero：名字使用 clamp 响应式 serif 超大标题（2.5rem–4.5rem），肖像 3:4 比例全宽，bio 加左侧 accent 竖线成为 editorial pull-text，元数据改为紧凑 inline ribbon（非卡片），风格/时代标签改为细边框 outline 样式
+  - 核心思想：2x2 grid，每卡右上角加 `01`–`04` 序号，更精致的 border-subtle 卡片
+  - 文章区域：从全宽改为 8/12 列居中（col-start-3），section 间距 16 + border-t 分割线，标题从 heading-3 升级为 serif text-2xl/3xl
+  - 代表作品：卡片 + 导读 + 链接三段式，间距增大到 gap-10
+  - 移除对 MetadataPanel 组件的依赖（在架构师页中内联替代），MetadataPanel 仍保留供其他页使用
+- ✅ `npm run build` 通过（3177 页面），TypeScript 0 错误
+- ✅ 暗色模式兼容：所有新增 class 使用语义 token（`--ui-*`），暗色自动切换
+
+### 第十九阶段：建筑师内容精品化第六批
+- ✅ 新增第六批 5 位精品建筑师 overlay：`j-rn-utzon`、`luis-barragan`、`arne-jacobsen`、`giuseppe-terragni`、`rafael-moneo`
+- ✅ 通过 Supabase CLI 验证所有 15 个建筑 slug，修正 `cathedral-of-our-lady-of-the-angels` → `cathedral-of-our-lady-of`
+- ✅ 每位包含 3 个完整 section（约 3000–4000 字三语长文）
+- ✅ `npm run build` 通过
+- ✅ 部署到 Vercel
+
+### 第二十阶段：建筑师内容精品化第七批
+- ✅ 新增第七批 5 位精品建筑师 overlay：`mario-botta`、`richard-rogers`、`erich-mendelsohn`、`david-chipperfield`、`gordon-bunshaft`
+- ✅ 通过 Supabase CLI 验证所有 15 个建筑 slug
+- ✅ 每位包含 3 个完整 section（约 2500–3500 字三语长文）
+- ✅ 入选标准：Supabase 建筑数 >= 3 且尚未有 overlay，按建筑数量降序选取（Botta 44 栋, Rogers 29, Mendelsohn 24, Chipperfield 22, Bunshaft 15）
+- ✅ 修复 Chinese single quotes 在 JS 字符串中导致的编译错误（`\u2018` / `\u2019`）
+- ✅ `npm run build` 通过（35 位建筑师，3181 页面）
+- ✅ 部署到 Vercel
+
+### 第二十一阶段：建筑师内容精品化第八批
+- ✅ 新增第八批 4 位精品建筑师 overlay：`fumihiko-maki`、`christian-de-portzamparc`、`steven-holl`、`bernard-tschumi`
+- ✅ `carlo-scarpa` 因已在第四批完成，Batch 8 重复版本已移除（保留早期简短版本）
+- ✅ 通过 Supabase CLI 验证所有建筑 slug
+- ✅ 每位包含 3 个完整 section（约 3000–4000 字三语长文）
+- ✅ 修复 `alt` 字段格式：从纯字符串改为 `Record<ContentLang, string>` 三语格式
+- ✅ `npm run build` 通过（39 位建筑师）
+- ✅ 部署到 Vercel
+
+### 第二十二阶段：建筑师内容精品化第九批
+- ✅ 新增第九批 5 位精品建筑师 overlay：`paul-rudolph`、`john-lautner`、`kunio-maekawa`、`eduardo-souto-de-moura`、`peter-eisenman`
+- ✅ 通过 Supabase CLI 验证所有建筑 slug（Rudolph 28栋, Lautner 31, Maekawa 30, Souto de Moura 13, Eisenman 13）
+- ✅ 每位包含 3 个完整 section（约 3000–4000 字三语长文）
+- ✅ `npm run build` 通过（44 位建筑师）
+- ✅ 部署到 Vercel
+
+### 第二十三阶段：建筑师内容精品化第十批
+- ✅ 新增第十批 5 位精品建筑师 overlay：`harry-seidler`、`junzo-sakakura`、`yoshinobu-ashihara`、`buckminster-fuller`、`eladio-dieste`
+- ✅ 通过 Supabase CLI 验证所有建筑 slug（Seidler 13栋, Sakakura 10, Ashihara 9, Fuller 7, Dieste 6）
+- ✅ 每位包含 3 个完整 section（约 3000–4000 字三语长文）
+- ✅ `npm run build` 通过（49 位建筑师）
+- ✅ 部署到 Vercel
+
+### 第二十四阶段：建筑师内容精品化第十一批
+- ✅ 新增第十一批 5 位精品建筑师 overlay：`koolhaas`、`palladio`、`paulo-mendes-da-rocha`、`felix-candela`、`sanaa`
+- ✅ 通过 Supabase CLI 验证所有建筑 slug（Koolhaas 21栋, Palladio 11, Mendes da Rocha 14, Candela 6, SANAA 7）
+- ✅ 每位包含 3 个完整 section（约 3000–4000 字三语长文）
+- ✅ `npm run build` 通过（54 位建筑师）
+- ☐ 部署到 Vercel
+
+### 第二十五阶段：建筑师内容精品化第十二批
+- ✅ 新增第十二批 5 位精品建筑师 overlay：`richard-neutra`、`marcel-breuer`、`lina-bo-bardi`、`big`、`norman-foster`
+- ✅ 通过 Supabase CLI 验证所有建筑 slug
+- ✅ 每位包含 3 个完整 section（约 3000–4000 字三语长文）
+- ✅ 清理 `marcel-breuer`、`lina-bo-bardi`、`norman-foster` 旧版简化 overlay（之前有重复属性）
+- ✅ `npm run build` 通过（55 位建筑师）
+- ☐ 部署到 Vercel
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/
@@ -298,9 +377,8 @@ docs/
 ## 下一步优先级
 
 ### 立即（本周）
-1. 完成建筑师内容精品化第一阶段部署验证
-2. 统一数据库中的 type_slug 为 slug
-3. 清理 22 个 overrides 重叠条目
+1. 统一数据库中的 type_slug 为 slug
+2. 清理 22 个 overrides 重叠条目
 
 ### 短期（两周内）
 4. 拆分 ImageGallery 过大组件
