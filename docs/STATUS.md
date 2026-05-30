@@ -360,7 +360,8 @@
 - ✅ 建筑师详情阅读区文案统一：`建筑师长文` → `建筑师档案`，`代表作导读` → `作品阅读`，`核心思想` → `思想线索`
 - ✅ 参考方向：MoMA / CCA 的 collection/archive 入口逻辑，Dezeen 的短导航口径，Aesop/COS 式克制品牌语言
 - ✅ 本地验证：`npm run lint` 通过（仅保留既有 `<img>` warning），`npm run build` 通过（3177 pages）
-- ☐ 本阶段待部署
+- ✅ 已推送 GitHub `main` 并完成 Vercel 生产部署
+- ✅ 正式域名验证：`https://archistory.app/zh`、`/zh/search?q=tokyo`、`/zh/architect/aalto` 均输出新的 Archistory 品牌文案
 
 ### 当前 docs/ 结构（10 个文档）
 ```
