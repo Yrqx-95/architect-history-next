@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
 import { getArchitectRelations } from '@/lib/relations'
-import { displayName } from '@/lib/types'
+import { displayName, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -74,7 +74,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const rels = await getArchitectRelations(slug)
   if (!rels) notFound()
 
-  const { architect, buildings, relatedArchitects: related, relatedBuildings, influencesList, influencedList, era } = rels
+  const { architect, buildings, relatedArchitects: related, relatedBuildings, influencesList, influencedList, era, styles } = rels
   const prefix = `/${lang}`
   const contentOverlay = getArchitectContent(slug)
   const allBuildingsWithCovers = contentOverlay ? await getBuildingsWithCovers() : []
@@ -82,18 +82,20 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const buildingsWithCovers = buildings.map(building => coverBySlug.get(building.slug) || building)
 
   const nameText = displayName(architect, lang)
-  const bioText = contentOverlay
+  const cleanText = (text: string) => (lang === 'ja' && isProbablySimplifiedChinese(text) ? '' : text)
+  const rawBioText = contentOverlay
     ? localizedContent(contentOverlay.summary, lang)
     : lang === 'ja' ? (architect.bio_ja || architect.bio_en) : lang === 'en' ? architect.bio_en : (architect.bio_zh || architect.bio_en)
+  const bioText = cleanText(rawBioText || '')
   const coreIdeas: string[] = contentOverlay ? [] : Array.isArray(architect.core_ideas) ? architect.core_ideas : []
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
 
   const metaRows = [
     { label: t(lang, 'lifeSpan'), value: architect.birth_year ? `${architect.birth_year} – ${architect.death_year || t(lang, 'present')}` : null },
     { label: t(lang, 'nationality'), value: architect.nationalities?.join(', ') || null },
-    { label: t(lang, 'style'), value: architect.style_slugs?.join(', ') || null },
-    { label: t(lang, 'eras'), value: architect.era_slug || null },
-    { label: t(lang, 'education'), value: architect.education || null },
+    { label: t(lang, 'style'), value: styles.length ? styles.map(style => displayName(style, lang)).join(', ') : null },
+    { label: t(lang, 'eras'), value: era ? displayName(era, lang) : null },
+    { label: t(lang, 'education'), value: architect.education ? cleanText(architect.education) : null },
   ].filter(r => r.value)
 
   return (
@@ -156,14 +158,14 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
             {/* Style / Era tags */}
             <div className="mt-5 flex flex-wrap gap-1.5">
-              {architect.era_slug && (
+              {era && (
                 <span className="inline-flex items-center rounded-full border border-subtle bg-surface-muted px-3 py-1 text-[0.7rem] font-medium uppercase tracking-wider text-muted">
-                  {architect.era_slug}
+                  {displayName(era, lang)}
                 </span>
               )}
-              {architect.style_slugs?.map(s => (
-                <span key={s} className="inline-flex items-center rounded-full border border-subtle bg-surface-muted px-3 py-1 text-[0.7rem] uppercase tracking-wider text-soft">
-                  {s}
+              {styles.map(style => (
+                <span key={style.id} className="inline-flex items-center rounded-full border border-subtle bg-surface-muted px-3 py-1 text-[0.7rem] uppercase tracking-wider text-soft">
+                  {displayName(style, lang)}
                 </span>
               ))}
             </div>
@@ -256,8 +258,12 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
                   <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="block relative group">
                     <div className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-[color:var(--ui-text-soft)] bg-app transition-colors group-hover:border-[color:var(--ui-accent)] sm:-left-[34px]" />
                     <span className="mr-2 font-mono text-xs text-muted">{b.year_start || '?'}</span>
-                    <span className="text-sm font-medium text-primary transition-colors group-hover:text-accent">{b.name_zh || b.name_en}</span>
-                    {b.city && <span className="ml-2 text-xs text-muted">{b.city}</span>}
+                    <span className="text-sm font-medium text-primary transition-colors group-hover:text-accent">{displayName(b, lang)}</span>
+                    {formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }) && (
+                      <span className="ml-2 text-xs text-muted">
+                        {formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang })}
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>
@@ -274,7 +280,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
       {/* ============================================================
           Continue Exploring
           ============================================================ */}
-      <ContinueExploring groups={[
+      <ContinueExploring lang={lang} groups={[
         ...(influencesList.length > 0 ? [{
           label: t(lang, 'influences'),
           items: influencesList.map(a => ({
@@ -299,7 +305,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
             id: a.slug,
             href: `${prefix}/architect/${a.slug}`,
             title: displayName(a, lang),
-            subtitle: a.era_slug || undefined,
+            subtitle: era ? displayName(era, lang) : undefined,
           }))
         }] : []),
         ...(relatedBuildings && relatedBuildings.length > 0 ? [{
@@ -307,8 +313,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
           items: relatedBuildings.map(b => ({
             id: b.slug,
             href: `${prefix}/building/${b.slug}`,
-            title: b.name_zh || b.name_en,
-            subtitle: b.city ? `${b.city}, ${b.year_start || ''}` : undefined,
+            title: displayName(b, lang),
+            subtitle: [formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }), b.year_start].filter(Boolean).join(', ') || undefined,
           }))
         }] : []),
       ]} />

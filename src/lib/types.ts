@@ -224,7 +224,7 @@ export function displayName(
   obj: { name_zh?: string | null; name_en?: string; name_ja?: string | null },
   lang: string
 ): string {
-  if (lang === 'ja' && obj.name_ja) return obj.name_ja
+  if (lang === 'ja' && obj.name_ja && !isProbablySimplifiedChinese(obj.name_ja)) return obj.name_ja
   if (lang === 'en' && obj.name_en) return obj.name_en
   if (lang === 'zh' && obj.name_zh) return obj.name_zh
   return obj.name_en || obj.name_zh || ''
@@ -235,9 +235,16 @@ export function displayText(
   lang: string
 ): string {
   if (!obj) return ''
-  if (lang === 'ja') return obj['ja'] || obj['en'] || ''
+  if (lang === 'ja') {
+    const ja = obj['ja']
+    return ja && !isProbablySimplifiedChinese(ja) ? ja : obj['en'] || ''
+  }
   if (lang === 'en') return obj['en'] || obj['zh'] || ''
   return obj['zh'] || obj['en'] || Object.values(obj)[0] || ''
+}
+
+export function isProbablySimplifiedChinese(text: string): boolean {
+  return /建筑|现代|主义|文艺|复兴|单体|航站|空间|体验|垃圾|发电|滑雪|享乐|可持续|向阳|巨树|悬挑|阳台|从中心|登机口|安检|钢|混凝土|巨型柱|办公建筑|文化建筑|交通建筑|商业建筑|生态建筑|当代建筑|参数化设计|雕塑建筑|波尔图|葡萄牙|华盛顿|美国|广州|首尔|布拉格|捷克|韩国|法国|印度|西班牙|英国|[现义艺复兴单间线动发电场乐阳树规则这与为门体从达过机飞极效钢壳柱厅检径办务态雕塑尔华顿韩广]/.test(text)
 }
 
 export function lifeSpan(birth: number | null, death: number | null): string {
@@ -248,4 +255,36 @@ export function lifeSpan(birth: number | null, death: number | null): string {
 export function formatLocation(city?: string | null, country?: string | null): string {
   if (city && country) return `${city}, ${country}`
   return city || country || ''
+}
+
+export function formatDisplayLocation({
+  city,
+  country,
+  countryCode,
+  lang,
+}: {
+  city?: string | null
+  country?: string | null
+  countryCode?: string | null
+  lang: string
+}): string {
+  if (lang !== 'ja') return formatLocation(city, country)
+
+  const localizedCountry = formatCountryName(countryCode, country, lang)
+  const safeCity = city && !isProbablySimplifiedChinese(city) ? city : ''
+  if (safeCity && localizedCountry) return `${safeCity}, ${localizedCountry}`
+  return safeCity || localizedCountry || ''
+}
+
+export function formatCountryName(countryCode?: string | null, fallback?: string | null, lang = 'en'): string {
+  if (countryCode) {
+    try {
+      const region = new Intl.DisplayNames([lang], { type: 'region' })
+      return region.of(countryCode.toUpperCase()) || fallback || ''
+    } catch {
+      return fallback || countryCode.toUpperCase()
+    }
+  }
+  if (lang === 'ja' && fallback && isProbablySimplifiedChinese(fallback)) return ''
+  return fallback || ''
 }

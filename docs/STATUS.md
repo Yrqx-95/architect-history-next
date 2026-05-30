@@ -363,6 +363,16 @@
 - ✅ 已推送 GitHub `main` 并完成 Vercel 生产部署
 - ✅ 正式域名验证：`https://archistory.app/zh`、`/zh/search?q=tokyo`、`/zh/architect/aalto` 均输出新的 Archistory 品牌文案
 
+### 第二十七阶段：日语页面中文 fallback 清理
+- ✅ 日语显示层新增疑似简体中文检测：`displayName()`、`displayText()`、搜索 metadata、卡片 metadata 不再把中文字段当作日语内容展示
+- ✅ 建筑详情页改用本地化建筑师、风格、时代与地点格式；日语缺失的类型、结构、材料和深度分析不会继续用中文补位
+- ✅ 建筑师详情页作品时间轴、相关作品与继续阅读区改用本地化标题和地点，`Continue Exploring / View all` 改为对应语言文案
+- ✅ 首页、浏览页、搜索结果、建筑师卡片和建筑卡片统一使用安全显示 helper，日语页不显示中文简繁切换控件
+- ✅ 地点显示对日语优先使用 `Intl.DisplayNames` 的国家/地区名称；没有可靠国家代码且字段明显是中文时，只保留年份或隐藏地点
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3177 页面）
+- ✅ 本地响应验证：`/ja`、`/ja/browse`、`/ja/building/beijing-daxing-airport` 未再显示首页中文说明、中文简繁控件或中文深度分析；建筑详情相关卡片不再显示 `波尔图 / 葡萄牙 / 华盛顿 / 美国` 等中文地点
+- ☐ 部署到 Vercel 并验证 `https://archistory.app/ja`、`/ja/browse`、`/ja/building/beijing-daxing-airport`
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/

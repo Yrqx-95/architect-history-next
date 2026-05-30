@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getTypes } from '@/lib/data'
 import { isMinimallyComplete } from '@/lib/quality'
-import { displayName, type Architect, type Building, type BuildingType, type Era } from '@/lib/types'
+import { displayName, formatCountryName, isProbablySimplifiedChinese, type Architect, type Building, type BuildingType, type Era } from '@/lib/types'
 import { listMatchesTaxonomy, matchesTaxonomy } from '@/lib/taxonomy'
 import PageShell from '@/components/PageShell'
 import SectionHeading from '@/components/SectionHeading'
@@ -38,6 +38,12 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
   const qualityBuildings = buildings.filter(b => isMinimallyComplete(b))
   const buildingCountByArchitect = countBy(buildings, building => building.architect_slug)
   const architectBySlug = new Map(architects.map(architect => [architect.slug, architect]))
+  const eraLabelFor = (value?: string | null) => {
+    if (!value) return ''
+    const era = eras.find(item => matchesTaxonomy(value, item))
+    if (era) return displayName(era, lang)
+    return lang === 'ja' && isProbablySimplifiedChinese(value) ? '' : value
+  }
 
   const architectsForEra = (era: Era) => architects.filter(architect => matchesTaxonomy(architect.era_slug, era))
   const buildingsForEra = (era: Era) => buildings.filter(building => {
@@ -91,7 +97,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
       id: style.id,
       href: `${prefix}/browse/style/${style.slug}`,
       label: displayName(style, lang),
-      meta: [style.era_slug || '', `${count} ${t(lang, 'architects')}`].filter(Boolean).join(' · '),
+        meta: [eraLabelFor(style.era_slug), `${count} ${t(lang, 'architects')}`].filter(Boolean).join(' · '),
     }))
 
   const typeItems: BrowseItem[] = [...types]
@@ -166,7 +172,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start">
             <div className="grid gap-3 sm:grid-cols-2">
               {featuredArchitects.map(architect => (
-                <FeaturedArchitect key={architect.id} architect={architect} count={buildingCountByArchitect.get(architect.slug) || 0} lang={lang} prefix={prefix} />
+                <FeaturedArchitect key={architect.id} architect={architect} count={buildingCountByArchitect.get(architect.slug) || 0} lang={lang} prefix={prefix} eraLabel={eraLabelFor(architect.era_slug)} />
               ))}
             </div>
             {eraGroups.length > 0 && (
@@ -184,7 +190,14 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
             <div className="mt-8">
               <p className="eyebrow mb-3">{lang === 'en' ? 'More architects' : lang === 'ja' ? 'その他の建築家' : '更多建筑师'}</p>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                {compactArchitects.map(architect => <ArchitectCard key={architect.id} architect={architect} lang={lang} />)}
+                {compactArchitects.map(architect => (
+                  <ArchitectCard
+                    key={architect.id}
+                    architect={architect}
+                    lang={lang}
+                    eraLabel={eraLabelFor(architect.era_slug)}
+                  />
+                ))}
               </div>
             </div>
           )}
@@ -270,7 +283,7 @@ function topCountries(buildings: Building[], lang: string): Array<{ code: string
     if (!code || !name) return
     const current = countries.get(code) || { code, name, count: 0 }
     current.count += 1
-    current.name = lang === 'en' ? code.toUpperCase() : name
+    current.name = formatCountryName(code, name, lang) || name
     countries.set(code, current)
   })
   return [...countries.values()].sort((a, b) => b.count - a.count).slice(0, 12)
@@ -288,14 +301,30 @@ function EntryCard({ href, label, value, meta }: { href: string; label: string; 
   )
 }
 
-function FeaturedArchitect({ architect, count, lang, prefix }: { architect: Architect; count: number; lang: string; prefix: string }) {
+function FeaturedArchitect({
+  architect,
+  count,
+  lang,
+  prefix,
+  eraLabel,
+}: {
+  architect: Architect
+  count: number
+  lang: string
+  prefix: string
+  eraLabel: string
+}) {
   const years = architect.birth_year ? `${architect.birth_year}-${architect.death_year || (lang === 'en' ? 'present' : lang === 'ja' ? '現在' : '至今')}` : ''
   return (
     <Link href={`${prefix}/architect/${architect.slug}`} className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
       <p className="caption mb-5">{[years, architect.nationalities?.[0]].filter(Boolean).join(' · ')}</p>
       <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">{displayName(architect, lang)}</h3>
       <div className="mt-4 flex flex-wrap gap-1.5">
-        {architect.era_slug && <span className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">{architect.era_slug}</span>}
+        {eraLabel && (
+          <span className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">
+            {eraLabel}
+          </span>
+        )}
         {count > 0 && <span className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">{count} {lang === 'en' ? 'works' : lang === 'ja' ? '作品' : '作品'}</span>}
       </div>
     </Link>

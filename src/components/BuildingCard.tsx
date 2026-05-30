@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import SafeImage from '@/components/SafeImage'
-import type { BuildingWithCover } from '@/lib/types'
+import { formatDisplayLocation, type BuildingWithCover } from '@/lib/types'
 import { safeDisplayName } from '@/lib/quality'
 
 export default function BuildingCard({ building, lang, architectName }: {
@@ -12,7 +12,12 @@ export default function BuildingCard({ building, lang, architectName }: {
   const prefix = `/${lang}`
   const name = safeDisplayName(building, lang)
   const coverUrl = building.cover_url
-  const location = [building.city, building.country].filter(Boolean).join(', ')
+  const location = formatDisplayLocation({
+    city: building.city,
+    country: building.country,
+    countryCode: building.country_code,
+    lang,
+  })
   const [imgError, setImgError] = useState(false)
 
   const showImage = coverUrl && !imgError

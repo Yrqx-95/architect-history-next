@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getCounts, getFeaturedBuildingsWithCovers } from '@/lib/data'
-import { displayName, displayText } from '@/lib/types'
+import { displayName, displayText, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
 import { matchesTaxonomy } from '@/lib/taxonomy'
 import SectionHeading from '@/components/SectionHeading'
 import CinematicHero from '@/components/CinematicHero'
@@ -38,6 +38,13 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const activeEras = eras.filter(e =>
     architects.some(a => matchesTaxonomy(a.era_slug, e))
   ).slice(0, 8)
+  const eraLabelFor = (value?: string | null) => {
+    if (!value) return ''
+    const era = eras.find(item => matchesTaxonomy(value, item))
+    if (era) return displayName(era, lang)
+    return lang === 'ja' && isProbablySimplifiedChinese(value) ? '' : value
+  }
+  const cleanSnippet = (value: string) => (lang === 'ja' && isProbablySimplifiedChinese(value) ? '' : value)
 
   const allBuildings = await getBuildingsWithCovers()
   const architectBuildingCount = new Map<string, number>()
@@ -73,7 +80,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const heroName = heroBuilding ? displayName(heroBuilding, lang) : t(lang, 'hero')
   const heroArchitectName = heroArchitect ? displayName(heroArchitect, lang) : ''
   const heroLocation = heroBuilding
-    ? [heroBuilding.city, heroBuilding.country].filter(Boolean).join(', ')
+    ? formatDisplayLocation({ city: heroBuilding.city, country: heroBuilding.country, countryCode: heroBuilding.country_code, lang })
     : ''
   const heroYear = heroBuilding?.year_start ? String(heroBuilding.year_start) : ''
   const heroMeta = [heroArchitectName, heroYear, heroLocation].filter(Boolean)
@@ -233,14 +240,14 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                     <h2 className="text-2xl font-medium leading-tight text-primary sm:text-3xl">{displayName(featuredLead, lang)}</h2>
                   </div>
                   <p className="caption">
-                    {[architects.find(a => a.slug === featuredLead.architect_slug) ? displayName(architects.find(a => a.slug === featuredLead.architect_slug) || {}, lang) : '', featuredLead.year_start, [featuredLead.city, featuredLead.country].filter(Boolean).join(', ')].filter(Boolean).join(' · ')}
+                    {[architects.find(a => a.slug === featuredLead.architect_slug) ? displayName(architects.find(a => a.slug === featuredLead.architect_slug) || {}, lang) : '', featuredLead.year_start, formatDisplayLocation({ city: featuredLead.city, country: featuredLead.country, countryCode: featuredLead.country_code, lang })].filter(Boolean).join(' · ')}
                   </p>
                 </div>
               </Link>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
                 {secondaryFeatured.slice(0, 3).map(b => {
                   const arch = architects.find(a => a.slug === b.architect_slug)
-                  const desc = displayText(b.description, lang) || displayText(b.significance, lang)
+                  const desc = cleanSnippet(displayText(b.description, lang) || displayText(b.significance, lang))
                   return (
                     <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="group grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-warm-200/70 pt-4 dark:border-charcoal-700">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-warm-100 dark:bg-charcoal-900">
@@ -249,7 +256,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                       <div className="min-w-0">
                         <p className="text-[0.66rem] uppercase tracking-[0.12em] text-warm-600 dark:text-warm-300">{arch ? displayName(arch, lang) : b.year_start}</p>
                         <h3 className="mt-1 text-base font-medium leading-snug text-warm-800 group-hover:text-warm-600 dark:text-paper-100 dark:group-hover:text-warm-300">{displayName(b, lang)}</h3>
-                        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-warm-600 dark:text-warm-300">{desc || [b.city, b.country, b.year_start].filter(Boolean).join(' · ')}</p>
+                        <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-warm-600 dark:text-warm-300">{desc || [formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }), b.year_start].filter(Boolean).join(' · ')}</p>
                         <div className="mt-2">
                           <ImageAttribution
                             photographer={b.cover_photographer}
@@ -270,7 +277,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {compactFeatured.map(b => (
                 <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="group flex items-baseline justify-between gap-4 py-2">
                   <span className="text-sm font-medium text-warm-800 group-hover:text-warm-600 dark:text-paper-100 dark:group-hover:text-warm-300">{displayName(b, lang)}</span>
-                  <span className="shrink-0 text-xs text-warm-600 dark:text-warm-300">{b.year_start || [b.city, b.country].filter(Boolean).join(', ')}</span>
+                  <span className="shrink-0 text-xs text-warm-600 dark:text-warm-300">{b.year_start || formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang })}</span>
                 </Link>
               ))}
             </div>
@@ -296,7 +303,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 <Link key={a.id} href={`${prefix}/architect/${a.slug}`} className="group grid grid-cols-[minmax(0,1fr)_4rem] gap-4 border-b border-warm-200/70 py-4 dark:border-charcoal-700">
                   <div>
                     <h3 className="text-base font-medium leading-snug text-warm-800 group-hover:text-warm-600 dark:text-paper-100 dark:group-hover:text-warm-300">{displayName(a, lang)}</h3>
-                    <p className="mt-1 text-xs text-warm-600 dark:text-warm-300">{[years, a.era_slug].filter(Boolean).join(' · ')}</p>
+                    <p className="mt-1 text-xs text-warm-600 dark:text-warm-300">{[years, eraLabelFor(a.era_slug)].filter(Boolean).join(' · ')}</p>
                   </div>
                   <p className="text-right font-serif-display text-2xl leading-none text-warm-300 dark:text-charcoal-600">{count}</p>
                 </Link>

@@ -3,7 +3,7 @@
  * Ensures only complete, well-formed content is prominently displayed.
  */
 
-import type { Architect, Building, BuildingWithCover } from './types'
+import { isProbablySimplifiedChinese, type Architect, type Building, type BuildingWithCover } from './types'
 
 /** Checks for common encoding artifacts. */
 export function isGarbled(text: string): boolean {
@@ -79,11 +79,11 @@ export function safeDisplayName(
     lang === 'ja' ? obj.name_ja : null,
     lang === 'zh' ? obj.name_zh : null,
     obj.name_en,
-    obj.name_zh,
+    lang === 'ja' ? null : obj.name_zh,
     obj.name_ja,
   ].filter(Boolean)
   for (const name of names) {
-    if (name && name.trim() && !isGarbled(name) && !isWikidataId(name)) return name
+    if (name && name.trim() && !isGarbled(name) && !isWikidataId(name) && !(lang === 'ja' && isProbablySimplifiedChinese(name))) return name
   }
   return 'Untitled'
 }

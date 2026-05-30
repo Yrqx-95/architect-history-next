@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getBuildings } from '@/lib/data'
 import { getBuildingRelations } from '@/lib/relations'
-import { displayName, displayText } from '@/lib/types'
+import { displayName, displayText, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import ImageGallery from '@/components/ImageGallery'
@@ -39,22 +39,32 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   const rels = await getBuildingRelations(slug)
   if (!rels) notFound()
 
-  const { building, architect, relatedBuildings: related, images, styles: buildingStyles } = rels
+  const { building, architect, relatedBuildings: related, images, styles: buildingStyles, era } = rels
   const prefix = `/${lang}`
 
   const nameText = displayName(building, lang)
-  const sigText = displayText(building.significance, lang)
+  const cleanText = (text: string) => (lang === 'ja' && isProbablySimplifiedChinese(text) ? '' : text)
+  const buildingLocation = formatDisplayLocation({
+    city: building.city,
+    country: building.country,
+    countryCode: building.country_code,
+    lang,
+  })
+  const sigText = cleanText(displayText(building.significance, lang))
+  const spatialText = cleanText(displayText(building.spatial_feat, lang))
+  const lightText = cleanText(displayText(building.light_feat, lang))
+  const circulationText = cleanText(displayText(building.circulation, lang))
 
   const metaRows = [
-    { label: t(lang, 'architects'), value: architect ? <Link href={`${prefix}/architect/${architect.slug}`} className="underline decoration-[color:var(--ui-border)] underline-offset-2 transition-colors hover:text-accent">{architect.name_zh || architect.name_en}</Link> : null },
+    { label: t(lang, 'architects'), value: architect ? <Link href={`${prefix}/architect/${architect.slug}`} className="underline decoration-[color:var(--ui-border)] underline-offset-2 transition-colors hover:text-accent">{displayName(architect, lang)}</Link> : null },
     { label: t(lang, 'year'), value: building.year_start ? `${building.year_start}${building.year_end ? ` – ${building.year_end}` : ''}` : null },
-    { label: t(lang, 'location'), value: building.city && building.country ? `${building.city}, ${building.country}` : building.city || building.country || null },
-    { label: t(lang, 'type'), value: building.type_slug || null },
-    { label: t(lang, 'structure'), value: building.structure || null },
-    { label: t(lang, 'materials'), value: building.materials?.length ? building.materials.join(', ') : null },
+    { label: t(lang, 'location'), value: buildingLocation || null },
+    { label: t(lang, 'type'), value: building.type_slug && !(lang === 'ja' && isProbablySimplifiedChinese(building.type_slug)) ? building.type_slug : null },
+    { label: t(lang, 'structure'), value: building.structure && !(lang === 'ja' && isProbablySimplifiedChinese(building.structure)) ? building.structure : null },
+    { label: t(lang, 'materials'), value: building.materials?.length && lang !== 'ja' ? building.materials.join(', ') : null },
     { label: t(lang, 'area'), value: building.area_sqm ? `${building.area_sqm.toLocaleString()} m²` : null },
-    { label: t(lang, 'style'), value: building.style_slugs?.length ? building.style_slugs.join(', ') : null },
-    { label: t(lang, 'eras'), value: building.era_slug || null },
+    { label: t(lang, 'style'), value: buildingStyles.length ? buildingStyles.map(style => displayName(style, lang)).join(', ') : null },
+    { label: t(lang, 'eras'), value: era ? displayName(era, lang) : null },
   ].filter(r => r.value)
 
   return (
@@ -84,32 +94,32 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
               Deep Analysis — layered content sections with reading anchors
               ============================================================ */}
           <div className="space-y-14 sm:space-y-16 mt-8">
-            {displayText(building.spatial_feat, lang) && (
+            {spatialText && (
               <Reveal>
                 <ArticleSection id="spatial-analysis" title={t(lang, 'spatial')}>
-                  <div className="prose prose-stone dark:prose-invert body max-w-none">{displayText(building.spatial_feat, lang)}</div>
+                  <div className="prose prose-stone dark:prose-invert body max-w-none">{spatialText}</div>
                 </ArticleSection>
               </Reveal>
             )}
 
             {/* Image break between analysis sections */}
-            {displayText(building.spatial_feat, lang) && displayText(building.light_feat, lang) && images.length > 1 && (
+            {spatialText && lightText && images.length > 1 && (
               <ImageBreak src={images[1]?.url_original || images[0].url_original} alt={nameText}
                 photographer={images[1]?.photographer} license={images[1]?.license} sourceUrl={images[1]?.source_url} />
             )}
 
-            {displayText(building.light_feat, lang) && (
+            {lightText && (
               <Reveal>
                 <ArticleSection id="light-analysis" title={t(lang, 'lighting')}>
-                  <div className="prose prose-stone dark:prose-invert body max-w-none">{displayText(building.light_feat, lang)}</div>
+                  <div className="prose prose-stone dark:prose-invert body max-w-none">{lightText}</div>
                 </ArticleSection>
               </Reveal>
             )}
 
-            {displayText(building.circulation, lang) && (
+            {circulationText && (
               <Reveal>
                 <ArticleSection id="circulation-analysis" title={t(lang, 'circulation')}>
-                  <div className="prose prose-stone dark:prose-invert body max-w-none">{displayText(building.circulation, lang)}</div>
+                  <div className="prose prose-stone dark:prose-invert body max-w-none">{circulationText}</div>
                 </ArticleSection>
               </Reveal>
             )}
@@ -137,7 +147,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {related.slice(0, 6).map(b => {
-                const relArch = architect && b.architect_slug === architect.slug ? architect.name_zh || architect.name_en : ''
+                const relArch = architect && b.architect_slug === architect.slug ? displayName(architect, lang) : ''
                 return <BuildingCard key={b.id} building={b} lang={lang} architectName={relArch} />
               })}
             </div>
@@ -146,15 +156,15 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
       )}
 
       {/* Continue Exploring */}
-      <ContinueExploring groups={[
+      <ContinueExploring lang={lang} groups={[
         ...(architect ? [{
-          label: lang === 'en' ? `More by ${architect.name_en || architect.name_zh}` : lang === 'ja' ? `${architect.name_ja || architect.name_en}の他の作品` : `${architect.name_zh || architect.name_en}的其他作品`,
+          label: lang === 'en' ? `More by ${displayName(architect, lang)}` : lang === 'ja' ? `${displayName(architect, lang)}の他の作品` : `${displayName(architect, lang)}的其他作品`,
           href: `/${lang}/architect/${architect.slug}`,
           items: related.filter(b => b.architect_slug === architect.slug).slice(0, 4).map(b => ({
             id: b.slug,
             href: `${prefix}/building/${b.slug}`,
-            title: b.name_zh || b.name_en,
-            subtitle: b.city ? `${b.city}, ${b.year_start || ''}` : undefined,
+            title: displayName(b, lang),
+            subtitle: [formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }), b.year_start].filter(Boolean).join(', ') || undefined,
           }))
         }] : []),
         ...(related.filter(b => b.architect_slug !== architect?.slug).length > 0 ? [{
@@ -162,8 +172,8 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
           items: related.filter(b => b.architect_slug !== architect?.slug).slice(0, 4).map(b => ({
             id: b.slug,
             href: `${prefix}/building/${b.slug}`,
-            title: b.name_zh || b.name_en,
-            subtitle: [b.city, b.year_start].filter(Boolean).join(', '),
+            title: displayName(b, lang),
+            subtitle: [formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }), b.year_start].filter(Boolean).join(', '),
           }))
         }] : []),
         ...(buildingStyles.length > 0 ? [{

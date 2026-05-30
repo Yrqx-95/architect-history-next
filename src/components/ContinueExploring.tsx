@@ -12,13 +12,15 @@ interface ExploreGroup {
   }[]
 }
 
-export default function ContinueExploring({ groups }: { groups: ExploreGroup[] }) {
+export default function ContinueExploring({ groups, lang = 'en' }: { groups: ExploreGroup[]; lang?: string }) {
   const visible = groups.filter(g => g.items.length > 0)
   if (!visible.length) return null
+  const heading = lang === 'zh' ? '继续阅读' : lang === 'ja' ? 'さらに見る' : 'Continue Exploring'
+  const viewAll = lang === 'zh' ? '查看全部' : lang === 'ja' ? 'すべて見る' : 'View all'
 
   return (
     <section className="border-t border-subtle pb-8 pt-12 sm:pt-16">
-      <p className="eyebrow mb-8">Continue Exploring</p>
+      <p className="eyebrow mb-8">{heading}</p>
 
       <div className="space-y-10 sm:space-y-12">
         {visible.map(group => (
@@ -27,7 +29,7 @@ export default function ContinueExploring({ groups }: { groups: ExploreGroup[] }
               <h3 className="heading-4">{group.label}</h3>
               {group.href && (
                 <Link href={group.href} className="text-xs text-muted transition-colors hover:text-accent">
-                  View all &rarr;
+                  {viewAll} &rarr;
                 </Link>
               )}
             </div>
