@@ -169,23 +169,33 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
             title={t(lang, 'architects')}
             description={lang === 'en' ? 'Start with major figures, then continue by period.' : lang === 'ja' ? '主要な建築家から入り、時代別にたどる。' : '先看重要建筑师，再按时代继续浏览。'}
           />
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-start">
-            <div className="grid gap-3 sm:grid-cols-2">
-              {featuredArchitects.map(architect => (
-                <FeaturedArchitect key={architect.id} architect={architect} count={buildingCountByArchitect.get(architect.slug) || 0} lang={lang} prefix={prefix} eraLabel={eraLabelFor(architect.era_slug)} />
-              ))}
-            </div>
-            {eraGroups.length > 0 && (
-              <div className="rounded-md border border-subtle bg-surface p-4 shadow-semantic-card sm:p-5">
-                <p className="eyebrow mb-4">{lang === 'en' ? 'By period' : lang === 'ja' ? '時代別' : '按时期'}</p>
-                <div className="space-y-5">
-                  {eraGroups.slice(0, 6).map(group => (
-                    <EraLineage key={group.era.id} era={group.era} architects={group.architects} lang={lang} prefix={prefix} />
-                  ))}
-                </div>
-              </div>
-            )}
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredArchitects.map(architect => (
+              <FeaturedArchitect key={architect.id} architect={architect} count={buildingCountByArchitect.get(architect.slug) || 0} lang={lang} prefix={prefix} eraLabel={eraLabelFor(architect.era_slug)} />
+            ))}
           </div>
+          {eraGroups.length > 0 && (
+            <div className="mt-8 rounded-md border border-subtle bg-surface p-4 shadow-semantic-card sm:p-5">
+              <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="eyebrow mb-2">{lang === 'en' ? 'By period' : lang === 'ja' ? '時代別' : '按时期'}</p>
+                  <h3 className="heading-3">{lang === 'en' ? 'Architect lineage' : lang === 'ja' ? '建築家の系譜' : '建筑师谱系'}</h3>
+                </div>
+                <p className="caption max-w-sm sm:text-right">
+                  {lang === 'en'
+                    ? 'Periods are entry points into people, not empty taxonomy columns.'
+                    : lang === 'ja'
+                    ? '時代を、人物へ入るための入口として読む。'
+                    : '把时期当作进入人物关系的入口，而不是空白的侧栏。'}
+                </p>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {eraGroups.slice(0, 6).map(group => (
+                  <EraLineage key={group.era.id} era={group.era} architects={group.architects} lang={lang} prefix={prefix} />
+                ))}
+              </div>
+            </div>
+          )}
           {compactArchitects.length > 0 && (
             <div className="mt-8">
               <p className="eyebrow mb-3">{lang === 'en' ? 'More architects' : lang === 'ja' ? 'その他の建築家' : '更多建筑师'}</p>
@@ -333,7 +343,7 @@ function FeaturedArchitect({
 
 function EraLineage({ era, architects, lang, prefix }: { era: Era; architects: Architect[]; lang: string; prefix: string }) {
   return (
-    <div>
+    <div className="rounded-md border border-subtle bg-surface-raised p-4">
       <Link href={`${prefix}/browse/era/${era.slug}`} className="body-sm font-medium text-primary transition-colors hover:text-accent">
         {displayName(era, lang)}
       </Link>

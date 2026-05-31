@@ -395,11 +395,22 @@
 - ✅ 部署验证：提交 `e1b0127` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-qyawdi0ou-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/map`、`/zh/timeline`、`/zh/browse` 均返回 200；`/api/search?q=2024` 只返回 `reinhard-ernst-museum:2024` 建筑结果
 
-### 当前 docs/ 结构（10 个文档）
+### 第三十阶段：P0 时间轴双模式与知识网络产品路线
+- ✅ 新增 `docs/PRODUCT_STRATEGY.md`：把 Archistory 明确为建筑史知识网络，而不是建筑索引或图片站
+- ✅ `/[lang]/timeline` 加回连续历史叙事层：古典世界、中世纪、文艺复兴到巴洛克、工业革命与现代主义、20世纪现代主义、当代
+- ✅ `/[lang]/timeline` 保留现有 decade atlas，并把 decade card 容器改为 columns，避免等高网格造成截图中的大块空白
+- ✅ `/[lang]/map` 国家/地区卡改为 columns；无合适封面时使用紧凑文字信息，不再撑出空白大图区域
+- ✅ `/[lang]/browse` 建筑师区取消右侧高空白“按时期”面板，改为下方建筑师谱系入口，减少左右错位和空白
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
+- ✅ 本地浏览器验证：`/zh/timeline`、`/zh/map`、`/zh/browse` 桌面和 390px 手机宽均无横向溢出；时间页可见 `叙事时间轴` 与 `年代索引`
+- ☐ 部署到 Vercel 并验证正式域名
+
+### 当前 docs/ 结构（11 个文档）
 ```
 docs/
 ├── PROJECT.md          — 项目定位与技术栈
 ├── STATUS.md           — 项目当前状态（本文件）
+├── PRODUCT_STRATEGY.md — 产品路线与知识网络目标
 ├── DESIGN_TOKENS.md    — 设计令牌系统
 ├── UI_RULES.md         — UI 设计与组件规范
 ├── DATA_SCHEMA.md      — 数据结构与 ER 关系
