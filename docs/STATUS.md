@@ -392,7 +392,8 @@
 - ✅ 搜索 API 新增 60s 内存缓存、`Cache-Control: public, s-maxage=60, stale-while-revalidate=300` 和字段权重排序；`2024` 不再因为封面加权返回大量无关建筑
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
 - ✅ 本地浏览器验证：`/zh/map`、`/zh/timeline`、`/zh/browse` 桌面和 390px 手机宽无横向溢出；主入口未出现 `0 建筑师 · 0 建筑` 失望信息
-- ☐ 部署到 Vercel 并验证正式域名
+- ✅ 部署验证：提交 `e1b0127` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-qyawdi0ou-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/map`、`/zh/timeline`、`/zh/browse` 均返回 200；`/api/search?q=2024` 只返回 `reinhard-ernst-museum:2024` 建筑结果
 
 ### 当前 docs/ 结构（10 个文档）
 ```
