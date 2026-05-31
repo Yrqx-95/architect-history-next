@@ -257,6 +257,39 @@ architect_influences (architect_id, influenced_id, relationship_type)
 - `image_role`: portrait/hero/supporting
 - `url_original`, `photographer`, `license`, `source_url`
 
+## Learning Paths Overlay（学习路径）
+
+学习路径第一版采用仓库优先 overlay，不写 Supabase。文件位置：
+
+```
+src/lib/learning-paths.ts
+```
+
+每条路径包含：
+
+- `slug`: 路径 URL 标识符，如 `corbusier-to-japanese-modernism`
+- `title/subtitle/description`: 中文、英文、日文三语标题与导语
+- `steps`: 有序知识节点数组
+
+每个 `step` 包含：
+
+- `kind`: `architect | building | style | era`
+- `slug`: 对应实体 slug
+- `note`: 三语阅读提示
+
+运行时规则：
+
+- `/[lang]/paths` 显示全部路径。
+- `/[lang]/paths/[slug]` 显示路径详情。
+- 每个节点按 `kind + slug` 链接到既有实体页面。
+- 若某节点在当前数据中解析不到，详情页会过滤该节点，避免死链；但内容维护时仍必须优先使用已存在实体。
+
+第一批路径：
+
+- `corbusier-to-japanese-modernism`
+- `renaissance-to-baroque`
+- `wright-aalto-lautner-organic-modernism`
+
 ## 数据质量问题
 
 | 问题 | 影响 | 优先级 |

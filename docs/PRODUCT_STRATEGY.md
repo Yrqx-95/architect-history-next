@@ -139,7 +139,7 @@ Architects × Buildings × Styles × Movements × Regions × Timeline
 
 1. `/graph` 关系图谱页。
 2. 风格详情页重做。
-3. 3 条学习路径：
+3. 3 条学习路径（第一版已上线到仓库 overlay）：
    - 从柯布西耶到日本现代主义
    - 从赖特到有机现代主义
    - 从文艺复兴到巴洛克

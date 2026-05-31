@@ -447,6 +447,16 @@
 - ✅ 部署验证：提交 `063595a` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-24uzgr6kw-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/browse/style/modernism`、`/zh/browse/style/renaissance`、`/zh/browse/era/classical-era`、`/zh/browse/era/renaissance` 可见 `知识网络 / 阅读路径`；`/ja/browse/style/modernism` 可见 `知識ネットワーク / 読み進める経路`
 
+### 第三十五阶段：学习路径第一版
+- ✅ 新增 `/[lang]/paths` 与 `/[lang]/paths/[slug]`，把建筑师、建筑、风格、时代串成可连续阅读的路线
+- ✅ 第一批 3 条路径：从柯布西耶到日本现代主义、从文艺复兴到巴洛克、从赖特到有机现代主义
+- ✅ 学习路径采用仓库 overlay：`src/lib/learning-paths.ts`，运行时解析现有实体并链接到详情页，不新增 Supabase 字段
+- ✅ 导航接入：桌面导航、手机抽屉、首页知识导览、档案入口均增加 `路径`
+- ✅ 文案全部面向读者，避免使用“已审校”“内部关系”等后台编辑口径
+- ✅ 文档同步：`DATA_SCHEMA.md` 记录学习路径模型；`PRODUCT_STRATEGY.md` 标记三条学习路径进入第一版
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 本地响应验证：`/zh/paths`、`/zh/paths/corbusier-to-japanese-modernism`、`/ja/paths/corbusier-to-japanese-modernism` 均返回学习路径内容；`/zh/browse` 已显示 `路径 / 3 / 学习路线`
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

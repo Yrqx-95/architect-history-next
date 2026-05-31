@@ -15,6 +15,7 @@ const dict: Record<string, Record<Lang, string>> = {
   map:         { zh: '地图',       en: 'Map',         ja: '地図' },
   browse:      { zh: '档案',       en: 'Archive',     ja: 'アーカイブ' },
   timeline:    { zh: '时间',       en: 'Time',        ja: '時間' },
+  paths:       { zh: '路径',       en: 'Paths',       ja: 'ルート' },
   architects:  { zh: '建筑师',     en: 'Architects',  ja: '建築家' },
   buildings:   { zh: '建筑',       en: 'Buildings',   ja: '建築' },
   styles:      { zh: '风格',       en: 'Styles',      ja: '様式' },

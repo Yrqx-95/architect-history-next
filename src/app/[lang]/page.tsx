@@ -91,6 +91,15 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     : ''
   const guideItems = [
     {
+      title: lang === 'en' ? 'Follow a path' : lang === 'ja' ? 'ルートで読む' : '按路径阅读',
+      body: lang === 'en'
+        ? 'Move through curated sequences that connect architects, works, styles, and periods.'
+        : lang === 'ja'
+        ? '建築家、作品、様式、時代を結ぶ選定ルートで読み進める。'
+        : '沿着策划路线，把建筑师、作品、风格与时代连续读下去。',
+      href: `${prefix}/paths`,
+    },
+    {
       title: lang === 'en' ? 'Read by period' : lang === 'ja' ? '時代から読む' : '按时代阅读',
       body: lang === 'en'
         ? 'Move through eras as a structured historical index, from classical orders to contemporary practice.'
@@ -355,7 +364,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             title={lang === 'en' ? 'Knowledge guides' : lang === 'ja' ? '知識ガイド' : '知识导览'}
             description={lang === 'en' ? 'Ways into the archive beyond a single gallery view.' : lang === 'ja' ? '単なるギャラリーではない、アーカイブへの入口。' : '不止于图片画廊的档案入口。'}
           />
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-4">
             {guideItems.map(item => (
               <Link key={item.title} href={item.href} className="group border-t border-warm-200/80 pt-5 dark:border-charcoal-700">
                 <h3 className="text-lg font-medium text-warm-800 group-hover:text-warm-600 dark:text-paper-100 dark:group-hover:text-warm-300">{item.title}</h3>

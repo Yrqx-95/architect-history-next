@@ -5,6 +5,7 @@ import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getTypes } f
 import { isMinimallyComplete } from '@/lib/quality'
 import { displayName, formatCountryName, isProbablySimplifiedChinese, type Architect, type Building, type BuildingType, type Era } from '@/lib/types'
 import { listMatchesTaxonomy, matchesTaxonomy } from '@/lib/taxonomy'
+import { learningPaths } from '@/lib/learning-paths'
 import PageShell from '@/components/PageShell'
 import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
@@ -154,9 +155,10 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
 
       <Reveal>
         <section className="section pt-0">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             <EntryCard href="#architect-lineage" label={t(lang, 'architects')} value={`${architects.length}`} meta={lang === 'en' ? 'people' : lang === 'ja' ? '人' : '人物'} />
             <EntryCard href="#building-index" label={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'} value={`${qualityBuildings.length}`} meta={t(lang, 'buildings')} />
+            <EntryCard href={`${prefix}/paths`} label={t(lang, 'paths')} value={`${learningPaths.length}`} meta={lang === 'en' ? 'learning routes' : lang === 'ja' ? '学習ルート' : '学习路线'} />
             <EntryCard href="#history-index" label={lang === 'en' ? 'Periods and styles' : lang === 'ja' ? '時代と様式' : '时代与风格'} value={`${historyPathCount}`} meta={lang === 'en' ? 'active paths' : lang === 'ja' ? '入口' : '可浏览入口'} />
             <EntryCard href={`${prefix}/browse/country`} label={t(lang, 'countries')} value={`${countryItems.length}`} meta={lang === 'en' ? 'regions' : lang === 'ja' ? '地域' : '地区'} />
           </div>
