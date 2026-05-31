@@ -417,6 +417,14 @@
 - ✅ 部署验证：提交 `7920387` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-nvx1awxfe-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/architect/le-corbusier`、`/zh/architect/kunio-maekawa`、`/zh/architect/tadao-ando` 可见 `知识网络`；`/ja/architect/le-corbusier` 可见 `知識ネットワーク`
 
+### 第三十二阶段：前台文案与空白区域快速修正
+- ✅ 建筑师关系模块文案改为面向读者的阅读提示，移除“已审校”“第一层”等内部产品/编辑口径
+- ✅ 建筑师详情页桌面肖像限制最大宽度，避免右侧大图撑高 hero 后导致左侧出现大片空白
+- ✅ 有精品关系 overlay 时隐藏旧版 `关联建筑师` 区块，避免与新关系模块重复且产生低信息密度卡片
+- ✅ 建筑师详情页 `全部作品` 对缺图作品降级为紧凑文字索引，不再渲染大面积图片占位块
+- ✅ 档案页 `建筑作品` 区去掉 sticky 右侧索引，类型与国家索引改为内容流下方双栏，减少桌面中段左右错位和空白
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）；待继续正式部署验证
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

@@ -9,7 +9,7 @@ import {
   relationText,
   type ResolvedArchitectKnowledgeRelation,
 } from '@/lib/architect-knowledge-relations'
-import { displayName, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
+import { displayName, formatDisplayLocation, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -72,9 +72,9 @@ function ArchitectKnowledgeNetwork({
     eyebrow: { zh: '知识网络', en: 'Knowledge network', ja: '知識ネットワーク' },
     title: { zh: '人物关系', en: 'Architect relations', ja: '建築家の関係' },
     intro: {
-      zh: '先从已审校的师承、影响和合作关系开始，把建筑师放回历史网络中阅读。',
-      en: 'A curated first layer of mentorship, influence, and collaboration puts the architect back into a historical network.',
-      ja: '師承、影響、協働の関係から、建築家を歴史的ネットワークの中で読む。',
+      zh: '沿着师承、同代人与后继者，继续阅读这位建筑师所在的历史网络。',
+      en: 'Follow mentors, peers, and successors to continue through this architect’s historical network.',
+      ja: '師、同時代人、後継者をたどり、この建築家が属する歴史的ネットワークへ進む。',
     },
     from: { zh: '来自', en: 'from', ja: '由来' },
     to: { zh: '指向', en: 'to', ja: 'へ' },
@@ -83,7 +83,7 @@ function ArchitectKnowledgeNetwork({
 
   return (
     <Reveal>
-      <section className="section border-t border-subtle">
+      <section className="section-sm border-t border-subtle pt-8 sm:pt-10">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="eyebrow mb-2">{l('eyebrow')}</p>
@@ -96,7 +96,7 @@ function ArchitectKnowledgeNetwork({
             <Link
               key={`${relation.from}-${relation.to}-${relation.kind}`}
               href={`${prefix}/architect/${relation.architect.slug}`}
-              className="group flex min-h-[12rem] flex-col justify-between rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+              className="group flex min-h-[10.5rem] flex-col justify-between rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
             >
               <div>
                 <div className="mb-4 flex items-center justify-between gap-3">
@@ -148,7 +148,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const knowledgeRelations = getResolvedArchitectKnowledgeRelations(slug, allArchitects)
   const allBuildingsWithCovers = contentOverlay ? await getBuildingsWithCovers() : []
   const coverBySlug = new Map(allBuildingsWithCovers.map(building => [building.slug, building]))
-  const buildingsWithCovers = buildings.map(building => coverBySlug.get(building.slug) || building)
+  const buildingsWithCovers: BuildingWithCover[] = buildings.map(building => coverBySlug.get(building.slug) || building)
 
   const nameText = displayName(architect, lang)
   const cleanText = (text: string) => (lang === 'ja' && isProbablySimplifiedChinese(text) ? '' : text)
@@ -158,6 +158,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const bioText = cleanText(rawBioText || '')
   const coreIdeas: string[] = contentOverlay ? [] : Array.isArray(architect.core_ideas) ? architect.core_ideas : []
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
+  const worksWithImages = buildingsWithCovers.filter(building => building.cover_url)
+  const worksWithoutImages = buildingsWithCovers.filter(building => !building.cover_url)
 
   const metaRows = [
     { label: t(lang, 'lifeSpan'), value: architect.birth_year ? `${architect.birth_year} – ${architect.death_year || t(lang, 'present')}` : null },
@@ -243,7 +245,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
           {/* —— Right column: portrait (5/12) —— */}
           <div className="hidden lg:block lg:col-span-5">
             {contentOverlay && (
-              <div className="lg:sticky lg:top-24">
+              <div className="ml-auto max-w-[24rem] lg:sticky lg:top-24">
                 <ArchitectPortraitFigure content={contentOverlay} lang={lang} />
               </div>
             )}
@@ -283,7 +285,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
       {/* ============================================================
           Influences / Influenced
           ============================================================ */}
-      {(influencesList.length > 0 || influencedList.length > 0) && (
+      {knowledgeRelations.length === 0 && (influencesList.length > 0 || influencedList.length > 0) && (
         <Reveal>
           <section className="section border-t border-subtle">
             <h2 className="heading-3 mb-6">{t(lang, 'relatedArchitects')}</h2>
@@ -341,9 +343,30 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
             </div>
 
             <p className="eyebrow mb-4">{lang === 'en' ? 'All works' : lang === 'ja' ? '全作品' : '全部作品'}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-              {buildingsWithCovers.map(b => <BuildingCard key={b.id} building={b} lang={lang} />)}
-            </div>
+            {worksWithImages.length > 0 && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
+                {worksWithImages.map(b => <BuildingCard key={b.id} building={b} lang={lang} />)}
+              </div>
+            )}
+            {worksWithoutImages.length > 0 && (
+              <div className={worksWithImages.length > 0 ? 'mt-8' : ''}>
+                <p className="caption mb-3">
+                  {lang === 'en' ? 'Text index' : lang === 'ja' ? 'テキスト索引' : '文字索引'}
+                </p>
+                <div className="grid gap-x-6 gap-y-0 border-t border-subtle sm:grid-cols-2 lg:grid-cols-3">
+                  {worksWithoutImages.map(b => (
+                    <Link
+                      key={b.id}
+                      href={`${prefix}/building/${b.slug}`}
+                      className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-b border-subtle py-3 text-sm transition-colors hover:text-accent"
+                    >
+                      <span className="font-medium text-primary">{displayName(b, lang)}</span>
+                      <span className="text-muted">{b.year_start || ''}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         </Reveal>
       )}

@@ -220,13 +220,13 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
             title={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'}
             description={lang === 'en' ? 'Read representative works through type, place, and authorship.' : lang === 'ja' ? '代表作を、類型、場所、作者性から読む。' : '从类型、地域与作者关系阅读代表作品。'}
           />
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
+          <div className="space-y-8">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {featuredBuildings.map(building => (
                 <BuildingCard key={building.id} building={building} lang={lang} architectName={architectMap.get(building.architect_slug || '') || ''} />
               ))}
             </div>
-            <div className="space-y-5 lg:sticky lg:top-28">
+            <div className="grid gap-5 md:grid-cols-2">
               <IndexList title={t(lang, 'types')} items={typeItems} />
               <IndexList title={t(lang, 'countries')} items={countryItems.slice(0, 8)} moreHref={`${prefix}/browse/country`} moreLabel={t(lang, 'viewAll')} />
             </div>
