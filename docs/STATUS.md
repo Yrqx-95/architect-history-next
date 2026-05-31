@@ -413,7 +413,9 @@
 - ✅ 无关系数据的建筑师详情页不显示空 section，避免产生“这里应该有内容但没有”的失望感
 - ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Architect Relationship Overlay` 与未来 `entity_relations` 迁移方向；`PRODUCT_STRATEGY.md` 记录关系模型第一步已启动
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
-- ✅ 本地页面验证：`/zh/architect/le-corbusier` 可见 `知识网络` 与 `人物关系`，`/zh/architect/kunio-maekawa`、`/zh/architect/kenzo-tange`、`/ja/architect/le-corbusier` 均返回 200；待继续做正式部署与域名验证
+- ✅ 本地页面验证：`/zh/architect/le-corbusier` 可见 `知识网络` 与 `人物关系`，`/zh/architect/kunio-maekawa`、`/zh/architect/kenzo-tange`、`/ja/architect/le-corbusier` 均返回 200
+- ✅ 部署验证：提交 `7920387` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-nvx1awxfe-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/architect/le-corbusier`、`/zh/architect/kunio-maekawa`、`/zh/architect/tadao-ando` 可见 `知识网络`；`/ja/architect/le-corbusier` 可见 `知識ネットワーク`
 
 ### 当前 docs/ 结构（11 个文档）
 ```
