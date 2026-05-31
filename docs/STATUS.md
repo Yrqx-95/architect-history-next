@@ -444,7 +444,8 @@
 - ✅ 文档同步：`DATA_SCHEMA.md` 增加 `Style / Era Reading Paths`；`PRODUCT_STRATEGY.md` 更新关系模型当前进展
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
 - ✅ 本地页面验证：`/zh/browse/style/modernism`、`/zh/browse/style/renaissance` 可见 `知识网络 / 阅读路径`；`/zh/browse/era/classical-era`、`/zh/browse/era/renaissance` 可见上一时期 / 下一时期 / 关键风格 / 代表人物 / 代表作品
-- ⏳ 待继续部署与正式域名验证
+- ✅ 部署验证：提交 `063595a` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-24uzgr6kw-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/browse/style/modernism`、`/zh/browse/style/renaissance`、`/zh/browse/era/classical-era`、`/zh/browse/era/renaissance` 可见 `知识网络 / 阅读路径`；`/ja/browse/style/modernism` 可见 `知識ネットワーク / 読み進める経路`
 
 ### 当前 docs/ 结构（11 个文档）
 ```
