@@ -4,6 +4,11 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
 import { getArchitectRelations } from '@/lib/relations'
+import {
+  getResolvedArchitectKnowledgeRelations,
+  relationText,
+  type ResolvedArchitectKnowledgeRelation,
+} from '@/lib/architect-knowledge-relations'
 import { displayName, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import PageShell from '@/components/PageShell'
@@ -52,6 +57,68 @@ function ArchitectPortraitFigure({
   )
 }
 
+function ArchitectKnowledgeNetwork({
+  relations,
+  lang,
+  prefix,
+}: {
+  relations: ResolvedArchitectKnowledgeRelation[]
+  lang: string
+  prefix: string
+}) {
+  if (relations.length === 0) return null
+
+  const copy = {
+    eyebrow: { zh: '知识网络', en: 'Knowledge network', ja: '知識ネットワーク' },
+    title: { zh: '人物关系', en: 'Architect relations', ja: '建築家の関係' },
+    intro: {
+      zh: '先从已审校的师承、影响和合作关系开始，把建筑师放回历史网络中阅读。',
+      en: 'A curated first layer of mentorship, influence, and collaboration puts the architect back into a historical network.',
+      ja: '師承、影響、協働の関係から、建築家を歴史的ネットワークの中で読む。',
+    },
+    from: { zh: '来自', en: 'from', ja: '由来' },
+    to: { zh: '指向', en: 'to', ja: 'へ' },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+
+  return (
+    <Reveal>
+      <section className="section border-t border-subtle">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow mb-2">{l('eyebrow')}</p>
+            <h2 className="heading-3">{l('title')}</h2>
+          </div>
+          <p className="caption max-w-lg sm:text-right">{l('intro')}</p>
+        </div>
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {relations.map(relation => (
+            <Link
+              key={`${relation.from}-${relation.to}-${relation.kind}`}
+              href={`${prefix}/architect/${relation.architect.slug}`}
+              className="group flex min-h-[12rem] flex-col justify-between rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+            >
+              <div>
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <span className="label">{relationText(relation.label, lang)}</span>
+                  <span className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">
+                    {relation.direction === 'incoming' ? l('from') : l('to')}
+                  </span>
+                </div>
+                <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">
+                  {displayName(relation.architect, lang)}
+                </h3>
+                <p className="body-sm mt-3 text-secondary">{relationText(relation.note, lang)}</p>
+              </div>
+              <p className="caption mt-5 border-t border-subtle pt-3">{relation.source.title}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </Reveal>
+  )
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
   const { lang, slug } = await params
   const rels = await getArchitectRelations(slug)
@@ -77,6 +144,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const { architect, buildings, relatedArchitects: related, relatedBuildings, influencesList, influencedList, era, styles } = rels
   const prefix = `/${lang}`
   const contentOverlay = getArchitectContent(slug)
+  const allArchitects = await getArchitects()
+  const knowledgeRelations = getResolvedArchitectKnowledgeRelations(slug, allArchitects)
   const allBuildingsWithCovers = contentOverlay ? await getBuildingsWithCovers() : []
   const coverBySlug = new Map(allBuildingsWithCovers.map(building => [building.slug, building]))
   const buildingsWithCovers = buildings.map(building => coverBySlug.get(building.slug) || building)
@@ -181,6 +250,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
           </div>
         </div>
       </section>
+
+      <ArchitectKnowledgeNetwork relations={knowledgeRelations} lang={lang} prefix={prefix} />
 
       {/* ============================================================
           Deep Article — overlay content

@@ -406,6 +406,15 @@
 - ✅ 部署验证：提交 `d4bd9d8` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-yt41h4o66-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/timeline` 可见 `叙事时间轴` 和 `年代索引`；`/zh/map` 可见 `国家与地区`；`/zh/browse` 可见 `建筑师谱系`
 
+### 第三十一阶段：建筑师关系 overlay 第一版
+- ✅ 新增 `src/lib/architect-knowledge-relations.ts`：以仓库 overlay 维护建筑师之间的师承、事务所脉络、教育、影响和合作关系
+- ✅ 第一批关系覆盖柯布西耶 → 前川国男 / 坂仓准三、前川国男 → 丹下健三、丹下健三 → 槙文彦、布劳耶 → 芦原义信、赖特 → 劳特纳 / 阿尔托、柯布西耶 / 路易·康 → 安藤忠雄等高价值学习路径
+- ✅ 建筑师详情页新增“知识网络 / 人物关系”面板，按当前建筑师自动显示 incoming / outgoing 关系，并链接到相关人物页
+- ✅ 无关系数据的建筑师详情页不显示空 section，避免产生“这里应该有内容但没有”的失望感
+- ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Architect Relationship Overlay` 与未来 `entity_relations` 迁移方向；`PRODUCT_STRATEGY.md` 记录关系模型第一步已启动
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
+- ✅ 本地页面验证：`/zh/architect/le-corbusier` 可见 `知识网络` 与 `人物关系`，`/zh/architect/kunio-maekawa`、`/zh/architect/kenzo-tange`、`/ja/architect/le-corbusier` 均返回 200；待继续做正式部署与域名验证
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

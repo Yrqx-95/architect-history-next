@@ -70,6 +70,8 @@ Architects × Buildings × Styles × Movements × Regions × Timeline
 - `reacted_against`
 - `evolved_into`
 
+当前进展：已建立仓库优先的 `Architect Relationship Overlay` 第一版，并先在建筑师详情页显示人物关系。下一步应把同一关系模型扩展到建筑、风格、时代和国家地区。
+
 ### 3. 建筑师页升级
 
 为什么做：建筑师页是知识网络最重要的节点。

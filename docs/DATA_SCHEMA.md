@@ -81,6 +81,40 @@
 **迁移方向：**
 稳定后可迁移为 `architect_articles`、`architect_portraits`、`architect_representative_works` 三张表，或一个 `architect_content` JSONB 表。迁移前仓库 overlay 仍是唯一编辑源。
 
+### Architect Relationship Overlay（建筑师关系层）
+
+知识网络第一阶段不直接写 Supabase，使用 `src/lib/architect-knowledge-relations.ts` 维护一组人工策展的人物关系。该层用于补足 `architects.influences / influenced` 只能表达 slug 列表、无法表达关系类型和解释文本的问题。
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| from | string | 起点建筑师 slug |
+| to | string | 终点建筑师 slug |
+| kind | string | 关系类型，如 `studio_lineage`、`mentorship`、`education`、`influence`、`collaboration` |
+| label | Record<zh/ja/en,string> | 前台显示的关系标签 |
+| note | Record<zh/ja/en,string> | 面向读者的关系解释 |
+| source | object | 来源标题，后续应补齐 URL 与页码/机构来源 |
+
+当前前台在建筑师详情页读取该 overlay，并按当前建筑师 slug 解析 incoming / outgoing 两种方向，显示“知识网络 / 人物关系”面板。无关系的建筑师页面保持现状，不出现空 section。
+
+**迁移方向：**
+稳定后建议迁移为 `entity_relations` 通用关系表，而不是只做 `architect_influences`，以便同一套模型覆盖建筑师、建筑、风格、时期、国家地区、理论与材料。
+
+```
+entity_relations (
+  id,
+  from_entity_type, from_entity_slug,
+  to_entity_type, to_entity_slug,
+  relation_type,
+  label_i18n,
+  note_i18n,
+  source_url,
+  source_title,
+  confidence,
+  created_at,
+  updated_at
+)
+```
+
 ### Chinese Script Overlay（中文简繁显示层）
 
 繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：
