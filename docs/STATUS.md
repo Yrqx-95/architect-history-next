@@ -384,6 +384,16 @@
 - ✅ 部署验证：提交 `7882e57` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-aws585nr1-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/map`、`/ja/map`、`/en/map`、`/ja/browse/country/us`、`/ja/not-a-real-page` 均返回 200，并通过混语/缺页可见文本检查
 
+### 第二十九阶段：地图 / 时间 / 档案页密度与对齐优化
+- ✅ 参考文化档案与集合可视化产品的组织方式：先给总览指标，再用时间、地域、主题等可进入路径组成密集索引，避免空地图、空列表或纯字段清单
+- ✅ `/[lang]/timeline` 从稀疏竖线改为 `Time atlas`：顶部指标、高密度年代入口、三列 decade card 索引，一屏内可扫视更多有效年代与作品
+- ✅ `/[lang]/map` 从长列表 + 高侧栏改为地域地图册：国家密度卡、地域入口、城市线索；入口图片只使用本地已治理图片，不适合做索引封面的图会被排除
+- ✅ `/[lang]/browse` 放宽桌面内容宽度，作品区和历史/风格/类型区改为 `items-start`，右侧索引 sticky，避免卡片被拉伸成大空白面板
+- ✅ 搜索 API 新增 60s 内存缓存、`Cache-Control: public, s-maxage=60, stale-while-revalidate=300` 和字段权重排序；`2024` 不再因为封面加权返回大量无关建筑
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
+- ✅ 本地浏览器验证：`/zh/map`、`/zh/timeline`、`/zh/browse` 桌面和 390px 手机宽无横向溢出；主入口未出现 `0 建筑师 · 0 建筑` 失望信息
+- ☐ 部署到 Vercel 并验证正式域名
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/
@@ -404,7 +414,7 @@ docs/
 2. 🟡 22 个 overrides 重叠条目待清理
 3. 🟢 首页 40 处内联三语字符串待迁移
 4. 🟢 首页 358 行待拆分
-5. 🟢 搜索 API 短缓存与相关性排序待补
+5. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级
 

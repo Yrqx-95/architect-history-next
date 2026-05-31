@@ -46,6 +46,8 @@ const copy = {
   density: { zh: '档案密度', en: 'Archive density', ja: 'アーカイブ密度' },
 }
 
+const indexImageDenylist = new Set(['louis-vuitton-fondation'])
+
 function c(lang: string, key: keyof typeof copy) {
   return copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
 }
@@ -66,6 +68,18 @@ function mapCityLabel(building: BuildingWithCover, lang: string) {
     countryCode: building.country_code,
     lang,
   })
+}
+
+function localCover(buildings: BuildingWithCover[]) {
+  return buildings.find(building =>
+    building.cover_url?.startsWith('/images/curated/') && !indexImageDenylist.has(building.slug)
+  )
+}
+
+function isLocalCover(building?: BuildingWithCover) {
+  return Boolean(
+    building?.cover_url?.startsWith('/images/curated/') && !indexImageDenylist.has(building.slug)
+  )
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -98,7 +112,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
       cluster.name = countryName
       cluster.buildingCount += 1
       if (building.city) cluster.cities.set(building.city, (cluster.cities.get(building.city) || 0) + 1)
-      if (cluster.featured.length < 3 && building.cover_url) cluster.featured.push(building)
+      if (cluster.featured.length < 8 && building.cover_url) cluster.featured.push(building)
       countryClusters.set(code, cluster)
     }
 
@@ -114,7 +128,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
       featured: undefined,
     }
     city.buildingCount += 1
-    if (!city.featured && building.cover_url) city.featured = building
+    if (!city.featured && isLocalCover(building)) city.featured = building
     cityClusters.set(cityKey, city)
   })
 
@@ -134,96 +148,115 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
   const maxCountryCount = Math.max(...countries.map(country => country.buildingCount), 1)
   const featuredRoutes = countries
     .filter(country => country.featured.length > 0)
-    .slice(0, 4)
+    .slice(0, 6)
 
   return (
-    <PageShell>
-      <header className="section">
-        <p className="eyebrow mb-4">{c(lang, 'eyebrow')}</p>
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(18rem,0.55fr)] lg:items-end">
-          <div>
-            <h1 className="heading-display mb-4">{c(lang, 'title')}</h1>
-            <p className="body-large max-w-3xl">{c(lang, 'intro')}</p>
-          </div>
-          <div className="grid grid-cols-3 overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
-            <Metric value={countries.length} label={t(lang, 'countries')} />
-            <Metric value={cities.length} label={c(lang, 'cities')} />
-            <Metric value={buildings.length} label={t(lang, 'buildings')} />
-          </div>
+    <PageShell className="!max-w-[86rem]">
+      <header className="section grid gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(20rem,0.55fr)] lg:items-end">
+        <div>
+          <p className="eyebrow mb-4">{c(lang, 'eyebrow')}</p>
+          <h1 className="heading-display mb-4">{c(lang, 'title')}</h1>
+          <p className="body-large max-w-3xl">{c(lang, 'intro')}</p>
+        </div>
+        <div className="grid grid-cols-3 overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
+          <Metric value={countries.length} label={t(lang, 'countries')} />
+          <Metric value={cities.length} label={c(lang, 'cities')} />
+          <Metric value={buildings.length} label={t(lang, 'buildings')} />
         </div>
       </header>
 
       <Reveal>
         <section className="section pt-0">
-          <div className="rounded-md border border-subtle bg-surface p-4 shadow-semantic-card sm:p-5">
-            <div className="mb-5 flex items-end justify-between gap-4">
-              <div>
-                <p className="eyebrow mb-2">{c(lang, 'density')}</p>
-                <h2 className="heading-3">{c(lang, 'countryIndex')}</h2>
-              </div>
-              <Link href={`${prefix}/browse/country`} className="body-sm text-accent underline underline-offset-4">
-                {t(lang, 'viewAll')}
-              </Link>
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow mb-2">{c(lang, 'density')}</p>
+              <h2 className="heading-3">{c(lang, 'countryIndex')}</h2>
             </div>
-            <div className="grid gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(18rem,0.55fr)]">
-              <div className="space-y-3">
-                {countries.slice(0, 12).map(country => (
-                  <Link
-                    key={country.code}
-                    href={`${prefix}/browse/country/${country.code}`}
-                    className="group grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 rounded-md border border-subtle bg-surface-raised px-3.5 py-3 transition-colors hover:border-default hover:bg-surface-muted"
-                  >
-                    <div className="min-w-0">
-                      <div className="mb-2 flex items-center justify-between gap-3">
-                        <h3 className="truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">{country.name}</h3>
-                        <span className="metadata shrink-0 uppercase">{country.code}</span>
-                      </div>
-                      <div className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
-                        <div
-                          className="h-full rounded-full bg-[color:var(--ui-accent)]"
-                          style={{ width: `${Math.max(8, Math.round((country.buildingCount / maxCountryCount) * 100))}%` }}
-                        />
-                      </div>
+            <Link href={`${prefix}/browse/country`} className="body-sm text-accent underline underline-offset-4">
+              {t(lang, 'viewAll')}
+            </Link>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {countries.slice(0, 12).map(country => {
+              const cover = localCover(country.featured)
+              return (
+                <Link
+                  key={country.code}
+                  href={`${prefix}/browse/country/${country.code}`}
+                  className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+                >
+                  <div className="mb-5 flex items-start justify-between gap-4">
+                    <div>
+                      <p className="metadata mb-2 uppercase">{country.code}</p>
+                      <h3 className="text-xl font-medium leading-snug text-primary transition-colors group-hover:text-accent">{country.name}</h3>
                     </div>
                     <p className="caption text-right tabular-nums">
                       {country.buildingCount} {c(lang, 'buildings')}
                       {country.architectCount > 0 && <><br />{country.architectCount} {c(lang, 'architects')}</>}
                     </p>
-                  </Link>
-                ))}
-              </div>
-              <div className="rounded-md border border-subtle bg-surface-muted p-4">
-                <p className="eyebrow mb-4">{c(lang, 'featuredRoutes')}</p>
-                <div className="space-y-4">
-                  {featuredRoutes.map(country => (
-                    <Link key={country.code} href={`${prefix}/browse/country/${country.code}`} className="group block">
-                      <div className="flex gap-3">
-                        <div className="grid h-16 w-20 shrink-0 grid-cols-2 gap-1 overflow-hidden rounded-sm bg-surface">
-                          {country.featured.slice(0, 2).map(building => (
-                            <div key={building.id} className="relative">
-                              <SafeImage
-                                src={building.cover_url || ''}
-                                alt={displayName(building, lang)}
-                                fill
-                                className="object-cover"
-                                sizes="5rem"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        <div className="min-w-0">
-                          <h3 className="body-sm font-medium text-primary transition-colors group-hover:text-accent">{country.name}</h3>
-                          <p className="caption mt-1">{country.buildingCount} {c(lang, 'buildings')} · {country.cities.size} {c(lang, 'cities')}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+                  </div>
+                  <div className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
+                    <div
+                      className="h-full rounded-full bg-[color:var(--ui-accent)]"
+                      style={{ width: `${Math.max(8, Math.round((country.buildingCount / maxCountryCount) * 100))}%` }}
+                    />
+                  </div>
+                  {cover && (
+                    <div className="relative mt-5 aspect-[16/9] overflow-hidden rounded-sm bg-surface-muted">
+                      <SafeImage
+                        src={cover.cover_url || ''}
+                        alt={displayName(cover, lang)}
+                        fill
+                        className="object-cover transition duration-500 ease-out group-hover:scale-[1.015]"
+                        sizes="(min-width: 1280px) 26rem, (min-width: 768px) 45vw, 100vw"
+                      />
+                    </div>
+                  )}
+                </Link>
+              )
+            })}
           </div>
         </section>
       </Reveal>
+
+      {featuredRoutes.length > 0 && (
+        <Reveal>
+          <section className="section border-t border-subtle pt-10 sm:pt-12">
+            <div className="mb-6">
+              <p className="eyebrow mb-2">{c(lang, 'featuredRoutes')}</p>
+              <h2 className="heading-3">{lang === 'en' ? 'Regional routes' : lang === 'ja' ? '地域の入口' : '地域入口'}</h2>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {featuredRoutes.map(country => {
+                const cover = localCover(country.featured)
+                return (
+                <Link key={country.code} href={`${prefix}/browse/country/${country.code}`} className="group grid grid-cols-[7rem_minmax(0,1fr)] gap-4 rounded-md border border-subtle bg-surface p-3 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-surface-muted">
+                    {cover ? (
+                      <SafeImage
+                        src={cover.cover_url || ''}
+                        alt={displayName(cover, lang)}
+                        fill
+                        className="object-cover transition duration-500 ease-out group-hover:scale-[1.015]"
+                        sizes="7rem"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-xs uppercase tracking-[0.18em] text-muted">{country.code}</div>
+                    )}
+                  </div>
+                  <div className="min-w-0 self-center">
+                    <h3 className="body-sm font-medium text-primary transition-colors group-hover:text-accent">{country.name}</h3>
+                    <p className="caption mt-1">{country.buildingCount} {c(lang, 'buildings')} · {country.cities.size} {c(lang, 'cities')}</p>
+                    <p className="mt-3 text-xs text-accent underline underline-offset-4">{c(lang, 'viewCountry')}</p>
+                  </div>
+                </Link>
+                )
+              })}
+            </div>
+          </section>
+        </Reveal>
+      )}
 
       <Reveal>
         <section className="section border-t border-subtle pt-10 sm:pt-12">
@@ -231,7 +264,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
             <p className="eyebrow mb-2">{t(lang, 'search')}</p>
             <h2 className="heading-3">{c(lang, 'cityIndex')}</h2>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {cities.map(city => (
               <Link
                 key={city.key}

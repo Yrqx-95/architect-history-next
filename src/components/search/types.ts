@@ -16,6 +16,7 @@ export interface SearchBuilding {
   year_start: number | null
   city: string | null
   country: string | null
+  country_code: string | null
   type_slug: string | null
   architect_slug: string | null
   cover_url: string | null

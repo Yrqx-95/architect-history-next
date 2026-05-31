@@ -17,80 +17,120 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
   const { lang } = await params
   const [architects, buildings] = await Promise.all([getArchitects(), getBuildings()])
 
-  const sortedBldgs = [...buildings].sort((a, b) => (a.year_start || 0) - (b.year_start || 0))
+  const datedBuildings = buildings.filter(building => building.year_start)
+  const sortedBldgs = [...datedBuildings].sort((a, b) => (a.year_start || 0) - (b.year_start || 0))
+  const architectMap = new Map(architects.map(architect => [architect.slug, architect]))
 
   const byDecade = new Map<number, typeof buildings>()
   sortedBldgs.forEach(b => {
-    const decade = Math.floor((b.year_start || 2000) / 10) * 10
+    const decade = Math.floor((b.year_start || 0) / 10) * 10
     if (!byDecade.has(decade)) byDecade.set(decade, [])
     byDecade.get(decade)!.push(b)
   })
 
   const decades = [...byDecade.entries()].sort(([a], [b]) => a - b)
+  const firstYear = sortedBldgs[0]?.year_start
+  const latestYear = sortedBldgs[sortedBldgs.length - 1]?.year_start
+  const featuredDecades = decades
+    .filter(([, bldgs]) => bldgs.length >= 3)
+    .sort((a, b) => b[1].length - a[1].length)
+    .slice(0, 4)
 
   return (
-    <PageShell>
-      <header className="section">
-        <h1 className="heading-display mb-4">{t(lang, 'timeline')}</h1>
-        <p className="body-large max-w-2xl">
-          {lang === 'en'
-            ? 'A chronological journey through architectural history — from antiquity to the present day.'
-            : lang === 'ja'
-            ? '建築史の年代的旅路 — 古代から現代まで。'
-            : '建筑史的年代之旅 — 从古代到当代。'}
-        </p>
+    <PageShell className="!max-w-[86rem]">
+      <header className="section grid gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(20rem,0.55fr)] lg:items-end">
+        <div>
+          <p className="eyebrow mb-4">{lang === 'en' ? 'Time atlas' : lang === 'ja' ? '時間の地図' : '时间图谱'}</p>
+          <h1 className="heading-display mb-4">{t(lang, 'timeline')}</h1>
+          <p className="body-large max-w-2xl">
+            {lang === 'en'
+              ? 'A dense chronological index of buildings, periods, and authorship. Browse by decade, then enter the work.'
+              : lang === 'ja'
+              ? '建築、時代、作者性を年代ごとに読むための密度ある索引。'
+              : '把建筑、时代与作者关系压缩进年代索引，从一个十年进入一组作品。'}
+          </p>
+        </div>
+        <div className="grid grid-cols-3 overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
+          <TimelineMetric value={decades.length} label={lang === 'en' ? 'decades' : lang === 'ja' ? '年代' : '年代段'} />
+          <TimelineMetric value={datedBuildings.length} label={t(lang, 'buildings')} />
+          <TimelineMetric value={firstYear && latestYear ? `${firstYear}-${latestYear}` : '—'} label={lang === 'en' ? 'range' : lang === 'ja' ? '範囲' : '范围'} />
+        </div>
       </header>
 
-      <div className="relative">
-        {/* Central timeline line */}
-        <div className="absolute left-4 sm:left-8 top-0 bottom-0 w-px bg-warm-200 dark:bg-charcoal-700" />
+      {featuredDecades.length > 0 && (
+        <Reveal>
+          <section className="section pt-0">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {featuredDecades.map(([decade, bldgs]) => (
+                <a key={decade} href={`#decade-${decade}`} className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
+                  <p className="label">{lang === 'en' ? 'high-density decade' : lang === 'ja' ? '高密度の年代' : '高密度年代'}</p>
+                  <p className="mt-4 font-serif-display text-4xl leading-none text-primary transition-colors group-hover:text-accent">{decade}s</p>
+                  <p className="caption mt-2">{bldgs.length} {t(lang, 'buildings')}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        </Reveal>
+      )}
 
-        <div className="space-y-16 sm:space-y-20">
+      <Reveal>
+        <section className="section border-t border-subtle pt-10 sm:pt-12">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow mb-2">{lang === 'en' ? 'Chronology' : lang === 'ja' ? '年代順' : '年代序列'}</p>
+              <h2 className="heading-3">{lang === 'en' ? 'Decade index' : lang === 'ja' ? '年代索引' : '年代索引'}</h2>
+            </div>
+            <p className="caption text-right">{decades.length} {lang === 'en' ? 'active periods' : lang === 'ja' ? '項目' : '有效年代'}</p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {decades.map(([decade, bldgs], eraIdx) => (
             <Reveal key={decade} delay={eraIdx * 0.05}>
-              <section className="relative pl-10 sm:pl-16">
-                {/* Decade marker */}
-                <div className="absolute left-[11px] sm:left-[27px] top-0 w-3 h-3 rounded-full bg-warm-400 dark:bg-charcoal-500 ring-4 ring-paper-100 dark:ring-charcoal-950" />
-
-                {/* Decade header */}
-                <div className="mb-5">
-                  <span className="text-2xl sm:text-3xl font-bold text-warm-800 dark:text-paper-100 font-mono tracking-tight">
-                    {decade}s
-                  </span>
-                  <span className="caption ml-3">
+              <section id={`decade-${decade}`} className="rounded-md border border-subtle bg-surface p-4 shadow-semantic-card scroll-mt-28">
+                <div className="mb-5 flex items-end justify-between gap-3 border-b border-subtle pb-4">
+                  <h3 className="font-serif-display text-4xl leading-none text-primary">{decade}s</h3>
+                  <p className="caption text-right">
                     {bldgs.length} {lang === 'en' ? 'buildings' : lang === 'ja' ? '作品' : '座建筑'}
-                  </span>
+                  </p>
                 </div>
 
-                {/* Buildings in this decade */}
-                <div className="space-y-2">
-                  {bldgs.slice(0, 30).map(b => {
-                    const arch = architects.find(a => a.slug === b.architect_slug)
+                <div className="divide-y divide-[color:var(--ui-border-subtle)]">
+                  {bldgs.slice(0, 7).map(b => {
+                    const arch = b.architect_slug ? architectMap.get(b.architect_slug) : null
                     return (
                       <Link key={b.id} href={`/${lang}/building/${b.slug}`}
-                        className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 text-sm py-2 px-3 -mx-3 rounded-lg hover:bg-warm-100 dark:hover:bg-charcoal-800/60 transition-colors group">
-                        <span className="w-16 shrink-0 font-mono text-xs text-warm-600 dark:text-warm-300">{b.year_start}</span>
-                        <span className="font-medium text-warm-700 dark:text-warm-200 group-hover:text-warm-900 dark:group-hover:text-paper-100 transition-colors">
-                          {b.name_zh || b.name_en}
-                        </span>
-                        <span className="text-xs text-warm-600 dark:text-warm-300">{b.city}</span>
-                        {arch && (
-                          <span className="hidden text-xs text-warm-600 dark:text-warm-300 sm:inline">
-                            {displayName(arch, lang)}
+                        className="group grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3 py-3 transition-colors first:pt-0 last:pb-0 hover:text-accent">
+                        <span className="metadata pt-0.5 tabular-nums">{b.year_start}</span>
+                        <span className="min-w-0">
+                          <span className="block truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">
+                            {displayName(b, lang)}
                           </span>
-                        )}
+                          <span className="caption mt-1 block truncate">
+                            {[arch ? displayName(arch, lang) : '', b.city].filter(Boolean).join(' · ')}
+                          </span>
+                        </span>
                       </Link>
                     )
                   })}
-                  {bldgs.length > 30 && (
-                    <p className="caption pl-[4.25rem] py-1">+ {bldgs.length - 30} more buildings in this decade</p>
+                  {bldgs.length > 7 && (
+                    <p className="caption py-3">+ {bldgs.length - 7} {lang === 'en' ? 'more works in this decade' : lang === 'ja' ? '件の作品' : '个更多作品'}</p>
                   )}
                 </div>
               </section>
             </Reveal>
           ))}
         </div>
-      </div>
+        </section>
+      </Reveal>
     </PageShell>
+  )
+}
+
+function TimelineMetric({ value, label }: { value: number | string; label: string }) {
+  return (
+    <div className="border-r border-subtle px-3 py-4 last:border-r-0 sm:px-4">
+      <p className="font-serif-display text-2xl leading-none text-primary sm:text-3xl">{value}</p>
+      <p className="caption mt-2">{label}</p>
+    </div>
   )
 }

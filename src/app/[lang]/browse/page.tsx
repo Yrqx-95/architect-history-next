@@ -139,7 +139,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
   const historyPathCount = eraItems.length + styleItems.length
 
   return (
-    <PageShell>
+    <PageShell className="!max-w-[86rem]">
       <header className="section">
         <p className="eyebrow mb-4">{lang === 'en' ? 'Archive index' : lang === 'ja' ? 'アーカイブ索引' : '档案索引'}</p>
         <h1 className="heading-display mb-4">{t(lang, 'browse')}</h1>
@@ -210,13 +210,13 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
             title={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'}
             description={lang === 'en' ? 'Read representative works through type, place, and authorship.' : lang === 'ja' ? '代表作を、類型、場所、作者性から読む。' : '从类型、地域与作者关系阅读代表作品。'}
           />
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {featuredBuildings.map(building => (
                 <BuildingCard key={building.id} building={building} lang={lang} architectName={architectMap.get(building.architect_slug || '') || ''} />
               ))}
             </div>
-            <div className="space-y-5">
+            <div className="space-y-5 lg:sticky lg:top-28">
               <IndexList title={t(lang, 'types')} items={typeItems} />
               <IndexList title={t(lang, 'countries')} items={countryItems.slice(0, 8)} moreHref={`${prefix}/browse/country`} moreLabel={t(lang, 'viewAll')} />
             </div>
@@ -231,7 +231,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
               title={lang === 'en' ? 'Periods, styles, types' : lang === 'ja' ? '時代・様式・類型' : '时代、风格与类型'}
               description={lang === 'en' ? 'Use historical period, movement, and program as three ways to read the archive.' : lang === 'ja' ? '時代、運動、用途からアーカイブを読む。' : '用时代、流派和用途三条线索阅读档案。'}
             />
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid items-start gap-6 lg:grid-cols-3">
               <IndexList title={t(lang, 'eras')} items={eraItems} />
               <IndexList title={t(lang, 'styles')} items={styleItems} />
               {styleFamilies.length > 0 && (

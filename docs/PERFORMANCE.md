@@ -1,12 +1,12 @@
 # PERFORMANCE.md — 性能审计与优化
 
-> 最后更新：2026-05-25
+> 最后更新：2026-05-31
 
 ## 当前性能概况
 
 | 指标 | 数值 | 评估 |
 |------|------|------|
-| 静态生成页面 | 3,177 | ✅ |
+| 静态生成页面 | 3,180 | ✅ |
 | Vercel 部署包 | 43.8MB | ⚠️ 偏大（主要为 curated images） |
 | Client Components | 12 个 | ✅ 合理 |
 | Dynamic imports | 0 | ⚠️ 无代码分割 |
@@ -39,7 +39,7 @@
 | 首页 358 行 | `src/app/[lang]/page.tsx` | 单体页面过大，难以维护 |
 | 零 dynamic import | 全项目 | 首页加载全部组件代码 |
 | 关系查询全表摄入 | `relations.ts` | 数据增长后响应变慢 |
-| 搜索 API JS 端过滤 | `src/app/api/search/route.ts` | 数据增长后响应变慢，相关性排序有限 |
+| 搜索 API JS 端过滤 | `src/app/api/search/route.ts` | 已加短 TTL 缓存与字段权重排序；数据继续增长后仍需数据库全文索引 |
 | 无 lazy loading 路由 | 全项目 | 所有页面在首次构建时全部生成 |
 
 ### 建议
@@ -48,7 +48,7 @@
 2. **Dynamic import 非首屏组件**：时间轴预览、知识导览可用 `next/dynamic`
 3. **关系查询优化**：改为 Supabase `.in()` 过滤，减少 JS 端计算
 4. **SearchResults 可 lazy**：搜索组件仅在搜索页需要
-5. **搜索 API 缓存与排序**：添加短 TTL 缓存，按精确命中、名称命中、地点/分类命中加权排序
+5. **搜索 API 缓存与排序**：已添加短 TTL 缓存和字段权重排序；后续增长到更大数据量时迁移到 Supabase / Postgres 全文索引
 
 ## Client Components
 
@@ -99,7 +99,7 @@ Reveal           — framer-motion
 ### 建议
 
 1. **跨请求缓存**：eras/styles 数据不常变，可用 `unstable_cache` 或全局缓存
-2. **API Route 缓存**：搜索 API 可添加短 TTL 缓存
+2. **API Route 缓存**：搜索 API 已添加 60s 内存缓存与 `s-maxage=60, stale-while-revalidate=300`
 3. **service worker**：不必要（已用 ISR）
 
 ## 优化优先级
@@ -110,7 +110,7 @@ Reveal           — framer-motion
 ### 中（短期）
 - 首页拆分为子组件（提升可维护性）
 - 关系查询优化（预防数据增长后性能下降）
-- 搜索 API 短缓存与相关性排序
+- 搜索 API 数据库全文索引（短缓存与相关性排序已完成第一步）
 - 首屏图片 lazy loading
 
 ### 低（长期）
