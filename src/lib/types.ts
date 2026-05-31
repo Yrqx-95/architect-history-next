@@ -244,7 +244,11 @@ export function displayText(
 }
 
 export function isProbablySimplifiedChinese(text: string): boolean {
-  return /建筑|现代|主义|文艺|复兴|单体|航站|空间|体验|垃圾|发电|滑雪|享乐|可持续|向阳|巨树|悬挑|阳台|从中心|登机口|安检|钢|混凝土|巨型柱|办公建筑|文化建筑|交通建筑|商业建筑|生态建筑|当代建筑|参数化设计|雕塑建筑|波尔图|葡萄牙|华盛顿|美国|广州|首尔|布拉格|捷克|韩国|法国|印度|西班牙|英国|[现义艺复兴单间线动发电场乐阳树规则这与为门体从达过机飞极效钢壳柱厅检径办务态雕塑尔华顿韩广]/.test(text)
+  return /建筑|现代|主义|文艺|复兴|单体|航站|空间|体验|垃圾|发电|滑雪|享乐|可持续|向阳|巨树|悬挑|阳台|从中心|登机口|安检|钢|混凝土|巨型柱|办公建筑|文化建筑|交通建筑|商业建筑|生态建筑|当代建筑|参数化设计|雕塑建筑|波尔图|葡萄牙|华盛顿|美国|广州|首尔|布拉格|捷克|韩国|法国|印度|西班牙|英国|哥本哈根|丹麦|圣路易斯|巴西利亚|巴西|罗马|梵蒂冈|芝加哥|直岛|[现义艺复兴单间线动发电场乐阳树规则这与为门体从达过机飞极效钢壳柱厅检径办务态雕塑尔华顿韩广岛]/.test(text)
+}
+
+export function hasCjk(text?: string | null): boolean {
+  return Boolean(text && /[\u3400-\u9fff]/.test(text))
 }
 
 export function lifeSpan(birth: number | null, death: number | null): string {
@@ -286,5 +290,6 @@ export function formatCountryName(countryCode?: string | null, fallback?: string
     }
   }
   if (lang === 'ja' && fallback && isProbablySimplifiedChinese(fallback)) return ''
+  if (lang === 'en' && hasCjk(fallback)) return ''
   return fallback || ''
 }

@@ -1,6 +1,6 @@
 # STATUS.md — 项目当前状态
 
-> 最后更新：2026-05-30
+> 最后更新：2026-05-31
 > 基于代码实际分析，非模板填充
 
 ## 总体进度
@@ -39,6 +39,7 @@
 - `/api/image-proxy` 图片代理（Edge Runtime）
 - `/api/search` 搜索 API（建筑 / 建筑师 / 城市 / 国家 / 年份 / 类型 / 风格 / 时代）
 - loading / error / not-found 状态页
+- `/[lang]/map` 地域档案 / 地图入口（按国家、城市与代表作品进入档案）
 
 ### 组件（32 个）
 - 图片系统：SafeImage, EditorialImage, ImageGallery, ImageBreak, ImageAttribution
@@ -82,21 +83,18 @@
 
 ### 轻微（代码质量）
 
-3. **error.tsx 和 not-found.tsx 无法获取 lang 参数**，错误信息始终是英文。
-    - 位置：`src/app/[lang]/error.tsx`, `src/app/[lang]/not-found.tsx`
-
-4. **getBuildingsWithCovers() 在首页被重复调用**，与 getFeaturedBuildingsWithCovers() 产生冗余数据库查询。
+3. **getBuildingsWithCovers() 在首页被重复调用**，与 getFeaturedBuildingsWithCovers() 产生冗余数据库查询。
     - 位置：`src/app/[lang]/page.tsx`
 
-5. **ContinueExploring 组件有死字段**：`ExploreGroup.items[].image` 在类型中定义但从未渲染。
+4. **ContinueExploring 组件有死字段**：`ExploreGroup.items[].image` 在类型中定义但从未渲染。
 
-6. **ImageGallery 体积过大**：250 行，混合图片展示、缩略图、灯箱、键盘与触摸导航。
+5. **ImageGallery 体积过大**：250 行，混合图片展示、缩略图、灯箱、键盘与触摸导航。
 
 ## 未完成模块
 
 | 模块 | 状态 | 说明 |
 |------|------|------|
-| `/[lang]/map` | ⏳ 未实现 | 空目录已删除，地图功能仍在长期规划 |
+| `/[lang]/map` | ✅ 第一版 | 地域档案入口，按国家密度、地域路径和城市线索进入档案 |
 | Proxy (proxy.ts) | ✅ 已实现 | 根路径与无语言前缀路径重定向到 `/zh` |
 | curated_images 表 | ❌ 迁移已写但未执行 | v3 迁移 SQL 存在但表未在 Supabase 创建 |
 | biography 深度内容 | ⚠️ 部分 | 建筑师 biography 字段存在但很多条目内容少于 20 字 |
@@ -116,7 +114,7 @@
 | Registry 覆盖建筑 | 632 |
 | 本地缓存图片 | 218 |
 | 本地覆盖建筑 | 198 |
-| 静态生成页面 | 3,177 |
+| 静态生成页面 | 3,180 |
 | 支持语言 | 3 (zh/en/ja) |
 | 精品建筑师长文 | 55（12 批，含 BIG / SANAA 等组合型建筑实践） |
 
@@ -374,6 +372,16 @@
 - ✅ 部署验证：提交 `b1416f0` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-1hlfe6tez-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/ja`、`/ja/browse`、`/ja/building/beijing-daxing-airport` 均返回 200；可见 HTML 未检出中文简繁控件、中文深度分析或中文地点 fallback
 
+### 第二十八阶段：地域档案 / 地图入口第一版
+- ✅ 新增 `/[lang]/map`：不使用空地图 SDK 占位，先以国家密度、可直接进入的地域路径和城市线索组成可用的地域档案入口
+- ✅ 桌面导航、移动抽屉和页脚同步加入 `地图 / Map / 地図` 入口，避免地图功能藏在未完成页面里
+- ✅ 国家索引与国家详情页使用 `Intl.DisplayNames` 本地化国家/地区名，`/ja/browse/country/us` 显示 `アメリカ合衆国`，`/en/browse/country/jp` 显示 `Japan`
+- ✅ 非中文页面收紧中文 fallback：英语/日语地图页不显示中文城市或中文国家名；没有可靠国家代码且字段明显是中文时隐藏该地点线索
+- ✅ 新增 `[lang]/[...missing]` 缺页兜底，`/ja/*` 未知路径显示日语 404，不再落到 Next 默认英文 404
+- ✅ 本轮参考方向：CCA / MoMA / Letterform Archive 等 archive 入口采用可筛选、可进入的地理/分类路径，第一版优先真实可点内容而非空交互
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
+- ✅ 本地响应验证：`/zh/map`、`/ja/map`、`/en/map`、`/ja/browse/country/us`、`/en/browse/country/jp`、`/zh/browse/country/us`、`/ja/not-a-real-page` 均通过可见文本检查
+
 ### 当前 docs/ 结构（10 个文档）
 ```
 docs/
@@ -418,4 +426,4 @@ docs/
 ### 长期
 15. 2418 Unsplash 图片替换为 Wikimedia 可信图片
 16. 对象存储迁移
-17. 地图功能实现
+17. 规划第二版地理可视化：仅在有足够经纬度与移动端性能预算时引入真实地图层

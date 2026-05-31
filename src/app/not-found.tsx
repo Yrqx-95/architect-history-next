@@ -38,7 +38,7 @@ export default function NotFound() {
   const text = labels[lang]
 
   return (
-    <div className="mx-auto max-w-2xl py-20 text-center">
+    <div className="mx-auto max-w-2xl px-4 py-20 text-center">
       <p className="eyebrow mb-4">404</p>
       <h1 className="heading-1 mb-4">{text.title}</h1>
       <p className="body mx-auto max-w-xl text-secondary">{text.body}</p>

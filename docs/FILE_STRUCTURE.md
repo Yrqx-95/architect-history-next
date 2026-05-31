@@ -18,6 +18,8 @@ architect-history-next/
 │   │   │   │   ├── style/[slug]/
 │   │   │   │   └── type/[slug]/
 │   │   │   ├── search/
+│   │   │   ├── map/              # 地域档案 / 地图入口
+│   │   │   ├── [...missing]/      # 多语言缺页兜底
 │   │   │   └── timeline/
 │   │   ├── api/          # API Routes
 │   │   │   ├── image-proxy/  # Edge 图片代理
@@ -145,7 +147,7 @@ components/
 | 位置 | 内容 | 建议 |
 |------|------|------|
 | `ContinueExploring.tsx` | `ExploreGroup.items[].image` 字段 | 删除或实现 |
-| `/[lang]/map` | 路由未实现 | 空目录已删除，后续如需要再实现 |
+| `/[lang]/map` | 地域档案第一版已实现 | 后续可在经纬度覆盖充足后升级为真实地图层 |
 | `db/image-cache-report.json` | 过时快照 | 加入 .gitignore |
 
 ### 命名问题

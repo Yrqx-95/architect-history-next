@@ -104,8 +104,8 @@ const dict: Record<string, Record<Lang, string>> = {
   present:     { zh: '至今',       en: 'Present',     ja: '現在' },
 
   // --- 地图 ---
-  mapTitle:    { zh: '地图探索',   en: 'Map Explorer', ja: '地図探索' },
-  mapSub:      { zh: '在世界地图上探索建筑分布', en: 'Explore building distribution on world map', ja: '世界地図で建築の分布を探る' },
+  mapTitle:    { zh: '建筑地图',   en: 'Architecture Map', ja: '建築地図' },
+  mapSub:      { zh: '从国家、城市和代表作品进入建筑时间档案', en: 'Enter Archistory through countries, cities, and representative works', ja: '国、都市、代表作から建築時間アーカイブへ入る' },
 
   // --- 通用 ---
   dark:        { zh: '暗色',       en: 'Dark',        ja: 'ダーク' },

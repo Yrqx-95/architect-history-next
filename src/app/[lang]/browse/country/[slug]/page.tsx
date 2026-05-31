@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
+import { displayName, formatCountryName } from '@/lib/types'
 import BrowseListing from '@/components/BrowseListing'
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  return { title: `Buildings in ${slug.toUpperCase()}` }
+  const { lang, slug } = await params
+  return { title: formatCountryName(slug, slug.toUpperCase(), lang) || `Buildings in ${slug.toUpperCase()}` }
 }
 
 export async function generateStaticParams() {
@@ -24,8 +25,9 @@ export default async function CountryPage({ params }: { params: Promise<{ lang: 
   const fn = (c: string) => c.toLowerCase() === slug
   const filteredArchs = architects.filter(a => a.nationalities?.some(fn))
   const filteredBldgs = buildings.filter(b => b.country_code ? fn(b.country_code.toLowerCase()) : false)
-  const archMap = new Map(architects.map(a => [a.slug, a.name_zh || a.name_en]))
-  const countryName = filteredBldgs.find(b => b.country)?.country || slug.toUpperCase()
+  const archMap = new Map(architects.map(a => [a.slug, displayName(a, lang)]))
+  const fallbackName = filteredBldgs.find(b => b.country)?.country || slug.toUpperCase()
+  const countryName = formatCountryName(slug, fallbackName, lang) || fallbackName
 
   return <BrowseListing lang={lang} displayName={countryName} architects={filteredArchs} buildings={filteredBldgs} architectMap={archMap} />
 }

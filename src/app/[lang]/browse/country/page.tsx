@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
+import { formatCountryName } from '@/lib/types'
 import PageShell from '@/components/PageShell'
 import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
@@ -33,11 +34,11 @@ export default async function CountriesPage({ params }: { params: Promise<{ lang
     if (!code) return
     const current = countries.get(code) || {
       code,
-      name: building.country || code.toUpperCase(),
+      name: formatCountryName(code, building.country, lang) || building.country || code.toUpperCase(),
       architectCount: 0,
       buildingCount: 0,
     }
-    current.name = current.name || building.country || code.toUpperCase()
+    current.name = formatCountryName(code, building.country, lang) || current.name || building.country || code.toUpperCase()
     current.buildingCount += 1
     countries.set(code, current)
   })

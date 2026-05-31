@@ -1,7 +1,5 @@
-'use client'
-
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import type { Metadata } from 'next'
 
 const labels = {
   zh: {
@@ -27,18 +25,23 @@ const labels = {
   },
 }
 
-function currentLang(pathname: string) {
-  const lang = pathname.split('/')[1]
+function normalizeLang(lang: string) {
   return lang === 'en' || lang === 'ja' || lang === 'zh' ? lang : 'zh'
 }
 
-export default function NotFound() {
-  const lang = currentLang(usePathname())
+export const metadata: Metadata = {
+  title: '404',
+  robots: { index: false, follow: false },
+}
+
+export default async function MissingPage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang: rawLang } = await params
+  const lang = normalizeLang(rawLang)
   const prefix = `/${lang}`
   const text = labels[lang]
 
   return (
-    <div className="mx-auto max-w-2xl py-20 text-center">
+    <div className="mx-auto max-w-2xl px-4 py-20 text-center">
       <p className="eyebrow mb-4">404</p>
       <h1 className="heading-1 mb-4">{text.title}</h1>
       <p className="body mx-auto max-w-xl text-secondary">{text.body}</p>
