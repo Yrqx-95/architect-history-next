@@ -434,7 +434,8 @@
 - ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Building Reading Paths` 自动关系来源；`PRODUCT_STRATEGY.md` 更新关系模型进展
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
 - ✅ 本地页面验证：`/zh/building/8-house`、`/zh/building/apple-park` 可见 `知识网络 / 阅读路径`；`/ja/building/8-house` 可见 `知識ネットワーク / 読み進める経路`
-- ⏳ 待继续部署与正式域名验证
+- ✅ 部署验证：提交 `bac87b8` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-5knyh4i3n-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/building/8-house`、`/zh/building/apple-park` 可见 `知识网络 / 阅读路径`；`/ja/building/8-house` 可见 `知識ネットワーク / 読み進める経路`
 
 ### 当前 docs/ 结构（11 个文档）
 ```
