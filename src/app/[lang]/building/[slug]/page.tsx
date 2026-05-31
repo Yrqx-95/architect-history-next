@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getBuildings } from '@/lib/data'
 import { getBuildingRelations } from '@/lib/relations'
-import { displayName, displayText, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
+import { displayName, displayText, formatCountryName, formatDisplayLocation, isProbablySimplifiedChinese, type Architect, type Building, type Era, type Style } from '@/lib/types'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import ImageGallery from '@/components/ImageGallery'
@@ -18,6 +18,110 @@ import BuildingCard from '@/components/BuildingCard'
 
 export const revalidate = 86400
 export const dynamicParams = true
+
+function BuildingKnowledgeNetwork({
+  lang,
+  prefix,
+  architect,
+  styles,
+  era,
+  building,
+  related,
+}: {
+  lang: string
+  prefix: string
+  architect: Architect | null
+  styles: Style[]
+  era: Era | null
+  building: Building
+  related: Building[]
+}) {
+  const copy = {
+    eyebrow: { zh: '知识网络', en: 'Knowledge network', ja: '知識ネットワーク' },
+    title: { zh: '阅读路径', en: 'Reading paths', ja: '読み進める経路' },
+    intro: {
+      zh: '从作者、时代、风格、地点和相近作品继续理解这座建筑的位置。',
+      en: 'Continue through authorship, period, style, place, and nearby works.',
+      ja: '作者、時代、様式、場所、近い作品から、この建築の位置を読み進める。',
+    },
+    architect: { zh: '作者', en: 'Architect', ja: '設計者' },
+    period: { zh: '时代', en: 'Period', ja: '時代' },
+    style: { zh: '风格', en: 'Style', ja: '様式' },
+    region: { zh: '地域', en: 'Region', ja: '地域' },
+    similar: { zh: '相近作品', en: 'Related work', ja: '近い作品' },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+  const countryCode = building.country_code?.toLowerCase()
+  const countryName = countryCode && building.country
+    ? formatCountryName(countryCode, building.country, lang) || building.country
+    : ''
+  const cards = [
+    architect && {
+      key: `architect-${architect.slug}`,
+      href: `${prefix}/architect/${architect.slug}`,
+      label: l('architect'),
+      title: displayName(architect, lang),
+      meta: architect.birth_year ? `${architect.birth_year}–${architect.death_year || (lang === 'en' ? 'present' : lang === 'ja' ? '現在' : '至今')}` : '',
+    },
+    era && {
+      key: `era-${era.slug}`,
+      href: `${prefix}/browse/era/${era.slug}`,
+      label: l('period'),
+      title: displayName(era, lang),
+      meta: era.year_start ? `${era.year_start}${era.year_end ? `–${era.year_end}` : ''}` : '',
+    },
+    ...styles.slice(0, 2).map(style => ({
+      key: `style-${style.slug}`,
+      href: `${prefix}/browse/style/${style.slug}`,
+      label: l('style'),
+      title: displayName(style, lang),
+      meta: style.era_slug || '',
+    })),
+    countryCode && countryName && {
+      key: `country-${countryCode}`,
+      href: `${prefix}/browse/country/${countryCode}`,
+      label: l('region'),
+      title: countryName,
+      meta: building.city || '',
+    },
+    ...related.slice(0, 2).map(item => ({
+      key: `building-${item.slug}`,
+      href: `${prefix}/building/${item.slug}`,
+      label: l('similar'),
+      title: displayName(item, lang),
+      meta: [item.year_start, formatDisplayLocation({ city: item.city, country: item.country, countryCode: item.country_code, lang })].filter(Boolean).join(' · '),
+    })),
+  ].filter(Boolean) as Array<{ key: string; href: string; label: string; title: string; meta: string }>
+
+  if (cards.length === 0) return null
+
+  return (
+    <Reveal>
+      <section className="section-sm border-t border-subtle pt-8 sm:pt-10">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow mb-2">{l('eyebrow')}</p>
+            <h2 className="heading-3">{l('title')}</h2>
+          </div>
+          <p className="caption max-w-lg sm:text-right">{l('intro')}</p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map(card => (
+            <Link
+              key={card.key}
+              href={card.href}
+              className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+            >
+              <p className="label mb-4">{card.label}</p>
+              <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">{card.title}</h3>
+              {card.meta && <p className="caption mt-2">{card.meta}</p>}
+            </Link>
+          ))}
+        </div>
+      </section>
+    </Reveal>
+  )
+}
 
 export async function generateStaticParams() {
   const buildings = await getBuildings()
@@ -134,6 +238,16 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
           </div>
         </div>
       </div>
+
+      <BuildingKnowledgeNetwork
+        lang={lang}
+        prefix={prefix}
+        architect={architect}
+        styles={buildingStyles}
+        era={era}
+        building={building}
+        related={related}
+      />
 
       {/* Related buildings */}
       {related.length > 0 && (

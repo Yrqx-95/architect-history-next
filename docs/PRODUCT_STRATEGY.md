@@ -70,7 +70,7 @@ Architects × Buildings × Styles × Movements × Regions × Timeline
 - `reacted_against`
 - `evolved_into`
 
-当前进展：已建立仓库优先的 `Architect Relationship Overlay` 第一版，并先在建筑师详情页显示人物关系。下一步应把同一关系模型扩展到建筑、风格、时代和国家地区。
+当前进展：已建立仓库优先的 `Architect Relationship Overlay` 第一版，并先在建筑师详情页显示人物关系。建筑详情页已新增基于现有数据实时生成的 `Reading paths`，把作者、时代、风格、地域和相近作品组织成下一步阅读入口。下一步应把同一关系模型扩展到风格详情页、时代详情页和专门的 `/graph` 视图。
 
 ### 3. 建筑师页升级
 

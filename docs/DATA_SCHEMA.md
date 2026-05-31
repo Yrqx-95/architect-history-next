@@ -115,6 +115,20 @@ entity_relations (
 )
 ```
 
+### Building Reading Paths（建筑页阅读路径）
+
+建筑详情页第一阶段不新增 overlay，而是从现有 `BuildingRelations` 实时生成知识网络入口：
+
+| 关系 | 来源字段 | 前台入口 |
+|------|----------|----------|
+| 建筑 → 建筑师 | `building.architect_slug` | `/[lang]/architect/[slug]` |
+| 建筑 → 时代 | `building.era_slug` 或 relations 匹配结果 | `/[lang]/browse/era/[slug]` |
+| 建筑 → 风格 | `building.style_slugs` | `/[lang]/browse/style/[slug]` |
+| 建筑 → 地域 | `building.country_code` | `/[lang]/browse/country/[code]` |
+| 建筑 → 相近作品 | 同建筑师 / 同风格 / 同类型的 `relatedBuildings` | `/[lang]/building/[slug]` |
+
+该层解决的问题是：作品页不再只展示 metadata 和图片，而是提供“下一步读什么”的结构化路径。后续若迁移到 `entity_relations`，这些自动关系可作为 inferred relation，人工策展关系可作为 curated relation，并通过 `confidence` 和 `source_*` 区分。
+
 ### Chinese Script Overlay（中文简繁显示层）
 
 繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：

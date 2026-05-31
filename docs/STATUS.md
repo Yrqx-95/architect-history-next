@@ -423,7 +423,18 @@
 - ✅ 有精品关系 overlay 时隐藏旧版 `关联建筑师` 区块，避免与新关系模块重复且产生低信息密度卡片
 - ✅ 建筑师详情页 `全部作品` 对缺图作品降级为紧凑文字索引，不再渲染大面积图片占位块
 - ✅ 档案页 `建筑作品` 区去掉 sticky 右侧索引，类型与国家索引改为内容流下方双栏，减少桌面中段左右错位和空白
-- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）；待继续正式部署验证
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
+- ✅ 部署验证：提交 `bb9722f` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-4likvjhec-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/architect/le-corbusier` 已显示新读者文案与 `文字索引`，内部说明文案已移除
+
+### 第三十三阶段：建筑页阅读路径第一版
+- ✅ 建筑详情页新增 `知识网络 / 阅读路径` 面板，自动组织作者、时代、风格、地域和相近作品入口
+- ✅ 阅读路径直接复用现有 `BuildingRelations` 数据，不新增数据库字段，避免先做重 schema 再验证体验
+- ✅ 建筑页从“metadata + 图片 + 相关建筑”推进到“可继续阅读的知识节点”，为后续风格页、时代页和 `/graph` 铺路
+- ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Building Reading Paths` 自动关系来源；`PRODUCT_STRATEGY.md` 更新关系模型进展
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
+- ✅ 本地页面验证：`/zh/building/8-house`、`/zh/building/apple-park` 可见 `知识网络 / 阅读路径`；`/ja/building/8-house` 可见 `知識ネットワーク / 読み進める経路`
+- ⏳ 待继续部署与正式域名验证
 
 ### 当前 docs/ 结构（11 个文档）
 ```
