@@ -129,6 +129,17 @@ entity_relations (
 
 该层解决的问题是：作品页不再只展示 metadata 和图片，而是提供“下一步读什么”的结构化路径。后续若迁移到 `entity_relations`，这些自动关系可作为 inferred relation，人工策展关系可作为 curated relation，并通过 `confidence` 和 `source_*` 区分。
 
+### Style / Era Reading Paths（风格与时代阅读路径）
+
+风格详情页与时代详情页同样先使用 `StyleRelations` / `EraRelations` 自动生成阅读路径：
+
+| 页面 | 自动关系 | 前台入口 |
+|------|----------|----------|
+| 风格页 | 上级风格、所属时代、子风格、代表人物、代表作品 | style / era / architect / building |
+| 时代页 | 上一时期、下一时期、关键风格、代表人物、代表作品 | era / style / architect / building |
+
+该层用于把分类页从“列表集合”推进为“知识节点”。未来迁移到 `entity_relations` 后，父子风格、时代演进与代表实体可统一为可查询关系。
+
 ### Chinese Script Overlay（中文简繁显示层）
 
 繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：

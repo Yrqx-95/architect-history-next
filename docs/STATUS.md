@@ -437,6 +437,15 @@
 - ✅ 部署验证：提交 `bac87b8` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-5knyh4i3n-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/building/8-house`、`/zh/building/apple-park` 可见 `知识网络 / 阅读路径`；`/ja/building/8-house` 可见 `知識ネットワーク / 読み進める経路`
 
+### 第三十四阶段：风格页与时代页阅读路径第一版
+- ✅ 风格详情页新增 `知识网络 / 阅读路径` 面板，自动组织上级风格、所属时代、子风格、代表人物和代表作品入口
+- ✅ 时代详情页新增 `知识网络 / 阅读路径` 面板，自动组织上一时期、下一时期、关键风格、代表人物和代表作品入口
+- ✅ 风格/时代页从“统计 + 列表”推进为可继续探索的知识节点，减少分类页面的孤立感和空白感
+- ✅ 文档同步：`DATA_SCHEMA.md` 增加 `Style / Era Reading Paths`；`PRODUCT_STRATEGY.md` 更新关系模型当前进展
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
+- ✅ 本地页面验证：`/zh/browse/style/modernism`、`/zh/browse/style/renaissance` 可见 `知识网络 / 阅读路径`；`/zh/browse/era/classical-era`、`/zh/browse/era/renaissance` 可见上一时期 / 下一时期 / 关键风格 / 代表人物 / 代表作品
+- ⏳ 待继续部署与正式域名验证
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
