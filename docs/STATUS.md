@@ -403,7 +403,8 @@
 - ✅ `/[lang]/browse` 建筑师区取消右侧高空白“按时期”面板，改为下方建筑师谱系入口，减少左右错位和空白
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
 - ✅ 本地浏览器验证：`/zh/timeline`、`/zh/map`、`/zh/browse` 桌面和 390px 手机宽均无横向溢出；时间页可见 `叙事时间轴` 与 `年代索引`
-- ☐ 部署到 Vercel 并验证正式域名
+- ✅ 部署验证：提交 `d4bd9d8` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-yt41h4o66-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/timeline` 可见 `叙事时间轴` 和 `年代索引`；`/zh/map` 可见 `国家与地区`；`/zh/browse` 可见 `建筑师谱系`
 
 ### 当前 docs/ 结构（11 个文档）
 ```
