@@ -381,6 +381,8 @@
 - ✅ 本轮参考方向：CCA / MoMA / Letterform Archive 等 archive 入口采用可筛选、可进入的地理/分类路径，第一版优先真实可点内容而非空交互
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
 - ✅ 本地响应验证：`/zh/map`、`/ja/map`、`/en/map`、`/ja/browse/country/us`、`/en/browse/country/jp`、`/zh/browse/country/us`、`/ja/not-a-real-page` 均通过可见文本检查
+- ✅ 部署验证：提交 `7882e57` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-aws585nr1-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/map`、`/ja/map`、`/en/map`、`/ja/browse/country/us`、`/ja/not-a-real-page` 均返回 200，并通过混语/缺页可见文本检查
 
 ### 当前 docs/ 结构（10 个文档）
 ```
