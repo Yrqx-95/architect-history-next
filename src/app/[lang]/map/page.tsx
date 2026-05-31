@@ -177,14 +177,14 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
             </Link>
           </div>
 
-          <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
+          <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
             {countries.slice(0, 12).map(country => {
               const cover = localCover(country.featured)
               return (
                 <Link
                   key={country.code}
                   href={`${prefix}/browse/country/${country.code}`}
-                  className="group mb-4 inline-block w-full break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+                  className="group w-full rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
                 >
                   <div className="mb-5 flex items-start justify-between gap-4">
                     <div>
@@ -203,7 +203,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                     />
                   </div>
                   {cover && (
-                    <div className="relative mt-5 aspect-[16/9] overflow-hidden rounded-sm bg-surface-muted">
+                    <div className="relative mt-5 h-32 overflow-hidden rounded-sm bg-surface-muted sm:h-36">
                       <SafeImage
                         src={cover.cover_url || ''}
                         alt={displayName(cover, lang)}
@@ -213,11 +213,9 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                       />
                     </div>
                   )}
-                  {!cover && (
-                    <p className="caption mt-5 border-t border-subtle pt-4">
-                      {country.cities.size} {c(lang, 'cities')} · {c(lang, 'viewCountry')}
-                    </p>
-                  )}
+                  <p className={`${cover ? 'mt-4' : 'mt-5'} caption border-t border-subtle pt-4`}>
+                    {country.cities.size} {c(lang, 'cities')} · {c(lang, 'viewCountry')}
+                  </p>
                 </Link>
               )
             })}

@@ -459,6 +459,15 @@
 - ✅ 部署验证：提交 `fd2fba9` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-qqnb0d5u4-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/paths`、`/zh/paths/corbusier-to-japanese-modernism`、`/ja/paths/corbusier-to-japanese-modernism`、`/zh/browse` 均可见学习路径入口与内容
 
+### 第三十六阶段：知识导航页密度与空白修复
+- ✅ 时间轴年代索引从瀑布列改为稳定 responsive grid，减少卡片高度差造成的错位和不可预测空白
+- ✅ 地图页国家/地区入口从展示型大图压缩为知识导航缩略图，移动端不再被单个国家卡片过度占据
+- ✅ 分类详情页把缺少可信封面的建筑拆入 `文字索引`，避免用大面积浅色图片占位制造“这里应该有图但没有”的失望感
+- ✅ `BrowseListing` 容器扩展到 `80rem`，让国家、风格、时代等列表页在桌面端更像档案页而不是窄栏清单
+- ✅ 文档同步：`UI_RULES.md` 增加知识导航页 grid、侧栏高度、缺图文字索引与地图缩略图规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 本地页面验证：`/zh/map` 国家卡片高度从约 `526px` 降至约 `327px`；`/zh/browse/country/gb` 显示 `文字索引` 且无大图占位；`/zh/timeline` 年代索引继续可访问
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
