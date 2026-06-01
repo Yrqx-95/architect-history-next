@@ -570,6 +570,8 @@
 - ✅ 文档同步：`UI_RULES.md` 增加国家总页与分类详情页索引规则
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 本地页面验证：`/zh/browse/country`、`/zh/browse/country/jp`、`/zh/browse/style/modernism` 可见新版结构；390px 与桌面宽度检查无横向溢出
+- ✅ 部署验证：提交 `a53b6d5` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-5bgp4f055-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/browse/country` 与 `/zh/browse/country/jp` 均返回新版地域索引与分类详情结构
 
 ### 当前 docs/ 结构（11 个文档）
 ```
