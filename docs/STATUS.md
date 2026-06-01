@@ -559,6 +559,8 @@
 - ✅ 文档同步：`UI_RULES.md` 增加索引型卡片必须使用 masonry/文字索引分层的规则
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 本地页面验证：`/zh/map`、`/zh/timeline`、`/zh/browse` 可见新版索引文案；390px 与桌面宽度检查无横向溢出
+- ✅ 部署验证：提交 `98540e5` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-bpzrq0xsd-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/map`、`/zh/timeline`、`/zh/browse` 均返回新版索引文案
 
 ### 当前 docs/ 结构（11 个文档）
 ```
