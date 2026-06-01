@@ -562,6 +562,15 @@
 - ✅ 部署验证：提交 `98540e5` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-bpzrq0xsd-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/map`、`/zh/timeline`、`/zh/browse` 均返回新版索引文案
 
+### 第四十六阶段：地域总页与分类详情页索引统一
+- ✅ `/[lang]/browse/country` 从旧纯文本列表升级为地域 archive index：总览指标、密度条、可信本地封面矩阵、城市文字线索和明确入口
+- ✅ 国家/地区卡片使用 masonry columns，避免有图和无图国家被等高网格拉出大面积空白
+- ✅ `BrowseListing` 的统计卡放回正常 section 节奏，减少 header 下方断层
+- ✅ 分类详情页中的建筑师列表与有图作品列表改为 masonry columns，减少长标题和图片卡高度差造成的空洞
+- ✅ 文档同步：`UI_RULES.md` 增加国家总页与分类详情页索引规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 本地页面验证：`/zh/browse/country`、`/zh/browse/country/jp`、`/zh/browse/style/modernism` 可见新版结构；390px 与桌面宽度检查无横向溢出
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
