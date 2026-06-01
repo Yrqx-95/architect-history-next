@@ -530,6 +530,15 @@
 - ✅ 部署验证：提交 `091efa7` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-67t5v3fqg-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/building/villa-savoye` 可见历史背景、时代页入口和时间轴入口
 
+### 第四十三阶段：建筑师关系图谱入口
+- ✅ 新增 `/[lang]/graph`，作为第一版可读关系图谱入口
+- ✅ 图谱页展示精选谱系路径：柯布西耶与日本现代主义、有机现代主义分支、安藤忠雄的现代主义远源
+- ✅ 图谱页展示建筑师到建筑师的关系索引，包含关系类型、方向、说明和来源标题
+- ✅ 桌面导航、移动抽屉与页脚新增 `图谱 / Graph / 関係図` 入口
+- ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Architect Relationship Graph` overlay，`UI_RULES.md` 规定图谱页第一版必须优先可读性
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 本地页面验证：`/zh/graph`、`/ja/graph`、`/en/graph` 均可见知识图谱、谱系路径与关系索引；首页导航可见 `/zh/graph`
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

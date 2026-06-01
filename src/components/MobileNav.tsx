@@ -88,6 +88,8 @@ export default function MobileNav({ lang }: { lang: string }) {
                     className="flex min-h-11 items-center rounded-lg px-3 text-sm text-secondary hover:bg-surface-muted hover:text-primary">{t(lang, 'browse')}</Link>
                   <Link href={prefix + '/paths'} onClick={() => setOpen(false)}
                     className="flex min-h-11 items-center rounded-lg px-3 text-sm text-secondary hover:bg-surface-muted hover:text-primary">{t(lang, 'paths')}</Link>
+                  <Link href={prefix + '/graph'} onClick={() => setOpen(false)}
+                    className="flex min-h-11 items-center rounded-lg px-3 text-sm text-secondary hover:bg-surface-muted hover:text-primary">{t(lang, 'graph')}</Link>
                   <Link href={prefix + '/map'} onClick={() => setOpen(false)}
                     className="flex min-h-11 items-center rounded-lg px-3 text-sm text-secondary hover:bg-surface-muted hover:text-primary">{t(lang, 'map')}</Link>
                   <Link href={prefix + '/timeline'} onClick={() => setOpen(false)}

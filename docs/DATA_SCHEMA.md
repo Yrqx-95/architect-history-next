@@ -158,6 +158,20 @@ entity_relations (
 
 时代详情页通过 `findTimelinePeriodForEra(era)` 匹配最接近的时间轴阶段，并显示“历史问题 / 时代转向 / 关键词”。后续若建立 `period_nodes` 表，可将该模型迁移为正式知识图谱节点。
 
+### Architect Relationship Graph（建筑师关系图谱）
+
+`src/lib/architect-knowledge-relations.ts` 是仓库优先的建筑师关系 overlay，用于表达建筑师之间的人工策展关系。第一阶段不写入 Supabase，前台通过 `/[lang]/graph` 与建筑师详情页读取该 overlay。
+
+| 字段 | 类型 | 用途 |
+|------|------|------|
+| `from` / `to` | architect slug | 关系方向 |
+| `kind` | enum | `studio_mentor`、`studied_under`、`influenced_by`、`influenced`、`collaborated_with`、`same_circle` |
+| `label` | localized string | 前台关系标签 |
+| `note` | localized string | 面向读者的关系解释 |
+| `source` | object | 来源标题与可选 URL |
+
+`/[lang]/graph` 不是最终图数据库视图，而是第一版可读关系索引：展示精选谱系路径、关系类型、方向、说明与来源。后续迁移方向是 `entity_relations` 表：`source_entity_type/source_entity_id/target_entity_type/target_entity_id/relation_type/source_url/confidence/curated_by`。
+
 ### Chinese Script Overlay（中文简繁显示层）
 
 繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：

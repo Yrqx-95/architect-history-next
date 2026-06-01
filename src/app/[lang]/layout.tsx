@@ -80,6 +80,7 @@ export default async function LangLayout({ children, params }: {
                 <Link href={prefix + '/'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'home')}</Link>
                 <Link href={prefix + '/browse'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'browse')}</Link>
                 <Link href={prefix + '/paths'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'paths')}</Link>
+                <Link href={prefix + '/graph'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'graph')}</Link>
                 <Link href={prefix + '/map'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'map')}</Link>
                 <Link href={prefix + '/timeline'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
               </div>
@@ -118,6 +119,7 @@ export default async function LangLayout({ children, params }: {
                   <Link href={`${prefix}/browse`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'architects')}</Link>
                   <Link href={`${prefix}/browse`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'buildings')}</Link>
                   <Link href={`${prefix}/paths`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'paths')}</Link>
+                  <Link href={`${prefix}/graph`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'graph')}</Link>
                   <Link href={`${prefix}/map`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'map')}</Link>
                   <Link href={`${prefix}/timeline`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
                 </div>
