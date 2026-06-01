@@ -548,6 +548,8 @@
 - ✅ 文档同步：`DATA_SCHEMA.md` 记录建筑作品研究模板字段来源，`UI_RULES.md` 规定作品页研究顺序和待补充状态规则
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 本地页面验证：`/zh/building/villa-savoye`、`/en/building/villa-savoye`、`/ja/building/villa-savoye` 均可见研究地图、历史背景、结构材料与来源文案
+- ✅ 部署验证：提交 `1fea3eb` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-3kkyt9ox5-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/building/villa-savoye`、`/en/building/villa-savoye`、`/ja/building/villa-savoye` 均可见研究地图、历史背景、结构材料与来源文案
 
 ### 当前 docs/ 结构（11 个文档）
 ```
