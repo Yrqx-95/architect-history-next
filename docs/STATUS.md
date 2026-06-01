@@ -498,6 +498,15 @@
 - ✅ 部署验证：提交 `ccb46b6` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-irxalgrur-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/timeline`、`/ja/timeline`、`/en/timeline` 均可见历史链条与时代问题
 
+### 第四十阶段：时代详情页接入历史问题模型
+- ✅ 新增 `src/lib/timeline-periods.ts`，把时间轴大阶段、核心问题、历史解释、时代转向和关键词抽成可复用数据层
+- ✅ `/[lang]/timeline` 改为引用统一时间轴模型，避免页面内重复维护历史解释
+- ✅ `/[lang]/browse/era/[slug]` 新增 `历史问题 / Historical question / 歴史上の問い` 模块，展示该时代在建筑史中回应的问题、转向和关键词
+- ✅ 时代详情页新增返回时间轴对应阶段的入口，让分类页从列表集合进一步变成知识节点
+- ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Timeline Period Model`，`UI_RULES.md` 要求时代详情页承接时间轴问题模型
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 本地页面验证：`/zh/browse/era/renaissance`、`/ja/browse/era/renaissance`、`/en/browse/era/renaissance` 均可见历史问题、时代转向和时间轴入口；`/zh/timeline` 继续可见历史链条
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

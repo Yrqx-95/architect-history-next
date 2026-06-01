@@ -140,6 +140,22 @@ entity_relations (
 
 该层用于把分类页从“列表集合”推进为“知识节点”。未来迁移到 `entity_relations` 后，父子风格、时代演进与代表实体可统一为可查询关系。
 
+### Timeline Period Model（时间轴时代问题模型）
+
+`src/lib/timeline-periods.ts` 是仓库优先的时间轴解释层，用于把 Supabase 中较细的 `Era` 归并到更适合学习的建筑史阶段。该层不替代数据库事实字段，而是给时间页和时代详情页提供统一的叙事框架：
+
+| 字段 | 类型 | 用途 |
+|------|------|------|
+| `id` | string | 页面锚点与跨页面跳转，例如 `/timeline#period-high-modern` |
+| `label` | localized string | 大阶段名称 |
+| `range` | `[number, number]` | 阶段覆盖年份，用于和 `era.year_start/year_end` 做区间匹配 |
+| `question` | localized string | 该阶段的核心建筑史问题 |
+| `summary` | localized string | 该阶段的历史解释 |
+| `transition` | localized string | 该阶段进入下一阶段的历史转向 |
+| `movements` | localized string[] | 前台关键词与风格词汇 |
+
+时代详情页通过 `findTimelinePeriodForEra(era)` 匹配最接近的时间轴阶段，并显示“历史问题 / 时代转向 / 关键词”。后续若建立 `period_nodes` 表，可将该模型迁移为正式知识图谱节点。
+
 ### Chinese Script Overlay（中文简繁显示层）
 
 繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：

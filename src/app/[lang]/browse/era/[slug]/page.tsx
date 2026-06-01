@@ -5,6 +5,7 @@ import { t } from '@/lib/i18n'
 import { getEras } from '@/lib/data'
 import { getEraRelations } from '@/lib/relations'
 import { displayName, type Architect, type Building, type Era, type Style } from '@/lib/types'
+import { findTimelinePeriodForEra, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
 import PageShell from '@/components/PageShell'
 import Badge from '@/components/Badge'
 import SectionHeading from '@/components/SectionHeading'
@@ -13,6 +14,61 @@ import ArchitectCard from '@/components/ArchitectCard'
 import BuildingCard from '@/components/BuildingCard'
 
 export const dynamicParams = true
+
+function EraHistoricalQuestion({
+  lang,
+  prefix,
+  period,
+}: {
+  lang: string
+  prefix: string
+  period: TimelinePeriod | null
+}) {
+  if (!period) return null
+
+  const copy = {
+    eyebrow: { zh: '历史问题', en: 'Historical question', ja: '歴史上の問い' },
+    transition: { zh: '时代转向', en: 'Historical turn', ja: '時代の転換' },
+    vocabulary: { zh: '关键词', en: 'Vocabulary', ja: 'キーワード' },
+    timeline: { zh: '在时间轴中查看', en: 'View in timeline', ja: '時間軸で見る' },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+
+  return (
+    <Reveal>
+      <section className="section-sm border-t border-subtle pt-8 sm:pt-10">
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,0.72fr)_minmax(18rem,0.38fr)]">
+          <div className="rounded-md border border-subtle bg-surface p-5 shadow-semantic-card sm:p-6">
+            <p className="eyebrow mb-4">{l('eyebrow')}</p>
+            <h2 className="max-w-3xl text-2xl font-medium leading-tight text-primary sm:text-3xl">
+              {localizedTimelineText(period.question, lang)}
+            </h2>
+            <p className="body-sm mt-5 max-w-3xl text-secondary">
+              {localizedTimelineText(period.summary, lang)}
+            </p>
+          </div>
+          <aside className="rounded-md border border-subtle bg-surface-muted p-5 sm:p-6">
+            <p className="label mb-3">{l('transition')}</p>
+            <p className="body-sm text-secondary">{localizedTimelineText(period.transition, lang)}</p>
+            <div className="mt-5 border-t border-subtle pt-5">
+              <p className="label mb-3">{l('vocabulary')}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {localizedTimelineText(period.movements, lang).map(item => (
+                  <span key={item} className="rounded-full bg-surface px-2.5 py-1 text-[0.72rem] text-secondary">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <Link href={`${prefix}/timeline#period-${period.id}`} className="mt-5 inline-flex text-sm font-medium text-accent underline underline-offset-4">
+              {l('timeline')}
+            </Link>
+          </aside>
+        </div>
+      </section>
+    </Reveal>
+  )
+}
 
 function EraReadingPaths({
   lang,
@@ -138,6 +194,7 @@ export default async function EraPage({ params }: { params: Promise<{ lang: stri
   const currentEraIndex = sortedEras.findIndex(item => item.slug === era.slug)
   const previousEra = currentEraIndex > 0 ? sortedEras[currentEraIndex - 1] : null
   const nextEra = currentEraIndex >= 0 && currentEraIndex < sortedEras.length - 1 ? sortedEras[currentEraIndex + 1] : null
+  const timelinePeriod = findTimelinePeriodForEra(era)
 
   return (
     <PageShell>
@@ -159,6 +216,8 @@ export default async function EraPage({ params }: { params: Promise<{ lang: stri
           </div>
         ))}
       </div>
+
+      <EraHistoricalQuestion lang={lang} prefix={prefix} period={timelinePeriod} />
 
       <EraReadingPaths
         lang={lang}
