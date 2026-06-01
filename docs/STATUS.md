@@ -470,6 +470,13 @@
 - ✅ 部署验证：提交 `21df732` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-rn8pd4qmr-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/map`、`/zh/browse/country/gb`、`/zh/timeline` 均返回新版布局内容
 
+### 第三十七阶段：建筑师页知识密度修复
+- ✅ 建筑师详情页 `人物关系` 从大卡片改为紧凑关系表，保留关系类型、方向、目标人物、说明和来源
+- ✅ `代表作` 区域在桌面端改为 `作品年表 + 全部作品` 双栏，减少年表与作品网格之间的大面积空白
+- ✅ 全部作品中的无图作品继续进入文字索引，避免大面积占位图
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 本地页面验证：`/zh/architect/le-corbusier`、`/zh/architect/aalto`、`/ja/architect/le-corbusier` 均返回新版关系与作品区结构
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

@@ -91,26 +91,24 @@ function ArchitectKnowledgeNetwork({
           </div>
           <p className="caption max-w-lg sm:text-right">{l('intro')}</p>
         </div>
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
           {relations.map(relation => (
             <Link
               key={`${relation.from}-${relation.to}-${relation.kind}`}
               href={`${prefix}/architect/${relation.architect.slug}`}
-              className="group flex min-h-[10.5rem] flex-col justify-between rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+              className="group grid gap-3 border-b border-subtle px-4 py-4 transition-colors last:border-b-0 hover:bg-surface-muted sm:grid-cols-[10rem_minmax(0,1fr)_minmax(10rem,0.55fr)] sm:items-center"
             >
               <div>
-                <div className="mb-4 flex items-center justify-between gap-3">
-                  <span className="label">{relationText(relation.label, lang)}</span>
-                  <span className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">
-                    {relation.direction === 'incoming' ? l('from') : l('to')}
-                  </span>
-                </div>
-                <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">
+                <p className="label">{relationText(relation.label, lang)}</p>
+                <p className="caption mt-1">{relation.direction === 'incoming' ? l('from') : l('to')}</p>
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-base font-medium leading-snug text-primary transition-colors group-hover:text-accent">
                   {displayName(relation.architect, lang)}
                 </h3>
-                <p className="body-sm mt-3 text-secondary">{relationText(relation.note, lang)}</p>
+                <p className="body-sm mt-1 line-clamp-2 text-secondary">{relationText(relation.note, lang)}</p>
               </div>
-              <p className="caption mt-5 border-t border-subtle pt-3">{relation.source.title}</p>
+              <p className="caption sm:text-right">{relation.source.title}</p>
             </Link>
           ))}
         </div>
@@ -324,49 +322,55 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
               </div>
             </div>
 
-            {/* Timeline */}
-            <div className="relative mb-12 border-l-2 border-subtle pl-6 sm:pl-8">
-              <div className="space-y-4 sm:space-y-5">
-                {sortedBuildings.slice(0, 15).map(b => (
-                  <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="block relative group">
-                    <div className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-[color:var(--ui-text-soft)] bg-app transition-colors group-hover:border-[color:var(--ui-accent)] sm:-left-[34px]" />
-                    <span className="mr-2 font-mono text-xs text-muted">{b.year_start || '?'}</span>
-                    <span className="text-sm font-medium text-primary transition-colors group-hover:text-accent">{displayName(b, lang)}</span>
-                    {formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }) && (
-                      <span className="ml-2 text-xs text-muted">
-                        {formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang })}
-                      </span>
-                    )}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <p className="eyebrow mb-4">{lang === 'en' ? 'All works' : lang === 'ja' ? '全作品' : '全部作品'}</p>
-            {worksWithImages.length > 0 && (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
-                {worksWithImages.map(b => <BuildingCard key={b.id} building={b} lang={lang} />)}
-              </div>
-            )}
-            {worksWithoutImages.length > 0 && (
-              <div className={worksWithImages.length > 0 ? 'mt-8' : ''}>
-                <p className="caption mb-3">
-                  {lang === 'en' ? 'Text index' : lang === 'ja' ? 'テキスト索引' : '文字索引'}
-                </p>
-                <div className="grid gap-x-6 gap-y-0 border-t border-subtle sm:grid-cols-2 lg:grid-cols-3">
-                  {worksWithoutImages.map(b => (
-                    <Link
-                      key={b.id}
-                      href={`${prefix}/building/${b.slug}`}
-                      className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-b border-subtle py-3 text-sm transition-colors hover:text-accent"
-                    >
-                      <span className="font-medium text-primary">{displayName(b, lang)}</span>
-                      <span className="text-muted">{b.year_start || ''}</span>
-                    </Link>
-                  ))}
+            <div className="grid gap-10 lg:grid-cols-[minmax(16rem,0.52fr)_minmax(0,1fr)] lg:items-start">
+              <div>
+                <p className="eyebrow mb-4">{lang === 'en' ? 'Chronology' : lang === 'ja' ? '年表' : '作品年表'}</p>
+                <div className="relative border-l-2 border-subtle pl-6 sm:pl-8">
+                  <div className="space-y-4 sm:space-y-5">
+                    {sortedBuildings.slice(0, 15).map(b => (
+                      <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="block relative group">
+                        <div className="absolute -left-[26px] top-1 h-3 w-3 rounded-full border-2 border-[color:var(--ui-text-soft)] bg-app transition-colors group-hover:border-[color:var(--ui-accent)] sm:-left-[34px]" />
+                        <span className="mr-2 font-mono text-xs text-muted">{b.year_start || '?'}</span>
+                        <span className="text-sm font-medium text-primary transition-colors group-hover:text-accent">{displayName(b, lang)}</span>
+                        {formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }) && (
+                          <span className="ml-2 text-xs text-muted">
+                            {formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang })}
+                          </span>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
-            )}
+
+              <div>
+                <p className="eyebrow mb-4">{lang === 'en' ? 'All works' : lang === 'ja' ? '全作品' : '全部作品'}</p>
+                {worksWithImages.length > 0 && (
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+                    {worksWithImages.map(b => <BuildingCard key={b.id} building={b} lang={lang} />)}
+                  </div>
+                )}
+                {worksWithoutImages.length > 0 && (
+                  <div className={worksWithImages.length > 0 ? 'mt-8' : ''}>
+                    <p className="caption mb-3">
+                      {lang === 'en' ? 'Text index' : lang === 'ja' ? 'テキスト索引' : '文字索引'}
+                    </p>
+                    <div className="grid gap-x-6 gap-y-0 border-t border-subtle sm:grid-cols-2">
+                      {worksWithoutImages.map(b => (
+                        <Link
+                          key={b.id}
+                          href={`${prefix}/building/${b.slug}`}
+                          className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-b border-subtle py-3 text-sm transition-colors hover:text-accent"
+                        >
+                          <span className="font-medium text-primary">{displayName(b, lang)}</span>
+                          <span className="text-muted">{b.year_start || ''}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </section>
         </Reveal>
       )}
