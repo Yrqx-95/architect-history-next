@@ -2,8 +2,10 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { t } from '@/lib/i18n'
+import { getEras } from '@/lib/data'
 import { getStyleRelations } from '@/lib/relations'
 import { displayName, type Architect, type Building, type Era, type Style } from '@/lib/types'
+import { findTimelinePeriodForEra, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
 import PageShell from '@/components/PageShell'
 import Badge from '@/components/Badge'
 import SectionHeading from '@/components/SectionHeading'
@@ -12,6 +14,87 @@ import ArchitectCard from '@/components/ArchitectCard'
 import BuildingCard from '@/components/BuildingCard'
 
 export const dynamicParams = true
+
+function inferEraFromStyleWorks(buildings: Building[], eras: Era[]): Era | null {
+  const scores = new Map<string, number>()
+  const bySlug = new Map(eras.map(era => [era.slug, era]))
+
+  buildings.forEach(building => {
+    if (building.era_slug && bySlug.has(building.era_slug)) {
+      scores.set(building.era_slug, (scores.get(building.era_slug) || 0) + 3)
+      return
+    }
+
+    if (building.year_start == null) return
+    const era = eras.find(item => {
+      if (item.year_start == null) return false
+      const end = item.year_end ?? item.year_start
+      return building.year_start! >= item.year_start && building.year_start! <= end
+    })
+    if (era) scores.set(era.slug, (scores.get(era.slug) || 0) + 1)
+  })
+
+  const winner = [...scores.entries()].sort((a, b) => b[1] - a[1])[0]?.[0]
+  return winner ? bySlug.get(winner) || null : null
+}
+
+function StylePeriodContext({
+  lang,
+  prefix,
+  era,
+  period,
+}: {
+  lang: string
+  prefix: string
+  era: Era | null
+  period: TimelinePeriod | null
+}) {
+  if (!era || !period) return null
+
+  const copy = {
+    eyebrow: { zh: '时代背景', en: 'Period context', ja: '時代背景' },
+    question: { zh: '这个风格回应的问题', en: 'Question behind this style', ja: 'この様式が応答した問い' },
+    turn: { zh: '历史转向', en: 'Historical turn', ja: '歴史の転換' },
+    eraLink: { zh: '进入时代页', en: 'Open period page', ja: '時代ページへ' },
+    timelineLink: { zh: '查看时间轴', en: 'View timeline', ja: '時間軸を見る' },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+
+  return (
+    <Reveal>
+      <section className="section-sm border-t border-subtle pt-8 sm:pt-10">
+        <div className="rounded-md border border-subtle bg-surface p-5 shadow-semantic-card sm:p-6">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.68fr)_minmax(16rem,0.32fr)]">
+            <div>
+              <p className="eyebrow mb-3">{l('eyebrow')}</p>
+              <p className="metadata mb-4">
+                {displayName(era, lang)} · {era.year_start}{era.year_end ? `-${era.year_end}` : ''}
+              </p>
+              <h2 className="text-2xl font-medium leading-tight text-primary sm:text-3xl">
+                {localizedTimelineText(period.question, lang)}
+              </h2>
+              <p className="body-sm mt-4 max-w-3xl text-secondary">
+                {localizedTimelineText(period.summary, lang)}
+              </p>
+            </div>
+            <aside className="border-t border-subtle pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+              <p className="label mb-3">{l('turn')}</p>
+              <p className="caption">{localizedTimelineText(period.transition, lang)}</p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Link href={`${prefix}/browse/era/${era.slug}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                  {l('eraLink')}
+                </Link>
+                <Link href={`${prefix}/timeline#period-${period.id}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                  {l('timelineLink')}
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </Reveal>
+  )
+}
 
 function StyleReadingPaths({
   lang,
@@ -132,6 +215,9 @@ export default async function StylePage({ params }: { params: Promise<{ lang: st
   const prefix = `/${lang}`
   const archMap = new Map(architects.map(a => [a.slug, a.name_zh || a.name_en]))
   const styleName = displayName(style, lang)
+  const allEras = await getEras()
+  const contextEra = era || inferEraFromStyleWorks(buildings, allEras)
+  const timelinePeriod = contextEra ? findTimelinePeriodForEra(contextEra) : null
 
   return (
     <PageShell>
@@ -153,6 +239,8 @@ export default async function StylePage({ params }: { params: Promise<{ lang: st
           </div>
         ))}
       </div>
+
+      <StylePeriodContext lang={lang} prefix={prefix} era={contextEra} period={timelinePeriod} />
 
       <StyleReadingPaths
         lang={lang}

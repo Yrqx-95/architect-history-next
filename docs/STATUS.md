@@ -509,6 +509,14 @@
 - ✅ 部署验证：提交 `b528cf5` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-n1mffkd76-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/browse/era/renaissance`、`/ja/browse/era/renaissance`、`/en/browse/era/renaissance` 均可见历史问题模块，`/zh/timeline` 继续可见历史链条
 
+### 第四十一阶段：风格详情页接入时代背景
+- ✅ `/[lang]/browse/style/[slug]` 在有关联时代时新增 `时代背景 / Period context / 時代背景` 模块
+- ✅ 当 `Style` 自身没有 `era_slug` 时，前台会从关联作品的 `era_slug` 与 `year_start` 推断主时代，避免风格页继续停留在孤立列表
+- ✅ 风格页显示该风格所在时间轴阶段的核心问题、历史解释和历史转向，并提供时代页与时间轴入口
+- ✅ 文档同步：`DATA_SCHEMA.md` 与 `UI_RULES.md` 记录风格详情页必须连接时代问题模型
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 本地页面验证：`/zh/browse/style/modernism`、`/ja/browse/style/modernism`、`/en/browse/style/modernism` 均可见时代背景、时代页入口和时间轴入口
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

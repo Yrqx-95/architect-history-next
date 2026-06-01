@@ -138,7 +138,7 @@ entity_relations (
 | 风格页 | 上级风格、所属时代、子风格、代表人物、代表作品 | style / era / architect / building |
 | 时代页 | 上一时期、下一时期、关键风格、代表人物、代表作品 | era / style / architect / building |
 
-该层用于把分类页从“列表集合”推进为“知识节点”。未来迁移到 `entity_relations` 后，父子风格、时代演进与代表实体可统一为可查询关系。
+该层用于把分类页从“列表集合”推进为“知识节点”。风格页若有关联 `Era`，会继续通过 `findTimelinePeriodForEra(era)` 接入时间轴时代问题模型，显示风格所处时代的核心问题与历史转向。未来迁移到 `entity_relations` 后，父子风格、时代演进与代表实体可统一为可查询关系。
 
 ### Timeline Period Model（时间轴时代问题模型）
 
