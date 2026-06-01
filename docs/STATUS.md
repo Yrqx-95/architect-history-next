@@ -527,6 +527,8 @@
 - ✅ 文档同步：`DATA_SCHEMA.md` 与 `UI_RULES.md` 记录建筑详情页必须说明历史问题和时代转向
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
 - ✅ 本地页面验证：`/zh/building/villa-savoye`、`/ja/building/villa-savoye`、`/en/building/villa-savoye` 均可见历史背景、时代页入口和时间轴入口
+- ✅ 部署验证：提交 `091efa7` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-67t5v3fqg-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/building/villa-savoye` 可见历史背景、时代页入口和时间轴入口
 
 ### 当前 docs/ 结构（11 个文档）
 ```
