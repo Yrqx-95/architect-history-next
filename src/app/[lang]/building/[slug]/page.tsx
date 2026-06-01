@@ -2,9 +2,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
-import { getBuildings } from '@/lib/data'
+import { getBuildings, getEras } from '@/lib/data'
 import { getBuildingRelations } from '@/lib/relations'
 import { displayName, displayText, formatCountryName, formatDisplayLocation, isProbablySimplifiedChinese, type Architect, type Building, type Era, type Style } from '@/lib/types'
+import { findTimelinePeriodForEra, findTimelinePeriodForRange, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import ImageGallery from '@/components/ImageGallery'
@@ -18,6 +19,80 @@ import BuildingCard from '@/components/BuildingCard'
 
 export const revalidate = 86400
 export const dynamicParams = true
+
+function findEraForBuildingYear(building: Building, eras: Era[]): Era | null {
+  if (building.year_start == null) return null
+  return eras.find(era => {
+    if (era.year_start == null) return false
+    const end = era.year_end ?? era.year_start
+    return building.year_start! >= era.year_start && building.year_start! <= end
+  }) || null
+}
+
+function BuildingPeriodContext({
+  lang,
+  prefix,
+  building,
+  era,
+  period,
+}: {
+  lang: string
+  prefix: string
+  building: Building
+  era: Era | null
+  period: TimelinePeriod | null
+}) {
+  if (!period) return null
+
+  const copy = {
+    eyebrow: { zh: '历史背景', en: 'Historical context', ja: '歴史背景' },
+    title: { zh: '这座建筑所在的问题', en: 'The question around this work', ja: 'この建築を囲む問い' },
+    turn: { zh: '时代转向', en: 'Historical turn', ja: '時代の転換' },
+    timeline: { zh: '在时间轴中查看', en: 'View in timeline', ja: '時間軸で見る' },
+    era: { zh: '进入时代页', en: 'Open period page', ja: '時代ページへ' },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+  const contextMeta = [
+    building.year_start,
+    era ? displayName(era, lang) : localizedTimelineText(period.label, lang),
+  ].filter(Boolean).join(' · ')
+
+  return (
+    <Reveal>
+      <section className="section-sm border-t border-subtle pt-8 sm:pt-10">
+        <div className="rounded-md border border-subtle bg-surface p-5 shadow-semantic-card sm:p-6">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.68fr)_minmax(16rem,0.32fr)]">
+            <div>
+              <p className="eyebrow mb-3">{l('eyebrow')}</p>
+              {contextMeta && <p className="metadata mb-4">{contextMeta}</p>}
+              <h2 className="heading-3 mb-4">{l('title')}</h2>
+              <p className="text-xl font-medium leading-snug text-primary sm:text-2xl">
+                {localizedTimelineText(period.question, lang)}
+              </p>
+              <p className="body-sm mt-4 max-w-3xl text-secondary">
+                {localizedTimelineText(period.summary, lang)}
+              </p>
+            </div>
+            <aside className="border-t border-subtle pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+              <p className="label mb-3">{l('turn')}</p>
+              <p className="caption">{localizedTimelineText(period.transition, lang)}</p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                {era && (
+                  <Link href={`${prefix}/browse/era/${era.slug}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                    {l('era')}
+                  </Link>
+                )}
+                <Link href={`${prefix}/timeline#period-${period.id}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                  {l('timeline')}
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </Reveal>
+  )
+}
 
 function BuildingKnowledgeNetwork({
   lang,
@@ -145,6 +220,11 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
 
   const { building, architect, relatedBuildings: related, images, styles: buildingStyles, era } = rels
   const prefix = `/${lang}`
+  const allEras = await getEras()
+  const contextEra = era || findEraForBuildingYear(building, allEras)
+  const timelinePeriod = contextEra
+    ? findTimelinePeriodForEra(contextEra)
+    : findTimelinePeriodForRange(building.year_start, building.year_end)
 
   const nameText = displayName(building, lang)
   const cleanText = (text: string) => (lang === 'ja' && isProbablySimplifiedChinese(text) ? '' : text)
@@ -168,7 +248,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
     { label: t(lang, 'materials'), value: building.materials?.length && lang !== 'ja' ? building.materials.join(', ') : null },
     { label: t(lang, 'area'), value: building.area_sqm ? `${building.area_sqm.toLocaleString()} m²` : null },
     { label: t(lang, 'style'), value: buildingStyles.length ? buildingStyles.map(style => displayName(style, lang)).join(', ') : null },
-    { label: t(lang, 'eras'), value: era ? displayName(era, lang) : null },
+    { label: t(lang, 'eras'), value: contextEra ? displayName(contextEra, lang) : null },
   ].filter(r => r.value)
 
   return (
@@ -239,12 +319,20 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         </div>
       </div>
 
+      <BuildingPeriodContext
+        lang={lang}
+        prefix={prefix}
+        building={building}
+        era={contextEra}
+        period={timelinePeriod}
+      />
+
       <BuildingKnowledgeNetwork
         lang={lang}
         prefix={prefix}
         architect={architect}
         styles={buildingStyles}
-        era={era}
+        era={contextEra}
         building={building}
         related={related}
       />

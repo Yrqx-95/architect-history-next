@@ -519,6 +519,15 @@
 - ✅ 部署验证：提交 `d4398da` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-2eqisz4g9-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/browse/style/modernism`、`/ja/browse/style/modernism`、`/en/browse/style/modernism` 均可见时代背景、时代页入口和时间轴入口
 
+### 第四十二阶段：建筑详情页接入历史背景
+- ✅ `/[lang]/building/[slug]` 在图像与标题之后新增 `历史背景 / Historical context / 歴史背景` 模块
+- ✅ 建筑页优先使用 `building.era_slug`，缺失时通过 `year_start/year_end` 推断时间轴阶段，显示作品所处的核心历史问题、时代解释和转向
+- ✅ metadata 中的时代字段同步使用推断后的 `contextEra`，减少缺少 `era_slug` 时的空白
+- ✅ 建筑页新增时代页与时间轴入口，让作品从孤立对象变成知识网络节点
+- ✅ 文档同步：`DATA_SCHEMA.md` 与 `UI_RULES.md` 记录建筑详情页必须说明历史问题和时代转向
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 本地页面验证：`/zh/building/villa-savoye`、`/ja/building/villa-savoye`、`/en/building/villa-savoye` 均可见历史背景、时代页入口和时间轴入口
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

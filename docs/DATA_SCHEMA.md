@@ -129,6 +129,8 @@ entity_relations (
 
 该层解决的问题是：作品页不再只展示 metadata 和图片，而是提供“下一步读什么”的结构化路径。后续若迁移到 `entity_relations`，这些自动关系可作为 inferred relation，人工策展关系可作为 curated relation，并通过 `confidence` 和 `source_*` 区分。
 
+建筑详情页还会接入 `Timeline Period Model`：优先使用 `building.era_slug` 匹配 `Era`，若缺失则用 `building.year_start/year_end` 推断所属阶段。前台显示“历史背景 / 这座建筑所在的问题 / 时代转向”，并提供时代页与时间轴入口。这一层用于回答“这座建筑为什么出现在这个历史时刻”，避免作品页只成为图片和 metadata 页面。
+
 ### Style / Era Reading Paths（风格与时代阅读路径）
 
 风格详情页与时代详情页同样先使用 `StyleRelations` / `EraRelations` 自动生成阅读路径：
