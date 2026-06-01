@@ -185,13 +185,13 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
                 </div>
                 <p className="caption max-w-sm sm:text-right">
                   {lang === 'en'
-                    ? 'Periods are entry points into people, not empty taxonomy columns.'
+                    ? 'Follow each period through the architects who gave it shape.'
                     : lang === 'ja'
-                    ? '時代を、人物へ入るための入口として読む。'
-                    : '把时期当作进入人物关系的入口，而不是空白的侧栏。'}
+                    ? '各時代を、その時代を形づくった建築家からたどる。'
+                    : '沿着每个时期，进入真正塑造它的建筑师。'}
                 </p>
               </div>
-              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+              <div className="columns-1 gap-3 md:columns-2 xl:columns-3">
                 {eraGroups.slice(0, 6).map(group => (
                   <EraLineage key={group.era.id} era={group.era} architects={group.architects} lang={lang} prefix={prefix} />
                 ))}
@@ -243,11 +243,11 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
               title={lang === 'en' ? 'Periods, styles, types' : lang === 'ja' ? '時代・様式・類型' : '时代、风格与类型'}
               description={lang === 'en' ? 'Use historical period, movement, and program as three ways to read the archive.' : lang === 'ja' ? '時代、運動、用途からアーカイブを読む。' : '用时代、流派和用途三条线索阅读档案。'}
             />
-            <div className="grid items-start gap-6 lg:grid-cols-3">
+            <div className="columns-1 gap-6 lg:columns-3">
               <IndexList title={t(lang, 'eras')} items={eraItems} />
               <IndexList title={t(lang, 'styles')} items={styleItems} />
               {styleFamilies.length > 0 && (
-                <div className="rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
+                <div className="mb-6 break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
                   <p className="eyebrow mb-4">{lang === 'en' ? 'Style groups' : lang === 'ja' ? '様式グループ' : '风格组'}</p>
                   <div className="space-y-4">
                     {styleFamilies.map(({ style, children, count }) => (
@@ -345,7 +345,7 @@ function FeaturedArchitect({
 
 function EraLineage({ era, architects, lang, prefix }: { era: Era; architects: Architect[]; lang: string; prefix: string }) {
   return (
-    <div className="rounded-md border border-subtle bg-surface-raised p-4">
+    <div className="mb-3 break-inside-avoid rounded-md border border-subtle bg-surface-raised p-4">
       <Link href={`${prefix}/browse/era/${era.slug}`} className="body-sm font-medium text-primary transition-colors hover:text-accent">
         {displayName(era, lang)}
       </Link>
@@ -364,7 +364,7 @@ function EraLineage({ era, architects, lang, prefix }: { era: Era; architects: A
 function IndexList({ title, items, moreHref, moreLabel }: { title: string; items: BrowseItem[]; moreHref?: string; moreLabel?: string }) {
   if (items.length === 0) return null
   return (
-    <div className="rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
+    <div className="mb-6 break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
       <p className="eyebrow mb-4">{title}</p>
       <div className="divide-y divide-[color:var(--ui-border-subtle)]">
         {items.map(item => (

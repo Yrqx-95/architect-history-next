@@ -551,6 +551,15 @@
 - ✅ 部署验证：提交 `1fea3eb` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-3kkyt9ox5-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/building/villa-savoye`、`/en/building/villa-savoye`、`/ja/building/villa-savoye` 均可见研究地图、历史背景、结构材料与来源文案
 
+### 第四十五阶段：地图/时间/档案索引空白修复
+- ✅ `/[lang]/map` 国家与地区索引改为 masonry columns，避免国家卡因有图/无图、高低不同被 CSS grid 拉出大面积空白
+- ✅ `/[lang]/map` 城市线索拆成图片城市卡与文字城市索引；缺少可信本地图片的城市不再显示大图占位
+- ✅ `/[lang]/timeline` 年代索引改为 masonry columns，保留双层时间轴结构，同时减少短年代卡造成的空白列
+- ✅ `/[lang]/browse` 建筑师谱系与时代/风格索引改为 columns 布局，并把内部说明文案改为面向读者的阅读提示
+- ✅ 文档同步：`UI_RULES.md` 增加索引型卡片必须使用 masonry/文字索引分层的规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 本地页面验证：`/zh/map`、`/zh/timeline`、`/zh/browse` 可见新版索引文案；390px 与桌面宽度检查无横向溢出
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

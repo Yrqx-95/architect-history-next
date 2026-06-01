@@ -230,10 +230,10 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
             <p className="caption text-right">{decades.length} {lang === 'en' ? 'active periods' : lang === 'ja' ? '項目' : '有效年代'}</p>
           </div>
 
-          <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
           {decades.map(([decade, bldgs], eraIdx) => (
             <Reveal key={decade} delay={eraIdx * 0.05}>
-              <section id={`decade-${decade}`} className="w-full scroll-mt-28 rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
+              <section id={`decade-${decade}`} className="mb-4 w-full break-inside-avoid scroll-mt-28 rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
                 <div className="mb-5 flex items-end justify-between gap-3 border-b border-subtle pb-4">
                   <h3 className="font-serif-display text-4xl leading-none text-primary">{decade}s</h3>
                   <p className="caption text-right">

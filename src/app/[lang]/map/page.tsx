@@ -145,6 +145,8 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
   const cities = [...cityClusters.values()]
     .sort((a, b) => b.buildingCount - a.buildingCount || a.label.localeCompare(b.label))
     .slice(0, 18)
+  const citiesWithCovers = cities.filter(city => city.featured?.cover_url)
+  const citiesWithoutCovers = cities.filter(city => !city.featured?.cover_url)
   const maxCountryCount = Math.max(...countries.map(country => country.buildingCount), 1)
   const featuredRoutes = countries
     .filter(country => country.featured.length > 0)
@@ -177,14 +179,14 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
             </Link>
           </div>
 
-          <div className="grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
             {countries.slice(0, 12).map(country => {
               const cover = localCover(country.featured)
               return (
                 <Link
                   key={country.code}
                   href={`${prefix}/browse/country/${country.code}`}
-                  className="group w-full rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+                  className="group mb-4 block w-full break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
                 >
                   <div className="mb-5 flex items-start justify-between gap-4">
                     <div>
@@ -202,7 +204,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                       style={{ width: `${Math.max(8, Math.round((country.buildingCount / maxCountryCount) * 100))}%` }}
                     />
                   </div>
-                  {cover && (
+                  {cover ? (
                     <div className="relative mt-5 h-32 overflow-hidden rounded-sm bg-surface-muted sm:h-36">
                       <SafeImage
                         src={cover.cover_url || ''}
@@ -211,6 +213,14 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                         className="object-cover transition duration-500 ease-out group-hover:scale-[1.015]"
                         sizes="(min-width: 1280px) 26rem, (min-width: 768px) 45vw, 100vw"
                       />
+                    </div>
+                  ) : (
+                    <div className="mt-5 grid grid-cols-2 gap-2 border-t border-subtle pt-4">
+                      {[...country.cities.entries()].slice(0, 4).map(([city, count]) => (
+                        <span key={city} className="caption truncate">
+                          {city} · {count}
+                        </span>
+                      ))}
                     </div>
                   )}
                   <p className={`${cover ? 'mt-4' : 'mt-5'} caption border-t border-subtle pt-4`}>
@@ -267,8 +277,9 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
             <p className="eyebrow mb-2">{t(lang, 'search')}</p>
             <h2 className="heading-3">{c(lang, 'cityIndex')}</h2>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {cities.map(city => (
+          {citiesWithCovers.length > 0 && (
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {citiesWithCovers.map(city => (
               <Link
                 key={city.key}
                 href={`${prefix}/search?q=${encodeURIComponent(city.query)}`}
@@ -293,8 +304,26 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                   <p className="mt-3 text-xs text-accent underline underline-offset-4">{c(lang, 'searchCity')}</p>
                 </div>
               </Link>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+          {citiesWithoutCovers.length > 0 && (
+            <div className={citiesWithCovers.length > 0 ? 'mt-6' : ''}>
+              <p className="eyebrow mb-3">{lang === 'en' ? 'Text city index' : lang === 'ja' ? '都市索引' : '城市文字索引'}</p>
+              <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+                {citiesWithoutCovers.map(city => (
+                  <Link
+                    key={city.key}
+                    href={`${prefix}/search?q=${encodeURIComponent(city.query)}`}
+                    className="group grid grid-cols-[minmax(0,1fr)_auto] gap-3 rounded-md border border-subtle bg-surface px-4 py-3 transition-colors hover:border-default hover:bg-surface-muted"
+                  >
+                    <span className="truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">{city.label}</span>
+                    <span className="caption tabular-nums">{city.buildingCount} {c(lang, 'buildings')}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
       </Reveal>
     </PageShell>
