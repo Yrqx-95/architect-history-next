@@ -479,6 +479,13 @@
 - ✅ 部署验证：提交 `aaa80fc` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-quo8gxn0w-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/architect/le-corbusier` 可见新版 `作品年表 / 全部作品` 与紧凑人物关系结构
 
+### 第三十八阶段：时间轴横向导航第一版
+- ✅ 新增 `TimelineRail` 客户端组件，为时间轴页提供可拖动横向年代轨道
+- ✅ 年代轨道支持鼠标拖动、左右翻页按钮和锚点跳转，补回用户喜欢的快速浏览时间功能
+- ✅ 时间轴页形成三层结构：高密度年代入口、横向时间导航、叙事时间轴与年代索引
+- ✅ 文档同步：`UI_RULES.md` 增加时间轴必须同时具备叙事层与快速定位层的规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

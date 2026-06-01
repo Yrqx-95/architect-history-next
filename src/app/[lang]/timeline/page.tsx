@@ -5,6 +5,7 @@ import { getArchitects, getBuildings } from '@/lib/data'
 import { displayName } from '@/lib/types'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
+import TimelineRail from '@/components/TimelineRail'
 
 export const revalidate = 3600
 
@@ -140,6 +141,12 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
     .filter(([, bldgs]) => bldgs.length >= 3)
     .sort((a, b) => b[1].length - a[1].length)
     .slice(0, 4)
+  const railItems = decades.map(([decade, bldgs]) => ({
+    id: `${decade}`,
+    href: `#decade-${decade}`,
+    label: `${decade}s`,
+    meta: `${bldgs.length} ${lang === 'en' ? 'works' : lang === 'ja' ? '作品' : '作品'}`,
+  }))
   const periodSummaries = timelinePeriods.map(period => {
     const [start, end] = period.range
     const periodBuildings = sortedBldgs.filter(building => {
@@ -194,6 +201,22 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
               ))}
             </div>
           </section>
+        </Reveal>
+      )}
+
+      {railItems.length > 0 && (
+        <Reveal>
+          <TimelineRail
+            title={lang === 'en' ? 'Time navigator' : lang === 'ja' ? '時間ナビゲーター' : '时间导航'}
+            description={
+              lang === 'en'
+                ? 'Drag the rail to scan active decades, then jump directly to the works in that period.'
+                : lang === 'ja'
+                ? '横にドラッグして年代を眺め、その時期の作品へ直接移動する。'
+                : '横向拖动浏览有效年代，并直接跳到对应时期的作品。'
+            }
+            items={railItems}
+          />
         </Reveal>
       )}
 
