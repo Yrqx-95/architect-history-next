@@ -198,6 +198,150 @@ function BuildingKnowledgeNetwork({
   )
 }
 
+function BuildingStudyMap({
+  lang,
+  building,
+  hasSpatial,
+  hasLight,
+  hasCirculation,
+}: {
+  lang: string
+  building: Building
+  hasSpatial: boolean
+  hasLight: boolean
+  hasCirculation: boolean
+}) {
+  const copy = {
+    eyebrow: { zh: '作品研究', en: 'Study map', ja: '作品研究' },
+    title: { zh: '从这些维度阅读', en: 'Read through these lenses', ja: 'この視点から読む' },
+    intro: {
+      zh: '先定位历史问题，再进入空间、光线、动线、结构与来源。缺少资料的维度不会硬塞占位。',
+      en: 'Start with the historical question, then read space, light, circulation, structure, and sources.',
+      ja: '歴史的な問いを確認し、空間、光、動線、構造、出典へ進む。',
+    },
+    spatial: { zh: '空间组织', en: 'Spatial organization', ja: '空間構成' },
+    light: { zh: '光线', en: 'Light', ja: '光' },
+    circulation: { zh: '动线', en: 'Circulation', ja: '動線' },
+    structure: { zh: '结构 / 材料', en: 'Structure / materials', ja: '構造・素材' },
+    sources: { zh: '来源', en: 'Sources', ja: '出典' },
+    available: { zh: '已整理', en: 'Available', ja: '整理済み' },
+    pending: { zh: '待补充', en: 'Pending', ja: '追加予定' },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+  const hasLocalizedStructure = Boolean(
+    building.structure && !(lang === 'ja' && isProbablySimplifiedChinese(building.structure))
+  )
+  const hasLocalizedMaterials = Boolean(building.materials?.length && lang !== 'ja')
+  const structureReady = Boolean(hasLocalizedStructure || hasLocalizedMaterials || building.area_sqm)
+  const sourcesReady = Boolean(building.wikipedia_url || building.official_url)
+  const items = [
+    { href: '#spatial-analysis', title: l('spatial'), ready: hasSpatial },
+    { href: '#light-analysis', title: l('light'), ready: hasLight },
+    { href: '#circulation-analysis', title: l('circulation'), ready: hasCirculation },
+    { href: '#technical-notes', title: l('structure'), ready: structureReady },
+    { href: '#building-sources', title: l('sources'), ready: sourcesReady },
+  ]
+
+  return (
+    <Reveal>
+      <section className="section-sm border-t border-subtle pt-8 sm:pt-10">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="eyebrow mb-2">{l('eyebrow')}</p>
+            <h2 className="heading-3">{l('title')}</h2>
+          </div>
+          <p className="caption max-w-lg sm:text-right">{l('intro')}</p>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+          {items.map(item => {
+            const className = `rounded-md border p-4 transition-colors ${
+              item.ready
+                ? 'border-subtle bg-surface shadow-semantic-card hover:border-default hover:bg-surface-muted'
+                : 'border-subtle bg-surface-muted'
+            }`
+            const content = (
+              <>
+                <p className="text-sm font-medium leading-snug text-primary">{item.title}</p>
+                <p className="caption mt-3">{item.ready ? l('available') : l('pending')}</p>
+              </>
+            )
+
+            return item.ready ? (
+              <a key={item.href} href={item.href} className={className}>
+                {content}
+              </a>
+            ) : (
+              <div key={item.href} className={className} aria-disabled="true">
+                {content}
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    </Reveal>
+  )
+}
+
+function BuildingTechnicalNotes({ lang, building }: { lang: string; building: Building }) {
+  const copy = {
+    title: { zh: '结构与材料', en: 'Structure and materials', ja: '構造と素材' },
+    structure: { zh: '结构', en: 'Structure', ja: '構造' },
+    materials: { zh: '材料', en: 'Materials', ja: '素材' },
+    area: { zh: '面积', en: 'Area', ja: '面積' },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+  const structure =
+    building.structure && !(lang === 'ja' && isProbablySimplifiedChinese(building.structure))
+      ? building.structure
+      : null
+  const materials = building.materials?.length && lang !== 'ja' ? building.materials.join(', ') : null
+  const rows = [
+    structure && { label: l('structure'), value: structure },
+    materials && { label: l('materials'), value: materials },
+    building.area_sqm && { label: l('area'), value: `${building.area_sqm.toLocaleString()} m²` },
+  ].filter(Boolean) as Array<{ label: string; value: string }>
+  if (rows.length === 0) return null
+
+  return (
+    <Reveal>
+      <ArticleSection id="technical-notes" title={l('title')}>
+        <div className="divide-y divide-[color:var(--ui-border-subtle)] rounded-md border border-subtle bg-surface">
+          {rows.map(row => (
+            <div key={row.label} className="grid gap-2 px-4 py-3 sm:grid-cols-[9rem_minmax(0,1fr)]">
+              <p className="label">{row.label}</p>
+              <p className="body-sm text-primary">{row.value}</p>
+            </div>
+          ))}
+        </div>
+      </ArticleSection>
+    </Reveal>
+  )
+}
+
+function BuildingSources({ lang, building }: { lang: string; building: Building }) {
+  const sources = [
+    building.official_url && { label: lang === 'en' ? 'Official site' : lang === 'ja' ? '公式サイト' : '官方网站', href: building.official_url },
+    building.wikipedia_url && { label: 'Wikipedia', href: building.wikipedia_url },
+  ].filter(Boolean) as Array<{ label: string; href: string }>
+
+  if (sources.length === 0) return null
+
+  return (
+    <Reveal>
+      <section id="building-sources" className="section-sm border-t border-subtle pt-8 sm:pt-10">
+        <p className="eyebrow mb-3">{lang === 'en' ? 'Sources' : lang === 'ja' ? '出典' : '来源'}</p>
+        <div className="flex flex-wrap gap-3">
+          {sources.map(source => (
+            <a key={source.href} href={source.href} target="_blank" rel="noreferrer" className="text-sm font-medium text-accent underline underline-offset-4">
+              {source.label}
+            </a>
+          ))}
+        </div>
+      </section>
+    </Reveal>
+  )
+}
+
 export async function generateStaticParams() {
   const buildings = await getBuildings()
   return ['zh', 'en', 'ja'].flatMap(lang => buildings.map(b => ({ lang, slug: b.slug })))
@@ -264,7 +408,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         <ImageGallery images={images} alt={nameText} />
       </div>
 
-      {/* Title + content */}
+      {/* Title + metadata */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 section">
         <div className="lg:col-span-2 flow">
           <h1 className="heading-display">{nameText}</h1>
@@ -273,41 +417,6 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
           )}
 
           {sigText && <PullQuote>{sigText}</PullQuote>}
-
-          {/* ============================================================
-              Deep Analysis — layered content sections with reading anchors
-              ============================================================ */}
-          <div className="space-y-14 sm:space-y-16 mt-8">
-            {spatialText && (
-              <Reveal>
-                <ArticleSection id="spatial-analysis" title={t(lang, 'spatial')}>
-                  <div className="prose prose-stone dark:prose-invert body max-w-none">{spatialText}</div>
-                </ArticleSection>
-              </Reveal>
-            )}
-
-            {/* Image break between analysis sections */}
-            {spatialText && lightText && images.length > 1 && (
-              <ImageBreak src={images[1]?.url_original || images[0].url_original} alt={nameText}
-                photographer={images[1]?.photographer} license={images[1]?.license} sourceUrl={images[1]?.source_url} />
-            )}
-
-            {lightText && (
-              <Reveal>
-                <ArticleSection id="light-analysis" title={t(lang, 'lighting')}>
-                  <div className="prose prose-stone dark:prose-invert body max-w-none">{lightText}</div>
-                </ArticleSection>
-              </Reveal>
-            )}
-
-            {circulationText && (
-              <Reveal>
-                <ArticleSection id="circulation-analysis" title={t(lang, 'circulation')}>
-                  <div className="prose prose-stone dark:prose-invert body max-w-none">{circulationText}</div>
-                </ArticleSection>
-              </Reveal>
-            )}
-          </div>
         </div>
 
         {/* Sticky sidebar */}
@@ -327,6 +436,48 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         period={timelinePeriod}
       />
 
+      <BuildingStudyMap
+        lang={lang}
+        building={building}
+        hasSpatial={Boolean(spatialText)}
+        hasLight={Boolean(lightText)}
+        hasCirculation={Boolean(circulationText)}
+      />
+
+      {/* Deep Analysis — layered content sections with reading anchors */}
+      <div className="section-sm space-y-14 sm:space-y-16">
+        {spatialText && (
+          <Reveal>
+            <ArticleSection id="spatial-analysis" title={t(lang, 'spatial')}>
+              <div className="prose prose-stone dark:prose-invert body max-w-none">{spatialText}</div>
+            </ArticleSection>
+          </Reveal>
+        )}
+
+        {spatialText && lightText && images.length > 1 && (
+          <ImageBreak src={images[1]?.url_original || images[0].url_original} alt={nameText}
+            photographer={images[1]?.photographer} license={images[1]?.license} sourceUrl={images[1]?.source_url} />
+        )}
+
+        {lightText && (
+          <Reveal>
+            <ArticleSection id="light-analysis" title={t(lang, 'lighting')}>
+              <div className="prose prose-stone dark:prose-invert body max-w-none">{lightText}</div>
+            </ArticleSection>
+          </Reveal>
+        )}
+
+        {circulationText && (
+          <Reveal>
+            <ArticleSection id="circulation-analysis" title={t(lang, 'circulation')}>
+              <div className="prose prose-stone dark:prose-invert body max-w-none">{circulationText}</div>
+            </ArticleSection>
+          </Reveal>
+        )}
+
+        <BuildingTechnicalNotes lang={lang} building={building} />
+      </div>
+
       <BuildingKnowledgeNetwork
         lang={lang}
         prefix={prefix}
@@ -336,6 +487,8 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         building={building}
         related={related}
       />
+
+      <BuildingSources lang={lang} building={building} />
 
       {/* Related buildings */}
       {related.length > 0 && (

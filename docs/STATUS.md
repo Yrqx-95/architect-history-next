@@ -541,6 +541,14 @@
 - ✅ 部署验证：提交 `6181a5f` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-hmgxii72k-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/graph`、`/ja/graph`、`/en/graph` 均可见知识图谱、谱系路径与关系索引；首页导航可见 `/zh/graph`
 
+### 第四十四阶段：建筑作品研究模板第一版
+- ✅ `/[lang]/building/[slug]` 新增 `作品研究 / Study map / 作品研究` 模块，把作品页组织为“历史背景 → 研究地图 → 空间/光线/动线 → 结构材料 → 来源 → 关联路径”
+- ✅ 研究地图会标记各研究维度 `已整理 / 待补充`；待补充项不生成空锚点链接，避免用户点击后落入空 section
+- ✅ 结构、材料、面积与来源从现有 `buildings` 字段读取，不新增数据库字段；日文页会避开未本地化的简体中文技术字段
+- ✅ 文档同步：`DATA_SCHEMA.md` 记录建筑作品研究模板字段来源，`UI_RULES.md` 规定作品页研究顺序和待补充状态规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 本地页面验证：`/zh/building/villa-savoye`、`/en/building/villa-savoye`、`/ja/building/villa-savoye` 均可见研究地图、历史背景、结构材料与来源文案
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

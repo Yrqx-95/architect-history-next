@@ -172,6 +172,26 @@ entity_relations (
 
 `/[lang]/graph` 不是最终图数据库视图，而是第一版可读关系索引：展示精选谱系路径、关系类型、方向、说明与来源。后续迁移方向是 `entity_relations` 表：`source_entity_type/source_entity_id/target_entity_type/target_entity_id/relation_type/source_url/confidence/curated_by`。
 
+### Building Study Map（建筑作品研究模板）
+
+建筑作品详情页第一版不新增 Supabase 字段，优先复用现有 `buildings` 表字段组织研究阅读结构：
+
+- `significance`: 页头引言 / 作品重要性
+- `spatial_feat`: 空间组织分析
+- `light_feat`: 光线分析
+- `circulation`: 动线分析
+- `structure`: 结构说明
+- `materials`: 材料列表
+- `area_sqm`: 面积
+- `official_url` / `wikipedia_url`: 文末来源入口
+
+运行时规则：
+
+- 详情页先通过 `era_slug` 或 `year_start/year_end` 推断历史阶段，再展示研究地图。
+- 研究地图显示“已整理 / 待补充”状态；待补充项不生成链接，避免跳转到空内容。
+- 日文页不得直接展示未本地化的简体中文技术字段；缺少日文内容时保留待补充状态。
+- 后续若迁移数据库，可把 `spatial_feat/light_feat/circulation/structure/materials` 拆为 `building_analysis_sections`，支持多语言、来源和审校状态。
+
 ### Chinese Script Overlay（中文简繁显示层）
 
 繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：
