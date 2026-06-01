@@ -538,6 +538,8 @@
 - ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Architect Relationship Graph` overlay，`UI_RULES.md` 规定图谱页第一版必须优先可读性
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 本地页面验证：`/zh/graph`、`/ja/graph`、`/en/graph` 均可见知识图谱、谱系路径与关系索引；首页导航可见 `/zh/graph`
+- ✅ 部署验证：提交 `6181a5f` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-hmgxii72k-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/graph`、`/ja/graph`、`/en/graph` 均可见知识图谱、谱系路径与关系索引；首页导航可见 `/zh/graph`
 
 ### 当前 docs/ 结构（11 个文档）
 ```
