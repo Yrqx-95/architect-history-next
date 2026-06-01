@@ -506,6 +506,8 @@
 - ✅ 文档同步：`DATA_SCHEMA.md` 记录 `Timeline Period Model`，`UI_RULES.md` 要求时代详情页承接时间轴问题模型
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
 - ✅ 本地页面验证：`/zh/browse/era/renaissance`、`/ja/browse/era/renaissance`、`/en/browse/era/renaissance` 均可见历史问题、时代转向和时间轴入口；`/zh/timeline` 继续可见历史链条
+- ✅ 部署验证：提交 `b528cf5` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-n1mffkd76-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/browse/era/renaissance`、`/ja/browse/era/renaissance`、`/en/browse/era/renaissance` 均可见历史问题模块，`/zh/timeline` 继续可见历史链条
 
 ### 当前 docs/ 结构（11 个文档）
 ```
