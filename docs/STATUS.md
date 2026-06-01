@@ -476,6 +476,8 @@
 - ✅ 全部作品中的无图作品继续进入文字索引，避免大面积占位图
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
 - ✅ 本地页面验证：`/zh/architect/le-corbusier`、`/zh/architect/aalto`、`/ja/architect/le-corbusier` 均返回新版关系与作品区结构
+- ✅ 部署验证：提交 `aaa80fc` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-quo8gxn0w-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/architect/le-corbusier` 可见新版 `作品年表 / 全部作品` 与紧凑人物关系结构
 
 ### 当前 docs/ 结构（11 个文档）
 ```
