@@ -488,6 +488,14 @@
 - ✅ 部署验证：提交 `988e51f` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-38epwlpc9-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/timeline`、`/ja/timeline` 均可见横向时间导航文案与年代锚点
 
+### 第三十九阶段：时间轴时代关系层
+- ✅ 时间轴 `TimelinePeriod` 模型新增 `question` 与 `transition`，把时代从静态分组改为建筑史问题链
+- ✅ `/[lang]/timeline` 新增 `历史链条 / Historical chain / 歴史の連鎖` section，解释每个时代的核心问题与进入下一时代的转向
+- ✅ 叙事时间轴卡片同步显示时代核心问题，用户在看建筑师与作品前先理解时代为什么变化
+- ✅ 文档同步：`UI_RULES.md` 增加时间轴必须呈现“核心问题 + 历史转向”的规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 本地页面验证：`/zh/timeline`、`/ja/timeline`、`/en/timeline` 均可见历史链条与时代问题
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
