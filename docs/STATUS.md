@@ -485,6 +485,8 @@
 - ✅ 时间轴页形成三层结构：高密度年代入口、横向时间导航、叙事时间轴与年代索引
 - ✅ 文档同步：`UI_RULES.md` 增加时间轴必须同时具备叙事层与快速定位层的规则
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
+- ✅ 部署验证：提交 `988e51f` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-38epwlpc9-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/timeline`、`/ja/timeline` 均可见横向时间导航文案与年代锚点
 
 ### 当前 docs/ 结构（11 个文档）
 ```
