@@ -467,6 +467,8 @@
 - ✅ 文档同步：`UI_RULES.md` 增加知识导航页 grid、侧栏高度、缺图文字索引与地图缩略图规则
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3192 页面）
 - ✅ 本地页面验证：`/zh/map` 国家卡片高度从约 `526px` 降至约 `327px`；`/zh/browse/country/gb` 显示 `文字索引` 且无大图占位；`/zh/timeline` 年代索引继续可访问
+- ✅ 部署验证：提交 `21df732` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-rn8pd4qmr-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/map`、`/zh/browse/country/gb`、`/zh/timeline` 均返回新版布局内容
 
 ### 当前 docs/ 结构（11 个文档）
 ```
