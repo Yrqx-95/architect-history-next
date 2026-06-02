@@ -303,6 +303,34 @@ architect_influences (architect_id, influenced_id, relationship_type)
 
 人物肖像当前不在 Supabase `images` 表中，因为该表只关联 `building_id`。第一阶段肖像随 `Architect Content Overlay` 存储，字段包含 `url`、`author`、`license`、`source_url` 和本地化 `alt`。
 
+第二阶段新增仓库级肖像覆盖文件：
+
+```
+src/lib/architect-image-overrides.json
+```
+
+生成脚本：
+
+```
+npm run content:portraits
+```
+
+规则：
+
+- 通过 Wikidata 实体的 `P18` 图片字段寻找人物肖像
+- 通过 Wikimedia Commons `imageinfo.extmetadata` 读取图片 URL、作者、license 和来源页
+- 只接受 Public Domain / CC0 / CC BY / CC BY-SA；跳过不可确认、非商用、授权不明或无 P18 图片的条目
+- 前台优先级：`architect-image-overrides.json` verified portrait → 有效 overlay portrait → 可信代表作图像兜底 → 不显示图片
+- 指向缺失本地文件的 overlay portrait 不得展示为破图
+
+审计报告：
+
+```
+db/architect-portrait-report.json
+```
+
+该报告记录已添加、跳过和错误条目，供后续人工补图使用。
+
 后续若迁移数据库，建议新增 `architect_images` 或通用 `entity_images` 表，支持：
 - `entity_type`: architect/building/style/era
 - `entity_slug`
@@ -352,6 +380,29 @@ src/lib/learning-paths.ts
 | location 字段 unused（类型为 unknown） | 地图功能无法实现 | 🟢 低 |
 | european-court-of-human-rights 指向 .ogg 音频 | 图片数据错误 | 🟢 低 |
 | 本地缓存目录仍有 1MB+ JPG | 部署包偏大 | 🟢 低 |
+
+## Content Coverage Audit（内容覆盖审计）
+
+内容覆盖脚本：
+
+```
+npm run content:audit
+```
+
+输出：
+
+```
+db/content-coverage-report.json
+```
+
+当前用途：
+
+- 统计建筑师 `bio_zh/bio_ja/bio_en` 缺口
+- 统计建筑作品 `description/significance/spatial_feat/light_feat/circulation` 缺口
+- 检查每个建筑是否至少有 Supabase 图片或本地 curated cover
+- 记录缺来源条目，作为后续迁移到 Supabase 或补 overlay 的依据
+
+注意：前台已有 `fallback-content.ts` 作为 P0 体验覆盖层，因此报告中的“正文为空”不等于页面完全空白；它表示数据库中仍缺少可迁移、可审校的正式内容字段。
 
 ## Slug 规则
 

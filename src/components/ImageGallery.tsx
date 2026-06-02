@@ -152,7 +152,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
               aria-label={`Image ${i + 1}`}
             >
               <SafeImage
-                src={img.url_thumb_400 || img.url_original}
+                src={img.url_original}
                 alt=""
                 width={64}
                 height={48}

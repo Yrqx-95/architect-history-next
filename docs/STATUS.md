@@ -695,6 +695,17 @@
 - ✅ `relations.ts` 过滤已确认 404 或不适合 Next 图片优化的外部 SVG/失效 Wikimedia 图；建筑详情页图库为空时回退到本地已治理 curated cover
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；生产预览复扫 `/zh/map`、`/zh/building/villa-savoye`、`/zh/architect/aalto`、`/zh/graph`、`/zh/paths` 桌面/手机无横向溢出、当前视口无破图
 
+### 第六十阶段：内容覆盖 P0 与肖像资料修复
+- ✅ 新增 `fallback-content.ts`：当 Supabase 建筑正文为空时，建筑详情页会基于已有事实字段生成可读的作品简介、建筑史节点说明、空间/光线/动线阅读提示；该层只使用作者、年份、地点、时代、风格、类型等已存在数据，不冒充精品长文
+- ✅ 所有建筑详情页优先展示一张已治理主图：若有 `local-image-overrides` / `image-overrides` curated cover，则只用该图作为主视觉，避免 Parc1 这类页面出现错误缩略图、无关河流桥梁图和远程 400 破图
+- ✅ 新增 `build-architect-portraits.mjs` 与 `architect-image-overrides.json`：从 Wikidata P18 + Wikimedia Commons imageinfo 生成 88 位建筑师的可追溯肖像覆盖，许可限制为 Public Domain / CC0 / CC BY / CC BY-SA
+- ✅ 建筑师详情页优先使用 verified portrait；若 overlay 肖像指向缺失的本地 `/images/architects/*` 文件则不再展示破图；若没有可靠本人肖像，仅在有 Wikimedia/本地 curated 开放图时使用代表作图像，并明确标注为代表作图像
+- ✅ 新增 `audit-content-coverage.mjs` 和 `content:audit`：输出 `db/content-coverage-report.json`，用于量化建筑师简介、建筑作品正文、图片与来源覆盖缺口
+- ✅ 中文/日文建筑师页缺少本地化简介时改用事实型档案摘要，不再在中文/日文页面直接露出英文短句；“0 个作品”改为“基本档案待扩展”口径，降低用户失望感
+- ✅ 移除生产布局中的开发期 `[Diagnostic] JS Error` 监听脚本；非中文页面不再注入简繁属性清理脚本，降低日文页 hydration 扰动
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；移动端复扫 `/zh/building/parc1`、`/ja/building/villa-savoye`、`/zh/architect/aldo-rossi`、`/ja/architect/aldo-rossi`、`/zh/map`、`/zh/browse` 无横向溢出、无当前视口破图
+- ⚠️ 仍有 18 位建筑师未获得可靠 Commons P18 肖像或授权未确认（如 BIG、SANAA、MVRDV、Zaha Hadid、Jørn Utzon、Kunio Maekawa 等），已记录在 `db/architect-portrait-report.json`，下一步需要人工确认官方/基金会/博物馆开放图片
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

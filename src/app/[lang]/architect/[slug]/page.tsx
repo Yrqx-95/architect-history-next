@@ -11,6 +11,8 @@ import {
 } from '@/lib/architect-knowledge-relations'
 import { displayName, formatDisplayLocation, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
+import { getArchitectFallbackSummary } from '@/lib/fallback-content'
+import { getArchitectImageOverride, type ArchitectImageOverride } from '@/lib/architect-images'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import Reveal from '@/components/Reveal'
@@ -24,11 +26,11 @@ export const revalidate = 86400
 export const dynamicParams = true
 
 function ArchitectPortraitFigure({
-  content,
+  portrait,
   lang,
   className = '',
 }: {
-  content: NonNullable<ReturnType<typeof getArchitectContent>>
+  portrait: ArchitectImageOverride | NonNullable<ReturnType<typeof getArchitectContent>>['portrait']
   lang: string
   className?: string
 }) {
@@ -36,19 +38,19 @@ function ArchitectPortraitFigure({
     <figure className={`overflow-hidden rounded-sm ${className}`}>
       <div className="relative aspect-[3/4] bg-surface-muted">
         <SafeImage
-          src={content.portrait.url}
-          alt={localizedContent(content.portrait.alt, lang)}
+          src={portrait.url}
+          alt={localizedContent(portrait.alt, lang)}
           fill
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 36rem"
         />
       </div>
       <figcaption className="mt-2.5 flex items-start justify-between gap-3">
-        <p className="text-xs leading-relaxed text-muted max-w-[70%]">{localizedContent(content.portrait.alt, lang)}</p>
+        <p className="text-xs leading-relaxed text-muted max-w-[70%]">{localizedContent(portrait.alt, lang)}</p>
         <ImageAttribution
-          photographer={content.portrait.author}
-          license={content.portrait.license}
-          sourceUrl={content.portrait.source_url}
+          photographer={portrait.author}
+          license={portrait.license}
+          sourceUrl={portrait.source_url}
           tone="dark"
         />
       </figcaption>
@@ -151,12 +153,51 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const cleanText = (text: string) => (lang === 'ja' && isProbablySimplifiedChinese(text) ? '' : text)
   const rawBioText = contentOverlay
     ? localizedContent(contentOverlay.summary, lang)
-    : lang === 'ja' ? (architect.bio_ja || architect.bio_en) : lang === 'en' ? architect.bio_en : (architect.bio_zh || architect.bio_en)
-  const bioText = contentOverlay ? (rawBioText || '') : cleanText(rawBioText || '')
+    : lang === 'ja'
+      ? (architect.bio_ja || architect.bio_en)
+      : lang === 'en'
+        ? architect.bio_en
+        : (architect.bio_zh || architect.bio_en)
+  const fallbackBioText = getArchitectFallbackSummary({
+    architect,
+    buildings: buildingsWithCovers,
+    era,
+    styles,
+    lang,
+  })
+  const rawBioClean = cleanText(rawBioText || '')
+  const hasLocalizedBio = lang === 'en'
+    ? rawBioClean.length >= 60
+    : /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(rawBioClean) && rawBioClean.length >= 40
+  const bioText = contentOverlay ? (rawBioText || '') : (hasLocalizedBio ? rawBioClean : fallbackBioText)
   const coreIdeas: string[] = contentOverlay ? [] : Array.isArray(architect.core_ideas) ? architect.core_ideas : []
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
   const worksWithImages = buildingsWithCovers.filter(building => building.cover_url)
   const worksWithoutImages = buildingsWithCovers.filter(building => !building.cover_url)
+  const verifiedPortrait = getArchitectImageOverride(slug)
+  const overlayPortrait = contentOverlay?.portrait && !contentOverlay.portrait.url.startsWith('/images/architects/')
+    ? contentOverlay.portrait
+    : null
+  const fallbackVisualWork = worksWithImages.find(work =>
+    work.cover_url?.startsWith('/images/curated/') ||
+    work.cover_source_url?.includes('commons.wikimedia.org') ||
+    work.cover_license?.toLowerCase().includes('public domain') ||
+    work.cover_license?.toLowerCase().includes('cc by')
+  )
+  const fallbackWorkPortrait = fallbackVisualWork
+    ? {
+        url: fallbackVisualWork.cover_url!,
+        author: fallbackVisualWork.cover_photographer || 'Wikimedia Commons',
+        license: fallbackVisualWork.cover_license || '',
+        source_url: fallbackVisualWork.cover_source_url || '',
+        alt: {
+          zh: `${nameText}代表作图像：${displayName(fallbackVisualWork, 'zh')}`,
+          ja: `${nameText}の代表作画像：${displayName(fallbackVisualWork, 'ja')}`,
+          en: `Representative work image for ${nameText}: ${displayName(fallbackVisualWork, 'en')}`,
+        },
+      }
+    : null
+  const portrait = verifiedPortrait || overlayPortrait || fallbackWorkPortrait
   const primaryStyle = styles[0]
   const readingPathLinks = [
     era && {
@@ -217,9 +258,9 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
             </div>
 
             {/* Portrait — mobile only, after name */}
-            {contentOverlay && (
+            {portrait && (
               <div className="mt-8 lg:hidden">
-                <ArchitectPortraitFigure content={contentOverlay} lang={lang} />
+                <ArchitectPortraitFigure portrait={portrait} lang={lang} />
               </div>
             )}
 
@@ -264,9 +305,9 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
           {/* —— Right column: portrait (5/12) —— */}
           <div className="hidden lg:block lg:col-span-5">
-            {contentOverlay && (
+            {portrait && (
               <div className="ml-auto max-w-[24rem] lg:sticky lg:top-24">
-                <ArchitectPortraitFigure content={contentOverlay} lang={lang} />
+                <ArchitectPortraitFigure portrait={portrait} lang={lang} />
               </div>
             )}
           </div>

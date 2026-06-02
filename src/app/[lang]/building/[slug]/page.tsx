@@ -6,6 +6,7 @@ import { getBuildings, getBuildingsWithCovers, getEras } from '@/lib/data'
 import { getBuildingRelations } from '@/lib/relations'
 import { displayName, displayText, formatCountryName, formatDisplayLocation, isProbablySimplifiedChinese, type Architect, type Building, type Era, type Style } from '@/lib/types'
 import { findTimelinePeriodForEra, findTimelinePeriodForRange, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
+import { getBuildingFallbackContent } from '@/lib/fallback-content'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import ImageGallery from '@/components/ImageGallery'
@@ -318,10 +319,24 @@ function BuildingTechnicalNotes({ lang, building }: { lang: string; building: Bu
   )
 }
 
-function BuildingSources({ lang, building }: { lang: string; building: Building }) {
+function BuildingSources({
+  lang,
+  building,
+  galleryImages,
+}: {
+  lang: string
+  building: Building
+  galleryImages: Array<{ source_url: string; photographer: string | null; license: string | null }>
+}) {
+  const imageSource = galleryImages.find(image => image.source_url)
   const sources = [
     building.official_url && { label: lang === 'en' ? 'Official site' : lang === 'ja' ? '公式サイト' : '官方网站', href: building.official_url },
     building.wikipedia_url && { label: 'Wikipedia', href: building.wikipedia_url },
+    building.wikidata_id && { label: 'Wikidata', href: `https://www.wikidata.org/wiki/${building.wikidata_id}` },
+    !building.official_url && !building.wikipedia_url && imageSource && {
+      label: lang === 'en' ? 'Image source' : lang === 'ja' ? '画像資料' : '图片来源',
+      href: imageSource.source_url,
+    },
   ].filter(Boolean) as Array<{ label: string; href: string }>
 
   if (sources.length === 0) return null
@@ -366,10 +381,8 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   const prefix = `/${lang}`
   const [allEras, buildingsWithCovers] = await Promise.all([getEras(), getBuildingsWithCovers()])
   const buildingWithCover = buildingsWithCovers.find(item => item.slug === building.slug)
-  const galleryImages = images.length > 0
-    ? images
-    : buildingWithCover?.cover_url
-    ? [{
+  const curatedCoverImage = buildingWithCover?.cover_url
+    ? {
         id: `${building.id}-curated-cover`,
         building_id: building.id,
         url_original: buildingWithCover.cover_url,
@@ -380,8 +393,13 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         source_url: buildingWithCover.cover_source_url || '',
         img_type: 'exterior',
         is_primary: true,
-      }]
-    : []
+      }
+    : null
+  const curatedCoverUrl = curatedCoverImage?.url_original
+  const supportingImages = images
+    .filter(image => image.url_original !== curatedCoverUrl)
+    .filter(image => image.source !== 'Unsplash' || !curatedCoverImage)
+  const galleryImages = curatedCoverImage ? [curatedCoverImage] : supportingImages.slice(0, 1)
   const contextEra = era || findEraForBuildingYear(building, allEras)
   const timelinePeriod = contextEra
     ? findTimelinePeriodForEra(contextEra)
@@ -395,10 +413,18 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
     countryCode: building.country_code,
     lang,
   })
-  const sigText = cleanText(displayText(building.significance, lang))
-  const spatialText = cleanText(displayText(building.spatial_feat, lang))
-  const lightText = cleanText(displayText(building.light_feat, lang))
-  const circulationText = cleanText(displayText(building.circulation, lang))
+  const fallbackContent = getBuildingFallbackContent({
+    building,
+    architect,
+    styles: buildingStyles,
+    era: contextEra,
+    lang,
+  })
+  const descriptionText = cleanText(displayText(building.description, lang)) || fallbackContent.summary
+  const sigText = cleanText(displayText(building.significance, lang)) || fallbackContent.significance
+  const spatialText = cleanText(displayText(building.spatial_feat, lang)) || fallbackContent.spatial
+  const lightText = cleanText(displayText(building.light_feat, lang)) || fallbackContent.light
+  const circulationText = cleanText(displayText(building.circulation, lang)) || fallbackContent.circulation
 
   const metaRows = [
     { label: t(lang, 'architects'), value: architect ? <Link href={`${prefix}/architect/${architect.slug}`} className="underline decoration-[color:var(--ui-border)] underline-offset-2 transition-colors hover:text-accent">{displayName(architect, lang)}</Link> : null },
@@ -431,6 +457,11 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
           <h1 className="heading-display">{nameText}</h1>
           {building.name_en !== nameText && (
             <p className="text-sm leading-relaxed text-secondary">{building.name_en}</p>
+          )}
+          {descriptionText && (
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-secondary sm:text-lg">
+              {descriptionText}
+            </p>
           )}
 
           {sigText && <PullQuote>{sigText}</PullQuote>}
@@ -505,7 +536,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         related={related}
       />
 
-      <BuildingSources lang={lang} building={building} />
+      <BuildingSources lang={lang} building={building} galleryImages={galleryImages} />
 
       {/* Related buildings */}
       {related.length > 0 && (
