@@ -583,6 +583,12 @@
 - ✅ 部署验证：提交 `e10b28b` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-bzjxt2290-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/browse/type/religious`、`/zh/browse/type/cultural`、`/en/browse/type/religious` 均返回新版分类详情结构
 
+### 第四十八阶段：图片 override 重叠清理
+- ✅ 清理 `image-overrides.json` 中被 `local-image-overrides.json` 完全覆盖的 22 个重复条目
+- ✅ 保留本地缓存 override 作为唯一优先来源，前台图片选择逻辑不变：本地缓存优先，其次远程审核 override，再其次 Supabase primary image
+- ✅ 重叠审计从 `22` 降为 `0`，远程 override 从 `42` 条降为 `20` 条
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -601,10 +607,9 @@ docs/
 
 ### 仍待修复（按优先级）
 1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
-2. 🟡 22 个 overrides 重叠条目待清理
-3. 🟢 首页 40 处内联三语字符串待迁移
-4. 🟢 首页 358 行待拆分
-5. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
+2. 🟢 首页 40 处内联三语字符串待迁移
+3. 🟢 首页 358 行待拆分
+4. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级
 
