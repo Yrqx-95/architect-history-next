@@ -599,6 +599,8 @@
 - ✅ `formatDisplayLocation` 改为中文页保留原始中文地点，英文/日文页使用国家代码本地化国家名并隐藏未本地化中文城市名
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 构建产物验证：`.next/server/app/zh.rsc`、`/en.rsc`、`/ja.rsc` 均可见对应首页 UI 文案；英文首页不再出现已知中文简介与中文地点片段
+- ✅ 部署验证：提交 `12f549e` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-pqe037d08-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh`、`/en`、`/ja` 均返回新版首页 UI 文案；英文页显示 `China · 2019`，不再返回已知中文简介或中文地点片段
 
 ### 当前 docs/ 结构（11 个文档）
 ```
