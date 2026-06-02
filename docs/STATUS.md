@@ -628,6 +628,15 @@
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 构建产物验证：`.next/server/app/zh/architect/kurokawa.rsc`、`/ja/architect/kurokawa.rsc`、`/en/architect/kurokawa.rsc` 均可见肖像、代表作和 Sources 区块
 
+### 第五十三阶段：移动端菜单 UIUX 重做
+- ✅ `MobileNav` 从右侧窄抽屉改为全屏移动菜单，避免露出背后首页、形成错位和双层关闭按钮
+- ✅ 菜单顶部只保留 Archistory、当前菜单标题和一个关闭入口；打开时锁定页面滚动，避免底层内容跟随滚动
+- ✅ 主导航改为 2 列触控卡片，覆盖首页、档案、路径、图谱、地图、时间六个知识入口，最小触控高度满足手机操作
+- ✅ 搜索、导航、语言、阅读设置分区重排；中文简繁和主题切换统一收纳在阅读设置内，不再挤在页面顶部
+- ✅ 移动端文案改为面向读者的“搜索 / 导航 / 语言 / 阅读设置”，不再使用“搜索档案”等拼接式标签
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 手机视口验证：Playwright 390×844 打开 `/zh` 菜单，dialog 覆盖完整视口、仅 1 个关闭按钮、body scroll lock 生效，截图保存为 `/tmp/archistory-mobile-menu-final.png`
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
