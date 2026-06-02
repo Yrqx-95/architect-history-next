@@ -5658,6 +5658,97 @@ const overlays: Record<string, ArchitectContentOverlay> = {
     ],
   },
 
+  'wren': {
+    slug: 'wren',
+    summary: {
+      zh: '克里斯托弗·雷恩既是建筑师，也是科学家、数学家和皇家学会核心人物。伦敦大火之后，他把古典比例、英国国教礼仪、工程理性和城市重建结合起来，用圣保罗大教堂和一系列城市教堂重新塑造了伦敦的天际线。',
+      ja: 'クリストファー・レンは建築家であると同時に、科学者、数学者、王立協会の中心人物でもあった。ロンドン大火後、古典的比例、英国国教の儀礼、工学的理性、都市再建を結びつけ、セント・ポール大聖堂と都市教会群によってロンドンのスカイラインを再形成した。',
+      en: 'Christopher Wren joined science, mathematics, Anglican ritual, and urban rebuilding to reshape London after the Great Fire.',
+    },
+    core_ideas: {
+      zh: ['以科学和数学训练组织建筑', '把古典语言转译为英国巴洛克', '通过教堂网络重建伦敦城市记忆', '用穹顶、塔楼和轴线塑造公共天际线'],
+      ja: ['科学と数学の訓練から建築を組み立てる', '古典語彙を英国バロックへ翻訳する', '教会群によってロンドンの記憶を再建する', 'ドーム、塔、軸線で公共的なスカイラインをつくる'],
+      en: ['Scientific architectural thinking', 'Classical language into English Baroque', 'London rebuilt through churches', 'Domes, towers, and civic skyline'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Christopher_Wren_by_Godfrey_Kneller_1711.jpg',
+      author: 'Godfrey Kneller',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Christopher_Wren_by_Godfrey_Kneller_1711.jpg',
+      alt: {
+        zh: '克里斯托弗·雷恩肖像',
+        ja: 'クリストファー・レンの肖像',
+        en: 'Portrait of Christopher Wren',
+      },
+    },
+    sections: [
+      {
+        title: { zh: '从自然哲学到建筑', ja: '自然哲学から建築へ', en: 'From natural philosophy to architecture' },
+        paragraphs: {
+          zh: [
+            '雷恩进入建筑史之前，首先是一位十七世纪英国科学共同体中的重要人物。他研究天文学、数学、解剖和机械问题，参与皇家学会早期活动，并在牛津与伦敦之间形成了一种实验科学的思维方式。对他而言，建筑并不是单纯的风格职业，而是测量、比例、结构、光线和公共秩序共同构成的理性工作。',
+            '这种背景解释了为什么雷恩的建筑常显得清晰而有控制力。他不像意大利巴洛克那样追求强烈戏剧性的旋转和幻觉，也不只是复制帕拉迪奥式的古典外壳。他更关心一个复杂问题如何被拆解：屋顶怎样跨越，穹顶怎样受力，礼拜空间如何被看见和听见，城市街道如何通过塔楼、门廊和立面获得方向感。',
+          ],
+          ja: [
+            'レンは建築史に登場する以前に、17世紀イギリスの科学共同体における重要人物だった。天文学、数学、解剖学、機械の問題を研究し、王立協会の初期活動に関わり、オックスフォードとロンドンのあいだで実験科学の思考を身につけた。彼にとって建築は単なる様式上の職能ではなく、測量、比例、構造、光、公共秩序が結びつく理性的な仕事だった。',
+            'この背景は、レンの建築がしばしば明晰で制御された印象を与える理由を説明する。イタリア・バロックのような強い劇場性や幻視を追うのではなく、パッラーディオ的な古典の外皮をコピーするだけでもない。彼が重視したのは、複雑な問題をいかに分解するかである。屋根はどう架かるか、ドームはどう力を受けるか、礼拝空間はどう見え、聞こえるか、街路は塔、ポーチ、立面によってどう方向づけられるか。',
+          ],
+          en: [
+            'Before entering architectural history, Wren was a central figure in seventeenth-century English science. Astronomy, mathematics, anatomy, mechanics, and the early Royal Society shaped his way of thinking.',
+            'This explains the controlled clarity of his buildings. Wren treated architecture as a rational problem of measurement, structure, light, worship, and urban orientation.',
+          ],
+        },
+      },
+      {
+        title: { zh: '大火之后的伦敦', ja: '大火後のロンドン', en: 'London after the Great Fire' },
+        paragraphs: {
+          zh: [
+            '1666 年伦敦大火摧毁了中世纪城市的大量街区和教堂，也把雷恩推到城市重建的中心。虽然他宏大的整体城市规划没有完整实现，但他长期担任皇家工程总监，参与了圣保罗大教堂和数十座城市教堂的重建。伦敦没有被改造成一个全新的几何首都，而是在旧街道网中逐步长出一组新的公共标记。',
+            '这正是雷恩重要性的核心：他没有只设计一座孤立的纪念碑，而是设计了一个教堂网络。每座教堂的体量可能不大，但塔楼、尖顶、钟声和入口共同把城市重新缝合起来。对普通伦敦人来说，雷恩的建筑不是远处的宫殿，而是在街角、市场、桥梁和墓地之间不断出现的城市方向感。',
+          ],
+          ja: [
+            '1666年のロンドン大火は中世都市の多くの街区と教会を破壊し、レンを都市再建の中心へ押し出した。彼の壮大な都市全体の計画は完全には実現しなかったが、王室工事監督官としてセント・ポール大聖堂と多数の都市教会の再建に関わった。ロンドンは新しい幾何学的首都へ作り替えられたのではなく、古い街路網のなかに新しい公共的な目印が少しずつ生まれた。',
+            'ここにレンの重要性がある。彼は孤立した一つの記念碑だけを設計したのではなく、教会のネットワークを設計した。個々の教会は大きくないかもしれないが、塔、尖塔、鐘、入口が都市を再び縫い合わせた。ロンドンの人々にとってレンの建築は遠くの宮殿ではなく、街角、市場、橋、墓地のあいだに繰り返し現れる都市の方向感覚だった。',
+          ],
+          en: [
+            'The Great Fire of 1666 made Wren central to rebuilding London. His grand city plan was not fully realized, but his churches and St Paul’s created a new network of civic markers within the old street fabric.',
+            'Wren’s achievement was urban as much as architectural: towers, spires, bells, and entrances stitched London back together.',
+          ],
+        },
+      },
+      {
+        title: { zh: '圣保罗大教堂与英国巴洛克', ja: 'セント・ポール大聖堂と英国バロック', en: 'St Paul’s and English Baroque' },
+        paragraphs: {
+          zh: [
+            '圣保罗大教堂是雷恩建筑思想最完整的综合。它既要继承英格兰主教座堂的礼仪传统，又要回应罗马圣彼得大教堂式的穹顶形象，还要在新教英国的政治和宗教环境中保持克制。最终形成的不是单一来源的复制，而是一种英国巴洛克：古典、清晰、庄重，但不完全放弃中世纪教堂的纵向礼拜轴线。',
+            '它的穹顶尤其重要。外部穹顶成为伦敦天际线的中心，内部空间则通过柱廊、拱券、鼓座和光线组织出庄严的礼拜经验。雷恩在这里解决的是一个三重问题：结构上如何站立，视觉上如何成为城市象征，宗教上如何服务英国国教。正因如此，圣保罗不是一座单纯漂亮的大教堂，而是伦敦从灾难、王权、宗教与科学时代中重新组织自我的建筑答案。',
+          ],
+          ja: [
+            'セント・ポール大聖堂は、レンの建築思想が最も完全に統合された作品である。イングランド大聖堂の礼拝伝統を継承しつつ、ローマのサン・ピエトロ大聖堂のようなドーム像に応答し、さらにプロテスタント国家イギリスの政治的・宗教的環境のなかで抑制を保たなければならなかった。最終的に生まれたのは単一の源泉の模倣ではなく、古典的で、明晰で、荘重でありながら、中世大聖堂の縦方向の礼拝軸を完全には捨てない英国バロックである。',
+            'とりわけドームが重要である。外部のドームはロンドンのスカイラインの中心となり、内部空間は列柱、アーチ、ドラム、光によって厳粛な礼拝経験を組織する。レンがここで解いたのは三重の問題だった。構造としてどう立つか、視覚としてどう都市の象徴になるか、宗教としてどう英国国教に仕えるか。だからセント・ポールは単に美しい大聖堂ではなく、災害、王権、宗教、科学の時代からロンドンが自らを再編成するための建築的回答である。',
+          ],
+          en: [
+            'St Paul’s Cathedral is Wren’s fullest synthesis: Anglican ritual, classical proportion, Baroque dome imagery, and restrained Protestant politics held together in one building.',
+            'Its dome is structural, symbolic, and liturgical at once. St Paul’s is not only a cathedral but London’s architectural answer to disaster, monarchy, religion, and science.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'st-pauls-cathedral', note: { zh: '伦敦大火后的核心重建工程，三重穹顶、古典立面和英国国教礼仪共同塑造了伦敦最重要的城市象征。', ja: 'ロンドン大火後の中心的再建事業。三重のドーム、古典的立面、英国国教の礼拝が、ロンドンで最も重要な都市的象徴をつくった。', en: 'The central rebuilding project after the Great Fire, joining dome, facade, and Anglican ritual into London’s defining symbol.' } },
+      { slug: 'greenwich-hospital', note: { zh: '以对称轴线、河岸空间和穹顶组织国家海军记忆，展示雷恩将纪念性转化为城市景观的能力。', ja: '対称軸、河岸空間、ドームによって国家的な海軍の記憶を組織し、記念性を都市景観へ変えるレンの能力を示す。', en: 'A riverside composition of axes and domes that turns naval memory into urban landscape.' } },
+      { slug: 'hampton-court', note: { zh: '宫廷扩建中的古典秩序实验，把王权居所从都铎图像转向更理性的巴洛克宫殿语言。', ja: '宮廷増築における古典秩序の実験。王権の住まいをチューダー的イメージから、より理性的なバロック宮殿の言語へ移した。', en: 'A palace extension that shifted royal architecture from Tudor image toward rational Baroque order.' } },
+    ],
+    sources: [
+      { title: 'Royal Society: History of the Royal Society', url: 'https://royalsociety.org/about-us/who-we-are/history/' },
+      { title: 'St Paul’s Cathedral: About us', url: 'https://www.stpauls.co.uk/about-us' },
+      { title: 'St Paul’s Cathedral: Wren 300', url: 'https://www.stpauls.co.uk/wren-300' },
+      { title: 'Old Royal Naval College: History', url: 'https://ornc.org/about-us/history/' },
+      { title: 'Wikimedia Commons: Christopher Wren by Godfrey Kneller 1711', url: 'https://commons.wikimedia.org/wiki/File:Christopher_Wren_by_Godfrey_Kneller_1711.jpg' },
+      { title: 'Wikidata: Christopher Wren', url: 'https://www.wikidata.org/wiki/Q165745' },
+    ],
+  },
+
 }
 
 const overlayAliases: Record<string, string> = {

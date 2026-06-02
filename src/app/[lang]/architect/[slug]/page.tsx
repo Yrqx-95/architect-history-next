@@ -153,7 +153,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const rawBioText = contentOverlay
     ? localizedContent(contentOverlay.summary, lang)
     : lang === 'ja' ? (architect.bio_ja || architect.bio_en) : lang === 'en' ? architect.bio_en : (architect.bio_zh || architect.bio_en)
-  const bioText = cleanText(rawBioText || '')
+  const bioText = contentOverlay ? (rawBioText || '') : cleanText(rawBioText || '')
   const coreIdeas: string[] = contentOverlay ? [] : Array.isArray(architect.core_ideas) ? architect.core_ideas : []
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
   const worksWithImages = buildingsWithCovers.filter(building => building.cover_url)

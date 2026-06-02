@@ -637,6 +637,16 @@
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 手机视口验证：Playwright 390×844 打开 `/zh` 菜单，dialog 覆盖完整视口、仅 1 个关闭按钮、body scroll lock 生效，截图保存为 `/tmp/archistory-mobile-menu-final.png`
 
+### 第五十四阶段：克里斯托弗·雷恩建筑师精品页
+- ✅ `architect-content.ts` 新增 `wren` 内容 overlay：中日英摘要、核心思想、三段长文、肖像、3 个代表作导读和文末来源
+- ✅ 肖像使用 Wikimedia Commons 可追溯公共领域图片：`Christopher_Wren_by_Godfrey_Kneller_1711.jpg`，作者 `Godfrey Kneller`，许可 `Public domain`
+- ✅ 代表作导读覆盖 `st-pauls-cathedral`、`greenwich-hospital`、`hampton-court`，三者均已有本地可信作品图覆盖
+- ✅ 内容重点从“科学/数学训练 → 伦敦大火后重建 → 英国巴洛克与城市天际线”建立阅读路径，符合 Architecture Knowledge Graph 的人物/时代/城市/作品关系方向
+- ✅ 修复建筑师详情页日文 overlay 摘要被 `isProbablySimplifiedChinese` 误过滤的问题：人工 overlay 内容不再走数据库回退字段的简中防混入过滤
+- ✅ 来源列表包含 Royal Society、St Paul’s Cathedral、Old Royal Naval College、Wikimedia Commons 和 Wikidata
+- ✅ 本地验证：肖像 URL 与 Wikidata URL 返回 200；`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 构建产物验证：`.next/server/app/zh/architect/wren.rsc`、`/ja/architect/wren.rsc` 均可见肖像、长文标题和参考资料
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
