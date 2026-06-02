@@ -60,13 +60,13 @@
 - 主题系统重做为 `system / light / dark` 三态，默认跟随系统
 - 新增语义色 token：页面背景、surface、输入框、边框、正文、辅助文字、反白文字和交互强调成套切换
 
-### 图片治理（截至 2026-05-25）
+### 图片治理（截至 2026-06-02）
 - 图片策展策略：image-policy.ts（受信任来源 + 开放许可检查）
 - 图片审计：audit-images.mjs（7276 张图片，4794 张可信）
 - 图片注册表：build-image-registry.mjs（632 建筑，4794 图片）
 - 本地缓存脚本：cache-curated-images.mjs
 - 本地缓存：218 张图片（76MB），覆盖 198 个建筑
-- 手动策展：image-overrides.json（39 条目）
+- 远程审核策展：image-overrides.json（20 条目，已去除与本地缓存重复的条目）
 - 本地缓存映射：local-image-overrides.json（198 条目）
 - 图片署名组件：ImageAttribution（首页 hero、精选、详情页）
 
@@ -588,6 +588,8 @@
 - ✅ 保留本地缓存 override 作为唯一优先来源，前台图片选择逻辑不变：本地缓存优先，其次远程审核 override，再其次 Supabase primary image
 - ✅ 重叠审计从 `22` 降为 `0`，远程 override 从 `42` 条降为 `20` 条
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 部署验证：提交 `7111f35` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-gt69pn9lj-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app` 已指向该部署；本地重叠审计确认 `local 198 / remote 20 / overlap 0`
 
 ### 当前 docs/ 结构（11 个文档）
 ```
@@ -615,13 +617,13 @@ docs/
 
 ### 立即（本周）
 1. 统一数据库中的 type_slug 为 slug
-2. 清理 22 个 overrides 重叠条目
+2. 将首页内联三语字符串迁移到统一文案层
+3. 压缩 1MB 以上本地缓存 JPG
 
 ### 短期（两周内）
 4. 拆分 ImageGallery 过大组件
-5. 首页内联三语字符串迁移到 i18n
-6. 首页拆分为子组件
-7. 压缩 1MB 以上本地缓存 JPG
+5. 首页拆分为子组件
+6. 继续补全缺少 biography、portrait 和代表作图片的建筑师
 
 ### 中期（一月内）
 8. 执行 v3 迁移，创建 curated_images 表
