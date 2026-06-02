@@ -5749,6 +5749,97 @@ const overlays: Record<string, ArchitectContentOverlay> = {
     ],
   },
 
+  'herzog-demeuron': {
+    slug: 'herzog-demeuron',
+    summary: {
+      zh: '赫尔佐格与德梅隆把当代建筑从“造型奇观”拉回到材料、表皮、城市记忆和公共感知。他们的作品常以克制体量开始，却通过砖、钢、玻璃、网格、图像和结构肌理，让建筑成为可以被触摸、观看和记忆的城市物体。',
+      ja: 'ヘルツォーク&ド・ムーロンは、現代建築を「形のスペクタクル」から素材、表皮、都市の記憶、公共的な知覚へ引き戻した。抑制された量塊から出発しながら、レンガ、鉄、ガラス、グリッド、イメージ、構造の肌理によって、触れ、見て、記憶できる都市の物体をつくる。',
+      en: 'Herzog & de Meuron return contemporary architecture to material, surface, urban memory, and public perception.',
+    },
+    core_ideas: {
+      zh: ['把建筑表皮变成文化记忆的载体', '在克制体量中制造强烈感知', '让工业遗产转化为公共文化空间', '用结构、图像和材料重新定义城市地标'],
+      ja: ['建築の表皮を文化的記憶の媒体にする', '抑制された量塊の中に強い知覚をつくる', '産業遺産を公共文化空間へ変換する', '構造、イメージ、素材で都市のランドマークを再定義する'],
+      en: ['Surface as cultural memory', 'Intense perception within restrained mass', 'Industrial heritage into civic culture', 'Structure, image, and material as landmarks'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/1/10/Jacques_Herzog_2025.jpg',
+      author: 'Quaenuncabibis',
+      license: 'CC BY-SA 4.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Jacques_Herzog_2025.jpg',
+      alt: {
+        zh: '赫尔佐格与德梅隆合伙人雅克·赫尔佐格肖像',
+        ja: 'ヘルツォーク&ド・ムーロン共同創設者ジャック・ヘルツォークの肖像',
+        en: 'Portrait of Jacques Herzog, co-founder of Herzog & de Meuron',
+      },
+    },
+    sections: [
+      {
+        title: { zh: '表皮不是装饰，而是知识层', ja: '表皮は装飾ではなく知識の層である', en: 'Surface as knowledge layer' },
+        paragraphs: {
+          zh: [
+            '赫尔佐格与德梅隆的建筑经常被误读为“表皮建筑”。但在他们那里，表皮不是事后贴上的装饰，而是建筑与城市、记忆、图像和身体感知之间的界面。从早期仓库和酒厂，到后来的美术馆、体育场和音乐厅，他们反复追问同一个问题：一座建筑如何在不依赖传统象征的情况下，被人看见、记住并愿意靠近。',
+            '这种方法来自瑞士现代主义的克制，也来自对材料经验的敏感。他们并不急于制造复杂的形式，而是让简单体量通过材料发生变化：砖墙可以成为图像，玻璃可以像水面一样反射，钢结构可以变成鸟巢般的城市纹理。建筑的意义不在“形状像什么”，而在材料、光线和观看距离如何不断改变人的判断。',
+          ],
+          ja: [
+            'ヘルツォーク&ド・ムーロンの建築は、しばしば「表皮の建築」として誤読される。しかし彼らにとって表皮は後から貼られる装飾ではなく、建築と都市、記憶、イメージ、身体的知覚を結ぶ界面である。初期の倉庫やワイナリーから、美術館、スタジアム、音楽ホールに至るまで、彼らは同じ問いを繰り返す。伝統的な象徴に頼らず、建築はいかに見られ、記憶され、人を近づけるのか。',
+            'この方法は、スイス近代主義の抑制と、素材経験への鋭い感覚から生まれている。複雑な形態を急いでつくるのではなく、単純な量塊を素材によって変化させる。レンガ壁はイメージになり、ガラスは水面のように反射し、鉄骨は鳥の巣のような都市的肌理になる。意味は「何に似ているか」ではなく、素材、光、見る距離が判断をどう変えるかにある。',
+          ],
+          en: [
+            'Herzog & de Meuron are often misread as architects of surface. For them, surface is not applied decoration but an interface between building, city, memory, image, and bodily perception.',
+            'Their buildings usually begin with restraint. Meaning emerges as brick, glass, steel, grids, and images change with light, distance, and use.',
+          ],
+        },
+      },
+      {
+        title: { zh: '工业遗产成为公共文化', ja: '産業遺産を公共文化へ変える', en: 'Industrial heritage into civic culture' },
+        paragraphs: {
+          zh: [
+            '泰特现代美术馆是理解他们的关键。伦敦 Bankside 发电站原本是一座沉重的工业建筑，赫尔佐格与德梅隆没有把它包装成全新的博物馆图像，而是保留涡轮大厅的巨大尺度，让工业空间直接转化为公共文化空间。进入泰特现代，观众首先感受到的不是白盒展厅，而是一种城市尺度的内部街道。',
+            '这使泰特现代成为二十世纪末最重要的改造案例之一。它证明建筑史不只是新风格替代旧风格，也可以是旧结构被重新解释、旧城市被重新激活。后来易北爱乐厅延续了这个逻辑：旧仓库基座承载新的玻璃音乐厅，港口记忆和当代文化叠合成一个城市地标。',
+          ],
+          ja: [
+            'テート・モダンは彼らを理解する鍵である。ロンドンのバンクサイド発電所は重い産業建築だったが、ヘルツォーク&ド・ムーロンはそれをまったく新しい美術館のイメージで覆わなかった。タービンホールの巨大な尺度を残し、産業空間をそのまま公共文化空間へ変換した。テート・モダンに入ると、まず感じられるのは白い展示室ではなく、都市スケールの内部街路である。',
+            'このためテート・モダンは20世紀末の最重要改修例の一つとなった。建築史は新しい様式が古い様式を置き換えるだけではない。古い構造が再解釈され、古い都市が再び活性化されることもある。後のエルプフィルハーモニーもこの論理を受け継ぐ。古い倉庫の基壇が新しいガラスの音楽ホールを支え、港の記憶と現代文化が一つの都市的ランドマークに重なる。',
+          ],
+          en: [
+            'Tate Modern is central to understanding their practice. The former Bankside Power Station was not disguised as a new museum image; its turbine hall became a public interior at urban scale.',
+            'Elbphilharmonie extends this logic: an old warehouse base supports a new glass concert hall, joining port memory with contemporary civic culture.',
+          ],
+        },
+      },
+      {
+        title: { zh: '地标不必只靠形状', ja: 'ランドマークは形だけで成り立たない', en: 'Landmarks beyond shape' },
+        paragraphs: {
+          zh: [
+            '北京国家体育场常被称为“鸟巢”，但它的意义并不止于图像比喻。它把结构、表皮和城市符号压缩在同一个系统中：看似随机的钢构件既是承重逻辑，也是视觉图像，还是大型公共事件的城市舞台。这种建筑并不追求传统纪念碑的单一正面，而是以多方向、多尺度的纹理进入公众记忆。',
+            '赫尔佐格与德梅隆的影响在于，他们让当代建筑重新获得“可读性”。这种可读性不是简单说明牌，而是材料和结构自身的表达能力：观众不一定知道所有技术细节，却能感到一座建筑正在从城市历史、功能需求和感官经验中长出来。对 Archistory 来说，他们是理解二十世纪末到二十一世纪初公共文化建筑转向的重要节点。',
+          ],
+          ja: [
+            '北京国家体育場は「鳥の巣」と呼ばれるが、その意味はイメージの比喩にとどまらない。構造、表皮、都市的記号が一つのシステムに圧縮されている。ランダムに見える鉄骨部材は、荷重を担う論理であり、視覚イメージであり、大規模な公共イベントの都市的舞台でもある。この建築は伝統的記念碑の単一の正面を求めず、多方向、多尺度の肌理として公共の記憶に入る。',
+            '彼らの影響は、現代建築に再び「読みやすさ」を与えた点にある。その読みやすさは説明板ではなく、素材と構造そのものの表現力である。観客はすべての技術的細部を知らなくても、建築が都市の歴史、機能の要請、感覚経験から生まれていることを感じ取れる。Archistory にとって彼らは、20世紀末から21世紀初頭の公共文化建築の転換を理解する重要な節点である。',
+          ],
+          en: [
+            'Beijing National Stadium compresses structure, skin, and urban symbol into one system. Its apparent randomness is load-bearing logic, image, and public stage at once.',
+            'Their influence lies in making contemporary architecture readable again through material and structure rather than explanatory signage.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'tate-modern', note: { zh: '将 Bankside 发电站转化为美术馆，让涡轮大厅成为城市尺度的公共文化室内街道。', ja: 'バンクサイド発電所を美術館へ転換し、タービンホールを都市スケールの公共文化の内部街路にした。', en: 'A power station transformed into a museum, with the turbine hall as an urban-scale public interior.' } },
+      { slug: 'beijing-national-stadium', note: { zh: '结构、表皮和城市符号合而为一，鸟巢式钢构成为二十一世纪公共事件的视觉记忆。', ja: '構造、表皮、都市的記号が一体化し、鳥の巣状の鉄骨が21世紀の公共イベントの視覚的記憶となった。', en: 'Structure, surface, and civic symbol fused into a visual memory of twenty-first-century public events.' } },
+      { slug: 'hamburg-elbphilharmonie', note: { zh: '旧港口仓库与新玻璃音乐厅叠合，使城市记忆、声学空间和天际线形成新的公共地标。', ja: '古い港湾倉庫と新しいガラスの音楽ホールを重ね、都市の記憶、音響空間、スカイラインを新しい公共的ランドマークにした。', en: 'An old harbor warehouse and a new glass concert hall layered into a civic landmark of memory, acoustics, and skyline.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Herzog & de Meuron', url: 'https://www.pritzkerprize.com/laureates/2001' },
+      { title: 'Tate: History of Tate Modern', url: 'https://www.tate.org.uk/about-us/history-tate/history-of-tate-modern' },
+      { title: 'Herzog & de Meuron: National Stadium', url: 'https://www.herzogdemeuron.com/projects/226-national-stadium/' },
+      { title: 'Herzog & de Meuron: Elbphilharmonie Hamburg', url: 'https://www.herzogdemeuron.com/projects/230-elbphilharmonie-hamburg/' },
+      { title: 'Wikimedia Commons: Jacques Herzog 2025', url: 'https://commons.wikimedia.org/wiki/File:Jacques_Herzog_2025.jpg' },
+      { title: 'Wikidata: Herzog & de Meuron', url: 'https://www.wikidata.org/wiki/Q665483' },
+    ],
+  },
+
 }
 
 const overlayAliases: Record<string, string> = {

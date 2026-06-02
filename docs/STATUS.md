@@ -647,6 +647,15 @@
 - ✅ 本地验证：肖像 URL 与 Wikidata URL 返回 200；`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 构建产物验证：`.next/server/app/zh/architect/wren.rsc`、`/ja/architect/wren.rsc` 均可见肖像、长文标题和参考资料
 
+### 第五十五阶段：赫尔佐格与德梅隆建筑师精品页
+- ✅ `architect-content.ts` 新增 `herzog-demeuron` 内容 overlay：中日英摘要、核心思想、三段长文、合伙人肖像、3 个代表作导读和文末来源
+- ✅ 肖像使用 Wikimedia Commons 可追溯图片：`Jacques_Herzog_2025.jpg`，作者 `Quaenuncabibis`，许可 `CC BY-SA 4.0`；alt 明确为“合伙人雅克·赫尔佐格肖像”，不误称双人合照
+- ✅ 代表作导读覆盖 `tate-modern`、`beijing-national-stadium`、`hamburg-elbphilharmonie`；站内四个 Herzog & de Meuron 作品归属已核对，均为 `architect_slug = herzog-demeuron`
+- ✅ 内容重点从“表皮作为知识层 → 工业遗产转化为公共文化 → 当代地标的可读性”建立阅读路径，补强材料、城市记忆、公共文化建筑维度
+- ✅ 来源列表包含 Pritzker、Tate、Herzog & de Meuron 官方项目页、Wikimedia Commons 和 Wikidata
+- ✅ 内容筛选延续：`toyo-ito` 仍暂缓精品页，因为站内作品仍含 `todaiji-temple` 错误归属，需先修数据再写长文
+- ✅ 本地验证：Pritzker、Tate、H&dM 国家体育场/易北爱乐厅、Wikimedia Commons、Wikidata 来源 URL 均已检查可访问；`npm run lint` 通过（剩余 2 个既有 `<img>` warning）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
