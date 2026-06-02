@@ -580,6 +580,8 @@
 - ✅ 文档同步：`DATA_SCHEMA.md` 记录分类兼容层与未来数据库迁移方向
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 本地页面验证：`/zh/browse/type/religious`、`/zh/browse/type/cultural`、`/en/browse/type/religious` 均返回新版分类详情结构
+- ✅ 部署验证：提交 `e10b28b` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-bzjxt2290-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/zh/browse/type/religious`、`/zh/browse/type/cultural`、`/en/browse/type/religious` 均返回新版分类详情结构
 
 ### 当前 docs/ 结构（11 个文档）
 ```
