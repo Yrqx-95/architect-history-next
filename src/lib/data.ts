@@ -23,6 +23,11 @@ const cachedImageOverrides = localImageOverrides as Record<string, ImageOverride
 const cache = new Map<string, { data: unknown; ts: number }>()
 const TTL = 300_000
 const FETCH_PAGE_SIZE = 500
+const FETCH_MAX_ATTEMPTS = 6
+
+function isTransientSupabaseError(message: string) {
+  return /Bad control character|JSON|522|Connection timed out|Cloudflare|DOCTYPE|fetch failed|network|timeout/i.test(message)
+}
 
 async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
   const entry = cache.get(key)
@@ -40,12 +45,12 @@ async function fetchAll<T>(table: string): Promise<T[]> {
     const to = from + FETCH_PAGE_SIZE - 1
     let data: T[] | null = null
     let error: { message: string } | null = null
-    for (let attempt = 0; attempt < 3; attempt += 1) {
+    for (let attempt = 0; attempt < FETCH_MAX_ATTEMPTS; attempt += 1) {
       const response = await supabase.from(table).select('*').range(from, to)
       data = (response.data as T[] | null) || null
       error = response.error ? { message: response.error.message } : null
-      if (!error || !/Bad control character|JSON/i.test(error.message)) break
-      await new Promise(resolve => setTimeout(resolve, 150 * (attempt + 1)))
+      if (!error || !isTransientSupabaseError(error.message) || attempt === FETCH_MAX_ATTEMPTS - 1) break
+      await new Promise(resolve => setTimeout(resolve, 300 * 2 ** attempt))
     }
     if (error) throw new Error(`${table}: ${error.message}`)
     if (!data || !data.length) break

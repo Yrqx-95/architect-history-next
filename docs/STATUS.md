@@ -672,6 +672,8 @@
 - ✅ 内容重点从“建筑师成为知识分子 → 《建筑十书》与古典秩序 → 立面作为城市秩序”建立阅读路径，承接 Brunelleschi 的工程/透视节点，补强文艺复兴理论链
 - ✅ 来源列表包含 Encyclopaedia Britannica、Santa Maria Novella 官方页、Mantova 城市资料页、Wikimedia Commons 和 Wikidata；NGA 原页面脚本访问返回 403，因此前台使用 Commons 作为稳定肖像来源
 - ✅ 本地验证：全部来源 URL 与肖像直链返回 200；`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；构建产物中 `/zh/architect/alberti` 与 `/ja/architect/alberti` 均可见肖像、长文和参考资料
+- ⚠️ 首次 Vercel 部署失败原因不是 Alberti 内容错误，而是构建期读取 Supabase `architects` 表时 Supabase/Cloudflare 返回 `522 Connection timed out`
+- ✅ `data.ts` 加强 Supabase 分页读取重试：将 transient error 识别从 JSON 解析扩展到 `522`、`Connection timed out`、`Cloudflare`、`DOCTYPE`、network/timeout，并使用 6 次指数退避，降低生产构建被短时网络波动打断的概率
 
 ### 当前 docs/ 结构（11 个文档）
 ```
