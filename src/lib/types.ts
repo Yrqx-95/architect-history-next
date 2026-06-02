@@ -272,10 +272,10 @@ export function formatDisplayLocation({
   countryCode?: string | null
   lang: string
 }): string {
-  if (lang !== 'ja') return formatLocation(city, country)
+  if (lang === 'zh') return formatLocation(city, country)
 
   const localizedCountry = formatCountryName(countryCode, country, lang)
-  const safeCity = city && !isProbablySimplifiedChinese(city) ? city : ''
+  const safeCity = city && !hasCjk(city) ? city : ''
   if (safeCity && localizedCountry) return `${safeCity}, ${localizedCountry}`
   return safeCity || localizedCountry || ''
 }

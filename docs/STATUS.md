@@ -591,6 +591,15 @@
 - ✅ 部署验证：提交 `7111f35` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-gt69pn9lj-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app` 已指向该部署；本地重叠审计确认 `local 198 / remote 20 / overlap 0`
 
+### 第四十九阶段：首页文案层整理
+- ✅ `/[lang]` 首页新增 `HOME_COPY` 本页文案层，把 metadata、hero label、统计标签、section 描述和知识导览入口从组件 JSX 中集中出来
+- ✅ 首页主体不再散落三语 UI 文案判断，后续调整 Archistory 品牌口吻、繁体显示和日文文案时可在单一结构中维护
+- ✅ 保留日文页对未本地化简体数据的过滤逻辑，避免把数据库缺口误当成 UI 文案混入页面
+- ✅ 英文首页新增 CJK 简介保护：当建筑描述缺少英文而回退到中文时，前台改显示地点/年份等结构化信息，避免英文页混入中文段落
+- ✅ `formatDisplayLocation` 改为中文页保留原始中文地点，英文/日文页使用国家代码本地化国家名并隐藏未本地化中文城市名
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 构建产物验证：`.next/server/app/zh.rsc`、`/en.rsc`、`/ja.rsc` 均可见对应首页 UI 文案；英文首页不再出现已知中文简介与中文地点片段
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -609,21 +618,21 @@ docs/
 
 ### 仍待修复（按优先级）
 1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
-2. 🟢 首页 40 处内联三语字符串待迁移
-3. 🟢 首页 358 行待拆分
+2. 🟢 首页 500 行，后续仍应拆分为 hero、featured、architect index、timeline preview 等子组件
+3. 🟢 压缩 1MB 以上本地缓存 JPG，降低移动端图片负担
 4. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级
 
 ### 立即（本周）
 1. 统一数据库中的 type_slug 为 slug
-2. 将首页内联三语字符串迁移到统一文案层
-3. 压缩 1MB 以上本地缓存 JPG
+2. 压缩 1MB 以上本地缓存 JPG
+3. 继续补全缺少 biography、portrait 和代表作图片的建筑师
 
 ### 短期（两周内）
 4. 拆分 ImageGallery 过大组件
 5. 首页拆分为子组件
-6. 继续补全缺少 biography、portrait 和代表作图片的建筑师
+6. 将高复用页面文案继续迁移到集中 copy/i18n 层
 
 ### 中期（一月内）
 8. 执行 v3 迁移，创建 curated_images 表

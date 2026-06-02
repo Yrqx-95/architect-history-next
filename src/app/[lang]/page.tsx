@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getCounts, getFeaturedBuildingsWithCovers } from '@/lib/data'
+import type { Lang } from '@/lib/types'
 import { displayName, displayText, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
 import { matchesTaxonomy } from '@/lib/taxonomy'
 import SectionHeading from '@/components/SectionHeading'
@@ -12,15 +13,171 @@ import ImageAttribution from '@/components/ImageAttribution'
 
 export const revalidate = 3600
 
+type HomeCopy = {
+  metaDescription: string
+  featuredWork: string
+  architect: string
+  year: string
+  location: string
+  stats: {
+    buildings: string
+    architects: string
+    styles: string
+    countries: string
+  }
+  featuredDescription: string
+  featuredBuilding: string
+  architectsDescription: string
+  timelineDescription: string
+  stylesDescription: string
+  guidesTitle: string
+  guidesDescription: string
+  guides: Array<{
+    title: string
+    body: string
+    href: 'paths' | 'timeline' | 'browse' | 'search'
+  }>
+}
+
+const HOME_COPY: Record<Lang, HomeCopy> = {
+  zh: {
+    metaDescription: 'Archistory 是建筑、人物与时代的在线档案。',
+    featuredWork: '本期作品',
+    architect: '建筑师',
+    year: '年份',
+    location: '地点',
+    stats: {
+      buildings: '建筑',
+      architects: '建筑师',
+      styles: '风格',
+      countries: '国家 / 地区',
+    },
+    featuredDescription: '从图像、年代与地点进入建筑档案的编辑精选。',
+    featuredBuilding: '精选建筑',
+    architectsDescription: '以作者、年代与空间立场组织的建筑师索引。',
+    timelineDescription: '以可浏览的年代线索进入建筑史。',
+    stylesDescription: '运动、倾向与形式语言。',
+    guidesTitle: '知识导览',
+    guidesDescription: '不止于图片画廊的档案入口。',
+    guides: [
+      {
+        title: '按路径阅读',
+        body: '沿着策划路线，把建筑师、作品、风格与时代连续读下去。',
+        href: 'paths',
+      },
+      {
+        title: '按时代阅读',
+        body: '以时代为线索，从古典秩序到当代实践梳理建筑脉络。',
+        href: 'timeline',
+      },
+      {
+        title: '阅读人物谱系',
+        body: '从建筑师、作品、运动与影响关系中阅读空间思想。',
+        href: 'browse',
+      },
+      {
+        title: '检索档案',
+        body: '通过名称、地点、风格或类型直接进入档案。',
+        href: 'search',
+      },
+    ],
+  },
+  en: {
+    metaDescription: 'Archistory is an online archive of architecture, people, and time.',
+    featuredWork: 'Featured work',
+    architect: 'Architect',
+    year: 'Year',
+    location: 'Location',
+    stats: {
+      buildings: 'Buildings',
+      architects: 'Architects',
+      styles: 'Styles',
+      countries: 'Countries',
+    },
+    featuredDescription: 'A current edit of buildings with distinct visual and historical entry points.',
+    featuredBuilding: 'Featured building',
+    architectsDescription: 'A compact index of authorship, chronology, and recurring spatial positions.',
+    timelineDescription: 'A preview of architectural history as a browsable chronology.',
+    stylesDescription: 'Movements, tendencies, and formal languages.',
+    guidesTitle: 'Knowledge guides',
+    guidesDescription: 'Ways into the archive beyond a single gallery view.',
+    guides: [
+      {
+        title: 'Follow a path',
+        body: 'Move through curated sequences that connect architects, works, styles, and periods.',
+        href: 'paths',
+      },
+      {
+        title: 'Read by period',
+        body: 'Move through eras as a structured historical index, from classical orders to contemporary practice.',
+        href: 'timeline',
+      },
+      {
+        title: 'Trace authorship',
+        body: 'Follow architects through built works, movements, influences, and recurring spatial questions.',
+        href: 'browse',
+      },
+      {
+        title: 'Search the archive',
+        body: 'Use names, places, styles, or building types to enter the collection directly.',
+        href: 'search',
+      },
+    ],
+  },
+  ja: {
+    metaDescription: 'Archistory は、建築、人物、時代を読むオンライン・アーカイブです。',
+    featuredWork: '特集作品',
+    architect: '建築家',
+    year: '竣工年',
+    location: '所在地',
+    stats: {
+      buildings: '建築',
+      architects: '建築家',
+      styles: '様式',
+      countries: '地域',
+    },
+    featuredDescription: '視覚的・歴史的な入口をもつ建築の編集セレクション。',
+    featuredBuilding: '特集建築',
+    architectsDescription: '作者性、年代、空間的立場を横断するコンパクトな索引。',
+    timelineDescription: '閲覧できる年代記としての建築史。',
+    stylesDescription: '運動、傾向、形式言語。',
+    guidesTitle: '知識ガイド',
+    guidesDescription: '単なるギャラリーではない、アーカイブへの入口。',
+    guides: [
+      {
+        title: 'ルートで読む',
+        body: '建築家、作品、様式、時代を結ぶ選定ルートで読み進める。',
+        href: 'paths',
+      },
+      {
+        title: '時代から読む',
+        body: '古典的秩序から現代の実践まで、時代を手がかりに建築をたどる。',
+        href: 'timeline',
+      },
+      {
+        title: '作者性をたどる',
+        body: '建築家、作品、運動、影響関係から空間思想を読み解く。',
+        href: 'browse',
+      },
+      {
+        title: 'アーカイブを検索',
+        body: '名称、場所、様式、建築種別からコレクションへ入る。',
+        href: 'search',
+      },
+    ],
+  },
+}
+
+function getHomeCopy(lang: string): HomeCopy {
+  return HOME_COPY[lang as Lang] || HOME_COPY.zh
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
+  const copy = getHomeCopy(lang)
   return {
     title: t(lang, 'hero'),
-    description: lang === 'en'
-      ? 'Archistory is an online archive of architecture, people, and time.'
-      : lang === 'ja'
-      ? 'Archistory は、建築、人物、時代を読むオンライン・アーカイブです。'
-      : 'Archistory 是建筑、人物与时代的在线档案。',
+    description: copy.metaDescription,
   }
 }
 
@@ -34,6 +191,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     getArchitects(),
   ])
   const prefix = `/${lang}`
+  const copy = getHomeCopy(lang)
 
   const activeEras = eras.filter(e =>
     architects.some(a => matchesTaxonomy(a.era_slug, e))
@@ -44,7 +202,11 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     if (era) return displayName(era, lang)
     return lang === 'ja' && isProbablySimplifiedChinese(value) ? '' : value
   }
-  const cleanSnippet = (value: string) => (lang === 'ja' && isProbablySimplifiedChinese(value) ? '' : value)
+  const cleanSnippet = (value: string) => {
+    if (lang === 'en' && /[\u3400-\u9fff]/.test(value)) return ''
+    if (lang === 'ja' && isProbablySimplifiedChinese(value)) return ''
+    return value
+  }
 
   const allBuildings = await getBuildingsWithCovers()
   const architectBuildingCount = new Map<string, number>()
@@ -85,48 +247,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const heroYear = heroBuilding?.year_start ? String(heroBuilding.year_start) : ''
   const heroMeta = [heroArchitectName, heroYear, heroLocation].filter(Boolean)
   const heroDescription = heroBuilding
-    ? displayText(heroBuilding.description, lang) ||
-      displayText(heroBuilding.significance, lang) ||
+    ? cleanSnippet(displayText(heroBuilding.description, lang) || displayText(heroBuilding.significance, lang)) ||
       [heroName, heroArchitectName, heroLocation, heroYear].filter(Boolean).join(' · ')
     : ''
-  const guideItems = [
-    {
-      title: lang === 'en' ? 'Follow a path' : lang === 'ja' ? 'ルートで読む' : '按路径阅读',
-      body: lang === 'en'
-        ? 'Move through curated sequences that connect architects, works, styles, and periods.'
-        : lang === 'ja'
-        ? '建築家、作品、様式、時代を結ぶ選定ルートで読み進める。'
-        : '沿着策划路线，把建筑师、作品、风格与时代连续读下去。',
-      href: `${prefix}/paths`,
-    },
-    {
-      title: lang === 'en' ? 'Read by period' : lang === 'ja' ? '時代から読む' : '按时代阅读',
-      body: lang === 'en'
-        ? 'Move through eras as a structured historical index, from classical orders to contemporary practice.'
-        : lang === 'ja'
-        ? '古典的秩序から現代の実践まで、時代を手がかりに建築をたどる。'
-        : '以时代为线索，从古典秩序到当代实践梳理建筑脉络。',
-      href: `${prefix}/timeline`,
-    },
-    {
-      title: lang === 'en' ? 'Trace authorship' : lang === 'ja' ? '作者性をたどる' : '阅读人物谱系',
-      body: lang === 'en'
-        ? 'Follow architects through built works, movements, influences, and recurring spatial questions.'
-        : lang === 'ja'
-        ? '建築家、作品、運動、影響関係から空間思想を読み解く。'
-        : '从建筑师、作品、运动与影响关系中阅读空间思想。',
-      href: `${prefix}/browse`,
-    },
-    {
-      title: lang === 'en' ? 'Search the archive' : lang === 'ja' ? 'アーカイブを検索' : '检索档案',
-      body: lang === 'en'
-        ? 'Use names, places, styles, or building types to enter the collection directly.'
-        : lang === 'ja'
-        ? '名称、場所、様式、建築種別からコレクションへ入る。'
-        : '通过名称、地点、风格或类型直接进入档案。',
-      href: `${prefix}/search`,
-    },
-  ]
+  const guideItems = copy.guides.map(item => ({ ...item, href: `${prefix}/${item.href}` }))
 
   return (
     <div>
@@ -134,7 +258,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_18rem] sm:items-end sm:gap-8">
           <div>
             <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-paper-100/62 sm:text-xs">
-              {lang === 'en' ? 'Featured work' : lang === 'ja' ? '特集作品' : '本期作品'}
+              {copy.featuredWork}
             </p>
             <h1 className="max-w-4xl text-[2.35rem] font-semibold leading-[1.04] text-paper-100 sm:text-6xl sm:leading-[1.02] lg:text-7xl">
               {heroName}
@@ -150,7 +274,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {heroArchitectName && (
                 <div className="sm:mb-5">
                   <dt className="text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42">
-                    {lang === 'en' ? 'Architect' : lang === 'ja' ? '建築家' : '建筑师'}
+                    {copy.architect}
                   </dt>
                   <dd className="mt-1 text-sm text-paper-100">{heroArchitectName}</dd>
                 </div>
@@ -158,7 +282,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {heroYear && (
                 <div className="sm:mb-5">
                   <dt className="text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42">
-                    {lang === 'en' ? 'Year' : lang === 'ja' ? '竣工年' : '年份'}
+                    {copy.year}
                   </dt>
                   <dd className="mt-1 text-sm text-paper-100">{heroYear}</dd>
                 </div>
@@ -166,7 +290,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               {heroLocation && (
                 <div className="col-span-2">
                   <dt className="text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42">
-                    {lang === 'en' ? 'Location' : lang === 'ja' ? '所在地' : '地点'}
+                    {copy.location}
                   </dt>
                   <dd className="mt-1 text-sm text-paper-100">{heroLocation}</dd>
                 </div>
@@ -189,10 +313,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         <div className="grid gap-4 border-y border-warm-200/80 py-5 dark:border-charcoal-700/80 lg:grid-cols-[minmax(0,1fr)_26rem] lg:items-center">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
-              [counts.buildings, lang === 'en' ? 'Buildings' : lang === 'ja' ? '建築' : '建筑'],
-              [counts.architects, lang === 'en' ? 'Architects' : lang === 'ja' ? '建築家' : '建筑师'],
-              [counts.styles, lang === 'en' ? 'Styles' : lang === 'ja' ? '様式' : '风格'],
-              [counts.countries, lang === 'en' ? 'Countries' : lang === 'ja' ? '地域' : '国家 / 地区'],
+              [counts.buildings, copy.stats.buildings],
+              [counts.architects, copy.stats.architects],
+              [counts.styles, copy.stats.styles],
+              [counts.countries, copy.stats.countries],
             ].map(([value, label]) => (
               <div key={label} className="min-w-0">
                 <p className="font-serif-display text-3xl leading-none text-primary">{value}</p>
@@ -218,7 +342,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         <section className="section">
           <SectionHeading
             title={t(lang, 'featured')}
-            description={lang === 'en' ? 'A current edit of buildings with distinct visual and historical entry points.' : lang === 'ja' ? '視覚的・歴史的な入口をもつ建築の編集セレクション。' : '从图像、年代与地点进入建筑档案的编辑精选。'}
+            description={copy.featuredDescription}
             action={<Link href={`${prefix}/browse`} className="text-xs sm:text-sm text-warm-600 hover:text-warm-800 dark:text-warm-300 dark:hover:text-paper-100 transition-colors">{t(lang, 'viewAll')} →</Link>}
           />
           {featuredLead && (
@@ -244,7 +368,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 <div className="mt-6 grid gap-4 border-b border-subtle pb-7 sm:grid-cols-[minmax(0,1fr)_12rem]">
                   <div>
                     <p className="label mb-2">
-                      {lang === 'en' ? 'Featured building' : lang === 'ja' ? '特集建築' : '精选建筑'}
+                      {copy.featuredBuilding}
                     </p>
                     <h2 className="text-2xl font-medium leading-tight text-primary sm:text-3xl">{displayName(featuredLead, lang)}</h2>
                   </div>
@@ -301,7 +425,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             <p className="font-serif-display text-6xl leading-none text-warm-200 dark:text-charcoal-700">{counts.architects}</p>
             <h2 className="heading-2 mt-3">{t(lang, 'architects')}</h2>
             <p className="caption mt-3 max-w-xs">
-              {lang === 'en' ? 'A compact index of authorship, chronology, and recurring spatial positions.' : lang === 'ja' ? '作者性、年代、空間的立場を横断するコンパクトな索引。' : '以作者、年代与空间立场组织的建筑师索引。'}
+              {copy.architectsDescription}
             </p>
           </div>
           <div className="grid gap-x-8 border-t border-warm-200/70 dark:border-charcoal-700 sm:grid-cols-2">
@@ -328,7 +452,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           <div>
             <SectionHeading
               title={t(lang, 'timeline')}
-              description={lang === 'en' ? 'A preview of architectural history as a browsable chronology.' : lang === 'ja' ? '閲覧できる年代記としての建築史。' : '以可浏览的年代线索进入建筑史。'}
+              description={copy.timelineDescription}
               action={<Link href={`${prefix}/timeline`} className="text-xs sm:text-sm text-warm-600 hover:text-warm-800 dark:text-warm-300 dark:hover:text-paper-100 transition-colors">{t(lang, 'viewAll')} →</Link>}
             />
             <div className="space-y-0 border-y border-warm-200/70 dark:border-charcoal-700">
@@ -343,7 +467,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           <div>
             <SectionHeading
               title={t(lang, 'styles')}
-              description={lang === 'en' ? 'Movements, tendencies, and formal languages.' : lang === 'ja' ? '運動、傾向、形式言語。' : '运动、倾向与形式语言。'}
+              description={copy.stylesDescription}
             />
             <div className="flex flex-wrap gap-2">
               {styles.slice(0, 18).map(s => (
@@ -361,8 +485,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <Reveal>
         <section className="section pb-20">
           <SectionHeading
-            title={lang === 'en' ? 'Knowledge guides' : lang === 'ja' ? '知識ガイド' : '知识导览'}
-            description={lang === 'en' ? 'Ways into the archive beyond a single gallery view.' : lang === 'ja' ? '単なるギャラリーではない、アーカイブへの入口。' : '不止于图片画廊的档案入口。'}
+            title={copy.guidesTitle}
+            description={copy.guidesDescription}
           />
           <div className="grid gap-5 md:grid-cols-4">
             {guideItems.map(item => (
