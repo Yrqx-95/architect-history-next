@@ -608,6 +608,8 @@
 - ✅ 3 张图片总量约从 3.4MB 降到 1.6MB；`public/images/curated` 中 1MB 以上 JPG 数量从 `3` 降为 `0`
 - ✅ 人工抽样查看三张压缩后图片，未见明显压缩损伤或主题变暗问题
 - ✅ 文档同步：`PERFORMANCE.md` 更新当前最大 JPG、curated 目录体积和后续图片入库阈值
+- ✅ 部署验证：提交 `65dde75` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-53ycroaq3-yrqx-95s-projects.vercel.app` Ready
+- ✅ 正式域名验证：`https://archistory.app/images/curated/...` 三张图片返回压缩后的 `content-length`：392750、403580、893919 bytes
 
 ### 当前 docs/ 结构（11 个文档）
 ```
