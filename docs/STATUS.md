@@ -65,7 +65,7 @@
 - 图片审计：audit-images.mjs（7276 张图片，4794 张可信）
 - 图片注册表：build-image-registry.mjs（632 建筑，4794 图片）
 - 本地缓存脚本：cache-curated-images.mjs
-- 本地缓存：218 张图片（76MB），覆盖 198 个建筑
+- 本地缓存：220 张图片（约 75MB），覆盖 198 个建筑
 - 远程审核策展：image-overrides.json（20 条目，已去除与本地缓存重复的条目）
 - 本地缓存映射：local-image-overrides.json（198 条目）
 - 图片署名组件：ImageAttribution（首页 hero、精选、详情页）
@@ -602,6 +602,13 @@
 - ✅ 部署验证：提交 `12f549e` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-pqe037d08-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh`、`/en`、`/ja` 均返回新版首页 UI 文案；英文页显示 `China · 2019`，不再返回已知中文简介或中文地点片段
 
+### 第五十阶段：本地大图体积压缩
+- ✅ 压缩 3 张超过 1MB 的本地缓存 JPG：`asakusa-culture-center-1024.jpg`、`empire-state-building-1024.jpg`、`122-leadenhall-street-1024.jpg`
+- ✅ 竖图最长边控制到 1600px；浅草文化观光中心图保持原始 914×1500 尺寸，避免无意义放大
+- ✅ 3 张图片总量约从 3.4MB 降到 1.6MB；`public/images/curated` 中 1MB 以上 JPG 数量从 `3` 降为 `0`
+- ✅ 人工抽样查看三张压缩后图片，未见明显压缩损伤或主题变暗问题
+- ✅ 文档同步：`PERFORMANCE.md` 更新当前最大 JPG、curated 目录体积和后续图片入库阈值
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -621,19 +628,19 @@ docs/
 ### 仍待修复（按优先级）
 1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
 2. 🟢 首页 500 行，后续仍应拆分为 hero、featured、architect index、timeline preview 等子组件
-3. 🟢 压缩 1MB 以上本地缓存 JPG，降低移动端图片负担
+3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师
 4. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级
 
 ### 立即（本周）
 1. 统一数据库中的 type_slug 为 slug
-2. 压缩 1MB 以上本地缓存 JPG
-3. 继续补全缺少 biography、portrait 和代表作图片的建筑师
+2. 继续补全缺少 biography、portrait 和代表作图片的建筑师
+3. 拆分首页为子组件
 
 ### 短期（两周内）
 4. 拆分 ImageGallery 过大组件
-5. 首页拆分为子组件
+5. 新增图片入库前 1MB 阈值检查
 6. 将高复用页面文案继续迁移到集中 copy/i18n 层
 
 ### 中期（一月内）
