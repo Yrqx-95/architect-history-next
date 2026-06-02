@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-06-02T17:14:57.278Z",
+  "totals": {
+    "architects": 106,
+    "buildings": 875,
+    "images": 7276
+  },
+  "displayCoverage": {
+    "architectTextCoveredByFallback": 106,
+    "buildingTextCoveredByFallback": 875,
+    "buildingsMissingAnyImage": 0,
+    "architectsMissingPortraitOrRepresentativeWorkImage": 4
+  },
+  "sourceCoverage": {
+    "architectPortraitOverrides": 88,
+    "architectsMissingSourceBio": 0,
+    "buildingsMissingSourceText": 739
+  },
+  "gaps": {
+    "buildingsMissingAnyImage": [],
+    "architectsMissingPortraitOrRepresentativeWorkImage": [
+      {
+        "slug": "mvrdv",
+        "name": "MVRDV"
+      },
+      {
+        "slug": "sinan",
+        "name": "Mimar Sinan"
+      },
+      {
+        "slug": "antonin-raymond",
+        "name": "Antonin Raymond"
+      },
+      {
+        "slug": "studio-mumbai",
+        "name": "Studio Mumbai"
+      }
+    ]
+  }
+}

@@ -404,6 +404,26 @@ db/content-coverage-report.json
 
 注意：前台已有 `fallback-content.ts` 作为 P0 体验覆盖层，因此报告中的“正文为空”不等于页面完全空白；它表示数据库中仍缺少可迁移、可审校的正式内容字段。
 
+展示层覆盖脚本：
+
+```
+npm run content:audit-display
+```
+
+输出：
+
+```
+db/display-coverage-report.json
+```
+
+它检查的是运行时实际可见结果：
+
+- 建筑是否有 Supabase 图片或 curated cover
+- 建筑师是否有 verified portrait，或至少有一张可靠代表作图像可兜底
+- 建筑师/建筑是否能通过 fallback 层避免空白页面
+
+截至第六十一阶段，建筑图片展示缺口为 0；建筑师仍有 4 个缺口：`mvrdv`、`sinan`、`antonin-raymond`、`studio-mumbai`。这些条目没有可靠开放肖像，也没有关联作品可作为代表作图像，因此不应使用无来源图片补洞。
+
 ## Slug 规则
 
 - building slug: 英文名 kebab-case，如 `empire-state-building`

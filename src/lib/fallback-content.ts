@@ -19,7 +19,8 @@ function localizedPresent(lang: ContentLang) {
   return '至今'
 }
 
-function localizedNationality(value: string, lang: ContentLang) {
+export function localizedNationality(value: string, lang: string) {
+  const l = locale(lang)
   const map: Record<string, Record<ContentLang, string>> = {
     Italy: { zh: '意大利', ja: 'イタリア', en: 'Italy' },
     Japan: { zh: '日本', ja: '日本', en: 'Japan' },
@@ -37,7 +38,7 @@ function localizedNationality(value: string, lang: ContentLang) {
     Brazil: { zh: '巴西', ja: 'ブラジル', en: 'Brazil' },
     India: { zh: '印度', ja: 'インド', en: 'India' },
   }
-  return map[value]?.[lang] || value
+  return map[value]?.[l] || value
 }
 
 export function getArchitectFallbackSummary({

@@ -11,7 +11,7 @@ import {
 } from '@/lib/architect-knowledge-relations'
 import { displayName, formatDisplayLocation, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
-import { getArchitectFallbackSummary } from '@/lib/fallback-content'
+import { getArchitectFallbackSummary, localizedNationality } from '@/lib/fallback-content'
 import { getArchitectImageOverride, type ArchitectImageOverride } from '@/lib/architect-images'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -126,7 +126,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const overlay = getArchitectContent(slug)
   const details = overlay
     ? localizedContent(overlay.summary, lang)
-    : [rels.architect.birth_year, rels.architect.nationalities?.join(', ')].filter(Boolean).join(' · ')
+    : [
+        rels.architect.birth_year,
+        rels.architect.nationalities?.map(nationality => localizedNationality(nationality, lang)).join(lang === 'en' ? ', ' : '、'),
+      ].filter(Boolean).join(' · ')
   return { title: name, description: details || undefined }
 }
 
@@ -224,7 +227,12 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
   const metaRows = [
     { label: t(lang, 'lifeSpan'), value: architect.birth_year ? `${architect.birth_year} – ${architect.death_year || t(lang, 'present')}` : null },
-    { label: t(lang, 'nationality'), value: architect.nationalities?.join(', ') || null },
+    {
+      label: t(lang, 'nationality'),
+      value: architect.nationalities?.length
+        ? architect.nationalities.map(nationality => localizedNationality(nationality, lang)).join(lang === 'en' ? ', ' : '、')
+        : null,
+    },
     { label: t(lang, 'style'), value: styles.length ? styles.map(style => displayName(style, lang)).join(', ') : null },
     { label: t(lang, 'eras'), value: era ? displayName(era, lang) : null },
     { label: t(lang, 'education'), value: architect.education ? cleanText(architect.education) : null },

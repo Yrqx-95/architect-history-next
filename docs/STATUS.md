@@ -706,6 +706,13 @@
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；移动端复扫 `/zh/building/parc1`、`/ja/building/villa-savoye`、`/zh/architect/aldo-rossi`、`/ja/architect/aldo-rossi`、`/zh/map`、`/zh/browse` 无横向溢出、无当前视口破图
 - ⚠️ 仍有 18 位建筑师未获得可靠 Commons P18 肖像或授权未确认（如 BIG、SANAA、MVRDV、Zaha Hadid、Jørn Utzon、Kunio Maekawa 等），已记录在 `db/architect-portrait-report.json`，下一步需要人工确认官方/基金会/博物馆开放图片
 
+### 第六十一阶段：展示层覆盖审计与剩余缺口收敛
+- ✅ 新增 `audit-display-coverage.mjs` 与 `content:audit-display`：从前台实际合并逻辑检查建筑师/建筑是否有可展示文字和图像，而不只看 Supabase 原始字段
+- ✅ 当前展示层覆盖结果：106 位建筑师均有可展示文字；875 座建筑均有可展示文字；875 座建筑均至少有一张图片或 curated cover；建筑层图片缺口为 0
+- ✅ 建筑师详情页的国籍/地区和 metadata 说明改为按语言本地化显示，减少中文/日文页面露出 `Italy`、`United States` 等数据库原值
+- ⚠️ 仍有 4 个建筑师条目没有可靠本人肖像，也没有可用代表作图像兜底：`mvrdv`、`sinan`、`antonin-raymond`、`studio-mumbai`。这些条目数据库中目前没有关联作品，且 Wikimedia/Wikidata 未通过开放授权校验；已记录在 `db/display-coverage-report.json`，不使用来源不清图片硬补
+- ✅ `npm run content:audit-display` 已生成 `db/display-coverage-report.json`，后续补内容时应优先清零其中的 `architectsMissingPortraitOrRepresentativeWorkImage`
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -725,14 +732,14 @@ docs/
 ### 仍待修复（按优先级）
 1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
 2. 🟢 首页 500 行，后续仍应拆分为 hero、featured、architect index、timeline preview 等子组件
-3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师（下一批优先：Alberti、Bernini、Borromini、Michele De Lucchi、Riken Yamamoto；伊东丰雄需先修正作品归属）
+3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师（展示层剩余缺图优先：MVRDV、Mimar Sinan、Antonin Raymond、Studio Mumbai；伊东丰雄需先修正作品归属）
 4. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级
 
 ### 立即（本周）
 1. 统一数据库中的 type_slug 为 slug
-2. 继续补全缺少 biography、portrait 和代表作图片的建筑师
+2. 继续补全缺少 biography、portrait 和代表作图片的建筑师，优先清零 `db/display-coverage-report.json` 中的 4 个展示缺图条目
 3. 拆分首页为子组件
 
 ### 短期（两周内）

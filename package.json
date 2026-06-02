@@ -11,6 +11,7 @@
     "images:registry": "node --env-file=.env.local scripts/build-image-registry.mjs",
     "images:cache": "node --env-file=.env.local scripts/cache-curated-images.mjs",
     "content:audit": "node --env-file=.env.local scripts/audit-content-coverage.mjs",
+    "content:audit-display": "node --env-file=.env.local scripts/audit-display-coverage.mjs",
     "content:portraits": "node --env-file=.env.local scripts/build-architect-portraits.mjs"
   },
   "dependencies": {
