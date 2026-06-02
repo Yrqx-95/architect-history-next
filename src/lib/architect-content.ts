@@ -5840,6 +5840,97 @@ const overlays: Record<string, ArchitectContentOverlay> = {
     ],
   },
 
+  'brunelleschi': {
+    slug: 'brunelleschi',
+    summary: {
+      zh: '布鲁内莱斯基把中世纪晚期的建造经验转化为文艺复兴的空间理性。他既是金匠、工程师和建筑师，也是线性透视的开创者；从佛罗伦萨大教堂穹顶到育婴堂，他让几何、比例、结构和城市公共性共同成为现代意义上“建筑设计”的起点。',
+      ja: 'ブルネレスキは、中世末期の建設経験をルネサンスの空間的理性へ変えた。金工師、技術者、建築家であり、線遠近法の開拓者でもある。フィレンツェ大聖堂のドームから捨て子養育院まで、幾何、比例、構造、都市的公共性を結びつけ、近代的な意味での「建築設計」の出発点をつくった。',
+      en: 'Brunelleschi turned late medieval building knowledge into Renaissance spatial reason, joining geometry, proportion, structure, and civic space.',
+    },
+    core_ideas: {
+      zh: ['以线性透视重新组织空间观看', '用工程发明解决前所未有的穹顶跨度', '把古典比例转化为可建造的公共秩序', '让佛罗伦萨成为文艺复兴建筑实验室'],
+      ja: ['線遠近法によって空間の見方を再編する', '工学的発明で前例のないドームのスパンを解く', '古典的比例を建設可能な公共秩序へ変える', 'フィレンツェをルネサンス建築の実験室にする'],
+      en: ['Linear perspective as spatial order', 'Engineering invention for unprecedented spans', 'Classical proportion as buildable public order', 'Florence as Renaissance laboratory'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Masaccio%2C_cappella_brancacci%2C_san_pietro_in_cattedra._ritratto_di_filippo_brunelleschi.jpg',
+      author: 'Masaccio / photographic reproduction',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Masaccio,_cappella_brancacci,_san_pietro_in_cattedra._ritratto_di_filippo_brunelleschi.jpg',
+      alt: {
+        zh: '马萨乔壁画细部中的布鲁内莱斯基肖像',
+        ja: 'マザッチョのフレスコ画細部に描かれたブルネレスキの肖像',
+        en: 'Portrait of Filippo Brunelleschi from a Masaccio fresco detail',
+      },
+    },
+    sections: [
+      {
+        title: { zh: '从工匠经验到空间科学', ja: '職人経験から空間科学へ', en: 'From craft to spatial science' },
+        paragraphs: {
+          zh: [
+            '布鲁内莱斯基的重要性不只在于他完成了几座著名建筑，而在于他改变了建筑师这个角色的含义。他接受金匠和雕塑训练，熟悉材料、尺度和制作过程；又通过研究罗马古迹，把古典建筑中的比例、拱券和几何秩序转化为可以重新建造的知识。对他而言，建筑不是装饰性的外壳，而是一套能够被计算、测量和体验的空间系统。',
+            '线性透视是这种转变的核心。透视并不只是绘画技巧，它把观看者、地平线、消失点和空间深度放进同一个几何关系里。文艺复兴建筑因此不再只是“看起来庄严”，而是可以通过比例和轴线组织人的身体位置。布鲁内莱斯基把这种新的观看秩序带入建筑，使空间成为一种可被理性理解的公共语言。',
+          ],
+          ja: [
+            'ブルネレスキの重要性は、いくつかの有名建築を完成させたことだけにない。彼は建築家という役割の意味を変えた。金工と彫刻の訓練によって素材、尺度、制作過程を知り、ローマ遺跡の研究を通じて古典建築の比例、アーチ、幾何学的秩序を、再び建設可能な知識へ変換した。彼にとって建築は装飾的な外皮ではなく、計算され、測定され、経験される空間システムだった。',
+            '線遠近法はこの転換の中心にある。遠近法は単なる絵画技術ではない。見る者、地平線、消失点、空間の奥行きを一つの幾何学的関係に置く方法である。ルネサンス建築はそれによって、ただ「荘厳に見える」ものではなく、比例と軸線によって身体の位置を組織するものになった。ブルネレスキはこの新しい視覚秩序を建築へ持ち込み、空間を理性的に理解できる公共言語へ変えた。',
+          ],
+          en: [
+            'Brunelleschi changed not only architectural form but the meaning of the architect. Trained as a goldsmith and sculptor, he joined craft knowledge with the study of Roman remains.',
+            'Linear perspective was central to this shift. It made space a measurable relation between observer, horizon, vanishing point, and depth, giving Renaissance architecture a new rational language.',
+          ],
+        },
+      },
+      {
+        title: { zh: '穹顶：没有先例的工程答案', ja: 'ドーム：前例なき工学的回答', en: 'The dome as engineering answer' },
+        paragraphs: {
+          zh: [
+            '佛罗伦萨大教堂穹顶是布鲁内莱斯基最强的历史节点。此前教堂已经有巨大的八角形鼓座，却长期缺少可行的覆盖方案：传统木脚手架难以支撑如此尺度的施工，旧有穹顶技术也无法直接套用。布鲁内莱斯基的方案不是单纯放大旧方法，而是重新组织建造过程本身。',
+            '双层穹壳、鱼骨式砌砖、环向拉结和专门设计的起重机械共同构成一套工程系统。它的伟大不只是“盖上了屋顶”，而是证明建筑师能够通过几何、材料和施工逻辑解决城市级难题。穹顶完成后，它不仅覆盖了教堂内部，也成为佛罗伦萨的城市象征：一个共和国用工程理性和集体信念把自己投射到天际线中。',
+          ],
+          ja: [
+            'フィレンツェ大聖堂のドームは、ブルネレスキの最も強い歴史的節点である。大聖堂にはすでに巨大な八角形のドラムがあったが、それを覆う実現可能な方法は長く見つからなかった。伝統的な木製足場ではその規模を支えられず、既存のドーム技術もそのまま適用できなかった。ブルネレスキの案は古い方法の単なる拡大ではなく、建設過程そのものの再編成だった。',
+            '二重殻、ヘリンボーン状のレンガ積み、環状の拘束、専用に設計された揚重機械が、一つの工学システムを形づくった。その偉大さは「屋根をかけた」ことだけではない。建築家が幾何、素材、施工論理によって都市規模の難題を解けることを示した点にある。完成したドームは教会内部を覆うだけでなく、フィレンツェの都市的象徴となった。共和国が工学的理性と共同体の信念をスカイラインへ投影したのである。',
+          ],
+          en: [
+            'The Florence Cathedral dome was an unprecedented problem: a vast octagonal crossing without a viable traditional centering system. Brunelleschi did not simply enlarge older methods; he reorganized construction itself.',
+            'Double shells, herringbone brickwork, ring ties, and hoisting machines formed an engineering system. The dome made architecture a civic act of geometry, material, construction, and collective ambition.',
+          ],
+        },
+      },
+      {
+        title: { zh: '公共建筑中的比例秩序', ja: '公共建築における比例秩序', en: 'Proportion in public architecture' },
+        paragraphs: {
+          zh: [
+            '如果穹顶展示了布鲁内莱斯基的工程想象，育婴堂则展示了他的空间秩序。它面向佛罗伦萨公共广场，以连续拱廊、清晰柱距和简洁墙面组织立面。这里没有中世纪晚期常见的复杂垂直堆叠，也没有炫耀性的装饰密度；相反，建筑通过重复、间距和水平线建立出一种可被市民理解的平静节奏。',
+            '帕齐礼拜堂把这种秩序推向更内向的精神空间。方形平面、穹顶、拱券和灰石线脚共同控制尺度，让礼拜空间像一套几何乐谱。布鲁内莱斯基由此成为文艺复兴建筑史的开端人物：他不是简单“复兴古典”，而是把古典比例变成现代城市、公共机构和宗教空间都能使用的组织方法。',
+          ],
+          ja: [
+            'ドームがブルネレスキの工学的想像力を示すなら、捨て子養育院は彼の空間秩序を示す。建物はフィレンツェの公共広場に向かい、連続するアーケード、明晰な柱間、簡潔な壁面によって立面を組織する。ここには中世末期に多い複雑な垂直的重なりも、誇示的な装飾密度もない。かわりに反復、間隔、水平線によって、市民が理解できる静かなリズムが生まれる。',
+            'パッツィ家礼拝堂は、この秩序をより内面的な精神空間へ押し進めた。正方形の平面、ドーム、アーチ、灰色石の線が尺度を制御し、礼拝空間は幾何学の楽譜のようになる。こうしてブルネレスキはルネサンス建築史の出発点となった。彼は単に「古典を復興」したのではなく、古典的比例を近代都市、公共施設、宗教空間が共有できる組織方法へ変えたのである。',
+          ],
+          en: [
+            'If the dome shows Brunelleschi’s engineering imagination, the Ospedale degli Innocenti shows his civic order: arcade, bay spacing, wall surface, and horizontal rhythm facing a public square.',
+            'The Pazzi Chapel turns that order inward. Square plan, dome, arches, and pietra serena lines make sacred space legible as geometry. Brunelleschi made classical proportion a usable method for civic and religious architecture.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'florence-cathedral-dome', note: { zh: '以双层穹壳、鱼骨砌砖和起重机械解决佛罗伦萨大教堂长期未解的覆盖难题，成为文艺复兴工程理性的象征。', ja: '二重殻、ヘリンボーン積み、揚重機械によって、フィレンツェ大聖堂の未解決だった覆いの問題を解き、ルネサンスの工学的理性の象徴となった。', en: 'A double-shell dome and construction system that solved Florence Cathedral’s long-unsolved covering problem.' } },
+      { slug: 'ospedale-innocenti', note: { zh: '连续拱廊、等距柱列和面向广场的平静立面，把慈善机构变成可被城市共享的比例秩序。', ja: '連続するアーケード、等間隔の柱列、広場に向かう静かな立面が、慈善施設を都市が共有する比例秩序へ変えた。', en: 'A civic arcade whose spacing and calm facade turned a charitable institution into public order.' } },
+      { slug: 'pazzi-chapel', note: { zh: '以方形平面、穹顶和灰石线脚组织小型礼拜空间，是文艺复兴几何秩序的浓缩案例。', ja: '正方形平面、ドーム、灰色石の線で小さな礼拝空間を組織する、ルネサンス的幾何秩序の凝縮例。', en: 'A compact sacred space where square plan, dome, and stone lines condense Renaissance geometry.' } },
+    ],
+    sources: [
+      { title: 'Encyclopaedia Britannica: Filippo Brunelleschi', url: 'https://www.britannica.com/biography/Filippo-Brunelleschi' },
+      { title: 'Museo degli Innocenti: Architecture', url: 'https://www.museodeglinnocenti.it/en/museo/percorsi-espositivi/architettura/' },
+      { title: 'Opera di Santa Croce: Pazzi Chapel', url: 'https://www.santacroceopera.it/en/places/cloisters/pazzi-chapel/' },
+      { title: 'Web Gallery of Art: Filippo Brunelleschi', url: 'https://www.wga.hu/frames-e.html?/bio/b/brunelle/biograph.html' },
+      { title: 'Wikimedia Commons: Portrait of Filippo Brunelleschi', url: 'https://commons.wikimedia.org/wiki/File:Masaccio,_cappella_brancacci,_san_pietro_in_cattedra._ritratto_di_filippo_brunelleschi.jpg' },
+      { title: 'Wikidata: Filippo Brunelleschi', url: 'https://www.wikidata.org/wiki/Q174330' },
+    ],
+  },
+
 }
 
 const overlayAliases: Record<string, string> = {

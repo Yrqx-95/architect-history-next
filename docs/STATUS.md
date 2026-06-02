@@ -656,6 +656,15 @@
 - ✅ 内容筛选延续：`toyo-ito` 仍暂缓精品页，因为站内作品仍含 `todaiji-temple` 错误归属，需先修数据再写长文
 - ✅ 本地验证：Pritzker、Tate、H&dM 国家体育场/易北爱乐厅、Wikimedia Commons、Wikidata 来源 URL 均已检查可访问；`npm run lint` 通过（剩余 2 个既有 `<img>` warning）
 
+### 第五十六阶段：布鲁内莱斯基建筑师精品页
+- ✅ `architect-content.ts` 新增 `brunelleschi` 内容 overlay：中日英摘要、核心思想、三段长文、肖像、3 个代表作导读和文末来源
+- ✅ 肖像使用 Wikimedia Commons 可追溯公共领域图片：Masaccio 壁画细部中的 Filippo Brunelleschi 肖像，许可 `Public domain`
+- ✅ 代表作导读覆盖 `florence-cathedral-dome`、`ospedale-innocenti`、`pazzi-chapel`；三者在站内均有可信图片记录，适合补强早期文艺复兴入口
+- ✅ 内容重点从“工匠经验与线性透视 → 穹顶工程系统 → 公共建筑中的比例秩序”建立阅读路径，补强时间轴中中世纪晚期到文艺复兴的转折节点
+- ✅ 来源列表包含 Encyclopaedia Britannica、Museo degli Innocenti、Opera di Santa Croce、Web Gallery of Art、Wikimedia Commons 和 Wikidata
+- ✅ 内容筛选审计：本轮用 Supabase 只读查询对比覆盖层与作品数，优先选择“高作品数 + 有图 + 归属稳定”的缺口；`toyo-ito` 仍暂缓，等待 `todaiji-temple` 归属修正
+- ✅ 本地验证：全部来源 URL 与肖像直链返回 200；`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；构建产物中 `/zh/architect/brunelleschi` 与 `/ja/architect/brunelleschi` 均可见肖像、长文和参考资料
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -675,7 +684,7 @@ docs/
 ### 仍待修复（按优先级）
 1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
 2. 🟢 首页 500 行，后续仍应拆分为 hero、featured、architect index、timeline preview 等子组件
-3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师（下一批优先：赫尔佐格与德梅隆、克里斯托弗·雷恩、伊东丰雄）
+3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师（下一批优先：Alberti、Bernini、Borromini、Michele De Lucchi、Riken Yamamoto；伊东丰雄需先修正作品归属）
 4. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级
