@@ -5931,6 +5931,97 @@ const overlays: Record<string, ArchitectContentOverlay> = {
     ],
   },
 
+  'alberti': {
+    slug: 'alberti',
+    summary: {
+      zh: '阿尔伯蒂把文艺复兴建筑从布鲁内莱斯基式的工程与空间实验推进到理论体系。他既是人文学者、作家和数学家，也是建筑师；通过《建筑十书》、鲁切拉宫、新圣母大殿立面和曼托瓦圣安德烈教堂，他把古典比例、城市秩序和建筑师作为知识分子的身份重新定义。',
+      ja: 'アルベルティは、ブルネレスキの工学的・空間的実験としてのルネサンス建築を、理論体系へ押し進めた。人文学者、作家、数学者であり、建築家でもあった。『建築論』、ルチェッライ宮殿、サンタ・マリア・ノヴェッラのファサード、マントヴァのサンタンドレア聖堂を通じて、古典的比例、都市秩序、知識人としての建築家像を再定義した。',
+      en: 'Alberti transformed Renaissance architecture from experiment into theory, defining classical proportion, civic order, and the architect as intellectual.',
+    },
+    core_ideas: {
+      zh: ['建筑是比例、秩序和美的理性系统', '建筑师应是掌握艺术、数学和历史的知识分子', '古典语言可以被系统化并服务于现代城市', '立面不是装饰，而是城市公共秩序的表达'],
+      ja: ['建築は比例、秩序、美の理性的システムである', '建築家は芸術、数学、歴史を扱う知識人である', '古典語彙は体系化され、近代都市へ応用できる', '立面は装飾ではなく都市的公共秩序の表現である'],
+      en: ['Architecture as rational order of proportion and beauty', 'The architect as intellectual', 'Classical language systematized for the modern city', 'Facade as civic order rather than decoration'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Leon_Battista_Alberti%2C_Self-Portrait%2C_c._1435%2C_NGA_43845.jpg',
+      author: 'Leon Battista Alberti',
+      license: 'CC0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Leon_Battista_Alberti,_Self-Portrait,_c._1435,_NGA_43845.jpg',
+      alt: {
+        zh: '莱昂·巴蒂斯塔·阿尔伯蒂自画像浮雕',
+        ja: 'レオン・バッティスタ・アルベルティの自画像浮彫',
+        en: 'Leon Battista Alberti self-portrait relief',
+      },
+    },
+    sections: [
+      {
+        title: { zh: '建筑师成为知识分子', ja: '建築家が知識人になる', en: 'The architect as intellectual' },
+        paragraphs: {
+          zh: [
+            '阿尔伯蒂与布鲁内莱斯基几乎属于同一场文艺复兴转变，但他们代表了两个不同侧面。布鲁内莱斯基让建筑通过工程、透视和比例重新获得理性；阿尔伯蒂则把这种理性写成一套可以传播、讨论和教学的理论。他不是传统意义上的工匠建筑师，而是人文学者、数学家、作家和城市观察者。',
+            '这使建筑师的身份发生变化。中世纪建造者常以工坊经验和现场技艺为核心，阿尔伯蒂却主张建筑师必须理解历史、数学、自然、社会礼仪和城市生活。建筑不只是把房子建起来，而是用比例、秩序和公共形象组织人的生活。Archistory 的知识网络中，阿尔伯蒂是“建筑作为知识系统”的关键节点。',
+          ],
+          ja: [
+            'アルベルティとブルネレスキは、ほぼ同じルネサンス的転換に属しているが、二つの異なる側面を代表する。ブルネレスキは工学、遠近法、比例によって建築に理性を取り戻した。アルベルティはその理性を、伝え、議論し、教えることのできる理論へ書き換えた。彼は伝統的な意味での職人工匠ではなく、人文学者、数学者、作家、都市の観察者だった。',
+            'そのため建築家の身分も変化する。中世の建設者は工房経験と現場技術を中心としていたが、アルベルティは建築家が歴史、数学、自然、社会的儀礼、都市生活を理解しなければならないと考えた。建築とは建物を建てるだけではなく、比例、秩序、公共的イメージによって人間の生活を組織することである。Archistory の知識ネットワークにおいて、アルベルティは「知識システムとしての建築」の重要な節点である。',
+          ],
+          en: [
+            'Alberti and Brunelleschi belong to the same Renaissance transformation, but they represent different sides. Brunelleschi made architecture rational through engineering, perspective, and proportion; Alberti turned that rationality into communicable theory.',
+            'For Alberti, the architect was not only a maker but an intellectual who understood history, mathematics, nature, social ceremony, and urban life.',
+          ],
+        },
+      },
+      {
+        title: { zh: '《建筑十书》与古典秩序', ja: '『建築論』と古典的秩序', en: 'De re aedificatoria and classical order' },
+        paragraphs: {
+          zh: [
+            '阿尔伯蒂的《建筑十书》是维特鲁威之后最重要的西方建筑理论文本之一。它没有只是罗列柱式和装饰，而是试图说明建筑为什么能够成为一门理性的艺术：选址、结构、用途、城市、比例和美共同构成一个整体。古典建筑在这里不再是对古罗马外形的怀旧，而是一套可以被分析、重组和应用的原则。',
+            '这点对后来的帕拉迪奥、米开朗基罗以及整个欧洲古典传统影响深远。阿尔伯蒂把建筑从单个项目提升到可讨论的知识体系：一个立面为什么和谐，一个宫殿为什么适合城市街道，一座教堂为什么能通过比例产生庄严感。这些问题后来成为建筑教育和批评的基础。',
+          ],
+          ja: [
+            'アルベルティの『建築論』は、ウィトルウィウス以後の西洋建築理論における最重要文献の一つである。それは柱式や装飾を列挙するだけではなく、建築がなぜ理性的な芸術になりうるのかを説明しようとした。敷地、構造、用途、都市、比例、美が一つの全体をつくる。ここで古典建築は古代ローマの外形への郷愁ではなく、分析し、再構成し、応用できる原理となった。',
+            'この点は、後のパッラーディオ、ミケランジェロ、そしてヨーロッパ古典主義全体に深い影響を与えた。アルベルティは建築を単独のプロジェクトから、議論可能な知識体系へ引き上げた。なぜ一つの立面は調和して見えるのか、なぜ宮殿は都市街路に適するのか、なぜ教会は比例によって荘厳さを生むのか。これらの問いは後に建築教育と批評の基礎となった。',
+          ],
+          en: [
+            'Alberti’s De re aedificatoria is one of the most important architectural theory texts after Vitruvius. It treats architecture as a rational art of site, structure, use, city, proportion, and beauty.',
+            'Its influence reached Palladio, Michelangelo, and the wider European classical tradition, turning architecture into a field of argument and education.',
+          ],
+        },
+      },
+      {
+        title: { zh: '立面作为城市秩序', ja: '都市秩序としての立面', en: 'Facade as civic order' },
+        paragraphs: {
+          zh: [
+            '鲁切拉宫和新圣母大殿立面展示了阿尔伯蒂的实践能力。鲁切拉宫把佛罗伦萨城市住宅整理成清晰的水平分层和古典壁柱秩序，既保持街道尺度，又让私人宫殿获得公共可读性。新圣母大殿则更复杂：阿尔伯蒂必须把已经存在的中世纪教堂下部与新的古典比例统一起来。',
+            '曼托瓦圣安德烈教堂进一步把古典凯旋门、巨大的桶形拱和礼拜空间结合起来。这里的建筑不只是复古，而是把古典形式转化为新的宗教和城市体验。阿尔伯蒂的价值正在于此：他让古典语言不再停留在考古和书本中，而成为文艺复兴城市可以真实使用的空间秩序。',
+          ],
+          ja: [
+            'ルチェッライ宮殿とサンタ・マリア・ノヴェッラのファサードは、アルベルティの実践能力を示す。ルチェッライ宮殿はフィレンツェの都市住宅を、明快な水平層と古典的な付柱秩序へ整理した。街路の尺度を保ちながら、私的な宮殿に公共的な読みやすさを与えている。サンタ・マリア・ノヴェッラでは問題はさらに複雑だった。既存の中世教会の下部と、新しい古典的比例を統合しなければならなかったからである。',
+            'マントヴァのサンタンドレア聖堂は、古典的な凱旋門、巨大な半筒ヴォールト、礼拝空間をさらに結びつける。ここで建築は単なる復古ではない。古典形式を新しい宗教的・都市的経験へ変換している。アルベルティの価値はまさにここにある。古典語彙を考古学や書物の中に留めず、ルネサンス都市が実際に使える空間秩序へ変えたのである。',
+          ],
+          en: [
+            'Palazzo Rucellai and the facade of Santa Maria Novella show Alberti’s practical intelligence: classical order made legible within existing urban and medieval conditions.',
+            'Sant’Andrea in Mantua transforms triumphal arch language and barrel-vaulted space into a new religious and civic experience.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'palazzo-rucellai', note: { zh: '以水平分层和古典壁柱秩序整理佛罗伦萨城市宫殿，让私人住宅立面获得公共可读性。', ja: '水平層と古典的付柱秩序によってフィレンツェの都市宮殿を整理し、私的住宅の立面に公共的な読みやすさを与えた。', en: 'A Florentine palace facade ordered by horizontal strata and classical pilasters.' } },
+      { slug: 'santa-maria-novella', note: { zh: '把既有中世纪教堂立面与新的古典比例整合起来，是文艺复兴“新旧调和”的关键案例。', ja: '既存の中世教会立面と新しい古典的比例を統合した、ルネサンスにおける新旧調和の重要例。', en: 'A facade that reconciles medieval fabric with Renaissance proportion.' } },
+      { slug: 'sant-andrea-mantua', note: { zh: '以凯旋门式立面和巨大桶形拱组织礼拜空间，把古典语言转化为新的宗教纪念性。', ja: '凱旋門式立面と巨大な半筒ヴォールトで礼拝空間を組織し、古典語彙を新しい宗教的記念性へ変えた。', en: 'A church where triumphal arch language and barrel vault create new religious monumentality.' } },
+    ],
+    sources: [
+      { title: 'Encyclopaedia Britannica: Leon Battista Alberti', url: 'https://www.britannica.com/biography/Leon-Battista-Alberti' },
+      { title: 'Encyclopaedia Britannica: Palazzo Rucellai', url: 'https://www.britannica.com/topic/Palazzo-Rucellai' },
+      { title: 'Santa Maria Novella: The Facade', url: 'https://www.smn.it/en/artworks/the-facade/' },
+      { title: 'Mantova: Basilica of Sant’Andrea', url: 'https://www.mantova.info/mantua/what-to-see/details/chiesa-di-sant-andrea' },
+      { title: 'Wikimedia Commons: Leon Battista Alberti self-portrait', url: 'https://commons.wikimedia.org/wiki/File:Leon_Battista_Alberti,_Self-Portrait,_c._1435,_NGA_43845.jpg' },
+      { title: 'Wikidata: Leon Battista Alberti', url: 'https://www.wikidata.org/wiki/Q154070' },
+    ],
+  },
+
 }
 
 const overlayAliases: Record<string, string> = {

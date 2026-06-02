@@ -665,6 +665,14 @@
 - ✅ 内容筛选审计：本轮用 Supabase 只读查询对比覆盖层与作品数，优先选择“高作品数 + 有图 + 归属稳定”的缺口；`toyo-ito` 仍暂缓，等待 `todaiji-temple` 归属修正
 - ✅ 本地验证：全部来源 URL 与肖像直链返回 200；`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；构建产物中 `/zh/architect/brunelleschi` 与 `/ja/architect/brunelleschi` 均可见肖像、长文和参考资料
 
+### 第五十七阶段：阿尔伯蒂建筑师精品页
+- ✅ `architect-content.ts` 新增 `alberti` 内容 overlay：中日英摘要、核心思想、三段长文、肖像、3 个代表作导读和文末来源
+- ✅ 肖像使用 Wikimedia Commons 可追溯 CC0 图片：`Leon_Battista_Alberti,_Self-Portrait,_c._1435,_NGA_43845.jpg`，作者为 Leon Battista Alberti
+- ✅ 代表作导读覆盖 `palazzo-rucellai`、`santa-maria-novella`、`sant-andrea-mantua`，三者均为站内归属稳定且已有图片记录的文艺复兴作品
+- ✅ 内容重点从“建筑师成为知识分子 → 《建筑十书》与古典秩序 → 立面作为城市秩序”建立阅读路径，承接 Brunelleschi 的工程/透视节点，补强文艺复兴理论链
+- ✅ 来源列表包含 Encyclopaedia Britannica、Santa Maria Novella 官方页、Mantova 城市资料页、Wikimedia Commons 和 Wikidata；NGA 原页面脚本访问返回 403，因此前台使用 Commons 作为稳定肖像来源
+- ✅ 本地验证：全部来源 URL 与肖像直链返回 200；`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；构建产物中 `/zh/architect/alberti` 与 `/ja/architect/alberti` 均可见肖像、长文和参考资料
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
