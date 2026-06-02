@@ -4810,6 +4810,95 @@ const overlays: Record<string, ArchitectContentOverlay> = {
     ],
   },
 
+  'kurokawa': {
+    slug: 'kurokawa',
+    summary: {
+      zh: '黑川纪章是日本新陈代谢运动最具辨识度的建筑师之一。他把城市看作可以生长、替换和共生的系统，从中银胶囊塔到国立新美术馆，持续追问建筑如何在技术、生命、传统与未来之间保持开放。',
+      ja: '黒川紀章は、日本のメタボリズム運動を代表する建築家の一人である。都市を成長し、交換され、共生するシステムとして捉え、中銀カプセルタワーから国立新美術館まで、技術、生命、伝統、未来のあいだで建築がどう開かれ続けるかを問い続けた。',
+      en: 'Kisho Kurokawa was a leading Metabolist architect who treated buildings and cities as systems of growth, replacement, and symbiosis.',
+    },
+    core_ideas: {
+      zh: ['新陈代谢：建筑和城市应像生命体一样允许生长、替换与更新', '胶囊建筑：把居住单元、设备和基础结构拆成可组合系统', '共生思想：在传统与现代、机器与自然、个体与城市之间建立可持续关系', '从未来主义到公共文化：晚期作品把技术想象转化为博物馆、机场与城市公共空间'],
+      ja: ['メタボリズム：建築と都市は生命体のように成長、交換、更新できるべきだ', 'カプセル建築：住居単位、設備、インフラを組み合わせ可能なシステムとして扱う', '共生思想：伝統と近代、機械と自然、個人と都市のあいだに持続的な関係をつくる', '未来主義から公共文化へ：後期作品では技術的想像力を美術館、空港、都市公共空間へ展開した'],
+      en: ['Metabolism as urban growth', 'Capsule architecture', 'Symbiosis between tradition and technology', 'Public culture at metropolitan scale'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/b/be/%E9%BB%92%E5%B7%9D%E7%B4%80%E7%AB%A0.jpg',
+      author: 'Ministry of Education, Culture, Sports, Science and Technology, Japan',
+      license: 'CC BY 4.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:%E9%BB%92%E5%B7%9D%E7%B4%80%E7%AB%A0.jpg',
+      alt: {
+        zh: '黑川纪章肖像',
+        ja: '黒川紀章の肖像',
+        en: 'Portrait of Kisho Kurokawa',
+      },
+    },
+    sections: [
+      {
+        title: { zh: '从丹下研究室到新陈代谢', ja: '丹下研究室からメタボリズムへ', en: 'From Tange Lab to Metabolism' },
+        paragraphs: {
+          zh: [
+            '黑川纪章1934年出生于名古屋，先后在京都大学和东京大学学习建筑，进入丹下健三的研究室，并在1960年前后与菊竹清训、槙文彦、大高正人等人共同参与新陈代谢运动。这个运动并不只是喜欢巨构和未来城市图像；它的核心问题是战后日本如何面对快速城市化、人口增长、工业生产和技术社会。',
+            '对黑川来说，建筑不应该被理解为一次性完成的固定物，而应当接近生命系统：核心结构可以较长久，居住单元和设备则可以随着生活方式变化而替换。这个思想既来自现代工业生产，也与日本传统建筑中可变、轻质、层叠的空间观念有关。黑川把这种双重来源称为“共生”的基础：不是简单地把东方和西方拼在一起，而是让不同系统在同一建筑中保持张力和转换能力。',
+          ],
+          ja: [
+            '黒川紀章は1934年に名古屋で生まれ、京都大学と東京大学で建築を学び、丹下健三の研究室に入った。1960年前後には菊竹清訓、槇文彦、大高正人らとともにメタボリズム運動に参加する。この運動は巨大構造や未来都市のイメージを好んだだけではない。中心にあったのは、戦後日本が急速な都市化、人口増加、工業生産、技術社会にどう向き合うかという問いだった。',
+            '黒川にとって、建築は一度完成すれば固定される物ではなく、生命システムに近いものであるべきだった。コアとなる構造は長く残り、住居単位や設備は生活様式の変化に応じて交換できる。この思想は近代の工業生産に由来すると同時に、日本の伝統建築にある可変的で軽やかな空間観とも関係している。黒川はその二重の源泉を「共生」の基盤と捉えた。東洋と西洋を単純に貼り合わせるのではなく、異なるシステムが一つの建築の中で緊張と変換可能性を保つのである。',
+          ],
+          en: [
+            'Born in Nagoya in 1934, Kisho Kurokawa studied at Kyoto University and the University of Tokyo, entered Kenzo Tange’s research circle, and became one of the key figures of Metabolism around 1960.',
+            'For Kurokawa, buildings were not fixed objects completed once and for all. They were closer to living systems: durable cores could remain, while capsules, equipment, and urban parts could be replaced as life changed.',
+          ],
+        },
+      },
+      {
+        title: { zh: '中银胶囊塔：未来主义的现实试验', ja: '中銀カプセルタワー——未来主義の現実実験', en: 'Nakagin Capsule Tower as a Real Experiment' },
+        paragraphs: {
+          zh: [
+            '1972年完成的中银胶囊塔，是黑川思想最集中的现实化。两座混凝土核心筒承载 140 个预制胶囊，每个胶囊通过少量高强螺栓固定，理论上可以拆卸、更换和升级。它不是普通的住宅塔楼，而是一种面向流动职业人群、信息社会和高度压缩都市生活的空间模型。',
+            '中银胶囊塔后来没有按原计划更新胶囊，维护和产权问题逐渐累积，最终在2022年拆除。正因为如此，它在建筑史中的意义更复杂：它既是新陈代谢运动最强烈的图像，也是现代建筑“可替换、可更新”理想与现实制度之间冲突的证据。MoMA 近年的展览把保存下来的胶囊、图纸和居民生活重新带回讨论中，说明这座建筑的价值并不只在外观，而在它暴露出建筑如何被时间、业主、维护、城市经济和记忆共同改变。',
+          ],
+          ja: [
+            '1972年に完成した中銀カプセルタワーは、黒川の思想が最も集中的に現実化された作品である。二つのコンクリート・コアに140個のプレファブリケーションされたカプセルが取り付けられ、それぞれのカプセルは少数の高張力ボルトで固定され、理論上は取り外し、交換、更新が可能だった。それは通常の集合住宅ではなく、移動する職業人、情報社会、高度に圧縮された都市生活のための空間モデルだった。',
+            'しかし中銀カプセルタワーでは、当初想定されたようなカプセル更新は実現せず、維持管理と所有権の問題が積み重なり、2022年に解体された。だからこそ、この建築の歴史的意味は複雑である。それはメタボリズム運動の最も強いイメージであると同時に、「交換可能で更新可能な建築」という近代建築の理想と現実の制度との衝突を示す証拠でもある。近年の MoMA の展示は、保存されたカプセル、図面、居住者の生活を再び議論の場に戻し、この建築の価値が外観だけでなく、時間、所有者、維持、都市経済、記憶によって建築がどう変えられるかにあることを示している。',
+          ],
+          en: [
+            'Completed in 1972, Nakagin Capsule Tower was Kurokawa’s most concentrated built experiment. Two concrete cores held 140 prefabricated capsules, each fixed by high-tension bolts and imagined as replaceable urban units.',
+            'The capsules were never renewed as planned, and the tower was demolished in 2022. Its importance therefore lies not only in its image, but in the tension it reveals between architectural ideals of replacement and the realities of ownership, maintenance, and urban economics.',
+          ],
+        },
+      },
+      {
+        title: { zh: '共生、曲线与公共文化空间', ja: '共生、曲線、公共文化空間', en: 'Symbiosis, Curves, and Public Culture' },
+        paragraphs: {
+          zh: [
+            '黑川晚期并没有停留在胶囊塔的机械未来主义中。他在“共生”理论中不断强调异质元素的并存：历史与未来、自然与人工、地方文化与全球技术。吉隆坡国际机场把大型交通基础设施与热带气候、森林意象和国家门户结合起来；国立新美术馆则以起伏的玻璃幕墙、圆锥形入口和“森林中的美术馆”概念，把大型展览机器转化为城市中的公共文化场所。',
+            '这种转向让黑川在建筑史上处于一个耐人寻味的位置。他既属于战后日本最激进的未来派谱系，也在晚期试图软化巨构建筑的冷硬形象。对今天的 Archistory 用户而言，黑川不是一个只需要记住“胶囊塔”的建筑师。他更像一条理解日本现代建筑的路径：从丹下健三的国家尺度，到新陈代谢的城市想象，再到美术馆、机场和全球化时代的公共空间。',
+          ],
+          ja: [
+            '黒川の後期は、カプセルタワーの機械的未来主義にとどまらない。彼は「共生」の理論において、歴史と未来、自然と人工、地域文化とグローバルな技術といった異質な要素の併存を繰り返し強調した。クアラルンプール国際空港は、大規模な交通インフラを熱帯気候、森林のイメージ、国家の玄関口と結びつけた。国立新美術館では、波打つガラスカーテンウォール、円錐形の入口、「森の中の美術館」という構想によって、大型の展示機械を都市の公共文化空間へ変換した。',
+            'この転回によって、黒川は建築史の中で興味深い位置を占める。彼は戦後日本の最も急進的な未来派の系譜に属しながら、後期には巨大構造の冷たさをやわらげようとした。Archistory の利用者にとって、黒川は「カプセルタワー」だけで記憶すべき建築家ではない。丹下健三の国家的スケール、新陳代謝の都市想像力、美術館、空港、グローバル時代の公共空間へと日本近代建築を読み解く一本の経路なのである。',
+          ],
+          en: [
+            'Kurokawa’s later work did not remain within the mechanical futurism of capsule architecture. His theory of symbiosis emphasized the coexistence of history and future, nature and technology, local culture and global infrastructure.',
+            'Projects such as Kuala Lumpur International Airport and the National Art Center, Tokyo show how he translated megastructural imagination into public cultural and infrastructural space.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'nakagin-capsule-tower', note: { zh: '新陈代谢运动最著名的现实试验，以可替换胶囊挑战固定住宅和固定城市的观念。', ja: 'メタボリズム運動を代表する実現作。交換可能なカプセルによって、固定された住宅と都市の観念に挑んだ。', en: 'The most famous built Metabolist experiment, challenging fixed housing through replaceable capsules.' } },
+      { slug: 'kuala-lumpur-airport', note: { zh: '把大型机场、热带气候和森林意象结合为国家门户，是黑川晚期“共生”理论的基础设施版本。', ja: '大規模空港、熱帯気候、森のイメージを国家の玄関口として統合した、黒川後期の「共生」理論のインフラ版。', en: 'A national gateway where airport infrastructure, tropical climate, and forest imagery meet.' } },
+      { slug: 'national-art-center-tokyo', note: { zh: '波浪形玻璃幕墙和“森林中的美术馆”概念，让大型展览机器获得更柔软的城市公共性。', ja: '波打つガラス幕壁と「森の中の美術館」という構想により、大型展示施設に柔らかな都市公共性を与えた。', en: 'A museum-as-forest with a wave-like glass wall, softening the scale of a major exhibition machine.' } },
+    ],
+    sources: [
+      { title: 'Kisho Kurokawa Architect & Associates: Nakagin Capsule Tower', url: 'https://www.kisho.co.jp/page/209.html' },
+      { title: 'The National Art Center, Tokyo: Architecture', url: 'https://www.nact.jp/english/introduce/architecture.html' },
+      { title: 'MoMA Magazine: Seven of the Many Lives That Architecture Holds', url: 'https://www.moma.org/magazine/articles/1346' },
+      { title: 'Wikidata: Kisho Kurokawa', url: 'https://www.wikidata.org/wiki/Q310314' },
+    ],
+  },
+
   'fujimoto': {
     slug: 'fujimoto',
     summary: {

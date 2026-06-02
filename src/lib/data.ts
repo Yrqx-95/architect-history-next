@@ -22,6 +22,7 @@ const cachedImageOverrides = localImageOverrides as Record<string, ImageOverride
 // Simple in-memory cache for the request lifecycle
 const cache = new Map<string, { data: unknown; ts: number }>()
 const TTL = 300_000
+const FETCH_PAGE_SIZE = 500
 
 async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
   const entry = cache.get(key)
@@ -36,12 +37,21 @@ async function fetchAll<T>(table: string): Promise<T[]> {
   const results: T[] = []
   let from = 0
   while (true) {
-    const { data, error } = await supabase.from(table).select('*').range(from, from + 999)
+    const to = from + FETCH_PAGE_SIZE - 1
+    let data: T[] | null = null
+    let error: { message: string } | null = null
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      const response = await supabase.from(table).select('*').range(from, to)
+      data = (response.data as T[] | null) || null
+      error = response.error ? { message: response.error.message } : null
+      if (!error || !/Bad control character|JSON/i.test(error.message)) break
+      await new Promise(resolve => setTimeout(resolve, 150 * (attempt + 1)))
+    }
     if (error) throw new Error(`${table}: ${error.message}`)
     if (!data || !data.length) break
     results.push(...(data as T[]))
-    if (data.length < 999) break
-    from += 999
+    if (data.length < FETCH_PAGE_SIZE) break
+    from += FETCH_PAGE_SIZE
   }
   return results
 }

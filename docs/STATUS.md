@@ -619,6 +619,15 @@
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 - ✅ 构建产物验证：`.next/server/app/zh/architect/fujimoto.rsc`、`/ja/architect/fujimoto.rsc`、`/en/architect/fujimoto.rsc` 均可见肖像、代表作和 Sources 区块
 
+### 第五十二阶段：黑川纪章建筑师精品页与构建稳定性
+- ✅ `architect-content.ts` 新增 `kurokawa` 内容 overlay：中日英摘要、核心思想、三段长文、肖像、3 个代表作导读和文末来源
+- ✅ 肖像使用 Wikimedia Commons 可追溯授权图片：文部科学省公开肖像，许可 `CC BY 4.0`
+- ✅ 代表作导读覆盖 `nakagin-capsule-tower`、`kuala-lumpur-airport`、`national-art-center-tokyo`，并自动接入黑川 4 个站内作品年表
+- ✅ 来源列表包含黑川事务所、中银胶囊塔官方页、国立新美术馆建筑说明、MoMA 和 Wikidata
+- ✅ `data.ts` 将 Supabase `fetchAll` 分页从 1000 条降为 500 条，并对 PostgREST JSON 解析类错误做短重试，修复静态生成时偶发/并发触发的 `Bad control character in JSON` 构建失败
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 构建产物验证：`.next/server/app/zh/architect/kurokawa.rsc`、`/ja/architect/kurokawa.rsc`、`/en/architect/kurokawa.rsc` 均可见肖像、代表作和 Sources 区块
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -638,7 +647,7 @@ docs/
 ### 仍待修复（按优先级）
 1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
 2. 🟢 首页 500 行，后续仍应拆分为 hero、featured、architect index、timeline preview 等子组件
-3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师（下一批优先：黑川纪章、赫尔佐格与德梅隆、克里斯托弗·雷恩、伊东丰雄）
+3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师（下一批优先：赫尔佐格与德梅隆、克里斯托弗·雷恩、伊东丰雄）
 4. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级
