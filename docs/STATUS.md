@@ -611,6 +611,14 @@
 - ✅ 部署验证：提交 `65dde75` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-53ycroaq3-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/images/curated/...` 三张图片返回压缩后的 `content-length`：392750、403580、893919 bytes
 
+### 第五十一阶段：藤本壮介建筑师精品页
+- ✅ `architect-content.ts` 新增 `fujimoto` 内容 overlay：中日英摘要、核心思想、三段长文、肖像、3 个代表作导读和文末来源
+- ✅ 肖像使用 Wikimedia Commons 可追溯授权图片：`Sou_Fujimoto_2011.jpg`，作者 `Arturo.sanz`，许可 `CC BY-SA 4.0`
+- ✅ 代表作导读覆盖 `musashino-art-museum`、`house-na`、`serpentine-pavilion-2013`，并自动接入站内藤本作品年表
+- ✅ 来源列表包含藤本事务所官网、森美术馆、Serpentine、ArchDaily 和 Wikidata，继续遵循“来源驱动 + 改写 + 前台显示来源”的内容规则
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 构建产物验证：`.next/server/app/zh/architect/fujimoto.rsc`、`/ja/architect/fujimoto.rsc`、`/en/architect/fujimoto.rsc` 均可见肖像、代表作和 Sources 区块
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -630,7 +638,7 @@ docs/
 ### 仍待修复（按优先级）
 1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
 2. 🟢 首页 500 行，后续仍应拆分为 hero、featured、architect index、timeline preview 等子组件
-3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师
+3. 🟢 继续补全缺少 biography、portrait 和代表作图片的建筑师（下一批优先：黑川纪章、赫尔佐格与德梅隆、克里斯托弗·雷恩、伊东丰雄）
 4. 🟢 搜索 API 数据库全文索引待规划（短缓存与相关性排序已完成第一步）
 
 ## 下一步优先级

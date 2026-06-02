@@ -4810,6 +4810,99 @@ const overlays: Record<string, ArchitectContentOverlay> = {
     ],
   },
 
+  'fujimoto': {
+    slug: 'fujimoto',
+    summary: {
+      zh: '藤本壮介从北海道森林和东京密集街区中提炼出一种轻盈、开放、介于自然与人工之间的建筑语言。他的作品常把墙、楼板、家具、街道与树冠重新组合，让居住和公共活动像在“人造森林”中发生。',
+      ja: '藤本壮介は、北海道の森と東京の高密な街区から、自然と人工のあいだにある軽やかで開かれた建築言語を引き出した。壁、床、家具、街路、樹冠を組み替え、生活や公共活動が「人工の森」の中で起こるような場をつくる。',
+      en: 'Sou Fujimoto develops a light, open architecture between nature and artifice, turning houses, libraries, pavilions, and cities into inhabitable forests.',
+    },
+    core_ideas: {
+      zh: ['原初未来：从森林、洞穴、巢穴等原型重新思考当代空间', '弱边界：让内外、家具与建筑、个人与城市之间保持可协商关系', '人造森林：用细柱、层板、网格和孔洞制造可停留的开放场', '小尺度公共性：在住宅和临时建筑中实验城市生活的微型模型'],
+      ja: ['原初的未来：森、洞窟、巣といった原型から現代空間を考える', '弱い境界：内外、家具と建築、個人と都市の関係を交渉可能にする', '人工の森：細い柱、床板、グリッド、開口で滞在できる開かれた場をつくる', '小さな公共性：住宅や仮設建築を通して都市生活の小さな模型を試す'],
+      en: ['Primitive future', 'Soft boundaries', 'Inhabitable artificial forests', 'Small-scale models of public life'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Sou_Fujimoto_2011.jpg',
+      author: 'Arturo.sanz',
+      license: 'CC BY-SA 4.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Sou_Fujimoto_2011.jpg',
+      alt: {
+        zh: '藤本壮介肖像',
+        ja: '藤本壮介の肖像',
+        en: 'Portrait of Sou Fujimoto',
+      },
+    },
+    sections: [
+      {
+        title: { zh: '从森林经验到城市模型', ja: '森の経験から都市の模型へ', en: 'From Forest Experience to Urban Models' },
+        paragraphs: {
+          zh: [
+            '藤本壮介1971年出生于北海道，1994年毕业于东京大学工学部建筑学科，2000年创立藤本壮介建筑设计事务所。他的建筑并不是从宏大的形式宣言开始，而是从一种非常基础的空间感受开始：人在森林中并不会被墙壁明确分隔，也不会被单一动线支配；树枝、光斑、坡地、缝隙和距离共同组成了可以停留、穿越、躲藏与相遇的场。',
+            '这种经验后来被他称为“原初的未来”。所谓原初，并不是回到古老形式；所谓未来，也不是依赖高科技表皮。藤本更关心建筑在现代城市中怎样重新获得类似森林的复杂性：既有秩序，也有偶然；既能保护个体，也能允许视线和活动相互渗透。东京的密集住宅区给了他另一个样本：狭小基地、邻里距离、楼梯、阳台、植物、招牌和自行车共同构成一种微型城市生态。藤本的作品常把这两种世界叠在一起，形成介于自然地景和都市装置之间的建筑。',
+          ],
+          ja: [
+            '藤本壮介は1971年に北海道で生まれ、1994年に東京大学工学部建築学科を卒業し、2000年に藤本壮介建築設計事務所を設立した。彼の建築は大きな形式宣言から始まるのではなく、きわめて基礎的な空間感覚から始まる。森の中では、人は壁によって明快に分けられず、単一の動線に支配されることもない。枝、光の斑点、斜面、隙間、距離が重なり、滞在し、通り抜け、隠れ、出会う場をつくる。',
+            'この経験はのちに「原初的な未来」と呼ばれる。原初とは古い形式に戻ることではなく、未来とは高技術の外皮だけを意味しない。藤本が問うのは、現代都市の中で建築が森のような複雑さをどう取り戻せるかである。秩序がありながら偶然もある。個人を守りながら、視線や活動が互いに滲み合う。東京の高密な住宅地ももう一つの手がかりとなった。小さな敷地、隣家との距離、階段、バルコニー、植栽、看板、自転車が小さな都市生態をつくる。藤本の作品は、この二つの世界を重ね、自然の風景と都市の装置のあいだにある建築をつくり出す。',
+          ],
+          en: [
+            'Born in Hokkaido in 1971, Sou Fujimoto graduated from the University of Tokyo in 1994 and founded his office in 2000. His architecture begins with an elemental spatial intuition: in a forest, people are not divided by hard walls or forced along a single route. Branches, light, slopes, gaps, and distances form a field for dwelling, moving, hiding, and meeting.',
+            'Fujimoto later framed this as a “primitive future.” The primitive does not mean nostalgia, and the future is not a technological skin. His question is how architecture can recover forest-like complexity inside the contemporary city: order with accident, protection with permeability, individuality with shared life.',
+          ],
+        },
+      },
+      {
+        title: { zh: '弱边界：住宅作为公共生活的实验室', ja: '弱い境界——住宅を公共生活の実験室にする', en: 'Soft Boundaries in the House' },
+        paragraphs: {
+          zh: [
+            '藤本最有争议也最有启发性的作品，往往是住宅。House N 用三层带孔洞的白色壳体把街道、庭院和室内层层过滤，使“在家里”和“在城市中”不再是两个完全分离的状态。House NA 更进一步，把住宅拆成许多高度不同的平台，家具、楼板、楼梯和房间之间没有传统意义上的清楚边界。它像一棵透明的树，也像一段被竖起来的街道。',
+            '这些住宅并不适合用“好不好住”这样单一问题概括。它们的重要性在于把日本当代住宅的极端条件转化为思想实验：当城市越来越密集，私密性、开放性、身体尺度和邻里关系能不能被重新谈判？藤本不是取消边界，而是把边界变成程度、距离和视线的组合。玻璃并不只是透明材料，平台并不只是楼板，楼梯也不只是交通；它们共同制造一种可被使用者不断重新解释的生活框架。',
+          ],
+          ja: [
+            '藤本の最も議論を呼び、同時に示唆に富む作品は住宅であることが多い。House N は穴のあいた三重の白い殻によって、街路、庭、室内を段階的に濾過し、「家の中にいること」と「都市の中にいること」を完全には分けない。House NA ではさらに、住宅が高さの異なる多数のプラットフォームへと分解され、家具、床、階段、部屋のあいだに従来の明快な境界がなくなる。それは透明な樹木であり、垂直に立ち上がった小さな街路でもある。',
+            'これらの住宅は、「住みやすいかどうか」という一つの問いだけでは捉えられない。重要なのは、日本の現代住宅が置かれた極端な条件を思考実験へ変えている点である。都市が高密化するなかで、プライバシー、開放性、身体の尺度、近隣との関係は再交渉できるのか。藤本は境界を消すのではなく、境界を濃度、距離、視線の組み合わせへ変える。ガラスは単なる透明素材ではなく、プラットフォームは単なる床ではなく、階段は単なる移動装置ではない。それらは利用者が解釈し続ける生活の枠組みとなる。',
+          ],
+          en: [
+            'Fujimoto’s most provocative works are often houses. House N filters street, garden, and room through three perforated shells, while House NA dissolves the house into stacked platforms where furniture, floor, stairs, and rooms lose their conventional boundaries.',
+            'Their importance is not simply whether they are comfortable in a conventional sense. They turn the extreme conditions of contemporary Japanese housing into spatial experiments about privacy, openness, bodily scale, and neighborhood life.',
+          ],
+        },
+      },
+      {
+        title: { zh: '公共建筑中的森林：书架、网格与云', ja: '公共建築の森——本棚、グリッド、雲', en: 'Forests of Books, Grids, and Clouds' },
+        paragraphs: {
+          zh: [
+            '当藤本进入公共建筑，他并没有放弃住宅中的小尺度思考，而是把它扩大为可被多人共享的空间系统。武藏野美术大学美术馆·图书馆把巨大的书架组织成连续的螺旋，书不再只是被收藏的对象，而成为构成空间本身的材料。读者在书架、光线和通道之间移动，图书馆像一片由知识构成的森林。',
+            '2013年的蛇形画廊夏季展亭则把“森林”推向更抽象的极限。细密的白色钢格网形成一团介于云、亭子和脚手架之间的结构，人可以坐在其中、穿过其中，也可以从外部把它看成一层轻薄的气候。它几乎没有传统建筑的重量，却把公共性做得很直接：人在里面寻找位置，视线穿过结构，公园和展亭互相渗透。',
+            'L’Arbre Blanc、白井屋酒店和大阪世博会大屋根等近年项目说明，藤本的主题已经从小住宅扩展到城市尺度。他的建筑不是用强烈姿态占领场地，而是尝试把人、自然、活动和基础设施编织成可参与的环境。对 Archistory 来说，藤本是理解日本当代建筑的重要节点：他连接了伊东丰雄、SANAA 之后的轻量化谱系，也把住宅实验、公共装置和城市想象放进同一条知识链。',
+          ],
+          ja: [
+            '藤本が公共建築に入るとき、住宅での小さな尺度の思考を捨てるのではなく、多くの人が共有できる空間システムへ拡張する。武蔵野美術大学美術館・図書館では、巨大な本棚が連続する螺旋として組織され、本は収蔵される対象であるだけでなく、空間そのものをつくる素材となる。読者は本棚、光、通路のあいだを移動し、図書館は知識でできた森のようになる。',
+            '2013年のサーペンタイン・ギャラリー・パヴィリオンは、「森」をさらに抽象的な極限へ押し出した。細かな白い鉄骨グリッドが、雲、東屋、足場のあいだにある構造をつくり、人はそこに座り、通り抜け、外からは薄い気候のように眺めることができる。伝統的な建築の重さはほとんどないが、公共性はきわめて直接的である。人は内部に居場所を探し、視線は構造を抜け、公園とパヴィリオンが互いに浸透する。',
+            'L’Arbre Blanc、白井屋ホテル、大阪・関西万博の大屋根リングなど近年のプロジェクトは、藤本のテーマが小住宅から都市スケールへ広がったことを示している。彼の建築は強い姿勢で敷地を占有するのではなく、人、自然、活動、インフラを参加可能な環境として編み上げようとする。Archistory にとって藤本は、日本現代建築を理解する重要な節点である。伊東豊雄、SANAA 以後の軽量化の系譜と、住宅実験、公共装置、都市への想像力を一つの知識の連鎖へつなぐ存在だからだ。',
+          ],
+          en: [
+            'In public work, Fujimoto enlarges small-scale thinking into shared spatial systems. The Musashino Art University Museum & Library turns bookshelves into a continuous spiral, while the 2013 Serpentine Pavilion makes the forest almost immaterial through a cloud-like steel grid.',
+            'Recent projects such as L’Arbre Blanc, Shiroiya Hotel, and the Expo 2025 Grand Ring show his themes expanding toward urban scale. Fujimoto is a key node in contemporary Japanese architecture, connecting the lightness after Toyo Ito and SANAA with housing experiments, public devices, and urban imagination.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'musashino-art-museum', note: { zh: '把书架变成空间结构的图书馆：螺旋书墙、光线和通道共同组织阅读体验。', ja: '本棚を空間構造に変えた図書館。螺旋状の本棚、光、通路が読書体験を組み立てる。', en: 'A library where bookshelves become architecture, organizing reading through spiral walls, light, and movement.' } },
+      { slug: 'house-na', note: { zh: '透明平台住宅，把家具、楼板、楼梯和城市视线编成一棵可居住的树。', ja: '透明なプラットフォーム住宅。家具、床、階段、都市への視線を、住むことのできる樹木のように編む。', en: 'A transparent platform house that turns furniture, floors, stairs, and urban views into an inhabitable tree.' } },
+      { slug: 'serpentine-pavilion-2013', note: { zh: '白色钢格网形成云状公共亭，公园、身体和结构在轻薄边界中互相渗透。', ja: '白い鉄骨グリッドによる雲のような公共パヴィリオン。公園、身体、構造が薄い境界の中で浸透し合う。', en: 'A cloud-like public pavilion where park, body, and structure interpenetrate through a light steel grid.' } },
+    ],
+    sources: [
+      { title: 'Sou Fujimoto Architects', url: 'https://www.sou-fujimoto.net/' },
+      { title: 'Mori Art Museum: The Architecture of Sou Fujimoto', url: 'https://www.mori.art.museum/en/exhibitions/soufujimoto/03/index.html' },
+      { title: 'Serpentine Pavilion 2013 by Sou Fujimoto', url: 'https://www.serpentinegalleries.org/whats-on/serpentine-gallery-pavilion-2013-sou-fujimoto/' },
+      { title: 'ArchDaily: Musashino Art University Museum & Library', url: 'https://www.archdaily.com/145789/musashino-art-university-museum-library-sou-fujimoto' },
+      { title: 'ArchDaily: House NA', url: 'https://www.archdaily.com/230533/house-na-sou-fujimoto-architects' },
+      { title: 'Wikidata: Sou Fujimoto', url: 'https://www.wikidata.org/wiki/Q581450' },
+    ],
+  },
+
   'sanaa': {
     slug: 'sanaa',
     summary: {
