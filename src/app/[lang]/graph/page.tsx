@@ -11,9 +11,16 @@ import {
 import { t } from '@/lib/i18n'
 import { displayName, type Architect } from '@/lib/types'
 
-export const metadata: Metadata = {
-  title: 'Relationship graph',
-  description: 'Architect relationships and lineages in Archistory.',
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  return {
+    title: t(lang, 'graph'),
+    description: lang === 'en'
+      ? 'Architect relationships and lineages in Archistory.'
+      : lang === 'ja'
+      ? 'Archistory の建築家関係と系譜。'
+      : 'Archistory 的建筑师关系与谱系。',
+  }
 }
 
 type Chain = {
@@ -164,10 +171,10 @@ export default async function GraphPage({ params }: { params: Promise<{ lang: st
             </div>
             <p className="caption max-w-md sm:text-right">
               {lang === 'en'
-                ? 'The first version keeps the graph readable: each relation has a type, direction, note, and source title.'
+                ? 'Each relation is shown with its direction, historical meaning, and source title.'
                 : lang === 'ja'
-                ? '第一版は読みやすさを優先し、関係の種類、方向、説明、出典名を表示する。'
-                : '第一版优先可读性：每条关系显示类型、方向、说明和来源标题。'}
+                ? 'それぞれの関係を、方向、歴史的な意味、出典名とともに読む。'
+                : '每条关系都标出方向、历史含义和来源标题。'}
             </p>
           </div>
           <div className="divide-y divide-[color:var(--ui-border-subtle)] rounded-md border border-subtle bg-surface shadow-semantic-card">

@@ -16,7 +16,6 @@ import Breadcrumb from '@/components/Breadcrumb'
 import Reveal from '@/components/Reveal'
 import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
-import ArchitectCard from '@/components/ArchitectCard'
 import ArchitectDeepArticle from '@/components/ArchitectDeepArticle'
 import SafeImage from '@/components/SafeImage'
 import ImageAttribution from '@/components/ImageAttribution'
@@ -314,16 +313,16 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
               {influencesList.length > 0 && (
                 <div>
                   <p className="eyebrow mb-3">{t(lang, 'influences')}</p>
-                  <div className="space-y-2">
-                    {influencesList.map(a => <ArchitectCard key={a.slug} architect={a} lang={lang} />)}
+                  <div className="divide-y divide-[color:var(--ui-border-subtle)] rounded-md border border-subtle bg-surface shadow-semantic-card">
+                    {influencesList.map(a => <CompactArchitectLink key={a.slug} architect={a} lang={lang} prefix={prefix} />)}
                   </div>
                 </div>
               )}
               {influencedList.length > 0 && (
                 <div>
                   <p className="eyebrow mb-3">{t(lang, 'influenced')}</p>
-                  <div className="space-y-2">
-                    {influencedList.map(a => <ArchitectCard key={a.slug} architect={a} lang={lang} />)}
+                  <div className="divide-y divide-[color:var(--ui-border-subtle)] rounded-md border border-subtle bg-surface shadow-semantic-card">
+                    {influencedList.map(a => <CompactArchitectLink key={a.slug} architect={a} lang={lang} prefix={prefix} />)}
                   </div>
                 </div>
               )}
@@ -457,5 +456,26 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
         }] : []),
       ]} />
     </PageShell>
+  )
+}
+
+function CompactArchitectLink({ architect, lang, prefix }: { architect: Awaited<ReturnType<typeof getArchitects>>[number]; lang: string; prefix: string }) {
+  const years = architect.birth_year
+    ? `${architect.birth_year}–${architect.death_year || (lang === 'en' ? 'present' : lang === 'ja' ? '現在' : '至今')}`
+    : ''
+
+  return (
+    <Link
+      href={`${prefix}/architect/${architect.slug}`}
+      className="group grid grid-cols-[minmax(0,1fr)_auto] gap-3 px-4 py-3 transition-colors hover:bg-surface-muted"
+    >
+      <span className="min-w-0">
+        <span className="block truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">
+          {displayName(architect, lang)}
+        </span>
+        {years && <span className="caption mt-1 block">{years}</span>}
+      </span>
+      <span className="self-center text-soft transition-colors group-hover:text-accent" aria-hidden="true">→</span>
+    </Link>
   )
 }

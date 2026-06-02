@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
-import { getBuildings, getEras } from '@/lib/data'
+import { getBuildings, getBuildingsWithCovers, getEras } from '@/lib/data'
 import { getBuildingRelations } from '@/lib/relations'
 import { displayName, displayText, formatCountryName, formatDisplayLocation, isProbablySimplifiedChinese, type Architect, type Building, type Era, type Style } from '@/lib/types'
 import { findTimelinePeriodForEra, findTimelinePeriodForRange, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
@@ -364,7 +364,24 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
 
   const { building, architect, relatedBuildings: related, images, styles: buildingStyles, era } = rels
   const prefix = `/${lang}`
-  const allEras = await getEras()
+  const [allEras, buildingsWithCovers] = await Promise.all([getEras(), getBuildingsWithCovers()])
+  const buildingWithCover = buildingsWithCovers.find(item => item.slug === building.slug)
+  const galleryImages = images.length > 0
+    ? images
+    : buildingWithCover?.cover_url
+    ? [{
+        id: `${building.id}-curated-cover`,
+        building_id: building.id,
+        url_original: buildingWithCover.cover_url,
+        url_thumb_400: buildingWithCover.cover_url,
+        photographer: buildingWithCover.cover_photographer || null,
+        source: 'curated',
+        license: buildingWithCover.cover_license || null,
+        source_url: buildingWithCover.cover_source_url || '',
+        img_type: 'exterior',
+        is_primary: true,
+      }]
+    : []
   const contextEra = era || findEraForBuildingYear(building, allEras)
   const timelinePeriod = contextEra
     ? findTimelinePeriodForEra(contextEra)
@@ -405,7 +422,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
 
       {/* Hero: image gallery */}
       <div className="section-sm">
-        <ImageGallery images={images} alt={nameText} />
+        <ImageGallery images={galleryImages} alt={nameText} />
       </div>
 
       {/* Title + metadata */}
@@ -454,9 +471,9 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
           </Reveal>
         )}
 
-        {spatialText && lightText && images.length > 1 && (
-          <ImageBreak src={images[1]?.url_original || images[0].url_original} alt={nameText}
-            photographer={images[1]?.photographer} license={images[1]?.license} sourceUrl={images[1]?.source_url} />
+        {spatialText && lightText && galleryImages.length > 1 && (
+          <ImageBreak src={galleryImages[1]?.url_original || galleryImages[0].url_original} alt={nameText}
+            photographer={galleryImages[1]?.photographer} license={galleryImages[1]?.license} sourceUrl={galleryImages[1]?.source_url} />
         )}
 
         {lightText && (

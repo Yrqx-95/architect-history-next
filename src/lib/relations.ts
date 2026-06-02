@@ -13,8 +13,26 @@ import {
 } from '@/lib/data'
 import { listMatchesTaxonomy, matchesTaxonomy, normalizeTaxonomyValue } from '@/lib/taxonomy'
 import type {
-  ArchitectRelations, BuildingRelations, StyleRelations, EraRelations,
+  ArchitectRelations, BuildingImage, BuildingRelations, StyleRelations, EraRelations,
 } from '@/lib/types'
+
+const brokenExternalImageFiles = new Set([
+  'villa_savoye.jpg',
+  'villasavoye_floorplan.svg',
+])
+
+function isDisplayableBuildingImage(image: BuildingImage) {
+  const url = image.url_original || image.url_thumb_400 || ''
+  try {
+    const pathname = new URL(url).pathname.toLowerCase()
+    const filename = pathname.split('/').pop() || ''
+    return !pathname.endsWith('.svg') && !brokenExternalImageFiles.has(filename)
+  } catch {
+    const pathname = url.toLowerCase().split('?')[0]
+    const filename = pathname.split('/').pop() || ''
+    return !pathname.endsWith('.svg') && !brokenExternalImageFiles.has(filename)
+  }
+}
 
 // ============================================================
 // Architect Relations
@@ -76,7 +94,7 @@ export const getBuildingRelations = cache(async (slug: string): Promise<Building
   const architect = allArchs.find(a => a.slug === building.architect_slug) || null
   const styles = allStyles.filter(s => listMatchesTaxonomy(building.style_slugs, s))
   const era = allEras.find(e => matchesTaxonomy(building.era_slug, e)) || null
-  const images = await getBuildingImages(building.id)
+  const images = (await getBuildingImages(building.id)).filter(isDisplayableBuildingImage)
   const typeKey = normalizeTaxonomyValue(building.type_slug)
 
   const relatedBuildings = allBuildings.filter(b =>

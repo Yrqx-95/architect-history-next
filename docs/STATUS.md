@@ -686,6 +686,15 @@
 - ✅ `/api/image-proxy` 不再把本地宽度参数追加到 Wikimedia 原图 URL，减少远程原图被错误识别为非图片的概率
 - ✅ `image-overrides.json` 新增 `paimio-sanatorium` 与 `vyborg-library` 有效 Wikimedia 覆盖图，替换注册表中两个 404 失效主图
 
+### 第五十九阶段：体验审计补丁与破图回退
+- ✅ 移动端导航从全屏平铺菜单改为底部抽屉：保留遮罩、清晰关闭按钮、搜索、主导航、语言、中文显示和主题设置，避免露出侧边旧页面造成“半打开”错觉
+- ✅ `/[lang]/graph` 移除“第一版优先可读性”等内部产品口吻，改为面向读者的关系说明；`/graph` 与 `/paths` metadata 改为按语言生成
+- ✅ `/[lang]/paths` 路线卡片高度从 `22rem` 收紧到 `16rem`，减少内容少时的大面积空白
+- ✅ `/[lang]/architect/[slug]` 的 fallback 关联建筑师列表改为紧凑索引行，避免大卡片在关系数量少时制造空洞
+- ✅ `/[lang]/map` 国家/地区卡片缩短：路径文案压为两行，代表图改成小图带，手机端一屏可看到更多入口
+- ✅ `relations.ts` 过滤已确认 404 或不适合 Next 图片优化的外部 SVG/失效 Wikimedia 图；建筑详情页图库为空时回退到本地已治理 curated cover
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）；生产预览复扫 `/zh/map`、`/zh/building/villa-savoye`、`/zh/architect/aalto`、`/zh/graph`、`/zh/paths` 桌面/手机无横向溢出、当前视口无破图
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

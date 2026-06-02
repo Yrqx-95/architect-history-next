@@ -74,17 +74,26 @@ export default function MobileNav({ lang }: { lang: string }) {
 
       {open && (
         <div
-          className="fixed bottom-0 left-0 right-0 top-0 z-[80] h-dvh w-screen overflow-hidden sm:hidden"
+          className="fixed inset-0 z-[80] h-dvh w-screen overflow-hidden bg-black/35 backdrop-blur-[2px] sm:hidden"
           role="dialog"
           aria-modal="true"
           aria-label={title}
-          style={{ background: 'var(--ui-surface)' }}
         >
-          <div className="flex h-full flex-col">
-            <div className="flex min-h-16 items-center justify-between border-b border-subtle px-5">
+          <button
+            type="button"
+            className="absolute inset-0 h-full w-full cursor-default"
+            aria-label="Close menu backdrop"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 flex max-h-[calc(100dvh-0.75rem)] flex-col overflow-hidden rounded-t-xl border border-subtle bg-surface shadow-modal"
+          >
+            <div className="flex min-h-14 items-center justify-between border-b border-subtle px-4">
               <div>
                 <p className="text-base font-semibold text-primary">Archistory</p>
-                <p className="mt-0.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-muted">{title}</p>
+                <p className="mt-0.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-muted">
+                  {lang === 'en' ? 'Archive menu' : lang === 'ja' ? 'アーカイブメニュー' : '档案菜单'}
+                </p>
               </div>
               <button
                 type="button"
@@ -98,8 +107,8 @@ export default function MobileNav({ lang }: { lang: string }) {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-5 pb-[calc(2rem+env(safe-area-inset-bottom))] pt-5">
-              <section className="border-b border-subtle pb-5">
+            <div className="flex-1 overflow-y-auto px-4 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-4">
+              <section className="border-b border-subtle pb-4">
                 <p className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{searchLabel}</p>
                 <form action={prefix + '/search'} onSubmit={() => setOpen(false)}>
                   <label className="relative block">
@@ -116,7 +125,7 @@ export default function MobileNav({ lang }: { lang: string }) {
                 </form>
               </section>
 
-              <section className="border-b border-subtle py-5">
+              <section className="border-b border-subtle py-4">
                 <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{navLabel}</p>
                 <div className="grid grid-cols-2 gap-2">
                   {mainLinks.map(item => (
@@ -124,7 +133,7 @@ export default function MobileNav({ lang }: { lang: string }) {
                       key={item.href}
                       href={prefix + item.href}
                       onClick={() => setOpen(false)}
-                      className="flex min-h-14 items-center justify-between rounded-md border border-subtle bg-surface-raised px-3 text-sm font-medium text-primary shadow-semantic-card transition-colors hover:bg-surface-muted"
+                      className="flex min-h-12 items-center justify-between rounded-md border border-subtle bg-surface-raised px-3 text-sm font-medium text-primary shadow-semantic-card transition-colors hover:bg-surface-muted"
                     >
                       <span>{item.label}</span>
                       <span aria-hidden="true" className="text-soft">→</span>
@@ -133,7 +142,7 @@ export default function MobileNav({ lang }: { lang: string }) {
                 </div>
               </section>
 
-              <section className="border-b border-subtle py-5">
+              <section className="border-b border-subtle py-4">
                 <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{languageLabel}</p>
                 <div className="grid grid-cols-3 gap-2">
                   {LANGS.map(l => (
@@ -141,7 +150,7 @@ export default function MobileNav({ lang }: { lang: string }) {
                       key={l}
                       href={localizedPath(l)}
                       onClick={() => setOpen(false)}
-                      className={`flex min-h-12 items-center justify-center rounded-md border px-2 text-sm transition-colors ${lang === l ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
+                      className={`flex min-h-11 items-center justify-center rounded-md border px-2 text-sm transition-colors ${lang === l ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
                     >
                       {LANGUAGE_LABELS[l]}
                     </Link>
@@ -149,7 +158,7 @@ export default function MobileNav({ lang }: { lang: string }) {
                 </div>
               </section>
 
-              <section className="pt-5">
+              <section className="pt-4">
                 <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{displayLabel}</p>
                 <div className="space-y-4 rounded-md border border-subtle bg-surface-raised p-3 shadow-semantic-card">
                   {lang === 'zh' && (

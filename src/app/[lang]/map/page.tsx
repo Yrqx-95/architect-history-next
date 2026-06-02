@@ -254,9 +254,9 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                       style={{ width: `${Math.max(8, Math.round((country.buildingCount / maxCountryCount) * 100))}%` }}
                     />
                   </div>
-                  <p className="mt-4 body-sm line-clamp-3 text-secondary">{regionNarrative(country.code, lang)}</p>
+                  <p className="mt-3 body-sm line-clamp-2 text-secondary">{regionNarrative(country.code, lang)}</p>
                   {cover ? (
-                    <div className="relative mt-5 h-32 overflow-hidden rounded-sm bg-surface-muted sm:h-36">
+                    <div className="relative mt-4 h-20 overflow-hidden rounded-sm bg-surface-muted sm:h-24">
                       <SafeImage
                         src={cover.cover_url || ''}
                         alt={displayName(cover, lang)}
@@ -266,7 +266,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                       />
                     </div>
                   ) : (
-                    <div className="mt-5 grid grid-cols-2 gap-2 border-t border-subtle pt-4">
+                    <div className="mt-4 grid grid-cols-2 gap-2 border-t border-subtle pt-3">
                       {[...country.cities.entries()].slice(0, 4).map(([city, count]) => (
                         <span key={city} className="caption truncate">
                           {city} · {count}
@@ -274,7 +274,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                       ))}
                     </div>
                   )}
-                  <p className={`${cover ? 'mt-4' : 'mt-5'} caption border-t border-subtle pt-4`}>
+                  <p className={`${cover ? 'mt-3' : 'mt-4'} caption border-t border-subtle pt-3`}>
                     {country.cities.size} {c(lang, 'cities')} · {c(lang, 'viewCountry')}
                   </p>
                 </Link>

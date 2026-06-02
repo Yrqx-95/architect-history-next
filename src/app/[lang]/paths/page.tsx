@@ -8,9 +8,16 @@ import { t } from '@/lib/i18n'
 import { learningPaths, localizedPathText, type LearningPathKind } from '@/lib/learning-paths'
 import { displayName, type Architect, type Building, type Era, type Style } from '@/lib/types'
 
-export const metadata: Metadata = {
-  title: 'Learning paths',
-  description: 'Curated routes through Archistory across architects, buildings, periods, and styles.',
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params
+  return {
+    title: t(lang, 'paths'),
+    description: lang === 'en'
+      ? 'Curated routes through Archistory across architects, buildings, periods, and styles.'
+      : lang === 'ja'
+      ? '建築家、作品、時代、様式をつなぐ Archistory の知識ルート。'
+      : '连接建筑师、作品、时代与风格的 Archistory 知识路线。',
+  }
 }
 
 const kindLabel = {
@@ -62,13 +69,13 @@ export default async function LearningPathsPage({ params }: { params: Promise<{ 
               <Link
                 key={path.slug}
                 href={`${prefix}/paths/${path.slug}`}
-                className="group flex min-h-[22rem] flex-col rounded-md border border-subtle bg-surface p-5 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+                className="group flex min-h-[16rem] flex-col rounded-md border border-subtle bg-surface p-5 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
               >
-                <p className="label mb-6">{path.steps.length} {lang === 'en' ? 'steps' : lang === 'ja' ? 'ステップ' : '个节点'}</p>
+                <p className="label mb-4">{path.steps.length} {lang === 'en' ? 'steps' : lang === 'ja' ? 'ステップ' : '个节点'}</p>
                 <h2 className="max-w-sm text-2xl font-semibold leading-tight text-primary group-hover:text-secondary">
                   {localizedPathText(path.title, lang)}
                 </h2>
-                <p className="mt-4 body-small text-secondary">{localizedPathText(path.subtitle, lang)}</p>
+                <p className="mt-3 body-small text-secondary">{localizedPathText(path.subtitle, lang)}</p>
                 <div className="mt-auto space-y-2 border-t border-subtle pt-5">
                   {path.steps.slice(0, 4).map(step => (
                     <div key={`${step.kind}-${step.slug}`} className="flex items-center justify-between gap-3 text-sm">
