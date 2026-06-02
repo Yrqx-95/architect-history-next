@@ -5,6 +5,7 @@ import type {
 } from './types'
 import { isMinimallyComplete, isWikidataId } from './quality'
 import { isTrustedEditorialImage } from './image-policy'
+import { normalizeTaxonomyValue } from './taxonomy'
 import imageOverrides from './image-overrides.json'
 import localImageOverrides from './local-image-overrides.json'
 
@@ -160,10 +161,11 @@ export async function getRelatedArchitects(slug: string): Promise<Architect[]> {
 export async function getRelatedBuildings(slug: string): Promise<Building[]> {
   const b = await getBuildingBySlug(slug)
   if (!b) return []
+  const typeKey = normalizeTaxonomyValue(b.type_slug)
   return (await getBuildings()).filter(x =>
     x.id !== b.id &&
     (x.architect_slug === b.architect_slug ||
      x.style_slugs?.some(s => b.style_slugs?.includes(s)) ||
-     x.type_slug === b.type_slug)
+     (typeKey && normalizeTaxonomyValue(x.type_slug) === typeKey))
   ).slice(0, 6)
 }

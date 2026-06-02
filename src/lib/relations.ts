@@ -11,7 +11,7 @@ import {
   getBuildingImages,
   getArchitectBySlug, getBuildingBySlug,
 } from '@/lib/data'
-import { listMatchesTaxonomy, matchesTaxonomy } from '@/lib/taxonomy'
+import { listMatchesTaxonomy, matchesTaxonomy, normalizeTaxonomyValue } from '@/lib/taxonomy'
 import type {
   ArchitectRelations, BuildingRelations, StyleRelations, EraRelations,
 } from '@/lib/types'
@@ -77,12 +77,13 @@ export const getBuildingRelations = cache(async (slug: string): Promise<Building
   const styles = allStyles.filter(s => listMatchesTaxonomy(building.style_slugs, s))
   const era = allEras.find(e => matchesTaxonomy(building.era_slug, e)) || null
   const images = await getBuildingImages(building.id)
+  const typeKey = normalizeTaxonomyValue(building.type_slug)
 
   const relatedBuildings = allBuildings.filter(b =>
     b.id !== building.id &&
     (b.architect_slug === building.architect_slug ||
      b.style_slugs?.some(s => building.style_slugs?.includes(s)) ||
-     b.type_slug === building.type_slug)
+     (typeKey && normalizeTaxonomyValue(b.type_slug) === typeKey))
   ).slice(0, 6)
 
   return { building, architect, styles, era, relatedBuildings, images }

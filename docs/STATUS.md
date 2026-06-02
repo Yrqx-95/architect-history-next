@@ -573,6 +573,14 @@
 - ✅ 部署验证：提交 `a53b6d5` 已推送 GitHub `main`，Vercel 生产部署 `architect-history-next-5bgp4f055-yrqx-95s-projects.vercel.app` Ready
 - ✅ 正式域名验证：`https://archistory.app/zh/browse/country` 与 `/zh/browse/country/jp` 均返回新版地域索引与分类详情结构
 
+### 第四十七阶段：建筑类型详情页与分类兼容层
+- ✅ `taxonomy.ts` 新增分类值规范化：兼容大小写、连字符/下划线/斜杠差异，以及英文 `architecture/building/type` 尾缀
+- ✅ 相关作品匹配从直接比较 `type_slug` 改为使用规范化键，降低旧显示名或旧 slug 导致的漏关联
+- ✅ `/[lang]/browse/type/[slug]` 改为复用 `BrowseListing`，和国家、风格、时代详情页共用有图/无图分层与 masonry 布局
+- ✅ 文档同步：`DATA_SCHEMA.md` 记录分类兼容层与未来数据库迁移方向
+- ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+- ✅ 本地页面验证：`/zh/browse/type/religious`、`/zh/browse/type/cultural`、`/en/browse/type/religious` 均返回新版分类详情结构
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
@@ -590,7 +598,7 @@ docs/
 ```
 
 ### 仍待修复（按优先级）
-1. 🟡 类型页兼容旧显示名 type_slug，数据需迁移为 slug
+1. 🟡 数据库中的 type_slug 已有前台兼容层，仍需长期迁移为稳定 slug
 2. 🟡 22 个 overrides 重叠条目待清理
 3. 🟢 首页 40 处内联三语字符串待迁移
 4. 🟢 首页 358 行待拆分

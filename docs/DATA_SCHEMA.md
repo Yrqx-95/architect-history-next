@@ -362,6 +362,18 @@ src/lib/learning-paths.ts
 - **禁止** Wikidata Q-ID 作为 slug（如 `q118539028`）
 - slug 不可更改（会破坏所有现有 URL）
 
+## Taxonomy Matching（分类兼容层）
+
+前台分类匹配使用 `src/lib/taxonomy.ts`，不是直接比较字符串。匹配键包含：
+
+- `slug`
+- `name_en`
+- `name_zh`
+- `name_ja`
+- 规范化后的旧值：大小写统一、`-`/`_`/`/` 转空格、去掉英文尾缀 `architecture/building/type`
+
+该兼容层用于过渡旧数据，例如 `religious-building`、`Religious Architecture`、`religious` 都能匹配到同一建筑类型。长期仍应把数据库中的 `type_slug` 迁移为稳定 slug。
+
 ## 关联查询性能注意事项
 
 - `relations.ts` 使用全表摄入后 JS 端过滤，数据增长后需要改为 Supabase `.in()` 查询

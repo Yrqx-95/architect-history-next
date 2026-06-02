@@ -1,13 +1,9 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { t } from '@/lib/i18n'
 import { getTypes, getBuildingsWithCovers, getArchitects } from '@/lib/data'
 import { displayName } from '@/lib/types'
 import { matchesTaxonomy } from '@/lib/taxonomy'
-import PageShell from '@/components/PageShell'
-import Reveal from '@/components/Reveal'
-import BuildingCard from '@/components/BuildingCard'
-import SectionHeading from '@/components/SectionHeading'
+import BrowseListing from '@/components/BrowseListing'
 
 export const dynamicParams = true
 
@@ -33,35 +29,15 @@ export default async function TypePage({ params }: { params: Promise<{ lang: str
   if (!type) notFound()
 
   const nameText = displayName(type, lang)
-  const archMap = new Map(architects.map(a => [a.slug, a.name_zh || a.name_en]))
+  const archMap = new Map(architects.map(a => [a.slug, displayName(a, lang)]))
   const filteredBldgs = buildings.filter(b => matchesTaxonomy(b.type_slug, type))
 
-  return (
-    <PageShell>
-      <header className="section">
-        <p className="eyebrow mb-4">{t(lang, 'types')}</p>
-        <h1 className="heading-display mb-3">{nameText}</h1>
-        <p className="body-sm">{filteredBldgs.length} {t(lang, 'buildings')}</p>
-      </header>
-
-      {filteredBldgs.length > 0 ? (
-        <Reveal>
-          <section className="section border-t border-subtle pt-10 sm:pt-12">
-            <SectionHeading
-              title={t(lang, 'buildings')}
-              description={lang === 'en' ? 'Works grouped by program and use.' : lang === 'ja' ? '用途とプログラムで束ねた作品。' : '按建筑用途与功能组织的作品。'}
-            />
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-5">
-            {filteredBldgs.map(b => (
-              <BuildingCard key={b.id} building={b} lang={lang}
-                architectName={archMap.get(b.architect_slug || '') || ''} />
-            ))}
-            </div>
-          </section>
-        </Reveal>
-      ) : (
-        <p className="body-sm py-8 text-center">{t(lang, 'noResults')}</p>
-      )}
-    </PageShell>
-  )
+  return <BrowseListing
+    lang={lang}
+    displayName={nameText}
+    description={lang === 'en' ? 'Works grouped by program and use.' : lang === 'ja' ? '用途とプログラムから作品を読む。' : '从建筑用途与功能进入作品。'}
+    architects={[]}
+    buildings={filteredBldgs}
+    architectMap={archMap}
+  />
 }
