@@ -48,8 +48,58 @@ const copy = {
 
 const indexImageDenylist = new Set(['louis-vuitton-fondation'])
 
+const regionNarratives = {
+  jp: {
+    zh: '从木构传统、战后现代主义到当代轻盈空间，日本路径适合观察“传统如何转译为现代”。',
+    en: 'From timber traditions to postwar modernism and contemporary lightness, Japan shows how tradition is translated into modern form.',
+    ja: '木造の伝統、戦後モダニズム、現代の軽やかな空間を通して、伝統が近代へ翻訳される過程を読む。',
+  },
+  us: {
+    zh: '美国路径把住宅实验、企业现代主义、城市更新和大型公共建筑放在同一张地图中阅读。',
+    en: 'The United States route connects houses, corporate modernism, urban renewal, and large public works.',
+    ja: '住宅実験、企業モダニズム、都市更新、大規模公共建築を同じ地図上で読む。',
+  },
+  fr: {
+    zh: '法国路径连接古典城市、博物馆制度、现代主义宣言和当代文化建筑。',
+    en: 'France connects classical urban order, museum culture, modernist manifestos, and contemporary cultural buildings.',
+    ja: '古典的都市秩序、美術館制度、モダニズムの宣言、現代文化建築を結ぶ経路。',
+  },
+  it: {
+    zh: '意大利路径适合追踪古典比例、城市广场、文艺复兴理论与现代改造之间的连续性。',
+    en: 'Italy is a route through classical proportion, urban squares, Renaissance theory, and modern intervention.',
+    ja: '古典的比例、都市広場、ルネサンス理論、近代的介入の連続性をたどる経路。',
+  },
+  cn: {
+    zh: '中国路径从交通枢纽、文化建筑和当代城市密度切入，观察全球化语境中的公共空间。',
+    en: 'China enters through transport hubs, cultural buildings, and contemporary urban density.',
+    ja: '交通拠点、文化建築、現代都市の密度から、グローバルな文脈の公共空間を読む。',
+  },
+  gb: {
+    zh: '英国路径连接工业革命、公共机构、城市基础设施和高技派建筑。',
+    en: 'Britain connects industrialization, public institutions, urban infrastructure, and high-tech architecture.',
+    ja: '産業革命、公共施設、都市インフラ、ハイテック建築を結ぶ経路。',
+  },
+  es: {
+    zh: '西班牙路径把现代主义、地域材料、地中海光线和城市公共空间并置阅读。',
+    en: 'Spain brings modernism, regional materials, Mediterranean light, and public urban space together.',
+    ja: 'モダニズム、地域素材、地中海の光、都市公共空間を並置して読む。',
+  },
+} as const
+
 function c(lang: string, key: keyof typeof copy) {
   return copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+}
+
+function regionNarrative(code: string, lang: string) {
+  const narrative = regionNarratives[code as keyof typeof regionNarratives]
+  if (!narrative) {
+    return lang === 'en'
+      ? 'Use this region to connect works, cities, architects, and historical density.'
+      : lang === 'ja'
+      ? 'この地域から作品、都市、建築家、歴史的密度をつなげて読む。'
+      : '从这个地域连接作品、城市、建筑师与历史密度。'
+  }
+  return narrative[lang as 'zh' | 'en' | 'ja'] || narrative.en
 }
 
 function mapCityLabel(building: BuildingWithCover, lang: string) {
@@ -179,7 +229,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
             </Link>
           </div>
 
-          <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {countries.slice(0, 12).map(country => {
               const cover = localCover(country.featured)
               return (
@@ -204,6 +254,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                       style={{ width: `${Math.max(8, Math.round((country.buildingCount / maxCountryCount) * 100))}%` }}
                     />
                   </div>
+                  <p className="mt-4 body-sm line-clamp-3 text-secondary">{regionNarrative(country.code, lang)}</p>
                   {cover ? (
                     <div className="relative mt-5 h-32 overflow-hidden rounded-sm bg-surface-muted sm:h-36">
                       <SafeImage
@@ -261,6 +312,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                   <div className="min-w-0 self-center">
                     <h3 className="body-sm font-medium text-primary transition-colors group-hover:text-accent">{country.name}</h3>
                     <p className="caption mt-1">{country.buildingCount} {c(lang, 'buildings')} · {country.cities.size} {c(lang, 'cities')}</p>
+                    <p className="caption mt-2 line-clamp-2">{regionNarrative(country.code, lang)}</p>
                     <p className="mt-3 text-xs text-accent underline underline-offset-4">{c(lang, 'viewCountry')}</p>
                   </div>
                 </Link>

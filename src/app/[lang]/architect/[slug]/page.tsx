@@ -158,6 +158,29 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
   const worksWithImages = buildingsWithCovers.filter(building => building.cover_url)
   const worksWithoutImages = buildingsWithCovers.filter(building => !building.cover_url)
+  const primaryStyle = styles[0]
+  const readingPathLinks = [
+    era && {
+      href: `${prefix}/browse/era/${era.slug}`,
+      label: lang === 'en' ? 'Period' : lang === 'ja' ? '時代' : '时代',
+      title: displayName(era, lang),
+    },
+    primaryStyle && {
+      href: `${prefix}/browse/style/${primaryStyle.slug}`,
+      label: lang === 'en' ? 'Style' : lang === 'ja' ? '様式' : '风格',
+      title: displayName(primaryStyle, lang),
+    },
+    architect.nationalities?.[0] && {
+      href: `${prefix}/search?q=${encodeURIComponent(architect.nationalities[0])}`,
+      label: lang === 'en' ? 'Region' : lang === 'ja' ? '地域' : '地域',
+      title: architect.nationalities[0],
+    },
+    sortedBuildings[0] && {
+      href: `${prefix}/timeline#decade-${Math.floor((sortedBuildings[0].year_start || 0) / 10) * 10}`,
+      label: lang === 'en' ? 'Chronology' : lang === 'ja' ? '年表' : '时间',
+      title: sortedBuildings[0].year_start ? `${sortedBuildings[0].year_start}s` : t(lang, 'timeline'),
+    },
+  ].filter(Boolean) as Array<{ href: string; label: string; title: string }>
 
   const metaRows = [
     { label: t(lang, 'lifeSpan'), value: architect.birth_year ? `${architect.birth_year} – ${architect.death_year || t(lang, 'present')}` : null },
@@ -322,10 +345,10 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
               </div>
             </div>
 
-            <div className="grid gap-10 lg:grid-cols-[minmax(16rem,0.52fr)_minmax(0,1fr)] lg:items-start">
-              <div>
+            <div className="grid gap-6 lg:grid-cols-[minmax(18rem,0.58fr)_minmax(0,1fr)] lg:items-start">
+              <aside className="rounded-md border border-subtle bg-surface p-4 shadow-semantic-card sm:p-5">
                 <p className="eyebrow mb-4">{lang === 'en' ? 'Chronology' : lang === 'ja' ? '年表' : '作品年表'}</p>
-                <div className="relative border-l-2 border-subtle pl-6 sm:pl-8">
+                <div className="relative border-l-2 border-subtle pl-6 sm:pl-7">
                   <div className="space-y-4 sm:space-y-5">
                     {sortedBuildings.slice(0, 15).map(b => (
                       <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="block relative group">
@@ -341,7 +364,24 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
                     ))}
                   </div>
                 </div>
-              </div>
+                {readingPathLinks.length > 0 && (
+                  <div className="mt-6 border-t border-subtle pt-5">
+                    <p className="eyebrow mb-3">{lang === 'en' ? 'Reading route' : lang === 'ja' ? '読書経路' : '阅读路径'}</p>
+                    <div className="grid gap-2">
+                      {readingPathLinks.map(link => (
+                        <Link
+                          key={`${link.label}-${link.href}`}
+                          href={link.href}
+                          className="group grid grid-cols-[4.5rem_minmax(0,1fr)] gap-3 rounded-sm border border-subtle px-3 py-2.5 transition-colors hover:border-default hover:bg-surface-muted"
+                        >
+                          <span className="caption">{link.label}</span>
+                          <span className="truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">{link.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </aside>
 
               <div>
                 <p className="eyebrow mb-4">{lang === 'en' ? 'All works' : lang === 'ja' ? '全作品' : '全部作品'}</p>

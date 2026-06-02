@@ -340,9 +340,9 @@ img { max-width: 100%; height: auto; }
    Spacing Rhythm
    ============================================================ */
 
-.section-sm { @apply mb-8 sm:mb-12; }
-.section    { @apply mb-14 sm:mb-20; }
-.section-lg { @apply mb-20 sm:mb-28; }
+.section-sm { @apply mb-7 sm:mb-10; }
+.section    { @apply mb-12 sm:mb-16; }
+.section-lg { @apply mb-16 sm:mb-24; }
 
 .flow > * + * { margin-top: var(--spacing-rhythm); }
 .flow-sm > * + * { margin-top: 1rem; }

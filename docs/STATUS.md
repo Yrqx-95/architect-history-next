@@ -675,6 +675,17 @@
 - ⚠️ 首次 Vercel 部署失败原因不是 Alberti 内容错误，而是构建期读取 Supabase `architects` 表时 Supabase/Cloudflare 返回 `522 Connection timed out`
 - ✅ `data.ts` 加强 Supabase 分页读取重试：将 transient error 识别从 JSON 解析扩展到 `522`、`Connection timed out`、`Cloudflare`、`DOCTYPE`、network/timeout，并使用 6 次指数退避，降低生产构建被短时网络波动打断的概率
 
+### 第五十八阶段：功能页密度与知识入口修复
+- ✅ 全站 section 节奏收紧：降低地图、时间、档案和详情页在桌面端的纵向空白感，同时保留移动端呼吸感
+- ✅ `/[lang]/timeline` 增加双层可拖动导航：先以“大历史时期”理解古典、中世纪、文艺复兴、工业现代和当代，再进入十年作品索引
+- ✅ `/[lang]/timeline` 的十年索引继续使用 masonry columns，避免短年代卡被等高 grid 拉伸成大空白
+- ✅ `/[lang]/map` 的国家/地区入口加入读者可理解的地域阅读路径，把地图从地名索引升级为建筑史地域线索
+- ✅ `/[lang]/architect/[slug]` 的作品区改为“作品年表 + 阅读路径 + 全部作品”结构，减少左右列空洞，并把时代、风格、地域、时间入口并入同一研究路径
+- ✅ 建筑师地域入口改为搜索入口，避免国籍字段不是国家代码时跳转到不存在的国家详情页
+- ✅ 建筑作品研究地图文案移除“硬塞占位”等内部编辑口吻，改为面向读者的跳转说明
+- ✅ `/api/image-proxy` 不再把本地宽度参数追加到 Wikimedia 原图 URL，减少远程原图被错误识别为非图片的概率
+- ✅ `image-overrides.json` 新增 `paimio-sanatorium` 与 `vyborg-library` 有效 Wikimedia 覆盖图，替换注册表中两个 404 失效主图
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

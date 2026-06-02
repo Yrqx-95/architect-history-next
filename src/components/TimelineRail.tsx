@@ -8,6 +8,7 @@ type TimelineRailItem = {
   href: string
   label: string
   meta: string
+  detail?: string
 }
 
 export default function TimelineRail({
@@ -77,12 +78,15 @@ export default function TimelineRail({
           <Link
             key={item.id}
             href={item.href}
-            className="group min-w-[10.5rem] rounded-md border border-subtle bg-surface-raised px-4 py-3 transition-colors hover:border-default hover:bg-surface-muted"
+            className="group flex min-h-[7.25rem] min-w-[11.5rem] flex-col justify-between rounded-md border border-subtle bg-surface-raised px-4 py-3 transition-colors hover:border-default hover:bg-surface-muted sm:min-w-[13rem]"
           >
-            <span className="block font-serif-display text-2xl leading-none text-primary transition-colors group-hover:text-accent">
-              {item.label}
+            <span>
+              <span className="block font-serif-display text-2xl leading-none text-primary transition-colors group-hover:text-accent">
+                {item.label}
+              </span>
+              {item.detail && <span className="caption mt-2 line-clamp-2 block">{item.detail}</span>}
             </span>
-            <span className="caption mt-2 block">{item.meta}</span>
+            <span className="caption mt-3 block">{item.meta}</span>
           </Link>
         ))}
       </div>

@@ -5,7 +5,6 @@ export const revalidate = 86400 // Cache for 1 day
 
 export async function GET(request: NextRequest) {
   const url = request.nextUrl.searchParams.get('url')
-  const w = request.nextUrl.searchParams.get('w')
 
   if (!url) {
     return NextResponse.json({ error: 'Missing url parameter' }, { status: 400 })
@@ -23,12 +22,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Domain not allowed' }, { status: 403 })
   }
 
-  // Build proxied URL with optional width
-  let proxyUrl = url
-  if (w) {
-    const sep = proxyUrl.includes('?') ? '&' : '?'
-    proxyUrl = `${proxyUrl}${sep}w=${w}`
-  }
+  // Width is part of the local proxy cache key only. Wikimedia file URLs are
+  // direct binary resources; appending arbitrary query params can make some
+  // upstream responses non-image and break Next's image optimizer.
+  const proxyUrl = url
 
   try {
     const controller = new AbortController()

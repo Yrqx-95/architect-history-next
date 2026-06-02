@@ -118,5 +118,17 @@
     "cover_photographer": "Antony-22",
     "cover_license": "CC BY-SA 4.0",
     "cover_source_url": "https://commons.wikimedia.org/wiki/File:Hudson_Yards_Vessel_2019.jpg"
+  },
+  "paimio-sanatorium": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Paimio_Sanatorium2.jpg",
+    "cover_photographer": "Leon Liao",
+    "cover_license": "CC BY 2.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Paimio_Sanatorium2.jpg"
+  },
+  "vyborg-library": {
+    "cover_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Vyborg_Library_Interior.jpg",
+    "cover_photographer": "Ninaraas",
+    "cover_license": "CC BY 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Vyborg_Library_Interior.jpg"
   }
 }

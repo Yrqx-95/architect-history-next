@@ -62,6 +62,13 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
       architectCount: activeArchitects.length,
     }
   }).filter(period => period.buildingCount > 0 || period.architectCount > 0)
+  const periodRailItems = periodSummaries.map(period => ({
+    id: period.id,
+    href: `#period-${period.id}`,
+    label: localizedTimelineText(period.label, lang),
+    detail: localizedTimelineText(period.question, lang),
+    meta: `${period.range[0]}-${period.range[1]} · ${period.architectCount} ${t(lang, 'architects')} · ${period.buildingCount} ${t(lang, 'buildings')}`,
+  }))
 
   return (
     <PageShell className="!max-w-[86rem]">
@@ -100,16 +107,32 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
         </Reveal>
       )}
 
+      {periodRailItems.length > 0 && (
+        <Reveal>
+          <TimelineRail
+            title={lang === 'en' ? 'Period navigator' : lang === 'ja' ? '時代ナビゲーター' : '时代导航'}
+            description={
+              lang === 'en'
+                ? 'Start with the long historical periods, then move down to individual decades and works.'
+                : lang === 'ja'
+                ? 'まず大きな時代の流れをつかみ、そのあと年代と作品へ降りていく。'
+                : '先抓住大的历史时期，再进入具体年代与作品。'
+            }
+            items={periodRailItems}
+          />
+        </Reveal>
+      )}
+
       {railItems.length > 0 && (
         <Reveal>
           <TimelineRail
-            title={lang === 'en' ? 'Time navigator' : lang === 'ja' ? '時間ナビゲーター' : '时间导航'}
+            title={lang === 'en' ? 'Decade navigator' : lang === 'ja' ? '年代ナビゲーター' : '十年导航'}
             description={
               lang === 'en'
-                ? 'Drag the rail to scan active decades, then jump directly to the works in that period.'
+                ? 'Drag across active decades and jump directly to the works recorded in each moment.'
                 : lang === 'ja'
-                ? '横にドラッグして年代を眺め、その時期の作品へ直接移動する。'
-                : '横向拖动浏览有效年代，并直接跳到对应时期的作品。'
+                ? '横にドラッグして有効な年代を眺め、各時点に記録された作品へ移動する。'
+                : '横向拖动浏览有效年代，并直接跳到每个时间点里的作品。'
             }
             items={railItems}
           />

@@ -215,7 +215,7 @@ function BuildingStudyMap({
     eyebrow: { zh: '作品研究', en: 'Study map', ja: '作品研究' },
     title: { zh: '从这些维度阅读', en: 'Read through these lenses', ja: 'この視点から読む' },
     intro: {
-      zh: '先定位历史问题，再进入空间、光线、动线、结构与来源。缺少资料的维度不会硬塞占位。',
+      zh: '先定位历史问题，再进入空间、光线、动线、结构与来源；已开放的维度可以直接跳转阅读。',
       en: 'Start with the historical question, then read space, light, circulation, structure, and sources.',
       ja: '歴史的な問いを確認し、空間、光、動線、構造、出典へ進む。',
     },
