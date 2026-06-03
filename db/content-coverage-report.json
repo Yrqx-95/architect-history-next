@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T11:52:31.212Z",
+  "generated_at": "2026-06-03T14:19:35.271Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -2223,11 +2223,11 @@
       "wikidata_id": null,
       "name_en": "Ospedale degli Innocenti",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2247,11 +2247,11 @@
       "wikidata_id": null,
       "name_en": "Palazzo Barberini",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2259,11 +2259,11 @@
       "wikidata_id": null,
       "name_en": "Palazzo Rucellai",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2283,11 +2283,11 @@
       "wikidata_id": null,
       "name_en": "Pazzi Chapel",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2391,11 +2391,11 @@
       "wikidata_id": null,
       "name_en": "San Carlo alle Quattro Fontane",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2439,11 +2439,11 @@
       "wikidata_id": null,
       "name_en": "Sant'Ivo alla Sapienza",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2451,11 +2451,11 @@
       "wikidata_id": null,
       "name_en": "Santa Maria Novella Facade",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2583,11 +2583,11 @@
       "wikidata_id": null,
       "name_en": "St. Peter's Square",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11759,17 +11759,25 @@
     "national-museum-of-roman-art",
     "olivetti-exhibition-centre-in-venice",
     "orange-county-government-center",
+    "ospedale-innocenti",
+    "palazzo-barberini",
+    "palazzo-rucellai",
     "palazzo-terragni",
+    "pazzi-chapel",
     "robie-house",
     "rolex-learning-center",
     "rose-seidler-house",
     "sagrada-familia",
     "salk-institute",
+    "san-carlo-alle-quattro-fontane",
+    "sant-ivo-alla-sapienza",
+    "santa-maria-novella",
     "sao-paulo-museum-of-art",
     "seagram-building",
     "sendai-mediatheque",
     "sesc-pompeia",
     "st-pauls-cathedral",
+    "st-peters-square",
     "sydney-opera-house",
     "therme-vals",
     "twa-terminal",

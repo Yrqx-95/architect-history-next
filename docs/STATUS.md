@@ -784,6 +784,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 94 增至 102，中文/日文正式正文缺口从 781 降至 773，来源缺口从 66 降至 58
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第七十二阶段：文艺复兴与巴洛克城市宗教空间研究卡第十一批
+- ✅ 第十一批补充文艺复兴公共建筑、宫殿立面、礼拜堂和罗马巴洛克空间：`ospedale-innocenti`、`palazzo-rucellai`、`pazzi-chapel`、`santa-maria-novella`、`palazzo-barberini`、`san-carlo-alle-quattro-fontane`、`sant-ivo-alla-sapienza`、`st-peters-square`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖布鲁内莱斯基公共慈善建筑、阿尔伯蒂城市立面、佛罗伦萨礼拜堂比例、巴贝里尼家族权力空间、博罗米尼动态几何和贝尼尼巴洛克城市剧场
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 102 增至 110，中文/日文正式正文缺口从 773 降至 765，来源缺口从 58 降至 50
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
