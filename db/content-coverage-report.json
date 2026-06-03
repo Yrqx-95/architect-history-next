@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-02T16:19:15.353Z",
+  "generated_at": "2026-06-03T00:20:14.907Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1539,11 +1539,11 @@
       "wikidata_id": null,
       "name_en": "Dulles Airport Terminal",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1611,11 +1611,11 @@
       "wikidata_id": null,
       "name_en": "Gateway Arch",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2691,11 +2691,11 @@
       "wikidata_id": null,
       "name_en": "TWA Flight Center",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -3147,8 +3147,8 @@
       "wikidata_id": "Q2349872",
       "name_en": "Kursaal convention centre",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -3171,8 +3171,8 @@
       "wikidata_id": "Q3330685",
       "name_en": "National Museum of Roman Art",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -3675,8 +3675,8 @@
       "wikidata_id": "Q1631067",
       "name_en": "Cathedral of Our Lady of the Angels",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -4179,8 +4179,8 @@
       "wikidata_id": "Q5221213",
       "name_en": "Danteum",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -4407,8 +4407,8 @@
       "wikidata_id": "Q321789",
       "name_en": "Einstein Tower",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -4683,8 +4683,8 @@
       "wikidata_id": "Q2719120",
       "name_en": "Palazzo Terragni",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -4815,8 +4815,8 @@
       "wikidata_id": "Q3625124",
       "name_en": "Asilo Sant'Elia",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -5139,8 +5139,8 @@
       "wikidata_id": "Q49230782",
       "name_en": "Kaufhaus Schocken",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -5151,8 +5151,8 @@
       "wikidata_id": "Q1180081",
       "name_en": "De La Warr Pavilion",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6075,8 +6075,8 @@
       "wikidata_id": "Q1046414",
       "name_en": "Luis Barragán House and Studio",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6099,8 +6099,8 @@
       "wikidata_id": "Q5754223",
       "name_en": "Casa Gilardi",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6123,8 +6123,8 @@
       "wikidata_id": "Q55065499",
       "name_en": "Cuadra San Cristobal",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6171,8 +6171,8 @@
       "wikidata_id": "Q127603419",
       "name_en": "São Paulo Museum of Art building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6231,8 +6231,8 @@
       "wikidata_id": "Q645190",
       "name_en": "SESC Pompéia",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6267,8 +6267,8 @@
       "wikidata_id": "Q28105029",
       "name_en": "Glass House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6351,8 +6351,8 @@
       "wikidata_id": "Q3874260",
       "name_en": "Olivetti Exhibition centre in Venice, Italy",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6387,8 +6387,8 @@
       "wikidata_id": "Q3992600",
       "name_en": "Brion tomb",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6555,8 +6555,8 @@
       "wikidata_id": "Q2181857",
       "name_en": "De Bijenkorf",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6819,8 +6819,8 @@
       "wikidata_id": "Q107427251",
       "name_en": "Marcel Breuer House II",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6891,8 +6891,8 @@
       "wikidata_id": "Q3747209",
       "name_en": "Fondazione Querini Stampalia",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -7095,8 +7095,8 @@
       "wikidata_id": "Q113546259",
       "name_en": "Conference Center UNESCO",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -8727,8 +8727,8 @@
       "wikidata_id": "Q4176574",
       "name_en": "Yale Art and Architecture Building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -8775,8 +8775,8 @@
       "wikidata_id": "Q110722976",
       "name_en": "Milam Residence",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -8823,8 +8823,8 @@
       "wikidata_id": "Q2889317",
       "name_en": "Orange County Government Center",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -9015,8 +9015,8 @@
       "wikidata_id": "Q7367931",
       "name_en": "Rose Seidler House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -9039,8 +9039,8 @@
       "wikidata_id": "Q599363",
       "name_en": "MLC Centre",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -9063,8 +9063,8 @@
       "wikidata_id": "Q19400176",
       "name_en": "Australia Square Tower",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -11675,6 +11675,38 @@
       }
     }
   ],
+  "building_content_overlays": [
+    "asilo-santelia",
+    "australia-square-tower",
+    "brion-tomb",
+    "casa-gilardi",
+    "cathedral-of-our-lady-of",
+    "conference-center-unesco",
+    "cuadra-san-cristobal",
+    "danteum",
+    "de-bijenkorf",
+    "de-la-warr-pavilion",
+    "dulles-airport",
+    "einstein-tower",
+    "fondazione-querini-stampalia",
+    "gateway-arch",
+    "glass-house",
+    "kaufhaus-schocken",
+    "kursaal-convention-centre",
+    "luis-barragan-house-and-studio",
+    "marcel-breuer-house-ii",
+    "milam-residence",
+    "mlc-centre",
+    "national-museum-of-roman-art",
+    "olivetti-exhibition-centre-in-venice",
+    "orange-county-government-center",
+    "palazzo-terragni",
+    "rose-seidler-house",
+    "sao-paulo-museum-of-art",
+    "sesc-pompeia",
+    "twa-terminal",
+    "yale-art-and-architecture-building"
+  ],
   "samples": {
     "architect_gaps": [
       {
@@ -12374,11 +12406,11 @@
         "wikidata_id": null,
         "name_en": "Dulles Airport Terminal",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12446,11 +12478,11 @@
         "wikidata_id": null,
         "name_en": "Gateway Arch",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {

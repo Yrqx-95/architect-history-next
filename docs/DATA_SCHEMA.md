@@ -192,6 +192,28 @@ entity_relations (
 - 日文页不得直接展示未本地化的简体中文技术字段；缺少日文内容时保留待补充状态。
 - 后续若迁移数据库，可把 `spatial_feat/light_feat/circulation/structure/materials` 拆为 `building_analysis_sections`，支持多语言、来源和审校状态。
 
+### Building Content Overlay（建筑作品正式内容层）
+
+第一轮建筑作品研究卡不直接写入 Supabase，使用 `src/lib/building-content.ts` 按 `building.slug` 提供正式内容 overlay。
+
+运行时规则：
+
+- 有 overlay 时，建筑详情页优先使用 `summary` 与 `significance`，并显示 3 个研究章节和文末来源。
+- 无 overlay 时，继续使用 Supabase 字段；若字段缺失，再使用 `fallback-content.ts` 的事实型兜底。
+- `sources[]` 必须至少 2 条，并在入库前验证 URL 可打开。
+
+字段：
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| slug | string | 对应 buildings.slug |
+| summary | Record<zh/ja/en,string> | 页头摘要与 SEO 描述 |
+| significance | Record<zh/ja/en,string> | 作品重要性说明 |
+| sections | array | 研究章节，第一轮固定为背景、空间组织、材料/光线/影响 |
+| sources | array | 来源标题和 URL |
+
+截至第六十二阶段，第一批 30 座代表作已加入该 overlay；`npm run content:audit` 会统计 `building_gaps.formal_overlay` 与 `building_content_overlays`。
+
 ### Chinese Script Overlay（中文简繁显示层）
 
 繁体中文第一阶段不新增 Supabase 字段，也不新增 `/zh-tw` 路由。中文页面仍使用 `/zh`，运行时通过 `localStorage.chineseScript` 控制显示形态：

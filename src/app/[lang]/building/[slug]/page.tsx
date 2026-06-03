@@ -7,6 +7,7 @@ import { getBuildingRelations } from '@/lib/relations'
 import { displayName, displayText, formatCountryName, formatDisplayLocation, isProbablySimplifiedChinese, type Architect, type Building, type Era, type Style } from '@/lib/types'
 import { findTimelinePeriodForEra, findTimelinePeriodForRange, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
 import { getBuildingFallbackContent } from '@/lib/fallback-content'
+import { getBuildingContent, localizedBuildingContent, type BuildingContentSource } from '@/lib/building-content'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import ImageGallery from '@/components/ImageGallery'
@@ -205,12 +206,14 @@ function BuildingStudyMap({
   hasSpatial,
   hasLight,
   hasCirculation,
+  hasSources,
 }: {
   lang: string
   building: Building
   hasSpatial: boolean
   hasLight: boolean
   hasCirculation: boolean
+  hasSources: boolean
 }) {
   const copy = {
     eyebrow: { zh: '作品研究', en: 'Study map', ja: '作品研究' },
@@ -234,7 +237,7 @@ function BuildingStudyMap({
   )
   const hasLocalizedMaterials = Boolean(building.materials?.length && lang !== 'ja')
   const structureReady = Boolean(hasLocalizedStructure || hasLocalizedMaterials || building.area_sqm)
-  const sourcesReady = Boolean(building.wikipedia_url || building.official_url)
+  const sourcesReady = hasSources || Boolean(building.wikipedia_url || building.official_url)
   const items = [
     { href: '#spatial-analysis', title: l('spatial'), ready: hasSpatial },
     { href: '#light-analysis', title: l('light'), ready: hasLight },
@@ -323,13 +326,16 @@ function BuildingSources({
   lang,
   building,
   galleryImages,
+  overlaySources,
 }: {
   lang: string
   building: Building
   galleryImages: Array<{ source_url: string; photographer: string | null; license: string | null }>
+  overlaySources?: BuildingContentSource[]
 }) {
   const imageSource = galleryImages.find(image => image.source_url)
-  const sources = [
+  const rawSources = [
+    ...(overlaySources || []).map(source => ({ label: source.title, href: source.url })),
     building.official_url && { label: lang === 'en' ? 'Official site' : lang === 'ja' ? '公式サイト' : '官方网站', href: building.official_url },
     building.wikipedia_url && { label: 'Wikipedia', href: building.wikipedia_url },
     building.wikidata_id && { label: 'Wikidata', href: `https://www.wikidata.org/wiki/${building.wikidata_id}` },
@@ -338,6 +344,7 @@ function BuildingSources({
       href: imageSource.source_url,
     },
   ].filter(Boolean) as Array<{ label: string; href: string }>
+  const sources = Array.from(new Map(rawSources.map(source => [source.href, source])).values())
 
   if (sources.length === 0) return null
 
@@ -368,7 +375,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   if (!rels) return { title: 'Not Found' }
   const name = displayName(rels.building, lang)
   const arch = rels.architect ? displayName(rels.architect, lang) : ''
-  const desc = [name, rels.building.city, rels.building.country, rels.building.year_start, arch].filter(Boolean).join(' · ')
+  const contentOverlay = getBuildingContent(slug)
+  const overlayDescription = contentOverlay ? localizedBuildingContent(contentOverlay.summary, lang) : ''
+  const desc = overlayDescription || [name, rels.building.city, rels.building.country, rels.building.year_start, arch].filter(Boolean).join(' · ')
   return { title: name, description: desc }
 }
 
@@ -379,6 +388,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
 
   const { building, architect, relatedBuildings: related, images, styles: buildingStyles, era } = rels
   const prefix = `/${lang}`
+  const contentOverlay = getBuildingContent(slug)
   const [allEras, buildingsWithCovers] = await Promise.all([getEras(), getBuildingsWithCovers()])
   const buildingWithCover = buildingsWithCovers.find(item => item.slug === building.slug)
   const curatedCoverImage = buildingWithCover?.cover_url
@@ -420,11 +430,15 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
     era: contextEra,
     lang,
   })
-  const descriptionText = cleanText(displayText(building.description, lang)) || fallbackContent.summary
-  const sigText = cleanText(displayText(building.significance, lang)) || fallbackContent.significance
-  const spatialText = cleanText(displayText(building.spatial_feat, lang)) || fallbackContent.spatial
-  const lightText = cleanText(displayText(building.light_feat, lang)) || fallbackContent.light
-  const circulationText = cleanText(displayText(building.circulation, lang)) || fallbackContent.circulation
+  const descriptionText = contentOverlay
+    ? localizedBuildingContent(contentOverlay.summary, lang)
+    : cleanText(displayText(building.description, lang)) || fallbackContent.summary
+  const sigText = contentOverlay
+    ? localizedBuildingContent(contentOverlay.significance, lang)
+    : cleanText(displayText(building.significance, lang)) || fallbackContent.significance
+  const spatialText = cleanText(displayText(building.spatial_feat, lang)) || (contentOverlay ? '' : fallbackContent.spatial)
+  const lightText = cleanText(displayText(building.light_feat, lang)) || (contentOverlay ? '' : fallbackContent.light)
+  const circulationText = cleanText(displayText(building.circulation, lang)) || (contentOverlay ? '' : fallbackContent.circulation)
 
   const metaRows = [
     { label: t(lang, 'architects'), value: architect ? <Link href={`${prefix}/architect/${architect.slug}`} className="underline decoration-[color:var(--ui-border)] underline-offset-2 transition-colors hover:text-accent">{displayName(architect, lang)}</Link> : null },
@@ -487,13 +501,33 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
       <BuildingStudyMap
         lang={lang}
         building={building}
-        hasSpatial={Boolean(spatialText)}
-        hasLight={Boolean(lightText)}
-        hasCirculation={Boolean(circulationText)}
+        hasSpatial={Boolean(spatialText || contentOverlay)}
+        hasLight={Boolean(lightText || contentOverlay)}
+        hasCirculation={Boolean(circulationText || contentOverlay)}
+        hasSources={Boolean(contentOverlay?.sources.length)}
       />
 
       {/* Deep Analysis — layered content sections with reading anchors */}
       <div className="section-sm space-y-14 sm:space-y-16">
+        {contentOverlay && (
+          <Reveal>
+            <ArticleSection id="building-research" title={lang === 'en' ? 'Research card' : lang === 'ja' ? '研究カード' : '研究卡'}>
+              <div className="space-y-10">
+                {contentOverlay.sections.map(section => (
+                  <section key={localizedBuildingContent(section.title, lang)} className="border-t border-subtle pt-7 first:border-t-0 first:pt-0">
+                    <h3 className="heading-4 mb-4">{localizedBuildingContent(section.title, lang)}</h3>
+                    <div className="space-y-4">
+                      {localizedBuildingContent(section.paragraphs, lang).map((paragraph, index) => (
+                        <p key={index} className="body text-secondary">{paragraph}</p>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            </ArticleSection>
+          </Reveal>
+        )}
+
         {spatialText && (
           <Reveal>
             <ArticleSection id="spatial-analysis" title={t(lang, 'spatial')}>
@@ -536,7 +570,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         related={related}
       />
 
-      <BuildingSources lang={lang} building={building} galleryImages={galleryImages} />
+      <BuildingSources lang={lang} building={building} galleryImages={galleryImages} overlaySources={contentOverlay?.sources} />
 
       {/* Related buildings */}
       {related.length > 0 && (

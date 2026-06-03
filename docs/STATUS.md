@@ -713,6 +713,14 @@
 - ⚠️ 仍有 4 个建筑师条目没有可靠本人肖像，也没有可用代表作图像兜底：`mvrdv`、`sinan`、`antonin-raymond`、`studio-mumbai`。这些条目数据库中目前没有关联作品，且 Wikimedia/Wikidata 未通过开放授权校验；已记录在 `db/display-coverage-report.json`，不使用来源不清图片硬补
 - ✅ `npm run content:audit-display` 已生成 `db/display-coverage-report.json`，后续补内容时应优先清零其中的 `architectsMissingPortraitOrRepresentativeWorkImage`
 
+### 第六十二阶段：30 座代表作中日研究卡
+- ✅ 新增 `src/lib/building-content.ts`，建立建筑作品正式内容 overlay：按 `building.slug` 提供中日摘要、重要性、3 个研究章节和来源列表
+- ✅ 建筑详情页接入 overlay：有正式内容时优先显示研究卡和文末来源；无 overlay 的建筑继续使用 Supabase 字段与 runtime fallback
+- ✅ 第一批 30 座代表作完成中日研究卡：Breuer、Moneo、Rudolph、Scarpa、Lina Bo Bardi、Barragán、Mendelsohn、Eero Saarinen、Terragni、Harry Seidler 各 3 座
+- ✅ 60 条来源 URL 已逐条请求验证，当前失败数为 0；来源优先使用 Wikidata、Wikipedia、Wikimedia Commons、官方机构或基金会页面
+- ✅ `audit-content-coverage.mjs` 新增 `building_gaps.formal_overlay` 与 `building_content_overlays`：当前正式建筑作品 overlay 数为 30，中文/日文正式正文缺口从 875 降到 845
+- ⚠️ 计划中的 `cathedral-of-our-lady-of-the-angels` 当前数据库不存在，实际站内 slug 为 `cathedral-of-our-lady-of`；本轮使用现有 slug，并应在后续 slug 清理时统一
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

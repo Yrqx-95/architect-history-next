@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import fs from 'node:fs/promises'
+import { buildingContentOverlays } from '../src/lib/building-content.ts'
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL
 const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -83,19 +84,23 @@ const architectGaps = architects.map(architect => ({
   },
 })).filter(item => Object.values(item.missing).some(Boolean))
 
+const buildingContentOverlaySlugs = Object.keys(buildingContentOverlays).sort()
+const buildingContentOverlaySet = new Set(buildingContentOverlaySlugs)
+
 const buildingGaps = buildings.map(building => {
   const relatedImages = (imagesByBuilding.get(building.id) || []).filter(isDisplayableImage)
   const hasOverride = Boolean(localOverrides[building.slug]?.cover_url || manualOverrides[building.slug]?.cover_url)
+  const hasFormalOverlay = buildingContentOverlaySet.has(building.slug)
   return {
     slug: building.slug,
     wikidata_id: building.wikidata_id,
     name_en: building.name_en,
     missing: {
-      zh: !hasRecordText(building.description, 'zh'),
-      ja: !hasRecordText(building.description, 'ja'),
+      zh: !hasFormalOverlay && !hasRecordText(building.description, 'zh'),
+      ja: !hasFormalOverlay && !hasRecordText(building.description, 'ja'),
       en: !hasRecordText(building.description, 'en'),
       image: !hasOverride && relatedImages.length === 0,
-      source: !building.wikipedia_url && !building.official_url && !building.wikidata_id,
+      source: !hasFormalOverlay && !building.wikipedia_url && !building.official_url && !building.wikidata_id,
     },
   }
 }).filter(item => Object.values(item.missing).some(Boolean))
@@ -121,7 +126,9 @@ const summary = {
     en: buildingGaps.filter(item => item.missing.en).length,
     image: buildingGaps.filter(item => item.missing.image).length,
     source: buildingGaps.filter(item => item.missing.source).length,
+    formal_overlay: buildingContentOverlaySlugs.length,
   },
+  building_content_overlays: buildingContentOverlaySlugs,
   samples: {
     architect_gaps: architectGaps.slice(0, 30),
     building_gaps: buildingGaps.slice(0, 50),
