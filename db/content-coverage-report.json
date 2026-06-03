@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T01:26:23.821Z",
+  "generated_at": "2026-06-03T01:50:52.550Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1179,11 +1179,11 @@
       "wikidata_id": null,
       "name_en": "8 House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1191,11 +1191,11 @@
       "wikidata_id": null,
       "name_en": "Apple Park",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1203,11 +1203,11 @@
       "wikidata_id": null,
       "name_en": "Asakusa Culture and Tourism Center",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1299,11 +1299,11 @@
       "wikidata_id": null,
       "name_en": "Beijing Daxing International Airport",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1323,11 +1323,11 @@
       "wikidata_id": null,
       "name_en": "Cathedral of Brasília",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1443,11 +1443,11 @@
       "wikidata_id": null,
       "name_en": "Chandigarh Capitol Complex",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1563,11 +1563,11 @@
       "wikidata_id": null,
       "name_en": "Fagus Factory",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1971,11 +1971,11 @@
       "wikidata_id": null,
       "name_en": "Louvre Pyramid",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11676,11 +11676,16 @@
     }
   ],
   "building_content_overlays": [
+    "8-house",
+    "apple-park",
+    "asakusa-culture-center",
     "asilo-santelia",
     "australia-square-tower",
     "barcelona-pavilion",
     "bauhaus-dessau",
+    "beijing-daxing-airport",
     "beijing-national-stadium",
+    "brasilia-cathedral",
     "brion-tomb",
     "bruder-klaus-chapel",
     "casa-batllo",
@@ -11689,6 +11694,7 @@
     "cathedral-of-our-lady-of",
     "cctv-headquarters",
     "centre-pompidou",
+    "chandigarh",
     "chapel-of-notre-dame-du-haut",
     "church-of-light",
     "conference-center-unesco",
@@ -11699,6 +11705,7 @@
     "dulles-airport",
     "east-building-national-gallery",
     "einstein-tower",
+    "fagus-factory",
     "fallingwater",
     "farnsworth-house",
     "fondazione-querini-stampalia",
@@ -11712,6 +11719,7 @@
     "kimbell-art-museum",
     "kolumba-museum",
     "kursaal-convention-centre",
+    "louvre-pyramid",
     "luis-barragan-house-and-studio",
     "marcel-breuer-house-ii",
     "milam-residence",
@@ -12070,11 +12078,11 @@
         "wikidata_id": null,
         "name_en": "8 House",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12082,11 +12090,11 @@
         "wikidata_id": null,
         "name_en": "Apple Park",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12094,11 +12102,11 @@
         "wikidata_id": null,
         "name_en": "Asakusa Culture and Tourism Center",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12190,11 +12198,11 @@
         "wikidata_id": null,
         "name_en": "Beijing Daxing International Airport",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12214,11 +12222,11 @@
         "wikidata_id": null,
         "name_en": "Cathedral of Brasília",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12334,11 +12342,11 @@
         "wikidata_id": null,
         "name_en": "Chandigarh Capitol Complex",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12454,11 +12462,11 @@
         "wikidata_id": null,
         "name_en": "Fagus Factory",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {

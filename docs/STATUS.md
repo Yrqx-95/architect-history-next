@@ -742,6 +742,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 46 增至 54，中文/日文正式正文缺口从 829 降至 821，来源缺口从 114 降至 106
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第六十六阶段：当代公共与早期现代建筑研究卡第五批
+- ✅ 第五批补充当代住宅/企业总部/公共信息节点/机场，以及早期现代主义和历史遗产介入案例：`8-house`、`apple-park`、`asakusa-culture-center`、`beijing-daxing-airport`、`brasilia-cathedral`、`chandigarh`、`fagus-factory`、`louvre-pyramid`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖立体街区、科技园区、城市游客节点、巨型交通空间、国家象征、后殖民新城、工业现代主义和博物馆入口系统
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0；浅草文化观光中心使用 Wikidata + 隈研吾事务所官方项目页，避免错误的 Wikipedia 路径
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 54 增至 62，中文/日文正式正文缺口从 821 降至 813，来源缺口从 106 降至 98
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
