@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T01:08:34.592Z",
+  "generated_at": "2026-06-03T01:26:23.821Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1311,11 +1311,11 @@
       "wikidata_id": null,
       "name_en": "Beijing National Stadium",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1335,11 +1335,11 @@
       "wikidata_id": null,
       "name_en": "Bruder Klaus Field Chapel",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1551,11 +1551,11 @@
       "wikidata_id": null,
       "name_en": "East Building, National Gallery",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1683,11 +1683,11 @@
       "wikidata_id": null,
       "name_en": "Guggenheim Museum Bilbao",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1791,11 +1791,11 @@
       "wikidata_id": null,
       "name_en": "HSBC Building Hong Kong",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1839,11 +1839,11 @@
       "wikidata_id": null,
       "name_en": "Kansai International Airport",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1863,11 +1863,11 @@
       "wikidata_id": null,
       "name_en": "Kolumba Museum",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2511,11 +2511,11 @@
       "wikidata_id": null,
       "name_en": "Sendai Mediatheque",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11680,7 +11680,9 @@
     "australia-square-tower",
     "barcelona-pavilion",
     "bauhaus-dessau",
+    "beijing-national-stadium",
     "brion-tomb",
+    "bruder-klaus-chapel",
     "casa-batllo",
     "casa-gilardi",
     "casa-mila",
@@ -11695,15 +11697,20 @@
     "de-bijenkorf",
     "de-la-warr-pavilion",
     "dulles-airport",
+    "east-building-national-gallery",
     "einstein-tower",
     "fallingwater",
     "farnsworth-house",
     "fondazione-querini-stampalia",
     "gateway-arch",
     "glass-house",
+    "guggenheim-bilbao",
     "guggenheim-nyc",
+    "hongkong-bank",
+    "kansai-airport",
     "kaufhaus-schocken",
     "kimbell-art-museum",
+    "kolumba-museum",
     "kursaal-convention-centre",
     "luis-barragan-house-and-studio",
     "marcel-breuer-house-ii",
@@ -11716,6 +11723,7 @@
     "rose-seidler-house",
     "sagrada-familia",
     "sao-paulo-museum-of-art",
+    "sendai-mediatheque",
     "sesc-pompeia",
     "sydney-opera-house",
     "therme-vals",
@@ -12194,11 +12202,11 @@
         "wikidata_id": null,
         "name_en": "Beijing National Stadium",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12218,11 +12226,11 @@
         "wikidata_id": null,
         "name_en": "Bruder Klaus Field Chapel",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12434,11 +12442,11 @@
         "wikidata_id": null,
         "name_en": "East Building, National Gallery",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12566,11 +12574,11 @@
         "wikidata_id": null,
         "name_en": "Guggenheim Museum Bilbao",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {

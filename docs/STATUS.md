@@ -735,6 +735,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 38 增至 46，中文/日文正式正文缺口从 837 降至 829，来源缺口从 122 降至 114
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第六十五阶段：公共与基础设施建筑研究卡第四批
+- ✅ 第四批补充公共地标、交通基础设施与遗址型博物馆：`beijing-national-stadium`、`hongkong-bank`、`east-building-national-gallery`、`guggenheim-bilbao`、`kansai-airport`、`sendai-mediatheque`、`kolumba-museum`、`bruder-klaus-chapel`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；重点覆盖大型赛事建筑、高技派总部、现代博物馆、交通建筑、媒体建筑和卒姆托的氛围/遗址空间
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0；对会 403/404 的官方或媒体页面，改用可访问的事务所、Wikidata、Wikipedia 或 ArchDaily 页面
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 46 增至 54，中文/日文正式正文缺口从 829 降至 821，来源缺口从 114 降至 106
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
