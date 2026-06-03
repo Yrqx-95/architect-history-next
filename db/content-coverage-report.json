@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T01:50:52.550Z",
+  "generated_at": "2026-06-03T08:32:47.229Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1215,11 +1215,11 @@
       "wikidata_id": null,
       "name_en": "Aspen Art Museum",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1239,11 +1239,11 @@
       "wikidata_id": null,
       "name_en": "Bank of China Tower",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1383,11 +1383,11 @@
       "wikidata_id": null,
       "name_en": "Casa da Música",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1491,11 +1491,11 @@
       "wikidata_id": null,
       "name_en": "CopenHill",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1515,11 +1515,11 @@
       "wikidata_id": null,
       "name_en": "Dongdaemun Design Plaza",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1719,11 +1719,11 @@
       "wikidata_id": null,
       "name_en": "Elbphilharmonie Hamburg",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1743,11 +1743,11 @@
       "wikidata_id": null,
       "name_en": "Heydar Aliyev Center",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1779,11 +1779,11 @@
       "wikidata_id": null,
       "name_en": "Hiroshima Peace Memorial Museum",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11680,7 +11680,9 @@
     "apple-park",
     "asakusa-culture-center",
     "asilo-santelia",
+    "aspen-art-museum",
     "australia-square-tower",
+    "bank-of-china-tower",
     "barcelona-pavilion",
     "bauhaus-dessau",
     "beijing-daxing-airport",
@@ -11689,6 +11691,7 @@
     "brion-tomb",
     "bruder-klaus-chapel",
     "casa-batllo",
+    "casa-da-musica",
     "casa-gilardi",
     "casa-mila",
     "cathedral-of-our-lady-of",
@@ -11698,10 +11701,12 @@
     "chapel-of-notre-dame-du-haut",
     "church-of-light",
     "conference-center-unesco",
+    "copenhill",
     "cuadra-san-cristobal",
     "danteum",
     "de-bijenkorf",
     "de-la-warr-pavilion",
+    "dongdaemun-design-plaza",
     "dulles-airport",
     "east-building-national-gallery",
     "einstein-tower",
@@ -11713,6 +11718,9 @@
     "glass-house",
     "guggenheim-bilbao",
     "guggenheim-nyc",
+    "hamburg-elbphilharmonie",
+    "heydar-aliyev-center",
+    "hiroshima-peace-museum",
     "hongkong-bank",
     "kansai-airport",
     "kaufhaus-schocken",
@@ -12114,11 +12122,11 @@
         "wikidata_id": null,
         "name_en": "Aspen Art Museum",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12138,11 +12146,11 @@
         "wikidata_id": null,
         "name_en": "Bank of China Tower",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12282,11 +12290,11 @@
         "wikidata_id": null,
         "name_en": "Casa da Música",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12390,11 +12398,11 @@
         "wikidata_id": null,
         "name_en": "CopenHill",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12414,11 +12422,11 @@
         "wikidata_id": null,
         "name_en": "Dongdaemun Design Plaza",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12618,11 +12626,11 @@
         "wikidata_id": null,
         "name_en": "Elbphilharmonie Hamburg",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12642,11 +12650,11 @@
         "wikidata_id": null,
         "name_en": "Heydar Aliyev Center",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {

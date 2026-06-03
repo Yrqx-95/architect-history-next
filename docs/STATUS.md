@@ -749,6 +749,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 54 增至 62，中文/日文正式正文缺口从 821 降至 813，来源缺口从 106 降至 98
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第六十七阶段：文化地标与城市再生研究卡第六批
+- ✅ 第六批补充当代文化地标、金融高层、城市再生与战后纪念建筑：`aspen-art-museum`、`bank-of-china-tower`、`casa-da-musica`、`copenhill`、`dongdaemun-design-plaza`、`hamburg-elbphilharmonie`、`heydar-aliyev-center`、`hiroshima-peace-museum`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖小型美术馆、香港金融天际线、音乐厅公共性、能源基础设施公共化、亚洲城市更新、港口再生、国家形象建筑和战后和平纪念
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0；修正易北爱乐厅与盖达尔·阿利耶夫中心的 Wikidata ID，避免前台来源坏链
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 62 增至 70，中文/日文正式正文缺口从 813 降至 805，来源缺口从 98 降至 90
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
