@@ -791,6 +791,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 102 增至 110，中文/日文正式正文缺口从 773 降至 765，来源缺口从 58 降至 50
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第七十三阶段：文艺复兴到巴洛克主线研究卡第十二批
+- ✅ 第十二批继续补充文艺复兴与巴洛克主线中的城市、教堂、剧场和大学仪式空间：`sant-andrea-mantua`、`piazza-del-campidoglio`、`san-giorgio-maggiore`、`teatro-olimpico`、`st-peters-dome`、`oratorio-dei-filippini`、`sant-andrea-al-quirinale`、`sheldonian-theatre`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖阿尔伯蒂古典礼仪空间、米开朗基罗城市广场、帕拉第奥水岸教堂与室内剧场、圣彼得穹顶、博罗米尼社群空间、贝尼尼小尺度精神剧场和雷恩的大学公共仪式空间
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0；对 Wikidata 搜索歧义较大的条目采用已验证 Wikipedia 来源，避免错误 Q 号进入前台
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 110 增至 118，中文/日文正式正文缺口从 765 降至 757，来源缺口从 50 降至 42
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T14:19:35.271Z",
+  "generated_at": "2026-06-03T14:41:09.136Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -2199,11 +2199,11 @@
       "wikidata_id": null,
       "name_en": "Oratorio dei Filippini",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2295,11 +2295,11 @@
       "wikidata_id": null,
       "name_en": "Piazza del Campidoglio",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2403,11 +2403,11 @@
       "wikidata_id": null,
       "name_en": "San Giorgio Maggiore",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2415,11 +2415,11 @@
       "wikidata_id": null,
       "name_en": "Sant'Andrea al Quirinale",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2427,11 +2427,11 @@
       "wikidata_id": null,
       "name_en": "Basilica of Sant'Andrea",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2547,11 +2547,11 @@
       "wikidata_id": null,
       "name_en": "Sheldonian Theatre",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2571,11 +2571,11 @@
       "wikidata_id": null,
       "name_en": "St. Peter's Basilica Dome",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2631,11 +2631,11 @@
       "wikidata_id": null,
       "name_en": "Teatro Olimpico",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11759,26 +11759,34 @@
     "national-museum-of-roman-art",
     "olivetti-exhibition-centre-in-venice",
     "orange-county-government-center",
+    "oratorio-dei-filippini",
     "ospedale-innocenti",
     "palazzo-barberini",
     "palazzo-rucellai",
     "palazzo-terragni",
     "pazzi-chapel",
+    "piazza-del-campidoglio",
     "robie-house",
     "rolex-learning-center",
     "rose-seidler-house",
     "sagrada-familia",
     "salk-institute",
     "san-carlo-alle-quattro-fontane",
+    "san-giorgio-maggiore",
+    "sant-andrea-al-quirinale",
+    "sant-andrea-mantua",
     "sant-ivo-alla-sapienza",
     "santa-maria-novella",
     "sao-paulo-museum-of-art",
     "seagram-building",
     "sendai-mediatheque",
     "sesc-pompeia",
+    "sheldonian-theatre",
     "st-pauls-cathedral",
+    "st-peters-dome",
     "st-peters-square",
     "sydney-opera-house",
+    "teatro-olimpico",
     "therme-vals",
     "twa-terminal",
     "unite-habitation",
