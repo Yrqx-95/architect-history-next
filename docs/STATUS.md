@@ -770,6 +770,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 78 增至 86，中文/日文正式正文缺口从 797 降至 789，来源缺口从 82 降至 74
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第七十阶段：当代美术馆与学习空间研究卡第九批
+- ✅ 第九批补充当代美术馆、学习空间、工程地标与日本小住宅实验：`louvre-lens`、`louis-vuitton-fondation`、`miho-museum`、`millau-viaduct`、`house-na`、`kanazawa-museum`、`naoshima-chichu-art-museum`、`rolex-learning-center`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖 SANAA 的开放公共性、盖里品牌文化地标、贝聿铭山地博物馆、福斯特工程景观、藤本透明住宅、安藤地下美术馆和校园学习地形
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 86 增至 94，中文/日文正式正文缺口从 789 降至 781，来源缺口从 74 降至 66
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

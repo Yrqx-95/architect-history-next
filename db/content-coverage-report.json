@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T11:16:03.937Z",
+  "generated_at": "2026-06-03T11:35:47.741Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1803,11 +1803,11 @@
       "wikidata_id": null,
       "name_en": "House NA",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1827,11 +1827,11 @@
       "wikidata_id": null,
       "name_en": "21st Century Museum Kanazawa",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1947,11 +1947,11 @@
       "wikidata_id": null,
       "name_en": "Louis Vuitton Foundation",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1959,11 +1959,11 @@
       "wikidata_id": null,
       "name_en": "Louvre-Lens",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2007,11 +2007,11 @@
       "wikidata_id": null,
       "name_en": "Miho Museum",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2019,11 +2019,11 @@
       "wikidata_id": null,
       "name_en": "Millau Viaduct",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2079,11 +2079,11 @@
       "wikidata_id": null,
       "name_en": "Chichu Art Museum",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2343,11 +2343,11 @@
       "wikidata_id": null,
       "name_en": "Rolex Learning Center",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11731,6 +11731,8 @@
     "heydar-aliyev-center",
     "hiroshima-peace-museum",
     "hongkong-bank",
+    "house-na",
+    "kanazawa-museum",
     "kansai-airport",
     "kaufhaus-schocken",
     "kimbell-art-museum",
@@ -11738,20 +11740,26 @@
     "kunsthal",
     "kursaal-convention-centre",
     "laurentian-library",
+    "louis-vuitton-fondation",
+    "louvre-lens",
     "louvre-pyramid",
     "luis-barragan-house-and-studio",
     "marcel-breuer-house-ii",
     "menil-collection",
+    "miho-museum",
     "milam-residence",
+    "millau-viaduct",
     "mit-chapel",
     "mlc-centre",
     "nakagin-capsule-tower",
+    "naoshima-chichu-art-museum",
     "national-art-center-tokyo",
     "national-assembly-dhaka",
     "national-museum-of-roman-art",
     "olivetti-exhibition-centre-in-venice",
     "orange-county-government-center",
     "palazzo-terragni",
+    "rolex-learning-center",
     "rose-seidler-house",
     "sagrada-familia",
     "sao-paulo-museum-of-art",
