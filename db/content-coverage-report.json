@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T14:41:09.136Z",
+  "generated_at": "2026-06-03T14:56:29.685Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -2235,11 +2235,11 @@
       "wikidata_id": null,
       "name_en": "Palau Güell",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2271,11 +2271,11 @@
       "wikidata_id": null,
       "name_en": "Park Güell",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2607,11 +2607,11 @@
       "wikidata_id": null,
       "name_en": "Taliesin West",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2835,11 +2835,11 @@
       "wikidata_id": null,
       "name_en": "Yale University Art Gallery",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -6747,8 +6747,8 @@
       "wikidata_id": "Q2706241",
       "name_en": "Villa Mairea",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -6939,8 +6939,8 @@
       "wikidata_id": "Q368706",
       "name_en": "Paimio Sanatorium",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -7203,8 +7203,8 @@
       "wikidata_id": "Q2456080",
       "name_en": "Säynätsalo Town Hall",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -7611,8 +7611,8 @@
       "wikidata_id": "Q6378695",
       "name_en": "Kaufmann Desert House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
         "source": false
@@ -11735,6 +11735,7 @@
     "kanazawa-museum",
     "kansai-airport",
     "kaufhaus-schocken",
+    "kaufmann-desert-house",
     "kimbell-art-museum",
     "kolumba-museum",
     "kunsthal",
@@ -11761,9 +11762,12 @@
     "orange-county-government-center",
     "oratorio-dei-filippini",
     "ospedale-innocenti",
+    "paimio-sanatorium",
+    "palau-guell",
     "palazzo-barberini",
     "palazzo-rucellai",
     "palazzo-terragni",
+    "park-guell",
     "pazzi-chapel",
     "piazza-del-campidoglio",
     "robie-house",
@@ -11778,6 +11782,7 @@
     "sant-ivo-alla-sapienza",
     "santa-maria-novella",
     "sao-paulo-museum-of-art",
+    "saynatsalo-town-hall",
     "seagram-building",
     "sendai-mediatheque",
     "sesc-pompeia",
@@ -11786,14 +11791,17 @@
     "st-peters-dome",
     "st-peters-square",
     "sydney-opera-house",
+    "taliesin-west",
     "teatro-olimpico",
     "therme-vals",
     "twa-terminal",
     "unite-habitation",
+    "villa-mairea",
     "villa-rotonda",
     "villa-savoye",
     "wainwright-building",
-    "yale-art-and-architecture-building"
+    "yale-art-and-architecture-building",
+    "yale-art-gallery"
   ],
   "samples": {
     "architect_gaps": [

@@ -798,6 +798,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 110 增至 118，中文/日文正式正文缺口从 765 降至 757，来源缺口从 50 降至 42
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第七十四阶段：地域现代主义与生活空间研究卡第十三批
+- ✅ 第十三批补充从高迪城市工艺到赖特沙漠学校、阿尔托人本现代主义、诺伊特拉沙漠住宅和康早期美术馆的关键作品：`palau-guell`、`park-guell`、`taliesin-west`、`paimio-sanatorium`、`villa-mairea`、`saynatsalo-town-hall`、`kaufmann-desert-house`、`yale-art-gallery`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖工艺与剖面、景观基础设施、有机建筑共同体、疗养院身体体验、地域现代住宅、市民公共空间、沙漠气候住宅和战后大学美术馆结构秩序
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 118 增至 126，中文/日文正式正文缺口从 757 降至 749，来源缺口从 42 降至 38
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
