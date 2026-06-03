@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T11:35:47.741Z",
+  "generated_at": "2026-06-03T11:52:31.212Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -2151,11 +2151,11 @@
       "wikidata_id": null,
       "name_en": "Neue Nationalgalerie",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2331,11 +2331,11 @@
       "wikidata_id": null,
       "name_en": "Robie House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2379,11 +2379,11 @@
       "wikidata_id": null,
       "name_en": "Salk Institute",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2487,11 +2487,11 @@
       "wikidata_id": null,
       "name_en": "Seagram Building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2559,11 +2559,11 @@
       "wikidata_id": null,
       "name_en": "St. Paul's Cathedral",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2703,11 +2703,11 @@
       "wikidata_id": null,
       "name_en": "Unité d'Habitation",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2739,11 +2739,11 @@
       "wikidata_id": null,
       "name_en": "Villa Rotonda",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2787,11 +2787,11 @@
       "wikidata_id": null,
       "name_en": "Wainwright Building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11755,20 +11755,28 @@
     "naoshima-chichu-art-museum",
     "national-art-center-tokyo",
     "national-assembly-dhaka",
+    "national-gallery-berlin",
     "national-museum-of-roman-art",
     "olivetti-exhibition-centre-in-venice",
     "orange-county-government-center",
     "palazzo-terragni",
+    "robie-house",
     "rolex-learning-center",
     "rose-seidler-house",
     "sagrada-familia",
+    "salk-institute",
     "sao-paulo-museum-of-art",
+    "seagram-building",
     "sendai-mediatheque",
     "sesc-pompeia",
+    "st-pauls-cathedral",
     "sydney-opera-house",
     "therme-vals",
     "twa-terminal",
+    "unite-habitation",
+    "villa-rotonda",
     "villa-savoye",
+    "wainwright-building",
     "yale-art-and-architecture-building"
   ],
   "samples": {

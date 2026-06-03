@@ -777,6 +777,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 86 增至 94，中文/日文正式正文缺口从 789 降至 781，来源缺口从 74 降至 66
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第七十一阶段：现代主义主线与经典原型研究卡第十批
+- ✅ 第十批补充从帕拉第奥原型到美国草原住宅、芝加哥学派、企业现代主义和战后集合住宅的主线作品：`robie-house`、`salk-institute`、`seagram-building`、`unite-habitation`、`wainwright-building`、`national-gallery-berlin`、`st-pauls-cathedral`、`villa-rotonda`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖赖特连续空间、康的科研共同体、密斯企业塔楼、柯布西耶集合住宅、沙利文摩天楼语法、英国巴洛克城市重建和帕拉第奥主义传播
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 94 增至 102，中文/日文正式正文缺口从 781 降至 773，来源缺口从 66 降至 58
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
