@@ -728,6 +728,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 30 增至 38，中文/日文正式正文缺口从 845 降至 837
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第六十四阶段：高频地标建筑研究卡第三批
+- ✅ 第三批继续补充高频访问与建筑史解释需求最高的作品：`centre-pompidou`、`guggenheim-nyc`、`casa-batllo`、`casa-mila`、`sagrada-familia`、`cctv-headquarters`、`church-of-light`、`therme-vals`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；重点覆盖文化建筑、宗教空间、城市住宅、当代地标和氛围建筑
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0；来源使用稳定的 Wikidata + Wikipedia 组合，避免前台出现坏链接
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 38 增至 46，中文/日文正式正文缺口从 837 降至 829，来源缺口从 122 降至 114
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

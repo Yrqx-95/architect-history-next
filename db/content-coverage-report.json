@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T00:44:56.754Z",
+  "generated_at": "2026-06-03T01:08:34.592Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1371,11 +1371,11 @@
       "wikidata_id": null,
       "name_en": "Casa Batlló",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1395,11 +1395,11 @@
       "wikidata_id": null,
       "name_en": "Casa Milà (La Pedrera)",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1419,11 +1419,11 @@
       "wikidata_id": null,
       "name_en": "CCTV Headquarters",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1431,11 +1431,11 @@
       "wikidata_id": null,
       "name_en": "Centre Pompidou",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1467,11 +1467,11 @@
       "wikidata_id": null,
       "name_en": "Church of the Light",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1695,11 +1695,11 @@
       "wikidata_id": null,
       "name_en": "Guggenheim Museum NYC",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2367,11 +2367,11 @@
       "wikidata_id": null,
       "name_en": "Sagrada Familia",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2655,11 +2655,11 @@
       "wikidata_id": null,
       "name_en": "Therme Vals",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11681,9 +11681,14 @@
     "barcelona-pavilion",
     "bauhaus-dessau",
     "brion-tomb",
+    "casa-batllo",
     "casa-gilardi",
+    "casa-mila",
     "cathedral-of-our-lady-of",
+    "cctv-headquarters",
+    "centre-pompidou",
     "chapel-of-notre-dame-du-haut",
+    "church-of-light",
     "conference-center-unesco",
     "cuadra-san-cristobal",
     "danteum",
@@ -11696,6 +11701,7 @@
     "fondazione-querini-stampalia",
     "gateway-arch",
     "glass-house",
+    "guggenheim-nyc",
     "kaufhaus-schocken",
     "kimbell-art-museum",
     "kursaal-convention-centre",
@@ -11708,9 +11714,11 @@
     "orange-county-government-center",
     "palazzo-terragni",
     "rose-seidler-house",
+    "sagrada-familia",
     "sao-paulo-museum-of-art",
     "sesc-pompeia",
     "sydney-opera-house",
+    "therme-vals",
     "twa-terminal",
     "villa-savoye",
     "yale-art-and-architecture-building"
@@ -12246,11 +12254,11 @@
         "wikidata_id": null,
         "name_en": "Casa Batlló",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12270,11 +12278,11 @@
         "wikidata_id": null,
         "name_en": "Casa Milà (La Pedrera)",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12294,11 +12302,11 @@
         "wikidata_id": null,
         "name_en": "CCTV Headquarters",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12306,11 +12314,11 @@
         "wikidata_id": null,
         "name_en": "Centre Pompidou",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12342,11 +12350,11 @@
         "wikidata_id": null,
         "name_en": "Church of the Light",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12570,11 +12578,11 @@
         "wikidata_id": null,
         "name_en": "Guggenheim Museum NYC",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
