@@ -721,6 +721,13 @@
 - ✅ `audit-content-coverage.mjs` 新增 `building_gaps.formal_overlay` 与 `building_content_overlays`：当前正式建筑作品 overlay 数为 30，中文/日文正式正文缺口从 875 降到 845
 - ⚠️ 计划中的 `cathedral-of-our-lady-of-the-angels` 当前数据库不存在，实际站内 slug 为 `cathedral-of-our-lady-of`；本轮使用现有 slug，并应在后续 slug 清理时统一
 
+### 第六十三阶段：核心现代建筑研究卡加密
+- ✅ 第二批优先补充“图片少也必须有文字解释”的核心建筑史代表作：`fallingwater`、`barcelona-pavilion`、`bauhaus-dessau`、`villa-savoye`、`chapel-of-notre-dame-du-haut`、`kimbell-art-museum`、`sydney-opera-house`、`farnsworth-house`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容口径聚焦历史位置、委托背景、空间组织、材料/光线/结构与影响
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0；对会返回 403/404 的官方站页面，改用稳定的 Wikidata + Wikipedia 组合，避免前台坏链接
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 30 增至 38，中文/日文正式正文缺口从 845 降至 837
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
