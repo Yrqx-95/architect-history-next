@@ -756,6 +756,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 62 增至 70，中文/日文正式正文缺口从 813 降至 805，来源缺口从 98 降至 90
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第六十八阶段：芝加哥学派与现代城市建筑研究卡第七批
+- ✅ 第七批补充芝加哥商业建筑、现代住宅综合体、灾后临时宗教建筑、解构主义城市地标与 OMA 文化建筑：`auditorium-building`、`carson-pirie-scott`、`cardboard-cathedral`、`copan-building`、`dancing-house`、`gropius-house`、`guangzhou-opera-house`、`kunsthal`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖芝加哥学派、百货商店立面、纸管救灾建筑、巴西高密度住宅、布拉格转型期地标、包豪斯美国化、广州文化地标和 OMA 流线实验
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 70 增至 78，中文/日文正式正文缺口从 805 降至 797，来源缺口从 90 降至 82
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/

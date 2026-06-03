@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T08:32:47.229Z",
+  "generated_at": "2026-06-03T10:11:54.827Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1227,11 +1227,11 @@
       "wikidata_id": null,
       "name_en": "Auditorium Building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1347,11 +1347,11 @@
       "wikidata_id": null,
       "name_en": "Cardboard Cathedral",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1359,11 +1359,11 @@
       "wikidata_id": null,
       "name_en": "Carson Pirie Scott Building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1479,11 +1479,11 @@
       "wikidata_id": null,
       "name_en": "Copan Building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1503,11 +1503,11 @@
       "wikidata_id": null,
       "name_en": "Dancing House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1659,11 +1659,11 @@
       "wikidata_id": null,
       "name_en": "Gropius House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1671,11 +1671,11 @@
       "wikidata_id": null,
       "name_en": "Guangzhou Opera House",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1887,11 +1887,11 @@
       "wikidata_id": null,
       "name_en": "Kunsthal Rotterdam",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11681,6 +11681,7 @@
     "asakusa-culture-center",
     "asilo-santelia",
     "aspen-art-museum",
+    "auditorium-building",
     "australia-square-tower",
     "bank-of-china-tower",
     "barcelona-pavilion",
@@ -11690,6 +11691,8 @@
     "brasilia-cathedral",
     "brion-tomb",
     "bruder-klaus-chapel",
+    "cardboard-cathedral",
+    "carson-pirie-scott",
     "casa-batllo",
     "casa-da-musica",
     "casa-gilardi",
@@ -11701,8 +11704,10 @@
     "chapel-of-notre-dame-du-haut",
     "church-of-light",
     "conference-center-unesco",
+    "copan-building",
     "copenhill",
     "cuadra-san-cristobal",
+    "dancing-house",
     "danteum",
     "de-bijenkorf",
     "de-la-warr-pavilion",
@@ -11716,6 +11721,8 @@
     "fondazione-querini-stampalia",
     "gateway-arch",
     "glass-house",
+    "gropius-house",
+    "guangzhou-opera-house",
     "guggenheim-bilbao",
     "guggenheim-nyc",
     "hamburg-elbphilharmonie",
@@ -11726,6 +11733,7 @@
     "kaufhaus-schocken",
     "kimbell-art-museum",
     "kolumba-museum",
+    "kunsthal",
     "kursaal-convention-centre",
     "louvre-pyramid",
     "luis-barragan-house-and-studio",
@@ -12134,11 +12142,11 @@
         "wikidata_id": null,
         "name_en": "Auditorium Building",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12254,11 +12262,11 @@
         "wikidata_id": null,
         "name_en": "Cardboard Cathedral",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12266,11 +12274,11 @@
         "wikidata_id": null,
         "name_en": "Carson Pirie Scott Building",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12386,11 +12394,11 @@
         "wikidata_id": null,
         "name_en": "Copan Building",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12410,11 +12418,11 @@
         "wikidata_id": null,
         "name_en": "Dancing House",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12566,11 +12574,11 @@
         "wikidata_id": null,
         "name_en": "Gropius House",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12578,11 +12586,11 @@
         "wikidata_id": null,
         "name_en": "Guangzhou Opera House",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
