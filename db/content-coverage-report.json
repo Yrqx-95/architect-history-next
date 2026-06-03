@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T10:11:54.827Z",
+  "generated_at": "2026-06-03T11:16:03.937Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -1275,11 +1275,11 @@
       "wikidata_id": null,
       "name_en": "Basilica Palladiana",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1599,11 +1599,11 @@
       "wikidata_id": null,
       "name_en": "Florence Cathedral Dome",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1923,11 +1923,11 @@
       "wikidata_id": null,
       "name_en": "Laurentian Library",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -1995,11 +1995,11 @@
       "wikidata_id": null,
       "name_en": "Menil Collection",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2031,11 +2031,11 @@
       "wikidata_id": null,
       "name_en": "MIT Chapel",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2067,11 +2067,11 @@
       "wikidata_id": null,
       "name_en": "Nakagin Capsule Tower",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2103,11 +2103,11 @@
       "wikidata_id": null,
       "name_en": "The National Art Center Tokyo",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -2115,11 +2115,11 @@
       "wikidata_id": null,
       "name_en": "National Assembly Building",
       "missing": {
-        "zh": true,
-        "ja": true,
+        "zh": false,
+        "ja": false,
         "en": true,
         "image": false,
-        "source": true
+        "source": false
       }
     },
     {
@@ -11685,6 +11685,7 @@
     "australia-square-tower",
     "bank-of-china-tower",
     "barcelona-pavilion",
+    "basilica-palladiana",
     "bauhaus-dessau",
     "beijing-daxing-airport",
     "beijing-national-stadium",
@@ -11718,6 +11719,7 @@
     "fagus-factory",
     "fallingwater",
     "farnsworth-house",
+    "florence-cathedral-dome",
     "fondazione-querini-stampalia",
     "gateway-arch",
     "glass-house",
@@ -11735,11 +11737,17 @@
     "kolumba-museum",
     "kunsthal",
     "kursaal-convention-centre",
+    "laurentian-library",
     "louvre-pyramid",
     "luis-barragan-house-and-studio",
     "marcel-breuer-house-ii",
+    "menil-collection",
     "milam-residence",
+    "mit-chapel",
     "mlc-centre",
+    "nakagin-capsule-tower",
+    "national-art-center-tokyo",
+    "national-assembly-dhaka",
     "national-museum-of-roman-art",
     "olivetti-exhibition-centre-in-venice",
     "orange-county-government-center",
@@ -12190,11 +12198,11 @@
         "wikidata_id": null,
         "name_en": "Basilica Palladiana",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {
@@ -12514,11 +12522,11 @@
         "wikidata_id": null,
         "name_en": "Florence Cathedral Dome",
         "missing": {
-          "zh": true,
-          "ja": true,
+          "zh": false,
+          "ja": false,
           "en": true,
           "image": false,
-          "source": true
+          "source": false
         }
       },
       {

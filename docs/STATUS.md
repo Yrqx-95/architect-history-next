@@ -763,6 +763,13 @@
 - ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 70 增至 78，中文/日文正式正文缺口从 805 降至 797，来源缺口从 90 降至 82
 - ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
 
+### 第六十九阶段：文艺复兴与经典现代建筑研究卡第八批
+- ✅ 第八批补充从文艺复兴工程到战后现代制度空间的关键作品：`basilica-palladiana`、`florence-cathedral-dome`、`laurentian-library`、`national-assembly-dhaka`、`menil-collection`、`mit-chapel`、`nakagin-capsule-tower`、`national-art-center-tokyo`
+- ✅ 8 座作品均新增中文 + 日文摘要、重要性、3 个研究章节和 2 条来源；内容重点覆盖帕拉第奥城市改造、布鲁内莱斯基穹顶工程、米开朗基罗矫饰主义空间、路易斯·康国家机构建筑、皮亚诺博物馆光线、沙里宁精神空间、日本新陈代谢和 21 世纪展览平台
+- ✅ 新增 16 条来源 URL 已逐条请求验证，当前失败数为 0
+- ✅ `npm run content:audit` 已更新 `db/content-coverage-report.json`：正式建筑作品 overlay 数从 78 增至 86，中文/日文正式正文缺口从 797 降至 789，来源缺口从 82 降至 74
+- ✅ `npm run lint` 通过（仍为 2 个既有 `<img>` warning），`npm run build` 通过（3195 页面）
+
 ### 当前 docs/ 结构（11 个文档）
 ```
 docs/
