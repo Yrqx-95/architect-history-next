@@ -47,6 +47,18 @@ export default async function LangLayout({ children, params }: {
   const [eras, styles] = await Promise.all([getEras(), getStyles()])
   const topEras = eras.slice(0, 6)
   const topStyles = styles.slice(0, 6)
+  const exploreLinks = [
+    { href: `${prefix}/browse`, label: t(lang, 'architects') },
+    { href: `${prefix}/browse`, label: t(lang, 'buildings') },
+    { href: `${prefix}/browse`, label: t(lang, 'styles') },
+    { href: `${prefix}/graph`, label: lang === 'en' ? 'Movements' : lang === 'ja' ? '運動' : 'Movements' },
+    { href: `${prefix}/browse/country`, label: lang === 'en' ? 'Countries / Regions' : lang === 'ja' ? '国・地域' : 'Countries / Regions' },
+  ]
+  const learnLinks = [
+    { href: `${prefix}/code`, label: t(lang, 'code') },
+    { href: `${prefix}/glossary`, label: t(lang, 'glossary') },
+    { href: `${prefix}/learn#exam`, label: t(lang, 'exam') },
+  ]
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -69,21 +81,32 @@ export default async function LangLayout({ children, params }: {
               <Link href={prefix + '/'} className="shrink-0 text-base font-bold tracking-tight text-primary sm:text-lg">Archistory</Link>
 
               {/* Desktop links - hidden on mobile */}
-              <div className="hidden sm:flex items-center gap-4 sm:gap-6">
-                <Link href={prefix + '/'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'home')}</Link>
-                <Link href={prefix + '/browse'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'browse')}</Link>
-                <Link href={prefix + '/paths'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'paths')}</Link>
-                <Link href={prefix + '/graph'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'graph')}</Link>
-                <Link href={prefix + '/map'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'map')}</Link>
+              <div className="hidden sm:flex items-center gap-5">
+                <div className="group relative">
+                  <Link href={prefix + '/browse'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'explore')}</Link>
+                  <div className="invisible absolute left-0 top-full z-20 mt-4 w-60 border border-subtle bg-surface-raised p-3 opacity-0 shadow-semantic-card transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    {exploreLinks.map(item => (
+                      <Link key={item.label} href={item.href} className="block border-b border-subtle px-2 py-2.5 text-sm text-secondary transition-colors last:border-b-0 hover:text-primary">
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                <div className="group relative">
+                  <Link href={prefix + '/learn'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'learn')}</Link>
+                  <div className="invisible absolute left-0 top-full z-20 mt-4 w-60 border border-subtle bg-surface-raised p-3 opacity-0 shadow-semantic-card transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    {learnLinks.map(item => (
+                      <Link key={item.label} href={item.href} className="block border-b border-subtle px-2 py-2.5 text-sm text-secondary transition-colors last:border-b-0 hover:text-primary">
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
                 <Link href={prefix + '/timeline'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
+                <Link href={prefix + '/search'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
               </div>
 
-              {/* Desktop search link */}
               <div className="hidden sm:block flex-1" />
-              <Link href={prefix + '/search'} className="hidden items-center gap-1 text-sm text-secondary transition-colors hover:text-primary sm:flex">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                {t(lang, 'search')}
-              </Link>
 
               {/* Right side controls */}
               <div className="flex items-center gap-1.5 sm:gap-2 ml-auto">
@@ -107,14 +130,11 @@ export default async function LangLayout({ children, params }: {
           <footer className="mt-14 border-t border-subtle py-8 sm:mt-20 sm:py-10">
             <div className="container-wide grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-sm">
               <div>
-                <h4 className="mb-3 font-medium text-primary">{t(lang, 'browse')}</h4>
+                <h4 className="mb-3 font-medium text-primary">{t(lang, 'explore')}</h4>
                 <div className="space-y-1.5">
-                  <Link href={`${prefix}/browse`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'architects')}</Link>
-                  <Link href={`${prefix}/browse`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'buildings')}</Link>
-                  <Link href={`${prefix}/paths`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'paths')}</Link>
-                  <Link href={`${prefix}/graph`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'graph')}</Link>
-                  <Link href={`${prefix}/map`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'map')}</Link>
-                  <Link href={`${prefix}/timeline`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
+                  {exploreLinks.map(item => (
+                    <Link key={item.label} href={item.href} className="block text-secondary transition-colors hover:text-primary">{item.label}</Link>
+                  ))}
                 </div>
               </div>
               <div>
@@ -134,8 +154,12 @@ export default async function LangLayout({ children, params }: {
                 </div>
               </div>
               <div>
-                <h4 className="mb-3 font-medium text-primary">{t(lang, 'search')}</h4>
+                <h4 className="mb-3 font-medium text-primary">{t(lang, 'learn')}</h4>
                 <div className="space-y-1.5">
+                  {learnLinks.map(item => (
+                    <Link key={item.label} href={item.href} className="block text-secondary transition-colors hover:text-primary">{item.label}</Link>
+                  ))}
+                  <Link href={`${prefix}/timeline`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
                   <Link href={`${prefix}/search`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'searchPlaceholder')}</Link>
                   <p className="caption mt-3">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>
                 </div>

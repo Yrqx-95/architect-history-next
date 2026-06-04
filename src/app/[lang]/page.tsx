@@ -10,6 +10,9 @@ import CinematicHero from '@/components/CinematicHero'
 import Reveal from '@/components/Reveal'
 import EditorialImage from '@/components/EditorialImage'
 import ImageAttribution from '@/components/ImageAttribution'
+import LearnEntryCard from '@/components/LearnEntryCard'
+import LearningTopicCard from '@/components/LearningTopicCard'
+import { getLocalizedLearningTopics } from '@/lib/learning-topics'
 
 export const revalidate = 3600
 
@@ -37,6 +40,66 @@ type HomeCopy = {
     body: string
     href: 'paths' | 'timeline' | 'browse' | 'search'
   }>
+}
+
+type HomeLearningCopy = {
+  startTitle: string
+  startDescription: string
+  codeTitle: string
+  codeBody: string
+  glossaryTitle: string
+  glossaryBody: string
+  examTitle: string
+  examBody: string
+  topicsTitle: string
+  topicsDescription: string
+  latestTitle: string
+  latestDescription: string
+}
+
+const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
+  zh: {
+    startTitle: 'Start Learning',
+    startDescription: '从建筑案例进入法规、术语和考试阅读，但保留建筑杂志式的节奏。',
+    codeTitle: 'Building Code',
+    codeBody: '用途、密度、道路、高度与防火，先读懂设计背后的基本规则。',
+    glossaryTitle: 'Glossary',
+    glossaryBody: '把图纸、评论、法规和建筑史里反复出现的词汇整理成短条目。',
+    examTitle: 'Exam Preparation',
+    examBody: '面向建筑学生和建筑士备考者，整理高频概念与常见误区。',
+    topicsTitle: 'Popular Learning Topics',
+    topicsDescription: '日本建筑法规中最常遇到的八个关键词。',
+    latestTitle: 'Latest Architecture Content',
+    latestDescription: '继续从建筑师、建筑作品、风格与时代进入 Archistory 的内容档案。',
+  },
+  en: {
+    startTitle: 'Start Learning',
+    startDescription: 'Move from architectural works into code literacy, vocabulary, and exam reading while keeping an editorial rhythm.',
+    codeTitle: 'Building Code',
+    codeBody: 'Use, density, road access, height, and fire planning: the rules behind design decisions.',
+    glossaryTitle: 'Glossary',
+    glossaryBody: 'A concise vocabulary layer for drawings, criticism, regulations, and architectural history.',
+    examTitle: 'Exam Preparation',
+    examBody: 'High-frequency concepts and common traps for students and licensing study.',
+    topicsTitle: 'Popular Learning Topics',
+    topicsDescription: 'Eight core terms frequently encountered in Japanese building regulation.',
+    latestTitle: 'Latest Architecture Content',
+    latestDescription: 'Continue into the archive through architects, buildings, styles, and periods.',
+  },
+  ja: {
+    startTitle: 'Start Learning',
+    startDescription: '建築作品から法規、語彙、試験の読み方へ進みながら、編集的な読み心地を保ちます。',
+    codeTitle: 'Building Code',
+    codeBody: '用途、密度、道路、高さ、防火など、設計判断の背後にある基本ルールを読む。',
+    glossaryTitle: 'Glossary',
+    glossaryBody: '図面、批評、法規、建築史に出てくる語彙を短い項目として整理します。',
+    examTitle: 'Exam Preparation',
+    examBody: '建築学生、一級・二級建築士試験の学習者に向けた頻出概念と誤解。',
+    topicsTitle: 'Popular Learning Topics',
+    topicsDescription: '日本の建築法規でよく使う八つのキーワード。',
+    latestTitle: 'Latest Architecture Content',
+    latestDescription: '建築家、作品、様式、時代から Archistory のアーカイブへ進みます。',
+  },
 }
 
 const HOME_COPY: Record<Lang, HomeCopy> = {
@@ -192,6 +255,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   ])
   const prefix = `/${lang}`
   const copy = getHomeCopy(lang)
+  const learningCopy = HOME_LEARNING_COPY[lang as Lang] || HOME_LEARNING_COPY.zh
+  const learningTopics = getLocalizedLearningTopics(lang, 'code').slice(0, 8)
 
   const activeEras = eras.filter(e =>
     architects.some(a => matchesTaxonomy(a.era_slug, e))
@@ -337,12 +402,60 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </div>
       </section>
 
+      {/* Learning entry */}
+      <Reveal>
+        <section className="section grid gap-8 border-b border-subtle pb-12 lg:grid-cols-[18rem_minmax(0,1fr)]">
+          <SectionHeading
+            title={learningCopy.startTitle}
+            description={learningCopy.startDescription}
+          />
+          <div className="grid gap-7 md:grid-cols-3">
+            <LearnEntryCard
+              href={`${prefix}/code`}
+              eyebrow="01"
+              title={learningCopy.codeTitle}
+              description={learningCopy.codeBody}
+              meta="Japanese code literacy"
+            />
+            <LearnEntryCard
+              href={`${prefix}/learn#glossary`}
+              eyebrow="02"
+              title={learningCopy.glossaryTitle}
+              description={learningCopy.glossaryBody}
+              meta="Vocabulary"
+            />
+            <LearnEntryCard
+              href={`${prefix}/learn#exam`}
+              eyebrow="03"
+              title={learningCopy.examTitle}
+              description={learningCopy.examBody}
+              meta="Study notes"
+            />
+          </div>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section className="section grid gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
+          <SectionHeading
+            title={learningCopy.topicsTitle}
+            description={learningCopy.topicsDescription}
+            action={<Link href={`${prefix}/code`} className="text-xs sm:text-sm text-warm-600 hover:text-warm-800 dark:text-warm-300 dark:hover:text-paper-100 transition-colors">{t(lang, 'viewAll')} →</Link>}
+          />
+          <div className="grid gap-x-8 border-b border-subtle md:grid-cols-2">
+            {learningTopics.map(topic => (
+              <LearningTopicCard key={topic.id} topic={topic} href={`${prefix}/code/${topic.slug}`} compact />
+            ))}
+          </div>
+        </section>
+      </Reveal>
+
       {/* Featured Buildings */}
       <Reveal>
         <section className="section">
           <SectionHeading
-            title={t(lang, 'featured')}
-            description={copy.featuredDescription}
+            title={learningCopy.latestTitle}
+            description={learningCopy.latestDescription}
             action={<Link href={`${prefix}/browse`} className="text-xs sm:text-sm text-warm-600 hover:text-warm-800 dark:text-warm-300 dark:hover:text-paper-100 transition-colors">{t(lang, 'viewAll')} →</Link>}
           />
           {featuredLead && (

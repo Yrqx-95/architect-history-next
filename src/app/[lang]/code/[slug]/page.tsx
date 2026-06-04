@@ -1,0 +1,283 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { getLearningTopics, getLocalizedLearningTopic } from '@/lib/learning-topics'
+import { getGlossaryTermTitle, getGlossaryTermsForCodeTopic } from '@/lib/glossary'
+import SourceBadge, { getSourceTypeLabel } from '@/components/SourceBadge'
+import StatusBadge, { getStatusLabel } from '@/components/StatusBadge'
+import VerificationBlock from '@/components/VerificationBlock'
+
+const LABELS = {
+  zh: {
+    code: '建筑法规',
+    japaneseTerm: '日语关键词',
+    definition: '定义',
+    keyTerms: '关键术语',
+    keyConcepts: '核心概念',
+    officialSource: '官方来源',
+    rules: '计算与规则',
+    examples: '示例',
+    mistakes: '常见错误',
+    reading: '延伸阅读',
+    exam: '考试重点',
+    back: '返回建筑法规',
+    status: '状态',
+    quality: '质量',
+    lastReviewed: '最后审查',
+    notReviewed: '未审查',
+    sourceType: '来源类型',
+    lawName: '法令名称',
+    articleNumber: '条文编号',
+    sourceUrl: '来源链接',
+    originalJapaneseTitle: '日文原题',
+    verificationState: '验证状态',
+    disclaimerTitle: '学习用途声明',
+    disclaimerBody: '本内容仅用于学习参考，不构成法律建议，也不应作为许可申请、设计审批或法律判断的唯一依据。请务必同时查阅官方来源、地方规定，并咨询具备资格的专业人士。',
+  },
+  en: {
+    code: 'Building Code',
+    japaneseTerm: 'Japanese Term',
+    definition: 'Definition',
+    keyTerms: 'Key Terms',
+    keyConcepts: 'Key Concepts',
+    officialSource: 'Official Source',
+    rules: 'Calculation / Rules',
+    examples: 'Examples',
+    mistakes: 'Common Mistakes',
+    reading: 'Further Reading',
+    exam: 'Exam Preparation',
+    back: 'Back to Code',
+    status: 'Status',
+    quality: 'Quality',
+    lastReviewed: 'Last Reviewed',
+    notReviewed: 'Not Reviewed',
+    sourceType: 'Source Type',
+    lawName: 'Law Name',
+    articleNumber: 'Article Number',
+    sourceUrl: 'Source URL',
+    originalJapaneseTitle: 'Original Japanese Title',
+    verificationState: 'Verification State',
+    disclaimerTitle: 'Educational Disclaimer',
+    disclaimerBody: 'This content is provided for educational purposes. It is not legal advice and must not be used as the sole basis for permit applications, design approval, or legal determinations. Always consult official sources, local regulations, and qualified professionals.',
+  },
+  ja: {
+    code: '建築法規',
+    japaneseTerm: '日本語キーワード',
+    definition: '定義',
+    keyTerms: '重要用語',
+    keyConcepts: '重要ポイント',
+    officialSource: '公式情報',
+    rules: '計算と規定',
+    examples: '例',
+    mistakes: 'よくある間違い',
+    reading: '参考資料',
+    exam: '試験対策',
+    back: '建築法規に戻る',
+    status: 'ステータス',
+    quality: '品質',
+    lastReviewed: '最終レビュー',
+    notReviewed: '未レビュー',
+    sourceType: '情報種別',
+    lawName: '法令名',
+    articleNumber: '条文番号',
+    sourceUrl: '参照URL',
+    originalJapaneseTitle: '日本語原題',
+    verificationState: '検証状態',
+    disclaimerTitle: '学習用コンテンツについて',
+    disclaimerBody: 'この内容は学習目的で提供されています。法的助言ではなく、確認申請、設計承認、法的判断の唯一の根拠として使用しないでください。必ず公式情報、地域の規定、資格を持つ専門家に確認してください。',
+  },
+}
+
+function labelsFor(lang: string) {
+  return LABELS[lang as keyof typeof LABELS] || LABELS.zh
+}
+
+export function generateStaticParams() {
+  const langs = ['zh', 'en', 'ja']
+  return langs.flatMap(lang => getLearningTopics('code').map(topic => ({ lang, slug: topic.slug })))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
+  const { lang, slug } = await params
+  const topic = getLocalizedLearningTopic(slug, lang)
+  if (!topic) return {}
+  return {
+    title: `${topic.title} | Building Code`,
+    description: topic.summary,
+  }
+}
+
+function ArticleBlock({ title, badge, children }: { title: string; badge?: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <section className="border-t border-subtle py-8">
+      <div className="mb-5 flex flex-wrap items-center gap-3">
+        <h2 className="text-xl font-medium text-primary">{title}</h2>
+        {badge}
+      </div>
+      {children}
+    </section>
+  )
+}
+
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-3">
+      {items.map(item => (
+        <li key={item} className="grid grid-cols-[1rem_minmax(0,1fr)] gap-3 text-sm leading-relaxed text-secondary">
+          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[color:var(--ui-accent)]" />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default async function CodeDetailPage({ params }: { params: Promise<{ lang: string; slug: string }> }) {
+  const { lang, slug } = await params
+  const topic = getLocalizedLearningTopic(slug, lang)
+  if (!topic) notFound()
+  const prefix = `/${lang}`
+  const labels = labelsFor(lang)
+  const keyTerms = getGlossaryTermsForCodeTopic(topic.slug)
+
+  return (
+    <article className="container-content pb-20 pt-8 sm:pt-16">
+      <Link href={`${prefix}/code`} className="caption transition-colors hover:text-primary">← {labels.back}</Link>
+
+      <header className="section-lg mt-8 grid gap-8 border-b border-subtle pb-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+        <div>
+          <p className="eyebrow">{labels.code}</p>
+          <h1 className="mt-5 text-4xl font-semibold leading-tight text-primary sm:text-6xl">{topic.title}</h1>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-secondary sm:text-lg">{topic.summary}</p>
+        </div>
+        <dl className="border-t border-subtle pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+          <dt className="label">{labels.japaneseTerm}</dt>
+          <dd className="mt-2 text-2xl font-medium text-primary">{topic.japaneseTerm}</dd>
+          <dd className="mt-1 text-sm text-muted">（{topic.reading}）</dd>
+        </dl>
+      </header>
+
+      <div className="mx-auto max-w-3xl">
+        <div className="-mt-8 mb-8">
+          <VerificationBlock
+            status={topic.verificationStatus}
+            qualityLevel={topic.qualityLevel}
+            lastReviewed={topic.lastReviewed}
+            reviewer={topic.reviewer}
+            lang={lang}
+          />
+        </div>
+
+        <div className="mb-8 rounded-md border border-subtle bg-surface-muted p-4">
+          <p className="text-sm font-medium text-primary">{labels.disclaimerTitle}</p>
+          <p className="mt-2 text-xs leading-relaxed text-secondary">{labels.disclaimerBody}</p>
+        </div>
+
+        {keyTerms.length > 0 && (
+          <section className="mb-8 rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card">
+            <h2 className="label">{labels.keyTerms}</h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {keyTerms.map(term => {
+                const title = getGlossaryTermTitle(term, lang)
+                const label = lang === 'ja' || title === term.termJa ? term.termJa : `${title} / ${term.termJa}`
+                return (
+                  <Link
+                    key={term.id}
+                    href={`${prefix}/glossary?term=${encodeURIComponent(term.slug)}`}
+                    className="inline-flex min-h-9 items-center rounded-full border border-subtle bg-surface-muted px-3 text-xs font-medium text-secondary transition-colors hover:bg-surface-raised hover:text-primary"
+                  >
+                    {label}
+                  </Link>
+                )
+              })}
+            </div>
+          </section>
+        )}
+
+        <ArticleBlock title={labels.definition} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+          <p className="body">{topic.definition}</p>
+        </ArticleBlock>
+
+        <ArticleBlock title={labels.keyConcepts} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+          <BulletList items={topic.keyConcepts} />
+        </ArticleBlock>
+
+        <ArticleBlock title={labels.officialSource}>
+          <div className="space-y-4">
+            {topic.references.map(reference => (
+              <div key={`${reference.lawName}-${reference.articleNumber}-${reference.sourceType}`} className="rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card">
+                <div className="mb-4 flex flex-wrap items-center gap-2">
+                  <SourceBadge sourceType={reference.sourceType} lang={lang} />
+                  <StatusBadge status={reference.verificationStatus} lang={lang} />
+                </div>
+                <dl className="grid gap-4 text-sm sm:grid-cols-2">
+                  <div>
+                    <dt className="label">{labels.sourceType}</dt>
+                    <dd className="mt-1 text-secondary">{getSourceTypeLabel(reference.sourceType, lang)}</dd>
+                  </div>
+                  <div>
+                    <dt className="label">{labels.lawName}</dt>
+                    <dd className="mt-1 text-secondary">{reference.lawName}</dd>
+                  </div>
+                  <div>
+                    <dt className="label">{labels.articleNumber}</dt>
+                    <dd className="mt-1 text-secondary">{reference.articleNumber}</dd>
+                  </div>
+                  <div>
+                    <dt className="label">{labels.originalJapaneseTitle}</dt>
+                    <dd className="mt-1 text-secondary">{reference.originalJapaneseTitle || topic.japaneseTerm}</dd>
+                  </div>
+                  <div>
+                    <dt className="label">{labels.verificationState}</dt>
+                    <dd className="mt-1 text-secondary">{getStatusLabel(reference.verificationStatus, lang)}</dd>
+                  </div>
+                  <div>
+                    <dt className="label">{labels.lastReviewed}</dt>
+                    <dd className="mt-1 text-secondary">{reference.lastReviewed || labels.notReviewed}</dd>
+                  </div>
+                  <div className="sm:col-span-2">
+                    <dt className="label">{labels.sourceUrl}</dt>
+                    <dd className="mt-1">
+                      <a href={reference.sourceUrl} className="break-all text-accent underline underline-offset-4" target="_blank" rel="noreferrer">
+                        {reference.sourceUrl}
+                      </a>
+                    </dd>
+                  </div>
+                </dl>
+                <p className="mt-4 text-xs leading-relaxed text-muted">{reference.note}</p>
+              </div>
+            ))}
+          </div>
+        </ArticleBlock>
+
+        <ArticleBlock title={labels.rules} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+          <BulletList items={topic.rules} />
+        </ArticleBlock>
+
+        <ArticleBlock title={labels.examples} badge={<SourceBadge sourceType="example" lang={lang} />}>
+          <BulletList items={topic.examples} />
+        </ArticleBlock>
+
+        <ArticleBlock title={labels.mistakes} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+          <BulletList items={topic.commonMistakes} />
+        </ArticleBlock>
+
+        <ArticleBlock title={labels.reading}>
+          <ul className="space-y-2 text-sm text-secondary">
+            {topic.furtherReading.map(item => <li key={item}>{item}</li>)}
+          </ul>
+        </ArticleBlock>
+
+        <details className="mt-8 rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+          <summary className="cursor-pointer text-base font-medium text-primary">
+            <span className="mr-3">{labels.exam}</span>
+            <SourceBadge sourceType="exam_reference" lang={lang} />
+          </summary>
+          <div className="mt-5">
+            <BulletList items={topic.examPreparation} />
+          </div>
+        </details>
+      </div>
+    </article>
+  )
+}

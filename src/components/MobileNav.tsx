@@ -20,17 +20,28 @@ export default function MobileNav({ lang }: { lang: string }) {
   const prefix = `/${lang}`
   const title = lang === 'en' ? 'Menu' : lang === 'ja' ? 'メニュー' : '菜单'
   const searchLabel = lang === 'en' ? 'Search' : lang === 'ja' ? '検索' : '搜索'
-  const navLabel = lang === 'en' ? 'Navigate' : lang === 'ja' ? 'ナビゲーション' : '导航'
+  const exploreLabel = t(lang, 'explore')
+  const learnLabel = t(lang, 'learn')
   const languageLabel = lang === 'en' ? 'Language' : lang === 'ja' ? '言語' : '语言'
   const displayLabel = lang === 'en' ? 'Reading settings' : lang === 'ja' ? '表示設定' : '阅读设置'
   const scriptLabel = lang === 'zh' ? '中文显示' : ''
-  const mainLinks = [
-    { href: '/', label: t(lang, 'home') },
-    { href: '/browse', label: t(lang, 'browse') },
-    { href: '/paths', label: t(lang, 'paths') },
-    { href: '/graph', label: t(lang, 'graph') },
-    { href: '/map', label: t(lang, 'map') },
+  const primaryLinks = [
+    { href: '/browse', label: t(lang, 'explore') },
+    { href: '/learn', label: t(lang, 'learn') },
     { href: '/timeline', label: t(lang, 'timeline') },
+    { href: '/search', label: t(lang, 'search') },
+  ]
+  const exploreLinks = [
+    { href: '/browse', label: t(lang, 'architects') },
+    { href: '/browse', label: t(lang, 'buildings') },
+    { href: '/browse', label: t(lang, 'styles') },
+    { href: '/graph', label: lang === 'en' ? 'Movements' : lang === 'ja' ? '運動' : 'Movements' },
+    { href: '/browse/country', label: lang === 'en' ? 'Countries / Regions' : lang === 'ja' ? '国・地域' : 'Countries / Regions' },
+  ]
+  const learnLinks = [
+    { href: '/code', label: t(lang, 'code') },
+    { href: '/glossary', label: t(lang, 'glossary') },
+    { href: '/learn#exam', label: t(lang, 'exam') },
   ]
 
   const localizedPath = (nextLang: string) => {
@@ -92,7 +103,7 @@ export default function MobileNav({ lang }: { lang: string }) {
               <div>
                 <p className="text-base font-semibold text-primary">Archistory</p>
                 <p className="mt-0.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-muted">
-                  {lang === 'en' ? 'Archive menu' : lang === 'ja' ? 'アーカイブメニュー' : '档案菜单'}
+                  {lang === 'en' ? 'Architecture learning' : lang === 'ja' ? '建築学習メニュー' : '建筑学习菜单'}
                 </p>
               </div>
               <button
@@ -126,14 +137,48 @@ export default function MobileNav({ lang }: { lang: string }) {
               </section>
 
               <section className="border-b border-subtle py-4">
-                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{navLabel}</p>
+                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">Archistory</p>
                 <div className="grid grid-cols-2 gap-2">
-                  {mainLinks.map(item => (
+                  {primaryLinks.map(item => (
                     <Link
                       key={item.href}
                       href={prefix + item.href}
                       onClick={() => setOpen(false)}
                       className="flex min-h-12 items-center justify-between rounded-md border border-subtle bg-surface-raised px-3 text-sm font-medium text-primary shadow-semantic-card transition-colors hover:bg-surface-muted"
+                    >
+                      <span>{item.label}</span>
+                      <span aria-hidden="true" className="text-soft">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section className="border-b border-subtle py-4">
+                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{exploreLabel}</p>
+                <div className="space-y-1">
+                  {exploreLinks.map(item => (
+                    <Link
+                      key={`${item.href}-${item.label}`}
+                      href={prefix + item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex min-h-11 items-center justify-between border-b border-subtle px-1 text-sm font-medium text-secondary transition-colors last:border-b-0 hover:text-primary"
+                    >
+                      <span>{item.label}</span>
+                      <span aria-hidden="true" className="text-soft">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section className="border-b border-subtle py-4">
+                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{learnLabel}</p>
+                <div className="space-y-1">
+                  {learnLinks.map(item => (
+                    <Link
+                      key={`${item.href}-${item.label}`}
+                      href={prefix + item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex min-h-11 items-center justify-between border-b border-subtle px-1 text-sm font-medium text-secondary transition-colors last:border-b-0 hover:text-primary"
                     >
                       <span>{item.label}</span>
                       <span aria-hidden="true" className="text-soft">→</span>
