@@ -25,6 +25,14 @@ export type LearningTopicTranslation = {
   locale: Lang
   title: string
   summary: string
+  overview?: string
+  whyItExists?: string
+  formulas?: LearningFormula[]
+  calculationSteps?: LearningStep[]
+  workedExamples?: LearningWorkedExample[]
+  comparisonTables?: LearningComparisonTable[]
+  diagramNotes?: LearningDiagramNote[]
+  memoryTips?: string[]
   definition: string
   keyConcepts: string[]
   rules: string[]
@@ -32,6 +40,41 @@ export type LearningTopicTranslation = {
   commonMistakes: string[]
   examPreparation: string[]
   furtherReading: string[]
+}
+
+export type LearningFormula = {
+  title: string
+  expression: string
+  variables: Array<{
+    label: string
+    description: string
+  }>
+  note?: string
+}
+
+export type LearningStep = {
+  title: string
+  description: string
+}
+
+export type LearningWorkedExample = {
+  label: string
+  title: string
+  description: string
+}
+
+export type LearningComparisonTable = {
+  title: string
+  columns: [string, string]
+  rows: Array<{
+    label: string
+    values: [string, string]
+  }>
+}
+
+export type LearningDiagramNote = {
+  title: string
+  items: string[]
 }
 
 export type LearningTranslation = LearningTopicTranslation

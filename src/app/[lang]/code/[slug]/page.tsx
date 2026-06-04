@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getLearningTopics, getLocalizedLearningTopic } from '@/lib/learning-topics'
 import { getGlossaryTermTitle, getGlossaryTermsForCodeTopic } from '@/lib/glossary'
+import type { LearningComparisonTable, LearningDiagramNote, LearningFormula, LearningStep, LearningWorkedExample } from '@/lib/learning-topics'
 import SourceBadge, { getSourceTypeLabel } from '@/components/SourceBadge'
 import StatusBadge, { getStatusLabel } from '@/components/StatusBadge'
 import VerificationBlock from '@/components/VerificationBlock'
@@ -12,6 +13,14 @@ const LABELS = {
     code: '建筑法规',
     japaneseTerm: '日语关键词',
     definition: '定义',
+    overview: '概要',
+    whyItExists: '为什么存在',
+    keyFormula: '关键公式',
+    calculationSteps: '计算步骤',
+    workedExamples: '例题',
+    comparisonTable: '对比表',
+    diagramNotes: '图解说明',
+    memoryTips: '记忆提示',
     keyTerms: '关键术语',
     keyConcepts: '核心概念',
     officialSource: '官方来源',
@@ -38,6 +47,14 @@ const LABELS = {
     code: 'Building Code',
     japaneseTerm: 'Japanese Term',
     definition: 'Definition',
+    overview: 'Overview',
+    whyItExists: 'Why It Exists',
+    keyFormula: 'Key Formula',
+    calculationSteps: 'Calculation Process',
+    workedExamples: 'Worked Examples',
+    comparisonTable: 'Comparison Table',
+    diagramNotes: 'Diagram Notes',
+    memoryTips: 'Memory Tips',
     keyTerms: 'Key Terms',
     keyConcepts: 'Key Concepts',
     officialSource: 'Official Source',
@@ -64,6 +81,14 @@ const LABELS = {
     code: '建築法規',
     japaneseTerm: '日本語キーワード',
     definition: '定義',
+    overview: '概要',
+    whyItExists: 'なぜ必要か',
+    keyFormula: '重要公式',
+    calculationSteps: '計算手順',
+    workedExamples: '例題',
+    comparisonTable: '比較表',
+    diagramNotes: '図解メモ',
+    memoryTips: '記憶のコツ',
     keyTerms: '重要用語',
     keyConcepts: '重要ポイント',
     officialSource: '公式情報',
@@ -132,6 +157,107 @@ function BulletList({ items }: { items: string[] }) {
   )
 }
 
+function FormulaCards({ formulas }: { formulas: LearningFormula[] }) {
+  return (
+    <div className="space-y-4">
+      {formulas.map(formula => (
+        <div key={formula.expression} className="rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+          <p className="label">{formula.title}</p>
+          <p className="mt-4 break-words font-serif-display text-3xl leading-tight text-primary sm:text-4xl">{formula.expression}</p>
+          {formula.note && <p className="mt-4 text-xs leading-relaxed text-muted">{formula.note}</p>}
+          <dl className="mt-5 grid gap-3 border-t border-subtle pt-4 sm:grid-cols-3">
+            {formula.variables.map(variable => (
+              <div key={variable.label}>
+                <dt className="text-xs font-medium text-primary">{variable.label}</dt>
+                <dd className="mt-1 text-xs leading-relaxed text-secondary">{variable.description}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function StepList({ steps }: { steps: LearningStep[] }) {
+  return (
+    <ol className="space-y-3">
+      {steps.map((step, index) => (
+        <li key={step.title} className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-4 rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card">
+          <span className="label">Step {index + 1}</span>
+          <div>
+            <p className="text-sm font-medium text-primary">{step.title}</p>
+            <p className="mt-2 text-sm leading-relaxed text-secondary">{step.description}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
+function WorkedExampleCards({ examples }: { examples: LearningWorkedExample[] }) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      {examples.map(example => (
+        <div key={example.title} className="rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+          <p className="label">{example.label}</p>
+          <h3 className="mt-3 text-base font-medium text-primary">{example.title}</h3>
+          <p className="mt-3 text-sm leading-relaxed text-secondary">{example.description}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ComparisonTables({ tables }: { tables: LearningComparisonTable[] }) {
+  return (
+    <div className="space-y-5">
+      {tables.map(table => (
+        <div key={table.title}>
+          <h3 className="mb-3 text-sm font-medium text-primary">{table.title}</h3>
+          <div className="overflow-x-auto rounded-md border border-subtle bg-surface-raised shadow-semantic-card">
+            <table className="min-w-full border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-subtle">
+                  <th className="w-1/3 px-4 py-3 text-xs font-medium uppercase tracking-wide text-muted"></th>
+                  <th className="px-4 py-3 text-xs font-medium uppercase tracking-wide text-muted">{table.columns[0]}</th>
+                  <th className="px-4 py-3 text-xs font-medium uppercase tracking-wide text-muted">{table.columns[1]}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {table.rows.map(row => (
+                  <tr key={row.label} className="border-b border-subtle last:border-b-0">
+                    <th className="px-4 py-3 text-xs font-medium text-primary">{row.label}</th>
+                    <td className="px-4 py-3 text-secondary">{row.values[0]}</td>
+                    <td className="px-4 py-3 text-secondary">{row.values[1]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function DiagramNoteBlocks({ notes }: { notes: LearningDiagramNote[] }) {
+  return (
+    <div className="space-y-4">
+      {notes.map(note => (
+        <div key={note.title} className="rounded-md border border-dashed border-subtle bg-surface-muted p-5">
+          <p className="label">{note.title}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {note.items.map(item => (
+              <span key={item} className="rounded-full border border-subtle bg-surface-raised px-3 py-1 text-xs text-secondary">{item}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 export default async function CodeDetailPage({ params }: { params: Promise<{ lang: string; slug: string }> }) {
   const { lang, slug } = await params
   const topic = getLocalizedLearningTopic(slug, lang)
@@ -194,6 +320,24 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
           </section>
         )}
 
+        {topic.overview && (
+          <ArticleBlock title={labels.overview} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+            <p className="body">{topic.overview}</p>
+          </ArticleBlock>
+        )}
+
+        {topic.whyItExists && (
+          <ArticleBlock title={labels.whyItExists} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+            <p className="body">{topic.whyItExists}</p>
+          </ArticleBlock>
+        )}
+
+        {topic.formulas && topic.formulas.length > 0 && (
+          <ArticleBlock title={labels.keyFormula} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+            <FormulaCards formulas={topic.formulas} />
+          </ArticleBlock>
+        )}
+
         <ArticleBlock title={labels.definition} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
           <p className="body">{topic.definition}</p>
         </ArticleBlock>
@@ -250,13 +394,43 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
           </div>
         </ArticleBlock>
 
+        {topic.calculationSteps && topic.calculationSteps.length > 0 ? (
+          <ArticleBlock title={labels.calculationSteps} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+            <StepList steps={topic.calculationSteps} />
+          </ArticleBlock>
+        ) : null}
+
         <ArticleBlock title={labels.rules} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
           <BulletList items={topic.rules} />
         </ArticleBlock>
 
+        {topic.workedExamples && topic.workedExamples.length > 0 ? (
+          <ArticleBlock title={labels.workedExamples} badge={<SourceBadge sourceType="example" lang={lang} />}>
+            <WorkedExampleCards examples={topic.workedExamples} />
+          </ArticleBlock>
+        ) : null}
+
         <ArticleBlock title={labels.examples} badge={<SourceBadge sourceType="example" lang={lang} />}>
           <BulletList items={topic.examples} />
         </ArticleBlock>
+
+        {topic.comparisonTables && topic.comparisonTables.length > 0 ? (
+          <ArticleBlock title={labels.comparisonTable} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+            <ComparisonTables tables={topic.comparisonTables} />
+          </ArticleBlock>
+        ) : null}
+
+        {topic.diagramNotes && topic.diagramNotes.length > 0 ? (
+          <ArticleBlock title={labels.diagramNotes} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
+            <DiagramNoteBlocks notes={topic.diagramNotes} />
+          </ArticleBlock>
+        ) : null}
+
+        {topic.memoryTips && topic.memoryTips.length > 0 ? (
+          <ArticleBlock title={labels.memoryTips} badge={<SourceBadge sourceType="exam_reference" lang={lang} />}>
+            <BulletList items={topic.memoryTips} />
+          </ArticleBlock>
+        ) : null}
 
         <ArticleBlock title={labels.mistakes} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
           <BulletList items={topic.commonMistakes} />
