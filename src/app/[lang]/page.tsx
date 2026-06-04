@@ -7,7 +7,7 @@ import { displayName, displayText, formatDisplayLocation, isProbablySimplifiedCh
 import { matchesTaxonomy } from '@/lib/taxonomy'
 import SectionHeading from '@/components/SectionHeading'
 import CinematicHero from '@/components/CinematicHero'
-import Reveal from '@/components/Reveal'
+import HomeSectionReveal from '@/components/HomeSectionReveal'
 import EditorialImage from '@/components/EditorialImage'
 import ImageAttribution from '@/components/ImageAttribution'
 import LearnEntryCard from '@/components/LearnEntryCard'
@@ -55,26 +55,34 @@ type HomeLearningCopy = {
   topicsDescription: string
   latestTitle: string
   latestDescription: string
+  codeMeta: string
+  glossaryMeta: string
+  examMeta: string
+  comingSoon: string
 }
 
 const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
   zh: {
-    startTitle: 'Start Learning',
-    startDescription: '从建筑案例进入法规、术语和考试阅读，但保留建筑杂志式的节奏。',
-    codeTitle: 'Building Code',
+    startTitle: '建筑学习',
+    startDescription: '从作品、法规与术语进入建筑知识。',
+    codeTitle: '建筑法规',
     codeBody: '用途、密度、道路、高度与防火，先读懂设计背后的基本规则。',
-    glossaryTitle: 'Glossary',
+    glossaryTitle: '术语表',
     glossaryBody: '把图纸、评论、法规和建筑史里反复出现的词汇整理成短条目。',
-    examTitle: 'Exam Preparation',
+    examTitle: '考试准备',
     examBody: '面向建筑学生和建筑士备考者，整理高频概念与常见误区。',
     topicsTitle: 'Popular Learning Topics',
     topicsDescription: '日本建筑法规中最常遇到的八个关键词。',
     latestTitle: 'Latest Architecture Content',
     latestDescription: '继续从建筑师、建筑作品、风格与时代进入 Archistory 的内容档案。',
+    codeMeta: '日本法规入门',
+    glossaryMeta: '建筑语汇索引',
+    examMeta: '学习路径提示',
+    comingSoon: '即将推出',
   },
   en: {
     startTitle: 'Start Learning',
-    startDescription: 'Move from architectural works into code literacy, vocabulary, and exam reading while keeping an editorial rhythm.',
+    startDescription: 'Move from architecture content into code, vocabulary, and exam knowledge.',
     codeTitle: 'Building Code',
     codeBody: 'Use, density, road access, height, and fire planning: the rules behind design decisions.',
     glossaryTitle: 'Glossary',
@@ -85,20 +93,28 @@ const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
     topicsDescription: 'Eight core terms frequently encountered in Japanese building regulation.',
     latestTitle: 'Latest Architecture Content',
     latestDescription: 'Continue into the archive through architects, buildings, styles, and periods.',
+    codeMeta: 'Japanese code literacy',
+    glossaryMeta: 'Vocabulary',
+    examMeta: 'Study notes',
+    comingSoon: 'Coming Soon',
   },
   ja: {
-    startTitle: 'Start Learning',
-    startDescription: '建築作品から法規、語彙、試験の読み方へ進みながら、編集的な読み心地を保ちます。',
-    codeTitle: 'Building Code',
+    startTitle: '建築を学ぶ',
+    startDescription: '作品から、法規・用語・試験知識へ。',
+    codeTitle: '建築法規',
     codeBody: '用途、密度、道路、高さ、防火など、設計判断の背後にある基本ルールを読む。',
-    glossaryTitle: 'Glossary',
+    glossaryTitle: '用語集',
     glossaryBody: '図面、批評、法規、建築史に出てくる語彙を短い項目として整理します。',
-    examTitle: 'Exam Preparation',
+    examTitle: '試験対策',
     examBody: '建築学生、一級・二級建築士試験の学習者に向けた頻出概念と誤解。',
     topicsTitle: 'Popular Learning Topics',
     topicsDescription: '日本の建築法規でよく使う八つのキーワード。',
     latestTitle: 'Latest Architecture Content',
     latestDescription: '建築家、作品、様式、時代から Archistory のアーカイブへ進みます。',
+    codeMeta: '日本法規の基礎',
+    glossaryMeta: '建築語彙の索引',
+    examMeta: '学習の方向づけ',
+    comingSoon: '準備中',
   },
 }
 
@@ -403,7 +419,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       </section>
 
       {/* Learning entry */}
-      <Reveal>
+      <HomeSectionReveal scale>
         <section className="section grid gap-8 border-b border-subtle pb-12 lg:grid-cols-[18rem_minmax(0,1fr)]">
           <SectionHeading
             title={learningCopy.startTitle}
@@ -415,27 +431,27 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               eyebrow="01"
               title={learningCopy.codeTitle}
               description={learningCopy.codeBody}
-              meta="Japanese code literacy"
+              meta={learningCopy.codeMeta}
             />
             <LearnEntryCard
-              href={`${prefix}/learn#glossary`}
+              href={`${prefix}/glossary`}
               eyebrow="02"
               title={learningCopy.glossaryTitle}
               description={learningCopy.glossaryBody}
-              meta="Vocabulary"
+              meta={learningCopy.glossaryMeta}
             />
             <LearnEntryCard
-              href={`${prefix}/learn#exam`}
               eyebrow="03"
               title={learningCopy.examTitle}
               description={learningCopy.examBody}
-              meta="Study notes"
+              meta={learningCopy.examMeta}
+              comingSoonLabel={learningCopy.comingSoon}
             />
           </div>
         </section>
-      </Reveal>
+      </HomeSectionReveal>
 
-      <Reveal>
+      <HomeSectionReveal>
         <section className="section grid gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
           <SectionHeading
             title={learningCopy.topicsTitle}
@@ -448,10 +464,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             ))}
           </div>
         </section>
-      </Reveal>
+      </HomeSectionReveal>
 
       {/* Featured Buildings */}
-      <Reveal>
+      <HomeSectionReveal>
         <section className="section">
           <SectionHeading
             title={learningCopy.latestTitle}
@@ -529,10 +545,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             </div>
           )}
         </section>
-      </Reveal>
+      </HomeSectionReveal>
 
       {/* Featured Architects */}
-      <Reveal>
+      <HomeSectionReveal>
         <section className="section grid gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
           <div>
             <p className="font-serif-display text-6xl leading-none text-warm-200 dark:text-charcoal-700">{counts.architects}</p>
@@ -557,10 +573,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             })}
           </div>
         </section>
-      </Reveal>
+      </HomeSectionReveal>
 
       {/* Timeline and Movements */}
-      <Reveal>
+      <HomeSectionReveal>
         <section className="section grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem]">
           <div>
             <SectionHeading
@@ -592,10 +608,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             </div>
           </div>
         </section>
-      </Reveal>
+      </HomeSectionReveal>
 
       {/* Knowledge Guides */}
-      <Reveal>
+      <HomeSectionReveal>
         <section className="section pb-20">
           <SectionHeading
             title={copy.guidesTitle}
@@ -610,7 +626,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             ))}
           </div>
         </section>
-      </Reveal>
+      </HomeSectionReveal>
     </div>
   )
 }

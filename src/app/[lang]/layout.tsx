@@ -57,8 +57,8 @@ export default async function LangLayout({ children, params }: {
   const learnLinks = [
     { href: `${prefix}/code`, label: t(lang, 'code') },
     { href: `${prefix}/glossary`, label: t(lang, 'glossary') },
-    { href: `${prefix}/learn#exam`, label: t(lang, 'exam') },
   ]
+  const comingSoonLabel = lang === 'en' ? 'Coming Soon' : lang === 'ja' ? '準備中' : '即将推出'
 
   return (
     <html lang={lang} suppressHydrationWarning>
@@ -94,18 +94,8 @@ export default async function LangLayout({ children, params }: {
                     </div>
                   </div>
                 </div>
-                <div className="group relative">
-                  <Link href={prefix + '/learn'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'learn')}</Link>
-                  <div className="invisible absolute left-0 top-full z-20 w-60 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <div className="border border-subtle bg-surface-raised p-3 shadow-semantic-card">
-                      {learnLinks.map(item => (
-                        <Link key={item.label} href={item.href} className="block border-b border-subtle px-2 py-2.5 text-sm text-secondary transition-colors last:border-b-0 hover:text-primary">
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                <Link href={prefix + '/code'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'code')}</Link>
+                <Link href={prefix + '/glossary'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'glossary')}</Link>
                 <Link href={prefix + '/timeline'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
                 <Link href={prefix + '/search'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
               </div>
@@ -163,6 +153,7 @@ export default async function LangLayout({ children, params }: {
                   {learnLinks.map(item => (
                     <Link key={item.label} href={item.href} className="block text-secondary transition-colors hover:text-primary">{item.label}</Link>
                   ))}
+                  <span className="block text-muted">{t(lang, 'exam')} · {comingSoonLabel}</span>
                   <Link href={`${prefix}/timeline`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
                   <Link href={`${prefix}/search`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'searchPlaceholder')}</Link>
                   <p className="caption mt-3">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>

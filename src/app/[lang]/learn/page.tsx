@@ -3,7 +3,6 @@ import Link from 'next/link'
 import LearnEntryCard from '@/components/LearnEntryCard'
 import LearningTopicCard from '@/components/LearningTopicCard'
 import SectionHeading from '@/components/SectionHeading'
-import Reveal from '@/components/Reveal'
 import { getLocalizedLearningTopics } from '@/lib/learning-topics'
 
 type LearnCopy = {
@@ -30,13 +29,13 @@ const COPY: Record<string, LearnCopy> = {
     title: '建筑学习中心',
     eyebrow: 'Learn',
     intro: '从建筑案例进入概念、法规与考试知识。这里不是题库，而是把建筑史档案和建筑学习连接起来的阅读入口。',
-    code: 'Building Code',
+    code: '建筑法规',
     codeBody: '理解日本建筑法规中的核心概念：用途、密度、道路、防火与高度控制。',
     codeMeta: '日本法规入门',
     glossary: '术语表',
     glossaryBody: '把常见建筑术语整理成可阅读的短条目，帮助你读懂图纸、评论与法规文本。',
     glossaryMeta: '建筑语汇索引',
-    exam: 'Exam Preparation',
+    exam: '考试准备',
     examBody: '面向建筑学生和一二级建筑士备考者，整理高频概念、误区和阅读顺序。',
     examMeta: '学习路径提示',
     topicsTitle: '热门学习主题',
@@ -66,13 +65,13 @@ const COPY: Record<string, LearnCopy> = {
     title: '建築学習センター',
     eyebrow: 'Learn',
     intro: '建築作品から概念、法規、試験の読み方へ進むための入口です。問題集ではなく、建築アーカイブと学習を接続します。',
-    code: 'Building Code',
+    code: '建築法規',
     codeBody: '用途、密度、道路、防火、高さ制限など、日本の建築法規の基本概念を読む。',
     codeMeta: '日本法規の基礎',
     glossary: '用語集',
     glossaryBody: '図面、批評、法規、建築史を読むための語彙を短い項目として整理します。',
     glossaryMeta: '建築語彙の索引',
-    exam: 'Exam Preparation',
+    exam: '試験対策',
     examBody: '建築学生、一級・二級建築士試験の学習者に向けた頻出概念、誤解、読み順。',
     examMeta: '学習の方向づけ',
     topicsTitle: 'よく使う学習テーマ',
@@ -100,6 +99,7 @@ export default async function LearnPage({ params }: { params: Promise<{ lang: st
   const prefix = `/${lang}`
   const copy = copyFor(lang)
   const topics = getLocalizedLearningTopics(lang, 'code')
+  const comingSoonLabel = lang === 'en' ? 'Coming Soon' : lang === 'ja' ? '準備中' : '即将推出'
 
   return (
     <div className="pb-20">
@@ -113,61 +113,52 @@ export default async function LearnPage({ params }: { params: Promise<{ lang: st
         <p className="body-large max-w-2xl">{copy.intro}</p>
       </section>
 
-      <Reveal>
-        <section className="section grid gap-7 md:grid-cols-3">
-          <LearnEntryCard href={`${prefix}/code`} eyebrow="01" title={copy.code} description={copy.codeBody} meta={copy.codeMeta} />
-          <LearnEntryCard href={`${prefix}/glossary`} eyebrow="02" title={copy.glossary} description={copy.glossaryBody} meta={copy.glossaryMeta} />
-          <LearnEntryCard href={`${prefix}/learn#exam`} eyebrow="03" title={copy.exam} description={copy.examBody} meta={copy.examMeta} />
-        </section>
-      </Reveal>
+      <section className="section grid gap-7 md:grid-cols-3">
+        <LearnEntryCard href={`${prefix}/code`} eyebrow="01" title={copy.code} description={copy.codeBody} meta={copy.codeMeta} />
+        <LearnEntryCard href={`${prefix}/glossary`} eyebrow="02" title={copy.glossary} description={copy.glossaryBody} meta={copy.glossaryMeta} />
+        <LearnEntryCard eyebrow="03" title={copy.exam} description={copy.examBody} meta={copy.examMeta} comingSoonLabel={comingSoonLabel} />
+      </section>
 
-      <Reveal>
-        <section className="section grid gap-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
-          <SectionHeading title={copy.topicsTitle} description={copy.topicsBody} />
-          <div className="grid gap-x-8 border-b border-subtle md:grid-cols-2">
-            {topics.map(topic => (
-              <LearningTopicCard key={topic.id} topic={topic} href={`${prefix}/code/${topic.slug}`} compact />
-            ))}
-          </div>
-        </section>
-      </Reveal>
+      <section className="section grid gap-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
+        <SectionHeading title={copy.topicsTitle} description={copy.topicsBody} />
+        <div className="grid gap-x-8 border-b border-subtle md:grid-cols-2">
+          {topics.map(topic => (
+            <LearningTopicCard key={topic.id} topic={topic} href={`${prefix}/code/${topic.slug}`} compact />
+          ))}
+        </div>
+      </section>
 
-      <Reveal>
-        <section id="glossary" className="section grid gap-8 border-t border-subtle pt-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
-          <div>
-            <p className="eyebrow">Glossary</p>
-            <h2 className="heading-3 mt-3">{copy.glossary}</h2>
-          </div>
-          <div>
-            <p className="body max-w-2xl">{copy.glossaryBody}</p>
-            <Link href={`${prefix}/glossary`} className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-default px-5 text-sm font-medium text-primary transition-colors hover:bg-surface-muted">
-              {copy.glossary}
-            </Link>
-          </div>
-        </section>
-      </Reveal>
-
-      <Reveal>
-        <section id="exam" className="section grid gap-8 border-t border-subtle pt-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
-          <div>
-            <p className="eyebrow">Exam</p>
-            <h2 className="heading-3 mt-3">{copy.exam}</h2>
-          </div>
-          <p className="body max-w-2xl">{copy.examBody}</p>
-        </section>
-      </Reveal>
-
-      <Reveal>
-        <section className="section grid gap-5 border-t border-subtle pt-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-center">
-          <div>
-            <h2 className="heading-3">{copy.archiveTitle}</h2>
-            <p className="caption mt-2 max-w-xl">{copy.archiveBody}</p>
-          </div>
-          <Link href={`${prefix}/browse`} className="inline-flex min-h-11 items-center justify-center rounded-full border border-default px-5 text-sm font-medium text-primary transition-colors hover:bg-surface-muted">
-            Explore Archive
+      <section id="glossary" className="section grid gap-8 border-t border-subtle pt-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
+        <div>
+          <p className="eyebrow">Glossary</p>
+          <h2 className="heading-3 mt-3">{copy.glossary}</h2>
+        </div>
+        <div>
+          <p className="body max-w-2xl">{copy.glossaryBody}</p>
+          <Link href={`${prefix}/glossary`} className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-default px-5 text-sm font-medium text-primary transition-colors hover:bg-surface-muted">
+            {copy.glossary}
           </Link>
-        </section>
-      </Reveal>
+        </div>
+      </section>
+
+      <section id="exam" className="section grid gap-8 border-t border-subtle pt-8 lg:grid-cols-[20rem_minmax(0,1fr)]">
+        <div>
+          <p className="eyebrow">Exam</p>
+          <h2 className="heading-3 mt-3">{copy.exam}</h2>
+          <p className="mt-3 inline-flex rounded-full border border-subtle px-3 py-1 text-xs font-medium text-muted">{comingSoonLabel}</p>
+        </div>
+        <p className="body max-w-2xl">{copy.examBody}</p>
+      </section>
+
+      <section className="section grid gap-5 border-t border-subtle pt-8 md:grid-cols-[minmax(0,1fr)_16rem] md:items-center">
+        <div>
+          <h2 className="heading-3">{copy.archiveTitle}</h2>
+          <p className="caption mt-2 max-w-xl">{copy.archiveBody}</p>
+        </div>
+        <Link href={`${prefix}/browse`} className="inline-flex min-h-11 items-center justify-center rounded-full border border-default px-5 text-sm font-medium text-primary transition-colors hover:bg-surface-muted">
+          Explore Archive
+        </Link>
+      </section>
     </div>
   )
 }

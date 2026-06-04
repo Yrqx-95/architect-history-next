@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import LearningTopicCard from '@/components/LearningTopicCard'
-import Reveal from '@/components/Reveal'
 import { getLocalizedLearningTopics } from '@/lib/learning-topics'
 
 const COPY = {
@@ -62,13 +61,11 @@ export default async function CodePage({ params }: { params: Promise<{ lang: str
         </div>
       </section>
 
-      <Reveal>
-        <section className="grid gap-x-10 gap-y-2 md:grid-cols-2 lg:grid-cols-3">
-          {topics.map(topic => (
-            <LearningTopicCard key={topic.id} topic={topic} href={`${prefix}/code/${topic.slug}`} />
-          ))}
-        </section>
-      </Reveal>
+      <section className="grid gap-x-10 gap-y-2 md:grid-cols-2 lg:grid-cols-3">
+        {topics.map(topic => (
+          <LearningTopicCard key={topic.id} topic={topic} href={`${prefix}/code/${topic.slug}`} />
+        ))}
+      </section>
     </div>
   )
 }

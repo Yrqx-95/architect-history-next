@@ -20,28 +20,19 @@ export default function MobileNav({ lang }: { lang: string }) {
   const prefix = `/${lang}`
   const title = lang === 'en' ? 'Menu' : lang === 'ja' ? 'メニュー' : '菜单'
   const searchLabel = lang === 'en' ? 'Search' : lang === 'ja' ? '検索' : '搜索'
-  const exploreLabel = t(lang, 'explore')
   const learnLabel = t(lang, 'learn')
   const languageLabel = lang === 'en' ? 'Language' : lang === 'ja' ? '言語' : '语言'
-  const displayLabel = lang === 'en' ? 'Reading settings' : lang === 'ja' ? '表示設定' : '阅读设置'
+  const settingsLabel = lang === 'en' ? 'Settings' : lang === 'ja' ? '設定' : '设置'
   const scriptLabel = lang === 'zh' ? '中文显示' : ''
+  const comingSoonLabel = lang === 'en' ? 'Coming Soon' : lang === 'ja' ? '準備中' : '即将推出'
   const primaryLinks = [
     { href: '/browse', label: t(lang, 'explore') },
-    { href: '/learn', label: t(lang, 'learn') },
     { href: '/timeline', label: t(lang, 'timeline') },
     { href: '/search', label: t(lang, 'search') },
-  ]
-  const exploreLinks = [
-    { href: '/browse', label: t(lang, 'architects') },
-    { href: '/browse', label: t(lang, 'buildings') },
-    { href: '/browse', label: t(lang, 'styles') },
-    { href: '/graph', label: lang === 'en' ? 'Movements' : lang === 'ja' ? '運動' : 'Movements' },
-    { href: '/browse/country', label: lang === 'en' ? 'Countries / Regions' : lang === 'ja' ? '国・地域' : 'Countries / Regions' },
   ]
   const learnLinks = [
     { href: '/code', label: t(lang, 'code') },
     { href: '/glossary', label: t(lang, 'glossary') },
-    { href: '/learn#exam', label: t(lang, 'exam') },
   ]
 
   const localizedPath = (nextLang: string) => {
@@ -138,30 +129,13 @@ export default function MobileNav({ lang }: { lang: string }) {
 
               <section className="border-b border-subtle py-4">
                 <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">Archistory</p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="space-y-1">
                   {primaryLinks.map(item => (
                     <Link
                       key={item.href}
                       href={prefix + item.href}
                       onClick={() => setOpen(false)}
-                      className="flex min-h-12 items-center justify-between rounded-md border border-subtle bg-surface-raised px-3 text-sm font-medium text-primary shadow-semantic-card transition-colors hover:bg-surface-muted"
-                    >
-                      <span>{item.label}</span>
-                      <span aria-hidden="true" className="text-soft">→</span>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-
-              <section className="border-b border-subtle py-4">
-                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{exploreLabel}</p>
-                <div className="space-y-1">
-                  {exploreLinks.map(item => (
-                    <Link
-                      key={`${item.href}-${item.label}`}
-                      href={prefix + item.href}
-                      onClick={() => setOpen(false)}
-                      className="flex min-h-11 items-center justify-between border-b border-subtle px-1 text-sm font-medium text-secondary transition-colors last:border-b-0 hover:text-primary"
+                      className="flex min-h-12 items-center justify-between border-b border-subtle px-1 text-sm font-medium text-primary transition-colors last:border-b-0 hover:text-accent"
                     >
                       <span>{item.label}</span>
                       <span aria-hidden="true" className="text-soft">→</span>
@@ -184,28 +158,36 @@ export default function MobileNav({ lang }: { lang: string }) {
                       <span aria-hidden="true" className="text-soft">→</span>
                     </Link>
                   ))}
-                </div>
-              </section>
-
-              <section className="border-b border-subtle py-4">
-                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{languageLabel}</p>
-                <div className="grid grid-cols-3 gap-2">
-                  {LANGS.map(l => (
-                    <Link
-                      key={l}
-                      href={localizedPath(l)}
-                      onClick={() => setOpen(false)}
-                      className={`flex min-h-11 items-center justify-center rounded-md border px-2 text-sm transition-colors ${lang === l ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
-                    >
-                      {LANGUAGE_LABELS[l]}
-                    </Link>
-                  ))}
+                  <div
+                    className="flex min-h-11 items-center justify-between border-b border-subtle px-1 text-sm font-medium text-muted last:border-b-0"
+                    aria-disabled="true"
+                  >
+                    <span>{t(lang, 'exam')}</span>
+                    <span className="rounded-full border border-subtle px-2 py-1 text-[0.65rem] uppercase tracking-[0.12em] text-muted">
+                      {comingSoonLabel}
+                    </span>
+                  </div>
                 </div>
               </section>
 
               <section className="pt-4">
-                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{displayLabel}</p>
+                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{settingsLabel}</p>
                 <div className="space-y-4 rounded-md border border-subtle bg-surface-raised p-3 shadow-semantic-card">
+                  <div>
+                    <p className="mb-2 text-xs font-medium text-secondary">{languageLabel}</p>
+                    <div className="grid grid-cols-3 gap-2">
+                      {LANGS.map(l => (
+                        <Link
+                          key={l}
+                          href={localizedPath(l)}
+                          onClick={() => setOpen(false)}
+                          className={`flex min-h-11 items-center justify-center rounded-md border px-2 text-sm transition-colors ${lang === l ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
+                        >
+                          {LANGUAGE_LABELS[l]}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                   {lang === 'zh' && (
                     <div>
                       <p className="mb-2 text-xs font-medium text-secondary">{scriptLabel}</p>

@@ -12,10 +12,10 @@ const dict: Record<string, Record<Lang, string>> = {
   // --- 导航 ---
   home:        { zh: '首页',       en: 'Home',        ja: 'ホーム' },
   explore:     { zh: 'Explore',    en: 'Explore',     ja: 'Explore' },
-  learn:       { zh: 'Learn',      en: 'Learn',       ja: 'Learn' },
-  code:        { zh: 'Building Code', en: 'Building Code', ja: 'Building Code' },
+  learn:       { zh: '学习',       en: 'Learn',       ja: '学習' },
+  code:        { zh: '建筑法规',    en: 'Building Code', ja: '建築法規' },
   glossary:    { zh: '术语表',      en: 'Glossary',    ja: '用語集' },
-  exam:        { zh: 'Exam Preparation', en: 'Exam Preparation', ja: 'Exam Preparation' },
+  exam:        { zh: '考试准备',    en: 'Exam Preparation', ja: '試験対策' },
   search:      { zh: '搜索',       en: 'Search',      ja: '検索' },
   map:         { zh: '地图',       en: 'Map',         ja: '地図' },
   browse:      { zh: '档案',       en: 'Archive',     ja: 'アーカイブ' },
