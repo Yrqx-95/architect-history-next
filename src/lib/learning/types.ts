@@ -18,6 +18,7 @@ export type LearningTopic = {
   qualityLevel: QualityLevel
   lastReviewed?: string
   reviewer?: string
+  sourceNotes?: string[]
 }
 
 export type LearningTopicTranslation = {
