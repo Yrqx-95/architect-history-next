@@ -76,7 +76,7 @@ export default async function LangLayout({ children, params }: {
         <ChineseScriptProvider lang={lang} />
         <SmoothScroll>
           {/* Desktop Nav */}
-          <nav className="sticky top-0 z-50 border-b border-subtle bg-nav backdrop-blur">
+          <nav className="sticky top-0 z-50 border-b border-subtle bg-nav">
             <div className="max-w-7xl mx-auto px-4 h-14 flex items-center gap-3 sm:gap-6">
               <Link href={prefix + '/'} className="shrink-0 text-base font-bold tracking-tight text-primary sm:text-lg">Archistory</Link>
 
@@ -84,22 +84,26 @@ export default async function LangLayout({ children, params }: {
               <div className="hidden sm:flex items-center gap-5">
                 <div className="group relative">
                   <Link href={prefix + '/browse'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'explore')}</Link>
-                  <div className="invisible absolute left-0 top-full z-20 mt-4 w-60 border border-subtle bg-surface-raised p-3 opacity-0 shadow-semantic-card transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    {exploreLinks.map(item => (
-                      <Link key={item.label} href={item.href} className="block border-b border-subtle px-2 py-2.5 text-sm text-secondary transition-colors last:border-b-0 hover:text-primary">
-                        {item.label}
-                      </Link>
-                    ))}
+                  <div className="invisible absolute left-0 top-full z-20 w-60 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    <div className="border border-subtle bg-surface-raised p-3 shadow-semantic-card">
+                      {exploreLinks.map(item => (
+                        <Link key={item.label} href={item.href} className="block border-b border-subtle px-2 py-2.5 text-sm text-secondary transition-colors last:border-b-0 hover:text-primary">
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <div className="group relative">
                   <Link href={prefix + '/learn'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'learn')}</Link>
-                  <div className="invisible absolute left-0 top-full z-20 mt-4 w-60 border border-subtle bg-surface-raised p-3 opacity-0 shadow-semantic-card transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    {learnLinks.map(item => (
-                      <Link key={item.label} href={item.href} className="block border-b border-subtle px-2 py-2.5 text-sm text-secondary transition-colors last:border-b-0 hover:text-primary">
-                        {item.label}
-                      </Link>
-                    ))}
+                  <div className="invisible absolute left-0 top-full z-20 w-60 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    <div className="border border-subtle bg-surface-raised p-3 shadow-semantic-card">
+                      {learnLinks.map(item => (
+                        <Link key={item.label} href={item.href} className="block border-b border-subtle px-2 py-2.5 text-sm text-secondary transition-colors last:border-b-0 hover:text-primary">
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <Link href={prefix + '/timeline'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
