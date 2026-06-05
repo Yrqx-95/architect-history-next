@@ -29,6 +29,7 @@ type LocalizedText = {
 }
 
 type HistoricalBuildingFactOverride = {
+  designerLabel?: LocalizedText
   designer: LocalizedText
   yearLabel: LocalizedText
   year: LocalizedText
@@ -40,6 +41,11 @@ type HistoricalBuildingFactOverride = {
 
 const historicalBuildingFactOverrides: Record<string, HistoricalBuildingFactOverride> = {
   'todaiji-temple': {
+    designerLabel: {
+      zh: '设计者',
+      en: 'Designer',
+      ja: '設計者',
+    },
     designer: {
       zh: '不明',
       en: 'Unknown',
@@ -67,6 +73,288 @@ const historicalBuildingFactOverrides: Record<string, HistoricalBuildingFactOver
       {
         label: { zh: '现大佛殿再建', en: 'Current Daibutsuden reconstruction', ja: '現在の大仏殿再建' },
         value: { zh: '公庆上人', en: 'Priest Kokei', ja: '公慶上人' },
+      },
+    ],
+  },
+  'museum-of-fine-arts-houston': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: '需人工确认', en: 'Pending confirmation', ja: '要確認' },
+    yearLabel: { zh: '机构创立', en: 'Institution founded', ja: '機関創設' },
+    year: { zh: '1900（非现代竣工年）', en: '1900 (institution date, not building completion)', ja: '1900（建物竣工年ではない）' },
+    facts: [
+      {
+        label: { zh: '增建', en: 'Addition', ja: '増築' },
+        value: { zh: 'Rafael Moneo：Audrey Jones Beck Building，2000', en: 'Rafael Moneo: Audrey Jones Beck Building, 2000', ja: 'Rafael Moneo：Audrey Jones Beck Building、2000' },
+      },
+    ],
+  },
+  'bank-of-spain-headquarters': {
+    designerLabel: { zh: '原始设计者', en: 'Original designers', ja: '原設計' },
+    designer: { zh: 'Eduardo de Adaro、Severiano Sainz de la Lastra', en: 'Eduardo de Adaro and Severiano Sainz de la Lastra', ja: 'Eduardo de Adaro、Severiano Sainz de la Lastra' },
+    yearLabel: { zh: '迁入年份', en: 'Move-in date', ja: '入居年' },
+    year: { zh: '1891', en: '1891', ja: '1891' },
+    facts: [
+      {
+        label: { zh: '扩建', en: 'Extension', ja: '増築' },
+        value: { zh: 'Rafael Moneo：最后阶段扩建项目，2006', en: 'Rafael Moneo: final extension phase, 2006', ja: 'Rafael Moneo：最終増築段階、2006' },
+      },
+    ],
+  },
+  'palazzo-abatellis': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Matteo Carnilivari', en: 'Matteo Carnilivari', ja: 'Matteo Carnilivari' },
+    yearLabel: { zh: '原始建成年份', en: 'Original completion', ja: '原建築年' },
+    year: { zh: '1495', en: '1495', ja: '1495' },
+    facts: [
+      {
+        label: { zh: '修复/展陈设计', en: 'Restoration / museum installation', ja: '修復・展示設計' },
+        value: { zh: 'Carlo Scarpa，1953–1954', en: 'Carlo Scarpa, 1953–1954', ja: 'Carlo Scarpa、1953–1954' },
+      },
+    ],
+  },
+  'fondazione-querini-stampalia': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: '不明', en: 'Unknown', ja: '不明' },
+    yearLabel: { zh: '基金会创立', en: 'Foundation established', ja: '財団設立' },
+    year: { zh: '1869（非建筑竣工年）', en: '1869 (foundation date, not building completion)', ja: '1869（建物竣工年ではない）' },
+    facts: [
+      {
+        label: { zh: '改修', en: 'Renovation', ja: '改修' },
+        value: { zh: 'Carlo Scarpa：入口、水上通道、庭院等，1961–1963', en: 'Carlo Scarpa: entrance, water access, garden, 1961–1963', ja: 'Carlo Scarpa：入口、水路、庭園など、1961–1963' },
+      },
+    ],
+  },
+  'minneapolis-institute-of-art': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'McKim, Mead & White', en: 'McKim, Mead & White', ja: 'McKim, Mead & White' },
+    yearLabel: { zh: '机构创立', en: 'Institution founded', ja: '機関創設' },
+    year: { zh: '1883（非现建筑竣工年）', en: '1883 (institution date, not building completion)', ja: '1883（建物竣工年ではない）' },
+    facts: [
+      {
+        label: { zh: '增建', en: 'Addition', ja: '増築' },
+        value: { zh: '丹下健三，1974', en: 'Kenzo Tange, 1974', ja: '丹下健三、1974' },
+      },
+    ],
+  },
+  'saint-louis-art-museum': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Cass Gilbert', en: 'Cass Gilbert', ja: 'Cass Gilbert' },
+    yearLabel: { zh: '原始建筑', en: 'Original building', ja: '原建築' },
+    year: { zh: '1904（1904年世博会美术宫）', en: '1904 (Palace of Fine Arts, World’s Fair)', ja: '1904（万国博覧会美術館）' },
+    facts: [
+      {
+        label: { zh: '增建', en: 'Addition', ja: '増築' },
+        value: { zh: 'David Chipperfield：East Building，2013', en: 'David Chipperfield: East Building, 2013', ja: 'David Chipperfield：East Building、2013' },
+      },
+    ],
+  },
+  'santantonio-abate-parish-church': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: '不明', en: 'Unknown', ja: '不明' },
+    yearLabel: { zh: '历史建筑年份', en: 'Historical date', ja: '歴史年' },
+    year: { zh: '1502（历史教堂年份）', en: '1502 (historical church date)', ja: '1502（歴史的教会の年）' },
+    facts: [
+      {
+        label: { zh: '改修/新介入', en: 'Renovation / intervention', ja: '改修・介入' },
+        value: { zh: 'Mario Botta：Genestrerio 教堂改修相关项目，需终审范围', en: 'Mario Botta: Genestrerio church intervention; scope pending final review', ja: 'Mario Botta：Genestrerio の教会改修関連、範囲は要確認' },
+      },
+    ],
+  },
+  'paris-opera-ballet-school': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Christian de Portzamparc', en: 'Christian de Portzamparc', ja: 'Christian de Portzamparc' },
+    yearLabel: { zh: '设计/建成', en: 'Design / completion', ja: '設計・竣工' },
+    year: { zh: '1983–1987', en: '1983–1987', ja: '1983–1987' },
+    facts: [
+      {
+        label: { zh: '说明', en: 'Note', ja: '注記' },
+        value: { zh: '1713 是巴黎歌剧院芭蕾学校历史源流相关年份，不是 Portzamparc 这座学校建筑的竣工年。', en: '1713 belongs to the school’s historical lineage, not the completion date of Portzamparc’s school building.', ja: '1713年は学校の歴史的系譜に関わる年であり、Portzamparcによる校舎の竣工年ではない。' },
+      },
+    ],
+  },
+  'plaza-de-toros-de-pamplona': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Francisco Urcola（需终审）', en: 'Francisco Urcola (pending final review)', ja: 'Francisco Urcola（要確認）' },
+    yearLabel: { zh: '原始建成年份', en: 'Original completion', ja: '原建築年' },
+    year: { zh: '1922', en: '1922', ja: '1922' },
+    facts: [
+      {
+        label: { zh: '改修/扩建', en: 'Renovation / extension', ja: '改修・増築' },
+        value: { zh: 'Rafael Moneo 仅作为后期改修/扩建相关建筑师保留，范围需人工终审。', en: 'Rafael Moneo is retained only as a later renovation / extension reference; scope needs final review.', ja: 'Rafael Moneo は後年の改修・増築に関わる参照として扱い、範囲は要確認。' },
+      },
+    ],
+  },
+  'palace-of-villahermosa': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: '不明', en: 'Unknown', ja: '不明' },
+    yearLabel: { zh: '历史建筑年份', en: 'Historical building date', ja: '歴史年' },
+    year: { zh: '1805（历史宫殿年份，非博物馆改造竣工年）', en: '1805 (historical palace date, not museum conversion completion)', ja: '1805（歴史的宮殿の年、博物館改修の竣工年ではない）' },
+    facts: [
+      {
+        label: { zh: '改修/博物馆转用', en: 'Renovation / museum conversion', ja: '改修・美術館転用' },
+        value: { zh: 'Rafael Moneo：Thyssen-Bornemisza Museum 改造，1989–1992', en: 'Rafael Moneo: Thyssen-Bornemisza Museum conversion, 1989–1992', ja: 'Rafael Moneo：Thyssen-Bornemisza Museum 改修、1989–1992' },
+      },
+    ],
+  },
+  'palacio-pascual-de-riquelme': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: '不明', en: 'Unknown', ja: '不明' },
+    yearLabel: { zh: '历史建筑年份', en: 'Historical building date', ja: '歴史年' },
+    year: { zh: '1800（需人工确认）', en: '1800 (pending confirmation)', ja: '1800（要確認）' },
+    facts: [
+      {
+        label: { zh: '说明', en: 'Note', ja: '注記' },
+        value: { zh: '当前资料不足以把现代建筑师显示为原始设计者，已移除误导性关联。', en: 'Current evidence is insufficient to show a modern architect as the original designer; the misleading link has been removed.', ja: '現時点の資料では現代建築家を原設計者として表示できないため、誤解を招く関連付けを外した。' },
+      },
+    ],
+  },
+  'the-nelson-atkins-museum-of-art': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Wight & Wight', en: 'Wight & Wight', ja: 'Wight & Wight' },
+    yearLabel: { zh: '原始建筑', en: 'Original building', ja: '原建築' },
+    year: { zh: '1933', en: '1933', ja: '1933' },
+    facts: [
+      {
+        label: { zh: '增建', en: 'Addition', ja: '増築' },
+        value: { zh: 'Steven Holl：Bloch Building，2007', en: 'Steven Holl: Bloch Building, 2007', ja: 'Steven Holl：Bloch Building、2007' },
+      },
+    ],
+  },
+  'gipsoteca-canoviana': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Francesco Lazzari / Giuseppe Segusini（需终审）', en: 'Francesco Lazzari / Giuseppe Segusini (pending final review)', ja: 'Francesco Lazzari / Giuseppe Segusini（要確認）' },
+    yearLabel: { zh: '原始建筑', en: 'Original building', ja: '原建築' },
+    year: { zh: '1832（需终审）', en: '1832 (pending final review)', ja: '1832（要確認）' },
+    facts: [
+      {
+        label: { zh: '增建/展示设计', en: 'Addition / museum installation', ja: '増築・展示設計' },
+        value: { zh: 'Carlo Scarpa：1955–1957 年扩建与展陈相关工作', en: 'Carlo Scarpa: 1955–1957 addition and museum installation work', ja: 'Carlo Scarpa：1955–1957 年の増築・展示設計' },
+      },
+    ],
+  },
+  'cleveland-museum-of-art-building': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Hubbell & Benes', en: 'Hubbell & Benes', ja: 'Hubbell & Benes' },
+    yearLabel: { zh: '原始建筑', en: 'Original building', ja: '原建築' },
+    year: { zh: '1916（数据库年份仍需终审）', en: '1916 (database year pending final review)', ja: '1916（DB 年は要確認）' },
+    facts: [
+      {
+        label: { zh: '增建', en: 'Addition', ja: '増築' },
+        value: { zh: 'Marcel Breuer：1971 年增建', en: 'Marcel Breuer: 1971 addition', ja: 'Marcel Breuer：1971 年増築' },
+      },
+    ],
+  },
+  'cleveland-museum-of-art': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Hubbell & Benes', en: 'Hubbell & Benes', ja: 'Hubbell & Benes' },
+    yearLabel: { zh: '原始建筑', en: 'Original building', ja: '原建築' },
+    year: { zh: '1916（数据库年份仍需终审）', en: '1916 (database year pending final review)', ja: '1916（DB 年は要確認）' },
+    facts: [
+      {
+        label: { zh: '增建', en: 'Addition', ja: '増築' },
+        value: { zh: 'Marcel Breuer：1971 年增建', en: 'Marcel Breuer: 1971 addition', ja: 'Marcel Breuer：1971 年増築' },
+      },
+    ],
+  },
+  'foundation-e-g-buhrle-collection': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: '不明', en: 'Unknown', ja: '不明' },
+    yearLabel: { zh: '基金会/收藏相关年份', en: 'Foundation / collection date', ja: '財団・コレクション関連年' },
+    year: { zh: '1960（非 Chipperfield 建筑竣工年）', en: '1960 (not Chipperfield building completion)', ja: '1960（Chipperfield による建物竣工年ではない）' },
+    facts: [
+      {
+        label: { zh: '展示/新馆关联', en: 'Display / extension context', ja: '展示・新館関連' },
+        value: { zh: 'David Chipperfield 关联主要属于 Kunsthaus Zürich 扩建后的收藏展示语境，非该基金会原始设计者。', en: 'David Chipperfield is mainly connected through the Kunsthaus Zürich extension display context, not as the foundation’s original designer.', ja: 'David Chipperfield との関連は主に Kunsthaus Zürich 増築後の展示文脈であり、財団の原設計者ではない。' },
+      },
+    ],
+  },
+  'gilbey-house': {
+    designerLabel: { zh: '设计者', en: 'Designers', ja: '設計者' },
+    designer: { zh: 'Serge Chermayeff、Erich Mendelsohn', en: 'Serge Chermayeff and Erich Mendelsohn', ja: 'Serge Chermayeff、Erich Mendelsohn' },
+    yearLabel: { zh: '建成年份', en: 'Completion', ja: '竣工年' },
+    year: { zh: '1937', en: '1937', ja: '1937' },
+    facts: [],
+  },
+  'red-banner-textile-factory': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Erich Mendelsohn', en: 'Erich Mendelsohn', ja: 'Erich Mendelsohn' },
+    yearLabel: { zh: '设计/施工', en: 'Design / construction', ja: '設計・建設' },
+    year: { zh: '1925–1926', en: '1925–1926', ja: '1925–1926' },
+    facts: [],
+  },
+  'bellevue-arts-museum': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Steven Holl', en: 'Steven Holl', ja: 'Steven Holl' },
+    yearLabel: { zh: '建成年份', en: 'Completion', ja: '竣工年' },
+    year: { zh: '2001', en: '2001', ja: '2001' },
+    facts: [],
+  },
+  'saint-johns-abbey': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Marcel Breuer', en: 'Marcel Breuer', ja: 'Marcel Breuer' },
+    yearLabel: { zh: '教堂建造', en: 'Abbey church construction', ja: '修道院教会建設' },
+    year: { zh: '1956–1961', en: '1956–1961', ja: '1956–1961' },
+    facts: [
+      {
+        label: { zh: '说明', en: 'Note', ja: '注記' },
+        value: { zh: '1856 属于修道院历史源流，不是 Breuer 教堂建筑竣工年。', en: '1856 belongs to the abbey’s institutional history, not Breuer’s church completion date.', ja: '1856年は修道院の歴史に関わる年であり、Breuer による教会建築の竣工年ではない。' },
+      },
+    ],
+  },
+  'museum-of-east-asian-art': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: '前川国男', en: 'Kunio Maekawa', ja: '前川国男' },
+    yearLabel: { zh: '开馆/建筑年份', en: 'Opening / building date', ja: '開館・建築年' },
+    year: { zh: '1977', en: '1977', ja: '1977' },
+    facts: [],
+  },
+  'bodmer-foundation': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Mario Botta', en: 'Mario Botta', ja: 'Mario Botta' },
+    yearLabel: { zh: '设计/建成', en: 'Design / completion', ja: '設計・竣工' },
+    year: { zh: '1998–2003', en: '1998–2003', ja: '1998–2003' },
+    facts: [],
+  },
+  'dortmund-city-and-state-library': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Mario Botta', en: 'Mario Botta', ja: 'Mario Botta' },
+    yearLabel: { zh: '建成年份', en: 'Completion', ja: '竣工年' },
+    year: { zh: '1999', en: '1999', ja: '1999' },
+    facts: [],
+  },
+  'san-francisco-museum-of-modern': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Mario Botta', en: 'Mario Botta', ja: 'Mario Botta' },
+    yearLabel: { zh: '设计/建成', en: 'Design / completion', ja: '設計・竣工' },
+    year: { zh: '1992–1995', en: '1992–1995', ja: '1992–1995' },
+    facts: [
+      {
+        label: { zh: '说明', en: 'Note', ja: '注記' },
+        value: { zh: '1935 属于 SFMOMA 机构创立史，不是 Mario Botta 建筑竣工年。', en: '1935 belongs to SFMOMA’s institutional history, not Mario Botta’s building completion date.', ja: '1935年は SFMOMA の機関史であり、Mario Botta による建物竣工年ではない。' },
+      },
+    ],
+  },
+  'pylkonmaki-church': {
+    designerLabel: { zh: '原始设计者', en: 'Original designer', ja: '原設計' },
+    designer: { zh: 'Jaakko Kuorikoski（需终审）', en: 'Jaakko Kuorikoski (pending final review)', ja: 'Jaakko Kuorikoski（要確認）' },
+    yearLabel: { zh: '原始建筑', en: 'Original building', ja: '原建築' },
+    year: { zh: '1860', en: '1860', ja: '1860' },
+    facts: [
+      {
+        label: { zh: '改修图', en: 'Renovation drawings', ja: '改修図面' },
+        value: { zh: 'Alvar Aalto：1926–1927 年改修相关图纸，不是 1860 年教堂原设计者。', en: 'Alvar Aalto: 1926–1927 renovation drawings, not the original 1860 church designer.', ja: 'Alvar Aalto：1926–1927 年の改修図面。1860 年教会の原設計者ではない。' },
+      },
+    ],
+  },
+  'carlton-hotel': {
+    designerLabel: { zh: '设计者', en: 'Designer', ja: '設計者' },
+    designer: { zh: 'Gordon Bunshaft / SOM（需终审项目范围）', en: 'Gordon Bunshaft / SOM (project scope pending final review)', ja: 'Gordon Bunshaft / SOM（範囲は要確認）' },
+    yearLabel: { zh: '建成年份', en: 'Completion', ja: '竣工年' },
+    year: { zh: '1972', en: '1972', ja: '1972' },
+    facts: [
+      {
+        label: { zh: '说明', en: 'Note', ja: '注記' },
+        value: { zh: '1906 与 Gordon Bunshaft 生年不符，已改为 Johannesburg 新 Carlton Hotel 相关的 1972 年项目口径。', en: '1906 conflicts with Gordon Bunshaft’s birth year; the record now follows the 1972 New Carlton Hotel / Johannesburg project context.', ja: '1906年は Gordon Bunshaft の生年と矛盾するため、Johannesburg の New Carlton Hotel に関わる 1972 年の文脈に修正。' },
       },
     ],
   },
@@ -506,7 +794,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
       : null
 
   const metaRows = [
-    { label: t(lang, 'architects'), value: designerValue },
+    { label: historicalOverride?.designerLabel ? localizedOverrideText(historicalOverride.designerLabel, lang) : t(lang, 'architects'), value: designerValue },
     { label: historicalOverride ? localizedOverrideText(historicalOverride.yearLabel, lang) : t(lang, 'year'), value: yearValue },
     ...(historicalOverride?.facts.map(fact => ({
       label: localizedOverrideText(fact.label, lang),
