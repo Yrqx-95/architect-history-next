@@ -334,7 +334,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const guideItems = copy.guides.map(item => ({ ...item, href: `${prefix}/${item.href}` }))
 
   return (
-    <div>
+    <div className="home-editorial-light">
       <CinematicHero imageUrl={heroImage} imageAlt={heroName}>
         <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_18rem] sm:items-end sm:gap-8">
           <div>
@@ -476,16 +476,18 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           />
           {featuredLead && (
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-start">
-              <Link href={`${prefix}/building/${featuredLead.slug}`} className="group block">
-                <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-warm-100 dark:bg-charcoal-900">
-                  <EditorialImage
-                    src={featuredLead.cover_url}
-                    alt={displayName(featuredLead, lang)}
-                    label={displayName(featuredLead, lang)}
-                    sizes="(max-width: 1024px) 100vw, 58vw"
-                    className="h-full w-full transition duration-500 ease-out group-hover:scale-[1.012]"
-                  />
-                </div>
+              <div className="group block">
+                <Link href={`${prefix}/building/${featuredLead.slug}`} className="block">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-md bg-warm-100 dark:bg-charcoal-900">
+                    <EditorialImage
+                      src={featuredLead.cover_url}
+                      alt={displayName(featuredLead, lang)}
+                      label={displayName(featuredLead, lang)}
+                      sizes="(max-width: 1024px) 100vw, 58vw"
+                      className="h-full w-full transition duration-500 ease-out group-hover:scale-[1.012]"
+                    />
+                  </div>
+                </Link>
                 <div className="mt-4">
                   <ImageAttribution
                     photographer={featuredLead.cover_photographer}
@@ -494,7 +496,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                     tone="dark"
                   />
                 </div>
-                <div className="mt-6 grid gap-4 border-b border-subtle pb-7 sm:grid-cols-[minmax(0,1fr)_12rem]">
+                <Link href={`${prefix}/building/${featuredLead.slug}`} className="mt-6 grid gap-4 border-b border-subtle pb-7 sm:grid-cols-[minmax(0,1fr)_12rem]">
                   <div>
                     <p className="label mb-2">
                       {copy.featuredBuilding}
@@ -504,20 +506,22 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                   <p className="caption">
                     {[architects.find(a => a.slug === featuredLead.architect_slug) ? displayName(architects.find(a => a.slug === featuredLead.architect_slug) || {}, lang) : '', featuredLead.year_start, formatDisplayLocation({ city: featuredLead.city, country: featuredLead.country, countryCode: featuredLead.country_code, lang })].filter(Boolean).join(' · ')}
                   </p>
-                </div>
-              </Link>
+                </Link>
+              </div>
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
                 {secondaryFeatured.slice(0, 3).map(b => {
                   const arch = architects.find(a => a.slug === b.architect_slug)
                   const desc = cleanSnippet(displayText(b.description, lang) || displayText(b.significance, lang))
                   return (
-                    <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="group grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-warm-200/70 pt-4 dark:border-charcoal-700">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-warm-100 dark:bg-charcoal-900">
+                    <div key={b.id} className="group grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-warm-200/70 pt-4 dark:border-charcoal-700">
+                      <Link href={`${prefix}/building/${b.slug}`} className="relative aspect-[4/3] overflow-hidden rounded-sm bg-warm-100 dark:bg-charcoal-900">
                         <EditorialImage src={b.cover_url} alt={displayName(b, lang)} label={displayName(b, lang)} sizes="8rem" className="h-full w-full transition duration-500 ease-out group-hover:scale-[1.015]" />
-                      </div>
+                      </Link>
                       <div className="min-w-0">
                         <p className="text-[0.66rem] uppercase tracking-[0.12em] text-warm-600 dark:text-warm-300">{arch ? displayName(arch, lang) : b.year_start}</p>
-                        <h3 className="mt-1 text-base font-medium leading-snug text-warm-800 group-hover:text-warm-600 dark:text-paper-100 dark:group-hover:text-warm-300">{displayName(b, lang)}</h3>
+                        <Link href={`${prefix}/building/${b.slug}`} className="block">
+                          <h3 className="mt-1 text-base font-medium leading-snug text-warm-800 group-hover:text-warm-600 dark:text-paper-100 dark:group-hover:text-warm-300">{displayName(b, lang)}</h3>
+                        </Link>
                         <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-warm-600 dark:text-warm-300">{desc || [formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }), b.year_start].filter(Boolean).join(' · ')}</p>
                         <div className="mt-2">
                           <ImageAttribution
@@ -528,7 +532,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                           />
                         </div>
                       </div>
-                    </Link>
+                    </div>
                   )
                 })}
               </div>

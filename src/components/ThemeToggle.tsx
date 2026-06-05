@@ -18,17 +18,26 @@ function applyTheme(theme: ThemeChoice) {
 }
 
 export default function ThemeToggle({ labels, compact = false }: { labels: { system: string; dark: string; light: string }; compact?: boolean }) {
-  const [theme, setTheme] = useState<ThemeChoice>(getStoredTheme)
+  const [theme, setTheme] = useState<ThemeChoice>('system')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    applyTheme(getStoredTheme())
+    const storedTheme = getStoredTheme()
+    applyTheme(storedTheme)
+    const readyTimer = window.setTimeout(() => {
+      setTheme(storedTheme)
+      setMounted(true)
+    }, 0)
 
     const media = window.matchMedia('(prefers-color-scheme: dark)')
     const handleChange = () => {
       if (getStoredTheme() === 'system') applyTheme('system')
     }
     media.addEventListener('change', handleChange)
-    return () => media.removeEventListener('change', handleChange)
+    return () => {
+      window.clearTimeout(readyTimer)
+      media.removeEventListener('change', handleChange)
+    }
   }, [])
 
   const chooseTheme = (nextTheme: ThemeChoice) => {
@@ -42,6 +51,7 @@ export default function ThemeToggle({ labels, compact = false }: { labels: { sys
     { value: 'light', label: labels.light },
     { value: 'dark', label: labels.dark },
   ]
+  const renderedTheme = mounted ? theme : 'system'
 
   return (
     <div className={`inline-flex rounded-full border border-default bg-surface-muted p-0.5 text-xs text-muted shadow-semantic-card ${compact ? 'w-full' : ''}`} aria-label="Theme" suppressHydrationWarning>
@@ -51,11 +61,11 @@ export default function ThemeToggle({ labels, compact = false }: { labels: { sys
           type="button"
           onClick={() => chooseTheme(option.value)}
           className={`min-h-8 rounded-full px-2.5 py-1 transition-colors ${compact ? 'flex-1' : 'sm:px-3'} ${
-            theme === option.value
+            renderedTheme === option.value
               ? 'bg-surface-raised text-primary shadow-subtle'
               : 'hover:bg-surface hover:text-primary'
           }`}
-          aria-pressed={theme === option.value}
+          aria-pressed={renderedTheme === option.value}
         >
           {option.label}
         </button>

@@ -7,6 +7,7 @@ import type { LearningComparisonTable, LearningDiagramNote, LearningFormula, Lea
 import SourceBadge, { getSourceTypeLabel } from '@/components/SourceBadge'
 import StatusBadge, { getStatusLabel } from '@/components/StatusBadge'
 import VerificationBlock from '@/components/VerificationBlock'
+import CodeTopicDiagrams, { hasCodeTopicDiagrams } from '@/components/CodeTopicDiagrams'
 
 const LABELS = {
   zh: {
@@ -420,9 +421,12 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
           </ArticleBlock>
         ) : null}
 
-        {topic.diagramNotes && topic.diagramNotes.length > 0 ? (
+        {hasCodeTopicDiagrams(topic.slug) || (topic.diagramNotes && topic.diagramNotes.length > 0) ? (
           <ArticleBlock title={labels.diagramNotes} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
-            <DiagramNoteBlocks notes={topic.diagramNotes} />
+            <div className="space-y-5">
+              <CodeTopicDiagrams topicSlug={topic.slug} lang={lang} />
+              {topic.diagramNotes && topic.diagramNotes.length > 0 ? <DiagramNoteBlocks notes={topic.diagramNotes} /> : null}
+            </div>
           </ArticleBlock>
         ) : null}
 
