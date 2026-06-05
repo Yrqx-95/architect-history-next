@@ -22,6 +22,60 @@ import BuildingCard from '@/components/BuildingCard'
 export const revalidate = 86400
 export const dynamicParams = true
 
+type LocalizedText = {
+  zh: string
+  en: string
+  ja: string
+}
+
+type HistoricalBuildingFactOverride = {
+  designer: LocalizedText
+  yearLabel: LocalizedText
+  year: LocalizedText
+  facts: Array<{
+    label: LocalizedText
+    value: LocalizedText
+  }>
+}
+
+const historicalBuildingFactOverrides: Record<string, HistoricalBuildingFactOverride> = {
+  'todaiji-temple': {
+    designer: {
+      zh: '不明',
+      en: 'Unknown',
+      ja: '不明',
+    },
+    yearLabel: {
+      zh: '历史年份',
+      en: 'Historical date',
+      ja: '歴史年',
+    },
+    year: {
+      zh: '752（大佛开眼供养会）',
+      en: '752 (Great Buddha eye-opening ceremony)',
+      ja: '752（大仏開眼供養会）',
+    },
+    facts: [
+      {
+        label: { zh: '建立', en: 'Imperial founder', ja: '建立' },
+        value: { zh: '圣武天皇', en: 'Emperor Shomu', ja: '聖武天皇' },
+      },
+      {
+        label: { zh: '开山', en: 'Founding priest', ja: '開山' },
+        value: { zh: '良弁', en: 'Roben', ja: '良弁' },
+      },
+      {
+        label: { zh: '现大佛殿再建', en: 'Current Daibutsuden reconstruction', ja: '現在の大仏殿再建' },
+        value: { zh: '公庆上人', en: 'Priest Kokei', ja: '公慶上人' },
+      },
+    ],
+  },
+}
+
+function localizedOverrideText(text: LocalizedText, lang: string) {
+  return text[lang as keyof LocalizedText] || text.en
+}
+
 function findEraForBuildingYear(building: Building, eras: Era[]): Era | null {
   if (building.year_start == null) return null
   return eras.find(era => {
@@ -439,10 +493,25 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   const spatialText = cleanText(displayText(building.spatial_feat, lang)) || (contentOverlay ? '' : fallbackContent.spatial)
   const lightText = cleanText(displayText(building.light_feat, lang)) || (contentOverlay ? '' : fallbackContent.light)
   const circulationText = cleanText(displayText(building.circulation, lang)) || (contentOverlay ? '' : fallbackContent.circulation)
+  const historicalOverride = historicalBuildingFactOverrides[building.slug]
+  const designerValue = historicalOverride
+    ? localizedOverrideText(historicalOverride.designer, lang)
+    : architect
+      ? <Link href={`${prefix}/architect/${architect.slug}`} className="underline decoration-[color:var(--ui-border)] underline-offset-2 transition-colors hover:text-accent">{displayName(architect, lang)}</Link>
+      : null
+  const yearValue = historicalOverride
+    ? localizedOverrideText(historicalOverride.year, lang)
+    : building.year_start
+      ? `${building.year_start}${building.year_end ? ` – ${building.year_end}` : ''}`
+      : null
 
   const metaRows = [
-    { label: t(lang, 'architects'), value: architect ? <Link href={`${prefix}/architect/${architect.slug}`} className="underline decoration-[color:var(--ui-border)] underline-offset-2 transition-colors hover:text-accent">{displayName(architect, lang)}</Link> : null },
-    { label: t(lang, 'year'), value: building.year_start ? `${building.year_start}${building.year_end ? ` – ${building.year_end}` : ''}` : null },
+    { label: t(lang, 'architects'), value: designerValue },
+    { label: historicalOverride ? localizedOverrideText(historicalOverride.yearLabel, lang) : t(lang, 'year'), value: yearValue },
+    ...(historicalOverride?.facts.map(fact => ({
+      label: localizedOverrideText(fact.label, lang),
+      value: localizedOverrideText(fact.value, lang),
+    })) || []),
     { label: t(lang, 'location'), value: buildingLocation || null },
     { label: t(lang, 'type'), value: building.type_slug && !(lang === 'ja' && isProbablySimplifiedChinese(building.type_slug)) ? building.type_slug : null },
     { label: t(lang, 'structure'), value: building.structure && !(lang === 'ja' && isProbablySimplifiedChinese(building.structure)) ? building.structure : null },

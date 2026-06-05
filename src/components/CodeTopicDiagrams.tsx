@@ -281,66 +281,98 @@ function FormulaPill({ x, y, text }: { x: number; y: number; text: string }) {
 
 function RoadSlantCoreDiagram(id: string) {
   return (
-    <DiagramSvg id={id}>
+    <DiagramSvg id={id} height={285}>
       <defs>
         <marker id={`${id}-arrow`} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
           <path d="M0 0 L8 4 L0 8 Z" fill="var(--ui-accent)" />
         </marker>
+        <marker id={`${id}-dim`} markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+          <path d="M0 4 L8 0 L8 8 Z" fill="var(--ui-text-secondary)" />
+        </marker>
       </defs>
-      <rect x="42" y="164" width="276" height="52" fill="#d8cec0" stroke="var(--ui-border)" />
-      <rect x="42" y="64" width="276" height="100" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
-      <line x1="42" y1="216" x2="318" y2="82" stroke="var(--ui-accent)" strokeWidth="3" />
-      <line x1="42" y1="216" x2="42" y2="52" stroke="var(--ui-text-primary)" strokeWidth="2" />
-      <line x1="186" y1="164" x2="186" y2="82" stroke="var(--ui-text-primary)" strokeWidth="2" strokeDasharray="5 4" />
-      <rect x="204" y="98" width="58" height="66" fill="#efe7dc" stroke="var(--ui-text-primary)" strokeWidth="2" />
-      <line x1="42" y1="226" x2="186" y2="226" stroke="var(--ui-accent)" strokeWidth="2" markerEnd={`url(#${id}-arrow)`} />
-      <text x="114" y="246" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">水平距離 D</text>
-      <text x="54" y="48" fontSize="12" fill="var(--ui-text-primary)">反対側道路境界線</text>
-      <text x="188" y="78" fontSize="12" fill="var(--ui-text-primary)">高さ H</text>
-      <text x="228" y="93" textAnchor="middle" fontSize="12" fill="var(--ui-text-primary)">建築物</text>
-      <text x="180" y="194" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">前面道路</text>
-      <text x="235" y="73" fontSize="12" fill="var(--ui-accent)">勾配 1.25 / 1.5</text>
-      <FormulaPill x={40} y={20} text="H = D × 勾配" />
+      <rect x="34" y="154" width="112" height="54" fill="#d8cec0" stroke="var(--ui-border)" />
+      <rect x="146" y="154" width="178" height="54" fill="#eee9de" stroke="var(--ui-border)" />
+      <rect x="146" y="78" width="178" height="76" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
+      <line x1="34" y1="208" x2="324" y2="208" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="34" y1="154" x2="324" y2="154" stroke="var(--ui-text-primary)" strokeWidth="1.5" />
+      <line x1="34" y1="208" x2="34" y2="58" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="34" y1="208" x2="314" y2="74" stroke="var(--ui-accent)" strokeWidth="3" />
+      <rect x="230" y="102" width="52" height="52" fill="#efe7dc" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="282" y1="154" x2="282" y2="88" stroke="var(--ui-text-secondary)" strokeWidth="1.5" strokeDasharray="4 4" />
+      <line x1="34" y1="226" x2="282" y2="226" stroke="var(--ui-text-secondary)" strokeWidth="1.5" markerStart={`url(#${id}-dim)`} markerEnd={`url(#${id}-arrow)`} />
+      <line x1="292" y1="154" x2="292" y2="88" stroke="var(--ui-text-secondary)" strokeWidth="1.5" markerStart={`url(#${id}-dim)`} markerEnd={`url(#${id}-arrow)`} />
+      <rect x="40" y="42" width="118" height="20" rx="10" fill="var(--ui-surface-raised)" />
+      <text x="99" y="56" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ui-text-primary)">反対側道路境界線</text>
+      <rect x="162" y="136" width="42" height="18" rx="9" fill="var(--ui-surface-raised)" />
+      <text x="183" y="149" textAnchor="middle" fontSize="12" fill="var(--ui-text-primary)">敷地</text>
+      <rect x="54" y="172" width="66" height="18" rx="9" fill="var(--ui-surface-raised)" />
+      <text x="87" y="185" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">前面道路</text>
+      <text x="256" y="98" textAnchor="middle" fontSize="12" fill="var(--ui-text-primary)">建築物</text>
+      <rect x="96" y="232" width="116" height="20" rx="10" fill="var(--ui-surface-raised)" />
+      <text x="154" y="246" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ui-text-secondary)">水平距離 D</text>
+      <rect x="298" y="108" width="42" height="20" rx="10" fill="var(--ui-surface-raised)" />
+      <text x="319" y="122" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ui-text-secondary)">高さ H</text>
+      <rect x="210" y="66" width="116" height="20" rx="10" fill="var(--ui-surface-raised)" />
+      <text x="268" y="80" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ui-accent)">道路斜線 / 勾配 1.25・1.5</text>
+      <FormulaPill x={40} y={18} text="H = D × 勾配" />
     </DiagramSvg>
   )
 }
 
 function RoadSlantExamDiagram(id: string) {
   return (
-    <DiagramSvg id={id} height={280}>
-      <rect x="36" y="168" width="288" height="48" fill="#d8cec0" stroke="var(--ui-border)" />
-      <rect x="36" y="72" width="288" height="96" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
-      <line x1="36" y1="216" x2="324" y2="72" stroke="var(--ui-accent)" strokeWidth="3" />
-      <line x1="36" y1="216" x2="36" y2="58" stroke="var(--ui-text-primary)" strokeWidth="2" />
-      <line x1="108" y1="168" x2="108" y2="216" stroke="var(--ui-text-primary)" strokeWidth="2" strokeDasharray="4 4" />
-      <line x1="252" y1="168" x2="252" y2="108" stroke="var(--ui-text-primary)" strokeWidth="2" strokeDasharray="4 4" />
-      <rect x="252" y="124" width="52" height="44" fill="#efe7dc" stroke="var(--ui-text-primary)" strokeWidth="2" />
-      <rect x="54" y="224" width="64" height="24" rx="12" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
-      <text x="86" y="240" textAnchor="middle" fontSize="12" fill="var(--ui-text-primary)">道路 4m</text>
-      <rect x="184" y="224" width="74" height="24" rx="12" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
-      <text x="221" y="240" textAnchor="middle" fontSize="12" fill="var(--ui-text-primary)">後退 2m</text>
-      <text x="180" y="36" textAnchor="middle" fontSize="14" fontWeight="700" fill="var(--ui-text-primary)">D = 4m + 2m = 6m</text>
-      <text x="180" y="56" textAnchor="middle" fontSize="14" fontWeight="700" fill="var(--ui-accent)">H = 6m × 1.25 = 7.5m</text>
-      <text x="250" y="104" fontSize="12" fill="var(--ui-text-primary)">7.5m</text>
-      <text x="180" y="264" textAnchor="middle" fontSize="11" fill="var(--ui-text-muted)">学習例：住居系の簡略計算。正式判断は用途地域・別表第3を確認。</text>
+    <DiagramSvg id={id} height={300}>
+      <defs>
+        <marker id={`${id}-arrow`} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0 0 L8 4 L0 8 Z" fill="var(--ui-text-secondary)" />
+        </marker>
+      </defs>
+      <rect x="34" y="162" width="90" height="44" fill="#d8cec0" stroke="var(--ui-border)" />
+      <rect x="124" y="162" width="72" height="44" fill="#eee9de" stroke="var(--ui-border)" />
+      <rect x="196" y="162" width="130" height="44" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
+      <line x1="34" y1="206" x2="326" y2="206" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="34" y1="162" x2="326" y2="162" stroke="var(--ui-text-primary)" strokeWidth="1.5" />
+      <line x1="34" y1="206" x2="34" y2="66" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="34" y1="206" x2="326" y2="84" stroke="var(--ui-accent)" strokeWidth="3" />
+      <rect x="196" y="110" width="58" height="52" fill="#efe7dc" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="196" y1="162" x2="196" y2="206" stroke="var(--ui-text-secondary)" strokeWidth="1.5" strokeDasharray="4 4" />
+      <line x1="254" y1="162" x2="254" y2="108" stroke="var(--ui-text-secondary)" strokeWidth="1.5" strokeDasharray="4 4" />
+      <line x1="34" y1="224" x2="124" y2="224" stroke="var(--ui-text-secondary)" strokeWidth="1.5" markerEnd={`url(#${id}-arrow)`} />
+      <line x1="124" y1="242" x2="196" y2="242" stroke="var(--ui-text-secondary)" strokeWidth="1.5" markerEnd={`url(#${id}-arrow)`} />
+      <line x1="34" y1="262" x2="196" y2="262" stroke="var(--ui-accent)" strokeWidth="2" markerEnd={`url(#${id}-arrow)`} />
+      <text x="79" y="220" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">道路 4m</text>
+      <text x="160" y="238" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">後退 2m</text>
+      <text x="115" y="280" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ui-accent)">D = 4m + 2m = 6m</text>
+      <text x="218" y="104" textAnchor="middle" fontSize="12" fill="var(--ui-text-primary)">建築物</text>
+      <text x="264" y="120" fontSize="12" fill="var(--ui-text-secondary)">H = 7.5m</text>
+      <text x="178" y="34" textAnchor="middle" fontSize="14" fontWeight="700" fill="var(--ui-text-primary)">H = 6m × 1.25 = 7.5m</text>
+      <text x="178" y="54" textAnchor="middle" fontSize="11" fill="var(--ui-text-muted)">学習例：住居系の簡略計算。正式判断は用途地域・別表第3を確認。</text>
+      <text x="80" y="182" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">前面道路</text>
+      <text x="224" y="182" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">敷地</text>
     </DiagramSvg>
   )
 }
 
 function RoadSlantMistakeDiagram(id: string) {
   return (
-    <DiagramSvg id={id}>
-      <rect x="38" y="160" width="284" height="52" fill="#d8cec0" stroke="var(--ui-border)" />
-      <rect x="38" y="68" width="284" height="92" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
-      <line x1="38" y1="212" x2="312" y2="78" stroke="var(--ui-accent)" strokeWidth="3" />
-      <line x1="38" y1="212" x2="38" y2="54" stroke="var(--ui-text-primary)" strokeWidth="2" />
-      <line x1="160" y1="160" x2="306" y2="94" stroke="#b84b3a" strokeWidth="3" strokeDasharray="7 5" />
-      <text x="174" y="108" fontSize="12" fill="#b84b3a">誤：自己側から起算</text>
-      <text x="52" y="50" fontSize="12" fill="var(--ui-text-primary)">正：反対側道路境界線</text>
-      <text x="180" y="190" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">前面道路</text>
-      <text x="72" y="235" fontSize="20" fontWeight="800" fill="var(--ui-accent)">OK</text>
-      <text x="232" y="132" fontSize="24" fontWeight="800" fill="#b84b3a">×</text>
-      <FormulaPill x={40} y={20} text="正：H = 反対側からの D × 勾配" />
+    <DiagramSvg id={id} height={285}>
+      <rect x="34" y="156" width="112" height="50" fill="#d8cec0" stroke="var(--ui-border)" />
+      <rect x="146" y="156" width="178" height="50" fill="var(--ui-surface-raised)" stroke="var(--ui-border)" />
+      <line x1="34" y1="206" x2="324" y2="206" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="34" y1="156" x2="324" y2="156" stroke="var(--ui-text-primary)" strokeWidth="1.5" />
+      <line x1="34" y1="206" x2="34" y2="62" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <line x1="34" y1="206" x2="320" y2="76" stroke="var(--ui-accent)" strokeWidth="3" />
+      <line x1="146" y1="206" x2="318" y2="102" stroke="#b84b3a" strokeWidth="3" strokeDasharray="7 5" />
+      <rect x="232" y="112" width="52" height="44" fill="#efe7dc" stroke="var(--ui-text-primary)" strokeWidth="2" />
+      <rect x="42" y="42" width="118" height="20" rx="10" fill="var(--ui-surface-raised)" />
+      <text x="101" y="56" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--ui-text-primary)">正：反対側境界線</text>
+      <rect x="168" y="96" width="108" height="20" rx="10" fill="var(--ui-surface-raised)" />
+      <text x="222" y="110" textAnchor="middle" fontSize="12" fontWeight="700" fill="#b84b3a">誤：自己側から起算</text>
+      <text x="80" y="184" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">前面道路</text>
+      <text x="218" y="184" textAnchor="middle" fontSize="12" fill="var(--ui-text-secondary)">敷地</text>
+      <text x="64" y="232" fontSize="20" fontWeight="800" fill="var(--ui-accent)">OK</text>
+      <text x="294" y="128" fontSize="24" fontWeight="800" fill="#b84b3a">×</text>
+      <FormulaPill x={40} y={242} text="道路斜線は反対側道路境界線から読む" />
     </DiagramSvg>
   )
 }

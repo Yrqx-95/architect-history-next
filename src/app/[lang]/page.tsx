@@ -11,7 +11,6 @@ import HomeSectionReveal from '@/components/HomeSectionReveal'
 import EditorialImage from '@/components/EditorialImage'
 import ImageAttribution from '@/components/ImageAttribution'
 import LearnEntryCard from '@/components/LearnEntryCard'
-import LearningTopicCard from '@/components/LearningTopicCard'
 import { getLocalizedLearningTopics } from '@/lib/learning-topics'
 
 export const revalidate = 3600
@@ -72,7 +71,7 @@ const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
     examTitle: '考试准备',
     examBody: '面向建筑学生和建筑士备考者，整理高频概念与常见误区。',
     topicsTitle: 'Popular Learning Topics',
-    topicsDescription: '日本建筑法规中最常遇到的八个关键词。',
+    topicsDescription: '先掌握最常见的高度与面积控制。',
     latestTitle: 'Latest Architecture Content',
     latestDescription: '继续从建筑师、建筑作品、风格与时代进入 Archistory 的内容档案。',
     codeMeta: '日本法规入门',
@@ -90,7 +89,7 @@ const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
     examTitle: 'Exam Preparation',
     examBody: 'High-frequency concepts and common traps for students and licensing study.',
     topicsTitle: 'Popular Learning Topics',
-    topicsDescription: 'Eight core terms frequently encountered in Japanese building regulation.',
+    topicsDescription: 'Start with the most common height and area controls.',
     latestTitle: 'Latest Architecture Content',
     latestDescription: 'Continue into the archive through architects, buildings, styles, and periods.',
     codeMeta: 'Japanese code literacy',
@@ -108,7 +107,7 @@ const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
     examTitle: '試験対策',
     examBody: '建築学生、一級・二級建築士試験の学習者に向けた頻出概念と誤解。',
     topicsTitle: 'Popular Learning Topics',
-    topicsDescription: '日本の建築法規でよく使う八つのキーワード。',
+    topicsDescription: '高さと面積を読むための基本トピック。',
     latestTitle: 'Latest Architecture Content',
     latestDescription: '建築家、作品、様式、時代から Archistory のアーカイブへ進みます。',
     codeMeta: '日本法規の基礎',
@@ -272,7 +271,16 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const prefix = `/${lang}`
   const copy = getHomeCopy(lang)
   const learningCopy = HOME_LEARNING_COPY[lang as Lang] || HOME_LEARNING_COPY.zh
-  const learningTopics = getLocalizedLearningTopics(lang, 'code').slice(0, 8)
+  const popularTopicSlugs = [
+    'road-slant-restriction',
+    'north-side-slant-restriction',
+    'building-coverage-ratio',
+    'floor-area-ratio',
+  ]
+  const allLearningTopics = getLocalizedLearningTopics(lang, 'code')
+  const learningTopics = popularTopicSlugs
+    .map(slug => allLearningTopics.find(topic => topic.slug === slug))
+    .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic))
 
   const activeEras = eras.filter(e =>
     architects.some(a => matchesTaxonomy(a.era_slug, e))
@@ -452,15 +460,22 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       </HomeSectionReveal>
 
       <HomeSectionReveal>
-        <section className="section grid gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
+        <section className="section-sm border-y border-subtle py-6">
           <SectionHeading
             title={learningCopy.topicsTitle}
             description={learningCopy.topicsDescription}
             action={<Link href={`${prefix}/code`} className="text-xs sm:text-sm text-warm-600 hover:text-warm-800 dark:text-warm-300 dark:hover:text-paper-100 transition-colors">{t(lang, 'viewAll')} →</Link>}
           />
-          <div className="grid gap-x-8 border-b border-subtle md:grid-cols-2">
+          <div className="mt-5 flex flex-wrap gap-2">
             {learningTopics.map(topic => (
-              <LearningTopicCard key={topic.id} topic={topic} href={`${prefix}/code/${topic.slug}`} compact />
+              <Link
+                key={topic.id}
+                href={`${prefix}/code/${topic.slug}`}
+                className="inline-flex min-h-10 items-center rounded-full border border-subtle bg-surface-raised px-4 text-sm font-medium text-primary transition-colors hover:border-default hover:text-accent"
+              >
+                <span>{topic.title}</span>
+                <span className="ml-2 text-xs text-muted">{topic.japaneseTerm}</span>
+              </Link>
             ))}
           </div>
         </section>

@@ -5,7 +5,7 @@ import { getLearningTopics, getLocalizedLearningTopic } from '@/lib/learning-top
 import { getGlossaryTermTitle, getGlossaryTermsForCodeTopic } from '@/lib/glossary'
 import type { LearningComparisonTable, LearningDiagramNote, LearningFormula, LearningStep, LearningWorkedExample } from '@/lib/learning-topics'
 import SourceBadge, { getSourceTypeLabel } from '@/components/SourceBadge'
-import StatusBadge, { getStatusLabel } from '@/components/StatusBadge'
+import StatusBadge from '@/components/StatusBadge'
 import VerificationBlock from '@/components/VerificationBlock'
 import CodeTopicDiagrams, { hasCodeTopicDiagrams } from '@/components/CodeTopicDiagrams'
 
@@ -36,11 +36,14 @@ const LABELS = {
     lastReviewed: '最后审查',
     notReviewed: '未审查',
     sourceType: '来源类型',
-    lawName: '法令名称',
+    lawName: '法规名',
     articleNumber: '条文编号',
     sourceUrl: '来源链接',
     originalJapaneseTitle: '日文原题',
     verificationState: '验证状态',
+    sourceNote: '说明',
+    openOfficialSource: '打开官方出处',
+    detailInfo: '详细信息',
     disclaimerTitle: '学习用途声明',
     disclaimerBody: '本内容仅用于学习参考，不构成法律建议，也不应作为许可申请、设计审批或法律判断的唯一依据。请务必同时查阅官方来源、地方规定，并咨询具备资格的专业人士。',
   },
@@ -70,11 +73,14 @@ const LABELS = {
     lastReviewed: 'Last Reviewed',
     notReviewed: 'Not Reviewed',
     sourceType: 'Source Type',
-    lawName: 'Law Name',
+    lawName: 'Regulation',
     articleNumber: 'Article Number',
     sourceUrl: 'Source URL',
     originalJapaneseTitle: 'Original Japanese Title',
     verificationState: 'Verification State',
+    sourceNote: 'Note',
+    openOfficialSource: 'Open Official Source',
+    detailInfo: 'Details',
     disclaimerTitle: 'Educational Disclaimer',
     disclaimerBody: 'This content is provided for educational purposes. It is not legal advice and must not be used as the sole basis for permit applications, design approval, or legal determinations. Always consult official sources, local regulations, and qualified professionals.',
   },
@@ -104,11 +110,14 @@ const LABELS = {
     lastReviewed: '最終レビュー',
     notReviewed: '未レビュー',
     sourceType: '情報種別',
-    lawName: '法令名',
+    lawName: '法規名',
     articleNumber: '条文番号',
     sourceUrl: '参照URL',
     originalJapaneseTitle: '日本語原題',
     verificationState: '検証状態',
+    sourceNote: '説明',
+    openOfficialSource: '公式情報を開く',
+    detailInfo: '詳細情報',
     disclaimerTitle: '学習用コンテンツについて',
     disclaimerBody: 'この内容は学習目的で提供されています。法的助言ではなく、確認申請、設計承認、法的判断の唯一の根拠として使用しないでください。必ず公式情報、地域の規定、資格を持つ専門家に確認してください。',
   },
@@ -351,15 +360,7 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
           <div className="space-y-4">
             {topic.references.map(reference => (
               <div key={`${reference.lawName}-${reference.articleNumber}-${reference.sourceType}`} className="rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card">
-                <div className="mb-4 flex flex-wrap items-center gap-2">
-                  <SourceBadge sourceType={reference.sourceType} lang={lang} />
-                  <StatusBadge status={reference.verificationStatus} lang={lang} />
-                </div>
                 <dl className="grid gap-4 text-sm sm:grid-cols-2">
-                  <div>
-                    <dt className="label">{labels.sourceType}</dt>
-                    <dd className="mt-1 text-secondary">{getSourceTypeLabel(reference.sourceType, lang)}</dd>
-                  </div>
                   <div>
                     <dt className="label">{labels.lawName}</dt>
                     <dd className="mt-1 text-secondary">{reference.lawName}</dd>
@@ -372,24 +373,52 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
                     <dt className="label">{labels.originalJapaneseTitle}</dt>
                     <dd className="mt-1 text-secondary">{reference.originalJapaneseTitle || topic.japaneseTerm}</dd>
                   </div>
-                  <div>
-                    <dt className="label">{labels.verificationState}</dt>
-                    <dd className="mt-1 text-secondary">{getStatusLabel(reference.verificationStatus, lang)}</dd>
-                  </div>
-                  <div>
-                    <dt className="label">{labels.lastReviewed}</dt>
-                    <dd className="mt-1 text-secondary">{reference.lastReviewed || labels.notReviewed}</dd>
+                  <div className="sm:col-span-2">
+                    <dt className="label">{labels.sourceNote}</dt>
+                    <dd className="mt-1 text-secondary">{reference.note}</dd>
                   </div>
                   <div className="sm:col-span-2">
-                    <dt className="label">{labels.sourceUrl}</dt>
-                    <dd className="mt-1">
-                      <a href={reference.sourceUrl} className="break-all text-accent underline underline-offset-4" target="_blank" rel="noreferrer">
-                        {reference.sourceUrl}
-                      </a>
-                    </dd>
+                    <a href={reference.sourceUrl} className="inline-flex min-h-10 items-center rounded-full border border-subtle bg-surface-muted px-4 text-sm font-medium text-primary transition-colors hover:bg-surface-raised hover:text-accent" target="_blank" rel="noreferrer">
+                      {labels.openOfficialSource}
+                    </a>
                   </div>
                 </dl>
-                <p className="mt-4 text-xs leading-relaxed text-muted">{reference.note}</p>
+
+                <details className="mt-4 border-t border-subtle pt-4">
+                  <summary className="cursor-pointer text-sm font-medium text-secondary transition-colors hover:text-primary">
+                    {labels.detailInfo}
+                  </summary>
+                  <dl className="mt-4 grid gap-4 text-sm sm:grid-cols-2">
+                    <div>
+                      <dt className="label">{labels.sourceType}</dt>
+                      <dd className="mt-1 text-secondary">{getSourceTypeLabel(reference.sourceType, lang)}</dd>
+                    </div>
+                    <div>
+                      <dt className="label">{labels.verificationState}</dt>
+                      <dd className="mt-1 text-secondary">
+                        <StatusBadge status={reference.verificationStatus} lang={lang} />
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="label">{labels.lastReviewed}</dt>
+                      <dd className="mt-1 text-secondary">{reference.lastReviewed || labels.notReviewed}</dd>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <dt className="label">{labels.sourceUrl}</dt>
+                      <dd className="mt-1">
+                        <a href={reference.sourceUrl} className="break-all text-accent underline underline-offset-4" target="_blank" rel="noreferrer">
+                          {reference.sourceUrl}
+                        </a>
+                      </dd>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <dt className="label">Guide reference</dt>
+                      <dd className="mt-1 text-secondary">
+                        {reference.sourceType === 'government_guide' ? getSourceTypeLabel(reference.sourceType, lang) : '—'}
+                      </dd>
+                    </div>
+                  </dl>
+                </details>
               </div>
             ))}
           </div>
