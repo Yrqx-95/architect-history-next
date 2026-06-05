@@ -167,7 +167,7 @@
 .bg-surface { background: var(--ui-surface); }
 .bg-surface-muted { background: var(--ui-surface-muted); }
 .bg-surface-raised { background: var(--ui-surface-raised); }
-.bg-nav { background: color-mix(in srgb, var(--ui-surface) 90%, transparent); }
+.bg-nav { background: var(--ui-surface); }
 .border-default { border-color: var(--ui-border); }
 .border-subtle { border-color: var(--ui-border-subtle); }
 .text-primary { color: var(--ui-text-primary); }

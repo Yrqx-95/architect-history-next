@@ -14,7 +14,7 @@ export default function CinematicHero({ imageUrl, imageAlt = '', children }: Cin
   const hasImage = imageUrl && !imageFailed
 
   return (
-    <section className="relative -mx-3 sm:-mx-4 -mt-4 sm:-mt-8 mb-12 sm:mb-16">
+    <section className="relative mb-12 sm:mb-16">
       <div className="relative h-[66vh] min-h-[500px] max-h-[760px] overflow-hidden bg-warm-900 dark:bg-charcoal-950 sm:h-[74vh] sm:min-h-[620px] sm:max-h-[820px]">
         {hasImage ? (
           <img

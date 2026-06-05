@@ -119,7 +119,7 @@ export default async function LangLayout({ children, params }: {
             </div>
           </nav>
 
-          <main className="container-wide py-4 sm:py-8 overflow-x-hidden"><PageTransition>{children}</PageTransition></main>
+          <main className="container-wide py-4 sm:py-8"><PageTransition>{children}</PageTransition></main>
 
           <footer className="mt-14 border-t border-subtle py-8 sm:mt-20 sm:py-10">
             <div className="container-wide grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-sm">
