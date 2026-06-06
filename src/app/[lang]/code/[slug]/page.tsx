@@ -2,8 +2,11 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getLearningTopic, getLearningTopics, getLocalizedLearningTopic } from '@/lib/learning-topics'
-import { getGlossaryTermTitle, getGlossaryTermsForCodeTopic } from '@/lib/glossary'
+import { getGlossaryTerm, getGlossaryTermTitle, getGlossaryTermsForCodeTopic } from '@/lib/glossary'
+import { getRelatedTopics, topicNavigationRecommendationBySlug, topicTermSetBySlug } from '@/lib/learning-graph'
 import type { LearningComparisonTable, LearningDiagramNote, LearningFormula, LearningStep, LearningWorkedExample } from '@/lib/learning-topics'
+import type { GlossaryTerm } from '@/lib/glossary'
+import type { LocalizedReason, TopicDependency, TopicNavigationRecommendation } from '@/lib/learning-graph'
 import SourceBadge from '@/components/SourceBadge'
 import StatusBadge from '@/components/StatusBadge'
 import VerificationBlock from '@/components/VerificationBlock'
@@ -31,6 +34,11 @@ const LABELS = {
     variables: '变量',
     terms: '术语',
     applicabilityCheck: '适用性检查',
+    requiredTerms: '必懂术语',
+    nextTopic: '下一步学习',
+    previousTopic: '上一步',
+    alternativeTopic: '也可以学习',
+    relatedTopics: '相关主题',
     relatedGlossary: '相关术语',
     relatedCodeTopics: '相关法规主题',
     problem: '题目',
@@ -78,6 +86,11 @@ const LABELS = {
     variables: 'Variables',
     terms: 'Terms',
     applicabilityCheck: 'Applicability Check',
+    requiredTerms: 'Required Terms',
+    nextTopic: 'Next Topic',
+    previousTopic: 'Previous Topic',
+    alternativeTopic: 'Alternative Topic',
+    relatedTopics: 'Related Topics',
     relatedGlossary: 'Related Glossary',
     relatedCodeTopics: 'Related Code Topics',
     problem: 'Problem',
@@ -125,6 +138,11 @@ const LABELS = {
     variables: '変数',
     terms: '用語',
     applicabilityCheck: '適用チェック',
+    requiredTerms: '重要用語',
+    nextTopic: '次に学ぶ',
+    previousTopic: '前に学ぶ',
+    alternativeTopic: '別の学習先',
+    relatedTopics: '関連テーマ',
     relatedGlossary: '関連用語',
     relatedCodeTopics: '関連法規テーマ',
     problem: '問題',
@@ -381,6 +399,145 @@ function DiagramNoteBlocks({ notes }: { notes: LearningDiagramNote[] }) {
   )
 }
 
+function GlossaryTermPill({ term, lang, prefix }: { term: GlossaryTerm; lang: string; prefix: string }) {
+  const localizedTitle = getGlossaryTermTitle(term, lang)
+  const shouldShowLocalizedTitle = lang !== 'ja' && localizedTitle !== term.termJa
+
+  return (
+    <Link
+      href={`${prefix}/glossary?term=${encodeURIComponent(term.slug)}`}
+      className="rounded-md border border-subtle bg-surface-raised px-4 py-3 text-left shadow-semantic-card transition-colors hover:bg-surface-muted hover:text-primary"
+    >
+      <span className="block text-sm font-medium text-primary">{term.termJa}</span>
+      <span className="mt-1 block text-xs text-muted">（{term.reading}）</span>
+      {shouldShowLocalizedTitle && <span className="mt-2 block text-xs leading-relaxed text-secondary">{localizedTitle}</span>}
+    </Link>
+  )
+}
+
+function RequiredTermsBlock({ termSlugs, lang, prefix }: { termSlugs: string[]; lang: string; prefix: string }) {
+  const terms = termSlugs
+    .map(slug => getGlossaryTerm(slug))
+    .filter((term): term is GlossaryTerm => Boolean(term))
+
+  if (terms.length === 0) return null
+
+  return (
+    <div className="grid gap-3 sm:grid-cols-2">
+      {terms.map(term => (
+        <GlossaryTermPill key={term.id} term={term} lang={lang} prefix={prefix} />
+      ))}
+    </div>
+  )
+}
+
+function topicTitle(slug: string, lang: string) {
+  const topic = getLocalizedLearningTopic(slug, lang)
+  if (topic) return topic.title
+  return getLearningTopic(slug)?.japaneseTerm || null
+}
+
+function getLocalizedReason(reason: LocalizedReason, lang: string) {
+  if (typeof reason === 'string') return reason
+  if (lang === 'zh') return reason.zh || reason.ja || reason.en || ''
+  if (lang === 'ja') return reason.ja || reason.en || reason.zh || ''
+  return reason.en || reason.ja || reason.zh || ''
+}
+
+function TopicStudyLink({
+  dependency,
+  label,
+  lang,
+  prefix,
+  emphasis = false,
+}: {
+  dependency: TopicDependency
+  label: string
+  lang: string
+  prefix: string
+  emphasis?: boolean
+}) {
+  const title = topicTitle(dependency.slug, lang)
+  if (!title) return null
+
+  return (
+    <Link
+      href={`${prefix}/code/${dependency.slug}`}
+      className={`block rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card transition-colors hover:bg-surface-muted hover:text-primary ${emphasis ? '' : 'text-sm'}`}
+    >
+      <span className="label">{label}</span>
+      <span className={`mt-2 block font-medium text-primary ${emphasis ? 'text-lg' : 'text-sm'}`}>{title}</span>
+      <span className="mt-2 block text-xs leading-relaxed text-secondary">{getLocalizedReason(dependency.reason, lang)}</span>
+    </Link>
+  )
+}
+
+function RecommendedNextTopicBlock({
+  recommendation,
+  relatedTopics,
+  labels,
+  lang,
+  prefix,
+}: {
+  recommendation?: TopicNavigationRecommendation
+  relatedTopics: TopicDependency[]
+  labels: ReturnType<typeof labelsFor>
+  lang: string
+  prefix: string
+}) {
+  const visibleRelatedTopics = relatedTopics.filter(topic => Boolean(topicTitle(topic.slug, lang)))
+  const hasNavigation = Boolean(
+    (recommendation?.recommendedNextTopic && topicTitle(recommendation.recommendedNextTopic.slug, lang)) ||
+    (recommendation?.previousTopic && topicTitle(recommendation.previousTopic.slug, lang)) ||
+    (recommendation?.alternativeNextTopic && topicTitle(recommendation.alternativeNextTopic.slug, lang)) ||
+    visibleRelatedTopics.length > 0
+  )
+  if (!hasNavigation) return null
+
+  return (
+    <div className="space-y-4">
+      {recommendation?.recommendedNextTopic && (
+        <TopicStudyLink
+          dependency={recommendation.recommendedNextTopic}
+          label={labels.nextTopic}
+          lang={lang}
+          prefix={prefix}
+          emphasis
+        />
+      )}
+      <div className="grid gap-3 sm:grid-cols-2">
+        {recommendation?.previousTopic && (
+          <TopicStudyLink dependency={recommendation.previousTopic} label={labels.previousTopic} lang={lang} prefix={prefix} />
+        )}
+        {recommendation?.alternativeNextTopic && (
+          <TopicStudyLink dependency={recommendation.alternativeNextTopic} label={labels.alternativeTopic} lang={lang} prefix={prefix} />
+        )}
+      </div>
+      {visibleRelatedTopics.length > 0 && (
+        <div>
+          <p className="label mb-3">{labels.relatedTopics}</p>
+          <div className="flex flex-wrap gap-2">
+            {visibleRelatedTopics.map(topic => {
+              const title = topicTitle(topic.slug, lang)
+              if (!title) return null
+              return (
+                <Link
+                  key={topic.slug}
+                  href={`${prefix}/code/${topic.slug}`}
+                  className="inline-flex min-h-9 items-center rounded-full border border-subtle bg-surface-muted px-3 text-xs font-medium text-secondary transition-colors hover:bg-surface-raised hover:text-primary"
+                  title={getLocalizedReason(topic.reason, lang)}
+                >
+                  {title}
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function OfficialSources({ topic, labels, lang }: {
   topic: NonNullable<ReturnType<typeof getLocalizedLearningTopic>>
   labels: ReturnType<typeof labelsFor>
@@ -444,6 +601,9 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
   const prefix = `/${lang}`
   const labels = labelsFor(lang)
   const keyTerms = getGlossaryTermsForCodeTopic(topic.slug)
+  const requiredTermSlugs = topicTermSetBySlug[topic.slug]?.requiredTerms || []
+  const topicNavigationRecommendation = topicNavigationRecommendationBySlug[topic.slug]
+  const relatedLearningTopics = getRelatedTopics(topic.slug)
   const relatedCodeTopics = Array.from(new Set(
     keyTerms
       .map(term => term.relatedCodeTopicSlug)
@@ -493,6 +653,12 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
         <ArticleBlock title={labels.examSnapshot} badge={<SourceBadge sourceType="exam_reference" lang={lang} />}>
           <ExamSnapshot items={topic.examPreparation} />
         </ArticleBlock>
+
+        {requiredTermSlugs.length > 0 && (
+          <ArticleBlock title={labels.requiredTerms}>
+            <RequiredTermsBlock termSlugs={requiredTermSlugs} lang={lang} prefix={prefix} />
+          </ArticleBlock>
+        )}
 
         {hasCodeTopicDiagrams(topic.slug) || (topic.diagramNotes && topic.diagramNotes.length > 0) ? (
           <ArticleBlock title={labels.coreDiagram} badge={<SourceBadge sourceType="editorial_explanation" lang={lang} />}>
@@ -552,6 +718,18 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
             <BulletList items={topic.memoryTips} />
           </ArticleBlock>
         ) : null}
+
+        {(topicNavigationRecommendation || relatedLearningTopics.length > 0) && (
+          <ArticleBlock title={labels.nextTopic}>
+            <RecommendedNextTopicBlock
+              recommendation={topicNavigationRecommendation}
+              relatedTopics={relatedLearningTopics}
+              labels={labels}
+              lang={lang}
+              prefix={prefix}
+            />
+          </ArticleBlock>
+        )}
 
         {keyTerms.length > 0 && (
           <ArticleBlock title={labels.relatedGlossary}>

@@ -7,6 +7,26 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'zh',
     title: '用途地域',
     summary: '用途地域（ようとちいき）是日本城市土地利用的基础框架。它先决定一片土地适合什么城市功能，再影响用途、密度、高度和防火等建筑条件。',
+    overview: '用途地域是日本城市土地利用的入口规则，先决定土地适合什么用途，再影响规模、高度和防火等条件。',
+    whyItExists: '它存在的目的，是把居住、商业和工业等城市功能分区组织，避免互相干扰，并为后续建蔽率、容积率和高度控制提供前提。',
+    calculationSteps: [
+      { title: '确认基地用途地域', description: '先从都市计划图或题目条件读取用途地域。' },
+      { title: '判断用途分组', description: '把它归入住居系、商業系或工業系，建立环境目标。' },
+      { title: '检查用途制限', description: '对照第48条学习逻辑，判断计划用途是否允许或受限。' },
+      { title: '继续检查叠加规则', description: '再看建蔽率、容積率、斜線、防火地域和地方条件。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '低层住宅区中的店铺', description: '先判断是否属于住居系，再确认店铺用途是否允许、规模是否受限。' },
+      { label: 'Exam Example', title: '共同住宅与商业地域', description: '不要只看“住宅”二字；先确认用途地域，再继续看容積率、防火和道路条件。' },
+    ],
+    comparisonTables: [
+      { title: '用途地域 vs 防火地域', columns: ['用途地域', '防火地域'], rows: [
+        { label: '控制对象', values: ['土地使用功能', '城市火灾蔓延风险'] },
+        { label: '考试作用', values: ['判断用途可否', '判断防火性能要求'] },
+      ] },
+    ],
+    diagramNotes: [{ title: 'Future Diagram', items: ['13用途地域分组', '住居系', '商業系', '工業系', '第48条用途制限', '后续建蔽率/容積率连接'] }],
+    memoryTips: ['先用途，后面积；先城市功能，后建筑规模。'],
     definition: '用途地域是都市计划中按照居住、商业、工业等功能划分土地利用的制度。它不是单体建筑设计规则，而是城市层面的土地利用框架。学习时要把用途地域理解为所有后续判断的入口：想建什么，必须先看该用途地域是否允许；即使用途允许，还要继续检查建蔽率、容積率、高度制限、防火規制等叠加条件。',
     keyConcepts: [
       '用途地域的核心作用是组织城市功能，避免住宅、商业、工业等活动无秩序混杂。',
@@ -48,6 +68,26 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'en',
     title: 'Zoning Districts',
     summary: 'Zoning districts, or 用途地域（ようとちいき）, form the basic land-use framework of Japanese urban planning. They shape what can be built before size or form is calculated.',
+    overview: 'Zoning districts are the first land-use frame for reading whether a proposed building use can happen on a site.',
+    whyItExists: 'They organize residential, commercial, and industrial functions so later controls such as BCR, FAR, height, and fire overlays can be read in context.',
+    calculationSteps: [
+      { title: 'Identify the district', description: 'Read the zoning district from the problem or official planning map.' },
+      { title: 'Group the district', description: 'Classify it as residential, commercial, or industrial.' },
+      { title: 'Check use restrictions', description: 'Use Article 48 study logic to decide whether the proposed use is allowed or restricted.' },
+      { title: 'Continue to overlays', description: 'Then check BCR, FAR, slant restrictions, fire districts, and local conditions.' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: 'Shop in a low-rise residential district', description: 'First identify the residential district, then check whether the shop use and scale are permitted.' },
+      { label: 'Exam Example', title: 'Apartment in a commercial district', description: 'Do not stop at the use name; continue into FAR, fire district, and road conditions.' },
+    ],
+    comparisonTables: [
+      { title: 'Zoning District vs Fire Prevention District', columns: ['Zoning District', 'Fire Prevention District'], rows: [
+        { label: 'Controls', values: ['Land use and urban function', 'Urban fire-spread risk'] },
+        { label: 'Exam role', values: ['Use permissibility', 'Fire-performance requirements'] },
+      ] },
+    ],
+    diagramNotes: [{ title: 'Future Diagram', items: ['13 zoning districts', 'Residential group', 'Commercial group', 'Industrial group', 'Article 48 use restrictions', 'Links to BCR/FAR'] }],
+    memoryTips: ['Use first, area second: read urban function before building size.'],
     definition: '用途地域 are land-use districts established through city planning to organize residential, commercial, and industrial activities. They are not merely building details; they are the first urban framework for reading a site. A proposed use must be checked against the district before coverage ratio, FAR, height controls, fire controls, and other restrictions become meaningful.',
     keyConcepts: [
       'The main role of zoning districts is to organize urban functions and reduce harmful conflicts between living, commerce, and industry.',
@@ -89,6 +129,26 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'ja',
     title: '用途地域',
     summary: '用途地域（ようとちいき）は、都市の土地利用を大きく方向づける基本制度です。建てたい用途を考える前に、まず敷地がどの用途地域にあるかを読みます。',
+    overview: '用途地域は、敷地でどの用途を考えられるかを読む最初の土地利用フレームです。',
+    whyItExists: '住居、商業、工業などの都市機能を整理し、建蔽率、容積率、高さ、防火指定などを読む前提をつくるためにあります。',
+    calculationSteps: [
+      { title: '用途地域を確認', description: '問題文や都市計画図から敷地の用途地域を読みます。' },
+      { title: '系統を分ける', description: '住居系、商業系、工業系のどれかを整理します。' },
+      { title: '用途制限を見る', description: '第48条の学習ロジックで用途の可否や制限を確認します。' },
+      { title: '重なる条件へ進む', description: '建蔽率、容積率、斜線、防火地域、地方条件を続けて読みます。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '低層住居系の店舗', description: 'まず住居系の性格を確認し、店舗用途と規模が許されるかを見ます。' },
+      { label: 'Exam Example', title: '商業地域の共同住宅', description: '用途名だけで止まらず、容積率、防火、道路条件へ進みます。' },
+    ],
+    comparisonTables: [
+      { title: '用途地域 vs 防火地域', columns: ['用途地域', '防火地域'], rows: [
+        { label: '見る対象', values: ['土地利用と都市機能', '市街地の延焼リスク'] },
+        { label: '試験での役割', values: ['用途の可否', '防火性能の要求'] },
+      ] },
+    ],
+    diagramNotes: [{ title: 'Future Diagram', items: ['13用途地域', '住居系', '商業系', '工業系', '第48条用途制限', '建蔽率・容積率への接続'] }],
+    memoryTips: ['先に用途、次に面積。都市機能を読んでから規模を計算します。'],
     definition: '用途地域は、住居、商業、工業などの都市機能に応じて土地利用を区分する都市計画上の制度です。単体建築の細則ではなく、都市全体の土地利用の大枠です。建築できる用途、建蔽率、容積率、高さ、防火規制などを読む入口になります。',
     keyConcepts: [
       '都市の機能を整理し、住環境、商業活動、工業活動が無秩序に混在しないようにする枠組みです。',
@@ -760,6 +820,26 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'zh',
     title: '接道义务',
     summary: '接道義務（せつどうぎむ）要求建筑基地与法定道路保持必要连接。它不是单纯的面积规则，而是关系到避难、消防、通行和城市基础设施的入口条件。',
+    overview: '接道義務要求建筑基地与建築基準法上的道路保持必要连接，是建造可能性的入口条件。',
+    whyItExists: '它保障避难、消防、日常通行和基础设施接入，避免土地虽然够大却无法安全使用。',
+    calculationSteps: [
+      { title: '确认通路性质', description: '先判断相接通路是否属于第42条道路等法定道路。' },
+      { title: '确认接道长度', description: '学习上重点看是否满足 2m 以上接道。' },
+      { title: '检查特殊地形', description: '旗竿地、私道、袋地和狭窄通路要特别谨慎。' },
+      { title: '再进入面积计算', description: '接道成立后，才继续看建蔽率、容積率等规模条件。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '2m 接道成立', description: '基地与第42条道路接触 2m 以上时，学习上可进入后续规模判断。' },
+      { label: 'Exam Example', title: '旗竿地', description: '即使总面积足够，也要先看竿状部分宽度和道路法定性质。' },
+    ],
+    comparisonTables: [
+      { title: '接道義務 vs 容積率', columns: ['接道義務', '容積率'], rows: [
+        { label: '问题', values: ['能否安全接入道路', '能建多少总楼面'] },
+        { label: '考试顺序', values: ['先检查', '接道后再计算'] },
+      ] },
+    ],
+    diagramNotes: [{ title: 'Future Diagram', items: ['敷地', '前面道路', '第42条道路', '接道部分', '2m以上', '旗竿地'] }],
+    memoryTips: ['面积再大，先问有没有合法道路和 2m 接道。'],
     definition: '接道义务对应日语「接道義務（せつどうぎむ）」。学习上可以理解为：建筑物的敷地原则上必须与建筑基准法上的道路接触，并且通常需要满足一定长度的接道条件。常见学习点是“2m以上接道”，但实际判断必须同时看道路是否属于建築基準法第42条意义上的道路，以及接道要求与第43条的关系。',
     keyConcepts: [
       '接道义务的核心不是土地面积，而是基地是否能安全连接到法定道路系统。',
@@ -801,6 +881,26 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'en',
     title: 'Road Access Obligation',
     summary: 'Road access obligation, or 接道義務（せつどうぎむ）, links a building site to legally recognized roads. It is a safety and access rule, not merely a site-area rule.',
+    overview: 'Road access obligation asks whether a site is properly connected to a Building Standards Act road.',
+    whyItExists: 'It supports evacuation, firefighting, daily movement, and infrastructure before area calculations begin.',
+    calculationSteps: [
+      { title: 'Check road status', description: 'First decide whether the adjoining route is an Article 42 road or equivalent legal road.' },
+      { title: 'Check access length', description: 'For study, watch the 2m-or-more access point.' },
+      { title: 'Check special site forms', description: 'Flagpole lots, private roads, landlocked sites, and narrow passages require caution.' },
+      { title: 'Move to area controls', description: 'Only after access is valid should BCR and FAR calculations become meaningful.' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '2m access satisfied', description: 'A site touching an Article 42 road by at least 2m can proceed to later study checks.' },
+      { label: 'Exam Example', title: 'Flagpole lot', description: 'Even with sufficient total area, the access strip width and legal road status must be checked first.' },
+    ],
+    comparisonTables: [
+      { title: 'Road Access vs FAR', columns: ['Road Access', 'FAR'], rows: [
+        { label: 'Question', values: ['Can the site safely connect to a legal road?', 'How much total floor area is allowed?'] },
+        { label: 'Exam order', values: ['Check first', 'Calculate after access is valid'] },
+      ] },
+    ],
+    diagramNotes: [{ title: 'Future Diagram', items: ['Site', 'Front road', 'Article 42 road', 'Access strip', '2m or more', 'Flagpole lot'] }],
+    memoryTips: ['Before area calculations, ask: legal road and 2m access?'],
     definition: 'Road access obligation refers to the requirement that a building site must generally connect to a road recognized under the Building Standards Act. A common study expression is that the site must have at least 2 meters of contact with such a road. The key is to read this together with Article 42, which concerns the definition of roads, and Article 43, which concerns the site-road connection requirement.',
     keyConcepts: [
       'The core question is not only how large the site is, but whether it is safely connected to the legal road network.',
@@ -842,6 +942,26 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'ja',
     title: '接道義務',
     summary: '接道義務（せつどうぎむ）は、建築物の敷地が法令上の道路に必要な形で接することを求める、安全と通行のための基本条件です。',
+    overview: '接道義務は、敷地が建築基準法上の道路に必要な形で接しているかを読む入口条件です。',
+    whyItExists: '避難、消防、日常通行、インフラ接続を確保し、面積が十分でも安全に使えない敷地を防ぐためにあります。',
+    calculationSteps: [
+      { title: '道路の性質を確認', description: '接する通路が第42条道路など法令上の道路かを見ます。' },
+      { title: '接道長さを確認', description: '学習上は 2m 以上接道が重要な確認点です。' },
+      { title: '特殊な敷地形状を見る', description: '旗竿地、私道、袋地、狭い通路は慎重に読みます。' },
+      { title: '面積計算へ進む', description: '接道が成立してから建蔽率、容積率などを検討します。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '2m 接道が成立', description: '第42条道路に 2m 以上接していれば、学習上は次の規模判断へ進めます。' },
+      { label: 'Exam Example', title: '旗竿地', description: '総面積が足りても、竿部分の幅と道路の法的性質を先に確認します。' },
+    ],
+    comparisonTables: [
+      { title: '接道義務 vs 容積率', columns: ['接道義務', '容積率'], rows: [
+        { label: '見る問題', values: ['安全に道路へ接続できるか', '延べ面積をどこまで取れるか'] },
+        { label: '試験順序', values: ['先に確認', '接道後に計算'] },
+      ] },
+    ],
+    diagramNotes: [{ title: 'Future Diagram', items: ['敷地', '前面道路', '第42条道路', '接道部分', '2m以上', '旗竿地'] }],
+    memoryTips: ['面積より先に、道路と 2m 接道。'],
     definition: '接道義務は、建築物の敷地が建築基準法上の道路に接することを求める制度です。学習上は「2m以上接道」が基本論点になりますが、まずその通路が建築基準法第42条の道路に当たるかを確認し、次に第43条の接道条件を読む必要があります。',
     keyConcepts: [
       '接道義務の中心は、敷地面積ではなく、敷地が安全に道路ネットワークへ接続しているかです。',
@@ -1546,6 +1666,24 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'zh',
     title: '防火地域',
     summary: '防火地域（ぼうかちいき）是城市中火灾风险较高区域的防火控制制度。它不是“不能建”，而是要求建筑具备更高防火性能。',
+    overview: '防火地域是在高火灾风险市街地要求更高防火性能的地区指定。',
+    whyItExists: '它通过建筑构造、外墙、开口部和主要结构部控制延烧风险，保护密集城市区域。',
+    calculationSteps: [
+      { title: '确认地区指定', description: '先判断基地是否位于防火地域。' },
+      { title: '确认建筑规模', description: '看层数、用途、面积和结构类型。' },
+      { title: '判断防火性能', description: '连接耐火建築物、主要構造部、外壁和开口部要求。' },
+      { title: '比较準防火地域', description: '用要求强度差异避免混淆。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '商业中心建筑', description: '用途允许不等于构造自由；防火地域内还要看耐火性能。' },
+      { label: 'Exam Example', title: '规模变化', description: '同一区域内，建筑规模变化可能改变所需构造类别。' },
+    ],
+    comparisonTables: [{ title: '防火地域 vs 準防火地域', columns: ['防火地域', '準防火地域'], rows: [
+      { label: '强度', values: ['通常更强', '中间强度'] },
+      { label: '关键词', values: ['耐火建築物', '準耐火建築物・防火構造'] },
+    ] }],
+    diagramNotes: [{ title: 'Future Diagram', items: ['防火地域边界', '建筑规模', '主要構造部', '外壁', '開口部', '延焼方向'] }],
+    memoryTips: ['防火地域不是不能建，而是防火性能更高。'],
     definition: '防火地域通常指定在城市中心、商业区、主要道路沿线和密集市街地等火灾蔓延风险较高的区域。它通过对建筑规模、构造和防火性能提出更严格要求，降低城市火灾扩大风险。学习时要把防火地域理解为叠加在用途地域之上的地区指定，而不是用途地域本身。',
     keyConcepts: [
       '防火地域的目的，是在高密度或高活动强度地区降低延烧风险。',
@@ -1587,6 +1725,24 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'en',
     title: 'Fire Prevention District',
     summary: 'Fire Prevention District, or 防火地域（ぼうかちいき）, is a fire-safety overlay for dense and high-risk urban areas. It does not prohibit building; it raises fire-performance requirements.',
+    overview: 'A Fire Prevention District is an overlay requiring stronger fire performance in high-risk urban areas.',
+    whyItExists: 'It reduces urban fire spread through requirements on structure, exterior walls, openings, and major building parts.',
+    calculationSteps: [
+      { title: 'Confirm designation', description: 'Check whether the site is in a Fire Prevention District.' },
+      { title: 'Confirm scale', description: 'Read stories, use, area, and construction type.' },
+      { title: 'Identify performance', description: 'Connect the problem to fire-resistant buildings, structural parts, walls, and openings.' },
+      { title: 'Compare quasi-fire district', description: 'Use the difference in strictness to avoid confusion.' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: 'Commercial-center building', description: 'Permitted use does not mean free construction; fire performance still matters.' },
+      { label: 'Exam Example', title: 'Scale changes', description: 'Within the same district, building scale can change the required construction category.' },
+    ],
+    comparisonTables: [{ title: 'Fire vs Quasi-fire District', columns: ['Fire Prevention District', 'Quasi-fire Prevention District'], rows: [
+      { label: 'Strength', values: ['Generally stricter', 'Intermediate'] },
+      { label: 'Keywords', values: ['Fire-resistant building', 'Quasi-fire-resistant building / fire-protective construction'] },
+    ] }],
+    diagramNotes: [{ title: 'Future Diagram', items: ['District boundary', 'Building scale', 'Major structural parts', 'Exterior wall', 'Opening', 'Fire-spread direction'] }],
+    memoryTips: ['Fire district does not mean no building; it means higher fire performance.'],
     definition: 'A Fire Prevention District is commonly designated in city centers, commercial areas, major corridors, and dense urban districts where fire spread risk is high. It requires buildings to respond with stronger fire-resistant construction and related performance. It should be understood as an overlay district that works together with zoning, not as a zoning district itself.',
     keyConcepts: [
       'The purpose is to reduce urban fire spread in dense or high-activity areas.',
@@ -1628,6 +1784,24 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'ja',
     title: '防火地域',
     summary: '防火地域（ぼうかちいき）は、都市中心部や密集市街地など延焼リスクが高い区域で、建築物に高い防火性能を求める地区指定です。',
+    overview: '防火地域は、延焼リスクが高い市街地で建築物に高い防火性能を求める地区指定です。',
+    whyItExists: '主要構造部、外壁、開口部などの性能を通じて、市街地火災の拡大を抑えるためにあります。',
+    calculationSteps: [
+      { title: '地区指定を確認', description: '敷地が防火地域にあるかを見ます。' },
+      { title: '建築規模を確認', description: '階数、用途、面積、構造種別を読みます。' },
+      { title: '防火性能を判断', description: '耐火建築物、主要構造部、外壁、開口部と結びつけます。' },
+      { title: '準防火地域と比較', description: '要求の強さの違いで混同を避けます。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '商業中心部の建築', description: '用途が可能でも、構造が自由とは限りません。防火性能を確認します。' },
+      { label: 'Exam Example', title: '規模が変わる問題', description: '同じ地域でも、規模が変わると必要な構造種別が変わることがあります。' },
+    ],
+    comparisonTables: [{ title: '防火地域 vs 準防火地域', columns: ['防火地域', '準防火地域'], rows: [
+      { label: '強さ', values: ['一般に厳しい', '中間的'] },
+      { label: 'キーワード', values: ['耐火建築物', '準耐火建築物・防火構造'] },
+    ] }],
+    diagramNotes: [{ title: 'Future Diagram', items: ['防火地域境界', '建築規模', '主要構造部', '外壁', '開口部', '延焼方向'] }],
+    memoryTips: ['防火地域は建築禁止ではなく、防火性能を高く求める地域。'],
     definition: '防火地域は、都市中心部、商業地、幹線道路沿い、密集市街地など、火災が広がりやすい区域に指定されることが多い防火上の地区指定です。建築を禁止する制度ではなく、建築物の規模、構造、防火性能に高い水準を求めます。用途地域とは別の制度であり、用途地域に重ねて読む必要があります。',
     keyConcepts: [
       '高密度な市街地で延焼を抑えることが大きな目的です。',
@@ -1669,6 +1843,24 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'zh',
     title: '准防火地域',
     summary: '準防火地域（じゅんぼうかちいき）是介于一般区域和防火地域之间的防火控制区域，常用于防火地域周边或较密集的市街地。',
+    overview: '準防火地域是在一般区域和防火地域之间的中间强度防火控制。',
+    whyItExists: '它在防火地域周边或密集街区降低延烧风险，同时要求强度通常低于防火地域。',
+    calculationSteps: [
+      { title: '确认準防火地域', description: '先判断基地是否落在準防火地域。' },
+      { title: '确认建筑规模', description: '看层数、用途、面积和构造。' },
+      { title: '检查局部构件', description: '重点看外壁、開口部、屋根和主要構造部。' },
+      { title: '和防火地域比较', description: '明确它不是一般区域，也不是完整防火地域。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '小规模住宅', description: '即使规模不大，外壁和开口部也可能需要比一般区域更高的防火性能。' },
+      { label: 'Exam Example', title: '木造建筑', description: '同为木造，在準防火地域与防火地域中的可选构造和细部不同。' },
+    ],
+    comparisonTables: [{ title: '準防火地域 vs 防火地域', columns: ['準防火地域', '防火地域'], rows: [
+      { label: '定位', values: ['中间防火控制', '较强防火控制'] },
+      { label: '常见部位', values: ['外壁・開口部・防火構造', '主要構造部・耐火建築物'] },
+    ] }],
+    diagramNotes: [{ title: 'Future Diagram', items: ['準防火地域边界', '外壁', '開口部', '屋根', '防火構造', '防火地域との比較'] }],
+    memoryTips: ['“准”不是没有要求，而是中间强度的防火要求。'],
     definition: '準防火地域用于在火灾风险较高但不一定达到防火地域强度的地区控制延烧风险。它通常要求建筑根据规模和构造满足一定防火性能，尤其涉及外壁、开口部、主要结构部和屋顶等部位。它不是用途地域，而是和用途地域叠加阅读的防火地区指定。',
     keyConcepts: [
       '準防火地域常作为防火地域周边、密集市街地或需要防止延烧的过渡区域。',
@@ -1710,6 +1902,24 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'en',
     title: 'Quasi-fire Prevention District',
     summary: 'Quasi-fire Prevention District, or 準防火地域（じゅんぼうかちいき）, is an intermediate fire-control overlay often used around fire prevention districts or in dense urban areas.',
+    overview: 'A Quasi-fire Prevention District is an intermediate fire-control overlay between ordinary areas and full fire prevention districts.',
+    whyItExists: 'It reduces fire spread around dense areas or near stricter fire districts while generally being less strict than a Fire Prevention District.',
+    calculationSteps: [
+      { title: 'Confirm designation', description: 'Check whether the site is in a Quasi-fire Prevention District.' },
+      { title: 'Confirm scale', description: 'Read stories, use, area, and construction type.' },
+      { title: 'Check building parts', description: 'Focus on exterior walls, openings, roof, and major structural parts.' },
+      { title: 'Compare fire district', description: 'Remember it is not ordinary, but it is not the same as full fire prevention district.' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: 'Small house', description: 'Even a small house may need stronger exterior-wall or opening performance than in an ordinary area.' },
+      { label: 'Exam Example', title: 'Timber building', description: 'A timber building may require different details in quasi-fire and full fire prevention districts.' },
+    ],
+    comparisonTables: [{ title: 'Quasi-fire vs Fire District', columns: ['Quasi-fire District', 'Fire Prevention District'], rows: [
+      { label: 'Position', values: ['Intermediate fire control', 'Stronger fire control'] },
+      { label: 'Common parts', values: ['Exterior walls, openings, fire-protective construction', 'Major structural parts, fire-resistant building'] },
+    ] }],
+    diagramNotes: [{ title: 'Future Diagram', items: ['Quasi-fire district boundary', 'Exterior wall', 'Opening', 'Roof', 'Fire-protective construction', 'Comparison with fire district'] }],
+    memoryTips: ['“Quasi” does not mean no requirement; it means intermediate fire control.'],
     definition: 'A Quasi-fire Prevention District controls fire spread in areas that require stronger protection than ordinary districts but are generally less strict than Fire Prevention Districts. Requirements vary with building scale, stories, use, and construction, and often involve exterior walls, openings, structural elements, and roofs. It is a fire-safety overlay, not a zoning district.',
     keyConcepts: [
       'It often works as a transition zone around stricter fire prevention districts or within dense urban neighborhoods.',
@@ -1751,6 +1961,24 @@ export const learningTopicTranslations: LearningTopicTranslation[] = [
     locale: 'ja',
     title: '準防火地域',
     summary: '準防火地域（じゅんぼうかちいき）は、防火地域の周辺や密集市街地などで、延焼を抑えるために中間的な防火性能を求める地区指定です。',
+    overview: '準防火地域は、一般区域と防火地域の間にある中間的な防火制限です。',
+    whyItExists: '防火地域の周辺や密集市街地で延焼を抑えつつ、防火地域ほど強くない防火性能を求めるためにあります。',
+    calculationSteps: [
+      { title: '準防火地域を確認', description: '敷地が準防火地域にあるかを見ます。' },
+      { title: '建築規模を確認', description: '階数、用途、面積、構造を読みます。' },
+      { title: '部位を確認', description: '外壁、開口部、屋根、主要構造部を重点的に見ます。' },
+      { title: '防火地域と比較', description: '一般区域ではないが、防火地域そのものでもないと整理します。' },
+    ],
+    workedExamples: [
+      { label: 'Basic Example', title: '小規模住宅', description: '小規模でも、一般区域より外壁や開口部に高い性能が必要になることがあります。' },
+      { label: 'Exam Example', title: '木造建築', description: '同じ木造でも、準防火地域と防火地域では細部や構造の扱いが変わります。' },
+    ],
+    comparisonTables: [{ title: '準防火地域 vs 防火地域', columns: ['準防火地域', '防火地域'], rows: [
+      { label: '位置づけ', values: ['中間的な防火制限', 'より強い防火制限'] },
+      { label: 'よく見る部位', values: ['外壁・開口部・防火構造', '主要構造部・耐火建築物'] },
+    ] }],
+    diagramNotes: [{ title: 'Future Diagram', items: ['準防火地域境界', '外壁', '開口部', '屋根', '防火構造', '防火地域との比較'] }],
+    memoryTips: ['「準」は不要という意味ではなく、中間的な防火要求です。'],
     definition: '準防火地域は、一般の区域より強い防火性能が必要だが、防火地域ほど厳しくない区域に指定されることが多い防火上の地区指定です。建築物の規模、階数、用途、構造に応じて、外壁、開口部、主要構造部、屋根などの防火性能が問題になります。用途地域とは別に重ねて読む制度です。',
     keyConcepts: [
       '防火地域の周辺や密集市街地で、延焼を抑えるための中間的な区域として理解します。',
