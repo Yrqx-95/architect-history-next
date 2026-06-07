@@ -463,17 +463,24 @@ function BuildingKnowledgeNetwork({
       en: 'Continue through authorship, period, style, place, and nearby works.',
       ja: '作者、時代、様式、場所、近い作品から、この建築の位置を読み進める。',
     },
-    architect: { zh: '作者', en: 'Architect', ja: '設計者' },
-    period: { zh: '时代', en: 'Period', ja: '時代' },
-    style: { zh: '风格', en: 'Style', ja: '様式' },
-    region: { zh: '地域', en: 'Region', ja: '地域' },
-    similar: { zh: '相近作品', en: 'Related work', ja: '近い作品' },
+    architect: { zh: '因为由其设计', en: 'Related because they designed it', ja: '設計者として関連' },
+    period: { zh: '因为属于这一时代', en: 'Related through its period', ja: '同じ時代として関連' },
+    style: { zh: '因为采用这一风格', en: 'Related through its style', ja: '同じ様式として関連' },
+    region: { zh: '因为位于这一地区', en: 'Related through its location', ja: '同じ地域として関連' },
+    sameArchitect: { zh: '因为建筑师相同', en: 'Related through the same architect', ja: '同じ建築家として関連' },
+    sameStyle: { zh: '因为风格相同', en: 'Related through a shared style', ja: '共通する様式で関連' },
+    sameType: { zh: '因为建筑类型相近', en: 'Related through the same building type', ja: '同じ建築類型として関連' },
   }
   const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
   const countryCode = building.country_code?.toLowerCase()
   const countryName = countryCode && building.country
     ? formatCountryName(countryCode, building.country, lang) || building.country
     : ''
+  const relatedLabel = (item: Building) => {
+    if (architect && item.architect_slug === architect.slug) return l('sameArchitect')
+    if (item.style_slugs?.some(style => building.style_slugs?.includes(style))) return l('sameStyle')
+    return l('sameType')
+  }
   const cards = [
     architect && {
       key: `architect-${architect.slug}`,
@@ -506,7 +513,7 @@ function BuildingKnowledgeNetwork({
     ...related.slice(0, 2).map(item => ({
       key: `building-${item.slug}`,
       href: `${prefix}/building/${item.slug}`,
-      label: l('similar'),
+      label: relatedLabel(item),
       title: displayName(item, lang),
       meta: [item.year_start, formatDisplayLocation({ city: item.city, country: item.country, countryCode: item.country_code, lang })].filter(Boolean).join(' · '),
     })),
@@ -758,7 +765,15 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
     : findTimelinePeriodForRange(building.year_start, building.year_end)
 
   const nameText = displayName(building, lang)
-  const cleanText = (text: string) => (lang === 'ja' && isProbablySimplifiedChinese(text) ? '' : text)
+  const visibleBuildingStyles = buildingStyles.filter(style => {
+    const styleName = displayName(style, lang)
+    return lang === 'en' || /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(styleName)
+  })
+  const cleanText = (text: string) => {
+    if (lang === 'en' && /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(text)) return ''
+    if (lang === 'ja' && isProbablySimplifiedChinese(text)) return ''
+    return text
+  }
   const buildingLocation = formatDisplayLocation({
     city: building.city,
     country: building.country,
@@ -772,15 +787,17 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
     era: contextEra,
     lang,
   })
-  const descriptionText = contentOverlay
+  const overlaySummary = contentOverlay ? localizedBuildingContent(contentOverlay.summary, lang) : ''
+  const hasLocalizedOverlay = Boolean(contentOverlay) && !(lang === 'en' && /[\u3400-\u9fff]/.test(overlaySummary))
+  const descriptionText = hasLocalizedOverlay && contentOverlay
     ? localizedBuildingContent(contentOverlay.summary, lang)
     : cleanText(displayText(building.description, lang)) || fallbackContent.summary
-  const sigText = contentOverlay
+  const sigText = hasLocalizedOverlay && contentOverlay
     ? localizedBuildingContent(contentOverlay.significance, lang)
     : cleanText(displayText(building.significance, lang)) || fallbackContent.significance
-  const spatialText = cleanText(displayText(building.spatial_feat, lang)) || (contentOverlay ? '' : fallbackContent.spatial)
-  const lightText = cleanText(displayText(building.light_feat, lang)) || (contentOverlay ? '' : fallbackContent.light)
-  const circulationText = cleanText(displayText(building.circulation, lang)) || (contentOverlay ? '' : fallbackContent.circulation)
+  const spatialText = cleanText(displayText(building.spatial_feat, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.spatial)
+  const lightText = cleanText(displayText(building.light_feat, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.light)
+  const circulationText = cleanText(displayText(building.circulation, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.circulation)
   const historicalOverride = historicalBuildingFactOverrides[building.slug]
   const designerValue = historicalOverride
     ? localizedOverrideText(historicalOverride.designer, lang)
@@ -801,11 +818,11 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
       value: localizedOverrideText(fact.value, lang),
     })) || []),
     { label: t(lang, 'location'), value: buildingLocation || null },
-    { label: t(lang, 'type'), value: building.type_slug && !(lang === 'ja' && isProbablySimplifiedChinese(building.type_slug)) ? building.type_slug : null },
-    { label: t(lang, 'structure'), value: building.structure && !(lang === 'ja' && isProbablySimplifiedChinese(building.structure)) ? building.structure : null },
+    { label: t(lang, 'type'), value: building.type_slug ? cleanText(building.type_slug) : null },
+    { label: t(lang, 'structure'), value: building.structure ? cleanText(building.structure) : null },
     { label: t(lang, 'materials'), value: building.materials?.length && lang !== 'ja' ? building.materials.join(', ') : null },
     { label: t(lang, 'area'), value: building.area_sqm ? `${building.area_sqm.toLocaleString()} m²` : null },
-    { label: t(lang, 'style'), value: buildingStyles.length ? buildingStyles.map(style => displayName(style, lang)).join(', ') : null },
+    { label: t(lang, 'style'), value: visibleBuildingStyles.length ? visibleBuildingStyles.map(style => displayName(style, lang)).join(', ') : null },
     { label: t(lang, 'eras'), value: contextEra ? displayName(contextEra, lang) : null },
   ].filter(r => r.value)
 
@@ -819,7 +836,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
 
       {/* Hero: image gallery */}
       <div className="section-sm">
-        <ImageGallery images={galleryImages} alt={nameText} />
+        <ImageGallery images={galleryImages} alt={nameText} lang={lang} />
       </div>
 
       {/* Title + metadata */}
@@ -858,15 +875,15 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
       <BuildingStudyMap
         lang={lang}
         building={building}
-        hasSpatial={Boolean(spatialText || contentOverlay)}
-        hasLight={Boolean(lightText || contentOverlay)}
-        hasCirculation={Boolean(circulationText || contentOverlay)}
+        hasSpatial={Boolean(spatialText || hasLocalizedOverlay)}
+        hasLight={Boolean(lightText || hasLocalizedOverlay)}
+        hasCirculation={Boolean(circulationText || hasLocalizedOverlay)}
         hasSources={Boolean(contentOverlay?.sources.length)}
       />
 
       {/* Deep Analysis — layered content sections with reading anchors */}
       <div className="section-sm space-y-14 sm:space-y-16">
-        {contentOverlay && (
+        {hasLocalizedOverlay && contentOverlay && (
           <Reveal>
             <ArticleSection id="building-research" title={lang === 'en' ? 'Research card' : lang === 'ja' ? '研究カード' : '研究卡'}>
               <div className="space-y-10">
@@ -895,7 +912,8 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
 
         {spatialText && lightText && galleryImages.length > 1 && (
           <ImageBreak src={galleryImages[1]?.url_original || galleryImages[0].url_original} alt={nameText}
-            photographer={galleryImages[1]?.photographer} license={galleryImages[1]?.license} sourceUrl={galleryImages[1]?.source_url} />
+            photographer={galleryImages[1]?.photographer} license={galleryImages[1]?.license}
+            sourceUrl={galleryImages[1]?.source_url} lang={lang} />
         )}
 
         {lightText && (
@@ -921,7 +939,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         lang={lang}
         prefix={prefix}
         architect={architect}
-        styles={buildingStyles}
+        styles={visibleBuildingStyles}
         era={contextEra}
         building={building}
         related={related}
@@ -936,7 +954,13 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
             <div className="flex items-end justify-between mb-6">
               <div>
                 <h2 className="heading-3">{t(lang, 'relatedBuildings')}</h2>
-                <p className="caption mt-1">{related.length} {lang === 'en' ? 'similar buildings' : lang === 'ja' ? '件の関連建築' : '座相关建筑'}</p>
+                <p className="caption mt-1">
+                  {lang === 'en'
+                    ? `${related.length} buildings selected by shared architect, style, or type`
+                    : lang === 'ja'
+                    ? `建築家、様式、建築類型が共通する ${related.length} 件`
+                    : `按共同建筑师、风格或类型选出的 ${related.length} 座建筑`}
+                </p>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -970,9 +994,9 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
             subtitle: [formatDisplayLocation({ city: b.city, country: b.country, countryCode: b.country_code, lang }), b.year_start].filter(Boolean).join(', '),
           }))
         }] : []),
-        ...(buildingStyles.length > 0 ? [{
+        ...(visibleBuildingStyles.length > 0 ? [{
           label: lang === 'en' ? 'Explore This Style' : lang === 'ja' ? 'この様式を探索' : '探索此风格',
-          items: buildingStyles.slice(0, 4).map(s => ({
+          items: visibleBuildingStyles.slice(0, 4).map(s => ({
             id: s.slug,
             href: `${prefix}/browse/style/${s.slug}`,
             title: displayName(s, lang),

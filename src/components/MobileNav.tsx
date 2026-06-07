@@ -20,11 +20,13 @@ export default function MobileNav({ lang }: { lang: string }) {
   const title = lang === 'en' ? 'Menu' : lang === 'ja' ? 'メニュー' : '菜单'
   const searchLabel = lang === 'en' ? 'Search' : lang === 'ja' ? '検索' : '搜索'
   const learnLabel = t(lang, 'learn')
+  const learningCenterLabel = lang === 'en' ? 'Learning Center' : lang === 'ja' ? '学習センター' : '学习中心'
   const languageLabel = lang === 'en' ? 'Language' : lang === 'ja' ? '言語' : '语言'
   const settingsLabel = lang === 'en' ? 'Settings' : lang === 'ja' ? '設定' : '设置'
   const scriptLabel = lang === 'zh' ? '中文显示' : ''
   const comingSoonLabel = lang === 'en' ? 'Coming Soon' : lang === 'ja' ? '準備中' : '即将推出'
   const primaryLinks = [
+    { href: '/learn', label: learnLabel },
     { href: '/browse', label: t(lang, 'explore') },
     { href: '/timeline', label: t(lang, 'timeline') },
     { href: '/search', label: t(lang, 'search') },
@@ -63,7 +65,7 @@ export default function MobileNav({ lang }: { lang: string }) {
   return (
     <>
       <button
-        className="min-h-10 min-w-10 rounded-lg p-2 text-primary transition-colors hover:bg-surface-muted sm:hidden"
+        className="min-h-10 min-w-10 rounded-lg p-2 text-primary transition-colors hover:bg-surface-muted xl:hidden"
         onClick={() => setOpen(true)}
         aria-label="Menu"
         aria-expanded={open}
@@ -75,7 +77,7 @@ export default function MobileNav({ lang }: { lang: string }) {
 
       {open && (
         <div
-          className="fixed inset-0 z-[80] h-dvh w-screen overflow-hidden bg-black/35 backdrop-blur-[2px] sm:hidden"
+          className="fixed inset-0 z-[80] h-dvh w-screen overflow-hidden bg-black/35 backdrop-blur-[2px] xl:hidden"
           role="dialog"
           aria-modal="true"
           aria-label={title}
@@ -144,7 +146,14 @@ export default function MobileNav({ lang }: { lang: string }) {
               </section>
 
               <section className="border-b border-subtle py-4">
-                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{learnLabel}</p>
+                <p className="mb-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{learnLabel}</p>
+                <Link
+                  href={prefix + '/learn'}
+                  onClick={() => setOpen(false)}
+                  className="mb-2 block text-xs text-secondary transition-colors hover:text-primary"
+                >
+                  {learningCenterLabel}
+                </Link>
                 <div className="space-y-1">
                   {learnLinks.map(item => (
                     <Link

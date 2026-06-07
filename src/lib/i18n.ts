@@ -11,7 +11,7 @@ type Lang = 'zh' | 'en' | 'ja'
 const dict: Record<string, Record<Lang, string>> = {
   // --- 导航 ---
   home:        { zh: '首页',       en: 'Home',        ja: 'ホーム' },
-  explore:     { zh: 'Explore',    en: 'Explore',     ja: 'Explore' },
+  explore:     { zh: '档案',       en: 'Explore',     ja: 'アーカイブ' },
   learn:       { zh: '学习',       en: 'Learn',       ja: '学習' },
   code:        { zh: '建筑法规',    en: 'Building Code', ja: '建築法規' },
   glossary:    { zh: '术语表',      en: 'Glossary',    ja: '用語集' },

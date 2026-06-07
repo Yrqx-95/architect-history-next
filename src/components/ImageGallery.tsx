@@ -3,10 +3,12 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import SafeImage from '@/components/SafeImage'
 import type { BuildingImage } from '@/lib/types'
+import { tImageType } from '@/lib/i18n'
 
 interface ImageGalleryProps {
   images: BuildingImage[]
   alt: string
+  lang: string
 }
 
 function Skeleton() {
@@ -15,17 +17,7 @@ function Skeleton() {
   )
 }
 
-const TYPE_LABELS: Record<string, string> = {
-  exterior: 'Exterior',
-  interior: 'Interior',
-  detail: 'Detail',
-  aerial: 'Aerial',
-  floor_plan: 'Floor Plan',
-  elevation: 'Elevation',
-  section: 'Section',
-}
-
-export default function ImageGallery({ images, alt }: ImageGalleryProps) {
+export default function ImageGallery({ images, alt, lang }: ImageGalleryProps) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const [loaded, setLoaded] = useState<Record<number, boolean>>({})
@@ -76,7 +68,20 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
 
   const current = images[active]
   const hasError = errors[active]
-  const typeLabel = TYPE_LABELS[current.img_type] || current.img_type
+  const typeLabel = tImageType(lang, current.img_type)
+  const sourceLabel = lang === 'ja' ? '出典' : lang === 'zh' ? '来源' : 'Source'
+  const unavailableLabel = lang === 'ja' ? '画像はありません' : lang === 'zh' ? '图片暂不可用' : 'Image unavailable'
+  const viewLabel = lang === 'ja' ? '画像を拡大' : lang === 'zh' ? '查看大图' : 'View full size'
+  const imageLabel = lang === 'ja' ? '画像' : lang === 'zh' ? '图片' : 'Image'
+  const photosLabel = lang === 'ja' ? '枚' : lang === 'zh' ? '张图片' : 'photos'
+  const closeLabel = lang === 'ja' ? '閉じる' : lang === 'zh' ? '关闭' : 'Close'
+  const previousLabel = lang === 'ja' ? '前の画像' : lang === 'zh' ? '上一张图片' : 'Previous image'
+  const nextLabel = lang === 'ja' ? '次の画像' : lang === 'zh' ? '下一张图片' : 'Next image'
+  const keyboardHint = lang === 'ja'
+    ? '← → で移動 · Esc で閉じる'
+    : lang === 'zh'
+      ? '← → 切换 · Esc 关闭'
+      : '← → to navigate · Esc to close'
 
   return (
     <>
@@ -84,17 +89,24 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
       <div className="mb-3">
         <button
           onClick={() => !hasError && setLightbox(true)}
-          className="block w-full cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-stone-400 rounded-lg overflow-hidden"
-          aria-label="View full size"
+          className={`block w-full overflow-hidden rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 ${hasError ? 'cursor-default' : 'cursor-zoom-in'}`}
+          aria-label={viewLabel}
         >
           <div
-            className="relative w-full aspect-[16/9] sm:aspect-[2/1] rounded-lg overflow-hidden bg-warm-100 dark:bg-charcoal-900"
+            className={`relative w-full overflow-hidden rounded-lg bg-warm-100 dark:bg-charcoal-900 ${
+              hasError ? 'h-36 sm:h-44' : 'aspect-[16/9] sm:aspect-[2/1]'
+            }`}
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
             {hasError ? (
               <div className="absolute inset-0 flex items-center justify-center bg-warm-100 dark:bg-charcoal-900">
-                <span className="text-sm text-warm-600 dark:text-warm-300">{alt}</span>
+                <div className="px-6 text-center">
+                  <svg className="mx-auto h-8 w-8 text-warm-500 dark:text-warm-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.25} d="M4 19h16M6 16V8l6-3 6 3v8M9 16v-4h6v4" />
+                  </svg>
+                  <p className="mt-2 text-sm text-warm-600 dark:text-warm-300">{unavailableLabel}</p>
+                </div>
               </div>
             ) : (
               <>
@@ -131,7 +143,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Source
+              {sourceLabel}
             </a>
           )}
         </div>
@@ -149,7 +161,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
                   ? 'ring-2 ring-warm-500 dark:ring-warm-400 opacity-100 scale-105'
                   : 'opacity-50 hover:opacity-80 hover:scale-105'
                 }`}
-              aria-label={`Image ${i + 1}`}
+              aria-label={`${imageLabel} ${i + 1}`}
             >
               <SafeImage
                 src={img.url_original}
@@ -162,7 +174,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
           ))}
           {/* Image count badge */}
           <span className="shrink-0 self-center ml-2 text-xs text-stone-400 tabular-nums">
-            {images.length} photos
+            {images.length} {photosLabel}
           </span>
         </div>
       )}
@@ -183,7 +195,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
             <button
               onClick={() => setLightbox(false)}
               className="p-2 text-white/70 hover:text-white transition-colors"
-              aria-label="Close"
+              aria-label={closeLabel}
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
@@ -210,7 +222,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
               {current.photographer}
               {current.license && <> &middot; {current.license}</>}
               {current.source_url && (
-                <> &middot; <a href={current.source_url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white/70">Source</a></>
+                <> &middot; <a href={current.source_url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white/70">{sourceLabel}</a></>
               )}
             </div>
           )}
@@ -221,7 +233,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
               <button
                 onClick={e => { e.stopPropagation(); prev() }}
                 className="absolute left-2 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-white transition-colors"
-                aria-label="Previous image"
+                aria-label={previousLabel}
               >
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
@@ -230,7 +242,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
               <button
                 onClick={e => { e.stopPropagation(); next() }}
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-white transition-colors"
-                aria-label="Next image"
+                aria-label={nextLabel}
               >
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
@@ -241,7 +253,7 @@ export default function ImageGallery({ images, alt }: ImageGalleryProps) {
 
           {/* Keyboard hint */}
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 text-white/30 text-xs hidden sm:block">
-            &#8592; &#8594; to navigate &middot; Esc to close
+            {keyboardHint}
           </div>
         </div>
       )}

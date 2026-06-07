@@ -44,6 +44,16 @@ type HomeCopy = {
 type HomeLearningCopy = {
   startTitle: string
   startDescription: string
+  learningCenterTitle: string
+  learningCenterBody: string
+  learningCenterMeta: string
+  studentTitle: string
+  studentBody: string
+  studentMeta: string
+  beginnerTitle: string
+  beginnerBody: string
+  historyTitle: string
+  historyBody: string
   codeTitle: string
   codeBody: string
   glossaryTitle: string
@@ -63,16 +73,26 @@ type HomeLearningCopy = {
 const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
   zh: {
     startTitle: '建筑学习',
-    startDescription: '从作品、法规与术语进入建筑知识。',
+    startDescription: '从建筑档案进入面向学生的学习路径。',
+    learningCenterTitle: '学习中心',
+    learningCenterBody: '进入完整的建筑学习档案，把作品、术语、法规和建筑史连成学习路线。',
+    learningCenterMeta: '查看全部学习路径',
+    studentTitle: '建筑学生',
+    studentBody: '从图纸阅读、空间组织、结构材料到法规概念，建立可用于课程与设计的知识骨架。',
+    studentMeta: '从建筑学生路径开始',
+    beginnerTitle: '建筑入门',
+    beginnerBody: '先学会从场地、平面、剖面和历史线索阅读建筑。',
+    historyTitle: '建筑史探索',
+    historyBody: '沿着风格、类型与时代，把建筑作品放回历史关系中阅读。',
     codeTitle: '建筑法规',
     codeBody: '用途、密度、道路、高度与防火，先读懂设计背后的基本规则。',
     glossaryTitle: '术语表',
     glossaryBody: '把图纸、评论、法规和建筑史里反复出现的词汇整理成短条目。',
     examTitle: '考试准备',
     examBody: '面向建筑学生和建筑士备考者，整理高频概念与常见误区。',
-    topicsTitle: 'Popular Learning Topics',
+    topicsTitle: '热门学习主题',
     topicsDescription: '先掌握最常见的高度与面积控制。',
-    latestTitle: 'Latest Architecture Content',
+    latestTitle: '最新建筑内容',
     latestDescription: '继续从建筑师、建筑作品、风格与时代进入 Archistory 的内容档案。',
     codeMeta: '日本法规入门',
     glossaryMeta: '建筑语汇索引',
@@ -81,7 +101,17 @@ const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
   },
   en: {
     startTitle: 'Start Learning',
-    startDescription: 'Move from architecture content into code, vocabulary, and exam knowledge.',
+    startDescription: 'Move from the archive into guided routes for architecture study.',
+    learningCenterTitle: 'Learning Center',
+    learningCenterBody: 'Enter the Architecture Learning Archive and connect works, vocabulary, code, and history into study routes.',
+    learningCenterMeta: 'View all learning paths',
+    studentTitle: 'Architecture Student',
+    studentBody: 'Build a reusable knowledge spine across drawings, spatial planning, structure, materials, and code concepts.',
+    studentMeta: 'Start with Architecture Student',
+    beginnerTitle: 'Absolute Beginner',
+    beginnerBody: 'Learn to read buildings through site, plan, section, material, and historical context.',
+    historyTitle: 'Architecture History Explorer',
+    historyBody: 'Follow styles, typologies, and periods back into buildings in the archive.',
     codeTitle: 'Building Code',
     codeBody: 'Use, density, road access, height, and fire planning: the rules behind design decisions.',
     glossaryTitle: 'Glossary',
@@ -99,16 +129,26 @@ const HOME_LEARNING_COPY: Record<Lang, HomeLearningCopy> = {
   },
   ja: {
     startTitle: '建築を学ぶ',
-    startDescription: '作品から、法規・用語・試験知識へ。',
+    startDescription: '建築アーカイブから、学生のための学習パスへ。',
+    learningCenterTitle: '学習センター',
+    learningCenterBody: '建築学習アーカイブとして、作品、用語、法規、建築史を学習ルートにつなげます。',
+    learningCenterMeta: 'すべての学習パスを見る',
+    studentTitle: '建築学生',
+    studentBody: '図面読解、空間計画、構造・材料、法規概念を、授業と設計に使える知識としてつなげます。',
+    studentMeta: '建築学生の学習パスから始める',
+    beginnerTitle: '建築入門',
+    beginnerBody: '敷地、平面、断面、素材、歴史的文脈から建築を読む入口です。',
+    historyTitle: '建築史探索',
+    historyBody: '様式、類型、時代をたどり、アーカイブ内の建築作品へ戻ります。',
     codeTitle: '建築法規',
     codeBody: '用途、密度、道路、高さ、防火など、設計判断の背後にある基本ルールを読む。',
     glossaryTitle: '用語集',
     glossaryBody: '図面、批評、法規、建築史に出てくる語彙を短い項目として整理します。',
     examTitle: '試験対策',
     examBody: '建築学生、一級・二級建築士試験の学習者に向けた頻出概念と誤解。',
-    topicsTitle: 'Popular Learning Topics',
+    topicsTitle: 'よく使う学習テーマ',
     topicsDescription: '高さと面積を読むための基本トピック。',
-    latestTitle: 'Latest Architecture Content',
+    latestTitle: '最新の建築コンテンツ',
     latestDescription: '建築家、作品、様式、時代から Archistory のアーカイブへ進みます。',
     codeMeta: '日本法規の基礎',
     glossaryMeta: '建築語彙の索引',
@@ -392,6 +432,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               license={heroBuilding?.cover_license}
               sourceUrl={heroBuilding?.cover_source_url}
               tone="light"
+              lang={lang}
             />
           </div>
         </div>
@@ -433,28 +474,44 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             title={learningCopy.startTitle}
             description={learningCopy.startDescription}
           />
-          <div className="grid gap-7 md:grid-cols-3">
-            <LearnEntryCard
-              href={`${prefix}/code`}
-              eyebrow="01"
-              title={learningCopy.codeTitle}
-              description={learningCopy.codeBody}
-              meta={learningCopy.codeMeta}
-            />
-            <LearnEntryCard
-              href={`${prefix}/glossary`}
-              eyebrow="02"
-              title={learningCopy.glossaryTitle}
-              description={learningCopy.glossaryBody}
-              meta={learningCopy.glossaryMeta}
-            />
-            <LearnEntryCard
-              eyebrow="03"
-              title={learningCopy.examTitle}
-              description={learningCopy.examBody}
-              meta={learningCopy.examMeta}
-              comingSoonLabel={learningCopy.comingSoon}
-            />
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
+            <Link
+              href={`${prefix}/learn#architecture-student`}
+              className="group flex min-h-[16rem] flex-col justify-between rounded-md border border-default bg-surface-raised p-5 shadow-semantic-card hover:bg-surface-muted"
+            >
+              <div>
+                <p className="eyebrow">01</p>
+                <h3 className="mt-5 text-3xl font-semibold leading-tight text-primary group-hover:text-accent">
+                  {learningCopy.studentTitle}
+                </h3>
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-secondary">
+                  {learningCopy.studentBody}
+                </p>
+              </div>
+              <div className="mt-8 flex items-center justify-between gap-4 border-t border-subtle pt-5 text-xs text-muted">
+                <span>{learningCopy.studentMeta}</span>
+                <span className="text-primary" aria-hidden="true">→</span>
+              </div>
+            </Link>
+
+            <div className="grid gap-4">
+              <LearnEntryCard
+                href={`${prefix}/learn`}
+                eyebrow="02"
+                title={learningCopy.learningCenterTitle}
+                description={learningCopy.learningCenterBody}
+                meta={learningCopy.learningCenterMeta}
+                className="min-h-0 rounded-md border border-subtle bg-surface p-4 shadow-semantic-card"
+              />
+              <Link href={`${prefix}/learn#absolute-beginner`} className="group border-t border-subtle pt-4">
+                <h3 className="text-base font-medium text-primary group-hover:text-accent">{learningCopy.beginnerTitle}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-secondary">{learningCopy.beginnerBody}</p>
+              </Link>
+              <Link href={`${prefix}/learn#architecture-history-explorer`} className="group border-t border-subtle pt-4">
+                <h3 className="text-base font-medium text-primary group-hover:text-accent">{learningCopy.historyTitle}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-secondary">{learningCopy.historyBody}</p>
+              </Link>
+            </div>
           </div>
         </section>
       </HomeSectionReveal>
@@ -509,6 +566,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                     license={featuredLead.cover_license}
                     sourceUrl={featuredLead.cover_source_url}
                     tone="dark"
+                    lang={lang}
                   />
                 </div>
                 <Link href={`${prefix}/building/${featuredLead.slug}`} className="mt-6 grid gap-4 border-b border-subtle pb-7 sm:grid-cols-[minmax(0,1fr)_12rem]">
@@ -544,6 +602,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                             license={b.cover_license}
                             sourceUrl={b.cover_source_url}
                             tone="dark"
+                            lang={lang}
                           />
                         </div>
                       </div>

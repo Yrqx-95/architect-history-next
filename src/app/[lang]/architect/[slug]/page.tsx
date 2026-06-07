@@ -12,51 +12,17 @@ import {
 import { displayName, formatDisplayLocation, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import { getArchitectFallbackSummary, localizedNationality } from '@/lib/fallback-content'
-import { getArchitectImageOverride, type ArchitectImageOverride } from '@/lib/architect-images'
+import { getArchitectImageOverride } from '@/lib/architect-images'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import Reveal from '@/components/Reveal'
 import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
 import ArchitectDeepArticle from '@/components/ArchitectDeepArticle'
-import SafeImage from '@/components/SafeImage'
-import ImageAttribution from '@/components/ImageAttribution'
+import ArchitectPortraitFigure from '@/components/ArchitectPortraitFigure'
 
 export const revalidate = 86400
 export const dynamicParams = true
-
-function ArchitectPortraitFigure({
-  portrait,
-  lang,
-  className = '',
-}: {
-  portrait: ArchitectImageOverride | NonNullable<ReturnType<typeof getArchitectContent>>['portrait']
-  lang: string
-  className?: string
-}) {
-  return (
-    <figure className={`overflow-hidden rounded-sm ${className}`}>
-      <div className="relative aspect-[3/4] bg-surface-muted">
-        <SafeImage
-          src={portrait.url}
-          alt={localizedContent(portrait.alt, lang)}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 36rem"
-        />
-      </div>
-      <figcaption className="mt-2.5 flex items-start justify-between gap-3">
-        <p className="text-xs leading-relaxed text-muted max-w-[70%]">{localizedContent(portrait.alt, lang)}</p>
-        <ImageAttribution
-          photographer={portrait.author}
-          license={portrait.license}
-          sourceUrl={portrait.source_url}
-          tone="dark"
-        />
-      </figcaption>
-    </figure>
-  )
-}
 
 function ArchitectKnowledgeNetwork({
   relations,
@@ -79,6 +45,7 @@ function ArchitectKnowledgeNetwork({
     },
     from: { zh: '来自', en: 'from', ja: '由来' },
     to: { zh: '指向', en: 'to', ja: 'へ' },
+    source: { zh: '关系来源', en: 'Relationship source', ja: '関係の出典' },
   }
   const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
 
@@ -109,7 +76,7 @@ function ArchitectKnowledgeNetwork({
                 </h3>
                 <p className="body-sm mt-1 line-clamp-2 text-secondary">{relationText(relation.note, lang)}</p>
               </div>
-              <p className="caption sm:text-right">{relation.source.title}</p>
+              <p className="caption sm:text-right" title={relation.source.title}>{l('source')}</p>
             </Link>
           ))}
         </div>
@@ -201,7 +168,11 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
       }
     : null
   const portrait = verifiedPortrait || overlayPortrait || fallbackWorkPortrait
-  const primaryStyle = styles[0]
+  const visibleStyles = styles.filter(style => {
+    const styleName = displayName(style, lang)
+    return lang === 'en' || /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(styleName)
+  })
+  const primaryStyle = visibleStyles[0]
   const readingPathLinks = [
     era && {
       href: `${prefix}/browse/era/${era.slug}`,
@@ -215,8 +186,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
     },
     architect.nationalities?.[0] && {
       href: `${prefix}/search?q=${encodeURIComponent(architect.nationalities[0])}`,
-      label: lang === 'en' ? 'Region' : lang === 'ja' ? '地域' : '地域',
-      title: architect.nationalities[0],
+      label: lang === 'en' ? 'Region' : lang === 'ja' ? '地域' : '地区',
+      title: localizedNationality(architect.nationalities[0], lang),
     },
     sortedBuildings[0] && {
       href: `${prefix}/timeline#decade-${Math.floor((sortedBuildings[0].year_start || 0) / 10) * 10}`,
@@ -233,7 +204,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
         ? architect.nationalities.map(nationality => localizedNationality(nationality, lang)).join(lang === 'en' ? ', ' : '、')
         : null,
     },
-    { label: t(lang, 'style'), value: styles.length ? styles.map(style => displayName(style, lang)).join(', ') : null },
+    { label: t(lang, 'style'), value: visibleStyles.length ? visibleStyles.map(style => displayName(style, lang)).join(', ') : null },
     { label: t(lang, 'eras'), value: era ? displayName(era, lang) : null },
     { label: t(lang, 'education'), value: architect.education ? cleanText(architect.education) : null },
   ].filter(r => r.value)
@@ -266,11 +237,12 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
             </div>
 
             {/* Portrait — mobile only, after name */}
-            {portrait && (
-              <div className="mt-8 lg:hidden">
-                <ArchitectPortraitFigure portrait={portrait} lang={lang} />
-              </div>
-            )}
+            <div className="mt-8 lg:hidden">
+              <ArchitectPortraitFigure
+                portrait={portrait ? { ...portrait, alt: localizedContent(portrait.alt, lang) } : null}
+                lang={lang}
+              />
+            </div>
 
             {/* Bio — editorial pull-text with subtle left accent */}
             {bioText && (
@@ -303,7 +275,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
                   {displayName(era, lang)}
                 </span>
               )}
-              {styles.map(style => (
+              {visibleStyles.map(style => (
                 <span key={style.id} className="inline-flex items-center rounded-full border border-subtle bg-surface-muted px-3 py-1 text-[0.7rem] uppercase tracking-wider text-soft">
                   {displayName(style, lang)}
                 </span>
@@ -313,11 +285,12 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
           {/* —— Right column: portrait (5/12) —— */}
           <div className="hidden lg:block lg:col-span-5">
-            {portrait && (
-              <div className="ml-auto max-w-[24rem] lg:sticky lg:top-24">
-                <ArchitectPortraitFigure portrait={portrait} lang={lang} />
-              </div>
-            )}
+            <div className="ml-auto max-w-[24rem] lg:sticky lg:top-24">
+              <ArchitectPortraitFigure
+                portrait={portrait ? { ...portrait, alt: localizedContent(portrait.alt, lang) } : null}
+                lang={lang}
+              />
+            </div>
           </div>
         </div>
       </section>

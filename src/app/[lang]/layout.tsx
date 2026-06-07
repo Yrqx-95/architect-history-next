@@ -51,8 +51,8 @@ export default async function LangLayout({ children, params }: {
     { href: `${prefix}/browse`, label: t(lang, 'architects') },
     { href: `${prefix}/browse`, label: t(lang, 'buildings') },
     { href: `${prefix}/browse`, label: t(lang, 'styles') },
-    { href: `${prefix}/graph`, label: lang === 'en' ? 'Movements' : lang === 'ja' ? '運動' : 'Movements' },
-    { href: `${prefix}/browse/country`, label: lang === 'en' ? 'Countries / Regions' : lang === 'ja' ? '国・地域' : 'Countries / Regions' },
+    { href: `${prefix}/graph`, label: lang === 'en' ? 'Movements' : lang === 'ja' ? '運動' : '建筑运动' },
+    { href: `${prefix}/browse/country`, label: lang === 'en' ? 'Countries / Regions' : lang === 'ja' ? '国・地域' : '国家与地区' },
   ]
   const learnLinks = [
     { href: `${prefix}/code`, label: t(lang, 'code') },
@@ -82,7 +82,8 @@ export default async function LangLayout({ children, params }: {
               <Link href={prefix + '/'} className="shrink-0 text-base font-bold tracking-tight text-primary sm:text-lg">Archistory</Link>
 
               {/* Desktop links - hidden on mobile */}
-              <div className="hidden sm:flex items-center gap-5">
+              <div className="hidden xl:flex items-center gap-5">
+                <Link href={prefix + '/learn'} className="text-sm font-medium text-primary transition-colors hover:text-accent">{t(lang, 'learn')}</Link>
                 <div className="group relative">
                   <Link href={prefix + '/browse'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'explore')}</Link>
                   <div className="invisible absolute left-0 top-full z-20 w-60 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
@@ -101,11 +102,11 @@ export default async function LangLayout({ children, params }: {
                 <Link href={prefix + '/search'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
               </div>
 
-              <div className="hidden sm:block flex-1" />
+              <div className="hidden flex-1 xl:block" />
 
               {/* Right side controls */}
               <div className="flex items-center gap-1.5 sm:gap-2 ml-auto">
-                <div className="hidden items-center gap-2 sm:flex">
+                <div className="hidden items-center gap-2 xl:flex">
                   <ChineseScriptToggle lang={lang} />
                 </div>
                 <LanguageSwitcher lang={lang} />
