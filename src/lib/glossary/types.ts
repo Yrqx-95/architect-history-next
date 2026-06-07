@@ -1,5 +1,6 @@
 export type GlossaryCategory =
   | 'code'
+  | 'drawing'
   | 'planning'
   | 'area'
   | 'road'
@@ -8,6 +9,10 @@ export type GlossaryCategory =
   | 'environment'
   | 'building-part'
   | 'use'
+  | 'structure'
+  | 'concrete'
+  | 'material'
+  | 'construction'
 
 export type GlossaryTerm = {
   id: string

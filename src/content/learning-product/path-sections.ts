@@ -15,6 +15,7 @@ export type LearningPathSection = {
     title: string
     topicOrder: string[]
     requiredGlossaryTerms: string[]
+    coreTermSlugs?: string[]
   }>
   nextAction: string
   missingContent: string[]
@@ -101,41 +102,123 @@ export const learningPathSections: LearningPathSection[] = [
         "topicOrder": [
           "scale",
           "site plan",
-          "floor plan"
+          "floor plan",
+          "interior elevation",
+          "grid planning"
         ],
         "requiredGlossaryTerms": [
           "縮尺",
           "配置図",
-          "平面図"
-        ]
-      },
-      {
-        "id": "space",
-        "title": "Planning and spatial design",
-        "topicOrder": [
-          "zoning",
-          "circulation",
-          "core"
+          "平面図",
+          "展開図",
+          "グリッドプランニング"
         ],
-        "requiredGlossaryTerms": [
-          "ゾーニング",
-          "動線",
-          "コアプラン"
+        "coreTermSlugs": [
+          "scale",
+          "site-plan",
+          "floor-plan",
+          "interior-elevation",
+          "グリッドプランニング"
         ]
       },
       {
-        "id": "technical",
-        "title": "Structure and materials",
+        "id": "structure",
+        "title": "Structure",
         "topicOrder": [
           "slab",
-          "moment",
-          "cement",
-          "aggregate"
+          "wall structure",
+          "frame",
+          "concrete",
+          "strength"
         ],
         "requiredGlossaryTerms": [
-          "スラブ",
-          "曲げモーメント",
-          "混合セメント"
+          "フラットスラブ構造",
+          "壁式構造",
+          "ラーメン構造",
+          "鉄筋コンクリート",
+          "設計基準強度"
+        ],
+        "coreTermSlugs": [
+          "flat-slab-structure",
+          "wall-structure",
+          "rigid-frame-structure",
+          "reinforced-concrete",
+          "design-strength"
+        ]
+      },
+      {
+        "id": "materials",
+        "title": "Materials",
+        "topicOrder": [
+          "concrete",
+          "cement",
+          "hydration",
+          "aggregate",
+          "water-cement ratio"
+        ],
+        "requiredGlossaryTerms": [
+          "フレッシュコンクリート",
+          "セメント",
+          "水和",
+          "骨材",
+          "水セメント比"
+        ],
+        "coreTermSlugs": [
+          "fresh-concrete",
+          "cement",
+          "hydration",
+          "aggregate",
+          "water-cement-ratio"
+        ]
+      },
+      {
+        "id": "planning",
+        "title": "Planning",
+        "topicOrder": [
+          "grouping",
+          "core plan",
+          "courtyard house",
+          "cul-de-sac",
+          "zoning"
+        ],
+        "requiredGlossaryTerms": [
+          "グルーピング",
+          "コアプラン",
+          "コートハウス",
+          "クルドサック",
+          "用途地域"
+        ],
+        "coreTermSlugs": [
+          "grouping",
+          "core-plan",
+          "courtyard-house",
+          "cul-de-sac",
+          "zoning-districts"
+        ]
+      },
+      {
+        "id": "building-code",
+        "title": "Building Code",
+        "topicOrder": [
+          "floor area",
+          "coverage",
+          "building area",
+          "road access",
+          "front road"
+        ],
+        "requiredGlossaryTerms": [
+          "延べ面積",
+          "建蔽率",
+          "建築面積",
+          "接道義務",
+          "前面道路"
+        ],
+        "coreTermSlugs": [
+          "total-floor-area",
+          "building-coverage-ratio",
+          "building-area",
+          "road-access-obligation",
+          "front-road"
         ]
       }
     ],

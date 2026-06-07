@@ -12,7 +12,7 @@ type GlossaryIndexProps = {
   initialTerm?: string
 }
 
-const CATEGORY_ORDER: GlossaryCategory[] = ['code', 'planning', 'area', 'road', 'height', 'fire', 'environment', 'building-part', 'use']
+const CATEGORY_ORDER: GlossaryCategory[] = ['code', 'drawing', 'planning', 'area', 'road', 'height', 'fire', 'environment', 'structure', 'concrete', 'material', 'construction', 'building-part', 'use']
 
 const COPY = {
   zh: {
@@ -24,6 +24,7 @@ const COPY = {
     japanese: '日语',
     categories: {
       code: '法规概念',
+      drawing: '图纸',
       planning: '规划与用途',
       area: '面积',
       road: '道路',
@@ -32,6 +33,10 @@ const COPY = {
       environment: '环境',
       'building-part': '建筑部位',
       use: '用途',
+      structure: '结构',
+      concrete: '混凝土',
+      material: '材料',
+      construction: '施工',
     },
   },
   en: {
@@ -43,6 +48,7 @@ const COPY = {
     japanese: 'Japanese',
     categories: {
       code: 'Code Concepts',
+      drawing: 'Drawing',
       planning: 'Planning & Use',
       area: 'Area',
       road: 'Road',
@@ -51,6 +57,10 @@ const COPY = {
       environment: 'Environment',
       'building-part': 'Building Parts',
       use: 'Use',
+      structure: 'Structure',
+      concrete: 'Concrete',
+      material: 'Materials',
+      construction: 'Construction',
     },
   },
   ja: {
@@ -62,6 +72,7 @@ const COPY = {
     japanese: '日本語',
     categories: {
       code: '法規概念',
+      drawing: '図面',
       planning: '都市計画・用途',
       area: '面積',
       road: '道路',
@@ -70,6 +81,10 @@ const COPY = {
       environment: '環境',
       'building-part': '建築部位',
       use: '用途',
+      structure: '構造',
+      concrete: 'コンクリート',
+      material: '材料',
+      construction: '施工',
     },
   },
 } satisfies Record<string, {
