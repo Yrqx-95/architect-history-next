@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getTypes } from '@/lib/data'
 import { isMinimallyComplete } from '@/lib/quality'
-import { displayName, formatCountryName, isProbablySimplifiedChinese, type Architect, type Building, type BuildingType, type Era } from '@/lib/types'
+import { displayName, displayTaxonomyName, formatCountryName, isProbablySimplifiedChinese, type Architect, type Building, type BuildingType, type Era } from '@/lib/types'
 import { listMatchesTaxonomy, matchesTaxonomy } from '@/lib/taxonomy'
 import { learningPaths } from '@/lib/learning-paths'
 import PageShell from '@/components/PageShell'
@@ -11,6 +11,7 @@ import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
 import BuildingCard from '@/components/BuildingCard'
 import ArchitectCard from '@/components/ArchitectCard'
+import { localizedNationality } from '@/lib/fallback-content'
 
 export const revalidate = 3600
 
@@ -93,13 +94,14 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
     .map(style => ({ style, count: architectsForStyle(style).length }))
     .filter(({ count }) => count > 0)
     .sort((a, b) => b.count - a.count)
-    .slice(0, 18)
     .map(({ style, count }) => ({
       id: style.id,
       href: `${prefix}/browse/style/${style.slug}`,
-      label: displayName(style, lang),
-        meta: [eraLabelFor(style.era_slug), `${count} ${t(lang, 'architects')}`].filter(Boolean).join(' · '),
+      label: displayTaxonomyName(style, lang),
+      meta: [eraLabelFor(style.era_slug), `${count} ${t(lang, 'architects')}`].filter(Boolean).join(' · '),
     }))
+    .filter(item => item.label)
+    .slice(0, 18)
 
   const typeItems: BrowseItem[] = [...types]
     .map(type => ({ type, count: typeCountFor(type) }))
@@ -109,22 +111,27 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
     .map(({ type, count }) => ({
       id: type.id,
       href: `${prefix}/browse/type/${type.slug}`,
-      label: displayName(type, lang),
+      label: displayTaxonomyName(type, lang),
       meta: `${count} ${t(lang, 'buildings')}`,
     }))
+    .filter(item => item.label)
 
   const styleFamilies = styles
     .filter(style => !style.parent_slug)
     .map(style => ({
       style,
+      label: displayTaxonomyName(style, lang),
       children: styles
         .filter(child => child.parent_slug === style.slug)
+        .map(child => ({ child, label: displayTaxonomyName(child, lang) }))
+        .filter(item => item.label)
+        .map(item => item.child)
         .filter(child => architectsForStyle(child).length > 0)
-        .sort((a, b) => displayName(a, lang).localeCompare(displayName(b, lang)))
+        .sort((a, b) => displayTaxonomyName(a, lang).localeCompare(displayTaxonomyName(b, lang)))
         .slice(0, 5),
       count: architectsForStyle(style).length,
     }))
-    .filter(group => group.count > 0 || group.children.length > 0)
+    .filter(group => group.label && (group.count > 0 || group.children.length > 0))
     .sort((a, b) => b.count - a.count)
     .slice(0, 8)
 
@@ -140,7 +147,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
   const historyPathCount = eraItems.length + styleItems.length
 
   return (
-    <PageShell className="!max-w-[86rem]">
+    <PageShell width="archive">
       <header className="section">
         <p className="eyebrow mb-4">{lang === 'en' ? 'Archive index' : lang === 'ja' ? 'アーカイブ索引' : '档案索引'}</p>
         <h1 className="heading-display mb-4">{t(lang, 'browse')}</h1>
@@ -228,7 +235,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
                 <BuildingCard key={building.id} building={building} lang={lang} architectName={architectMap.get(building.architect_slug || '') || ''} />
               ))}
             </div>
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid items-start gap-5 md:grid-cols-2">
               <IndexList title={t(lang, 'types')} items={typeItems} />
               <IndexList title={t(lang, 'countries')} items={countryItems.slice(0, 8)} moreHref={`${prefix}/browse/country`} moreLabel={t(lang, 'viewAll')} />
             </div>
@@ -250,17 +257,17 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
                 <div className="mb-6 break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
                   <p className="eyebrow mb-4">{lang === 'en' ? 'Style groups' : lang === 'ja' ? '様式グループ' : '风格组'}</p>
                   <div className="space-y-4">
-                    {styleFamilies.map(({ style, children, count }) => (
+                    {styleFamilies.map(({ style, label, children, count }) => (
                       <div key={style.id} className="border-b border-subtle pb-4 last:border-b-0 last:pb-0">
                         <Link href={`${prefix}/browse/style/${style.slug}`} className="body-sm font-medium text-primary transition-colors hover:text-accent">
-                          {displayName(style, lang)}
+                          {label}
                         </Link>
                         <p className="caption mt-1">{count} {t(lang, 'architects')}</p>
                         {children.length > 0 && (
                           <div className="mt-2 flex flex-wrap gap-1.5">
                             {children.map(child => (
                               <Link key={child.id} href={`${prefix}/browse/style/${child.slug}`} className="rounded-full border border-subtle px-2.5 py-1 text-[0.68rem] leading-none text-secondary transition-colors hover:border-default hover:text-primary">
-                                {displayName(child, lang)}
+                                {displayTaxonomyName(child, lang)}
                               </Link>
                             ))}
                           </div>
@@ -329,7 +336,7 @@ function FeaturedArchitect({
   const years = architect.birth_year ? `${architect.birth_year}-${architect.death_year || (lang === 'en' ? 'present' : lang === 'ja' ? '現在' : '至今')}` : ''
   return (
     <Link href={`${prefix}/architect/${architect.slug}`} className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
-      <p className="caption mb-5">{[years, architect.nationalities?.[0]].filter(Boolean).join(' · ')}</p>
+      <p className="caption mb-5">{[years, architect.nationalities?.[0] ? localizedNationality(architect.nationalities[0], lang) : ''].filter(Boolean).join(' · ')}</p>
       <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">{displayName(architect, lang)}</h3>
       <div className="mt-4 flex flex-wrap gap-1.5">
         {eraLabel && (
@@ -364,7 +371,7 @@ function EraLineage({ era, architects, lang, prefix }: { era: Era; architects: A
 function IndexList({ title, items, moreHref, moreLabel }: { title: string; items: BrowseItem[]; moreHref?: string; moreLabel?: string }) {
   if (items.length === 0) return null
   return (
-    <div className="mb-6 break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
+    <div className="mb-6 h-fit break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
       <p className="eyebrow mb-4">{title}</p>
       <div className="divide-y divide-[color:var(--ui-border-subtle)]">
         {items.map(item => (

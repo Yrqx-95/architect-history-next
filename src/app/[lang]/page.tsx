@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getCounts, getFeaturedBuildingsWithCovers } from '@/lib/data'
 import type { Lang } from '@/lib/types'
-import { displayName, displayText, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
+import { displayName, displayTaxonomyName, displayText, formatDisplayLocation, isProbablySimplifiedChinese } from '@/lib/types'
 import { matchesTaxonomy } from '@/lib/taxonomy'
 import SectionHeading from '@/components/SectionHeading'
 import CinematicHero from '@/components/CinematicHero'
@@ -322,6 +322,11 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     .map(slug => allLearningTopics.find(topic => topic.slug === slug))
     .filter((topic): topic is NonNullable<typeof topic> => Boolean(topic))
 
+  const localizedStyles = styles
+    .map(style => ({ style, label: displayTaxonomyName(style, lang) }))
+    .filter(item => item.label)
+    .slice(0, 18)
+
   const activeEras = eras.filter(e =>
     architects.some(a => matchesTaxonomy(a.era_slug, e))
   ).slice(0, 8)
@@ -469,7 +474,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
       {/* Learning entry */}
       <HomeSectionReveal scale>
-        <section className="section grid gap-8 border-b border-subtle pb-12 lg:grid-cols-[18rem_minmax(0,1fr)]">
+        <section className="section grid items-start gap-8 border-b border-subtle pb-8 lg:grid-cols-[15rem_minmax(0,1fr)]">
           <SectionHeading
             title={learningCopy.startTitle}
             description={learningCopy.startDescription}
@@ -477,7 +482,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
             <Link
               href={`${prefix}/learn#architecture-student`}
-              className="group flex min-h-[16rem] flex-col justify-between rounded-md border border-default bg-surface-raised p-5 shadow-semantic-card hover:bg-surface-muted"
+              className="group flex min-h-[12rem] flex-col justify-between rounded-md border border-default bg-surface-raised p-5 shadow-semantic-card hover:bg-surface-muted"
             >
               <div>
                 <p className="eyebrow">01</p>
@@ -488,7 +493,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                   {learningCopy.studentBody}
                 </p>
               </div>
-              <div className="mt-8 flex items-center justify-between gap-4 border-t border-subtle pt-5 text-xs text-muted">
+              <div className="mt-6 flex items-center justify-between gap-4 border-t border-subtle pt-4 text-xs text-muted">
                 <span>{learningCopy.studentMeta}</span>
                 <span className="text-primary" aria-hidden="true">→</span>
               </div>
@@ -677,10 +682,10 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               description={copy.stylesDescription}
             />
             <div className="flex flex-wrap gap-2">
-              {styles.slice(0, 18).map(s => (
-                <Link key={s.id} href={`${prefix}/browse/style/${s.slug}`}
+              {localizedStyles.map(({ style, label }) => (
+                <Link key={style.id} href={`${prefix}/browse/style/${style.slug}`}
                   className="rounded-full border border-subtle px-3.5 py-2 text-sm text-secondary transition-colors hover:border-default hover:text-primary">
-                  {displayName(s, lang)}
+                  {label}
                 </Link>
               ))}
             </div>
@@ -690,7 +695,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
       {/* Knowledge Guides */}
       <HomeSectionReveal>
-        <section className="section pb-20">
+        <section className="section pb-8 sm:pb-10">
           <SectionHeading
             title={copy.guidesTitle}
             description={copy.guidesDescription}

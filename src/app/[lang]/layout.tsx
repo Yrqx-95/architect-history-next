@@ -3,7 +3,7 @@ import Link from 'next/link'
 import '../globals.css'
 import { t } from '@/lib/i18n'
 import { getEras, getStyles } from '@/lib/data'
-import { displayName } from '@/lib/types'
+import { displayName, displayTaxonomyName } from '@/lib/types'
 import MobileNav from '@/components/MobileNav'
 import PageTransition from '@/components/PageTransition'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -46,7 +46,10 @@ export default async function LangLayout({ children, params }: {
   const prefix = `/${lang}`
   const [eras, styles] = await Promise.all([getEras(), getStyles()])
   const topEras = eras.slice(0, 6)
-  const topStyles = styles.slice(0, 6)
+  const topStyles = styles
+    .map(style => ({ style, label: displayTaxonomyName(style, lang) }))
+    .filter(item => item.label)
+    .slice(0, 6)
   const exploreLinks = [
     { href: `${prefix}/browse`, label: t(lang, 'architects') },
     { href: `${prefix}/browse`, label: t(lang, 'buildings') },
@@ -58,8 +61,6 @@ export default async function LangLayout({ children, params }: {
     { href: `${prefix}/code`, label: t(lang, 'code') },
     { href: `${prefix}/glossary`, label: t(lang, 'glossary') },
   ]
-  const comingSoonLabel = lang === 'en' ? 'Coming Soon' : lang === 'ja' ? '準備中' : '即将推出'
-
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
@@ -118,8 +119,8 @@ export default async function LangLayout({ children, params }: {
 
           <main className="container-wide py-4 sm:py-8"><PageTransition>{children}</PageTransition></main>
 
-          <footer className="mt-14 border-t border-subtle py-8 sm:mt-20 sm:py-10">
-            <div className="container-wide grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-sm">
+          <footer className="mt-10 border-t border-subtle py-6 sm:mt-14 sm:py-8">
+            <div className="container-wide grid grid-cols-2 gap-6 text-sm sm:grid-cols-4 sm:gap-8">
               <div>
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'explore')}</h4>
                 <div className="space-y-1.5">
@@ -139,8 +140,8 @@ export default async function LangLayout({ children, params }: {
               <div>
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'styles')}</h4>
                 <div className="space-y-1.5">
-                  {topStyles.map(s => (
-                    <Link key={s.id} href={`${prefix}/browse/style/${s.slug}`} className="block text-secondary transition-colors hover:text-primary">{displayName(s, lang)}</Link>
+                  {topStyles.map(({ style, label }) => (
+                    <Link key={style.id} href={`${prefix}/browse/style/${style.slug}`} className="block text-secondary transition-colors hover:text-primary">{label}</Link>
                   ))}
                 </div>
               </div>
@@ -150,9 +151,8 @@ export default async function LangLayout({ children, params }: {
                   {learnLinks.map(item => (
                     <Link key={item.label} href={item.href} className="block text-secondary transition-colors hover:text-primary">{item.label}</Link>
                   ))}
-                  <span className="block text-muted">{t(lang, 'exam')} · {comingSoonLabel}</span>
                   <Link href={`${prefix}/timeline`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
-                  <Link href={`${prefix}/search`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'searchPlaceholder')}</Link>
+                  <Link href={`${prefix}/search`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
                   <p className="caption mt-3">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>
                 </div>
               </div>

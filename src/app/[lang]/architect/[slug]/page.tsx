@@ -9,7 +9,7 @@ import {
   relationText,
   type ResolvedArchitectKnowledgeRelation,
 } from '@/lib/architect-knowledge-relations'
-import { displayName, formatDisplayLocation, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
+import { displayName, displayTaxonomyName, formatDisplayLocation, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import { getArchitectFallbackSummary, localizedNationality } from '@/lib/fallback-content'
 import { getArchitectImageOverride } from '@/lib/architect-images'
@@ -83,6 +83,20 @@ function ArchitectKnowledgeNetwork({
       </section>
     </Reveal>
   )
+}
+
+function localizedEducation(value: string | null | undefined, lang: string): string {
+  if (!value) return ''
+  const normalized = value.trim()
+  const map: Record<string, Record<string, string>> = {
+    '东京大学': { zh: '东京大学', ja: '東京大学', en: 'University of Tokyo' },
+    '東京大学': { zh: '东京大学', ja: '東京大学', en: 'University of Tokyo' },
+    'University of Tokyo': { zh: '东京大学', ja: '東京大学', en: 'University of Tokyo' },
+  }
+  const mapped = map[normalized]?.[lang]
+  if (mapped) return mapped
+  if (lang === 'ja' && isProbablySimplifiedChinese(normalized)) return ''
+  return normalized
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
@@ -169,8 +183,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
     : null
   const portrait = verifiedPortrait || overlayPortrait || fallbackWorkPortrait
   const visibleStyles = styles.filter(style => {
-    const styleName = displayName(style, lang)
-    return lang === 'en' || /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(styleName)
+    const styleName = displayTaxonomyName(style, lang)
+    return Boolean(styleName)
   })
   const primaryStyle = visibleStyles[0]
   const readingPathLinks = [
@@ -182,7 +196,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
     primaryStyle && {
       href: `${prefix}/browse/style/${primaryStyle.slug}`,
       label: lang === 'en' ? 'Style' : lang === 'ja' ? '様式' : '风格',
-      title: displayName(primaryStyle, lang),
+      title: displayTaxonomyName(primaryStyle, lang),
     },
     architect.nationalities?.[0] && {
       href: `${prefix}/search?q=${encodeURIComponent(architect.nationalities[0])}`,
@@ -204,9 +218,9 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
         ? architect.nationalities.map(nationality => localizedNationality(nationality, lang)).join(lang === 'en' ? ', ' : '、')
         : null,
     },
-    { label: t(lang, 'style'), value: visibleStyles.length ? visibleStyles.map(style => displayName(style, lang)).join(', ') : null },
+    { label: t(lang, 'style'), value: visibleStyles.length ? visibleStyles.map(style => displayTaxonomyName(style, lang)).filter(Boolean).join(', ') : null },
     { label: t(lang, 'eras'), value: era ? displayName(era, lang) : null },
-    { label: t(lang, 'education'), value: architect.education ? cleanText(architect.education) : null },
+    { label: t(lang, 'education'), value: localizedEducation(architect.education, lang) || null },
   ].filter(r => r.value)
 
   return (
@@ -277,7 +291,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
               )}
               {visibleStyles.map(style => (
                 <span key={style.id} className="inline-flex items-center rounded-full border border-subtle bg-surface-muted px-3 py-1 text-[0.7rem] uppercase tracking-wider text-soft">
-                  {displayName(style, lang)}
+                  {displayTaxonomyName(style, lang)}
                 </span>
               ))}
             </div>
@@ -285,7 +299,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
 
           {/* —— Right column: portrait (5/12) —— */}
           <div className="hidden lg:block lg:col-span-5">
-            <div className="ml-auto max-w-[24rem] lg:sticky lg:top-24">
+            <div className="ml-auto max-w-[21rem] lg:sticky lg:top-24">
               <ArchitectPortraitFigure
                 portrait={portrait ? { ...portrait, alt: localizedContent(portrait.alt, lang) } : null}
                 lang={lang}

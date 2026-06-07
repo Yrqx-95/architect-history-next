@@ -1,11 +1,14 @@
 interface PageShellProps {
   children: React.ReactNode
   className?: string
+  width?: 'content' | 'archive'
 }
 
-export default function PageShell({ children, className = '' }: PageShellProps) {
+export default function PageShell({ children, className = '', width = 'content' }: PageShellProps) {
+  const containerClass = width === 'archive' ? 'container-wide' : 'container-content'
+
   return (
-    <div className={`container-content page-enter pb-8 sm:pb-12 ${className}`}>
+    <div className={`${containerClass} page-enter pb-8 sm:pb-12 ${className}`}>
       {children}
     </div>
   )
