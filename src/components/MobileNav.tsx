@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { t } from '@/lib/i18n'
-import ThemeToggle from '@/components/ThemeToggle'
 import ChineseScriptToggle from '@/components/ChineseScriptToggle'
 
 const LANGS = ['zh', 'en', 'ja'] as const
@@ -194,17 +193,6 @@ export default function MobileNav({ lang }: { lang: string }) {
                       <ChineseScriptToggle lang={lang} compact />
                     </div>
                   )}
-                  <div>
-                    <p className="mb-2 text-xs font-medium text-secondary">{lang === 'en' ? 'Theme' : lang === 'ja' ? 'テーマ' : '主题'}</p>
-                    <ThemeToggle
-                      compact
-                      labels={{
-                        system: lang === 'en' ? 'System' : lang === 'ja' ? '自動' : '系统',
-                        dark: t(lang, 'dark'),
-                        light: t(lang, 'light'),
-                      }}
-                    />
-                  </div>
                 </div>
               </section>
             </div>

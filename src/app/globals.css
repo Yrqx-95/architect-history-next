@@ -128,6 +128,7 @@
    ============================================================ */
 
 :root {
+  color-scheme: light;
   --ui-bg: #f7f4ed;
   --ui-surface: #fffdf8;
   --ui-surface-muted: #eee9de;
@@ -163,6 +164,10 @@
   --ui-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.25);
 }
 
+html.dark {
+  color-scheme: dark;
+}
+
 .bg-app { background: var(--ui-bg); }
 .bg-surface { background: var(--ui-surface); }
 .bg-surface-muted { background: var(--ui-surface-muted); }
@@ -178,24 +183,9 @@
 .text-accent { color: var(--ui-accent); }
 .shadow-semantic-card { box-shadow: var(--ui-shadow-card); }
 
-/* Homepage keeps an editorial light reading surface even when the app is in dark mode. */
-.home-editorial-light {
-  color-scheme: light;
+/* Homepage keeps its full-bleed editorial layout while following app theme tokens. */
+.home-editorial-surface {
   -webkit-text-size-adjust: 100%;
-  --ui-bg: #f7f4ed;
-  --ui-surface: #fffdf8;
-  --ui-surface-muted: #eee9de;
-  --ui-surface-raised: #ffffff;
-  --ui-border: #cfc6b8;
-  --ui-border-subtle: #ddd6ca;
-  --ui-text-primary: #201c18;
-  --ui-text-secondary: #373029;
-  --ui-text-muted: #51483f;
-  --ui-text-soft: #6b6055;
-  --ui-accent: #8f4f30;
-  --ui-accent-hover: #6f3b21;
-  --ui-focus: rgba(143, 79, 48, 0.38);
-  --ui-shadow-card: 0 1px 3px rgba(40, 32, 24, 0.07), 0 10px 28px rgba(40, 32, 24, 0.04);
   width: 100vw;
   min-height: 100vh;
   margin-left: calc(50% - 50vw);
@@ -204,16 +194,12 @@
   margin-bottom: -1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background: #f7f4ed;
-  color: #201c18;
+  background: var(--ui-bg);
+  color: var(--ui-text-primary);
 }
 
-.home-editorial-light * {
-  color-scheme: light;
-}
-
-.home-editorial-light > section:not(:first-child),
-.home-editorial-light > div > section {
+.home-editorial-surface > section:not(:first-child),
+.home-editorial-surface > div > section {
   max-width: var(--container-wide);
   margin-left: auto;
   margin-right: auto;
@@ -222,34 +208,19 @@
 }
 
 @media (min-width: 640px) {
-  .home-editorial-light {
+  .home-editorial-surface {
     margin-top: -2rem;
     margin-bottom: -2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
 
-  .home-editorial-light > section:not(:first-child),
-  .home-editorial-light > div > section {
+  .home-editorial-surface > section:not(:first-child),
+  .home-editorial-surface > div > section {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 }
-
-.dark .home-editorial-light [class~="dark:text-paper-100"] { color: #201c18 !important; }
-.dark .home-editorial-light [class~="dark:text-warm-200"] { color: #3d3731 !important; }
-.dark .home-editorial-light [class~="dark:text-warm-300"] { color: #51483f !important; }
-.dark .home-editorial-light [class~="dark:text-charcoal-600"] { color: #d4cfc6 !important; }
-.dark .home-editorial-light [class~="dark:text-charcoal-700"] { color: #e8e5df !important; }
-.dark .home-editorial-light [class~="dark:hover:text-paper-100"]:hover { color: #201c18 !important; }
-.dark .home-editorial-light [class~="dark:hover:text-warm-300"]:hover { color: #8f4f30 !important; }
-.dark .home-editorial-light [class~="dark:border-charcoal-500"]:hover { border-color: #b8b0a4 !important; }
-.dark .home-editorial-light [class~="dark:border-charcoal-600/80"] { border-color: rgba(207, 198, 184, 0.8) !important; }
-.dark .home-editorial-light [class~="dark:border-charcoal-700"] { border-color: #ddd6ca !important; }
-.dark .home-editorial-light [class~="dark:border-charcoal-700/80"] { border-color: rgba(221, 214, 202, 0.8) !important; }
-.dark .home-editorial-light [class~="dark:bg-charcoal-800"] { background-color: #fffdf8 !important; }
-.dark .home-editorial-light [class~="dark:bg-charcoal-900"] { background-color: #f5f4f1 !important; }
-.dark .home-editorial-light [class~="dark:placeholder:text-warm-300"]::placeholder { color: #7d7468 !important; }
 
 /* Code topic SVG diagrams use a fixed light study-sheet palette so hardcoded
    beige geometry remains readable in dark mode. */

@@ -4,13 +4,13 @@ import '../globals.css'
 import { t } from '@/lib/i18n'
 import { getEras, getStyles } from '@/lib/data'
 import { displayName } from '@/lib/types'
-import ThemeToggle from '@/components/ThemeToggle'
 import MobileNav from '@/components/MobileNav'
 import PageTransition from '@/components/PageTransition'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import SmoothScroll from '@/components/SmoothScroll'
 import ChineseScriptProvider from '@/components/ChineseScriptProvider'
 import ChineseScriptToggle from '@/components/ChineseScriptToggle'
+import SystemThemeSync from '@/components/SystemThemeSync'
 
 const LANGS = ['zh', 'en', 'ja'] as const
 
@@ -64,7 +64,7 @@ export default async function LangLayout({ children, params }: {
     <html lang={lang} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{
-          __html: `(function(){var t=localStorage.getItem('theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.dataset.theme=t;document.documentElement.classList.toggle('dark',d)})()`
+          __html: `(function(){var m=window.matchMedia('(prefers-color-scheme:dark)');document.documentElement.classList.toggle('dark',m.matches)})()`
         }} />
         {lang === 'zh' && (
           <script dangerouslySetInnerHTML={{
@@ -73,6 +73,7 @@ export default async function LangLayout({ children, params }: {
         )}
       </head>
       <body className="min-h-screen bg-app font-sans text-primary antialiased">
+        <SystemThemeSync />
         <ChineseScriptProvider lang={lang} />
         <SmoothScroll>
           {/* Desktop Nav */}
@@ -106,11 +107,6 @@ export default async function LangLayout({ children, params }: {
               <div className="flex items-center gap-1.5 sm:gap-2 ml-auto">
                 <div className="hidden items-center gap-2 sm:flex">
                   <ChineseScriptToggle lang={lang} />
-                  <ThemeToggle labels={{
-                    system: lang === 'en' ? 'System' : lang === 'ja' ? '自動' : '系统',
-                    dark: t(lang, 'dark'),
-                    light: t(lang, 'light'),
-                  }} />
                 </div>
                 <LanguageSwitcher lang={lang} />
                 {/* Mobile nav trigger */}

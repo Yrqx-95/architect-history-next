@@ -342,7 +342,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const guideItems = copy.guides.map(item => ({ ...item, href: `${prefix}/${item.href}` }))
 
   return (
-    <div className="home-editorial-light">
+    <div className="home-editorial-surface">
       <CinematicHero imageUrl={heroImage} imageAlt={heroName}>
         <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_18rem] sm:items-end sm:gap-8">
           <div>
