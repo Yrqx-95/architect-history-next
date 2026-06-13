@@ -19,7 +19,6 @@ import Reveal from '@/components/Reveal'
 import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
 
-export const revalidate = 86400
 export const dynamicParams = true
 
 type LocalizedText = {

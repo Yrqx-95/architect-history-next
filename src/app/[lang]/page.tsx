@@ -13,8 +13,6 @@ import ImageAttribution from '@/components/ImageAttribution'
 import LearnEntryCard from '@/components/LearnEntryCard'
 import { getLocalizedLearningTopics } from '@/lib/learning-topics'
 
-export const revalidate = 3600
-
 type HomeCopy = {
   metaDescription: string
   featuredWork: string

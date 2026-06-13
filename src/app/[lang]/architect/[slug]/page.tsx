@@ -21,7 +21,6 @@ import BuildingCard from '@/components/BuildingCard'
 import ArchitectDeepArticle from '@/components/ArchitectDeepArticle'
 import ArchitectPortraitFigure from '@/components/ArchitectPortraitFigure'
 
-export const revalidate = 86400
 export const dynamicParams = true
 
 function ArchitectKnowledgeNetwork({

@@ -8,8 +8,6 @@ import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
 import SafeImage from '@/components/SafeImage'
 
-export const revalidate = 3600
-
 type CountrySummary = {
   code: string
   name: string

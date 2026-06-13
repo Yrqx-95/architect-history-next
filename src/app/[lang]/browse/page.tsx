@@ -13,8 +13,6 @@ import BuildingCard from '@/components/BuildingCard'
 import ArchitectCard from '@/components/ArchitectCard'
 import { localizedNationality } from '@/lib/fallback-content'
 
-export const revalidate = 3600
-
 type BrowseItem = {
   id: string
   href: string

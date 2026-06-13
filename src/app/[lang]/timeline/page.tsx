@@ -8,8 +8,6 @@ import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
 import TimelineRail from '@/components/TimelineRail'
 
-export const revalidate = 3600
-
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
   return { title: t(lang, 'timeline'), description: t(lang, 'timelineTitle') }
