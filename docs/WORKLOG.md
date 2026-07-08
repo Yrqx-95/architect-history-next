@@ -2,6 +2,42 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-08 - High-Confidence Era Slug Baseline
+
+### Intent
+
+- Reduce the largest content metadata gap without over-automating architectural history classification.
+- Create a small, reviewable baseline for `buildings.era_slug` and `building_eras`.
+- Keep medium-confidence year-range assignment and ambiguous works out of this batch.
+
+### Changes
+
+- Added `db/migrations/v15-normalize-high-confidence-era-slugs.sql`.
+- Added `docs/archive/data-governance/ERA_SLUG_HIGH_CONFIDENCE_WRITE_REPORT.md`.
+
+### Validation
+
+- Applied to production Supabase project `usuqjsjluietcnudxwvz` as migration `20260708151701 normalize_high_confidence_era_slugs`.
+- Verified `buildings.era_slug`: 32 populated, 843 still missing, 875 total buildings.
+- Verified `building_eras`: 32 rows.
+- Verified distribution: `renaissance` 13, `baroque` 7, `art-nouveau` 6, `classical-era` 5, `postmodern` 1.
+- Ran `npm run data:audit`: 0 errors, 1265 warnings, 2490 info, 3755 total issues.
+
+### Remaining Risk
+
+- This only handles 32 high-confidence records; most era metadata remains intentionally unresolved.
+- `building_eras` is a relation baseline, while current app code still primarily reads `buildings.era_slug`.
+
+### Rollback Scope
+
+- `db/migrations/v15-normalize-high-confidence-era-slugs.sql`
+- `docs/archive/data-governance/ERA_SLUG_HIGH_CONFIDENCE_WRITE_REPORT.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Commit and push this baseline, then plan the medium-confidence year-range era batch as a separate reviewable change.
+
 ## 2026-07-08 - Supabase Migration Audit And Schema Reconciliation
 
 ### Intent
