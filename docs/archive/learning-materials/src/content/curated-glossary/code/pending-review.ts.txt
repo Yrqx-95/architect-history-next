@@ -1,0 +1,56 @@
+import { inferCategory } from './candidate-pool'
+import { unclassifiedAfterReject } from './rejected-candidates'
+import type { CandidateRecord, CandidateReviewRecord } from './types'
+
+const possibleMergeTargets: Record<string, string> = {
+  DK: 'LDK',
+  LD: 'LDK',
+  リビングダイニング: 'LDK',
+  ツインコア: 'ダブルコア',
+  ポイントアクセス型: '集中型',
+  鉄筋コンクリート造: '鉄筋コンクリート',
+  脆性: '脆性材料',
+  靭性: '靭性材料',
+  道路高さ制限: '道路斜線制限',
+  北側高さ制限: '北側斜線制限',
+  フリーアドレス: 'フリーアドレスオフィス',
+}
+
+function reviewReason(candidate: CandidateRecord) {
+  if (possibleMergeTargets[candidate.termJa]) {
+    return 'Possible alias or near-duplicate; confirm whether it should merge with the proposed canonical term.'
+  }
+  if (candidate.sourceCategories.includes('case-study')) {
+    return 'Potentially useful history or case-study concept, but scope and source authority require editorial review.'
+  }
+  if (candidate.sourceCategories.includes('code')) {
+    return 'Building-code term requires current official-source verification before glossary publication.'
+  }
+  if (candidate.sourceCategories.includes('exam-concept')) {
+    return 'Exam-derived concept needs separation from prompt wording and independent technical verification.'
+  }
+  if (/^[A-Z0-9・.-]+$/i.test(candidate.termJa)) {
+    return 'Abbreviation or foreign-language label needs canonical Japanese naming and translation review.'
+  }
+  if (candidate.termJa.length <= 2) {
+    return 'Term is very broad or context-dependent and needs a narrower architectural definition.'
+  }
+  return 'Useful candidate, but reading, translations, definition boundary, or related-term links still need human review.'
+}
+
+export const pendingReview: CandidateReviewRecord[] = unclassifiedAfterReject.map(candidate => ({
+  termJa: candidate.termJa,
+  normalizedTermJa: candidate.normalizedTermJa,
+  category: inferCategory(candidate),
+  qualityGrade: 'B',
+  sourceRefs: candidate.sourceRefs,
+  aliases: [],
+  reason: reviewReason(candidate),
+  possibleCanonicalTerm: possibleMergeTargets[candidate.termJa],
+  needsTranslationReview: true,
+  needsReadingReview: true,
+  needsSourceConfirmation:
+    candidate.sourceCategories.includes('code') ||
+    candidate.sourceCategories.includes('case-study') ||
+    candidate.sourceCategories.includes('exam-concept'),
+}))

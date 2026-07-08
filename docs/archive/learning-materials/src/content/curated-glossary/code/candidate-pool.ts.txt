@@ -1,0 +1,116 @@
+import {
+  classLearningSourceMaterials,
+  rcInteriorCandidateGroups,
+  remainingCandidateGroups,
+} from '@/content/learning-sources'
+import { glossaryTerms } from '@/lib/glossary'
+import type { CandidateRecord, CuratedCategory, SourceRef } from './types'
+
+const sourceById = new Map(
+  classLearningSourceMaterials.map(source => [source.id, source]),
+)
+
+const existingJapaneseTerms = new Set(glossaryTerms.map(term => term.termJa))
+
+export function normalizeJapaneseTerm(value: string) {
+  return value
+    .normalize('NFKC')
+    .replace(/\s+/g, ' ')
+    .replace(/[‐‑‒–—―]/g, '-')
+    .trim()
+}
+
+const allCandidateGroups = [
+  ...rcInteriorCandidateGroups,
+  ...remainingCandidateGroups,
+]
+
+const recordsByTerm = new Map<string, CandidateRecord>()
+
+for (const group of allCandidateGroups) {
+  const source = sourceById.get(group.sourceMaterialId)
+  if (!source) {
+    throw new Error(`Missing source record: ${group.sourceMaterialId}`)
+  }
+
+  for (const termJa of group.terms) {
+    if (existingJapaneseTerms.has(termJa)) continue
+    const normalizedTermJa = normalizeJapaneseTerm(termJa)
+    const sourceRef: SourceRef = {
+      sourceId: source.id,
+      fileName: source.fileName,
+      page: group.page,
+      note: 'Private editorial reference; wording and diagrams are not reproduced.',
+    }
+    const existing = recordsByTerm.get(normalizedTermJa)
+    if (existing) {
+      if (!existing.sourceRefs.some(ref =>
+        ref.sourceId === sourceRef.sourceId && ref.page === sourceRef.page
+      )) {
+        existing.sourceRefs.push(sourceRef)
+      }
+      if (!existing.sourceCategories.includes(group.category)) {
+        existing.sourceCategories.push(group.category)
+      }
+      continue
+    }
+    recordsByTerm.set(normalizedTermJa, {
+      termJa,
+      normalizedTermJa,
+      sourceRefs: [sourceRef],
+      sourceCategories: [group.category],
+    })
+  }
+}
+
+export const candidatePool = [...recordsByTerm.values()]
+
+if (candidatePool.length !== 596) {
+  throw new Error(`Expected 596 candidates, found ${candidatePool.length}`)
+}
+
+export function getCandidate(termJa: string) {
+  return recordsByTerm.get(normalizeJapaneseTerm(termJa))
+}
+
+export function getCandidateSourceRefs(termJa: string) {
+  const candidate = getCandidate(termJa)
+  if (!candidate) {
+    throw new Error(`Curated term is not in candidate pool: ${termJa}`)
+  }
+  return candidate.sourceRefs
+}
+
+const categoryRules: Array<[CuratedCategory, RegExp]> = [
+  ['building-code', /(制限|確認申請|確認済証|避難|排煙|非常用|特殊建築物|不燃材料|用途変更|歩行距離|道路|地盤面)/],
+  ['lighting', /(照明|ライト|ランプ|FLOS|AKARI|ルイスポールセン|レ・クリント|フォスカリーニ)/i],
+  ['drawing', /(図|縮尺|グリッド|スパン|寸法|読解)/],
+  ['construction', /(工法|型枠|打設|養生|打ち継ぎ|打ち重ね|プレカット|施工|タンピング)/],
+  ['materials', /(セメント|骨材|砂|クリンカー|せっこう|水硬性|気硬性|収縮|反応|空気量|結合材|強度)/],
+  ['structure', /(構造|梁|柱|筋|応力|引張|圧縮|座屈|支点|モーメント|せん断|剛接合|耐力壁|スラブ)/],
+  ['furniture', /(家具|テーブル|天板|脚部|背板|陳列棚|下足箱)/],
+  ['architectural-history', /(建築|造$|式$|神社|寺|宮|城|邸|遺跡|京$|オーダー|モダニズム|ゴシック|ロマネスク|ビザンティン|イスラム|ギリシア|ローマ|エジプト)/],
+  ['style', /(スタイル|モダン|インダストリアル|シンプル|シャビー|エスニック)/],
+  ['interior-design', /(インテリア|ウインドウトリートメント|ヒアリング|条件整理|カラー)/],
+  ['equipment', /(キッチン|水回り|洗濯室|脱衣室|ユーティリティ|エレベーター|OAフロア)/],
+  ['spatial-design', /(空間|吹抜け|中庭|コートハウス|動線|ゾーニング|グルーピング|廊下|玄関|階段|窓|屋根|戸$)/],
+  ['planning', /(計画|住宅|住戸|住区|店舗|事務所|商業|面積|レンタブル|コア|モデュール|人体寸法|食寝分離|プライバシー|採光|通風)/],
+]
+
+export function inferCategory(candidate: CandidateRecord): CuratedCategory {
+  for (const [category, pattern] of categoryRules) {
+    if (pattern.test(candidate.termJa)) return category
+  }
+
+  const sourceCategory = candidate.sourceCategories[0]
+  if (sourceCategory === 'lighting') return 'lighting'
+  if (sourceCategory === 'furniture') return 'furniture'
+  if (sourceCategory === 'drawing') return 'drawing'
+  if (sourceCategory === 'structure') return 'structure'
+  if (sourceCategory === 'material' || sourceCategory === 'concrete' || sourceCategory === 'durability') return 'materials'
+  if (sourceCategory === 'construction') return 'construction'
+  if (sourceCategory === 'history' || sourceCategory === 'case-study') return 'architectural-history'
+  if (sourceCategory === 'interior' || sourceCategory === 'interior-style') return 'interior-design'
+  if (sourceCategory === 'code') return 'building-code'
+  return 'planning'
+}

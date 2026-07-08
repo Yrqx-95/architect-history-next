@@ -1,0 +1,130 @@
+import { candidatePool, getCandidate, inferCategory } from './candidate-pool'
+import { curatedJapaneseTerms } from './curated-terms'
+import type { CandidateReviewRecord } from './types'
+
+const productOrBrandTerms = new Set([
+  'ルイスポールセン',
+  'レ・クリント',
+  'FLOS',
+  'スミスフィールド',
+  'ネルソンバブルランプ',
+  'フォスカリーニ',
+  'イサム・ノグチ',
+  'AKARI',
+  'アルテック',
+  'クラシックペンダント',
+])
+
+const properNameTerms = new Set([
+  'スカイハウス',
+  '塔の家',
+  '住吉の長屋',
+  '山川山荘',
+  'ロビー邸',
+  'シュレーダー邸',
+  'サヴォア邸',
+  'イームズ自邸',
+  'NEXT21',
+  '同潤会アパート',
+  '日本住宅公団',
+  'UR賃貸住宅',
+  '六甲の集合住宅',
+  '桜台コートビレッジ',
+  'ユニテ・ダビタシオン',
+  'アビタ67',
+  '吉野ヶ里遺跡',
+  '伊勢神宮',
+  '住吉大社',
+  '出雲大社',
+  '飛鳥寺',
+  '四天王寺',
+  '法隆寺',
+  '平城京',
+  '平安京',
+  '平等院鳳凰堂',
+  '厳島神社',
+  '待庵',
+  '燕庵',
+  '桂離宮',
+  '白川郷',
+  '五箇山',
+  '銀座煉瓦街',
+  'ジョサイア・コンドル',
+  '辰野金吾',
+  '築地本願寺',
+  '伊東忠太',
+  '丹下健三',
+  'パルテノン神殿',
+  'パンテオン',
+  'コロッセウム',
+  'ハギア・ソフィア',
+  'アルハンブラ宮殿',
+  'コルドバ大モスク',
+])
+
+const contextOnlyTerms = new Set([
+  '北内郭',
+  '南内郭',
+  '垂直な田園都市',
+  '住居単位',
+  '住区基幹公園',
+  '非収益部分',
+  '定価販売',
+  '流通業態',
+  '核店舗',
+  '国家プロジェクト',
+  '近代建築三大巨匠',
+  '構造形式判別',
+  '空間構想',
+  '調合計算',
+  '配筋読解',
+  'クライアントプロフィール',
+  '人体系家具',
+  '収益部分',
+  'カウンター高さ',
+])
+
+function reject(termJa: string, reason: string): CandidateReviewRecord {
+  const candidate = getCandidate(termJa)
+  if (!candidate) throw new Error(`Rejected term is not in candidate pool: ${termJa}`)
+  return {
+    termJa,
+    normalizedTermJa: candidate.normalizedTermJa,
+    category: inferCategory(candidate),
+    qualityGrade: 'C',
+    sourceRefs: candidate.sourceRefs,
+    aliases: [],
+    reason,
+  }
+}
+
+export const rejectedCandidates: CandidateReviewRecord[] = [
+  ...[...productOrBrandTerms].map(termJa => reject(
+    termJa,
+    'Brand, designer, or product-series name. Keep in a separately verified product registry rather than the general glossary.',
+  )),
+  ...[...properNameTerms].map(termJa => reject(
+    termJa,
+    'Proper name of a person, institution, place, or individual work. It belongs in archive entities, not the general glossary.',
+  )),
+  ...[...contextOnlyTerms].map(termJa => reject(
+    termJa,
+    'Context-specific phrase or assessment label with insufficient standalone glossary value.',
+  )),
+]
+
+export const rejectedJapaneseTerms = new Set(rejectedCandidates.map(item => item.termJa))
+
+const overlap = rejectedCandidates.filter(item => curatedJapaneseTerms.has(item.termJa))
+if (overlap.length > 0) {
+  throw new Error(`Accepted/rejected overlap: ${overlap.map(item => item.termJa).join(', ')}`)
+}
+
+if (rejectedCandidates.length !== rejectedJapaneseTerms.size) {
+  throw new Error('Duplicate rejected candidate records')
+}
+
+export const unclassifiedAfterReject = candidatePool.filter(candidate =>
+  !curatedJapaneseTerms.has(candidate.termJa) &&
+  !rejectedJapaneseTerms.has(candidate.termJa)
+)

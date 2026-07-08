@@ -1,0 +1,648 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { ensureReportDir, fetchAll, ROOT } from './supabase-script-utils'
+
+type Building = {
+  id: string
+  slug: string
+  name_zh: string | null
+  name_en: string | null
+  name_ja: string | null
+  city: string | null
+  country: string | null
+  wikipedia_url: string | null
+  type_slug: string | null
+  description: Record<string, unknown> | null
+  significance: Record<string, unknown> | null
+  ai_tags: Record<string, unknown> | null
+}
+
+type TypeRule = {
+  target: string
+  subtype: string
+  pattern: RegExp
+  confidence: 'high' | 'medium'
+}
+
+type TypeHit = {
+  target: string
+  subtype: string
+  confidence: 'high' | 'medium'
+  evidence: string
+}
+
+type MediumCandidate = {
+  slug: string
+  name: string
+  candidate: string
+  subtype: string
+  evidence: string
+  hits: TypeHit[]
+  category: 'A' | 'B' | 'C'
+  categoryLabel: string
+  reason: string
+  suggestedRule: string
+}
+
+const REPORT_DIR = ensureReportDir()
+const REPORT_JSON = path.join(REPORT_DIR, 'type-slug-medium-review.json')
+const REPORT_MD = path.join(ROOT, 'TYPE_SLUG_MEDIUM_REVIEW.md')
+
+const typeRules: TypeRule[] = [
+  {
+    target: 'religious',
+    subtype: 'cathedral',
+    pattern:
+      /\b(cathedral|basilica|church|chapel|temple|shrine|synagogue|mosque|abbey|parish|kirche|kirkko|sant\b|santa\b|san\b|notre dame|st\. mary|st mary|st peters|bagværd|bagsværd)\b|教堂|寺|神社/i,
+    confidence: 'high',
+  },
+  {
+    target: 'cultural',
+    subtype: 'art-museum',
+    pattern:
+      /\b(art museum|museum of art|gallery|galleria|kunsthaus|kunsthal|pinakothek|museu de arte|museo.*arte|fine arts|modern art|contemporary art|collection|gipsoteca)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'cultural',
+    subtype: 'museum',
+    pattern:
+      /\b(museum|museo|museu|musée|centre pompidou|cultural centre|cultural center|culture center|civic hall|concert hall|philharmonie|opera house|theatre|theater|auditorium|performing arts|arts centre|arts center|cinema|library|biblioteca|bibliothèque|kiasma|hergé)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'cultural',
+    subtype: 'named-cultural',
+    pattern:
+      /\b(teatro|teatret|schaubühne|schaubuhne|z[eé]nith|institute of art|instituto de arte|colecci[oó]n|oceanogr[aà]fic|oc[eé]an et du surf|biosph[eè]re|biosphere|sesc pomp[eé]ia|kinokuniya hall|bunka kaikan|kulttuuritalo|kirjatalo|spiral|rocher de palmer|champs libres)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'government',
+    subtype: 'civic-government-intl',
+    pattern: /\b(rathaus|valtiontalo|ciutat de la just[ií]cia|palace of justice|palacio de justicia|just[ií]cia)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'leisure',
+    subtype: 'leisure-named',
+    pattern: /\b(the o2|arenas de barcelona|aquarium|oceanogr[aà]fic|tidal pools|pools of|skylight)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'residential',
+    subtype: 'house',
+    pattern:
+      /\b(house|villa|residence|home|maison|casa\b|houses|housing|apartment|apartments|condominium|dormitory|mews|row house|townhouse|hotel marcel)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'sports',
+    subtype: 'stadium',
+    pattern: /\b(stadium|gymnasium|sports hall|arena|dome|velodrome|sport|olympic|natatorium|performing? no)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'transportation',
+    subtype: 'airport-station',
+    pattern: /\b(airport|terminal|station|railway|train station|metro|subway|concourse|transport|ferry|bridge of peace)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'government',
+    subtype: 'government',
+    pattern:
+      /\b(government|courthouse|court house|court of|city hall|town hall|parliament|assembly|congress|embassy|palace of justice|justice|prefectural government|county hall|federal building|presidential palace|bank of spain headquarters)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'educational',
+    subtype: 'school-university',
+    pattern:
+      /\b(school|university|college|campus|faculty|facultad|scuola|institute of technology|education|elementary|training school|academy|kindergarten)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'healthcare',
+    subtype: 'healthcare',
+    pattern: /\b(hospital|sanatorium|clinic|medical|materno|health)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'cultural',
+    subtype: 'hall-cultural',
+    pattern:
+      /\b(teatret|auditori|ongakud[oō]|bunka hall|symphony hall|coliseu|cais das artes|cidade das artes|kunstzaal|moderna museet|centre georges pompidou|centro cultural|cultural centre|cultural center)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'sports',
+    subtype: 'stadium-intl',
+    pattern: /\b(est[aá]dio|palacio de los deportes|sports center|sports centre|sports complex)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'transportation',
+    subtype: 'station-intl',
+    pattern: /\b(atocha|cercan[ií]as|messe|puerta de atocha)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'office',
+    subtype: 'tower-office',
+    pattern:
+      /\b(tower|towers|torre|torres|toren|tour\b|tours\b|hochhaus|centre|center|building|edificio|edifici|bau\b|head office|banca|bankinter|national bank|leumi|wood street|madison avenue|sloane street|spring street|astor place|fcg building|ibm studios|parc1|one57|mlc centre|capita centre|lippo centre|one raffles place|uob plaza|international towers|times square|qv\.?1|blue front shibaura|taipei twins|telehouse|baloise bellinzona|coolsingeltoren|lützowplatz|lutzowplatz|harting vertriebsgebäude|harting vertriebsgebaude|verona 203a|uberseering)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'civic-public',
+    subtype: 'hall-center',
+    pattern:
+      /\b(hall|forum|foundation|foundazione|fondazione|center|centre|complex|palace|palacio|paleis|palazzo|paraninfo|col.?legi|club|community|service center|operations complex)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'residential',
+    subtype: 'housing-general',
+    pattern:
+      /\b(haus|landhaus|case d|case-|bairro|conjunto habitacional|ilot|hautes-formes|felicit[eé]|manor|cabin|estate|malagueira|bou[cç]a|can lis|can feliz|utzon-huset|studio aalto|ypenhof|terassitalo|neutra vdl|studio and residences|bonjour tristesse|new orleans|lange voorhout|haras de la huderie)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'commercial',
+    subtype: 'commercial-intl',
+    pattern: /\b(commerciale|geschäftshaus|geschaftshaus|mercado|vinothek|coffee shop|restaurante|bijenkorf|gaumont|grand [eé]cran|designer outlet)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'religious',
+    subtype: 'religious-intl',
+    pattern: /\b(chiesa|chapelle|friedhof|crematorium|parroquia|nuestra se[nñ]ora|dar-al-islam|santo papa)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'public-space',
+    subtype: 'park-intl',
+    pattern: /\b(parc\b|parque|villette|big roof|pavilh[aã]o de portugal)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'office',
+    subtype: 'office-headquarters',
+    pattern:
+      /\b(headquarters|office|offices|bank building|bank of|corporate|company|business center|business centre|tower|skyscraper|world trade center|trade center|leadenhall|lloyd's|lever house|modulightor|dentsu|united nations university)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'commercial',
+    subtype: 'commercial-retail',
+    pattern:
+      /\b(shopping|mall|outlet|store|department store|kaufhaus|market|commercial|casino|restaurant|retail|hotel|resort|mercure|shangri-la|discovery primea|one monte-carlo|negozio|galeria department store|italie deux)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'industrial',
+    subtype: 'industrial',
+    pattern: /\b(factory|plant|industrial|warehouse|depot|dep[oó]sito|power station|refinery|works|fagus|red banner textile)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'temporary',
+    subtype: 'pavilion',
+    pattern: /\b(pavilion|expo|exhibition room|exhibition centre|exhibition center|temporary)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'monument',
+    subtype: 'monument-memorial',
+    pattern: /\b(memorial|monument|cenotaph|tomb|arch\b|flame of peace|statue|mausoleum)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'public-space',
+    subtype: 'public-space',
+    pattern: /\b(square|piazza|plaza|park\b|garden|public space|promenade|urban park)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'infrastructure',
+    subtype: 'infrastructure',
+    pattern: /\b(bridge|viaduct|dam|water tower|tower of|observation tower|footbridge|parking garage|garage|library? no)\b/i,
+    confidence: 'medium',
+  },
+  {
+    target: 'research-institute',
+    subtype: 'research',
+    pattern: /\b(research institute|laboratory|labs|science center|science centre|innovation center|innovation centre|salk|pats-center)\b/i,
+    confidence: 'high',
+  },
+  {
+    target: 'civic-public',
+    subtype: 'civic-public',
+    pattern: /\b(public library|community center|community centre|civic center|civic centre|service center|conference center|conference centre|convention centre|convention center)\b/i,
+    confidence: 'medium',
+  },
+]
+
+function valueText(value: unknown) {
+  if (!value) return ''
+  if (typeof value === 'string') return value
+  if (typeof value === 'object') return Object.values(value).filter(Boolean).join(' ')
+  return String(value)
+}
+
+function textOf(building: Building) {
+  return [
+    building.slug,
+    building.name_en,
+    building.name_zh,
+    building.name_ja,
+    building.city,
+    building.country,
+    building.wikipedia_url,
+    valueText(building.description),
+    valueText(building.significance),
+    JSON.stringify(building.ai_tags || {}),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+}
+
+function inferMediumType(building: Building) {
+  if (building.type_slug) return null
+  const text = textOf(building)
+  const hits = typeRules.flatMap(rule => {
+    const match = text.match(rule.pattern)
+    return match
+      ? [
+          {
+            target: rule.target,
+            subtype: rule.subtype,
+            confidence: rule.confidence,
+            evidence: match[0],
+          },
+        ]
+      : []
+  })
+  if (!hits.length) return null
+
+  const chosen = hits.find(hit => hit.confidence === 'high') || hits[0]
+  let confidence = chosen.confidence
+  if (hits.length > 1) {
+    const distinctTargets = new Set(hits.map(hit => hit.target))
+    if (distinctTargets.size > 1 && confidence === 'high') confidence = 'medium'
+  }
+  if (confidence !== 'medium') return null
+  return { ...chosen, hits }
+}
+
+function hasStrongHighHit(hits: TypeHit[]) {
+  return hits.some(
+    hit =>
+      hit.confidence === 'high' &&
+      [
+        'art-museum',
+        'museum',
+        'named-cultural',
+        'civic-government-intl',
+        'stadium',
+        'airport-station',
+        'government',
+        'school-university',
+        'healthcare',
+        'hall-cultural',
+        'stadium-intl',
+        'commercial-intl',
+        'commercial-retail',
+        'industrial',
+        'monument-memorial',
+        'research',
+      ].includes(hit.subtype)
+  )
+}
+
+function strongHitTargets(hits: TypeHit[]) {
+  return hits.filter(hit => hit.confidence === 'high').map(hit => hit.target)
+}
+
+function hasUnsafeEvidence(candidate: { evidence: string; subtype: string; target: string }, hits: TypeHit[]) {
+  const evidence = candidate.evidence.toLowerCase()
+  if (['san', 'sant', 'santa', 'casa'].includes(evidence)) return true
+  if (hits.some(hit => ['san', 'sant', 'santa'].includes(hit.evidence.toLowerCase()) && hit.target === 'religious')) return true
+  return false
+}
+
+function classify(candidate: {
+  slug: string
+  candidate: string
+  subtype: string
+  evidence: string
+  hits: TypeHit[]
+}): Pick<MediumCandidate, 'category' | 'categoryLabel' | 'reason' | 'suggestedRule'> {
+  if (hasUnsafeEvidence({ target: candidate.candidate, subtype: candidate.subtype, evidence: candidate.evidence }, candidate.hits)) {
+    return {
+      category: 'C',
+      categoryLabel: 'Reject / unsafe',
+      reason: 'Rule depends on a generic or misleading token such as `san`, `sant`, or `casa`.',
+      suggestedRule: 'Do not auto-write. Replace generic token matching with explicit building-name exceptions or stronger phrase rules.',
+    }
+  }
+
+  const strongTargets = new Set(strongHitTargets(candidate.hits))
+  const hasMultipleStrongTargets = strongTargets.size > 1
+  const evidence = candidate.evidence.toLowerCase()
+
+  if (evidence === 'collection' && candidate.hits.some(hit => hit.target === 'commercial' && hit.evidence.toLowerCase() === 'hotel')) {
+    return {
+      category: 'C',
+      categoryLabel: 'Reject / unsafe',
+      reason: '`Collection` in hotel brand names is not reliable evidence for cultural/art-museum use.',
+      suggestedRule: 'Require `collection` to appear with museum/gallery/art terms, or demote it to manual review.',
+    }
+  }
+
+  if (hasStrongHighHit(candidate.hits) && !hasMultipleStrongTargets) {
+    return {
+      category: 'A',
+      categoryLabel: 'Safe after rule refinement',
+      reason: 'A strong type word was present, but the current rules downgraded it because another broad rule also matched.',
+      suggestedRule: 'Refine rule precedence so specific strong words outrank broad `center/hall/building/house` style matches.',
+    }
+  }
+
+  if (hasMultipleStrongTargets) {
+    const hitEvidence = candidate.hits.map(hit => hit.evidence.toLowerCase())
+    const hasOnlyHouseConflict =
+      strongTargets.has('cultural') &&
+      strongTargets.has('residential') &&
+      hitEvidence.includes('opera house')
+    const hasChapelMemorialConflict =
+      strongTargets.has('religious') &&
+      strongTargets.has('monument') &&
+      hitEvidence.includes('chapel')
+
+    if (hasOnlyHouseConflict || hasChapelMemorialConflict) {
+      return {
+        category: 'A',
+        categoryLabel: 'Safe after rule refinement',
+        reason: 'The conflict is caused by a known compound phrase; the specific phrase should outrank the generic token.',
+        suggestedRule: 'Add compound-phrase precedence, e.g. `opera house` before `house` and `chapel` before `memorial`.',
+      }
+    }
+
+    return {
+      category: 'B',
+      categoryLabel: 'Needs human review',
+      reason: 'Multiple strong type words point to different canonical types, so the rule cannot safely choose automatically.',
+      suggestedRule: 'Review manually or add a curated exception after confirming the building context.',
+    }
+  }
+
+  const specificMedium =
+    (candidate.subtype === 'pavilion' && evidence.includes('pavilion')) ||
+    (candidate.subtype === 'station-intl' && /atocha|cercan[ií]as|puerta de atocha/.test(evidence)) ||
+    (candidate.subtype === 'religious-intl' && /chiesa|chapelle|parroquia|nuestra se[nñ]ora|dar-al-islam/.test(evidence)) ||
+    (candidate.subtype === 'infrastructure' && /bridge|viaduct|footbridge|water tower|dam/.test(evidence))
+
+  if (specificMedium) {
+    return {
+      category: 'A',
+      categoryLabel: 'Safe after rule refinement',
+      reason: 'The matched word is a relatively specific function term; it can be promoted after narrowing the regex.',
+      suggestedRule: 'Split this subtype into stronger exact phrase rules and keep vague fallback terms in manual review.',
+    }
+  }
+
+  if (
+    [
+      'tower-office',
+      'office-headquarters',
+      'hall-center',
+      'housing-general',
+      'civic-public',
+      'leisure-named',
+      'station-intl',
+      'public-space',
+      'religious-intl',
+      'infrastructure',
+    ].includes(candidate.subtype)
+  ) {
+    return {
+      category: 'B',
+      categoryLabel: 'Needs human review',
+      reason: '`hall`, `center/centre`, `tower`, `building`, `house`, `foundation`, and named venue terms can represent several functions.',
+      suggestedRule: 'Do not auto-write from this word alone. Add curated exceptions only after checking the building context.',
+    }
+  }
+
+  return {
+    category: 'B',
+    categoryLabel: 'Needs human review',
+    reason: 'The candidate was not unsafe, but the current evidence is not specific enough for automatic write.',
+    suggestedRule: 'Review manually and convert repeated safe patterns into explicit rules later.',
+  }
+}
+
+function countBy<T extends string>(items: Array<Record<T, string>>, key: T) {
+  const counts = new Map<string, number>()
+  for (const item of items) counts.set(item[key], (counts.get(item[key]) || 0) + 1)
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+}
+
+function table<T>(rows: T[], columns: Array<[string, (row: T) => unknown]>) {
+  const lines = [
+    `| ${columns.map(column => column[0]).join(' | ')} |`,
+    `|${columns.map(() => '---').join('|')}|`,
+  ]
+  for (const row of rows) {
+    lines.push(`| ${columns.map(column => String(column[1](row) ?? '').replaceAll('|', '\\|')).join(' | ')} |`)
+  }
+  return lines.join('\n')
+}
+
+function markdownReport(report: {
+  generatedAt: string
+  totalBuildings: number
+  missingTypeSlug: number
+  mediumCandidates: MediumCandidate[]
+  manualCount: number
+}) {
+  const a = report.mediumCandidates.filter(candidate => candidate.category === 'A')
+  const b = report.mediumCandidates.filter(candidate => candidate.category === 'B')
+  const c = report.mediumCandidates.filter(candidate => candidate.category === 'C')
+  const lines = [
+    '# Type Slug Medium Review',
+    '',
+    `Generated: ${report.generatedAt}`,
+    '',
+    '## Scope',
+    '',
+    '- Recomputed medium-confidence `type_slug` candidates from the current database after Sprint 03.',
+    '- No database writes were performed.',
+    '- `country_code` and `era_slug` were not processed.',
+    '- No new `building_types` were added.',
+    '',
+    '## Summary',
+    '',
+    `- Total buildings: ${report.totalBuildings}`,
+    `- Remaining missing type_slug: ${report.missingTypeSlug}`,
+    `- Medium-confidence candidates: ${report.mediumCandidates.length}`,
+    `- Manual / no-rule candidates: ${report.manualCount}`,
+    `- A. Safe after rule refinement: ${a.length}`,
+    `- B. Needs human review: ${b.length}`,
+    `- C. Reject / unsafe: ${c.length}`,
+    `- Estimated safe writes next round: ${a.length}`,
+    '',
+    '## Category Distribution By Candidate Type',
+    '',
+    '### A. Safe After Rule Refinement',
+    '',
+    table(
+      countBy(a, 'candidate').map(([candidate, count]) => ({ candidate, count })),
+      [
+        ['type_slug', row => row.candidate],
+        ['Count', row => row.count],
+      ]
+    ),
+    '',
+    '### B. Needs Human Review',
+    '',
+    table(
+      countBy(b, 'candidate').map(([candidate, count]) => ({ candidate, count })),
+      [
+        ['type_slug', row => row.candidate],
+        ['Count', row => row.count],
+      ]
+    ),
+    '',
+    '### C. Reject / Unsafe',
+    '',
+    c.length
+      ? table(
+          countBy(c, 'candidate').map(([candidate, count]) => ({ candidate, count })),
+          [
+            ['type_slug', row => row.candidate],
+            ['Count', row => row.count],
+          ]
+        )
+      : 'None.',
+    '',
+    '## Representative Cases',
+    '',
+    '### A. Safe After Rule Refinement',
+    '',
+    table(a.slice(0, 40), [
+      ['Building', row => row.slug],
+      ['Name', row => row.name],
+      ['Candidate', row => row.candidate],
+      ['Subtype', row => row.subtype],
+      ['Evidence', row => row.evidence],
+      ['Reason', row => row.reason],
+    ]),
+    '',
+    '### B. Needs Human Review',
+    '',
+    table(b.slice(0, 50), [
+      ['Building', row => row.slug],
+      ['Name', row => row.name],
+      ['Candidate', row => row.candidate],
+      ['Subtype', row => row.subtype],
+      ['Evidence', row => row.evidence],
+      ['Reason', row => row.reason],
+    ]),
+    '',
+    '### C. Reject / Unsafe',
+    '',
+    c.length
+      ? table(c.slice(0, 50), [
+          ['Building', row => row.slug],
+          ['Name', row => row.name],
+          ['Candidate', row => row.candidate],
+          ['Subtype', row => row.subtype],
+          ['Evidence', row => row.evidence],
+          ['Reason', row => row.reason],
+        ])
+      : 'None.',
+    '',
+    '## Misclassification Risks',
+    '',
+    '- `hall`, `center/centre`, `complex`, `foundation`, and `palace` can be cultural, civic, office, commercial, or residential depending on context.',
+    '- `tower`, `building`, `bank`, and address-like names are often office/commercial, but can also be residential, institutional, or mixed-use.',
+    '- `house` and `casa` are especially risky: they can mean residence, museum, cultural institution, restaurant, or foundation.',
+    '- `san`, `sant`, and `santa` are unsafe as religious markers because they also appear in place names and personal names.',
+    '- `institute` is not enough by itself: it can be educational, research, cultural, or administrative.',
+    '',
+    '## Suggested Rule Changes',
+    '',
+    '- Promote exact strong phrases before generic rules: `museum`, `library`, `theatre/theater/teatro`, `cathedral/church/chapel`, `station/terminal/airport`, `stadium/gymnasium`, `school/university/faculty`, `hospital/sanatorium`.',
+    '- Demote or remove generic religious tokens: do not classify from bare `san`, `sant`, or `santa`.',
+    '- Demote bare `casa`; only auto-map residential when the phrase is an explicit residence/house pattern or curated exception.',
+    '- Split `center/centre/hall/complex/foundation` into exact phrase rules, then leave the remaining generic matches in human review.',
+    '- Keep current `building_types` taxonomy for now. No new type is required by Sprint 05; gaps are evidence-quality problems, not taxonomy gaps.',
+    '',
+    '## Next-Round Recommendation',
+    '',
+    `The next safe write batch should only use Category A after rule refinement, with an expected maximum of ${a.length} writes. Category B should become a curated manual checklist. Category C should not be written automatically.`,
+    '',
+  ]
+  return lines.join('\n')
+}
+
+async function main() {
+  const buildings = await fetchAll<Building>('buildings')
+  const missing = buildings.filter(building => !building.type_slug)
+  const candidates: MediumCandidate[] = []
+  let manualCount = 0
+
+  for (const building of missing) {
+    const inferred = inferMediumType(building)
+    if (!inferred) {
+      manualCount += 1
+      continue
+    }
+    const base = {
+      slug: building.slug,
+      name: building.name_zh || building.name_en || '',
+      candidate: inferred.target,
+      subtype: inferred.subtype,
+      evidence: inferred.evidence,
+      hits: inferred.hits,
+    }
+    const classification = classify(base)
+    candidates.push({
+      ...base,
+      ...classification,
+    })
+  }
+
+  const report = {
+    generatedAt: new Date().toISOString(),
+    totalBuildings: buildings.length,
+    missingTypeSlug: missing.length,
+    mediumCandidates: candidates,
+    manualCount,
+  }
+  fs.writeFileSync(REPORT_JSON, `${JSON.stringify(report, null, 2)}\n`)
+  fs.writeFileSync(REPORT_MD, markdownReport(report))
+
+  const counts = {
+    A: candidates.filter(candidate => candidate.category === 'A').length,
+    B: candidates.filter(candidate => candidate.category === 'B').length,
+    C: candidates.filter(candidate => candidate.category === 'C').length,
+  }
+  console.log('Type slug medium review complete')
+  console.log(`- remaining missing type_slug: ${missing.length}`)
+  console.log(`- medium candidates: ${candidates.length}`)
+  console.log(`- manual / no-rule candidates: ${manualCount}`)
+  console.log(`- A safe after rule refinement: ${counts.A}`)
+  console.log(`- B needs human review: ${counts.B}`)
+  console.log(`- C reject / unsafe: ${counts.C}`)
+  console.log(`- report: ${path.relative(ROOT, REPORT_MD)}`)
+  console.log(`- json: ${path.relative(ROOT, REPORT_JSON)}`)
+}
+
+main().catch(error => {
+  console.error(error)
+  process.exit(1)
+})

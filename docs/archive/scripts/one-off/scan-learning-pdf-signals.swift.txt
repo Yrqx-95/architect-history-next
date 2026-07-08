@@ -1,0 +1,179 @@
+import AppKit
+import Foundation
+import PDFKit
+import Vision
+
+struct PageSignal: Codable {
+  let page: Int
+  let method: String
+  let signals: [String]
+}
+
+struct DocumentSignal: Codable {
+  let fileName: String
+  let pageCount: Int
+  let pages: [PageSignal]
+}
+
+let japanesePattern = try! NSRegularExpression(pattern: "[\\u3040-\\u30ff\\u3400-\\u9fff]")
+let noisePattern = try! NSRegularExpression(
+  pattern: "^(?:p?\\.?\\s*\\d+|\\d{1,4}[./-]\\d{1,2}[./-]\\d{1,2}|copyright|https?://|www\\.)$",
+  options: [.caseInsensitive]
+)
+
+func japaneseRatio(_ value: String) -> Double {
+  guard !value.isEmpty else { return 0 }
+  let range = NSRange(value.startIndex..<value.endIndex, in: value)
+  return Double(japanesePattern.numberOfMatches(in: value, range: range)) / Double(value.count)
+}
+
+func normalize(_ value: String) -> String {
+  value
+    .precomposedStringWithCompatibilityMapping
+    .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+    .trimmingCharacters(in: .whitespacesAndNewlines)
+}
+
+func isUseful(_ value: String) -> Bool {
+  let text = normalize(value)
+  guard text.count >= 2, text.count <= 72 else { return false }
+  let range = NSRange(text.startIndex..<text.endIndex, in: text)
+  guard noisePattern.firstMatch(in: text, range: range) == nil else { return false }
+  guard japaneseRatio(text) >= 0.08 || text.range(of: "[A-Za-z]{3,}", options: .regularExpression) != nil else {
+    return false
+  }
+  return true
+}
+
+func uniqueSignals(_ values: [String], limit: Int = 6) -> [String] {
+  var seen = Set<String>()
+  var result: [String] = []
+  for rawValue in values {
+    let value = normalize(rawValue)
+    guard isUseful(value), !seen.contains(value) else { continue }
+    seen.insert(value)
+    result.append(value)
+    if result.count == limit { break }
+  }
+  return result
+}
+
+func extractTextSignals(_ text: String) -> [String] {
+  let lines = text
+    .components(separatedBy: .newlines)
+    .map(normalize)
+    .filter(isUseful)
+
+  let headingLines = lines.filter { line in
+    line.count <= 42 &&
+      (line.range(of: "^[#●■◆◇〈【（]?[0-9０-９一二三四五六七八九十]*[.．:_ -]?", options: .regularExpression) != nil ||
+       line.contains("構造") ||
+       line.contains("計画") ||
+       line.contains("建築") ||
+       line.contains("材料") ||
+       line.contains("様式") ||
+       line.contains("空間"))
+  }
+  return uniqueSignals(headingLines + lines, limit: 6)
+}
+
+func render(_ page: PDFPage, scale: CGFloat) -> CGImage? {
+  let bounds = page.bounds(for: .mediaBox)
+  let width = max(1, Int(bounds.width * scale))
+  let height = max(1, Int(bounds.height * scale))
+  guard let context = CGContext(
+    data: nil,
+    width: width,
+    height: height,
+    bitsPerComponent: 8,
+    bytesPerRow: 0,
+    space: CGColorSpaceCreateDeviceRGB(),
+    bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+  ) else {
+    return nil
+  }
+
+  context.setFillColor(NSColor.white.cgColor)
+  context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+  context.saveGState()
+  context.scaleBy(x: scale, y: scale)
+  page.draw(with: .mediaBox, to: context)
+  context.restoreGState()
+  return context.makeImage()
+}
+
+func extractOCRSignals(_ page: PDFPage) -> [String] {
+  guard let image = render(page, scale: 1.5) else { return [] }
+  let request = VNRecognizeTextRequest()
+  request.recognitionLevel = .accurate
+  request.recognitionLanguages = ["ja-JP", "en-US"]
+  request.usesLanguageCorrection = false
+
+  do {
+    try VNImageRequestHandler(cgImage: image).perform([request])
+  } catch {
+    return []
+  }
+
+  let observations = request.results ?? []
+  guard !observations.isEmpty else { return [] }
+  let medianHeight = observations.map(\.boundingBox.height).sorted()[observations.count / 2]
+  let candidates = observations
+    .filter { observation in
+      observation.boundingBox.maxY >= 0.72 ||
+        observation.boundingBox.height >= medianHeight * 1.35
+    }
+    .sorted {
+      if abs($0.boundingBox.maxY - $1.boundingBox.maxY) > 0.02 {
+        return $0.boundingBox.maxY > $1.boundingBox.maxY
+      }
+      return $0.boundingBox.minX < $1.boundingBox.minX
+    }
+    .compactMap { $0.topCandidates(1).first?.string }
+
+  return uniqueSignals(candidates, limit: 6)
+}
+
+let paths = CommandLine.arguments.dropFirst()
+guard !paths.isEmpty else {
+  FileHandle.standardError.write(Data("Usage: swift scan-learning-pdf-signals.swift file.pdf [...]\\n".utf8))
+  exit(2)
+}
+
+let encoder = JSONEncoder()
+encoder.outputFormatting = [.sortedKeys]
+
+for path in paths {
+  let url = URL(fileURLWithPath: path)
+  guard let document = PDFDocument(url: url) else { continue }
+  FileHandle.standardError.write(
+    Data(("Scanning \(url.lastPathComponent) (\(document.pageCount) pages)\\n").utf8)
+  )
+  var pageSignals: [PageSignal] = []
+
+  for index in 0..<document.pageCount {
+    guard let page = document.page(at: index) else { continue }
+    let embeddedText = page.string ?? ""
+    let embeddedUsable = embeddedText.count >= 40 && japaneseRatio(embeddedText) >= 0.12
+    let signals = embeddedUsable ? extractTextSignals(embeddedText) : extractOCRSignals(page)
+    pageSignals.append(
+      PageSignal(
+        page: index + 1,
+        method: embeddedUsable ? "text" : "ocr_accurate",
+        signals: signals
+      )
+    )
+  }
+
+  let result = DocumentSignal(
+    fileName: url.lastPathComponent,
+    pageCount: document.pageCount,
+    pages: pageSignals
+  )
+  if let data = try? encoder.encode(result), let line = String(data: data, encoding: .utf8) {
+    print(line)
+  }
+  FileHandle.standardError.write(
+    Data(("Finished \(url.lastPathComponent)\\n").utf8)
+  )
+}

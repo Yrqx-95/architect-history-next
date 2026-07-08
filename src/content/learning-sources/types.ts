@@ -1,4 +1,14 @@
-export type LearningSourceType = 'exam_material' | 'law_book'
+export type LearningSourceType =
+  | 'exam_material'
+  | 'law_book'
+  | 'lecture_notes'
+  | 'course_handbook'
+  | 'reference_booklet'
+  | 'course_deck'
+  | 'worksheet'
+  | 'answer_reference'
+  | 'workflow_sheet'
+  | 'product_reference'
 
 export type LearningSourceLanguage = 'ja' | 'zh' | 'en' | 'multi'
 
@@ -30,4 +40,11 @@ export type LearningSourceTopicNote = {
   sourceMaterialIds: string[]
   referenceScope: string[]
   note: string
+}
+
+export type LearningSourceCandidateGroup = {
+  sourceMaterialId: string
+  page: number
+  category: string
+  terms: string[]
 }

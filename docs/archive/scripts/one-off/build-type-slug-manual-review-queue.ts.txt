@@ -1,0 +1,390 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { ensureReportDir, fetchAll, ROOT } from './supabase-script-utils'
+
+type Building = {
+  id: string
+  slug: string
+  name_zh: string | null
+  name_en: string | null
+  name_ja: string | null
+  architect_slug: string | null
+  year_start: number | null
+  country_code: string | null
+  country: string | null
+  city: string | null
+  location: string | null
+  type_slug: string | null
+  style_slugs: string[] | null
+  description: Record<string, unknown> | null
+  significance: Record<string, unknown> | null
+  ai_tags: Record<string, unknown> | null
+  wikipedia_url: string | null
+  wikidata_id: string | null
+  archdaily_url: string | null
+  official_url: string | null
+}
+
+type ReviewCandidate = {
+  slug: string
+  name: string
+  candidate: string
+  subtype: string
+  evidence: string
+  category: 'A' | 'B' | 'C'
+  reason: string
+  suggestedRule: string
+}
+
+type MediumReview = {
+  mediumCandidates: ReviewCandidate[]
+}
+
+type QueueItem = {
+  priority: 'P0' | 'P1' | 'P2'
+  building_slug: string
+  display_name: string
+  country_code: string | null
+  city: string | null
+  location: string | null
+  year_start: number | null
+  architect_slug: string | null
+  current_style_slugs: string[]
+  ai_tags: Record<string, unknown>
+  description_summary: string
+  significance_summary: string
+  candidate_type_slug: string | null
+  candidate_subtype: string | null
+  confidence: 'medium' | 'reject_unsafe' | 'none'
+  reason: string
+  suggested_action: 'assign' | 'skip_unknown' | 'needs_research' | 'taxonomy_gap'
+  review_source: 'sprint05_B' | 'sprint05_C' | 'manual_no_rule'
+  review_notes: string[]
+  score: number
+}
+
+const REPORT_DIR = ensureReportDir()
+const REVIEW_JSON = path.join(REPORT_DIR, 'type-slug-medium-review.json')
+const QUEUE_JSON = path.join(REPORT_DIR, 'type-slug-manual-review-queue.json')
+const QUEUE_MD = path.join(ROOT, 'TYPE_SLUG_MANUAL_REVIEW_QUEUE.md')
+
+const ambiguousCandidates = new Set(['office', 'residential', 'civic-public', 'public-space', 'leisure', 'infrastructure'])
+
+function readReview() {
+  if (!fs.existsSync(REVIEW_JSON)) {
+    throw new Error(`Missing Sprint 05 review file: ${path.relative(ROOT, REVIEW_JSON)}`)
+  }
+  return JSON.parse(fs.readFileSync(REVIEW_JSON, 'utf8')) as MediumReview
+}
+
+function localizedText(value: Record<string, unknown> | null) {
+  if (!value) return ''
+  const parts = ['zh', 'en', 'ja'].map(key => value[key]).filter(Boolean)
+  return parts.map(part => String(part)).join(' ')
+}
+
+function summarize(value: Record<string, unknown> | null, maxLength = 180) {
+  const text = localizedText(value).replace(/\s+/g, ' ').trim()
+  if (text.length <= maxLength) return text
+  return `${text.slice(0, maxLength - 1).trim()}…`
+}
+
+function displayName(building: Building) {
+  return building.name_zh || building.name_en || building.name_ja || building.slug
+}
+
+function textCorpus(building: Building) {
+  return [
+    building.slug,
+    building.name_zh,
+    building.name_en,
+    building.name_ja,
+    building.city,
+    building.country,
+    localizedText(building.description),
+    localizedText(building.significance),
+    JSON.stringify(building.ai_tags || {}),
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+}
+
+function hasTrafficPotential(building: Building) {
+  return Boolean(
+    building.architect_slug ||
+      building.wikipedia_url ||
+      building.wikidata_id ||
+      building.archdaily_url ||
+      building.official_url ||
+      localizedText(building.description).length > 80 ||
+      localizedText(building.significance).length > 80
+  )
+}
+
+function completenessScore(building: Building) {
+  return [
+    building.architect_slug,
+    building.year_start,
+    building.country_code,
+    building.city || building.location,
+    (building.style_slugs || []).length,
+    localizedText(building.description),
+    localizedText(building.significance),
+  ].filter(Boolean).length
+}
+
+function taxonomyGapSignal(building: Building) {
+  const text = textCorpus(building)
+  const gapTerms = [
+    /\bcrematorium\b/,
+    /\bcemetery\b/,
+    /\bfriedhof\b/,
+    /\bparking garage\b/,
+    /\bgarage\b/,
+    /\bmarket hall\b/,
+  ]
+  return gapTerms.some(pattern => pattern.test(text))
+}
+
+function inferManualNotes(building: Building, review: ReviewCandidate | undefined) {
+  const notes: string[] = []
+  if (!building.architect_slug) notes.push('missing architect_slug')
+  if (!building.year_start) notes.push('missing year_start')
+  if (!building.country_code) notes.push('missing country_code')
+  if (!building.city && !building.location) notes.push('missing city/location')
+  if (!localizedText(building.description)) notes.push('missing description')
+  if (!localizedText(building.significance)) notes.push('missing significance')
+  if (review?.category === 'C') notes.push('Sprint 05 marked the candidate as unsafe')
+  if (review && ambiguousCandidates.has(review.candidate)) notes.push(`ambiguous candidate family: ${review.candidate}`)
+  if (taxonomyGapSignal(building)) notes.push('possible taxonomy gap signal')
+  return notes
+}
+
+function suggestedAction(building: Building, review: ReviewCandidate | undefined): QueueItem['suggested_action'] {
+  if (taxonomyGapSignal(building) && !review) return 'taxonomy_gap'
+  if (review?.category === 'C') return 'needs_research'
+  if (review?.category === 'B') {
+    return 'needs_research'
+  }
+  if (completenessScore(building) <= 2 && !hasTrafficPotential(building)) return 'skip_unknown'
+  return 'needs_research'
+}
+
+function priorityFor(building: Building, review: ReviewCandidate | undefined, action: QueueItem['suggested_action']) {
+  const score =
+    (building.architect_slug ? 2 : 0) +
+    (building.year_start ? 2 : 0) +
+    (building.country_code ? 2 : 0) +
+    (hasTrafficPotential(building) ? 2 : 0) +
+    (review?.category === 'B' ? 2 : 0) +
+    (action === 'assign' ? 2 : 0) -
+    (review?.category === 'C' ? 3 : 0) -
+    (action === 'taxonomy_gap' ? 2 : 0) -
+    (action === 'skip_unknown' ? 2 : 0)
+
+  if (score >= 9) return { priority: 'P0' as const, score }
+  if (score >= 5) return { priority: 'P1' as const, score }
+  return { priority: 'P2' as const, score }
+}
+
+function candidateConfidence(review: ReviewCandidate | undefined): QueueItem['confidence'] {
+  if (!review) return 'none'
+  if (review.category === 'C') return 'reject_unsafe'
+  return 'medium'
+}
+
+function reviewSource(review: ReviewCandidate | undefined): QueueItem['review_source'] {
+  if (!review) return 'manual_no_rule'
+  if (review.category === 'C') return 'sprint05_C'
+  return 'sprint05_B'
+}
+
+function countBy<T extends string>(items: QueueItem[], getter: (item: QueueItem) => T | null) {
+  const counts = new Map<string, number>()
+  for (const item of items) {
+    const key = getter(item) || 'none'
+    counts.set(key, (counts.get(key) || 0) + 1)
+  }
+  return [...counts.entries()]
+    .map(([key, count]) => ({ key, count }))
+    .sort((a, b) => b.count - a.count || a.key.localeCompare(b.key))
+}
+
+function orderedCounts(counts: Array<{ key: string; count: number }>, order: string[]) {
+  const rank = new Map(order.map((key, index) => [key, index]))
+  return [...counts].sort((a, b) => {
+    const aRank = rank.get(a.key) ?? Number.MAX_SAFE_INTEGER
+    const bRank = rank.get(b.key) ?? Number.MAX_SAFE_INTEGER
+    return aRank - bRank || b.count - a.count || a.key.localeCompare(b.key)
+  })
+}
+
+function markdownLocation(item: QueueItem) {
+  const location = item.city || (item.location ? 'location set' : '')
+  return location.replaceAll('|', '\\|')
+}
+
+function markdownReport(report: {
+  generatedAt: string
+  totalBuildings: number
+  missingTypeSlug: number
+  queue: QueueItem[]
+  priorityCounts: Array<{ key: string; count: number }>
+  candidateDistribution: Array<{ key: string; count: number }>
+  actionCounts: Array<{ key: string; count: number }>
+  taxonomyGapItems: QueueItem[]
+}) {
+  const lines = [
+    '# Type Slug Manual Review Queue',
+    '',
+    `Generated: ${report.generatedAt}`,
+    '',
+    '## Scope',
+    '',
+    '- No database writes were performed.',
+    '- No migrations were generated.',
+    '- No building_types were added.',
+    '- Queue includes current `type_slug IS NULL` buildings only.',
+    '',
+    '## Summary',
+    '',
+    `- Total buildings: ${report.totalBuildings}`,
+    `- Remaining missing type_slug: ${report.missingTypeSlug}`,
+    '',
+    '### Priority Counts',
+    '',
+    '| Priority | Count |',
+    '|---|---:|',
+  ]
+
+  for (const item of orderedCounts(report.priorityCounts, ['P0', 'P1', 'P2'])) {
+    lines.push(`| ${item.key} | ${item.count} |`)
+  }
+
+  lines.push('', '### Suggested Action Counts', '', '| Action | Count |', '|---|---:|')
+  for (const item of orderedCounts(report.actionCounts, ['assign', 'needs_research', 'taxonomy_gap', 'skip_unknown'])) {
+    lines.push(`| ${item.key} | ${item.count} |`)
+  }
+
+  lines.push('', '### Candidate type_slug Distribution', '', '| candidate_type_slug | Count |', '|---|---:|')
+  for (const item of report.candidateDistribution) lines.push(`| ${item.key} | ${item.count} |`)
+
+  lines.push('', '### Taxonomy Gap Candidates', '')
+  if (!report.taxonomyGapItems.length) {
+    lines.push('None detected as a confident taxonomy gap. Existing taxonomy appears sufficient for this queue; most remaining records need human context review rather than new types.')
+  } else {
+    lines.push('| Priority | Building | Name | Reason |')
+    lines.push('|---|---|---|---|')
+    for (const item of report.taxonomyGapItems) {
+      lines.push(`| ${item.priority} | ${item.building_slug} | ${item.display_name} | ${item.review_notes.join('; ')} |`)
+    }
+  }
+
+  lines.push('', '## Queue', '')
+
+  for (const priority of ['P0', 'P1', 'P2'] as const) {
+    const items = report.queue.filter(item => item.priority === priority)
+    lines.push(`### ${priority}`, '')
+    if (!items.length) {
+      lines.push('None.', '')
+      continue
+    }
+    lines.push('| Building | Name | Country | City / Location | Year | Architect | Styles | Candidate | Confidence | Action | Reason |')
+    lines.push('|---|---|---|---|---:|---|---|---|---|---|---|')
+    for (const item of items) {
+      const styles = item.current_style_slugs.join(', ')
+      lines.push(
+        `| ${item.building_slug} | ${item.display_name} | ${item.country_code || ''} | ${markdownLocation(item)} | ${item.year_start ?? ''} | ${item.architect_slug || ''} | ${styles} | ${item.candidate_type_slug || ''} | ${item.confidence} | ${item.suggested_action} | ${item.reason.replaceAll('|', '\\|')} |`
+      )
+    }
+    lines.push('')
+  }
+
+  lines.push('## Machine-Readable Queue', '')
+  lines.push('- JSON: `reports/type-slug-manual-review-queue.json`')
+  lines.push('')
+  return lines.join('\n')
+}
+
+async function main() {
+  const review = readReview()
+  const reviewBySlug = new Map(
+    review.mediumCandidates
+      .filter(candidate => candidate.category === 'B' || candidate.category === 'C')
+      .map(candidate => [candidate.slug, candidate])
+  )
+
+  const buildings = await fetchAll<Building>('buildings')
+  const missing = buildings.filter(building => !building.type_slug)
+
+  const queue = missing.map(building => {
+    const reviewCandidate = reviewBySlug.get(building.slug)
+    const action = suggestedAction(building, reviewCandidate)
+    const priority = priorityFor(building, reviewCandidate, action)
+    const notes = inferManualNotes(building, reviewCandidate)
+    const item: QueueItem = {
+      priority: priority.priority,
+      building_slug: building.slug,
+      display_name: displayName(building),
+      country_code: building.country_code,
+      city: building.city,
+      location: building.location,
+      year_start: building.year_start,
+      architect_slug: building.architect_slug,
+      current_style_slugs: building.style_slugs || [],
+      ai_tags: building.ai_tags || {},
+      description_summary: summarize(building.description),
+      significance_summary: summarize(building.significance),
+      candidate_type_slug: reviewCandidate?.candidate || null,
+      candidate_subtype: reviewCandidate?.subtype || null,
+      confidence: candidateConfidence(reviewCandidate),
+      reason: reviewCandidate?.reason || 'No medium-confidence type rule matched after Sprint 06 writes.',
+      suggested_action: action,
+      review_source: reviewSource(reviewCandidate),
+      review_notes: notes,
+      score: priority.score,
+    }
+    return item
+  })
+
+  queue.sort((a, b) => {
+    const priorityOrder = { P0: 0, P1: 1, P2: 2 }
+    return (
+      priorityOrder[a.priority] - priorityOrder[b.priority] ||
+      b.score - a.score ||
+      (a.candidate_type_slug || 'zz').localeCompare(b.candidate_type_slug || 'zz') ||
+      a.building_slug.localeCompare(b.building_slug)
+    )
+  })
+
+  const report = {
+    generatedAt: new Date().toISOString(),
+    totalBuildings: buildings.length,
+    missingTypeSlug: missing.length,
+    priorityCounts: countBy(queue, item => item.priority),
+    candidateDistribution: countBy(queue, item => item.candidate_type_slug),
+    actionCounts: countBy(queue, item => item.suggested_action),
+    taxonomyGapItems: queue.filter(item => item.suggested_action === 'taxonomy_gap'),
+    queue,
+  }
+
+  fs.writeFileSync(QUEUE_JSON, `${JSON.stringify(report, null, 2)}\n`)
+  fs.writeFileSync(QUEUE_MD, markdownReport(report))
+
+  console.log('Generated type_slug manual review queue')
+  console.log(`- total buildings: ${report.totalBuildings}`)
+  console.log(`- remaining missing type_slug: ${report.missingTypeSlug}`)
+  for (const item of orderedCounts(report.priorityCounts, ['P0', 'P1', 'P2'])) {
+    console.log(`- ${item.key}: ${item.count}`)
+  }
+  console.log(`- needs_research: ${report.actionCounts.find(item => item.key === 'needs_research')?.count || 0}`)
+  console.log(`- taxonomy_gap: ${report.taxonomyGapItems.length}`)
+  console.log(`- report: ${path.relative(ROOT, QUEUE_MD)}`)
+  console.log(`- json: ${path.relative(ROOT, QUEUE_JSON)}`)
+}
+
+main().catch(error => {
+  console.error(error)
+  process.exit(1)
+})

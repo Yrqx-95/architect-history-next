@@ -1,0 +1,27 @@
+import { curatedTerms } from './curated-terms'
+
+export const curatedAliasMap: Record<string, string> = Object.fromEntries(
+  curatedTerms.flatMap(term => [
+    [term.termJa, term.slug],
+    ...(term.reading ? [[term.reading, term.slug] as const] : []),
+    [term.termZh, term.slug],
+    [term.termEn, term.slug],
+    ...term.aliases.map(alias => [alias, term.slug] as const),
+  ]),
+)
+
+export const canonicalMergeMap: Record<string, string> = {
+  ツインコア: 'double-core',
+  中央コア: 'center-core',
+  フィックス窓: 'fixed-window',
+  天窓: 'toplight',
+  切妻: 'gable-roof',
+  寄棟: 'hip-roof',
+  SI住宅: 'skeleton-infill',
+  ツーバイフォー工法: 'platform-frame-construction',
+  木造軸組工法: 'post-and-beam-timber-construction',
+  竪穴住居: 'pit-dwelling',
+  擬洋風: 'giyofu-architecture',
+  排煙: 'smoke-control-system',
+  非常照明: 'emergency-lighting',
+}
