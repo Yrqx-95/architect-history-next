@@ -15,7 +15,7 @@ It is not only a database and not yet a full study platform. The current product
 - Languages: zh / en / ja
 - Current data audit: 0 errors, with remaining warnings/info mainly about content completeness
 - Test safety net: unit tests and Playwright smoke tests exist
-- Current cleanup phase: repository consolidation, not feature expansion
+- Current cleanup phase: local repository consolidation completed; awaiting push/deploy decision
 
 ## Current Focus
 

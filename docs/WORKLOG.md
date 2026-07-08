@@ -2,6 +2,47 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-08 - Grouped Cleanup Completion
+
+### Intent
+
+- Finish the repository cleanup as reviewable, grouped local commits.
+- Leave a concise record of what changed, what passed, what remains local, and what should happen next.
+- Keep the process simple enough for future maintainers to follow without reading every historical report.
+
+### Changes
+
+- Completed seven local cleanup commits covering operating docs, graduation library work, archived material, data/API updates, visible product surfaces, route/image tests, and obsolete file removal.
+- Removed generated verification caches after checks: `.next/`, `tsconfig.tsbuildinfo`, and `test-results/`.
+- Added `docs/reports/CLEANUP_COMPLETION_2026-07-08.md` as the final cleanup record.
+- Updated `DOCUMENT_INDEX.md` and `STATUS.md` so a new maintainer can find the cleanup result from the current entry docs.
+
+### Validation
+
+- Passed before this docs-only report commit: `npm run typecheck`.
+- Passed before this docs-only report commit: `npm run lint`.
+- Passed before this docs-only report commit: `npm run test:unit`.
+- Passed before this docs-only report commit: `npm run test:e2e`.
+- Passed for this docs-only report commit: `git diff --check`.
+- Not rerun for this entry yet: full app test suite, because the pending change is documentation only.
+
+### Remaining Risk
+
+- Local commits have not been pushed.
+- Supabase migrations were organized and committed, but not applied to or verified against production in this cleanup pass.
+- Production deployment was not run after the local cleanup.
+
+### Rollback Scope
+
+- `docs/reports/CLEANUP_COMPLETION_2026-07-08.md`
+- `DOCUMENT_INDEX.md`
+- `STATUS.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Commit this final docs-only cleanup record, verify the worktree is clean, then push/deploy only when explicitly requested.
+
 ## 2026-07-08 - Simple Project Operating Rules And File Map
 
 ### Intent

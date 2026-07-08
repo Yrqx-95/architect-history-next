@@ -34,6 +34,7 @@ Current docs under `docs/`:
 - `docs/HANDOFF.md` — handoff notes.
 - `docs/TECH_DEBT.md` — older technical debt log; use `TECHNICAL_DEBT_REPORT.md` in archive for latest cleanup audit context.
 - `docs/LEARNING_MATERIAL_INVENTORY.md` — active/future/archive classification for learning and research material.
+- `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
 - `docs/graduation/` — current V1 Graduation Inspiration Library handoff docs, including wireframes, random behavior, content guide, and source/image policy.
 
 ## Archived
