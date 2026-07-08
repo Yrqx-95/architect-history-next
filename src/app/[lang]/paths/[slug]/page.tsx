@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import type { Architect, Building, Era, Style } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
 import { getArchitects, getBuildings, getEras, getStyles } from '@/lib/data'
-import { learningPaths, localizedPathText, type LearningPathKind } from '@/lib/learning-paths'
-import { displayName, type Architect, type Building, type Era, type Style } from '@/lib/types'
+import { learningPaths, localizedPathText, LearningPathKind } from '@/lib/learning-paths'
+import { displayName } from '@/lib/display'
 
 const LANGS = ['zh', 'en', 'ja'] as const
 
@@ -16,7 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
   const { lang, slug } = await params
   const path = learningPaths.find(item => item.slug === slug)
-  if (!path) return { title: 'Learning path' }
+  if (!path) return { title: 'Archive route' }
   return {
     title: localizedPathText(path.title, lang),
     description: localizedPathText(path.subtitle, lang),
@@ -70,21 +71,21 @@ export default async function LearningPathDetailPage({ params }: { params: Promi
     <PageShell>
       <header className="section">
         <Link href={`${prefix}/paths`} className="caption mb-6 inline-block text-secondary underline-offset-4 hover:text-primary hover:underline">
-          {lang === 'en' ? 'All learning paths' : lang === 'ja' ? 'すべての学習ルート' : '全部学习路径'}
+          {lang === 'en' ? 'All archive routes' : lang === 'ja' ? 'すべての資料ルート' : '全部档案路线'}
         </Link>
-        <p className="eyebrow mb-4">{lang === 'en' ? 'Learning path' : lang === 'ja' ? '学習ルート' : '学习路径'}</p>
+        <p className="eyebrow mb-4">{lang === 'en' ? 'Archive route' : lang === 'ja' ? '資料ルート' : '档案路线'}</p>
         <h1 className="heading-display mb-5 max-w-4xl">{localizedPathText(path.title, lang)}</h1>
         <p className="body-large max-w-3xl">{localizedPathText(path.description, lang)}</p>
       </header>
 
       <Reveal>
         <section className="section pt-0">
-          <div className="grid gap-4">
+          <div className="border-y border-subtle">
             {resolvedSteps.map(step => (
               <Link
                 key={`${step.kind}-${step.slug}`}
                 href={hrefFor(prefix, step.kind, step.slug)}
-                className="group grid gap-4 rounded-md border border-subtle bg-surface p-5 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted sm:grid-cols-[5rem_minmax(0,1fr)_8rem] sm:items-start"
+                className="interactive-row group grid gap-4 border-b border-subtle px-2 py-5 last:border-b-0 sm:grid-cols-[5rem_minmax(0,1fr)_8rem] sm:items-start"
               >
                 <div className="font-serif-display text-4xl leading-none text-primary/70">{String(step.index).padStart(2, '0')}</div>
                 <div>
@@ -92,7 +93,7 @@ export default async function LearningPathDetailPage({ params }: { params: Promi
                   <h2 className="text-2xl font-semibold leading-tight text-primary group-hover:text-secondary">{step.title}</h2>
                   <p className="mt-4 body-small text-secondary">{localizedPathText(step.note, lang)}</p>
                 </div>
-                <span className="caption justify-self-start rounded-full bg-surface-muted px-3 py-1 text-secondary sm:justify-self-end">
+                <span className="caption justify-self-start border-b border-subtle pb-1 text-secondary transition-colors group-hover:border-default group-hover:text-primary sm:justify-self-end">
                   {lang === 'en' ? 'Open' : lang === 'ja' ? '開く' : '打开'}
                 </span>
               </Link>

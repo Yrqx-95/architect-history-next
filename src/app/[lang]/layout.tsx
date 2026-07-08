@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import Link from 'next/link'
 import '../globals.css'
+import { displayTaxonomyName } from '@/lib/taxonomy-display'
 import { t } from '@/lib/i18n'
 import { getEras, getStyles } from '@/lib/data'
-import { displayName, displayTaxonomyName } from '@/lib/types'
+import { displayName } from '@/lib/display'
 import MobileNav from '@/components/MobileNav'
 import PageTransition from '@/components/PageTransition'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -11,6 +12,7 @@ import SmoothScroll from '@/components/SmoothScroll'
 import ChineseScriptProvider from '@/components/ChineseScriptProvider'
 import ChineseScriptToggle from '@/components/ChineseScriptToggle'
 import SystemThemeSync from '@/components/SystemThemeSync'
+import ScrollRevealProvider from '@/components/ScrollRevealProvider'
 
 const LANGS = ['zh', 'en', 'ja'] as const
 
@@ -51,16 +53,18 @@ export default async function LangLayout({ children, params }: {
     .filter(item => item.label)
     .slice(0, 6)
   const exploreLinks = [
-    { href: `${prefix}/browse`, label: t(lang, 'architects') },
-    { href: `${prefix}/browse`, label: t(lang, 'buildings') },
-    { href: `${prefix}/browse`, label: t(lang, 'styles') },
-    { href: `${prefix}/graph`, label: lang === 'en' ? 'Movements' : lang === 'ja' ? '運動' : '建筑运动' },
+    { href: `${prefix}/browse/architects`, label: t(lang, 'architects') },
+    { href: `${prefix}/browse/buildings`, label: t(lang, 'buildings') },
+    { href: `${prefix}/browse/style`, label: t(lang, 'styles') },
+    { href: `${prefix}/graph`, label: lang === 'en' ? 'Relations' : lang === 'ja' ? '関係図' : '关系图' },
     { href: `${prefix}/browse/country`, label: lang === 'en' ? 'Countries / Regions' : lang === 'ja' ? '国・地域' : '国家与地区' },
   ]
   const learnLinks = [
+    { href: `${prefix}/graduation`, label: t(lang, 'graduation') },
     { href: `${prefix}/code`, label: t(lang, 'code') },
     { href: `${prefix}/glossary`, label: t(lang, 'glossary') },
   ]
+  const feedback = { href: `${prefix}/feedback`, label: feedbackLabel(lang) }
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
@@ -75,18 +79,19 @@ export default async function LangLayout({ children, params }: {
       </head>
       <body className="min-h-screen bg-app font-sans text-primary antialiased">
         <SystemThemeSync />
+        <ScrollRevealProvider />
         <ChineseScriptProvider lang={lang} />
         <SmoothScroll>
           {/* Desktop Nav */}
-          <nav className="sticky top-0 z-50 border-b border-subtle bg-nav">
+          <nav className="fixed inset-x-0 top-0 z-[80] border-b border-subtle bg-nav shadow-subtle">
             <div className="max-w-7xl mx-auto px-4 h-14 flex items-center gap-3 sm:gap-6">
-              <Link href={prefix + '/'} className="shrink-0 text-base font-bold tracking-tight text-primary sm:text-lg">Archistory</Link>
+              <Link href={prefix + '/'} className="inline-flex min-h-10 shrink-0 items-center text-base font-bold tracking-tight text-primary sm:text-lg">Archistory</Link>
 
               {/* Desktop links - hidden on mobile */}
               <div className="hidden xl:flex items-center gap-5">
-                <Link href={prefix + '/learn'} className="text-sm font-medium text-primary transition-colors hover:text-accent">{t(lang, 'learn')}</Link>
+                <Link href={prefix + '/browse'} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm font-medium text-primary transition-colors hover:text-accent">{t(lang, 'learn')}</Link>
                 <div className="group relative">
-                  <Link href={prefix + '/browse'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'explore')}</Link>
+                  <Link href={prefix + '/browse'} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'explore')}</Link>
                   <div className="invisible absolute left-0 top-full z-20 w-60 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                     <div className="border border-subtle bg-surface-raised p-3 shadow-semantic-card">
                       {exploreLinks.map(item => (
@@ -97,10 +102,12 @@ export default async function LangLayout({ children, params }: {
                     </div>
                   </div>
                 </div>
-                <Link href={prefix + '/code'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'code')}</Link>
-                <Link href={prefix + '/glossary'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'glossary')}</Link>
-                <Link href={prefix + '/timeline'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
-                <Link href={prefix + '/search'} className="text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
+                <Link href={prefix + '/code'} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'code')}</Link>
+                <Link href={prefix + '/glossary'} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'glossary')}</Link>
+                <Link href={prefix + '/graduation'} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'graduation')}</Link>
+                <Link href={prefix + '/timeline'} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
+                <Link href={prefix + '/search'} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
+                <Link href={feedback.href} className="inline-flex min-h-10 min-w-9 items-center justify-center px-1 text-sm text-secondary transition-colors hover:text-primary">{feedback.label}</Link>
               </div>
 
               <div className="hidden flex-1 xl:block" />
@@ -117,7 +124,7 @@ export default async function LangLayout({ children, params }: {
             </div>
           </nav>
 
-          <main className="container-wide py-4 sm:py-8"><PageTransition>{children}</PageTransition></main>
+          <main className="container-wide pt-20 pb-4 sm:pt-24 sm:pb-8"><PageTransition>{children}</PageTransition></main>
 
           <footer className="mt-10 border-t border-subtle py-6 sm:mt-14 sm:py-8">
             <div className="container-wide grid grid-cols-2 gap-6 text-sm sm:grid-cols-4 sm:gap-8">
@@ -125,7 +132,7 @@ export default async function LangLayout({ children, params }: {
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'explore')}</h4>
                 <div className="space-y-1.5">
                   {exploreLinks.map(item => (
-                    <Link key={item.label} href={item.href} className="block text-secondary transition-colors hover:text-primary">{item.label}</Link>
+                    <Link key={item.label} href={item.href} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{item.label}</Link>
                   ))}
                 </div>
               </div>
@@ -133,7 +140,7 @@ export default async function LangLayout({ children, params }: {
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'eras')}</h4>
                 <div className="space-y-1.5">
                   {topEras.map(e => (
-                    <Link key={e.id} href={`${prefix}/browse/era/${e.slug}`} className="block text-secondary transition-colors hover:text-primary">{displayName(e, lang)}</Link>
+                    <Link key={e.id} href={`${prefix}/browse/era/${e.slug}`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{displayName(e, lang)}</Link>
                   ))}
                 </div>
               </div>
@@ -141,7 +148,7 @@ export default async function LangLayout({ children, params }: {
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'styles')}</h4>
                 <div className="space-y-1.5">
                   {topStyles.map(({ style, label }) => (
-                    <Link key={style.id} href={`${prefix}/browse/style/${style.slug}`} className="block text-secondary transition-colors hover:text-primary">{label}</Link>
+                    <Link key={style.id} href={`${prefix}/browse/style/${style.slug}`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{label}</Link>
                   ))}
                 </div>
               </div>
@@ -149,10 +156,11 @@ export default async function LangLayout({ children, params }: {
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'learn')}</h4>
                 <div className="space-y-1.5">
                   {learnLinks.map(item => (
-                    <Link key={item.label} href={item.href} className="block text-secondary transition-colors hover:text-primary">{item.label}</Link>
+                    <Link key={item.label} href={item.href} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{item.label}</Link>
                   ))}
-                  <Link href={`${prefix}/timeline`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
-                  <Link href={`${prefix}/search`} className="block text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
+                  <Link href={`${prefix}/timeline`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'timeline')}</Link>
+                  <Link href={`${prefix}/search`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
+                  <Link href={feedback.href} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{feedback.label}</Link>
                   <p className="caption mt-3">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>
                 </div>
               </div>
@@ -162,4 +170,10 @@ export default async function LangLayout({ children, params }: {
       </body>
     </html>
   )
+}
+
+function feedbackLabel(lang: string) {
+  if (lang === 'ja') return 'フィードバック'
+  if (lang === 'en') return 'Feedback'
+  return '反馈'
 }

@@ -26,7 +26,7 @@ export default function LanguageSwitcher({ lang }: { lang: string }) {
     <div className="hidden gap-2 xl:flex" aria-label="Language">
       {LANGS.map(l => (
         <Link key={l} href={localizedPath(pathname, l)}
-          className={`rounded px-1.5 py-1 text-xs transition-colors sm:px-2 ${lang === l ? 'bg-[color:var(--ui-text-primary)] text-inverse' : 'text-muted hover:text-primary'}`}>
+          className={`inline-flex min-h-10 min-w-9 items-center justify-center rounded px-2 text-xs transition-colors ${lang === l ? 'bg-[color:var(--ui-text-primary)] text-inverse' : 'text-muted hover:text-primary'}`}>
           {LABELS[l]}
         </Link>
       ))}

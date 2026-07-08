@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function EditorialImage({
   src,
@@ -30,9 +31,10 @@ export default function EditorialImage({
   }
 
   return (
-    <img
+    <Image
       src={src}
       alt={alt}
+      fill
       sizes={sizes}
       loading={loading || 'lazy'}
       className={`absolute inset-0 h-full w-full object-cover opacity-100 brightness-100 contrast-100 saturate-100 mix-blend-normal ${className}`}

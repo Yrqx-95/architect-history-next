@@ -31,7 +31,7 @@ export default function TimelineRail({
   }
 
   return (
-    <section className="section-sm rounded-md border border-subtle bg-surface p-4 shadow-semantic-card sm:p-5">
+    <section className="section-sm border-y border-subtle py-5">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="eyebrow mb-2">{title}</p>
@@ -41,7 +41,7 @@ export default function TimelineRail({
           <button
             type="button"
             onClick={() => scrollByPage(-1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-subtle text-primary transition-colors hover:border-default hover:bg-surface-muted"
+            className="flex h-9 w-9 items-center justify-center border border-subtle text-primary transition-colors hover:border-default hover:bg-surface-muted active:scale-95"
             aria-label="Previous"
           >
             ‹
@@ -49,7 +49,7 @@ export default function TimelineRail({
           <button
             type="button"
             onClick={() => scrollByPage(1)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-subtle text-primary transition-colors hover:border-default hover:bg-surface-muted"
+            className="flex h-9 w-9 items-center justify-center border border-subtle text-primary transition-colors hover:border-default hover:bg-surface-muted active:scale-95"
             aria-label="Next"
           >
             ›
@@ -58,7 +58,7 @@ export default function TimelineRail({
       </div>
       <div
         ref={scrollerRef}
-        className={`flex cursor-grab gap-3 overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:thin] ${isDragging ? 'cursor-grabbing select-none' : ''}`}
+        className={`flex cursor-grab overflow-x-auto overscroll-x-contain border-y border-subtle [scrollbar-width:thin] ${isDragging ? 'cursor-grabbing select-none' : ''}`}
         onMouseDown={event => {
           const el = scrollerRef.current
           if (!el) return
@@ -78,7 +78,7 @@ export default function TimelineRail({
           <Link
             key={item.id}
             href={item.href}
-            className="group flex min-h-[7.25rem] min-w-[11.5rem] flex-col justify-between rounded-md border border-subtle bg-surface-raised px-4 py-3 transition-colors hover:border-default hover:bg-surface-muted sm:min-w-[13rem]"
+            className="interactive-row group flex min-h-[7.25rem] min-w-[11.5rem] flex-col justify-between border-r border-subtle px-4 py-3 last:border-r-0 sm:min-w-[13rem]"
           >
             <span>
               <span className="block font-serif-display text-2xl leading-none text-primary transition-colors group-hover:text-accent">

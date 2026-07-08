@@ -8,21 +8,21 @@ const COPY = {
     title: '建筑法规',
     subtitle: '日本建筑法规关键词',
     intro: '从建筑设计最常遇到的法规概念开始：用途、密度、道路、高度与防火。页面以百科解释为主，考试提示作为辅助阅读。',
-    back: '返回 Learn',
+    back: '返回档案',
     count: '个主题',
   },
   en: {
     title: 'Building Code',
     subtitle: 'Japanese architectural regulation terms',
     intro: 'Start with the code concepts most often encountered in design: use, density, road access, height, and fire planning. Articles are written as references first, with exam notes as a secondary layer.',
-    back: 'Back to Learn',
+    back: 'Back to archive',
     count: 'topics',
   },
   ja: {
     title: '建築法規',
     subtitle: '日本の建築法規キーワード',
     intro: '用途、密度、道路、高さ、防火など、設計で頻出する法規概念から読み始めます。百科的な説明を主とし、試験対策は補助的に扱います。',
-    back: 'Learn に戻る',
+    back: 'アーカイブへ戻る',
     count: 'テーマ',
   },
 }
@@ -50,7 +50,7 @@ export default async function CodePage({ params }: { params: Promise<{ lang: str
     <div className="pb-20">
       <section className="section-lg grid gap-8 border-b border-subtle pb-10 pt-8 sm:pt-16 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
         <div>
-          <Link href={`${prefix}/learn`} className="caption transition-colors hover:text-primary">← {copy.back}</Link>
+          <Link href={`${prefix}/browse`} className="caption transition-colors hover:text-primary">← {copy.back}</Link>
           <p className="eyebrow mt-8">{copy.subtitle}</p>
           <h1 className="mt-5 text-5xl font-semibold leading-none text-primary sm:text-7xl">{copy.title}</h1>
         </div>

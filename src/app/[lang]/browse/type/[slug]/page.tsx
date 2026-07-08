@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getTypes, getBuildingsWithCovers, getArchitects } from '@/lib/data'
-import { displayName } from '@/lib/types'
+import { displayName } from '@/lib/display'
 import { matchesTaxonomy } from '@/lib/taxonomy'
 import BrowseListing from '@/components/BrowseListing'
 

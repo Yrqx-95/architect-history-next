@@ -1,17 +1,21 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { formatCountryName, isProbablySimplifiedChinese } from '@/lib/locale'
+import { displayTaxonomyName } from '@/lib/taxonomy-display'
+import type { Architect, Building, BuildingType, BuildingWithCover, Era } from '@/lib/types'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers, getEras, getStyles, getTypes } from '@/lib/data'
 import { isMinimallyComplete } from '@/lib/quality'
-import { displayName, displayTaxonomyName, formatCountryName, isProbablySimplifiedChinese, type Architect, type Building, type BuildingType, type Era } from '@/lib/types'
+import { displayName } from '@/lib/display'
 import { listMatchesTaxonomy, matchesTaxonomy } from '@/lib/taxonomy'
-import { learningPaths } from '@/lib/learning-paths'
 import PageShell from '@/components/PageShell'
 import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
 import BuildingCard from '@/components/BuildingCard'
 import ArchitectCard from '@/components/ArchitectCard'
+import ArchitectPortraitThumb from '@/components/ArchitectPortraitThumb'
 import { localizedNationality } from '@/lib/fallback-content'
+import { getArchitectImageOverride } from '@/lib/architect-images'
 
 type BrowseItem = {
   id: string
@@ -37,6 +41,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
   const prefix = `/${lang}`
   const qualityBuildings = buildings.filter(b => isMinimallyComplete(b))
   const buildingCountByArchitect = countBy(buildings, building => building.architect_slug)
+  const architectVisualBySlug = buildArchitectVisualMap(qualityBuildings)
   const architectBySlug = new Map(architects.map(architect => [architect.slug, architect]))
   const eraLabelFor = (value?: string | null) => {
     if (!value) return ''
@@ -58,8 +63,9 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
   const rankedArchitects = [...architects].sort((a, b) =>
     (buildingCountByArchitect.get(b.slug) || 0) - (buildingCountByArchitect.get(a.slug) || 0)
   )
-  const featuredArchitects = rankedArchitects.slice(0, 8)
-  const compactArchitects = rankedArchitects.slice(8, 32)
+  const visualArchitects = rankedArchitects.filter(architect => architectVisualBySlug.get(architect.slug))
+  const featuredArchitects = visualArchitects.slice(0, 8)
+  const compactArchitects = visualArchitects.slice(8, 24)
 
   const eraGroups = [...eras]
     .sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
@@ -114,25 +120,6 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
     }))
     .filter(item => item.label)
 
-  const styleFamilies = styles
-    .filter(style => !style.parent_slug)
-    .map(style => ({
-      style,
-      label: displayTaxonomyName(style, lang),
-      children: styles
-        .filter(child => child.parent_slug === style.slug)
-        .map(child => ({ child, label: displayTaxonomyName(child, lang) }))
-        .filter(item => item.label)
-        .map(item => item.child)
-        .filter(child => architectsForStyle(child).length > 0)
-        .sort((a, b) => displayTaxonomyName(a, lang).localeCompare(displayTaxonomyName(b, lang)))
-        .slice(0, 5),
-      count: architectsForStyle(style).length,
-    }))
-    .filter(group => group.label && (group.count > 0 || group.children.length > 0))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 8)
-
   const countryItems = topCountries(buildings, lang).map(country => ({
     id: country.name,
     href: `${prefix}/browse/country/${country.code}`,
@@ -143,6 +130,30 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
   const architectMap = new Map(architects.map(a => [a.slug, displayName(a, lang)]))
   const featuredBuildings = qualityBuildings.slice(0, 6)
   const historyPathCount = eraItems.length + styleItems.length
+  const archiveGroups = [
+    {
+      title: lang === 'en' ? 'Periods' : lang === 'ja' ? '時代' : '时代',
+      body: lang === 'en' ? 'Read works and architects through time.' : lang === 'ja' ? '時代ごとに建築家と作品を読む。' : '按时代阅读建筑师与作品。',
+      items: eraItems.slice(0, 8),
+    },
+    {
+      title: t(lang, 'styles'),
+      body: lang === 'en' ? 'Open formal languages and related works.' : lang === 'ja' ? '様式や形式言語から関連作品へ入る。' : '从风格与形式语言进入相关作品。',
+      items: styleItems.slice(0, 10),
+      actionHref: `${prefix}/browse/style`,
+    },
+    {
+      title: t(lang, 'types'),
+      body: lang === 'en' ? 'Browse by program and use.' : lang === 'ja' ? '用途・建築種別から作品を探す。' : '按用途和建筑类型浏览。',
+      items: typeItems.slice(0, 8),
+    },
+    {
+      title: t(lang, 'countries'),
+      body: lang === 'en' ? 'Jump by country or region.' : lang === 'ja' ? '国・地域から建築を探す。' : '按国家和地区进入。',
+      items: countryItems.slice(0, 8),
+      actionHref: `${prefix}/browse/country`,
+    },
+  ]
 
   return (
     <PageShell width="archive">
@@ -160,11 +171,10 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
 
       <Reveal>
         <section className="section pt-0">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            <EntryCard href="#architect-lineage" label={t(lang, 'architects')} value={`${architects.length}`} meta={lang === 'en' ? 'people' : lang === 'ja' ? '人' : '人物'} />
-            <EntryCard href="#building-index" label={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'} value={`${qualityBuildings.length}`} meta={t(lang, 'buildings')} />
-            <EntryCard href={`${prefix}/paths`} label={t(lang, 'paths')} value={`${learningPaths.length}`} meta={lang === 'en' ? 'learning routes' : lang === 'ja' ? '学習ルート' : '学习路线'} />
-            <EntryCard href="#history-index" label={lang === 'en' ? 'Periods and styles' : lang === 'ja' ? '時代と様式' : '时代与风格'} value={`${historyPathCount}`} meta={lang === 'en' ? 'active paths' : lang === 'ja' ? '入口' : '可浏览入口'} />
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <EntryCard href={`${prefix}/browse/architects`} label={t(lang, 'architects')} value={`${architects.length}`} meta={lang === 'en' ? 'people' : lang === 'ja' ? '人' : '人物'} />
+            <EntryCard href={`${prefix}/browse/buildings`} label={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'} value={`${qualityBuildings.length}`} meta={t(lang, 'buildings')} />
+            <EntryCard href={`${prefix}/browse/style`} label={lang === 'en' ? 'Periods and styles' : lang === 'ja' ? '時代と様式' : '时代与风格'} value={`${historyPathCount}`} meta={lang === 'en' ? 'archive entries' : lang === 'ja' ? '入口' : '可浏览入口'} />
             <EntryCard href={`${prefix}/browse/country`} label={t(lang, 'countries')} value={`${countryItems.length}`} meta={lang === 'en' ? 'regions' : lang === 'ja' ? '地域' : '地区'} />
           </div>
         </section>
@@ -176,43 +186,38 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
             title={t(lang, 'architects')}
             description={lang === 'en' ? 'Start with major figures, then continue by period.' : lang === 'ja' ? '主要な建築家から入り、時代別にたどる。' : '先看重要建筑师，再按时代继续浏览。'}
           />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredArchitects.map(architect => (
-              <FeaturedArchitect key={architect.id} architect={architect} count={buildingCountByArchitect.get(architect.slug) || 0} lang={lang} prefix={prefix} eraLabel={eraLabelFor(architect.era_slug)} />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {featuredArchitects.map((architect, index) => (
+              <FeaturedArchitect
+                key={architect.id}
+                architect={architect}
+                count={buildingCountByArchitect.get(architect.slug) || 0}
+                lang={lang}
+                prefix={prefix}
+                eraLabel={eraLabelFor(architect.era_slug)}
+                visualUrl={architectVisualBySlug.get(architect.slug)}
+                priority={index < 4}
+              />
             ))}
           </div>
           {eraGroups.length > 0 && (
-            <div className="mt-8 rounded-md border border-subtle bg-surface p-4 shadow-semantic-card sm:p-5">
-              <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <p className="eyebrow mb-2">{lang === 'en' ? 'By period' : lang === 'ja' ? '時代別' : '按时期'}</p>
-                  <h3 className="heading-3">{lang === 'en' ? 'Architect lineage' : lang === 'ja' ? '建築家の系譜' : '建筑师谱系'}</h3>
-                </div>
-                <p className="caption max-w-sm sm:text-right">
-                  {lang === 'en'
-                    ? 'Follow each period through the architects who gave it shape.'
-                    : lang === 'ja'
-                    ? '各時代を、その時代を形づくった建築家からたどる。'
-                    : '沿着每个时期，进入真正塑造它的建筑师。'}
-                </p>
-              </div>
-              <div className="columns-1 gap-3 md:columns-2 xl:columns-3">
-                {eraGroups.slice(0, 6).map(group => (
-                  <EraLineage key={group.era.id} era={group.era} architects={group.architects} lang={lang} prefix={prefix} />
-                ))}
-              </div>
-            </div>
+            <PeriodPath
+              groups={eraGroups.slice(0, 6)}
+              lang={lang}
+              prefix={prefix}
+            />
           )}
           {compactArchitects.length > 0 && (
             <div className="mt-8">
               <p className="eyebrow mb-3">{lang === 'en' ? 'More architects' : lang === 'ja' ? 'その他の建築家' : '更多建筑师'}</p>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {compactArchitects.map(architect => (
                   <ArchitectCard
                     key={architect.id}
                     architect={architect}
                     lang={lang}
                     eraLabel={eraLabelFor(architect.era_slug)}
+                    visualUrl={architectVisualBySlug.get(architect.slug)}
                   />
                 ))}
               </div>
@@ -228,53 +233,33 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
             description={lang === 'en' ? 'Read representative works through type, place, and authorship.' : lang === 'ja' ? '代表作を、類型、場所、作者性から読む。' : '从类型、地域与作者关系阅读代表作品。'}
           />
           <div className="space-y-8">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {featuredBuildings.map(building => (
                 <BuildingCard key={building.id} building={building} lang={lang} architectName={architectMap.get(building.architect_slug || '') || ''} />
               ))}
             </div>
-            <div className="grid items-start gap-5 md:grid-cols-2">
-              <IndexList title={t(lang, 'types')} items={typeItems} />
-              <IndexList title={t(lang, 'countries')} items={countryItems.slice(0, 8)} moreHref={`${prefix}/browse/country`} moreLabel={t(lang, 'viewAll')} />
-            </div>
+            <Link href={`${prefix}/browse/buildings`} className="interactive-row group flex items-center justify-between gap-4 border-y border-subtle px-2 py-4">
+              <span>
+                <span className="label block">{lang === 'en' ? 'Open the complete works index' : lang === 'ja' ? '作品アーカイブを開く' : '打开完整建筑作品索引'}</span>
+                <span className="mt-1 block text-sm text-secondary">{qualityBuildings.length} {t(lang, 'buildings')}</span>
+              </span>
+              <span className="text-lg text-primary transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            </Link>
           </div>
         </section>
       </Reveal>
 
-      {(eraItems.length > 0 || styleItems.length > 0 || styleFamilies.length > 0) && (
+      {(eraItems.length > 0 || styleItems.length > 0 || typeItems.length > 0 || countryItems.length > 0) && (
         <Reveal>
-          <section id="history-index" className="section border-t border-subtle pt-10 sm:pt-12">
+          <section id="history-index" className="section scroll-mt-20 border-t border-subtle pt-10 sm:pt-12">
             <SectionHeading
-              title={lang === 'en' ? 'Periods, styles, types' : lang === 'ja' ? '時代・様式・類型' : '时代、风格与类型'}
-              description={lang === 'en' ? 'Use historical period, movement, and program as three ways to read the archive.' : lang === 'ja' ? '時代、運動、用途からアーカイブを読む。' : '用时代、流派和用途三条线索阅读档案。'}
+              title={lang === 'en' ? 'Other ways in' : lang === 'ja' ? 'ほかの入口' : '其他入口'}
+              description={lang === 'en' ? 'Use period, style, program, or region only when they help you narrow the archive.' : lang === 'ja' ? '時代、様式、用途、地域は、作品や建築家を絞り込むための入口として使います。' : '时代、风格、用途和地域只作为筛选建筑师与作品的入口。'}
             />
-            <div className="columns-1 gap-6 lg:columns-3">
-              <IndexList title={t(lang, 'eras')} items={eraItems} />
-              <IndexList title={t(lang, 'styles')} items={styleItems} />
-              {styleFamilies.length > 0 && (
-                <div className="mb-6 break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
-                  <p className="eyebrow mb-4">{lang === 'en' ? 'Style groups' : lang === 'ja' ? '様式グループ' : '风格组'}</p>
-                  <div className="space-y-4">
-                    {styleFamilies.map(({ style, label, children, count }) => (
-                      <div key={style.id} className="border-b border-subtle pb-4 last:border-b-0 last:pb-0">
-                        <Link href={`${prefix}/browse/style/${style.slug}`} className="body-sm font-medium text-primary transition-colors hover:text-accent">
-                          {label}
-                        </Link>
-                        <p className="caption mt-1">{count} {t(lang, 'architects')}</p>
-                        {children.length > 0 && (
-                          <div className="mt-2 flex flex-wrap gap-1.5">
-                            {children.map(child => (
-                              <Link key={child.id} href={`${prefix}/browse/style/${child.slug}`} className="rounded-full border border-subtle px-2.5 py-1 text-[0.68rem] leading-none text-secondary transition-colors hover:border-default hover:text-primary">
-                                {displayTaxonomyName(child, lang)}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+            <div className="grid items-start gap-4 md:grid-cols-2">
+              {archiveGroups.map(group => (
+                <ArchiveGroup key={group.title} {...group} actionLabel={t(lang, 'viewAll')} />
+              ))}
             </div>
           </section>
         </Reveal>
@@ -290,6 +275,15 @@ function countBy<T>(items: T[], getKey: (item: T) => string | null | undefined):
     if (key) counts.set(key, (counts.get(key) || 0) + 1)
   })
   return counts
+}
+
+function buildArchitectVisualMap(buildings: BuildingWithCover[]): Map<string, string> {
+  const visuals = new Map<string, string>()
+  buildings.forEach(building => {
+    if (!building.architect_slug || !building.cover_url || visuals.has(building.architect_slug)) return
+    visuals.set(building.architect_slug, building.cover_url)
+  })
+  return visuals
 }
 
 function topCountries(buildings: Building[], lang: string): Array<{ code: string; name: string; count: number }> {
@@ -308,7 +302,7 @@ function topCountries(buildings: Building[], lang: string): Array<{ code: string
 
 function EntryCard({ href, label, value, meta }: { href: string; label: string; value: string; meta: string }) {
   return (
-    <Link href={href} className="group rounded-md border border-subtle bg-surface px-4 py-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
+    <Link href={href} className="interactive-row group border-y border-subtle px-2 py-4">
       <p className="label">{label}</p>
       <div className="mt-4 flex items-end justify-between gap-3">
         <span className="font-serif-display text-4xl leading-none text-primary">{value}</span>
@@ -324,66 +318,128 @@ function FeaturedArchitect({
   lang,
   prefix,
   eraLabel,
+  visualUrl,
+  priority = false,
 }: {
   architect: Architect
   count: number
   lang: string
   prefix: string
   eraLabel: string
+  visualUrl?: string | null
+  priority?: boolean
 }) {
   const years = architect.birth_year ? `${architect.birth_year}-${architect.death_year || (lang === 'en' ? 'present' : lang === 'ja' ? '現在' : '至今')}` : ''
+  const portrait = getArchitectImageOverride(architect.slug)
+  const portraitAlt = portrait?.alt[lang as keyof typeof portrait.alt] || portrait?.alt.en || displayName(architect, lang)
   return (
-    <Link href={`${prefix}/architect/${architect.slug}`} className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
-      <p className="caption mb-5">{[years, architect.nationalities?.[0] ? localizedNationality(architect.nationalities[0], lang) : ''].filter(Boolean).join(' · ')}</p>
-      <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">{displayName(architect, lang)}</h3>
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {eraLabel && (
-          <span className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">
-            {eraLabel}
-          </span>
+    <Link href={`${prefix}/architect/${architect.slug}`} className="group block border-y border-subtle pb-4 transition-colors hover:bg-surface-muted/45">
+      <ArchitectPortraitThumb
+        src={portrait?.url}
+        fallbackSrc={visualUrl}
+        alt={portraitAlt}
+        fallback={displayName(architect, lang)}
+        className="aspect-[4/3] rounded-sm"
+        sizes="(max-width: 1024px) 50vw, 20vw"
+        priority={priority}
+      />
+      <div className="pt-4">
+        <p className="caption mb-3">{[years, architect.nationalities?.[0] ? localizedNationality(architect.nationalities[0], lang) : ''].filter(Boolean).join(' · ')}</p>
+        <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">{displayName(architect, lang)}</h3>
+        {(eraLabel || count > 0) && (
+          <p className="mt-4 text-xs leading-relaxed text-muted">
+            {[eraLabel, count > 0 ? `${count} ${lang === 'en' ? 'works' : lang === 'ja' ? '作品' : '作品'}` : ''].filter(Boolean).join(' · ')}
+          </p>
         )}
-        {count > 0 && <span className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">{count} {lang === 'en' ? 'works' : lang === 'ja' ? '作品' : '作品'}</span>}
       </div>
     </Link>
   )
 }
 
-function EraLineage({ era, architects, lang, prefix }: { era: Era; architects: Architect[]; lang: string; prefix: string }) {
+function PeriodPath({ groups, lang, prefix }: { groups: Array<{ era: Era; architects: Architect[] }>; lang: string; prefix: string }) {
   return (
-    <div className="mb-3 break-inside-avoid rounded-md border border-subtle bg-surface-raised p-4">
-      <Link href={`${prefix}/browse/era/${era.slug}`} className="body-sm font-medium text-primary transition-colors hover:text-accent">
-        {displayName(era, lang)}
-      </Link>
-      <p className="caption mt-1">{era.year_start ? `${era.year_start}${era.year_end ? `-${era.year_end}` : ''}` : ''}</p>
-      <div className="mt-2 space-y-1.5">
-        {architects.map(architect => (
-          <Link key={architect.id} href={`${prefix}/architect/${architect.slug}`} className="block text-sm leading-relaxed text-secondary transition-colors hover:text-primary">
-            {displayName(architect, lang)}
-          </Link>
+    <div className="mt-10 border-y border-subtle py-7">
+      <div className="mb-6 grid gap-3 md:grid-cols-[16rem_minmax(0,1fr)] md:items-end">
+        <div>
+          <p className="eyebrow mb-2">{lang === 'en' ? 'Period route' : lang === 'ja' ? '時代別' : '时代路径'}</p>
+          <h3 className="heading-3">{lang === 'en' ? 'Read by turning points' : lang === 'ja' ? '時代の入口から読む' : '按时代入口阅读'}</h3>
+        </div>
+        <p className="caption max-w-2xl md:justify-self-end md:text-right">
+          {lang === 'en'
+            ? 'Each row is a doorway into one period: open the period, then compare the key architects beside it.'
+            : lang === 'ja'
+              ? '各行は時代ページへの入口です。時代を開き、横に並ぶ代表的な建築家と比較します。'
+              : '每一行都是进入某个时代的入口：先打开时代，再对照旁边的代表建筑师。'}
+        </p>
+      </div>
+      <div className="grid gap-0">
+        {groups.map((group, index) => (
+          <EraLineage key={group.era.id} era={group.era} architects={group.architects.slice(0, 4)} lang={lang} prefix={prefix} index={index + 1} />
         ))}
       </div>
     </div>
   )
 }
 
-function IndexList({ title, items, moreHref, moreLabel }: { title: string; items: BrowseItem[]; moreHref?: string; moreLabel?: string }) {
+function EraLineage({ era, architects, lang, prefix, index }: { era: Era; architects: Architect[]; lang: string; prefix: string; index: number }) {
+  return (
+    <div className="grid gap-4 border-t border-subtle py-4 first:border-t-0 md:grid-cols-[3rem_12rem_minmax(0,1fr)_5rem] md:items-start">
+      <p className="caption tabular-nums">{String(index).padStart(2, '0')}</p>
+      <div>
+        <Link href={`${prefix}/browse/era/${era.slug}`} className="body-sm font-medium text-primary transition-colors hover:text-accent">
+          {displayName(era, lang)}
+        </Link>
+        <p className="caption mt-1">{era.year_start ? `${era.year_start}${era.year_end ? `-${era.year_end}` : ''}` : ''}</p>
+      </div>
+      <div className="flex flex-wrap gap-x-4 gap-y-2">
+        {architects.map(architect => (
+          <Link key={architect.id} href={`${prefix}/architect/${architect.slug}`} className="text-sm leading-relaxed text-secondary transition-colors hover:text-primary">
+            {displayName(architect, lang)}
+          </Link>
+        ))}
+      </div>
+      <Link href={`${prefix}/browse/era/${era.slug}`} className="text-xs font-medium text-accent md:text-right">
+        {lang === 'en' ? 'Open' : lang === 'ja' ? '開く' : '打开'} →
+      </Link>
+    </div>
+  )
+}
+
+function ArchiveGroup({
+  title,
+  body,
+  items,
+  actionHref,
+  actionLabel,
+}: {
+  title: string
+  body: string
+  items: BrowseItem[]
+  actionHref?: string
+  actionLabel: string
+}) {
   if (items.length === 0) return null
   return (
-    <div className="mb-6 h-fit break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
-      <p className="eyebrow mb-4">{title}</p>
+    <div className="border-t border-subtle pt-4">
+      <div className="mb-4 flex items-start justify-between gap-4">
+        <div>
+          <h3 className="text-lg font-medium text-primary">{title}</h3>
+          <p className="mt-1 text-xs leading-relaxed text-secondary">{body}</p>
+        </div>
+        {actionHref && (
+          <Link href={actionHref} className="shrink-0 text-xs text-accent underline underline-offset-4">
+            {actionLabel}
+          </Link>
+        )}
+      </div>
       <div className="divide-y divide-[color:var(--ui-border-subtle)]">
         {items.map(item => (
-          <Link key={item.id} href={item.href} className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 py-3 transition-colors first:pt-0 last:pb-0 hover:text-accent">
-            <span className="body-sm font-medium text-primary">{item.label}</span>
+          <Link key={item.id} href={item.href} className="interactive-row group grid grid-cols-[minmax(0,1fr)_auto] gap-3 px-2 py-3">
+            <span className="min-w-0 truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">{item.label}</span>
             <span className="caption text-right">{item.meta}</span>
           </Link>
         ))}
       </div>
-      {moreHref && moreLabel && (
-        <Link href={moreHref} className="mt-4 inline-flex body-sm text-accent underline underline-offset-4">
-          {moreLabel}
-        </Link>
-      )}
     </div>
   )
 }

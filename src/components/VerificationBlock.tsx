@@ -58,7 +58,7 @@ function copyFor(lang: string) {
 export default function VerificationBlock({ status, qualityLevel, lastReviewed, reviewer, lang }: VerificationBlockProps) {
   const copy = copyFor(lang)
   return (
-    <aside className="rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card">
+    <aside className="border-y border-subtle px-2 py-4">
       <div className="flex flex-wrap items-center gap-2">
         <StatusBadge status={status} lang={lang} />
         <span className="rounded-full border border-subtle px-2.5 py-1 text-[0.68rem] font-medium uppercase tracking-[0.08em] text-muted">

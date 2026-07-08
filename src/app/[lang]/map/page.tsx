@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { formatDisplayLocation } from '@/lib/display'
+import { formatCountryName, hasCjk, isProbablySimplifiedChinese } from '@/lib/locale'
+import type { BuildingWithCover } from '@/lib/types'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
-import { displayName, formatCountryName, formatDisplayLocation, hasCjk, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
+import { displayName } from '@/lib/display'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
 import SafeImage from '@/components/SafeImage'
@@ -208,7 +211,7 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
           <h1 className="heading-display mb-4">{c(lang, 'title')}</h1>
           <p className="body-large max-w-3xl">{c(lang, 'intro')}</p>
         </div>
-        <div className="grid grid-cols-3 overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
+        <div className="grid grid-cols-3 border-y border-subtle">
           <Metric value={countries.length} label={t(lang, 'countries')} />
           <Metric value={cities.length} label={c(lang, 'cities')} />
           <Metric value={buildings.length} label={t(lang, 'buildings')} />
@@ -227,14 +230,14 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
             </Link>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-x-8 gap-y-0 md:grid-cols-2 xl:grid-cols-3">
             {countries.slice(0, 12).map(country => {
               const cover = localCover(country.featured)
               return (
                 <Link
                   key={country.code}
                   href={`${prefix}/browse/country/${country.code}`}
-                  className="group mb-4 block w-full break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+                  className="interactive-row group block w-full border-t border-subtle px-2 py-5"
                 >
                   <div className="mb-5 flex items-start justify-between gap-4">
                     <div>
@@ -246,20 +249,20 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
                       {country.architectCount > 0 && <><br />{country.architectCount} {c(lang, 'architects')}</>}
                     </p>
                   </div>
-                  <div className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
+                  <div className="h-1 overflow-hidden bg-surface-muted">
                     <div
-                      className="h-full rounded-full bg-[color:var(--ui-accent)]"
+                      className="h-full bg-[color:var(--ui-accent)]"
                       style={{ width: `${Math.max(8, Math.round((country.buildingCount / maxCountryCount) * 100))}%` }}
                     />
                   </div>
                   <p className="mt-3 body-sm line-clamp-2 text-secondary">{regionNarrative(country.code, lang)}</p>
                   {cover ? (
-                    <div className="relative mt-4 h-20 overflow-hidden rounded-sm bg-surface-muted sm:h-24">
+                    <div className="image-frame relative mt-4 h-20 rounded-sm bg-surface-muted sm:h-24">
                       <SafeImage
                         src={cover.cover_url || ''}
                         alt={displayName(cover, lang)}
                         fill
-                        className="object-cover transition duration-500 ease-out group-hover:scale-[1.015]"
+                        className="image-zoom object-cover"
                         sizes="(min-width: 1280px) 26rem, (min-width: 768px) 45vw, 100vw"
                       />
                     </div>
@@ -289,18 +292,18 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
               <p className="eyebrow mb-2">{c(lang, 'featuredRoutes')}</p>
               <h2 className="heading-3">{lang === 'en' ? 'Regional routes' : lang === 'ja' ? '地域の入口' : '地域入口'}</h2>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-x-8 gap-y-0 md:grid-cols-2 xl:grid-cols-3">
               {featuredRoutes.map(country => {
                 const cover = localCover(country.featured)
                 return (
-                <Link key={country.code} href={`${prefix}/browse/country/${country.code}`} className="group grid grid-cols-[7rem_minmax(0,1fr)] gap-4 rounded-md border border-subtle bg-surface p-3 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-surface-muted">
+                <Link key={country.code} href={`${prefix}/browse/country/${country.code}`} className="interactive-row group grid grid-cols-[7rem_minmax(0,1fr)] gap-4 border-t border-subtle px-2 py-4">
+                  <div className="image-frame relative aspect-[4/3] rounded-sm bg-surface-muted">
                     {cover ? (
                       <SafeImage
                         src={cover.cover_url || ''}
                         alt={displayName(cover, lang)}
                         fill
-                        className="object-cover transition duration-500 ease-out group-hover:scale-[1.015]"
+                        className="image-zoom object-cover"
                         sizes="7rem"
                       />
                     ) : (
@@ -328,20 +331,20 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
             <h2 className="heading-3">{c(lang, 'cityIndex')}</h2>
           </div>
           {citiesWithCovers.length > 0 && (
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-x-6 gap-y-0 sm:grid-cols-2 xl:grid-cols-4">
               {citiesWithCovers.map(city => (
               <Link
                 key={city.key}
                 href={`${prefix}/search?q=${encodeURIComponent(city.query)}`}
-                className="group grid min-h-[7.25rem] grid-cols-[5.5rem_minmax(0,1fr)] gap-3 rounded-md border border-subtle bg-surface p-3 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+                className="interactive-row group grid min-h-[7.25rem] grid-cols-[5.5rem_minmax(0,1fr)] gap-3 border-t border-subtle px-2 py-4"
               >
-                <div className="relative overflow-hidden rounded-sm bg-surface-muted">
+                <div className="image-frame relative rounded-sm bg-surface-muted">
                   {city.featured?.cover_url ? (
                     <SafeImage
                       src={city.featured.cover_url}
                       alt={displayName(city.featured, lang)}
                       fill
-                      className="object-cover"
+                      className="image-zoom object-cover"
                       sizes="6rem"
                     />
                   ) : (
@@ -360,12 +363,12 @@ export default async function MapPage({ params }: { params: Promise<{ lang: stri
           {citiesWithoutCovers.length > 0 && (
             <div className={citiesWithCovers.length > 0 ? 'mt-6' : ''}>
               <p className="eyebrow mb-3">{lang === 'en' ? 'Text city index' : lang === 'ja' ? '都市索引' : '城市文字索引'}</p>
-              <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-x-6 gap-y-0 sm:grid-cols-2 xl:grid-cols-3">
                 {citiesWithoutCovers.map(city => (
                   <Link
                     key={city.key}
                     href={`${prefix}/search?q=${encodeURIComponent(city.query)}`}
-                    className="group grid grid-cols-[minmax(0,1fr)_auto] gap-3 rounded-md border border-subtle bg-surface px-4 py-3 transition-colors hover:border-default hover:bg-surface-muted"
+                    className="interactive-row group grid grid-cols-[minmax(0,1fr)_auto] gap-3 border-t border-subtle px-2 py-3"
                   >
                     <span className="truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">{city.label}</span>
                     <span className="caption tabular-nums">{city.buildingCount} {c(lang, 'buildings')}</span>

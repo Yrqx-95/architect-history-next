@@ -1,13 +1,17 @@
 import Link from 'next/link'
+import { displayText, formatDisplayCity, formatDisplayLocation } from '@/lib/display'
+import { formatCountryName, isProbablySimplifiedChinese } from '@/lib/locale'
+import type { Architect, Building, Era, Style } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getBuildings, getBuildingsWithCovers, getEras } from '@/lib/data'
 import { getBuildingRelations } from '@/lib/relations'
-import { displayName, displayText, formatCountryName, formatDisplayLocation, isProbablySimplifiedChinese, type Architect, type Building, type Era, type Style } from '@/lib/types'
+import { displayName } from '@/lib/display'
 import { findTimelinePeriodForEra, findTimelinePeriodForRange, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
 import { getBuildingFallbackContent } from '@/lib/fallback-content'
 import { getBuildingContent, localizedBuildingContent, type BuildingContentSource } from '@/lib/building-content'
+import { buildingLearningMapBySlug, type BuildingLearningMapRecord } from '@/content/building-learning-map/building-learning-map'
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import ImageGallery from '@/components/ImageGallery'
@@ -19,7 +23,7 @@ import Reveal from '@/components/Reveal'
 import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
 
-export const dynamicParams = true
+export const dynamicParams = false
 
 type LocalizedText = {
   zh: string
@@ -403,34 +407,32 @@ function BuildingPeriodContext({
   return (
     <Reveal>
       <section className="section-sm border-t border-subtle pt-8 sm:pt-10">
-        <div className="rounded-md border border-subtle bg-surface p-5 shadow-semantic-card sm:p-6">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.68fr)_minmax(16rem,0.32fr)]">
-            <div>
-              <p className="eyebrow mb-3">{l('eyebrow')}</p>
-              {contextMeta && <p className="metadata mb-4">{contextMeta}</p>}
-              <h2 className="heading-3 mb-4">{l('title')}</h2>
-              <p className="text-xl font-medium leading-snug text-primary sm:text-2xl">
-                {localizedTimelineText(period.question, lang)}
-              </p>
-              <p className="body-sm mt-4 max-w-3xl text-secondary">
-                {localizedTimelineText(period.summary, lang)}
-              </p>
-            </div>
-            <aside className="border-t border-subtle pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
-              <p className="label mb-3">{l('turn')}</p>
-              <p className="caption">{localizedTimelineText(period.transition, lang)}</p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                {era && (
-                  <Link href={`${prefix}/browse/era/${era.slug}`} className="text-sm font-medium text-accent underline underline-offset-4">
-                    {l('era')}
-                  </Link>
-                )}
-                <Link href={`${prefix}/timeline#period-${period.id}`} className="text-sm font-medium text-accent underline underline-offset-4">
-                  {l('timeline')}
-                </Link>
-              </div>
-            </aside>
+        <div className="grid gap-6 border-y border-subtle py-6 lg:grid-cols-[minmax(0,0.68fr)_minmax(16rem,0.32fr)]">
+          <div>
+            <p className="eyebrow mb-3">{l('eyebrow')}</p>
+            {contextMeta && <p className="metadata mb-4">{contextMeta}</p>}
+            <h2 className="heading-3 mb-4">{l('title')}</h2>
+            <p className="text-xl font-medium leading-snug text-primary sm:text-2xl">
+              {localizedTimelineText(period.question, lang)}
+            </p>
+            <p className="body-sm mt-4 max-w-3xl text-secondary">
+              {localizedTimelineText(period.summary, lang)}
+            </p>
           </div>
+          <aside className="border-t border-subtle pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+            <p className="label mb-3">{l('turn')}</p>
+            <p className="caption">{localizedTimelineText(period.transition, lang)}</p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {era && (
+                <Link href={`${prefix}/browse/era/${era.slug}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                  {l('era')}
+                </Link>
+              )}
+              <Link href={`${prefix}/timeline#period-${period.id}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                {l('timeline')}
+              </Link>
+            </div>
+          </aside>
         </div>
       </section>
     </Reveal>
@@ -507,7 +509,7 @@ function BuildingKnowledgeNetwork({
       href: `${prefix}/browse/country/${countryCode}`,
       label: l('region'),
       title: countryName,
-      meta: building.city || '',
+      meta: formatDisplayCity(building.city, lang),
     },
     ...related.slice(0, 2).map(item => ({
       key: `building-${item.slug}`,
@@ -530,12 +532,12 @@ function BuildingKnowledgeNetwork({
           </div>
           <p className="caption max-w-lg sm:text-right">{l('intro')}</p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map(card => (
             <Link
               key={card.key}
               href={card.href}
-              className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+              className="interactive-row group border-y border-subtle px-2 py-4"
             >
               <p className="label mb-4">{card.label}</p>
               <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">{card.title}</h3>
@@ -606,11 +608,9 @@ function BuildingStudyMap({
         </div>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
           {items.map(item => {
-            const className = `rounded-md border p-4 transition-colors ${
-              item.ready
-                ? 'border-subtle bg-surface shadow-semantic-card hover:border-default hover:bg-surface-muted'
-                : 'border-subtle bg-surface-muted'
-            }`
+            const className = item.ready
+              ? 'interactive-row border-y border-subtle px-2 py-4'
+              : 'border-y border-subtle px-2 py-4 opacity-65'
             const content = (
               <>
                 <p className="text-sm font-medium leading-snug text-primary">{item.title}</p>
@@ -629,6 +629,136 @@ function BuildingStudyMap({
             )
           })}
         </div>
+      </section>
+    </Reveal>
+  )
+}
+
+function uniqueCompact(items: string[]) {
+  return Array.from(new Set(items.map(item => item.trim()).filter(Boolean)))
+}
+
+function formatStudyLabel(value: string) {
+  return value
+    .split('-')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
+}
+
+function BuildingLearningBridge({
+  lang,
+  prefix,
+  record,
+}: {
+  lang: string
+  prefix: string
+  record: BuildingLearningMapRecord
+}) {
+  const copy = {
+    eyebrow: { zh: '阅读线索', en: 'Reading cues', ja: '読解の手がかり' },
+    title: { zh: '继续阅读这座建筑', en: 'Continue reading this building', ja: 'この建築を読み進める' },
+    intro: {
+      zh: '先抓住核心概念，再从空间、材料、结构与历史四个方向继续进入相关档案。',
+      en: 'Start with the core concepts, then continue through related archive cues in space, material, structure, and history.',
+      ja: '核となる概念を押さえ、空間、素材、構造、歴史の手がかりから関連資料へ進みます。',
+    },
+    coreConcepts: { zh: '核心概念', en: 'Core concepts', ja: '核となる概念' },
+    studyQuestions: { zh: '阅读问题', en: 'Reading questions', ja: '読み解く問い' },
+    glossary: { zh: '相关术语', en: 'Related glossary terms', ja: '関連用語' },
+    codeTopics: { zh: '相关法规主题', en: 'Related code topics', ja: '関連する法規テーマ' },
+    spatial: { zh: '空间', en: 'Space', ja: '空間' },
+    material: { zh: '材料', en: 'Material', ja: '素材' },
+    structure: { zh: '结构', en: 'Structure', ja: '構造' },
+    history: { zh: '历史', en: 'History', ja: '歴史' },
+    reviewNote: {
+      zh: '这些是阅读提示，用来帮助进入作品；不是最终的资料来源结论。',
+      en: 'These are reading prompts for entering the work, not final source claims.',
+      ja: 'これは作品へ入るための読解プロンプトであり、最終的な出典上の結論ではありません。',
+    },
+  }
+  const l = (key: keyof typeof copy) => copy[key][lang as 'zh' | 'en' | 'ja'] || copy[key].en
+  const question = (label: string, terms: string[]) => {
+    const joined = uniqueCompact(terms).slice(0, 3).join(', ')
+    if (lang === 'en') return joined ? `How does this work make ${joined} readable?` : `What does this work reveal about ${label.toLowerCase()}?`
+    if (lang === 'ja') return joined ? `${joined} は、この作品の中でどのように読めるか。` : `${label}の視点から、この作品は何を教えるか。`
+    return joined ? `这座建筑如何让 ${joined} 变得可读？` : `从${label}角度看，这座建筑呈现了什么？`
+  }
+  const lensGroups = [
+    { key: 'spatial', label: l('spatial'), terms: record.spatialConcepts },
+    { key: 'material', label: l('material'), terms: record.materialConcepts },
+    { key: 'structure', label: l('structure'), terms: record.structureConcepts },
+    { key: 'history', label: l('history'), terms: record.historyConcepts },
+  ].filter(group => group.terms.length)
+  const fallbackLensGroups = lensGroups.length ? lensGroups : [
+    { key: 'core', label: l('coreConcepts'), terms: record.learningConcepts },
+  ]
+  const concepts = uniqueCompact(record.learningConcepts)
+  const glossaryTerms = uniqueCompact(record.glossaryTerms)
+  const codeTopics = uniqueCompact(record.relatedCodeTopics)
+
+  if (!concepts.length && !glossaryTerms.length && !codeTopics.length) return null
+
+  return (
+    <Reveal>
+      <section id="learn-from-this-building" className="section-sm border-t border-subtle pt-8 sm:pt-10">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.62fr)_minmax(18rem,0.38fr)]">
+          <div>
+            <p className="eyebrow mb-2">{l('eyebrow')}</p>
+            <h2 className="heading-3">{l('title')}</h2>
+            <p className="body-sm mt-4 max-w-2xl text-secondary">{l('intro')}</p>
+            {record.needsReview && <p className="caption mt-4 max-w-2xl">{l('reviewNote')}</p>}
+          </div>
+          {concepts.length > 0 && (
+            <div className="border-t border-subtle pt-4">
+              <p className="label mb-3">{l('coreConcepts')}</p>
+              <div className="flex flex-wrap gap-2">
+                {concepts.slice(0, 8).map(concept => (
+                  <span key={concept} className="rounded-full border border-subtle bg-surface-muted px-3 py-1 text-xs font-medium leading-5 text-secondary">
+                    {concept}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {fallbackLensGroups.map(group => (
+            <div key={group.key} className="border-y border-subtle px-2 py-4">
+              <p className="label mb-3">{group.label}</p>
+              <p className="body-sm text-primary">{question(group.label, group.terms)}</p>
+            </div>
+          ))}
+        </div>
+
+        {(glossaryTerms.length > 0 || codeTopics.length > 0) && (
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+            {glossaryTerms.length > 0 && (
+              <div className="border-t border-subtle pt-4">
+                <p className="label mb-3">{l('glossary')}</p>
+                <div className="flex flex-wrap gap-3">
+                  {glossaryTerms.slice(0, 6).map(term => (
+                    <Link key={term} href={`${prefix}/glossary?term=${encodeURIComponent(term)}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                      {term}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+            {codeTopics.length > 0 && (
+              <div className="border-t border-subtle pt-4">
+                <p className="label mb-3">{l('codeTopics')}</p>
+                <div className="flex flex-wrap gap-3">
+                  {codeTopics.map(topic => (
+                    <Link key={topic} href={`${prefix}/code/${topic}`} className="text-sm font-medium text-accent underline underline-offset-4">
+                      {formatStudyLabel(topic)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </section>
     </Reveal>
   )
@@ -657,9 +787,9 @@ function BuildingTechnicalNotes({ lang, building }: { lang: string; building: Bu
   return (
     <Reveal>
       <ArticleSection id="technical-notes" title={l('title')}>
-        <div className="divide-y divide-[color:var(--ui-border-subtle)] rounded-md border border-subtle bg-surface">
+        <div className="divide-y divide-[color:var(--ui-border-subtle)] border-y border-subtle">
           {rows.map(row => (
-            <div key={row.label} className="grid gap-2 px-4 py-3 sm:grid-cols-[9rem_minmax(0,1fr)]">
+            <div key={row.label} className="grid gap-2 px-2 py-3 sm:grid-cols-[9rem_minmax(0,1fr)]">
               <p className="label">{row.label}</p>
               <p className="body-sm text-primary">{row.value}</p>
             </div>
@@ -762,6 +892,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   const timelinePeriod = contextEra
     ? findTimelinePeriodForEra(contextEra)
     : findTimelinePeriodForRange(building.year_start, building.year_end)
+  const learningMapRecord = buildingLearningMapBySlug[building.slug]
 
   const nameText = displayName(building, lang)
   const visibleBuildingStyles = buildingStyles.filter(style => {
@@ -879,6 +1010,14 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         hasCirculation={Boolean(circulationText || hasLocalizedOverlay)}
         hasSources={Boolean(contentOverlay?.sources.length)}
       />
+
+      {learningMapRecord && (
+        <BuildingLearningBridge
+          lang={lang}
+          prefix={prefix}
+          record={learningMapRecord}
+        />
+      )}
 
       {/* Deep Analysis — layered content sections with reading anchors */}
       <div className="section-sm space-y-14 sm:space-y-16">

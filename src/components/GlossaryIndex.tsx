@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import type { GlossaryCategory, GlossaryTerm } from '@/lib/glossary'
 import { getGlossaryRelatedTopicLabel, getGlossaryTermDefinition, getGlossaryTermTitle } from '@/lib/glossary'
@@ -159,14 +160,14 @@ export default function GlossaryIndex({ terms, lang, prefix, initialTerm = '' }:
             value={query}
             onChange={event => setQuery(event.target.value)}
             placeholder={copy.searchPlaceholder}
-            className="mt-3 min-h-12 w-full rounded-full border border-default bg-surface-raised px-5 text-base text-primary shadow-semantic-card placeholder:text-muted focus:border-default focus:outline-none focus:ring-2 focus:ring-[color:var(--ui-focus)]"
+            className="filter-search-shell mt-3 min-h-12 w-full rounded-full border border-default bg-surface-raised px-5 text-base text-primary shadow-semantic-card placeholder:text-muted focus:border-default focus:outline-none focus:ring-2 focus:ring-[color:var(--ui-focus)]"
           />
         </div>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => setCategory('all')}
-            className={`min-h-10 rounded-full border px-4 text-sm transition-colors ${category === 'all' ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
+            className={`category-chip min-h-10 rounded-full border px-4 text-sm transition-colors ${category === 'all' ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
           >
             {copy.all}
           </button>
@@ -175,7 +176,7 @@ export default function GlossaryIndex({ terms, lang, prefix, initialTerm = '' }:
               key={item}
               type="button"
               onClick={() => setCategory(item)}
-              className={`min-h-10 rounded-full border px-4 text-sm transition-colors ${category === item ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
+              className={`category-chip min-h-10 rounded-full border px-4 text-sm transition-colors ${category === item ? 'border-default bg-[color:var(--ui-text-primary)] text-inverse' : 'border-subtle bg-surface-raised text-secondary hover:bg-surface-muted hover:text-primary'}`}
             >
               {copy.categories[item]}
             </button>
@@ -183,8 +184,8 @@ export default function GlossaryIndex({ terms, lang, prefix, initialTerm = '' }:
         </div>
       </div>
 
-      <div className="mt-8 grid gap-x-8 border-b border-subtle md:grid-cols-2">
-        {filteredTerms.map(term => {
+      <div key={`${category}-${normalizedQuery || 'empty'}`} className="filter-results mt-8 grid gap-x-8 border-b border-subtle md:grid-cols-2">
+        {filteredTerms.map((term, index) => {
           const title = getGlossaryTermTitle(term, lang)
           const secondary = secondaryTerms(term, lang)
           const isDeepLinked = Boolean(deepLinkedSlug && matchesTerm(term, deepLinkedSlug))
@@ -192,7 +193,8 @@ export default function GlossaryIndex({ terms, lang, prefix, initialTerm = '' }:
             <article
               key={term.id}
               id={term.slug}
-              className={`scroll-mt-28 border-t border-subtle py-6 transition-colors ${isDeepLinked ? 'bg-surface-muted px-4 sm:-mx-4' : ''}`}
+              style={{ '--stagger-index': Math.min(index, 10) } as CSSProperties}
+              className={`motion-appear filter-result-row interactive-row scroll-mt-28 border-t border-subtle py-6 transition-colors ${isDeepLinked ? 'bg-surface-muted px-4 sm:-mx-4' : ''}`}
             >
               <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_8rem]">
                 <div>

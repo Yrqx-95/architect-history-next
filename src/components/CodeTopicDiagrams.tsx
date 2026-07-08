@@ -238,7 +238,7 @@ export default function CodeTopicDiagrams({ topicSlug, lang }: { topicSlug: stri
   return (
     <div className="space-y-5">
       {diagrams.map(diagram => (
-        <figure key={diagram.id} className="diagram-light-theme rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card">
+        <figure key={diagram.id} className="diagram-light-theme border-y border-subtle px-2 py-4">
           <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="caption">{kindLabel(diagram.kind, lang)}</p>

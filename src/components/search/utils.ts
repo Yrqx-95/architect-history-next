@@ -1,5 +1,5 @@
 import type { SearchName } from './types'
-import { formatCountryName, hasCjk, isProbablySimplifiedChinese } from '@/lib/types'
+import { formatCountryName, hasCjk, isProbablySimplifiedChinese } from '@/lib/locale'
 
 export function displayName(obj: SearchName, lang: string) {
   return (lang === 'ja'

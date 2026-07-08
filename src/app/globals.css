@@ -258,6 +258,24 @@ body {
 
 img { max-width: 100%; height: auto; }
 
+:where(a[href], button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 3px;
+}
+
+:where(button, select, summary, a[href]) {
+  touch-action: manipulation;
+}
+
+:where(button, summary, a[href]) {
+  cursor: pointer;
+}
+
+:where(button:disabled) {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 ::selection {
   background: var(--ui-surface-muted);
   color: var(--ui-text-primary);
@@ -296,6 +314,15 @@ img { max-width: 100%; height: auto; }
   line-height: 1.25;
 }
 .dark .heading-2 { color: var(--ui-text-primary); }
+
+/* Section title — quiet index and archive section headers */
+.heading-section {
+  @apply text-xl sm:text-2xl font-semibold;
+  color: var(--ui-text-primary);
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+.dark .heading-section { color: var(--ui-text-primary); }
 
 /* Heading 3 — subsection titles */
 .heading-3 {
@@ -410,6 +437,103 @@ img { max-width: 100%; height: auto; }
 .flow > * + * { margin-top: var(--spacing-rhythm); }
 .flow-sm > * + * { margin-top: 1rem; }
 .flow-lg > * + * { margin-top: 2.5rem; }
+
+/* ============================================================
+   Graduation Module — civic archive polish
+   ============================================================ */
+
+.graduation-system {
+  --ui-surface: #f6f8f7;
+  --ui-surface-muted: #eef2f1;
+  --ui-surface-raised: #ffffff;
+  --ui-border: #c9d0cf;
+  --ui-border-subtle: #dde2e0;
+  --ui-text-primary: #151817;
+  --ui-text-secondary: #323837;
+  --ui-text-muted: #68716e;
+  --ui-text-soft: #8a918d;
+  --ui-accent: #315f68;
+  --ui-accent-hover: #183f47;
+  box-sizing: border-box;
+  width: 100vw;
+  min-height: calc(100vh - 6rem);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-bottom: -2rem;
+  padding: 0 max(0.75rem, calc((100vw - var(--container-wide)) / 2)) 3rem;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7f9f8 42%, #f2f5f4 100%);
+  color: var(--ui-text-primary);
+}
+
+.dark .graduation-system {
+  --ui-surface: #151819;
+  --ui-surface-muted: #202627;
+  --ui-surface-raised: #1b2021;
+  --ui-border: #465052;
+  --ui-border-subtle: #30383a;
+  --ui-text-primary: #f4f7f5;
+  --ui-text-secondary: #dce4e1;
+  --ui-text-muted: #abb8b4;
+  --ui-text-soft: #8e9b98;
+  --ui-accent: #92c7ce;
+  --ui-accent-hover: #c0e5e9;
+  background:
+    linear-gradient(180deg, #151819 0%, #171d1e 42%, #111516 100%);
+}
+
+.graduation-system .heading-display {
+  font-weight: 650;
+}
+
+.graduation-system .heading-section {
+  font-weight: 650;
+}
+
+.graduation-system .eyebrow {
+  letter-spacing: 0.06em;
+}
+
+.graduation-hero {
+  position: relative;
+}
+
+.graduation-hero::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1.25rem;
+  width: 4rem;
+  height: 1px;
+  background: var(--ui-text-primary);
+  opacity: 0.38;
+}
+
+.graduation-section {
+  border-top: 1px solid var(--ui-border-subtle);
+  padding-top: 1.25rem;
+}
+
+.graduation-filter-console {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--ui-surface-muted) 68%, transparent), transparent 72%),
+    var(--ui-surface-raised);
+}
+
+.graduation-result-list {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--ui-surface-muted) 42%, transparent), transparent 18rem),
+    var(--ui-surface-raised);
+}
+
+.graduation-soft-band {
+  background: color-mix(in srgb, var(--ui-surface-muted) 58%, transparent);
+}
+
+.graduation-system .interactive-row:hover,
+.graduation-system .interactive-row:focus-visible {
+  background: color-mix(in srgb, var(--ui-surface-muted) 56%, transparent);
+}
 
 /* ============================================================
    Prose Configuration — Long-form Architectural Reading
@@ -594,8 +718,39 @@ img { max-width: 100%; height: auto; }
   to { opacity: 1; }
 }
 
+@keyframes filter-result-enter {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes count-bump {
+  0% { transform: translateY(2px) scale(0.96); opacity: 0.45; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes motion-appear {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
 .page-enter {
-  animation: page-enter var(--duration-slow) var(--ease-out);
+  animation: page-enter var(--duration-slow) var(--ease-out) both;
 }
 
 .reveal-anim {
@@ -605,7 +760,7 @@ img { max-width: 100%; height: auto; }
 }
 
 .fade-in {
-  animation: page-enter var(--duration-slow) var(--ease-out);
+  animation: page-enter var(--duration-slow) var(--ease-out) both;
 }
 
 /* ============================================================
@@ -624,6 +779,190 @@ img { max-width: 100%; height: auto; }
 }
 .dark .card-hover:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.interactive-card {
+  transition:
+    transform 240ms var(--motion-ease-out),
+    box-shadow 240ms var(--motion-ease-out),
+    border-color 240ms var(--motion-ease-out),
+    background-color 240ms var(--motion-ease-out);
+}
+
+.interactive-card:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--ui-surface-raised) 70%, var(--ui-surface-muted));
+  border-color: var(--ui-border);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.interactive-row {
+  transition:
+    background-color 180ms var(--motion-ease-out),
+    color 180ms var(--motion-ease-out),
+    border-color 180ms var(--motion-ease-out),
+    box-shadow 180ms var(--motion-ease-out),
+    transform 180ms var(--motion-ease-out);
+}
+
+.interactive-row:hover,
+.interactive-row:focus-visible {
+  background: color-mix(in srgb, var(--ui-surface-muted) 58%, transparent);
+  border-color: var(--ui-border);
+}
+
+.interactive-row:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 4px;
+}
+
+.image-frame {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ui-surface-muted);
+}
+
+.image-frame > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(32, 28, 24, 0.08);
+  opacity: 0.75;
+  transition: opacity 240ms var(--motion-ease-out);
+}
+
+.dark .image-frame::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.group:hover .image-frame::after,
+.image-frame:hover::after {
+  opacity: 1;
+}
+
+.image-zoom {
+  transform: scale(1);
+  transition:
+    transform 700ms var(--motion-ease-out),
+    filter 700ms var(--motion-ease-out),
+    opacity 300ms var(--motion-ease-out);
+  will-change: transform;
+}
+
+.group:hover .image-zoom,
+.image-frame:hover .image-zoom {
+  transform: scale(1.035);
+}
+
+.taxonomy-panel {
+  overflow: hidden;
+  border: 1px solid var(--ui-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-card);
+}
+
+.filter-search-shell {
+  transition:
+    border-color 180ms var(--motion-ease-out),
+    box-shadow 180ms var(--motion-ease-out),
+    transform 180ms var(--motion-ease-out);
+}
+
+.filter-search-shell:focus-within {
+  border-color: var(--ui-border);
+  box-shadow: var(--ui-shadow-card);
+  transform: translateY(-1px);
+}
+
+.category-chip {
+  transition:
+    background-color 180ms var(--motion-ease-out),
+    border-color 180ms var(--motion-ease-out),
+    box-shadow 180ms var(--motion-ease-out),
+    color 180ms var(--motion-ease-out),
+    transform 180ms var(--motion-ease-out);
+}
+
+.category-chip:hover {
+  transform: translateY(-1px);
+}
+
+.category-chip:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.category-chip[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ui-accent) 30%, transparent);
+}
+
+.filter-results {
+  animation: fade-in 260ms var(--motion-ease-out) both;
+}
+
+.filter-result-row {
+  animation: filter-result-enter 700ms var(--motion-ease-out) both;
+  animation-delay: calc(var(--stagger-index, 0) * 40ms);
+}
+
+.filter-count-bump {
+  animation: count-bump 220ms var(--motion-ease-out) both;
+}
+
+.motion-lift {
+  transition:
+    background-color 200ms var(--motion-ease-out),
+    border-color 200ms var(--motion-ease-out),
+    box-shadow 200ms var(--motion-ease-out),
+    transform 200ms var(--motion-ease-out);
+}
+
+.motion-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ui-shadow-card);
+}
+
+.motion-lift:active {
+  transform: translateY(0) scale(0.995);
+}
+
+.motion-appear {
+  animation: motion-appear 700ms var(--motion-ease-out) both;
+  animation-delay: calc(var(--appear-index, 0) * 40ms);
+}
+
+.motion-scroll-ready .scroll-reveal-target {
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateY(12px);
+  animation: none !important;
+  transition:
+    opacity 640ms var(--motion-ease-out),
+    filter 640ms var(--motion-ease-out),
+    transform 640ms var(--motion-ease-out);
+  transition-delay: calc(var(--scroll-reveal-index, 0) * 24ms);
+  will-change: opacity, filter, transform;
+}
+
+.motion-scroll-ready .scroll-reveal-target.scroll-reveal-initial {
+  opacity: 0.82;
+  filter: blur(1px);
+  transform: translateY(8px);
+}
+
+.motion-scroll-ready .scroll-reveal-target.is-scroll-revealed {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
 }
 
 /* Focus ring — architectural, not browser-default */
@@ -689,6 +1028,41 @@ img {
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   img { animation: none; }
+  .card-hover,
+  .interactive-card,
+  .interactive-row,
+  .image-zoom,
+  .category-chip,
+  .filter-search-shell,
+  .motion-lift {
+    transition: none;
+  }
+  .page-enter,
+  .reveal-anim,
+  .fade-in,
+  .filter-results,
+  .filter-result-row,
+  .filter-count-bump,
+  .scroll-reveal-target,
+  .motion-appear {
+    animation: none;
+  }
+  .motion-scroll-ready .scroll-reveal-target {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+  .card-hover:hover,
+  .interactive-card:hover,
+  .category-chip:hover,
+  .filter-search-shell:focus-within,
+  .motion-lift:hover,
+  .motion-lift:active,
+  .group:hover .image-zoom,
+  .image-frame:hover .image-zoom {
+    transform: none;
+  }
 }
 
 /* ============================================================

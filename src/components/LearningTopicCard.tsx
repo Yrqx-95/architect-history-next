@@ -11,7 +11,7 @@ export default function LearningTopicCard({ topic, href, compact = false }: Lear
   return (
     <Link
       href={href}
-      className={`group block border-t border-subtle transition-colors hover:border-default ${compact ? 'py-4' : 'py-5'}`}
+      className={`motion-appear motion-lift group block border-t border-subtle transition-colors hover:border-default ${compact ? 'py-4' : 'py-5'}`}
     >
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -22,7 +22,7 @@ export default function LearningTopicCard({ topic, href, compact = false }: Lear
             {topic.title}
           </h3>
         </div>
-        <span className="shrink-0 rounded-full border border-subtle px-2.5 py-1 text-[0.68rem] text-muted">
+        <span className="category-chip shrink-0 rounded-full border border-subtle px-2.5 py-1 text-[0.68rem] text-muted">
           {topic.level}
         </span>
       </div>

@@ -15,14 +15,14 @@ export default function ImageBreak({
   const sourceLabel = lang === 'ja' ? '出典' : lang === 'zh' ? '来源' : 'Source'
 
   return (
-    <figure className="my-10 sm:my-16 -mx-3 sm:-mx-4 lg:-mx-8">
-      <div className="relative w-full aspect-[21/9] sm:aspect-[2/1] rounded-none sm:rounded-lg overflow-hidden">
+    <figure className="group my-10 -mx-3 sm:my-16 sm:-mx-4 lg:-mx-8">
+      <div className="image-frame aspect-[21/9] w-full rounded-none sm:aspect-[2/1] sm:rounded-lg">
         <SafeImage
           src={src}
           alt={alt}
           fill
           sizes="100vw"
-          className="object-cover"
+          className="image-zoom object-cover"
         />
       </div>
       {(caption || photographer) && (

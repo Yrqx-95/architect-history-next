@@ -1,15 +1,16 @@
 import Link from 'next/link'
+import { formatDisplayLocation } from '@/lib/display'
+import { hasCjk, isProbablySimplifiedChinese } from '@/lib/locale'
+import { displayTaxonomyName } from '@/lib/taxonomy-display'
+import type { BuildingWithCover } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
 import { getArchitectRelations } from '@/lib/relations'
 import {
-  getResolvedArchitectKnowledgeRelations,
-  relationText,
-  type ResolvedArchitectKnowledgeRelation,
-} from '@/lib/architect-knowledge-relations'
-import { displayName, displayTaxonomyName, formatDisplayLocation, isProbablySimplifiedChinese, type BuildingWithCover } from '@/lib/types'
+  getResolvedArchitectKnowledgeRelations, relationText, ResolvedArchitectKnowledgeRelation, } from '@/lib/architect-knowledge-relations'
+import { displayName } from '@/lib/display'
 import { getArchitectContent, localizedContent } from '@/lib/architect-content'
 import { getArchitectFallbackSummary, localizedNationality } from '@/lib/fallback-content'
 import { getArchitectImageOverride } from '@/lib/architect-images'
@@ -21,7 +22,7 @@ import BuildingCard from '@/components/BuildingCard'
 import ArchitectDeepArticle from '@/components/ArchitectDeepArticle'
 import ArchitectPortraitFigure from '@/components/ArchitectPortraitFigure'
 
-export const dynamicParams = true
+export const dynamicParams = false
 
 function ArchitectKnowledgeNetwork({
   relations,
@@ -91,11 +92,22 @@ function localizedEducation(value: string | null | undefined, lang: string): str
     '东京大学': { zh: '东京大学', ja: '東京大学', en: 'University of Tokyo' },
     '東京大学': { zh: '东京大学', ja: '東京大学', en: 'University of Tokyo' },
     'University of Tokyo': { zh: '东京大学', ja: '東京大学', en: 'University of Tokyo' },
+    '威斯康星大学麦迪逊分校（未毕业）': { zh: '威斯康星大学麦迪逊分校（未毕业）', ja: 'ウィスコンシン大学マディソン校（未卒業）', en: 'University of Wisconsin-Madison (did not graduate)' },
+    '苏黎世联邦理工学院（ETH）': { zh: '苏黎世联邦理工学院（ETH）', ja: 'チューリッヒ工科大学（ETH）', en: 'ETH Zurich' },
   }
   const mapped = map[normalized]?.[lang]
   if (mapped) return mapped
   if (lang === 'ja' && isProbablySimplifiedChinese(normalized)) return ''
   return normalized
+}
+
+function visibleCoreIdeasForLanguage(ideas: string[], lang: string): string[] {
+  if (lang === 'zh') return ideas
+  if (lang === 'en') return ideas.filter(idea => !hasCjk(idea))
+  if (lang === 'ja') {
+    return ideas.filter(idea => /[ぁ-ゟァ-ヿー]/.test(idea) && !isProbablySimplifiedChinese(idea))
+  }
+  return ideas
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
@@ -153,7 +165,9 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
     ? rawBioClean.length >= 60
     : /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(rawBioClean) && rawBioClean.length >= 40
   const bioText = contentOverlay ? (rawBioText || '') : (hasLocalizedBio ? rawBioClean : fallbackBioText)
-  const coreIdeas: string[] = contentOverlay ? [] : Array.isArray(architect.core_ideas) ? architect.core_ideas : []
+  const coreIdeas: string[] = contentOverlay
+    ? []
+    : visibleCoreIdeasForLanguage(Array.isArray(architect.core_ideas) ? architect.core_ideas : [], lang)
   const sortedBuildings = [...buildings].sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
   const worksWithImages = buildingsWithCovers.filter(building => building.cover_url)
   const worksWithoutImages = buildingsWithCovers.filter(building => !building.cover_url)
@@ -254,6 +268,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
               <ArchitectPortraitFigure
                 portrait={portrait ? { ...portrait, alt: localizedContent(portrait.alt, lang) } : null}
                 lang={lang}
+                priority
               />
             </div>
 
@@ -302,6 +317,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
               <ArchitectPortraitFigure
                 portrait={portrait ? { ...portrait, alt: localizedContent(portrait.alt, lang) } : null}
                 lang={lang}
+                priority
               />
             </div>
           </div>

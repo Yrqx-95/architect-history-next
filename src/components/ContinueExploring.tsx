@@ -8,7 +8,6 @@ interface ExploreGroup {
     href: string
     title: string
     subtitle?: string
-    image?: string
   }[]
 }
 
@@ -33,10 +32,10 @@ export default function ContinueExploring({ groups, lang = 'en' }: { groups: Exp
                 </Link>
               )}
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
               {group.items.slice(0, 4).map(item => (
                 <Link key={item.id} href={item.href}
-                  className="card-hover group block rounded-md border border-subtle bg-surface p-4">
+                  className="interactive-row group block border-y border-subtle px-2 py-4">
                   <span className="line-clamp-2 block text-sm font-medium text-primary transition-colors group-hover:text-accent">
                     {item.title}
                   </span>

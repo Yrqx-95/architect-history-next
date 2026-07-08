@@ -1,10 +1,11 @@
+import type { Architect, Building, Era, Style } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { t } from '@/lib/i18n'
 import { getEras } from '@/lib/data'
 import { getEraRelations } from '@/lib/relations'
-import { displayName, type Architect, type Building, type Era, type Style } from '@/lib/types'
+import { displayName, formatDisplayLocation } from '@/lib/display'
 import { findTimelinePeriodForEra, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
 import PageShell from '@/components/PageShell'
 import Badge from '@/components/Badge'
@@ -137,7 +138,15 @@ function EraReadingPaths({
       href: `${prefix}/building/${building.slug}`,
       label: l('building'),
       title: displayName(building, lang),
-      meta: [building.year_start, building.city || building.country].filter(Boolean).join(' · '),
+      meta: [
+        building.year_start,
+        formatDisplayLocation({
+          city: building.city,
+          country: building.country,
+          countryCode: building.country_code,
+          lang,
+        }),
+      ].filter(Boolean).join(' · '),
     })),
   ].filter(Boolean) as Array<{ key: string; href: string; label: string; title: string; meta: string }>
 

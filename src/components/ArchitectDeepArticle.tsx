@@ -3,7 +3,7 @@ import BuildingCard from '@/components/BuildingCard'
 import type { BuildingWithCover } from '@/lib/types'
 import type { ArchitectContentOverlay } from '@/lib/architect-content'
 import { localizedContent } from '@/lib/architect-content'
-import { displayName } from '@/lib/types'
+import { displayName } from '@/lib/display'
 
 export default function ArchitectDeepArticle({
   content,

@@ -2,19 +2,17 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
+import type { Architect } from '@/lib/types'
 import { getArchitects } from '@/lib/data'
 import {
-  architectKnowledgeRelations,
-  relationText,
-  type ArchitectKnowledgeRelation,
-} from '@/lib/architect-knowledge-relations'
+  architectKnowledgeRelations, relationText, ArchitectKnowledgeRelation, } from '@/lib/architect-knowledge-relations'
 import { t } from '@/lib/i18n'
-import { displayName, type Architect } from '@/lib/types'
+import { displayName } from '@/lib/display'
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
   return {
-    title: t(lang, 'graph'),
+    title: relationMapLabel(lang),
     description: lang === 'en'
       ? 'Architect relationships and lineages in Archistory.'
       : lang === 'ja'
@@ -116,47 +114,53 @@ export default async function GraphPage({ params }: { params: Promise<{ lang: st
 
   return (
     <PageShell className="!max-w-[86rem]">
-      <header className="section grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(18rem,0.35fr)] lg:items-end">
+      <header className="section border-b border-subtle pb-8 sm:pb-10">
         <div>
-          <p className="eyebrow mb-4">{lang === 'en' ? 'Knowledge graph' : lang === 'ja' ? '知識グラフ' : '知识图谱'}</p>
-          <h1 className="heading-display mb-4">{t(lang, 'graph')}</h1>
+          <p className="eyebrow mb-4">{lang === 'en' ? 'Relationship map' : lang === 'ja' ? '関係図' : '关系图'}</p>
+          <h1 className="heading-display mb-4">{relationMapLabel(lang)}</h1>
           <p className="body-large max-w-3xl">
             {lang === 'en'
-              ? 'Read architecture through lineages, influence, collaboration, and shared historical problems.'
+              ? 'This page is not a movement taxonomy. It reads architecture through lineages, influence, collaboration, and shared historical problems.'
               : lang === 'ja'
-              ? '師承、影響、協働、共有された歴史的課題から建築を読む。'
-              : '从师承、影响、合作和共同历史问题中阅读建筑师之间的关系。'}
+              ? 'ここは「運動」の分類ではなく、師承、影響、協働、共有された歴史的課題から建築家の関係を読むページです。'
+              : '这里不是“建筑运动”的分类，而是从师承、影响、合作和共同历史问题中阅读建筑师之间的关系。'}
           </p>
-        </div>
-        <div className="grid grid-cols-2 overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
-          <GraphMetric value={connectedSlugs.size} label={t(lang, 'architects')} />
-          <GraphMetric value={relations.length} label={lang === 'en' ? 'Relations' : lang === 'ja' ? '関係' : '关系'} />
+          <div className="mt-7 grid gap-3 border-y border-subtle py-4 sm:grid-cols-2">
+            <GraphMetric value={connectedSlugs.size} label={t(lang, 'architects')} />
+            <GraphMetric value={relations.length} label={lang === 'en' ? 'Relations' : lang === 'ja' ? '関係' : '关系'} />
+          </div>
         </div>
       </header>
 
       <Reveal>
-        <section className="section pt-0">
-          <div className="grid gap-4 lg:grid-cols-3">
+        <section className="section pt-8 sm:pt-10">
+          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow mb-2">{lang === 'en' ? 'Lineage paths' : lang === 'ja' ? '系譜ルート' : '谱系路径'}</p>
+              <h2 className="heading-3">{lang === 'en' ? 'Three ways through the network' : lang === 'ja' ? '関係をたどる三つの入口' : '进入关系网络的三条路径'}</h2>
+            </div>
+          </div>
+          <div className="grid gap-x-8 gap-y-10 lg:grid-cols-3">
             {chains.map(chain => (
-              <div key={chain.id} className="rounded-md border border-subtle bg-surface p-5 shadow-semantic-card">
-                <p className="label mb-4">{lang === 'en' ? 'Lineage path' : lang === 'ja' ? '系譜ルート' : '谱系路径'}</p>
+              <section key={chain.id} className="border-t border-subtle pt-4">
+                <p className="label mb-3">{lang === 'en' ? 'Lineage path' : lang === 'ja' ? '系譜ルート' : '谱系路径'}</p>
                 <h2 className="text-2xl font-medium leading-tight text-primary">{local(chain.title, lang)}</h2>
                 <p className="body-sm mt-3 text-secondary">{local(chain.description, lang)}</p>
-                <div className="mt-6 space-y-2">
+                <div className="mt-6 divide-y divide-[color:var(--ui-border-subtle)]">
                   {chain.slugs.map((slug, index) => {
                     const architect = architectBySlug.get(slug)
                     if (!architect) return null
                     return (
-                      <div key={slug} className="grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3">
-                        <span className="font-serif-display text-2xl text-soft">{String(index + 1).padStart(2, '0')}</span>
-                        <Link href={`${prefix}/architect/${slug}`} className="rounded-md border border-subtle bg-surface-muted px-3 py-2 text-sm font-medium text-primary transition-colors hover:border-default hover:text-accent">
+                      <div key={slug} className="grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 py-3">
+                        <span className="caption tabular-nums">{String(index + 1).padStart(2, '0')}</span>
+                        <Link href={`${prefix}/architect/${slug}`} className="interactive-row text-sm font-medium text-primary transition-colors hover:text-accent">
                           {displayName(architect, lang)}
                         </Link>
                       </div>
                     )
                   })}
                 </div>
-              </div>
+              </section>
             ))}
           </div>
         </section>
@@ -177,9 +181,9 @@ export default async function GraphPage({ params }: { params: Promise<{ lang: st
                 : '每条关系都标出方向、历史含义和来源标题。'}
             </p>
           </div>
-          <div className="divide-y divide-[color:var(--ui-border-subtle)] rounded-md border border-subtle bg-surface shadow-semantic-card">
+          <div className="divide-y divide-[color:var(--ui-border-subtle)] border-t border-subtle">
             {relations.map(({ relation, from, to }) => (
-              <div key={`${relation.from}-${relation.to}-${relation.kind}`} className="grid gap-4 p-4 lg:grid-cols-[minmax(10rem,0.35fr)_2rem_minmax(10rem,0.35fr)_minmax(0,0.8fr)] lg:items-center">
+              <div key={`${relation.from}-${relation.to}-${relation.kind}`} className="grid gap-4 py-4 lg:grid-cols-[minmax(10rem,0.35fr)_2rem_minmax(10rem,0.35fr)_minmax(0,0.8fr)] lg:items-center">
                 <Link href={`${prefix}/architect/${from.slug}`} className="text-lg font-medium leading-snug text-primary hover:text-accent">
                   {displayName(from, lang)}
                 </Link>
@@ -203,9 +207,15 @@ export default async function GraphPage({ params }: { params: Promise<{ lang: st
 
 function GraphMetric({ value, label }: { value: number | string; label: string }) {
   return (
-    <div className="border-r border-subtle px-4 py-5 last:border-r-0">
-      <p className="font-serif-display text-4xl leading-none text-primary">{value}</p>
+    <div className="min-w-0">
+      <p className="font-serif-display text-3xl leading-none text-primary">{value}</p>
       <p className="caption mt-2">{label}</p>
     </div>
   )
+}
+
+function relationMapLabel(lang: string) {
+  if (lang === 'en') return 'Architect Relationships'
+  if (lang === 'ja') return '建築家の関係図'
+  return '建筑师关系图'
 }

@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { formatCountryName } from '@/lib/locale'
+import type { BuildingWithCover } from '@/lib/types'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
-import { displayName, formatCountryName, type BuildingWithCover } from '@/lib/types'
+import { displayName, formatDisplayCity } from '@/lib/display'
+import { dedupeBuildings, isMinimallyComplete } from '@/lib/quality'
 import PageShell from '@/components/PageShell'
-import SectionHeading from '@/components/SectionHeading'
 import Reveal from '@/components/Reveal'
 import SafeImage from '@/components/SafeImage'
 
@@ -28,9 +30,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function CountriesPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   const [architects, buildings] = await Promise.all([getArchitects(), getBuildingsWithCovers()])
+  const qualityBuildings = dedupeBuildings(buildings.filter(building => isMinimallyComplete(building)))
   const countries = new Map<string, CountrySummary>()
 
-  buildings.forEach(building => {
+  qualityBuildings.forEach(building => {
     const code = building.country_code?.toLowerCase()
     if (!code) return
     const current = countries.get(code) || {
@@ -48,95 +51,116 @@ export default async function CountriesPage({ params }: { params: Promise<{ lang
     countries.set(code, current)
   })
 
-  architects.forEach(architect => {
-    architect.nationalities?.forEach(nationality => {
-      const code = nationality.toLowerCase()
-      const current = countries.get(code)
-      if (current) current.architectCount += 1
-    })
-  })
-
   const list = [...countries.values()]
     .filter(country => country.buildingCount > 0)
     .sort((a, b) => b.buildingCount - a.buildingCount || a.name.localeCompare(b.name))
-  const maxCount = Math.max(...list.map(country => country.buildingCount), 1)
+
+  architects.forEach(architect => {
+    list.forEach(country => {
+      if (architectMatchesCountry(architect.nationalities, country.code, country.name, lang)) {
+        country.architectCount += 1
+      }
+    })
+  })
 
   const prefix = `/${lang}/browse/country`
 
   return (
-    <PageShell className="!max-w-[86rem]">
-      <header className="section grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(20rem,0.5fr)] lg:items-end">
+    <PageShell width="archive">
+      <header className="section border-b border-subtle pb-8 sm:pb-10">
         <div>
           <p className="eyebrow mb-4">{lang === 'en' ? 'Regional index' : lang === 'ja' ? '地域索引' : '地域索引'}</p>
-        <h1 className="heading-display mb-4">{t(lang, 'countries')}</h1>
-        <p className="body-large max-w-2xl">
-          {t(lang, 'countriesIntro')}
-        </p>
-        </div>
-        <div className="grid grid-cols-3 overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
-          <Metric value={list.length} label={t(lang, 'countries')} />
-          <Metric value={buildings.length} label={t(lang, 'buildings')} />
-          <Metric value={architects.length} label={t(lang, 'architects')} />
+          <h1 className="heading-display mb-4">{t(lang, 'countries')}</h1>
+          <p className="body-large max-w-3xl">
+            {t(lang, 'countriesIntro')}
+          </p>
+          <div className="mt-7 grid gap-3 border-y border-subtle py-4 sm:grid-cols-3">
+            <IndexStat value={list.length} label={t(lang, 'countries')} />
+            <IndexStat value={qualityBuildings.length} label={t(lang, 'buildings')} />
+            <IndexStat value={architects.length} label={t(lang, 'architects')} />
+          </div>
         </div>
       </header>
 
       <Reveal>
-        <section className="section pt-0">
-          <SectionHeading
-            title={t(lang, 'countries')}
-            description={`${list.length} ${t(lang, 'countriesAndRegions')}`}
-          />
+        <section className="section pt-8 sm:pt-10">
+          <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow mb-2">{lang === 'en' ? 'Archive paths' : lang === 'ja' ? 'アーカイブ入口' : '档案入口'}</p>
+              <h2 className="heading-3">{`${list.length} ${t(lang, 'countriesAndRegions')}`}</h2>
+            </div>
+            <p className="caption max-w-lg sm:text-right">
+              {lang === 'en'
+                ? 'Each row opens a regional archive, with representative works shown only as quick visual anchors.'
+                : lang === 'ja'
+                ? '各行から地域アーカイブへ。代表作の画像は入口を見分けるための小さな手がかりです。'
+                : '每一行进入一个地域档案，代表作品图片只作为快速识别线索。'}
+            </p>
+          </div>
 
-          <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
+          <div className="grid gap-x-6 gap-y-10 lg:grid-cols-2 xl:grid-cols-3">
             {list.map(country => (
-              <Link
-                key={country.code}
-                href={`${prefix}/${country.code}`}
-                className="group mb-4 block break-inside-avoid rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[color:var(--ui-accent)] focus-visible:ring-offset-4 focus-visible:ring-offset-[color:var(--ui-bg)]"
-              >
-                <div className="mb-4 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="metadata mb-2 uppercase">{country.code}</p>
-                    <h2 className="text-xl font-medium leading-snug text-primary transition-colors group-hover:text-accent">
-                      {country.name}
-                    </h2>
+              <section key={country.code} className="border-t border-subtle pt-4">
+                <Link
+                  href={`${prefix}/${country.code}`}
+                  className="interactive-row group grid gap-4 border-b border-subtle pb-4 sm:grid-cols-[3.5rem_minmax(0,1fr)_auto] sm:items-start"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-sm bg-surface-muted text-xs font-medium uppercase tracking-[0.08em] text-secondary">
+                    {country.code}
+                  </span>
+                  <div className="min-w-0">
+                    <h2 className="text-xl font-medium leading-snug text-primary transition-colors group-hover:text-accent">{country.name}</h2>
+                    <p className="caption mt-2">
+                      {[
+                        `${country.buildingCount} ${t(lang, 'buildings')}`,
+                        country.architectCount > 0 ? `${country.architectCount} ${t(lang, 'architects')}` : '',
+                        `${country.cities.size} ${lang === 'en' ? 'cities' : lang === 'ja' ? '都市' : '城市'}`,
+                      ].filter(Boolean).join(' · ')}
+                    </p>
                   </div>
-                  <p className="caption text-right tabular-nums">
-                    {country.buildingCount} {t(lang, 'buildings')}
-                    {country.architectCount > 0 && <><br />{country.architectCount} {t(lang, 'architects')}</>}
-                  </p>
+                  <span className="hidden text-sm font-medium text-accent sm:block">
+                    {lang === 'en' ? 'Open' : lang === 'ja' ? '開く' : '打开'} →
+                  </span>
+                </Link>
+                <div className="grid divide-y divide-[color:var(--ui-border-subtle)]">
+                  {country.featured.length > 0
+                    ? country.featured.slice(0, 4).map(building => (
+                      <Link
+                        key={building.id}
+                        href={`${prefix}/${country.code}`}
+                        className="interactive-row group grid min-h-[4.5rem] grid-cols-[4rem_minmax(0,1fr)] gap-3 py-2"
+                      >
+                        <span className="relative h-14 w-14 overflow-hidden rounded-sm bg-surface-muted">
+                          <SafeImage
+                            src={building.cover_url || ''}
+                            alt={displayName(building, lang)}
+                            fill
+                            className="object-cover transition duration-500 ease-out group-hover:scale-[1.04]"
+                            sizes="3.5rem"
+                          />
+                        </span>
+                        <span className="min-w-0 self-center">
+                          <span className="block truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">
+                            {displayName(building, lang)}
+                          </span>
+                          <span className="caption mt-1 block truncate">
+                            {[formatDisplayCity(building.city, lang), building.year_start].filter(Boolean).join(' · ')}
+                          </span>
+                        </span>
+                      </Link>
+                    ))
+                    : [...country.cities.entries()]
+                      .map(([city, count]) => [formatDisplayCity(city, lang), count] as const)
+                      .filter(([city]) => Boolean(city))
+                      .slice(0, 4)
+                      .map(([city, count]) => (
+                        <Link key={city} href={`${prefix}/${country.code}`} className="interactive-row grid grid-cols-[minmax(0,1fr)_auto] gap-3 py-3">
+                          <span className="truncate text-sm font-medium text-primary">{city}</span>
+                          <span className="caption">{count}</span>
+                        </Link>
+                      ))}
                 </div>
-                <div className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
-                  <div
-                    className="h-full rounded-full bg-[color:var(--ui-accent)]"
-                    style={{ width: `${Math.max(8, Math.round((country.buildingCount / maxCount) * 100))}%` }}
-                  />
-                </div>
-                {country.featured.length > 0 ? (
-                  <div className="mt-5 grid grid-cols-2 gap-1.5">
-                    {country.featured.slice(0, 4).map(building => (
-                      <div key={building.id} className="relative aspect-[4/3] overflow-hidden rounded-sm bg-surface-muted">
-                        <SafeImage
-                          src={building.cover_url || ''}
-                          alt={displayName(building, lang)}
-                          fill
-                          className="object-cover transition duration-500 ease-out group-hover:scale-[1.015]"
-                          sizes="12rem"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="mt-5 grid grid-cols-2 gap-2 border-t border-subtle pt-4">
-                    {[...country.cities.entries()].slice(0, 4).map(([city, count]) => (
-                      <span key={city} className="caption truncate">{city} · {count}</span>
-                    ))}
-                  </div>
-                )}
-                <p className="caption mt-4 border-t border-subtle pt-4">
-                  {country.cities.size} {lang === 'en' ? 'cities' : lang === 'ja' ? '都市' : '城市'} · {lang === 'en' ? 'Open region archive' : lang === 'ja' ? '地域アーカイブへ' : '进入地域档案'}
-                </p>
-              </Link>
+              </section>
             ))}
           </div>
         </section>
@@ -145,10 +169,22 @@ export default async function CountriesPage({ params }: { params: Promise<{ lang
   )
 }
 
-function Metric({ value, label }: { value: number; label: string }) {
+function architectMatchesCountry(nationalities: string[] | null | undefined, code: string, countryName: string, lang: string) {
+  if (!nationalities?.length) return false
+  const names = new Set(
+    ['en', 'ja', 'zh', lang]
+      .map(locale => formatCountryName(code, countryName, locale))
+      .concat([countryName, code, code.toUpperCase()])
+      .filter(Boolean)
+      .map(value => value.toLowerCase())
+  )
+  return nationalities.some(value => names.has(value.toLowerCase()))
+}
+
+function IndexStat({ value, label }: { value: number; label: string }) {
   return (
-    <div className="border-r border-subtle px-3 py-4 last:border-r-0 sm:px-4">
-      <p className="font-serif-display text-3xl leading-none text-primary sm:text-4xl">{value}</p>
+    <div className="min-w-0">
+      <p className="font-serif-display text-3xl leading-none text-primary">{value}</p>
       <p className="caption mt-2">{label}</p>
     </div>
   )

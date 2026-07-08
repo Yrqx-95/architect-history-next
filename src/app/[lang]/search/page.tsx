@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import Link from 'next/link'
 import { t } from '@/lib/i18n'
 import { getEras, getStyles, getTypes } from '@/lib/data'
-import { displayName } from '@/lib/types'
+import { displayName } from '@/lib/display'
 import SearchResults from '@/components/SearchResults'
 
 export default async function SearchPage({ params }: { params: Promise<{ lang: string }> }) {

@@ -20,18 +20,18 @@ export default function MobileNav({ lang }: { lang: string }) {
   const title = lang === 'en' ? 'Menu' : lang === 'ja' ? 'メニュー' : '菜单'
   const searchLabel = lang === 'en' ? 'Search' : lang === 'ja' ? '検索' : '搜索'
   const learnLabel = t(lang, 'learn')
-  const learningCenterLabel = lang === 'en' ? 'Learning Center' : lang === 'ja' ? '学習センター' : '学习中心'
+  const archiveToolsLabel = lang === 'en' ? 'Archive tools' : lang === 'ja' ? '資料ツール' : '资料工具'
   const languageLabel = lang === 'en' ? 'Language' : lang === 'ja' ? '言語' : '语言'
   const settingsLabel = lang === 'en' ? 'Settings' : lang === 'ja' ? '設定' : '设置'
   const scriptLabel = lang === 'zh' ? '中文显示' : ''
-  const comingSoonLabel = lang === 'en' ? 'Coming Soon' : lang === 'ja' ? '準備中' : '即将推出'
   const primaryLinks = [
-    { href: '/learn', label: learnLabel },
-    { href: '/browse', label: t(lang, 'explore') },
+    { href: '/browse', label: learnLabel },
+    { href: '/browse/buildings', label: t(lang, 'buildings') },
     { href: '/timeline', label: t(lang, 'timeline') },
     { href: '/search', label: t(lang, 'search') },
   ]
   const learnLinks = [
+    { href: '/graduation', label: t(lang, 'graduation') },
     { href: '/code', label: t(lang, 'code') },
     { href: '/glossary', label: t(lang, 'glossary') },
   ]
@@ -95,7 +95,7 @@ export default function MobileNav({ lang }: { lang: string }) {
               <div>
                 <p className="text-base font-semibold text-primary">Archistory</p>
                 <p className="mt-0.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-muted">
-                  {lang === 'en' ? 'Architecture learning' : lang === 'ja' ? '建築学習メニュー' : '建筑学习菜单'}
+                  {lang === 'en' ? 'Architecture archive' : lang === 'ja' ? '建築資料館メニュー' : '建筑资料馆菜单'}
                 </p>
               </div>
               <button
@@ -146,14 +146,7 @@ export default function MobileNav({ lang }: { lang: string }) {
               </section>
 
               <section className="border-b border-subtle py-4">
-                <p className="mb-1 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{learnLabel}</p>
-                <Link
-                  href={prefix + '/learn'}
-                  onClick={() => setOpen(false)}
-                  className="mb-2 block text-xs text-secondary transition-colors hover:text-primary"
-                >
-                  {learningCenterLabel}
-                </Link>
+                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{archiveToolsLabel}</p>
                 <div className="space-y-1">
                   {learnLinks.map(item => (
                     <Link
@@ -166,15 +159,6 @@ export default function MobileNav({ lang }: { lang: string }) {
                       <span aria-hidden="true" className="text-soft">→</span>
                     </Link>
                   ))}
-                  <div
-                    className="flex min-h-11 items-center justify-between border-b border-subtle px-1 text-sm font-medium text-muted last:border-b-0"
-                    aria-disabled="true"
-                  >
-                    <span>{t(lang, 'exam')}</span>
-                    <span className="rounded-full border border-subtle px-2 py-1 text-[0.65rem] uppercase tracking-[0.12em] text-muted">
-                      {comingSoonLabel}
-                    </span>
-                  </div>
                 </div>
               </section>
 

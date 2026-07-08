@@ -22,10 +22,12 @@ export default function ArchitectPortraitFigure({
   portrait,
   lang,
   className = '',
+  priority = false,
 }: {
   portrait: Portrait | null
   lang: string
   className?: string
+  priority?: boolean
 }) {
   const [failed, setFailed] = useState(false)
   const fallbackLabel = FALLBACK_COPY[lang as keyof typeof FALLBACK_COPY] || FALLBACK_COPY.en
@@ -54,6 +56,7 @@ export default function ArchitectPortraitFigure({
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 36rem"
+            priority={priority}
             onError={() => setFailed(true)}
           />
         ) : null}

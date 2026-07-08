@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
 import { getArchitects, getBuildings } from '@/lib/data'
-import { displayName } from '@/lib/types'
+import { displayName, formatDisplayCity } from '@/lib/display'
 import { localizedTimelineText, timelinePeriods } from '@/lib/timeline-periods'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
@@ -69,41 +69,62 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
   }))
 
   return (
-    <PageShell className="!max-w-[86rem]">
-      <header className="section grid gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(20rem,0.55fr)] lg:items-end">
+    <PageShell width="archive">
+      <header className="section border-b border-subtle pb-10 pt-4 sm:pt-8">
         <div>
           <p className="eyebrow mb-4">{lang === 'en' ? 'Timeline system' : lang === 'ja' ? '時間システム' : '时间系统'}</p>
           <h1 className="heading-display mb-4">{t(lang, 'timeline')}</h1>
           <p className="body-large max-w-2xl">
             {lang === 'en'
-              ? 'Read architectural history in two ways: a continuous historical narrative, and a dense decade-by-decade atlas.'
+              ? 'Read architectural history as a chain of questions, then move from each period into decades and works.'
               : lang === 'ja'
-              ? '連続する歴史の流れと、年代ごとの密度ある索引の二つから建築史を読む。'
-              : '用两种方式阅读建筑史：连续的历史叙事，以及按十年组织的密集索引。'}
+              ? '各時代の問いをたどり、そのあと年代と作品へ降りていく。'
+              : '先读每个时代提出的问题，再进入年代与作品。'}
           </p>
         </div>
-        <div className="grid grid-cols-3 overflow-hidden rounded-md border border-subtle bg-surface shadow-semantic-card">
+        <div className="mt-8 grid max-w-2xl grid-cols-3 border-t border-subtle pt-5">
           <TimelineMetric value={decades.length} label={lang === 'en' ? 'decades' : lang === 'ja' ? '年代' : '年代段'} />
           <TimelineMetric value={datedBuildings.length} label={t(lang, 'buildings')} />
           <TimelineMetric value={firstYear && latestYear ? `${firstYear}-${latestYear}` : '—'} label={lang === 'en' ? 'range' : lang === 'ja' ? '範囲' : '范围'} />
         </div>
       </header>
 
-      {featuredDecades.length > 0 && (
-        <Reveal>
-          <section className="section pt-0">
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {featuredDecades.map(([decade, bldgs]) => (
-                <a key={decade} href={`#decade-${decade}`} className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted">
-                  <p className="label">{lang === 'en' ? 'high-density decade' : lang === 'ja' ? '高密度の年代' : '高密度年代'}</p>
-                  <p className="mt-4 font-serif-display text-4xl leading-none text-primary transition-colors group-hover:text-accent">{decade}s</p>
-                  <p className="caption mt-2">{bldgs.length} {t(lang, 'buildings')}</p>
-                </a>
-              ))}
-            </div>
-          </section>
-        </Reveal>
-      )}
+      <Reveal>
+        <section className="section">
+          <div className="mb-6 max-w-2xl">
+            <p className="eyebrow mb-2">{lang === 'en' ? 'Historical chain' : lang === 'ja' ? '歴史の連鎖' : '历史链条'}</p>
+            <h2 className="heading-3">{lang === 'en' ? 'Why one period becomes the next' : lang === 'ja' ? '時代はなぜ次へ移るのか' : '时代为什么会进入下一段'}</h2>
+            <p className="caption mt-2">
+              {lang === 'en'
+                ? 'Each period is framed as a historical question and a transition before the page asks you to browse counts.'
+                : lang === 'ja'
+                ? '件数を見る前に、各時代を問いと移行として読む。'
+                : '先把每个时代读成问题和转向，再进入数量索引。'}
+            </p>
+          </div>
+          <div className="grid border-y border-subtle md:grid-cols-2 xl:grid-cols-3 xl:divide-x xl:divide-[color:var(--ui-border-subtle)]">
+            {periodSummaries.map((period, index) => (
+              <a
+                key={period.id}
+                href={`#period-${period.id}`}
+                className="interactive-row group flex min-h-[13rem] flex-col border-b border-subtle px-2 py-5 md:px-4 xl:border-b-0"
+              >
+                <div className="mb-4 flex items-start justify-between gap-4">
+                  <div>
+                    <p className="metadata mb-2">{period.range[0]}-{period.range[1]}</p>
+                    <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">
+                      {localizedTimelineText(period.label, lang)}
+                    </h3>
+                  </div>
+                  <span className="font-serif-display text-3xl leading-none text-soft">{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <p className="body-sm font-medium text-primary">{localizedTimelineText(period.question, lang)}</p>
+                <p className="caption mt-auto border-t border-subtle pt-3">{localizedTimelineText(period.transition, lang)}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      </Reveal>
 
       {periodRailItems.length > 0 && (
         <Reveal>
@@ -139,45 +160,6 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
 
       <Reveal>
         <section className="section border-t border-subtle pt-10 sm:pt-12">
-          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="eyebrow mb-2">{lang === 'en' ? 'Historical chain' : lang === 'ja' ? '歴史の連鎖' : '历史链条'}</p>
-              <h2 className="heading-3">{lang === 'en' ? 'Why one period becomes the next' : lang === 'ja' ? '時代はなぜ次へ移るのか' : '时代为什么会进入下一段'}</h2>
-            </div>
-            <p className="caption max-w-sm sm:text-right">
-              {lang === 'en'
-                ? 'Each period is framed as a historical question and a transition, so the timeline reads as a chain of problems.'
-                : lang === 'ja'
-                ? '各時代を問いと移行として読み、時間軸を問題の連鎖として捉える。'
-                : '把每个时代读成一个问题和一次转向，让时间轴成为问题链，而不是年份表。'}
-            </p>
-          </div>
-          <div className="grid gap-3 lg:grid-cols-2">
-            {periodSummaries.map((period, index) => (
-              <a
-                key={period.id}
-                href={`#period-${period.id}`}
-                className="group rounded-md border border-subtle bg-surface p-4 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
-              >
-                <div className="mb-4 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="metadata mb-2">{period.range[0]}-{period.range[1]}</p>
-                    <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">
-                      {localizedTimelineText(period.label, lang)}
-                    </h3>
-                  </div>
-                  <span className="font-serif-display text-3xl leading-none text-soft">{String(index + 1).padStart(2, '0')}</span>
-                </div>
-                <p className="body-sm font-medium text-primary">{localizedTimelineText(period.question, lang)}</p>
-                <p className="caption mt-3 border-t border-subtle pt-3">{localizedTimelineText(period.transition, lang)}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-      </Reveal>
-
-      <Reveal>
-        <section className="section border-t border-subtle pt-10 sm:pt-12">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="eyebrow mb-2">{lang === 'en' ? 'Narrative timeline' : lang === 'ja' ? '叙述の時間軸' : '叙事时间轴'}</p>
@@ -198,35 +180,35 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
               {periodSummaries.map(period => (
                 <section id={`period-${period.id}`} key={period.id} className="relative grid scroll-mt-28 gap-4 pl-10 sm:pl-14 lg:grid-cols-[minmax(12rem,0.42fr)_minmax(0,1fr)]">
                   <div className="absolute left-[0.45rem] top-2 h-4 w-4 rounded-full border-4 border-[color:var(--ui-bg)] bg-[color:var(--ui-accent)] sm:left-[0.7rem]" />
-                  <div className="rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
+                  <div className="border-t border-subtle pt-4">
                     <p className="metadata mb-3">{period.range[0]}-{period.range[1]}</p>
                     <h3 className="text-xl font-medium leading-snug text-primary">{localizedTimelineText(period.label, lang)}</h3>
                     <p className="body-sm mt-3 font-medium text-primary">{localizedTimelineText(period.question, lang)}</p>
                     <p className="body-sm mt-3 text-secondary">{localizedTimelineText(period.summary, lang)}</p>
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {localizedTimelineText(period.movements, lang).map(movement => (
-                        <span key={movement} className="rounded-full bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">
+                        <span key={movement} className="category-chip rounded-full border border-subtle bg-surface-muted px-2.5 py-1 text-[0.68rem] text-secondary">
                           {movement}
                         </span>
                       ))}
                     </div>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-md border border-subtle bg-surface p-4">
+                    <div className="border-t border-subtle px-2 pt-4">
                       <p className="label mb-3">{t(lang, 'architects')} · {period.architectCount}</p>
                       <div className="space-y-2">
                         {period.architects.map(architect => (
-                          <Link key={architect.id} href={`/${lang}/architect/${architect.slug}`} className="block text-sm font-medium text-primary transition-colors hover:text-accent">
+                          <Link key={architect.id} href={`/${lang}/architect/${architect.slug}`} className="interactive-row block rounded-sm px-2 py-1.5 text-sm font-medium text-primary transition-colors hover:text-accent">
                             {displayName(architect, lang)}
                           </Link>
                         ))}
                       </div>
                     </div>
-                    <div className="rounded-md border border-subtle bg-surface p-4">
+                    <div className="border-t border-subtle px-2 pt-4">
                       <p className="label mb-3">{t(lang, 'buildings')} · {period.buildingCount}</p>
                       <div className="space-y-2">
                         {period.buildings.map(building => (
-                          <Link key={building.id} href={`/${lang}/building/${building.slug}`} className="grid grid-cols-[3.2rem_minmax(0,1fr)] gap-3 text-sm transition-colors hover:text-accent">
+                          <Link key={building.id} href={`/${lang}/building/${building.slug}`} className="interactive-row grid grid-cols-[3.2rem_minmax(0,1fr)] gap-3 rounded-sm px-2 py-1.5 text-sm transition-colors hover:text-accent">
                             <span className="metadata tabular-nums">{building.year_start}</span>
                             <span className="truncate font-medium text-primary">{displayName(building, lang)}</span>
                           </Link>
@@ -251,10 +233,21 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
             <p className="caption text-right">{decades.length} {lang === 'en' ? 'active periods' : lang === 'ja' ? '項目' : '有效年代'}</p>
           </div>
 
-          <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
-          {decades.map(([decade, bldgs], eraIdx) => (
-            <Reveal key={decade} delay={eraIdx * 0.05}>
-              <section id={`decade-${decade}`} className="mb-4 w-full break-inside-avoid scroll-mt-28 rounded-md border border-subtle bg-surface p-4 shadow-semantic-card">
+          {featuredDecades.length > 0 && (
+            <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {featuredDecades.map(([decade, bldgs]) => (
+                <a key={decade} href={`#decade-${decade}`} className="interactive-row group border-y border-subtle px-2 py-4">
+                  <p className="label">{lang === 'en' ? 'dense decade' : lang === 'ja' ? '密度の高い年代' : '高密度年代'}</p>
+                  <p className="mt-4 font-serif-display text-3xl leading-none text-primary transition-colors group-hover:text-accent">{decade}s</p>
+                  <p className="caption mt-2">{bldgs.length} {t(lang, 'buildings')}</p>
+                </a>
+              ))}
+            </div>
+          )}
+
+          <div className="grid gap-x-6 gap-y-10 lg:grid-cols-3">
+          {decades.map(([decade, bldgs]) => (
+              <section key={decade} id={`decade-${decade}`} className="h-full scroll-mt-28 border-t border-subtle px-2 py-4">
                 <div className="mb-5 flex items-end justify-between gap-3 border-b border-subtle pb-4">
                   <h3 className="font-serif-display text-4xl leading-none text-primary">{decade}s</h3>
                   <p className="caption text-right">
@@ -267,14 +260,14 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
                     const arch = b.architect_slug ? architectMap.get(b.architect_slug) : null
                     return (
                       <Link key={b.id} href={`/${lang}/building/${b.slug}`}
-                        className="group grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3 py-3 transition-colors first:pt-0 last:pb-0 hover:text-accent">
+                        className="interactive-row group grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3 rounded-sm px-2 py-3 transition-colors first:pt-0 last:pb-0 hover:text-accent">
                         <span className="metadata pt-0.5 tabular-nums">{b.year_start}</span>
                         <span className="min-w-0">
                           <span className="block truncate text-sm font-medium text-primary transition-colors group-hover:text-accent">
                             {displayName(b, lang)}
                           </span>
                           <span className="caption mt-1 block truncate">
-                            {[arch ? displayName(arch, lang) : '', b.city].filter(Boolean).join(' · ')}
+                            {[arch ? displayName(arch, lang) : '', formatDisplayCity(b.city, lang)].filter(Boolean).join(' · ')}
                           </span>
                         </span>
                       </Link>
@@ -285,7 +278,6 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
                   )}
                 </div>
               </section>
-            </Reveal>
           ))}
         </div>
         </section>
@@ -297,7 +289,7 @@ export default async function TimelinePage({ params }: { params: Promise<{ lang:
 function TimelineMetric({ value, label }: { value: number | string; label: string }) {
   return (
     <div className="border-r border-subtle px-3 py-4 last:border-r-0 sm:px-4">
-      <p className="font-serif-display text-2xl leading-none text-primary sm:text-3xl">{value}</p>
+      <p className="whitespace-nowrap font-serif-display text-xl leading-none text-primary tabular-nums sm:text-3xl">{value}</p>
       <p className="caption mt-2">{label}</p>
     </div>
   )

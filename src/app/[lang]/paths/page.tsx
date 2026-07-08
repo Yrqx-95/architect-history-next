@@ -3,20 +3,21 @@ import Link from 'next/link'
 import PageShell from '@/components/PageShell'
 import Reveal from '@/components/Reveal'
 import SectionHeading from '@/components/SectionHeading'
+import type { Architect, Building, Era, Style } from '@/lib/types'
 import { getArchitects, getBuildings, getEras, getStyles } from '@/lib/data'
 import { t } from '@/lib/i18n'
-import { learningPaths, localizedPathText, type LearningPathKind } from '@/lib/learning-paths'
-import { displayName, type Architect, type Building, type Era, type Style } from '@/lib/types'
+import { learningPaths, localizedPathText, LearningPathKind } from '@/lib/learning-paths'
+import { displayName } from '@/lib/display'
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
   return {
     title: t(lang, 'paths'),
     description: lang === 'en'
-      ? 'Curated routes through Archistory across architects, buildings, periods, and styles.'
+      ? 'Curated archive routes through Archistory across architects, buildings, periods, and styles.'
       : lang === 'ja'
-      ? '建築家、作品、時代、様式をつなぐ Archistory の知識ルート。'
-      : '连接建筑师、作品、时代与风格的 Archistory 知识路线。',
+      ? '建築家、作品、時代、様式をつなぐ Archistory の資料ルート。'
+      : '连接建筑师、作品、时代与风格的 Archistory 档案路线。',
   }
 }
 
@@ -51,25 +52,25 @@ export default async function LearningPathsPage({ params }: { params: Promise<{ 
   return (
     <PageShell className="!max-w-[86rem]">
       <header className="section">
-        <p className="eyebrow mb-4">{lang === 'en' ? 'Knowledge routes' : lang === 'ja' ? '知識ルート' : '知识路线'}</p>
+        <p className="eyebrow mb-4">{lang === 'en' ? 'Archive routes' : lang === 'ja' ? '資料ルート' : '档案路线'}</p>
         <h1 className="heading-display mb-4">{t(lang, 'paths')}</h1>
         <p className="body-large max-w-3xl">
           {lang === 'en'
-            ? 'Follow curated routes that connect architects, works, styles, and periods into readable historical sequences.'
+            ? 'Open a curated sequence when you want the archive to suggest one possible order.'
             : lang === 'ja'
-            ? '建築家、作品、様式、時代を読みやすい歴史の順序に結びつけたルート。'
-            : '沿着策划好的路线，把建筑师、作品、风格与时代串成可以阅读的建筑史序列。'}
+            ? 'アーカイブ側がひとつの閲覧順序を示す、補助的な資料ルートです。'
+            : '当你希望资料馆给出一个参考顺序时，可以打开这些策划路线。'}
         </p>
       </header>
 
       <Reveal>
         <section className="section pt-0">
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-x-8 gap-y-0 md:grid-cols-3">
             {learningPaths.map(path => (
               <Link
                 key={path.slug}
                 href={`${prefix}/paths/${path.slug}`}
-                className="group flex min-h-[16rem] flex-col rounded-md border border-subtle bg-surface p-5 shadow-semantic-card transition-colors hover:border-default hover:bg-surface-muted"
+                className="interactive-row group flex min-h-[16rem] flex-col border-t border-subtle px-2 py-5"
               >
                 <p className="label mb-4">{path.steps.length} {lang === 'en' ? 'steps' : lang === 'ja' ? 'ステップ' : '个节点'}</p>
                 <h2 className="max-w-sm text-2xl font-semibold leading-tight text-primary group-hover:text-secondary">
@@ -95,10 +96,10 @@ export default async function LearningPathsPage({ params }: { params: Promise<{ 
           <SectionHeading
             title={lang === 'en' ? 'How to read' : lang === 'ja' ? '読み方' : '如何阅读'}
             description={lang === 'en'
-              ? 'Each route is a guided sequence. Open any step to continue into its architect, building, style, or period page.'
+              ? 'Each route is optional. Open any step to continue into its architect, building, style, or period page.'
               : lang === 'ja'
-              ? '各ルートは案内付きの順序です。各ステップから建築家、作品、様式、時代のページへ進めます。'
-              : '每条路线都是一组有顺序的节点。点开任意节点，就能继续进入对应的建筑师、建筑、风格或时代页面。'}
+              ? '各ルートは任意の入口です。各ステップから建築家、作品、様式、時代のページへ進めます。'
+              : '每条路线都只是可选入口。点开任意节点，就能继续进入对应的建筑师、建筑、风格或时代页面。'}
           />
         </section>
       </Reveal>

@@ -39,8 +39,9 @@ const LABELS = {
     previousTopic: '上一步',
     alternativeTopic: '也可以学习',
     relatedTopics: '相关主题',
-    relatedGlossary: '相关术语',
-    relatedCodeTopics: '相关法规主题',
+    relatedGlossary: '本主题使用的术语',
+    relatedCodeTopics: '因共享术语而相关的法规主题',
+    sharedTermsReason: '与本主题使用相同的术语。',
     problem: '题目',
     answer: '答案',
     rules: '计算与规则',
@@ -91,8 +92,9 @@ const LABELS = {
     previousTopic: 'Previous Topic',
     alternativeTopic: 'Alternative Topic',
     relatedTopics: 'Related Topics',
-    relatedGlossary: 'Related Glossary',
-    relatedCodeTopics: 'Related Code Topics',
+    relatedGlossary: 'Terms used in this topic',
+    relatedCodeTopics: 'Code topics related through shared terms',
+    sharedTermsReason: 'Uses glossary terms that also appear in this topic.',
     problem: 'Problem',
     answer: 'Answer',
     rules: 'Calculation / Rules',
@@ -143,8 +145,9 @@ const LABELS = {
     previousTopic: '前に学ぶ',
     alternativeTopic: '別の学習先',
     relatedTopics: '関連テーマ',
-    relatedGlossary: '関連用語',
-    relatedCodeTopics: '関連法規テーマ',
+    relatedGlossary: 'このテーマで使う用語',
+    relatedCodeTopics: '共通用語で関連する法規テーマ',
+    sharedTermsReason: 'このテーマと共通する用語が使われています。',
     problem: '問題',
     answer: '答え',
     rules: '計算と規定',
@@ -220,7 +223,7 @@ function ExamSnapshot({ items }: { items: string[] }) {
   if (snapshotItems.length === 0) return null
 
   return (
-    <div className="rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+    <div className="border-y border-subtle px-2 py-5">
       <ul className="grid gap-3 sm:grid-cols-2">
         {snapshotItems.map((item, index) => (
           <li key={item} className="flex gap-3 text-sm leading-relaxed text-secondary">
@@ -239,7 +242,7 @@ function FormulaCards({ formulas }: { formulas: LearningFormula[] }) {
   return (
     <div className="space-y-4">
       {formulas.map(formula => (
-        <div key={formula.expression} className="rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+        <div key={formula.expression} className="border-y border-subtle px-2 py-5">
           <p className="label">{formula.title}</p>
           <p className="mt-4 break-words font-serif-display text-3xl leading-tight text-primary sm:text-4xl">{formula.expression}</p>
           {formula.note && <p className="mt-4 text-xs leading-relaxed text-muted">{formula.note}</p>}
@@ -271,7 +274,7 @@ function VariablesAndTerms({
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       {variables.length > 0 && (
-        <div className="rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+        <div className="border-y border-subtle px-2 py-5">
           <p className="label mb-4">{labels.variables}</p>
           <dl className="space-y-4">
             {variables.map(variable => (
@@ -283,7 +286,7 @@ function VariablesAndTerms({
           </dl>
         </div>
       )}
-      <div className="rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+      <div className="border-y border-subtle px-2 py-5">
         <p className="label mb-4">{labels.terms}</p>
         <BulletList items={keyConcepts} />
       </div>
@@ -295,7 +298,7 @@ function StepList({ steps }: { steps: LearningStep[] }) {
   return (
     <ol className="space-y-3">
       {steps.map((step, index) => (
-        <li key={step.title} className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-4 rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card">
+        <li key={step.title} className="interactive-row grid grid-cols-[3.5rem_minmax(0,1fr)] gap-4 border-t border-subtle px-2 py-4 first:border-t-0">
           <span className="label">Step {index + 1}</span>
           <div>
             <p className="text-sm font-medium text-primary">{step.title}</p>
@@ -323,9 +326,9 @@ function WorkedExampleCards({ examples, labels }: { examples: LearningWorkedExam
         const processSteps = steps.length > 1 ? steps.slice(0, -1) : []
 
         return (
-          <div key={example.title} className="rounded-md border border-subtle bg-surface-raised p-5 shadow-semantic-card">
+          <div key={example.title} className="border-y border-subtle px-2 py-5">
             <p className="label">{example.label}</p>
-            <div className="mt-4 rounded border border-subtle bg-surface-muted p-3">
+            <div className="mt-4 border-y border-subtle px-2 py-3">
               <p className="label">{labels.problem}</p>
               <h3 className="mt-2 text-base font-medium text-primary">{example.title}</h3>
             </div>
@@ -356,7 +359,7 @@ function ComparisonTables({ tables }: { tables: LearningComparisonTable[] }) {
       {tables.map(table => (
         <div key={table.title}>
           <h3 className="mb-3 text-sm font-medium text-primary">{table.title}</h3>
-          <div className="overflow-x-auto rounded-md border border-subtle bg-surface-raised shadow-semantic-card">
+          <div className="overflow-x-auto border-y border-subtle">
             <table className="min-w-full border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-subtle">
@@ -386,7 +389,7 @@ function DiagramNoteBlocks({ notes }: { notes: LearningDiagramNote[] }) {
   return (
     <div className="space-y-4">
       {notes.map(note => (
-        <div key={note.title} className="rounded-md border border-dashed border-subtle bg-surface-muted p-5">
+        <div key={note.title} className="border-y border-subtle px-2 py-5">
           <p className="label">{note.title}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {note.items.map(item => (
@@ -399,18 +402,19 @@ function DiagramNoteBlocks({ notes }: { notes: LearningDiagramNote[] }) {
   )
 }
 
-function GlossaryTermPill({ term, lang, prefix }: { term: GlossaryTerm; lang: string; prefix: string }) {
+function GlossaryTermLink({ term, lang, prefix }: { term: GlossaryTerm; lang: string; prefix: string }) {
   const localizedTitle = getGlossaryTermTitle(term, lang)
   const shouldShowLocalizedTitle = lang !== 'ja' && localizedTitle !== term.termJa
 
   return (
     <Link
       href={`${prefix}/glossary?term=${encodeURIComponent(term.slug)}`}
-      className="rounded-md border border-subtle bg-surface-raised px-4 py-3 text-left shadow-semantic-card transition-colors hover:bg-surface-muted hover:text-primary"
+      className="grid gap-1 py-3 text-left transition-colors hover:text-accent sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-4"
     >
-      <span className="block text-sm font-medium text-primary">{term.termJa}</span>
-      <span className="mt-1 block text-xs text-muted">（{term.reading}）</span>
-      {shouldShowLocalizedTitle && <span className="mt-2 block text-xs leading-relaxed text-secondary">{localizedTitle}</span>}
+      <span className="text-sm font-medium text-primary">{term.termJa}</span>
+      <span className="text-xs leading-relaxed text-secondary">
+        （{term.reading}）{shouldShowLocalizedTitle ? ` · ${localizedTitle}` : ''}
+      </span>
     </Link>
   )
 }
@@ -423,9 +427,9 @@ function RequiredTermsBlock({ termSlugs, lang, prefix }: { termSlugs: string[]; 
   if (terms.length === 0) return null
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
+    <div className="divide-y divide-[color:var(--ui-border-subtle)] border-y border-subtle">
       {terms.map(term => (
-        <GlossaryTermPill key={term.id} term={term} lang={lang} prefix={prefix} />
+        <GlossaryTermLink key={term.id} term={term} lang={lang} prefix={prefix} />
       ))}
     </div>
   )
@@ -463,7 +467,7 @@ function TopicStudyLink({
   return (
     <Link
       href={`${prefix}/code/${dependency.slug}`}
-      className={`block rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card transition-colors hover:bg-surface-muted hover:text-primary ${emphasis ? '' : 'text-sm'}`}
+      className={`block border-t border-subtle py-3 transition-colors hover:text-accent ${emphasis ? '' : 'text-sm'}`}
     >
       <span className="label">{label}</span>
       <span className={`mt-2 block font-medium text-primary ${emphasis ? 'text-lg' : 'text-sm'}`}>{title}</span>
@@ -516,7 +520,7 @@ function RecommendedNextTopicBlock({
       {visibleRelatedTopics.length > 0 && (
         <div>
           <p className="label mb-3">{labels.relatedTopics}</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="divide-y divide-[color:var(--ui-border-subtle)] border-y border-subtle">
             {visibleRelatedTopics.map(topic => {
               const title = topicTitle(topic.slug, lang)
               if (!title) return null
@@ -524,10 +528,10 @@ function RecommendedNextTopicBlock({
                 <Link
                   key={topic.slug}
                   href={`${prefix}/code/${topic.slug}`}
-                  className="inline-flex min-h-9 items-center rounded-full border border-subtle bg-surface-muted px-3 text-xs font-medium text-secondary transition-colors hover:bg-surface-raised hover:text-primary"
-                  title={getLocalizedReason(topic.reason, lang)}
+                  className="grid gap-1 py-3 text-sm transition-colors hover:text-accent sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-4"
                 >
-                  {title}
+                  <span className="font-medium text-primary">{title}</span>
+                  <span className="text-xs leading-relaxed text-secondary">{getLocalizedReason(topic.reason, lang)}</span>
                 </Link>
               )
             })}
@@ -548,7 +552,7 @@ function OfficialSources({ topic, labels, lang }: {
       {topic.references.map(reference => (
         <details
           key={`${reference.lawName}-${reference.articleNumber}-${reference.sourceType}`}
-          className="rounded-md border border-subtle bg-surface-raised p-4 shadow-semantic-card"
+          className="border-y border-subtle px-2 py-4"
         >
           <summary className="cursor-pointer list-none">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -583,7 +587,7 @@ function OfficialSources({ topic, labels, lang }: {
               <dd className="mt-1 text-secondary">{reference.lastReviewed || labels.notReviewed}</dd>
             </div>
             <div className="sm:col-span-2">
-              <a href={reference.sourceUrl} className="inline-flex min-h-10 items-center rounded-full border border-subtle bg-surface-muted px-4 text-sm font-medium text-primary transition-colors hover:bg-surface-raised hover:text-accent" target="_blank" rel="noreferrer">
+              <a href={reference.sourceUrl} className="inline-flex min-h-10 items-center border-b border-subtle text-sm font-medium text-primary transition-colors hover:border-default hover:text-accent" target="_blank" rel="noreferrer">
                 {labels.openOfficialSource}
               </a>
             </div>
@@ -629,7 +633,7 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
         </dl>
       </header>
 
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-[var(--container-read)]">
         <div className="-mt-8 mb-8">
           <VerificationBlock
             status={topic.verificationStatus}
@@ -733,7 +737,7 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
 
         {keyTerms.length > 0 && (
           <ArticleBlock title={labels.relatedGlossary}>
-            <div className="flex flex-wrap gap-2">
+            <div className="divide-y divide-[color:var(--ui-border-subtle)] border-y border-subtle">
               {keyTerms.map(term => {
                 const title = getGlossaryTermTitle(term, lang)
                 const label = lang === 'ja' || title === term.termJa ? term.termJa : `${title} / ${term.termJa}`
@@ -741,9 +745,10 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
                   <Link
                     key={term.id}
                     href={`${prefix}/glossary?term=${encodeURIComponent(term.slug)}`}
-                    className="inline-flex min-h-9 items-center rounded-full border border-subtle bg-surface-muted px-3 text-xs font-medium text-secondary transition-colors hover:bg-surface-raised hover:text-primary"
+                    className="flex min-h-10 items-center justify-between gap-4 py-3 text-sm font-medium text-primary transition-colors hover:text-accent"
                   >
-                    {label}
+                    <span>{label}</span>
+                    <span aria-hidden="true" className="text-muted">→</span>
                   </Link>
                 )
               })}
@@ -753,14 +758,15 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
 
         {relatedCodeTopics.length > 0 && (
           <ArticleBlock title={labels.relatedCodeTopics}>
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="divide-y divide-[color:var(--ui-border-subtle)] border-y border-subtle">
               {relatedCodeTopics.map(relatedTopic => (
                 <Link
                   key={relatedTopic.slug}
                   href={`${prefix}/code/${relatedTopic.slug}`}
-                  className="rounded-md border border-subtle bg-surface-raised p-4 text-sm font-medium text-primary shadow-semantic-card transition-colors hover:bg-surface-muted hover:text-accent"
+                  className="grid gap-1 py-3 text-sm transition-colors hover:text-accent sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-4"
                 >
-                  {relatedTopic.japaneseTerm}
+                  <span className="font-medium text-primary">{topicTitle(relatedTopic.slug, lang) || relatedTopic.japaneseTerm}</span>
+                  <span className="text-xs leading-relaxed text-secondary">{labels.sharedTermsReason}</span>
                 </Link>
               ))}
             </div>
@@ -777,7 +783,7 @@ export default async function CodeDetailPage({ params }: { params: Promise<{ lan
           <OfficialSources topic={topic} labels={labels} lang={lang} />
         </ArticleBlock>
 
-        <div className="mt-8 rounded-md border border-subtle bg-surface-muted p-4">
+        <div className="mt-8 border-y border-subtle px-2 py-4">
           <p className="text-sm font-medium text-primary">{labels.disclaimerTitle}</p>
           <p className="mt-2 text-xs leading-relaxed text-secondary">{labels.disclaimerBody}</p>
         </div>
