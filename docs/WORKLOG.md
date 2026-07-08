@@ -2,6 +2,49 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-08 - Supabase Migration Audit And Schema Reconciliation
+
+### Intent
+
+- Verify production Supabase state after the repository cleanup and production deploy.
+- Separate true schema drift from content-quality debt.
+- Apply only low-risk additive/remedial database changes.
+
+### Changes
+
+- Added `docs/reports/SUPABASE_MIGRATION_AUDIT_2026-07-08.md`.
+- Added `db/migrations/v13-reconcile-knowledge-os-persistence.sql`.
+- Added `db/migrations/v14-revoke-public-postgis-metadata-access-v2.sql`.
+- Applied the matching production migrations through Supabase MCP.
+
+### Validation
+
+- Confirmed production project ref: `usuqjsjluietcnudxwvz`.
+- Confirmed production migration history before remediation only contained two timestamped migrations.
+- Confirmed core archive tables exist with RLS and public read policies.
+- Confirmed Knowledge OS API returns derived evidence without persisted `claims` tables.
+- Applied `reconcile_knowledge_os_persistence`; verified `sources`, `claims`, `claim_sources`, `ai_citation_events`, and `user_events` exist with RLS enabled.
+- Verified Data API access: `claims` and `claim_sources` are publicly readable; `user_events` and `ai_citation_events` reject anon reads.
+- Applied `revoke_public_postgis_metadata_access_v2`; verified it was recorded in migration history, but PostGIS ACL checks still show anon/auth access because the extension objects are owned by `supabase_admin`.
+- Ran `npm run data:audit`: 0 errors, 1297 warnings, 2490 info.
+
+### Remaining Risk
+
+- `curated_images` is still absent and not currently used by runtime code.
+- PostGIS extension objects still live in `public`; the revoke attempt did not clear the advisor warnings and moving the extension is intentionally deferred as a separate higher-risk operation.
+- Content metadata debt remains: missing `era_slug`, `type_slug`, country codes, and some architect references.
+
+### Rollback Scope
+
+- `db/migrations/v13-reconcile-knowledge-os-persistence.sql`
+- `db/migrations/v14-revoke-public-postgis-metadata-access-v2.sql`
+- `docs/reports/SUPABASE_MIGRATION_AUDIT_2026-07-08.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Commit and push the database audit/migration record, then let Vercel run its normal doc/migration-only deployment.
+
 ## 2026-07-08 - Grouped Cleanup Completion
 
 ### Intent
