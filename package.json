@@ -15,6 +15,7 @@
     "images:registry": "node --env-file=.env.local scripts/build-image-registry.mjs",
     "images:cache": "node --env-file=.env.local scripts/cache-curated-images.mjs",
     "data:audit": "tsx scripts/audit-data.ts",
+    "data:plan-eras": "tsx scripts/plan-era-slugs.ts",
     "data:normalize-types": "tsx scripts/normalize-type-slugs.ts",
     "data:normalize-styles": "tsx scripts/normalize-style-slugs.ts",
     "data:apply-type-p0-decisions": "tsx scripts/apply-type-slug-p0-decisions.ts",

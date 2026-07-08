@@ -2,6 +2,44 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-08 - Era Slug Dry-Run Planner
+
+### Intent
+
+- Plan the next `era_slug` batch without writing medium-confidence data directly to production.
+- Separate unique year-range candidates from overlapping era ranges and records with missing years.
+- Make the planning step repeatable from a registered script instead of an ad hoc SQL query.
+
+### Changes
+
+- Added `scripts/plan-era-slugs.ts`.
+- Added `data:plan-eras` to `package.json`.
+- Registered the script in `SCRIPT_REGISTRY.md`.
+- Added `docs/archive/data-governance/ERA_SLUG_DRY_RUN_2026-07-08.md`.
+
+### Validation
+
+- Ran `npm run data:plan-eras`.
+- Generated `reports/era-slug-dry-run.md` and `reports/era-slug-dry-run.json`.
+- Current result: 32 already assigned, 843 missing, 399 `year-unique`, 101 `year-overlap`, 343 `missing-year`.
+
+### Remaining Risk
+
+- This is a planning tool only; it does not decide whether all 399 `year-unique` candidates are historically correct.
+- Boundary cases and architecturally ambiguous works still need an exclusion list before any write migration.
+
+### Rollback Scope
+
+- `scripts/plan-era-slugs.ts`
+- `package.json`
+- `SCRIPT_REGISTRY.md`
+- `docs/archive/data-governance/ERA_SLUG_DRY_RUN_2026-07-08.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Review the `year-unique` candidates from `reports/era-slug-dry-run.json`, add a small exclusion list, then create the next era write migration.
+
 ## 2026-07-08 - High-Confidence Era Slug Baseline
 
 ### Intent
