@@ -1,7 +1,7 @@
 # AI_AGENT_RULES.md — AI 代理工作规范
 
 > 本项目由人类 + AI 长期协作维护。  
-> AI 代理（Claude Code 或其他）必须严格遵守本文件定义的工作流程。
+> 总维护规则见 `docs/PROJECT_OPERATING_SYSTEM.md`。本文件只补充 AI 代理（Claude Code 或其他）的工作规范。
 
 ## 核心原则
 
@@ -20,27 +20,30 @@
 
 ## 开发前：必读文档
 
-每次开始任何开发任务前，**必须按顺序阅读**：
+普通任务先读短入口：
 
-1. **`docs/PROJECT.md`** — 网站定位、禁止事项、开发原则
-2. **`docs/DESIGN_TOKENS.md`** — 设计令牌（色彩/spacing/typography/radius/shadow）
-3. **`docs/UI_RULES.md`** — UI 规范（card/section/grid/image/animation）
-4. **`docs/STATUS.md`** — 当前状态、已知 bug、下一步计划
-5. **`docs/TECH_DEBT.md`** — 技术债清单，避免新增
-6. **`docs/DATA_SCHEMA.md`** — 数据结构、entity relationship
-7. **`docs/CONTENT_RULES.md`** — 内容规范（biography/图片/metadata）
-8. **`docs/FILE_STRUCTURE.md`** — 目录结构、死代码标记
-9. **`docs/PERFORMANCE.md`** — 性能问题与优化建议
+1. **`STATUS.md`** — 当前产品状态和暂停事项
+2. **`DOCUMENT_INDEX.md`** — 文档入口和归档位置
+3. **`docs/PROJECT_OPERATING_SYSTEM.md`** — 简单维护规则
+4. **`docs/WORKLOG.md`** — 最近交接记录
 
-## 开发前：必须执行的分析
+只在相关时继续读专业文档：
 
-在写任何代码之前，必须：
+- UI / 视觉：`docs/DESIGN_TOKENS.md`、`docs/UI_RULES.md`
+- 数据 / 内容：`docs/DATA_SCHEMA.md`、`docs/CONTENT_RULES.md`
+- 性能：`docs/PERFORMANCE.md`
+- 文件移动 / 删除：`docs/FILE_STRUCTURE.md`
+- 技术债：`docs/TECH_DEBT.md`
 
-1. **总结当前项目状态**（基于 STATUS.md 的最新内容）
-2. **分析影响范围**（哪些页面/组件/路由/数据会受影响）
-3. **说明准备修改的文件清单**
-4. **如果变更涉及 3+ 文件，先在 Plan Mode 中输出方案**
-5. **评估是否会引入新的技术债**（对照 TECH_DEBT.md）
+## 开发前：简单检查
+
+在写代码前先确认三件事：
+
+1. 当前真正的源头文件在哪里。
+2. 这次改动会影响哪些页面、数据或脚本。
+3. 改完后应该跑哪一级验证。
+
+小改动直接做。大范围、不可逆、或方向不清楚时再先写方案。
 
 ## 开发中：代码规范
 
@@ -89,16 +92,16 @@
 ❌ 不使用 CC BY-NC / CC BY-ND 许可图片
 ```
 
-## 开发后：必须执行
+## 开发后：按风险验证
 
-1. **`npm run build`** — 确保 TypeScript 通过 + 当前静态页面生成成功
-2. **`npx vercel --prod --yes`** — 部署到生产环境
-3. **验证** — 至少检查首页 + 2 个详情页 + 相关图片 HTTP/2 200
-4. **更新 `docs/STATUS.md`** — 记录：
-   - 做了什么
-   - 修复了什么
-   - 新发现的问题
-   - 下一步建议
+按 `docs/PROJECT_OPERATING_SYSTEM.md` 的验证表执行。
+
+- 普通代码改动：`npm run typecheck` + `npm run lint`
+- 数据改动：相关 audit script
+- 路由或图片行为：本地 200 smoke test
+- 发布候选：`npm run build` + browser / Playwright QA
+
+不要默认部署生产。只有在任务明确包含发布时，才执行生产部署。
 
 ## 禁止行为
 
@@ -122,13 +125,15 @@ src/lib/types.ts          — 所有类型定义
 src/lib/data.ts           — 数据访问层
 src/lib/i18n.ts           — 国际化字典
 src/lib/relations.ts      — 关系图谱
-src/lib/image-policy.ts   — 图片许可策略
+src/lib/image-domains.ts  — 图片域名白名单
+src/lib/proxy-image.ts    — 图片代理辅助
 src/lib/quality.ts        — 内容质量筛选
 ```
 
 ## 快速参考
 
 ```
+总维护规则  → docs/PROJECT_OPERATING_SYSTEM.md
 设计令牌    → docs/DESIGN_TOKENS.md
 UI 规范     → docs/UI_RULES.md
 数据模型    → docs/DATA_SCHEMA.md

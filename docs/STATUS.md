@@ -1,7 +1,84 @@
 # STATUS.md — 项目当前状态
 
-> 最后更新：2026-05-31
+> 最后更新：2026-06-08
 > 基于代码实际分析，非模板填充
+
+## 2026-06-08 浏览页体验修复与部署记录
+
+- ✅ Phase 1 安全网已启动：新增 Vitest unit test 与 Playwright production e2e test
+- ✅ 新增 `npm test` / `npm run test:unit` / `npm run test:e2e`
+- ✅ 核心路径测试覆盖：首页 200、建筑详情 200/404、建筑师详情 200/404、搜索 API、图片代理 API、根路径语言跳转
+- ✅ 修复生产环境未知建筑/建筑师详情页 HTTP 404 语义：详情页 `dynamicParams` 改为 `false`
+- ✅ 新增 `db/migrations/v1-baseline.sql`，作为从零建库的仓库 baseline；生产灾备前仍需与 live DB schema-only dump 对照
+- ✅ 新增 `scripts/audit-data.ts` 与 `npm run data:audit`，输出 `reports/data-audit.json` / `reports/data-audit.md`
+- ⚠️ 首次数据审计发现 5301 项问题：348 error、2463 warning、2490 info；主要集中在 `type_slug` / `style_slugs` 使用显示名、缺 `era_slug` / `country_code`、正文过短与图片元数据缺失
+- ✅ 新增 `scripts/normalize-type-slugs.ts` 与 `npm run data:normalize-types`，默认 dry-run；只有传 `--write` 才更新 Supabase，写入后会自动跑 `npm run data:audit`
+- ✅ 新增 `db/migrations/v4-building-type-taxonomy-additions.sql`，补充 `civic-public` / `research-institute` / `observation` 三个类型
+- ✅ 类型规范化已执行写入：135 个建筑从旧显示名迁移到 `building_types.slug`，后续 dry-run 为 0 planned / 0 unmapped
+- ✅ 数据审计 error 从 348 降到 213；当前剩余 error 全部来自 `style_slugs`
+- ✅ 新增 `scripts/report-orphan-style-slugs.ts` 与 `npm run data:orphan-styles`，只生成 `reports/orphan-style-slugs.*`，不写库
+- ⚠️ 孤儿 style 报告发现 213 个 orphan assignments、49 个唯一孤儿值；已分类为 A=38/191 assignments、B=7/17 assignments、C=4/5 assignments，下一步只处理 A 类自动映射候选
+- ✅ 新增 `scripts/style-slug-aliases.json`，显式确认 A 类 style alias；B/C 不进入映射表
+- ✅ 新增 `scripts/normalize-style-slugs.ts` 与 `npm run data:normalize-styles`，默认 dry-run，`--write` 才更新 Supabase
+- ✅ A 类 style 规范化已执行写入：135 个建筑、191 条 assignment 已映射到 canonical `styles.slug`；写入后生成 `db/migrations/v5-normalize-style-slugs.sql`
+- ✅ 数据审计 error 从 213 降到 22；当前剩余 error 仍全部来自 `style_slugs`，且只剩 B/C 类
+- ✅ 最新孤儿 style 分类：A=0/0 assignments、B=7/17 assignments、C=4/5 assignments
+- ✅ 查询性能优化起步：建筑详情页 related buildings 已改为按 architect/type/style 小查询下推，不再为单个详情页拉全量 buildings 做 JS 过滤
+- ✅ 修复建筑作品浏览页大屏分组过窄导致的右侧大面积空白，宽分组可铺满多列布局
+- ✅ 修复移动端 loading skeleton 固定宽度导致的潜在横向溢出
+- ✅ 修复空 slug 数据生成 `/[lang]/building` 错链的问题，并过滤不可用 slug
+- ✅ 移除 `[lang]/[...missing]` catch-all 页面，交由 Next not-found 机制返回真实 404
+- ✅ 修复 `CinematicHero` 与 `EditorialImage` 的 `<img>` lint warning，改用 `next/image`
+- ✅ 浏览页首屏代表作图片添加 `next/image` priority，降低 LCP 提示回归风险
+- ✅ 反馈页补充邮箱收信配置提示，避免把 `mailto:` 入口误认为已开通邮箱服务
+- ✅ 修复滚动 reveal 首屏跳过导致的动画缺失感：首屏进入轻量 reveal，滚动列表继续 IntersectionObserver reveal
+- ✅ 浏览页图片列表优先使用可靠本地/可信视觉，减少大列表触发 `/api/image-proxy` 失败
+- ✅ 图片代理域名白名单已抽为共享配置，loader、proxy helper、API route 口径一致
+- ✅ 首页 featured 建筑从已取得的建筑列表中筛选，避免并发重复请求 `getBuildingsWithCovers()`
+- ✅ Supabase 环境变量改为明确运行时检查，缺配置时直接报出变量名
+- ✅ `ContinueExploring` 未使用的 `image` 类型字段已清理
+- ✅ 清理错误本地图片覆盖：欧洲人权法院不再显示 `.ogg` 文件图标；Basilica Palladiana 图片来源、作者、许可证已补正
+- ✅ 图片可展示性过滤已统一为 `isDisplayableImageUrl()`，建筑封面与详情页画廊复用同一套规则
+- ✅ `ImageGallery` 已拆为主控组件 + labels / Skeleton / MainImage / ThumbnailStrip / Lightbox，外部 API 不变，后续维护更简单
+- ✅ 验证通过：`npm run lint`
+- ✅ 验证通过：`npm run build`（Next 16.2.6；3240 个静态页面；保留既有 Edge runtime 静态化提示）
+- ✅ 本地状态码验证：`/zh/browse/buildings` 返回 200，`/zh/building` 返回 404
+- ⚠️ 内容审计仍提示数据治理问题：大量正文依赖 fallback、Unsplash 低可信图片仍需后续替换、部分建筑国家/地区缺失导致“未分类”过大
+- ✅ 生产部署完成：Vercel deployment `dpl_3WdUMrxcVkV7S5T8g3o3sBApPYzb` Ready
+- ✅ 正式域名别名完成：`https://archistory.app`、`https://www.archistory.app`、`https://architect-history-next.vercel.app`
+- ✅ 线上验证：`https://archistory.app/zh/browse/buildings` 返回 200，`https://archistory.app/zh/building` 返回 404
+- ⚠️ 临时 deployment URL `https://architect-history-next-eudgnqxxt-yrqx-95s-projects.vercel.app` 返回 401，正式域名可正常访问
+
+### Migration Execution State
+
+Executed:
+- `v1-baseline.sql`
+- `v2-junction-tables.sql`
+- `v4-building-type-taxonomy-additions.sql`
+- `v5-normalize-style-slugs.sql`
+
+Pending:
+- `v3-curated-image-registry.sql`
+
+## 2026-06-06 教学资料提炼第一批
+
+- ✅ 登记 5 份 RC 讲义与 2 份室内资料，统一标记为 `reference_only`
+- ✅ 提取 154 个带 PDF 页码的私有候选术语
+- ✅ Glossary 从 30 个扩展至 62 个术语，新增结构、混凝土、材料、施工分类
+- ✅ 新增术语均包含日语、读音、中文、英文、三语短释义和搜索别名
+- ✅ 数值限值、JIS/JASS 条文与历史归属未直接公开，继续保持待核验状态
+- ✅ `npx tsc --noEmit`、`npm run lint`、`npm run build` 通过（3,228 页面）
+- ⚠️ 应用内浏览器因本地 URL 安全策略未能执行视觉验收
+
+## 2026-06-06 教学资料全量扫描
+
+- ✅ 完成 40 份 PDF、1,277 页的来源盘点与页级扫描
+- ✅ 其余 33 份资料采用文本层检测与 macOS Vision OCR 混合识别
+- ✅ 来源注册表覆盖规划、历史、集合住宅、办公、商业、RC、室内、照明、考试与法规
+- ✅ 建立 199 个页级候选组，包含 736 次术语提及、631 个去重候选
+- ✅ 35 个候选已存在于公开 Glossary，596 个进入待审池
+- ✅ 新增过可重复扫描工具，现已归档到 `docs/archive/scripts/one-off/scan-learning-pdf-signals.swift.txt`
+- ✅ 不保存整页 OCR、题干、选项、答案、扫描页或原图表
 
 ## 总体进度
 
@@ -83,12 +160,12 @@
 
 ### 轻微（代码质量）
 
-3. **getBuildingsWithCovers() 在首页被重复调用**，与 getFeaturedBuildingsWithCovers() 产生冗余数据库查询。
+3. **首页重复调用 getBuildingsWithCovers() 已修复**，featured 建筑从同一份建筑列表中筛选。
     - 位置：`src/app/[lang]/page.tsx`
 
-4. **ContinueExploring 组件有死字段**：`ExploreGroup.items[].image` 在类型中定义但从未渲染。
+4. **ContinueExploring 组件死字段已清理**：`ExploreGroup.items[].image` 已从类型中删除，组件继续保持纯文字卡片。
 
-5. **ImageGallery 体积过大**：250 行，混合图片展示、缩略图、灯箱、键盘与触摸导航。
+5. **ImageGallery 体积过大已修复**：已拆分为主控组件和 `src/components/image-gallery/` 子组件，外部 props 保持不变。
 
 ## 未完成模块
 
@@ -377,7 +454,7 @@
 - ✅ 桌面导航、移动抽屉和页脚同步加入 `地图 / Map / 地図` 入口，避免地图功能藏在未完成页面里
 - ✅ 国家索引与国家详情页使用 `Intl.DisplayNames` 本地化国家/地区名，`/ja/browse/country/us` 显示 `アメリカ合衆国`，`/en/browse/country/jp` 显示 `Japan`
 - ✅ 非中文页面收紧中文 fallback：英语/日语地图页不显示中文城市或中文国家名；没有可靠国家代码且字段明显是中文时隐藏该地点线索
-- ✅ 新增 `[lang]/[...missing]` 缺页兜底，`/ja/*` 未知路径显示日语 404，不再落到 Next 默认英文 404
+- ✅ 曾新增 `[lang]/[...missing]` 缺页兜底；后续已改由 `[lang]/not-found.tsx` 和 Next not-found 机制处理真实 404
 - ✅ 本轮参考方向：CCA / MoMA / Letterform Archive 等 archive 入口采用可筛选、可进入的地理/分类路径，第一版优先真实可点内容而非空交互
 - ✅ 本地验证：`npm run lint` 通过（剩余 2 个既有 `<img>` warning），`npm run build` 通过（3180 页面）
 - ✅ 本地响应验证：`/zh/map`、`/ja/map`、`/en/map`、`/ja/browse/country/us`、`/en/browse/country/jp`、`/zh/browse/country/us`、`/ja/not-a-real-page` 均通过可见文本检查

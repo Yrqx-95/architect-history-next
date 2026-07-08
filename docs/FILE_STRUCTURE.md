@@ -1,168 +1,91 @@
-# FILE_STRUCTURE.md — 目录结构与文件说明
+# File Structure
 
-> 基于实际项目扫描，标注合理/混乱之处
+Last updated: 2026-07-08
 
-## 总览
+Purpose: show where current code, content, docs, generated files, and archives belong. Keep this file short; detailed rules live in `docs/PROJECT_OPERATING_SYSTEM.md`.
 
-```
-architect-history-next/
-├── docs/                  # 📖 项目文档（本目录）
-├── src/
-│   ├── app/              # 🌐 Next.js App Router
-│   │   ├── [lang]/       #   多语言路由组
-│   │   │   ├── architect/[slug]/  # 建筑师详情
-│   │   │   ├── building/[slug]/   # 建筑详情
-│   │   │   ├── browse/            # 分类浏览
-│   │   │   │   ├── country/[slug]/
-│   │   │   │   ├── era/[slug]/
-│   │   │   │   ├── style/[slug]/
-│   │   │   │   └── type/[slug]/
-│   │   │   ├── search/
-│   │   │   ├── map/              # 地域档案 / 地图入口
-│   │   │   ├── [...missing]/      # 多语言缺页兜底
-│   │   │   └── timeline/
-│   │   ├── api/          # API Routes
-│   │   │   ├── image-proxy/  # Edge 图片代理
-│   │   │   └── search/       # 搜索 API（档案检索）
-│   │   ├── globals.css   # 🎨 设计系统（599行）
-│   │   └── [lang]/layout.tsx # 根 HTML/body 布局，按语言输出 lang
-│   ├── components/       # 🧩 32 个组件（多数平铺，search 已分目录）
-│   └── lib/              # 📚 核心库（11 个文件）
-│       ├── data.ts           # 数据访问层
-│       ├── types.ts          # 类型定义
-│       ├── relations.ts      # 关系图谱查询
-│       ├── quality.ts        # 内容质量筛选
-│       ├── i18n.ts           # 国际化
-│       ├── image-policy.ts   # 图片许可策略
-│       ├── image-loader.ts   # Next.js 图片 loader
-│       ├── proxy-image.ts    # 图片代理辅助
-│       ├── supabase.ts       # Supabase 客户端
-│       ├── image-overrides.json      # 手动策展图片 (39条)
-│       └── local-image-overrides.json # 本地缓存映射 (198条)
-├── public/
-│   └── images/curated/  # 🖼️ 本地缓存图片 (218 文件, 76MB)
-├── scripts/             # 🔧 图片管理脚本
-│   ├── audit-images.mjs
-│   ├── build-image-registry.mjs
-│   └── cache-curated-images.mjs
-├── db/                  # 🗄️ 数据库
-│   ├── migrations/
-│   │   ├── v2-junction-tables.sql
-│   │   └── v3-curated-image-registry.sql
-│   ├── image-registry.generated.json  # ⚠️ 4.1MB 生成文件
-│   └── image-cache-report.json
-├── next.config.ts
-├── vercel.json
-├── tsconfig.json
-├── package.json
-├── .env.local           # ⚠️ 含 service_role key，勿提交
-├── CLAUDE.md → AGENTS.md
-└── README.md
-```
+## Top Level
 
-## 各目录详细分析
+| Path | Role | Notes |
+|---|---|---|
+| `README.md` | Setup and quick entry | Start here for local run commands. |
+| `STATUS.md` | Current product state | Keep current constraints here, not in old reports. |
+| `DOCUMENT_INDEX.md` | Document map | Update when adding or moving current docs. |
+| `SCRIPT_REGISTRY.md` | Script lifecycle | Update when adding scripts. |
+| `src/` | Next.js app, components, libraries, app-consumed content | Main product code. |
+| `content/` | Source CSV and content manifests | Editable content source. |
+| `public/` | Static runtime assets and public data exports | Optimize images before committing. |
+| `scripts/` | Repeatable maintenance tools | No one-off scripts without registry notes. |
+| `db/` | Database migrations and reports | Keep reviewed migrations here. |
+| `docs/` | Current docs, logs, archive, and reports | Current docs stay shallow; history goes to `docs/archive/`. |
+| `reports/` | Generated script output | Ignored by git. Regenerate when needed. |
 
-### `src/app/` — 路由层 ✅
+## App Routes
 
-**结构合理。** 使用 Next.js App Router 约定，`[lang]` 动态段处理三语路由。每个路由有明确的职责。SSG/ISR 策略正确使用。
+| Path | Role |
+|---|---|
+| `src/app/[lang]/` | Localized public routes for `zh`, `en`, and `ja`. |
+| `src/app/[lang]/browse/` | Archive browsing by architects, buildings, countries, eras, styles, and types. |
+| `src/app/[lang]/architect/[slug]/` | Architect detail pages. |
+| `src/app/[lang]/building/[slug]/` | Building detail pages. |
+| `src/app/[lang]/code/` | Building-code learning pages. |
+| `src/app/[lang]/graduation/[[...slug]]/` | Graduation Inspiration Library. |
+| `src/app/[lang]/learn/`, `paths/`, `timeline/`, `map/`, `graph/`, `search/`, `feedback/` | Learning, navigation, discovery, and feedback surfaces. |
+| `src/app/[lang]/not-found.tsx` | Localized not-found handling. |
+| `src/app/api/` | Search, image proxy, and V1 API endpoints. |
 
-**问题：**
-- `src/proxy.ts` 已负责语言前缀重定向与 Accept-Language 协商
-- `/browse/country` 索引页已实现，国家详情页静态参数从建筑数据生成
-- 顶层 `layout.tsx` / `page.tsx` 已删除，根布局在 `[lang]` 段中以保证 `<html lang>` 正确
+Note: the old `src/app/[lang]/[...missing]/page.tsx` catch-all route is intentionally removed; localized not-found handling should use `src/app/[lang]/not-found.tsx`.
 
-### `src/components/` — 组件层 ⚠️
+## Product Code
 
-**多数文件仍平铺在单一目录中，搜索组件已先行拆入 `components/search/`。** 这是当前最大的结构问题之一。
+| Path | Role | Notes |
+|---|---|---|
+| `src/components/` | Shared React components | Mostly flat today; only split into subfolders when repeated complexity justifies it. |
+| `src/components/search/` | Search-specific components | Keep search internals here. |
+| `src/components/image-gallery/` | Image gallery internals | Keep gallery subcomponents here. |
+| `src/lib/data.ts` | Main data access | Treat as core architecture. |
+| `src/lib/types.ts` | Shared types | Keep type-focused. |
+| `src/lib/i18n.ts` | UI translation dictionary | Add `zh`, `en`, and `ja` together. |
+| `src/lib/display.ts`, `locale.ts`, `taxonomy-display.ts` | Display and localization helpers | Prefer these over inline locale logic. |
+| `src/lib/image-domains.ts`, `proxy-image.ts` | Image domain policy and proxy helpers | Keep domain allowlist in one place. |
+| `src/lib/graduation.ts` | Graduation data helpers | Keep paired with graduation content and audit scripts. |
 
-**合理：** 大多数组件职责清晰、体积适中（<70 行）。SafeImage 作为 next/image 的统一包装器是好的抽象。
+## Content And Generated Data
 
-**混乱之处：**
-- **分类不完整**：导航组件（MobileNav, LanguageSwitcher, Breadcrumb, ThemeToggle）、内容组件（BuildingCard, ArchitectCard）、布局组件（PageShell, ArticleSection）、特效组件（Reveal, PageTransition, SmoothScroll）仍在顶层
-- **ImageGallery.tsx (250 行)** 体积过大，SearchResults 已拆为 110 行 shell + `components/search/` 展示组件
-- **ContinueExploring.tsx** 的 `ExploreGroup.items[].image` 字段定义但从未使用（死代码）
+| Path | Role | Rule |
+|---|---|---|
+| `content/issues.csv`, `site_types.csv`, `cases.csv` | Graduation source tables | Source of truth for editable graduation content. |
+| `content/graduation_image_manifest.json` | Current local graduation image records | Only current visible local assets belong here. |
+| `content/graduation_image_retry_queue.json` | Future image download candidates | Use with `--retry-queue`; do not mix with current manifest. |
+| `src/content/graduation/` | App-consumed graduation JSON | Generated or synchronized from source content. |
+| `public/data/graduation/` | Public graduation data exports | Keep synchronized through `npm run graduation:data`. |
+| `public/images/graduation/` | Runtime graduation images | Optimize with `npm run graduation:images:optimize`. |
 
-**推荐重构：**
-```
-components/
-├── layout/      PageShell, ArticleSection, SectionHeading
-├── navigation/  MobileNav, LanguageSwitcher, Breadcrumb, ThemeToggle
-├── cards/       BuildingCard, ArchitectCard, ContinueExploring
-├── image/       SafeImage, EditorialImage, ImageGallery, ImageBreak,
-│                ImageAttribution
-├── search/      SearchInput, SearchSuggestions, SearchSummary,
-│                SearchEmptyState, SearchArchitectResults, SearchBuildingResults
-├── animation/   Reveal, PageTransition, SmoothScroll
-├── ui/          Badge, MetadataPanel, PullQuote
-└── home/        CinematicHero
-```
+## Scripts
 
-### `src/lib/` — 核心库 ⚠️
+Current script ownership is tracked in `SCRIPT_REGISTRY.md`.
 
-**职责相对清晰，但存在重复和 bug。**
+Important groups:
 
-| 文件 | 评价 |
-|------|------|
-| `types.ts` (249行) | ✅ 完整，但 Building.location 类型为 unknown |
-| `data.ts` (169行) | ✅ 数据层缓存合理，但类型转换过多 (as T) |
-| `relations.ts` (131行) | ⚠️ 与 data.ts 有重复逻辑；slug 匹配 bug 已修复 |
-| `quality.ts` (90行) | ⚠️ hasProperName 与 hasValidName 重复 |
-| `i18n.ts` (105行) | ✅ 集中式管理好，回退链与 displayText 不一致 |
-| `image-policy.ts` (28行) | ✅ CC BY-NC 前缀误判已修复 |
-| `image-loader.ts` (35行) | ⚠️ 与 proxy-image.ts 域名列表重复 |
-| `proxy-image.ts` (22行) | ⚠️ 同上 |
-| `supabase.ts` (10行) | ✅ 简洁，但环境变量用非空断言 |
-| `image-overrides.json` | ⚠️ 与 local-image-overrides.json 有重叠条目 |
-| `local-image-overrides.json` | ⚠️ 1190 行，存在无效 URL（.ogg 文件作为图片） |
+- data governance: `scripts/audit-data.ts`, `scripts/normalize-*.ts`, `scripts/report-orphan-style-slugs.ts`
+- image governance: `scripts/audit-images.mjs`, `scripts/build-image-registry.mjs`, `scripts/cache-curated-images.mjs`
+- graduation: `scripts/build-graduation-data.mjs`, `scripts/audit-graduation-content.mjs`, `scripts/localize-graduation-case-images.mjs`, `scripts/optimize-graduation-case-images.mjs`
 
-### `scripts/` — 工具脚本 ✅
+## Docs
 
-结构合理。三个脚本组成图片治理流水线：审计 → 注册表 → 缓存。
+| Path | Role |
+|---|---|
+| `docs/PROJECT_OPERATING_SYSTEM.md` | Short maintenance protocol. |
+| `docs/WORKLOG.md` | Engineering handoff log. |
+| `docs/USER_SIMULATION_LOG.md` | User-view QA and product simulation log. |
+| `docs/graduation/` | Current graduation feature handoff docs. |
+| `docs/reports/` | Current human-readable audit or cleanup reports. |
+| `docs/archive/` | Old plans, reports, one-off evidence, and historical material. |
 
-### `db/` — 数据库 ⚠️
+## Current Cleanup Notes
 
-**问题：**
-- `image-registry.generated.json` (4.1MB) 是生成产物，不应提交到 Git
-- `image-cache-report.json` 内容过时
-- 缺少 v1 迁移（基础表创建 SQL 不在版本控制中）
-- v3 迁移写了但未在 Supabase 执行
-
-### `public/images/curated/` — 图片缓存 ⚠️
-
-218 个文件，76MB。属于构建产物，应在 `.gitignore` 中（需确认）。
-
-## 重复与死代码
-
-### 确认重复
-
-| 位置 | 内容 | 建议 |
-|------|------|------|
-| `image-loader.ts` + `proxy-image.ts` | 外部图片域名列表 | 抽取为共享常量 |
-| `data.ts` + `relations.ts` | 关系查询逻辑 | 仅保留 relations.ts |
-| `quality.ts` | `hasProperName` ≈ `hasValidName` | 合并为一个 |
-| `image-overrides.json` ∩ `local-image-overrides.json` | 重叠条目 | 明确优先级规则 |
-
-### 确认死代码
-
-| 位置 | 内容 | 建议 |
-|------|------|------|
-| `ContinueExploring.tsx` | `ExploreGroup.items[].image` 字段 | 删除或实现 |
-| `/[lang]/map` | 地域档案第一版已实现 | 后续可在经纬度覆盖充足后升级为真实地图层 |
-| `db/image-cache-report.json` | 过时快照 | 加入 .gitignore |
-
-### 命名问题
-
-- `BrowseListing` 与 `BrowseListing` 组件用途不够直观
-- `q118539028` 作为 building slug 暴露了 Wikidata ID
-
-## .gitignore 建议
-
-应确保以下路径不在版本控制中：
-```
-public/images/curated/
-db/image-registry.generated.json
-db/image-cache-report.json
-.env.local
-.next/
-node_modules/
-```
+- `.next/`, `tsconfig.tsbuildinfo`, `reports/`, `.vercel/`, and `node_modules/` are local/generated and should not be committed.
+- `reports/` remains on disk for generated script output but is ignored.
+- `plans/` markdown files were archived under `docs/archive/plans/`.
+- Learning markdown reports formerly under `src/lib/` were archived under `docs/archive/learning-materials/`.
+- Deletions of unused code files should stay in a separate review group until validation passes.

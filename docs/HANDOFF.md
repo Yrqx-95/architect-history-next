@@ -291,10 +291,10 @@ npm run images:cache     # 缓存精选图片到本地
 - **影响文件**：无代码变更
 - **新增文件**：
   - [`docs/HANDOFF.md`](HANDOFF.md) — 本文件
-  - [`plans/handover-report.md`](../plans/handover-report.md) — 完整接手报告
-  - [`plans/batch5-architect-content.md`](../plans/batch5-architect-content.md) — Batch 5 候选方案
-  - [`plans/batch5-data-verification.md`](../plans/batch5-data-verification.md) — Batch 5 数据验证
-  - [`plans/project-analysis.md`](../plans/project-analysis.md) — 项目架构分析
+  - [`docs/archive/plans/handover-report.md`](archive/plans/handover-report.md) — 完整接手报告
+  - [`docs/archive/plans/batch5-architect-content.md`](archive/plans/batch5-architect-content.md) — Batch 5 候选方案
+  - [`docs/archive/plans/batch5-data-verification.md`](archive/plans/batch5-data-verification.md) — Batch 5 数据验证
+  - [`docs/archive/plans/project-analysis.md`](archive/plans/project-analysis.md) — 项目架构分析
 - **验证**：N/A（无代码变更）
 - **遗留**：
   - git 状态未确认（Architect 模式无法执行 git）
@@ -346,7 +346,7 @@ npm run images:cache     # 缓存精选图片到本地
 1. **CC BY-NC ≠ CC BY** — [`image-policy.ts`](../src/lib/image-policy.ts) 已修复，不要删除拦截逻辑
 2. **style_slugs 是 slug 不是显示名** — 但旧数据可能混入了显示名，用 [`taxonomy.ts`](../src/lib/taxonomy.ts) 兼容匹配
 3. **`year_start = 0`** 会导致时间轴显示 "0年"
-4. **两个图片域名列表重复** — [`image-loader.ts`](../src/lib/image-loader.ts) 和 [`proxy-image.ts`](../src/lib/proxy-image.ts) 需统一
+4. **图片域名白名单统一在 `image-domains.ts`** — 旧 `image-loader.ts` 已移除，页面图片通过 [`proxy-image.ts`](../src/lib/proxy-image.ts) 与 [`image-domains.ts`](../src/lib/image-domains.ts) 处理
 5. **`getBuildingsWithCovers()` 被重复调用** — 首页和精选共用时注意缓存
 6. **Next.js 16 有破坏性变更** — 不要用旧版 Next.js API 知识直接写代码，查阅 `node_modules/next/dist/docs/`
 7. **日语 `displayText` 不回退中文** — 回退链：ja → en，不允许 ja → zh
