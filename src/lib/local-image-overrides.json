@@ -210,10 +210,10 @@
     "cover_source_url": "https://commons.wikimedia.org/wiki/File:174_Sydney_Aug_1976_(51747972351).jpg"
   },
   "villa-savoye": {
-    "cover_url": "/images/curated/villa-savoye-1024.jpg",
-    "cover_photographer": "Pascal3012",
-    "cover_license": "CC BY-SA 4.0",
-    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Ville-Savoye.JPG"
+    "cover_url": "/images/curated/villa-savoye-exterior-1024.jpg",
+    "cover_photographer": null,
+    "cover_license": "Wikipedia file",
+    "cover_source_url": "https://en.wikipedia.org/wiki/File:VillaSavoye.jpg"
   },
   "salk-institute": {
     "cover_url": "/images/curated/salk-institute-1024.jpg",
@@ -517,9 +517,9 @@
   },
   "basilica-palladiana": {
     "cover_url": "/images/curated/basilica-palladiana-1024.jpg",
-    "cover_photographer": null,
-    "cover_license": "CC BY-SA",
-    "cover_source_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Basilica_Palladiana_Vicenza.jpg/Basilica_Palladiana_Vicenza.jpg"
+    "cover_photographer": "Francesco Sperotto",
+    "cover_license": "CC BY-SA 4.0",
+    "cover_source_url": "https://commons.wikimedia.org/wiki/File:Basilica_Palladiana_Vicenza.jpg"
   },
   "basilica-fano": {
     "cover_url": "/images/curated/basilica-fano-1024.jpg",
@@ -976,12 +976,6 @@
     "cover_photographer": "trevor.patt from Lausanne, Switzerland",
     "cover_license": "CC BY-SA 2.0",
     "cover_source_url": "https://commons.wikimedia.org/wiki/File:Banco_Borges_e_Irm%C3%A3o_Vila_do_Conde_2011.jpg"
-  },
-  "european-court-of-human-rights": {
-    "cover_url": "/images/curated/european-court-of-human-rights-1024.jpg",
-    "cover_photographer": "Jeuwre",
-    "cover_license": "CC BY-SA 4.0",
-    "cover_source_url": "https://commons.wikimedia.org/wiki/File:De-Europ%C3%A4ischer_Gerichtshof_f%C3%BCr_Menschenrechte.ogg"
   },
   "estadio-serra-dourada": {
     "cover_url": "/images/curated/estadio-serra-dourada-1024.jpg",

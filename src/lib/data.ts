@@ -5,7 +5,6 @@ import type {
 } from './types'
 import { isMinimallyComplete, isWikidataId } from './quality'
 import { isTrustedEditorialImage } from './image-policy'
-import { normalizeTaxonomyValue } from './taxonomy'
 import imageOverrides from './image-overrides.json'
 import localImageOverrides from './local-image-overrides.json'
 
@@ -24,6 +23,12 @@ const cache = new Map<string, { data: unknown; ts: number }>()
 const TTL = 300_000
 const FETCH_PAGE_SIZE = 500
 const FETCH_MAX_ATTEMPTS = 6
+const NON_IMAGE_EXTENSIONS = new Set(['.ogg', '.oga', '.mp3', '.mp4', '.webm', '.pdf', '.svg'])
+const UNUSABLE_COVER_FILES = new Set([
+  'european-court-of-human-rights-1024.jpg',
+  'fileicon-ogg.png',
+  'villa_savoye.jpg',
+])
 
 function isTransientSupabaseError(message: string) {
   return /Bad control character|JSON|522|Connection timed out|Cloudflare|DOCTYPE|fetch failed|network|timeout/i.test(message)
@@ -61,6 +66,14 @@ async function fetchAll<T>(table: string): Promise<T[]> {
   return results
 }
 
+export function isDisplayableImageUrl(value: unknown): value is string {
+  if (typeof value !== 'string' || !value.trim()) return false
+  const clean = value.split('?')[0].toLowerCase()
+  const filename = clean.split('/').pop() || ''
+  if (UNUSABLE_COVER_FILES.has(filename)) return false
+  return !Array.from(NON_IMAGE_EXTENSIONS).some(extension => clean.endsWith(extension))
+}
+
 export async function getArchitects() { return cached('architects', () => fetchAll<Architect>('architects')) }
 export async function getBuildings() { return cached('buildings', () => fetchAll<Building>('buildings')) }
 
@@ -93,8 +106,7 @@ export async function getFeaturedBuildings(limit = 6) {
 }
 
 /** Quality-filtered featured buildings: proper names + cover images + complete data. */
-export async function getFeaturedBuildingsWithCovers(limit = 7): Promise<BuildingWithCover[]> {
-  const all = await getBuildingsWithCovers()
+export function selectFeaturedBuildingsWithCovers(all: BuildingWithCover[], limit = 7): BuildingWithCover[] {
   return all
     .filter(b => b.cover_url && isMinimallyComplete(b) && !isWikidataId(b.slug) && isTrustedEditorialImage({
       source: b.cover_source_url?.includes('commons.wikimedia.org') ? 'Wikimedia Commons' : null,
@@ -103,6 +115,12 @@ export async function getFeaturedBuildingsWithCovers(limit = 7): Promise<Buildin
     }))
     .sort((a, b) => (b.year_start || 0) - (a.year_start || 0))
     .slice(0, limit)
+}
+
+/** Quality-filtered featured buildings: proper names + cover images + complete data. */
+export async function getFeaturedBuildingsWithCovers(limit = 7): Promise<BuildingWithCover[]> {
+  const all = await getBuildingsWithCovers()
+  return selectFeaturedBuildingsWithCovers(all, limit)
 }
 
 /** All buildings with covers, excluding Wikidata Q-ID entries and incomplete records. */
@@ -130,12 +148,16 @@ export async function getBuildingsWithCovers(): Promise<BuildingWithCover[]> {
     return buildings.map(b => {
       const image = imgMap.get(b.id)
       const override = cachedImageOverrides[b.slug] || curatedImageOverrides[b.slug]
+      const overrideCoverUrl = isDisplayableImageUrl(override?.cover_url) ? override.cover_url : null
+      const imageCoverUrl = isDisplayableImageUrl(image?.url_original) ? image?.url_original as string : null
+      const useOverride = Boolean(overrideCoverUrl)
+      const useImage = !useOverride && Boolean(imageCoverUrl)
       return {
         ...b,
-        cover_url: override?.cover_url || (image?.url_original as string) || null,
-        cover_photographer: override?.cover_photographer || (image?.photographer as string) || null,
-        cover_license: override?.cover_license || (image?.license as string) || null,
-        cover_source_url: override?.cover_source_url || (image?.source_url as string) || null,
+        cover_url: overrideCoverUrl || imageCoverUrl || null,
+        cover_photographer: useOverride ? override?.cover_photographer || null : useImage ? image?.photographer as string || null : null,
+        cover_license: useOverride ? override?.cover_license || null : useImage ? image?.license as string || null : null,
+        cover_source_url: useOverride ? override?.cover_source_url || null : useImage ? image?.source_url as string || null : null,
       }
     })
   })
@@ -155,32 +177,7 @@ export async function getBuildingBySlug(slug: string): Promise<Building | null> 
   return data
 }
 
-export async function getBuildingsByArchitect(slug: string): Promise<Building[]> {
-  const { data } = await createClient().from('buildings').select('*').eq('architect_slug', slug)
-  return data || []
-}
-
 export async function getBuildingImages(buildingId: string): Promise<BuildingImage[]> {
   const { data } = await createClient().from('images').select('*').eq('building_id', buildingId).order('is_primary', { ascending: false })
-  return data || []
-}
-
-export async function getRelatedArchitects(slug: string): Promise<Architect[]> {
-  const arch = await getArchitectBySlug(slug)
-  if (!arch) return []
-  const ids = new Set([...(arch.influences || []), ...(arch.influenced || [])])
-  if (!ids.size) return []
-  return (await getArchitects()).filter(a => ids.has(a.slug) && a.slug !== slug)
-}
-
-export async function getRelatedBuildings(slug: string): Promise<Building[]> {
-  const b = await getBuildingBySlug(slug)
-  if (!b) return []
-  const typeKey = normalizeTaxonomyValue(b.type_slug)
-  return (await getBuildings()).filter(x =>
-    x.id !== b.id &&
-    (x.architect_slug === b.architect_slug ||
-     x.style_slugs?.some(s => b.style_slugs?.includes(s)) ||
-     (typeKey && normalizeTaxonomyValue(x.type_slug) === typeKey))
-  ).slice(0, 6)
+  return (data || []).filter(image => isDisplayableImageUrl(image.url_original))
 }

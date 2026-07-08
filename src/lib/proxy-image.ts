@@ -1,13 +1,9 @@
-const EXTERNAL_HOSTS = [
-  'images.unsplash.com',
-  'upload.wikimedia.org',
-  'commons.wikimedia.org',
-]
+import { isExternalImageHost } from './image-domains'
 
 export function isExternalImage(src: string): boolean {
   try {
     const host = new URL(src).hostname
-    return EXTERNAL_HOSTS.some(h => host === h || host.endsWith('.' + h))
+    return isExternalImageHost(host)
   } catch {
     return false
   }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T14:56:29.685Z",
+  "generated_at": "2026-06-08T03:23:13.428Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
@@ -2663,18 +2663,6 @@
       }
     },
     {
-      "slug": "todaiji-temple",
-      "wikidata_id": null,
-      "name_en": "Todai-ji Temple",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": true
-      }
-    },
-    {
       "slug": "tokyo-metropolitan-government",
       "wikidata_id": null,
       "name_en": "Tokyo Metropolitan Government Building",
@@ -3191,18 +3179,6 @@
       }
     },
     {
-      "slug": "museum-of-fine-arts-houston",
-      "wikidata_id": "Q1565911",
-      "name_en": "Museum of Fine Arts, Houston",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "serralves-museum-of-contemporary-art",
       "wikidata_id": "Q1954380",
       "name_en": "Serralves Museum of Contemporary Art",
@@ -3299,9 +3275,9 @@
       }
     },
     {
-      "slug": "plaza-de-toros-de-pamplona",
-      "wikidata_id": "Q2033759",
-      "name_en": "Plaza de Toros de Pamplona",
+      "slug": "museum-of-fine-arts-houston",
+      "wikidata_id": "Q1565911",
+      "name_en": "Museum of Fine Arts, Houston",
       "missing": {
         "zh": true,
         "ja": true,
@@ -3479,9 +3455,9 @@
       }
     },
     {
-      "slug": "atocha-cercanias",
-      "wikidata_id": "Q2842655",
-      "name_en": "Atocha-Cercanías",
+      "slug": "plaza-de-toros-de-pamplona",
+      "wikidata_id": "Q2033759",
+      "name_en": "Plaza de Toros de Pamplona",
       "missing": {
         "zh": true,
         "ja": true,
@@ -3491,9 +3467,9 @@
       }
     },
     {
-      "slug": "bank-of-spain-headquarters",
-      "wikidata_id": "Q4889526",
-      "name_en": "Bank of Spain headquarters",
+      "slug": "atocha-cercanias",
+      "wikidata_id": "Q2842655",
+      "name_en": "Atocha-Cercanías",
       "missing": {
         "zh": true,
         "ja": true,
@@ -3518,18 +3494,6 @@
       "slug": "lauditori",
       "wikidata_id": "Q2713088",
       "name_en": "L'Auditori",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
-      "slug": "palace-of-villahermosa",
-      "wikidata_id": "Q5358601",
-      "name_en": "Palace of Villahermosa",
       "missing": {
         "zh": true,
         "ja": true,
@@ -3650,6 +3614,30 @@
       "slug": "25th-of-april-society-headquarters",
       "wikidata_id": "Q136706143",
       "name_en": "25th of April Society Headquarters",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "bank-of-spain-headquarters",
+      "wikidata_id": "Q4889526",
+      "name_en": "Bank of Spain headquarters",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "palace-of-villahermosa",
+      "wikidata_id": "Q5358601",
+      "name_en": "Palace of Villahermosa",
       "missing": {
         "zh": true,
         "ja": true,
@@ -3995,18 +3983,6 @@
       }
     },
     {
-      "slug": "palacio-pascual-de-riquelme",
-      "wikidata_id": "Q93418835",
-      "name_en": "Palacio Pascual de Riquelme",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "madrid-puerta-de-atocha-almudena-grandes",
       "wikidata_id": "Q5846989",
       "name_en": "Madrid-Puerta de Atocha-Almudena Grandes",
@@ -4094,6 +4070,18 @@
       "slug": "bonjour-tristesse",
       "wikidata_id": "Q822311",
       "name_en": "Bonjour Tristesse",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "palacio-pascual-de-riquelme",
+      "wikidata_id": "Q93418835",
+      "name_en": "Palacio Pascual de Riquelme",
       "missing": {
         "zh": true,
         "ja": true,
@@ -4835,18 +4823,6 @@
       }
     },
     {
-      "slug": "gilbey-house",
-      "wikidata_id": "Q26407116",
-      "name_en": "Gilbey House",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "q125966353",
       "wikidata_id": "Q125966353",
       "name_en": "Q125966353",
@@ -4886,6 +4862,18 @@
       "slug": "q124556059",
       "wikidata_id": "Q124556059",
       "name_en": "Q124556059",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "gilbey-house",
+      "wikidata_id": "Q26407116",
+      "name_en": "Gilbey House",
       "missing": {
         "zh": true,
         "ja": true,
@@ -5171,18 +5159,6 @@
       }
     },
     {
-      "slug": "red-banner-textile-factory",
-      "wikidata_id": "Q2506798",
-      "name_en": "Red Banner Textile Factory",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "schocken-library",
       "wikidata_id": "Q6756158",
       "name_en": "Schocken Library",
@@ -5279,6 +5255,18 @@
       }
     },
     {
+      "slug": "red-banner-textile-factory",
+      "wikidata_id": "Q2506798",
+      "name_en": "Red Banner Textile Factory",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
       "slug": "haifa-first-power-plant",
       "wikidata_id": "Q97212961",
       "name_en": "Haifa first power plant",
@@ -5318,18 +5306,6 @@
       "slug": "loisium-wine-spa-resort-langenlois",
       "wikidata_id": "Q111410458",
       "name_en": "Loisium Wine & Spa Resort Langenlois",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
-      "slug": "the-nelson-atkins-museum-of-art",
-      "wikidata_id": "Q1976985",
-      "name_en": "The Nelson-Atkins Museum of Art",
       "missing": {
         "zh": true,
         "ja": true,
@@ -5426,18 +5402,6 @@
       "slug": "simmons-hall",
       "wikidata_id": "Q118601571",
       "name_en": "Simmons Hall",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
-      "slug": "bellevue-arts-museum",
-      "wikidata_id": "Q4883914",
-      "name_en": "Bellevue Arts Museum",
       "missing": {
         "zh": true,
         "ja": true,
@@ -5570,6 +5534,30 @@
       "slug": "q118611436",
       "wikidata_id": "Q118611436",
       "name_en": "Q118611436",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "the-nelson-atkins-museum-of-art",
+      "wikidata_id": "Q1976985",
+      "name_en": "The Nelson-Atkins Museum of Art",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "bellevue-arts-museum",
+      "wikidata_id": "Q4883914",
+      "name_en": "Bellevue Arts Museum",
       "missing": {
         "zh": true,
         "ja": true,
@@ -5939,18 +5927,6 @@
       }
     },
     {
-      "slug": "paris-opera-ballet-school",
-      "wikidata_id": "Q19945031",
-      "name_en": "Paris Opera Ballet School",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "renaissance-paris-arc-de-triomphe",
       "wikidata_id": "Q111390925",
       "name_en": "Renaissance Paris Arc de Triomphe Hotel",
@@ -6143,6 +6119,18 @@
       }
     },
     {
+      "slug": "paris-opera-ballet-school",
+      "wikidata_id": "Q19945031",
+      "name_en": "Paris Opera Ballet School",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
       "slug": "dar-al-islam",
       "wikidata_id": "Q5221944",
       "name_en": "Dar al-Islam",
@@ -6323,18 +6311,6 @@
       }
     },
     {
-      "slug": "gipsoteca-canoviana",
-      "wikidata_id": "Q3768553",
-      "name_en": "Gipsoteca canoviana",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "san-giovanni-battista",
       "wikidata_id": "Q3670406",
       "name_en": "San Giovanni Battista",
@@ -6419,9 +6395,9 @@
       }
     },
     {
-      "slug": "palazzo-abatellis",
-      "wikidata_id": "Q1255652",
-      "name_en": "Palazzo Abatellis",
+      "slug": "gipsoteca-canoviana",
+      "wikidata_id": "Q3768553",
+      "name_en": "Gipsoteca canoviana",
       "missing": {
         "zh": true,
         "ja": true,
@@ -6659,6 +6635,18 @@
       }
     },
     {
+      "slug": "palazzo-abatellis",
+      "wikidata_id": "Q1255652",
+      "name_en": "Palazzo Abatellis",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
       "slug": "villa-veritti",
       "wikidata_id": "Q26950714",
       "name_en": "Villa Veritti",
@@ -6887,18 +6875,6 @@
       }
     },
     {
-      "slug": "fondazione-querini-stampalia",
-      "wikidata_id": "Q3747209",
-      "name_en": "Fondazione Querini Stampalia",
-      "missing": {
-        "zh": false,
-        "ja": false,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "nordic-house",
       "wikidata_id": "Q3480216",
       "name_en": "Nordic House",
@@ -7067,18 +7043,6 @@
       }
     },
     {
-      "slug": "cleveland-museum-of-art-building",
-      "wikidata_id": "Q130255573",
-      "name_en": "Cleveland Museum of Art building",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "murray-d-lincoln-campus-center",
       "wikidata_id": "Q6939194",
       "name_en": "Murray D. Lincoln Campus Center",
@@ -7097,6 +7061,30 @@
       "missing": {
         "zh": false,
         "ja": false,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "fondazione-querini-stampalia",
+      "wikidata_id": "Q3747209",
+      "name_en": "Fondazione Querini Stampalia",
+      "missing": {
+        "zh": false,
+        "ja": false,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "cleveland-museum-of-art-building",
+      "wikidata_id": "Q130255573",
+      "name_en": "Cleveland Museum of Art building",
+      "missing": {
+        "zh": true,
+        "ja": true,
         "en": true,
         "image": false,
         "source": false
@@ -7259,18 +7247,6 @@
       }
     },
     {
-      "slug": "saint-johns-abbey",
-      "wikidata_id": "Q2820565",
-      "name_en": "Saint John's Abbey",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "q118947481",
       "wikidata_id": "Q118947481",
       "name_en": "Q118947481",
@@ -7310,6 +7286,18 @@
       "slug": "q118947199",
       "wikidata_id": "Q118947199",
       "name_en": "Q118947199",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "saint-johns-abbey",
+      "wikidata_id": "Q2820565",
+      "name_en": "Saint John's Abbey",
       "missing": {
         "zh": true,
         "ja": true,
@@ -7367,18 +7355,6 @@
       }
     },
     {
-      "slug": "pylkonmaki-church",
-      "wikidata_id": "Q19406937",
-      "name_en": "Pylkönmäki Church",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "aalto-hochhaus",
       "wikidata_id": "Q300972",
       "name_en": "Aalto-Hochhaus",
@@ -7418,18 +7394,6 @@
       "slug": "hotel-marcel",
       "wikidata_id": "Q63615028",
       "name_en": "Hotel Marcel",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
-      "slug": "cleveland-museum-of-art",
-      "wikidata_id": "Q657415",
-      "name_en": "Cleveland Museum of Art",
       "missing": {
         "zh": true,
         "ja": true,
@@ -7586,6 +7550,30 @@
       "slug": "palos-verdes-high-school",
       "wikidata_id": "Q14683607",
       "name_en": "Palos Verdes High School",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "cleveland-museum-of-art",
+      "wikidata_id": "Q657415",
+      "name_en": "Cleveland Museum of Art",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "pylkonmaki-church",
+      "wikidata_id": "Q19406937",
+      "name_en": "Pylkönmäki Church",
       "missing": {
         "zh": true,
         "ja": true,
@@ -9575,18 +9563,6 @@
       }
     },
     {
-      "slug": "minneapolis-institute-of-art",
-      "wikidata_id": "Q1700481",
-      "name_en": "Minneapolis Institute of Art",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "fcg-building",
       "wikidata_id": "Q10954019",
       "name_en": "FCG Building",
@@ -9623,18 +9599,6 @@
       }
     },
     {
-      "slug": "museum-of-east-asian-art",
-      "wikidata_id": "Q884204",
-      "name_en": "Museum of East-Asian Art",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "miyagi-museum-of-art",
       "wikidata_id": "Q11453791",
       "name_en": "Miyagi Museum of Art",
@@ -9662,6 +9626,30 @@
       "slug": "yamaguchi-prefectural-museum",
       "wikidata_id": "Q4707661",
       "name_en": "Yamaguchi Prefectural Museum",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "minneapolis-institute-of-art",
+      "wikidata_id": "Q1700481",
+      "name_en": "Minneapolis Institute of Art",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "museum-of-east-asian-art",
+      "wikidata_id": "Q884204",
+      "name_en": "Museum of East-Asian Art",
       "missing": {
         "zh": true,
         "ja": true,
@@ -10607,18 +10595,6 @@
       }
     },
     {
-      "slug": "saint-louis-art-museum",
-      "wikidata_id": "Q1760539",
-      "name_en": "Saint Louis Art Museum",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "rena-lange-headquarters",
       "wikidata_id": "Q133283074",
       "name_en": "Rena Lange Headquarters",
@@ -10691,18 +10667,6 @@
       }
     },
     {
-      "slug": "foundation-e-g-buhrle-collection",
-      "wikidata_id": "Q666331",
-      "name_en": "Foundation E.G. Bührle Collection",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "kaufhaus-tyrol",
       "wikidata_id": "Q1737019",
       "name_en": "Kaufhaus Tyrol",
@@ -10754,6 +10718,30 @@
       "slug": "q3412221",
       "wikidata_id": "Q3412221",
       "name_en": "Q3412221",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "saint-louis-art-museum",
+      "wikidata_id": "Q1760539",
+      "name_en": "Saint Louis Art Museum",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "foundation-e-g-buhrle-collection",
+      "wikidata_id": "Q666331",
+      "name_en": "Foundation E.G. Bührle Collection",
       "missing": {
         "zh": true,
         "ja": true,
@@ -11039,18 +11027,6 @@
       }
     },
     {
-      "slug": "bodmer-foundation",
-      "wikidata_id": "Q667858",
-      "name_en": "Bodmer Foundation",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "q125408225",
       "wikidata_id": "Q125408225",
       "name_en": "Q125408225",
@@ -11075,9 +11051,9 @@
       }
     },
     {
-      "slug": "santantonio-abate-parish-church",
-      "wikidata_id": "Q29884486",
-      "name_en": "Sant'Antonio Abate Parish Church",
+      "slug": "bodmer-foundation",
+      "wikidata_id": "Q667858",
+      "name_en": "Bodmer Foundation",
       "missing": {
         "zh": true,
         "ja": true,
@@ -11126,6 +11102,18 @@
       "slug": "toulouse-school-of-economics",
       "wikidata_id": "Q3532921",
       "name_en": "Toulouse School of Economics",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "santantonio-abate-parish-church",
+      "wikidata_id": "Q29884486",
+      "name_en": "Sant'Antonio Abate Parish Church",
       "missing": {
         "zh": true,
         "ja": true,
@@ -11219,9 +11207,9 @@
       }
     },
     {
-      "slug": "dortmund-city-and-state-library",
-      "wikidata_id": "Q2326332",
-      "name_en": "Dortmund City and State Library",
+      "slug": "teatro-degli-arcimboldi",
+      "wikidata_id": "Q1131522",
+      "name_en": "Teatro degli Arcimboldi",
       "missing": {
         "zh": true,
         "ja": true,
@@ -11231,9 +11219,9 @@
       }
     },
     {
-      "slug": "teatro-degli-arcimboldi",
-      "wikidata_id": "Q1131522",
-      "name_en": "Teatro degli Arcimboldi",
+      "slug": "dortmund-city-and-state-library",
+      "wikidata_id": "Q2326332",
+      "name_en": "Dortmund City and State Library",
       "missing": {
         "zh": true,
         "ja": true,
@@ -11339,18 +11327,6 @@
       }
     },
     {
-      "slug": "san-francisco-museum-of-modern",
-      "wikidata_id": "Q913672",
-      "name_en": "San Francisco Museum of Modern Art",
-      "missing": {
-        "zh": true,
-        "ja": true,
-        "en": true,
-        "image": false,
-        "source": false
-      }
-    },
-    {
       "slug": "house-delorenzi",
       "wikidata_id": "Q138456287",
       "name_en": "House Delorenzi",
@@ -11378,6 +11354,18 @@
       "slug": "scuola-media",
       "wikidata_id": "Q29527440",
       "name_en": "Scuola Media",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": false
+      }
+    },
+    {
+      "slug": "san-francisco-museum-of-modern",
+      "wikidata_id": "Q913672",
+      "name_en": "San Francisco Museum of Modern Art",
       "missing": {
         "zh": true,
         "ja": true,
@@ -11672,6 +11660,18 @@
         "en": true,
         "image": false,
         "source": false
+      }
+    },
+    {
+      "slug": "todaiji-temple",
+      "wikidata_id": null,
+      "name_en": "Todai-ji Temple",
+      "missing": {
+        "zh": true,
+        "ja": true,
+        "en": true,
+        "image": false,
+        "source": true
       }
     }
   ],

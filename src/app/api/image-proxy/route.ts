@@ -1,7 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isExternalImageHost } from '@/lib/image-domains'
 
 export const runtime = 'edge'
 export const revalidate = 86400 // Cache for 1 day
+
+const FALLBACK_PNG_BASE64 =
+  'iVBORw0KGgoAAAANSUhEUgAAAHgAAABICAIAAACyfKYoAAABKUlEQVR42u3cOwrCQBRGYSOuzGxAwcYNWLoYSzdgI+gGdAtiI7ZWugMLGwshjUZNJoHM8J0yDwiHO/+dy0Cy6+XUQ/v0KSCaaBBNNNEgmmgQTTTRIJpoEE000SA6HQYd/KbJbF7jrfVyQXRldttNpefz0Vh0gGiiiUZazbBgtduX3ZrmQxUNomOMjnqTRVyDRlcyuupkEd2gITqIRozbu5A9XCMtpKl2Mki7jgJbSIPtRHREGB3vU9xr4ZddJ9oIbtehoqPg4/ooVsb3uypadIBoojXDgHE5pJ8ks+NW0USLjnj5HkStxpSKFh1Eg+jukv3zB5rGz4TS4+cpl4oWHUSD6A5Phrf7g4VwfmrMDucjTaKDaBBNNNEgmmgQTTTRIJpoEE000WibJ3OoOkRatK+jAAAAAElFTkSuQmCC'
+
+function fallbackImageResponse(reason: string) {
+  const bytes = Uint8Array.from(atob(FALLBACK_PNG_BASE64), char => char.charCodeAt(0))
+
+  return new NextResponse(bytes, {
+    status: 200,
+    headers: {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
+      'CDN-Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
+      'Vercel-CDN-Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
+      'X-Archistory-Image-Fallback': reason,
+    },
+  })
+}
 
 export async function GET(request: NextRequest) {
   const url = request.nextUrl.searchParams.get('url')
@@ -11,14 +30,14 @@ export async function GET(request: NextRequest) {
   }
 
   // Validate URL - only allow whitelisted domains
-  const parsed = new URL(url)
-  const allowedHosts = [
-    'images.unsplash.com',
-    'upload.wikimedia.org',
-    'commons.wikimedia.org',
-    'plus.unsplash.com',
-  ]
-  if (!allowedHosts.some(h => parsed.hostname === h || parsed.hostname.endsWith('.' + h))) {
+  let parsed: URL
+  try {
+    parsed = new URL(url)
+  } catch {
+    return NextResponse.json({ error: 'Invalid url parameter' }, { status: 400 })
+  }
+
+  if (!isExternalImageHost(parsed.hostname)) {
     return NextResponse.json({ error: 'Domain not allowed' }, { status: 403 })
   }
 
@@ -40,13 +59,14 @@ export async function GET(request: NextRequest) {
     clearTimeout(timeout)
 
     if (!res.ok) {
-      return NextResponse.json(
-        { error: `Upstream returned ${res.status}` },
-        { status: 502 }
-      )
+      return fallbackImageResponse(`upstream-${res.status}`)
     }
 
-    const contentType = res.headers.get('content-type') || 'image/jpeg'
+    const contentType = res.headers.get('content-type') || ''
+    if (!contentType.toLowerCase().startsWith('image/')) {
+      return fallbackImageResponse('non-image-response')
+    }
+
     const body = await res.arrayBuffer()
     const cacheControl = res.headers.get('cache-control') || 'public, max-age=86400, immutable'
 
@@ -60,9 +80,6 @@ export async function GET(request: NextRequest) {
       },
     })
   } catch {
-    return NextResponse.json(
-      { error: 'Failed to fetch image' },
-      { status: 504 }
-    )
+    return fallbackImageResponse('fetch-failed')
   }
 }

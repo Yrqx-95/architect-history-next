@@ -1,6 +1,7 @@
+import type { BuildingWithCover } from '@/lib/types'
 import { NextRequest, NextResponse } from 'next/server'
 import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
-import type { Architect, BuildingWithCover } from '@/lib/types'
+import type { Architect } from '@/lib/types'
 
 const QUERY_CACHE_TTL = 60_000
 const queryCache = new Map<string, { ts: number; data: SearchResponse }>()
