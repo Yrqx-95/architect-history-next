@@ -61,6 +61,23 @@ This file is the handoff log for future Codex/chat windows. Read it before conti
 
 - Build, commit, push, deploy to Vercel production, then smoke-test `/zh`, `/zh/browse/era/postmodern`, and representative API/building routes on `https://archistory.app`.
 
+### Production Result
+
+- Commit: `61fd018 chore: apply reviewed postmodern era batch`.
+- Pushed to `origin/main`.
+- Vercel production deployment: `dpl_3vvebyDE5hN84JUKTh2CzKcsgeeo`.
+- Production alias: `https://archistory.app`.
+- Deployment state: `READY`.
+- Build logs errors-only check: no build errors.
+- Smoke test passed on:
+  - `/zh` returns 200.
+  - `/zh/browse/era/postmodern` returns 200 and shows the scope note explaining that `postmodern` is a historical period, not a style claim for every work.
+  - `/zh/browse/era/postmodern` includes `louvre-pyramid`.
+  - `/zh/browse/era/postmodern` excludes `church-of-light`.
+  - `/zh/browse/era/contemporary` returns 200.
+  - `/api/v1/buildings/louvre-pyramid` returns 200.
+  - `/api/v1/buildings/church-of-light` returns 200.
+
 ## 2026-07-09 - Postmodern Era Review Queue
 
 ### Intent
