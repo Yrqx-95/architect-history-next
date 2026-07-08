@@ -2,6 +2,300 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Postmodern V18 Apply And Verification
+
+### Intent
+
+- Apply the reviewed postmodern chronological era batch after the queue and wording guard were prepared.
+- Keep the 12 excluded records out of the write batch:
+  - 6 weak-identity records.
+  - 6 style hold-outs where `postmodern` would be especially easy to misread as a style claim.
+- Verify the database, data audit, and code checks before deployment.
+
+### Changes
+
+- Applied Supabase migration `normalize_postmodern_reviewed_era_slugs`.
+- Production migration history version: `20260708231338`.
+- Wrote 87 reviewed `postmodern` chronological-era assignments to `buildings.era_slug`.
+- Inserted the matching 87 `building_eras` rows.
+- Left the 12 excluded records unassigned.
+
+### Validation
+
+- Supabase before apply:
+  - `buildings.era_slug` filled: 321.
+  - `buildings.era_slug` missing: 554.
+  - `building_eras`: 321.
+  - writable postmodern year-unique candidates: 99.
+- Supabase after apply:
+  - `buildings.era_slug` filled: 408.
+  - `buildings.era_slug` missing: 467.
+  - `building_eras`: 408.
+  - expected V18 buildings written: 87.
+  - expected V18 relations written: 87.
+  - excluded records assigned: 0.
+- Spot checks:
+  - `louvre-pyramid`: `postmodern`.
+  - `bank-of-china-tower`: `postmodern`.
+  - `guggenheim-bilbao`: `postmodern`.
+  - `church-of-light`: still unassigned.
+- Ran `npm run data:audit`: 0 errors, 889 warnings, 2490 info, 3379 total.
+- Ran `npm run data:plan-eras`: 23 `year-unique`, 101 `year-overlap`, 343 `missing-year`.
+- Ran `npm run typecheck`.
+- Ran `npm run lint`.
+
+### Remaining Risk
+
+- `postmodern` is still an overloaded reader-facing word; the wording guard reduces but does not remove the risk.
+- The remaining 12 postmodern `year-unique` records are intentionally left for identity/style exception cleanup.
+- The largest remaining era work is still the 101 `year-overlap` group, especially `modern + post-war`.
+
+### Rollback Scope
+
+- Use `reports/era-slug-postmodern-reviewed-rollback.sql` if the V18 data write needs to be reverted after review.
+- UI wording rollback scope remains:
+  - `src/app/[lang]/browse/era/[slug]/page.tsx`
+  - `src/components/search/utils.ts`
+
+### Next Step
+
+- Build, commit, push, deploy to Vercel production, then smoke-test `/zh`, `/zh/browse/era/postmodern`, and representative API/building routes on `https://archistory.app`.
+
+## 2026-07-09 - Postmodern Era Review Queue
+
+### Intent
+
+- Continue the era metadata cleanup without automatically writing historically ambiguous `postmodern` records.
+- Build a simple manual review queue that separates weak identity records, style-conflict records, and lower-risk chronological candidates.
+- Keep this round read-only and rollback-free: no Supabase writes, no migration, no deployment.
+
+### Changes
+
+- Added `scripts/build-era-postmodern-review-queue.ts`.
+- Added `data:review-era-postmodern` to `package.json`.
+- Registered the script in `SCRIPT_REGISTRY.md`.
+- Generated ignored local reports:
+  - `reports/era-slug-postmodern-review-queue.md`
+  - `reports/era-slug-postmodern-review-queue.json`
+
+### Validation
+
+- Ran `npm run data:review-era-postmodern`: 99 candidates total.
+- Queue split:
+  - 6 `weak-identity-review`
+  - 18 `style-conflict-review`
+  - 75 `likely-chronological-postmodern`
+- Ran `npm run typecheck`.
+- Ran `npm run lint`.
+
+### Remaining Risk
+
+- The lane split is a conservative heuristic, not final architectural history judgment.
+- Some `likely-chronological-postmodern` records may still be weak, duplicate-like, or better treated as late-modern/contemporary after human review.
+- The generated report is ignored local output; the durable source is the repeatable script plus this worklog entry.
+
+### Rollback Scope
+
+- `scripts/build-era-postmodern-review-queue.ts`
+- `package.json`
+- `SCRIPT_REGISTRY.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Review the 6 `weak-identity-review` records first, then inspect the 18 `style-conflict-review` records before preparing any write batch.
+
+## 2026-07-09 - Postmodern Weak Identity Triage
+
+### Intent
+
+- Continue from the postmodern review queue by examining the 6 weakest identity records first.
+- Keep the work as a research/triage note, not a data write.
+- Identify obvious conflicts before any future era, type, country, or public-name normalization.
+
+### Changes
+
+- Added `docs/archive/data-governance/ERA_SLUG_POSTMODERN_WEAK_IDENTITY_REVIEW.md`.
+- Recorded Wikidata clue links, current local state, likely conflict points, and suggested next action for each weak identity record.
+
+### Validation
+
+- Queried current Supabase `buildings` data for the 6 weak records.
+- Checked Wikidata entity labels, descriptions, country/type/architect/year clues for the same records.
+- Found 2 likely local country-code conflicts:
+  - `q125679108`: local `LU`, external clue points to Maastricht, Netherlands.
+  - `untitled`: local `LU`, external clue points to Aachen, Germany.
+
+### Remaining Risk
+
+- Wikidata clues are not final project decisions; they need human review before any migration.
+- `q125679109`, `q125679110`, and `q125679108` may be related Siza/Castanheira housing records and should be reviewed together for duplication or grouping.
+- `untitled` may be public art/infrastructure rather than a normal building archive record.
+
+### Rollback Scope
+
+- `docs/archive/data-governance/ERA_SLUG_POSTMODERN_WEAK_IDENTITY_REVIEW.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Review the 18 `style-conflict-review` records and split them into likely chronological `postmodern`, late-modern/high-tech/minimalist exceptions, and records needing identity cleanup.
+
+## 2026-07-09 - Postmodern Style Conflict Triage
+
+### Intent
+
+- Continue from the postmodern review queue by examining the 18 style-conflict records.
+- Keep `postmodern` from being confused with a style label when the underlying records are high-tech, minimalist, deconstructivist, late-modern, or regional contemporary works.
+- Stay read-only: no Supabase write, no migration, no deployment.
+
+### Changes
+
+- Added `docs/archive/data-governance/ERA_SLUG_POSTMODERN_STYLE_CONFLICT_REVIEW.md`.
+- Split the 18 style-conflict records into:
+  - 6 hold-out records needing separate review before any era write.
+  - 12 chronological postmodern candidates where a style note is required.
+
+### Validation
+
+- Read `reports/era-slug-postmodern-review-queue.json`.
+- Extracted all 18 `style-conflict-review` records and grouped them by current `style_slugs`, architect context, and likely reader interpretation risk.
+- Ran no code or database write for this triage; this was a documentation-only classification.
+
+### Remaining Risk
+
+- The split is still a heuristic; a human should review before generating a migration.
+- `postmodern` remains overloaded as both an era word and a style word, so future UI copy may need to make the distinction clearer.
+- The 12 chronological candidates are not "safe" in the style sense; they are only likely acceptable if `era_slug` is explicitly treated as time-period metadata.
+
+### Rollback Scope
+
+- `docs/archive/data-governance/ERA_SLUG_POSTMODERN_STYLE_CONFLICT_REVIEW.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Prepare a small postmodern write-preparation script that excludes the 6 weak-identity records and 6 style hold-outs, then generates a reviewed migration/report for the remaining lower-risk chronological candidates.
+
+## 2026-07-09 - Postmodern Reviewed Write Preparation
+
+### Intent
+
+- Turn the reviewed postmodern queue into a concrete, reviewable write-preparation batch.
+- Exclude the 6 weak-identity records and 6 style hold-out records from automatic writing.
+- Generate migration/report/rollback artifacts without applying any production database change.
+
+### Changes
+
+- Added `scripts/prepare-era-slug-postmodern-reviewed.ts`.
+- Added `data:prepare-era-postmodern` to `package.json`.
+- Registered the script in `SCRIPT_REGISTRY.md`.
+- Added `db/migrations/v18-normalize-postmodern-reviewed-era-slugs.sql`.
+- Added `docs/archive/data-governance/ERA_SLUG_POSTMODERN_REVIEWED_WRITE_REPORT.md`.
+- Generated ignored local reports:
+  - `reports/era-slug-postmodern-reviewed.md`
+  - `reports/era-slug-postmodern-reviewed.json`
+  - `reports/era-slug-postmodern-reviewed-rollback.sql`
+
+### Validation
+
+- Ran `npm run data:prepare-era-postmodern`: 99 candidates, 87 writable decisions, 12 exclusions.
+- Confirmed generated report explicitly treats `postmodern` as a chronological era bucket, not a style label.
+- Ran `npm run typecheck`.
+- Ran `npm run lint`.
+
+### Remaining Risk
+
+- The migration is generated but intentionally not applied; production data is unchanged.
+- The 87 records still need human review before execution, especially those with high-tech, deconstructivist, modernist, or regional style slugs.
+- UI wording may still make `postmodern` sound like a style rather than a time-period bucket.
+
+### Rollback Scope
+
+- `scripts/prepare-era-slug-postmodern-reviewed.ts`
+- `package.json`
+- `SCRIPT_REGISTRY.md`
+- `db/migrations/v18-normalize-postmodern-reviewed-era-slugs.sql`
+- `docs/archive/data-governance/ERA_SLUG_POSTMODERN_REVIEWED_WRITE_REPORT.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Review the generated V18 migration and report; if acceptable, apply it to Supabase in a later explicit database-write turn, then run `npm run data:audit`, `npm run data:plan-eras`, `npm run typecheck`, and `npm run lint`.
+
+## 2026-07-09 - Postmodern V18 Mechanical Review
+
+### Intent
+
+- Review the generated V18 postmodern migration artifacts without applying them.
+- Confirm that report, migration, and rollback agree before any future database-write turn.
+
+### Changes
+
+- Added this Worklog entry only.
+- No code, migration, report, database, or deployment changes were made in this pass.
+
+### Validation
+
+- Compared `reports/era-slug-postmodern-reviewed.json`, `reports/era-slug-postmodern-reviewed.md`, `docs/archive/data-governance/ERA_SLUG_POSTMODERN_REVIEWED_WRITE_REPORT.md`, `db/migrations/v18-normalize-postmodern-reviewed-era-slugs.sql`, and `reports/era-slug-postmodern-reviewed-rollback.sql`.
+- Confirmed 87 writable decisions and 12 exclusions.
+- Confirmed no duplicate decision slugs.
+- Confirmed V18 migration has 87 insert rows and `expected_count := 87`.
+- Confirmed rollback SQL has 87 exact slug + era rows.
+- Confirmed no excluded high-risk slugs appear in the V18 migration.
+- Confirmed archive report exactly matches the generated report.
+
+### Remaining Risk
+
+- This was only mechanical consistency review, not historical/content review.
+- Production Supabase remains unchanged because the migration was not applied.
+- UI copy may still need to clarify that `postmodern` is a chronological era bucket, not a style claim.
+
+### Rollback Scope
+
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Either pause for human review of V18, or add a small UI/content wording check for era pages so `postmodern` is not presented as a style label before applying the migration.
+
+## 2026-07-09 - Postmodern Wording Guard
+
+### Intent
+
+- Reduce the chance that readers misunderstand `postmodern` era metadata as a style claim.
+- Keep the change small and textual before any V18 database write.
+
+### Changes
+
+- Added a short `postmodern`-specific scope note on `/[lang]/browse/era/postmodern`.
+- Changed search architect metadata display from raw `postmodern` to localized period wording:
+  - `后现代时期`
+  - `Postmodern period`
+  - `ポストモダン期`
+
+### Validation
+
+- Ran `npm run typecheck`.
+- Ran `npm run lint`.
+- Searched source output to confirm the new wording exists in the era page and search metadata helper.
+
+### Remaining Risk
+
+- This does not fully solve every possible wording ambiguity across the product.
+- The timeline still lists postmodernism among contemporary movement vocabulary, which is reasonable there but may need future editorial review.
+- V18 is still not applied to Supabase.
+
+### Rollback Scope
+
+- `src/app/[lang]/browse/era/[slug]/page.tsx`
+- `src/components/search/utils.ts`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Pause for human review of the V18 postmodern migration/report, or run a browser smoke check for `/zh/browse/era/postmodern`, `/en/browse/era/postmodern`, `/ja/browse/era/postmodern`, and search results before applying any database write.
+
 ## 2026-07-09 - Era Slug Contemporary Year Unique Write Batch
 
 ### Intent

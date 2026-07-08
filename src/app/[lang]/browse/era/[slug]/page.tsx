@@ -176,6 +176,18 @@ function EraReadingPaths({
   )
 }
 
+function eraScopeNote(era: Era, lang: string) {
+  if (era.slug !== 'postmodern') return ''
+
+  const copy = {
+    zh: '这里的“后现代”先作为 1980-1999 的历史时期使用，不等同于每个作品都是后现代主义风格。',
+    en: 'Here, “Postmodern” is used first as a 1980-1999 historical period, not a claim that every work belongs stylistically to Postmodernism.',
+    ja: 'ここでの「ポストモダン」はまず1980-1999年の歴史的時期を指し、すべての作品が様式としてポストモダンであるという意味ではありません。',
+  }
+
+  return copy[lang as keyof typeof copy] || copy.en
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
   const { lang, slug } = await params
   const rels = await getEraRelations(slug)
@@ -204,6 +216,7 @@ export default async function EraPage({ params }: { params: Promise<{ lang: stri
   const previousEra = currentEraIndex > 0 ? sortedEras[currentEraIndex - 1] : null
   const nextEra = currentEraIndex >= 0 && currentEraIndex < sortedEras.length - 1 ? sortedEras[currentEraIndex + 1] : null
   const timelinePeriod = findTimelinePeriodForEra(era)
+  const scopeNote = eraScopeNote(era, lang)
 
   return (
     <PageShell>
@@ -211,6 +224,7 @@ export default async function EraPage({ params }: { params: Promise<{ lang: stri
         <p className="eyebrow mb-4">{t(lang, 'eras')}</p>
         <h1 className="heading-display mb-3">{eraName}</h1>
         {era.year_start && <p className="body-sm">{era.year_start} – {era.year_end || ''}</p>}
+        {scopeNote && <p className="body-sm mt-4 max-w-2xl text-secondary">{scopeNote}</p>}
       </header>
 
       <div className="mb-8 grid gap-3 sm:grid-cols-3">

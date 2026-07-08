@@ -21,6 +21,8 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | `scripts/report-orphan-style-slugs.ts` | Reports orphan style assignments | Keep until style taxonomy remains stable over time |
 | `scripts/normalize-style-slugs.ts` | Dry-run/write style alias normalization | Keep for repeatability and rollback context |
 | `scripts/plan-era-slugs.ts` | Read-only era_slug candidate planning | Keep until era completion ends; writes no database changes |
+| `scripts/build-era-postmodern-review-queue.ts` | Builds a read-only postmodern era manual review queue | Keep until postmodern era completion ends; writes no database changes |
+| `scripts/prepare-era-slug-postmodern-reviewed.ts` | Generates the reviewed postmodern chronological era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
 | `scripts/prepare-era-slug-year-unique-a.ts` | Generates the first reviewed year-unique era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
 | `scripts/prepare-era-slug-contemporary-year-unique.ts` | Generates the reviewed contemporary year-unique era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
 | `scripts/normalize-type-slugs.ts` | Dry-run/write legacy type normalization | Keep until old display-name compatibility is retired |
@@ -63,6 +65,8 @@ From `package.json`:
 
 - `data:audit` → governance
 - `data:plan-eras` → governance / read-only planning
+- `data:review-era-postmodern` → governance / read-only manual review queue
+- `data:prepare-era-postmodern` → governance / era write preparation
 - `data:prepare-era-year-a` → governance / era write preparation
 - `data:prepare-era-contemporary` → governance / era write preparation
 - `data:normalize-types` → governance

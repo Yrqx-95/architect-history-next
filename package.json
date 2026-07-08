@@ -16,6 +16,8 @@
     "images:cache": "node --env-file=.env.local scripts/cache-curated-images.mjs",
     "data:audit": "tsx scripts/audit-data.ts",
     "data:plan-eras": "tsx scripts/plan-era-slugs.ts",
+    "data:review-era-postmodern": "tsx scripts/build-era-postmodern-review-queue.ts",
+    "data:prepare-era-postmodern": "tsx scripts/prepare-era-slug-postmodern-reviewed.ts",
     "data:prepare-era-year-a": "tsx scripts/prepare-era-slug-year-unique-a.ts",
     "data:prepare-era-contemporary": "tsx scripts/prepare-era-slug-contemporary-year-unique.ts",
     "data:normalize-types": "tsx scripts/normalize-type-slugs.ts",

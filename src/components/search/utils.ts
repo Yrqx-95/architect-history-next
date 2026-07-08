@@ -11,6 +11,11 @@ export function displayName(obj: SearchName, lang: string) {
 
 export function displayMetadataText(text: string | null | undefined, lang: string) {
   if (!text) return ''
+  if (text === 'postmodern') {
+    if (lang === 'zh') return '后现代时期'
+    if (lang === 'ja') return 'ポストモダン期'
+    return 'Postmodern period'
+  }
   return lang === 'ja' && isProbablySimplifiedChinese(text) ? '' : text
 }
 
