@@ -7,12 +7,27 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
     "images:audit": "node --env-file=.env.local scripts/audit-images.mjs",
     "images:registry": "node --env-file=.env.local scripts/build-image-registry.mjs",
     "images:cache": "node --env-file=.env.local scripts/cache-curated-images.mjs",
+    "data:audit": "tsx scripts/audit-data.ts",
+    "data:normalize-types": "tsx scripts/normalize-type-slugs.ts",
+    "data:normalize-styles": "tsx scripts/normalize-style-slugs.ts",
+    "data:apply-type-p0-decisions": "tsx scripts/apply-type-slug-p0-decisions.ts",
+    "data:orphan-styles": "tsx scripts/report-orphan-style-slugs.ts",
     "content:audit": "node --env-file=.env.local scripts/audit-content-coverage.mjs",
     "content:audit-display": "node --env-file=.env.local scripts/audit-display-coverage.mjs",
-    "content:portraits": "node --env-file=.env.local scripts/build-architect-portraits.mjs"
+    "content:portraits": "node --env-file=.env.local scripts/build-architect-portraits.mjs",
+    "graduation:data": "node scripts/build-graduation-data.mjs",
+    "graduation:data:from-json": "node scripts/build-graduation-data.mjs --from-json",
+    "graduation:audit": "node scripts/audit-graduation-content.mjs",
+    "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
+    "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
+    "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
@@ -26,6 +41,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -33,6 +49,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.22.4",
+    "typescript": "^5",
+    "vitest": "^4.1.8"
   }
 }

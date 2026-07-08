@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     localPatterns: [
       { pathname: '/api/image-proxy' },
       { pathname: '/images/curated/**' },
+      { pathname: '/images/graduation/**' },
     ],
     remotePatterns: [
       { protocol: 'https', hostname: 'upload.wikimedia.org' },
