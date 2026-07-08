@@ -2,6 +2,57 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Era Slug Year Unique A Write Batch
+
+### Intent
+
+- Reduce the largest remaining `era_slug` metadata gap with a conservative, reviewable batch.
+- Write only pre-1980 `year-unique` records where `year_start` maps to exactly one era range.
+- Keep postmodern/contemporary, overlap, missing-year, weak identity, duplicate-like, and source-year ambiguity cases out of automatic writes.
+
+### Changes
+
+- Added `scripts/prepare-era-slug-year-unique-a.ts`.
+- Added `data:prepare-era-year-a` to `package.json`.
+- Registered the script in `SCRIPT_REGISTRY.md`.
+- Added `db/migrations/v16-normalize-year-unique-a-era-slugs.sql`.
+- Added `docs/archive/data-governance/ERA_SLUG_YEAR_UNIQUE_A_WRITE_REPORT.md`.
+- Generated ignored rollback SQL at `reports/era-slug-year-unique-a-rollback.sql`.
+
+### Validation
+
+- Ran `npm run data:prepare-era-year-a`: 173 candidates, 170 writable decisions, 3 manual exclusions.
+- Preflighted the 170 decisions against production Supabase: all target buildings were still unassigned, all target era slugs existed, and no target `building_eras` relationships already existed.
+- Applied production Supabase migration `20260708154949 normalize_year_unique_a_era_slugs`.
+- Verified `buildings.era_slug`: 202 populated, 673 still missing, 875 total buildings.
+- Verified `building_eras`: 202 rows.
+- Verified excluded records remain unassigned: `fondazione-querini-stampalia`, `cleveland-museum-of-art-building`, and `swedish-centre-for-architecture-and`.
+- Ran `npm run data:audit`: 0 errors, 1095 warnings, 2490 info, 3585 total issues.
+- Ran `npm run typecheck`.
+- Ran `npm run lint`.
+- Ran `git diff --check`.
+
+### Remaining Risk
+
+- This is still chronological era assignment, not a deep architectural style judgment for every record.
+- `postmodern`, `contemporary`, `year-overlap`, and `missing-year` records remain intentionally unresolved.
+- The generated rollback SQL lives in ignored `reports/`; keep this Worklog and archive report as the durable pointer.
+
+### Rollback Scope
+
+- Database rollback: review and run `reports/era-slug-year-unique-a-rollback.sql` if the batch must be reverted.
+- Code/documentation rollback:
+  - `scripts/prepare-era-slug-year-unique-a.ts`
+  - `package.json`
+  - `SCRIPT_REGISTRY.md`
+  - `db/migrations/v16-normalize-year-unique-a-era-slugs.sql`
+  - `docs/archive/data-governance/ERA_SLUG_YEAR_UNIQUE_A_WRITE_REPORT.md`
+  - this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Re-run `npm run data:plan-eras`, then split the remaining era debt into two groups: postmodern/contemporary year-unique review and overlap/missing-year manual review.
+
 ## 2026-07-08 - Era Slug Dry-Run Planner
 
 ### Intent
