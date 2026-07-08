@@ -22,6 +22,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | `scripts/normalize-style-slugs.ts` | Dry-run/write style alias normalization | Keep for repeatability and rollback context |
 | `scripts/plan-era-slugs.ts` | Read-only era_slug candidate planning | Keep until era completion ends; writes no database changes |
 | `scripts/prepare-era-slug-year-unique-a.ts` | Generates the first reviewed year-unique era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
+| `scripts/prepare-era-slug-contemporary-year-unique.ts` | Generates the reviewed contemporary year-unique era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
 | `scripts/normalize-type-slugs.ts` | Dry-run/write legacy type normalization | Keep until old display-name compatibility is retired |
 | `scripts/normalize-type-slugs-high-confidence.ts` | High-confidence type normalization | Keep as governance history until type completion ends |
 | `scripts/normalize-type-slugs-medium-a.ts` | Medium-A type normalization | Keep as governance history until type completion ends |
@@ -63,6 +64,7 @@ From `package.json`:
 - `data:audit` → governance
 - `data:plan-eras` → governance / read-only planning
 - `data:prepare-era-year-a` → governance / era write preparation
+- `data:prepare-era-contemporary` → governance / era write preparation
 - `data:normalize-types` → governance
 - `data:normalize-styles` → governance
 - `data:apply-type-p0-decisions` → governance / manual review workflow

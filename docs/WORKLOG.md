@@ -2,6 +2,57 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Era Slug Contemporary Year Unique Write Batch
+
+### Intent
+
+- Continue reducing `era_slug` metadata debt without mixing period assignment and style judgment too aggressively.
+- Write only `contemporary` year-unique records, because the 2000+ bucket is a broad chronological era.
+- Leave `postmodern` year-unique records for a separate review because that label is easier to confuse with style.
+
+### Changes
+
+- Added `scripts/prepare-era-slug-contemporary-year-unique.ts`.
+- Added `data:prepare-era-contemporary` to `package.json`.
+- Registered the script in `SCRIPT_REGISTRY.md`.
+- Added `db/migrations/v17-normalize-contemporary-year-unique-era-slugs.sql`.
+- Added `docs/archive/data-governance/ERA_SLUG_CONTEMPORARY_YEAR_UNIQUE_WRITE_REPORT.md`.
+- Generated ignored rollback SQL at `reports/era-slug-contemporary-year-unique-rollback.sql`.
+
+### Validation
+
+- Ran `npm run data:prepare-era-contemporary`: 127 candidates, 119 writable decisions, 8 exclusions.
+- Preflighted the 119 decisions against production Supabase: all target buildings were still unassigned, all target era slugs existed, and no target `building_eras` relationships already existed.
+- Applied production Supabase migration `normalize_contemporary_year_unique_era_slugs`.
+- Verified `buildings.era_slug`: 321 populated, 554 still missing, 875 total buildings.
+- Verified `building_eras`: 321 rows.
+- Verified the 8 excluded contemporary records remain unassigned, including Q-id placeholder slugs, the empty slug record, and `new-orleans`.
+- Ran `npm run data:audit`: 0 errors, 976 warnings, 2490 info, 3466 total issues.
+- Ran `npm run data:plan-eras`: 321 already assigned, 554 missing, 110 `year-unique`, 101 `year-overlap`, 343 `missing-year`.
+- Ran `npm run typecheck`.
+- Ran `npm run lint`.
+
+### Remaining Risk
+
+- This intentionally leaves `postmodern` year-unique records unresolved because the era label can read like a style label.
+- Some contemporary records may still be duplicates or weak content, but their chronological era assignment is low-risk and rollbackable.
+- The generated rollback SQL lives in ignored `reports/`; keep this Worklog and archive report as the durable pointer.
+
+### Rollback Scope
+
+- Database rollback: review and run `reports/era-slug-contemporary-year-unique-rollback.sql` if the batch must be reverted.
+- Code/documentation rollback:
+  - `scripts/prepare-era-slug-contemporary-year-unique.ts`
+  - `package.json`
+  - `SCRIPT_REGISTRY.md`
+  - `db/migrations/v17-normalize-contemporary-year-unique-era-slugs.sql`
+  - `docs/archive/data-governance/ERA_SLUG_CONTEMPORARY_YEAR_UNIQUE_WRITE_REPORT.md`
+  - this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Build a postmodern review queue instead of an automatic write batch, separating true postmodern-style works from late-modern, high-tech, minimalist, and identity-cleanup records.
+
 ## 2026-07-09 - Era Slug Year Unique A Write Batch
 
 ### Intent
