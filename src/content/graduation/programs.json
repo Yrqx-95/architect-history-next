@@ -1,0 +1,210 @@
+[
+  {
+    "id": "PROGRAM-001",
+    "name": "图书馆 / 知识客厅",
+    "name_ja": "図書館 / 知識リビング",
+    "name_en": "Library / Knowledge living room",
+    "summary": "当学生已经想做图书馆时，不要只停在“放书和自习”。它可以回应学习孤立、代际交流、车站前空洞化、夜间非商业停留等问题。",
+    "summary_ja": "図書館をやりたい時、蔵書と自習だけで考えない。学習の孤立、世代交流、駅前の空洞化、夜間の非商業滞在に応答できる。",
+    "summary_en": "A library should not stop at books and study desks. It can respond to learning isolation, intergenerational contact, hollowed-out station areas, and non-commercial night stay.",
+    "keywords": ["图书馆", "学习", "知识客厅", "夜间学习", "儿童学习"],
+    "keywords_ja": ["図書館", "学習", "知識リビング", "夜間学習", "子ども学習"],
+    "keywords_en": ["library", "learning", "knowledge living room", "night study", "children"],
+    "possible_issue_ids": ["ISSUE-016", "ISSUE-043", "ISSUE-070", "ISSUE-079", "ISSUE-092", "ISSUE-097"],
+    "site_type_ids": ["SITE-023", "SITE-008", "SITE-017", "SITE-047"],
+    "reference_case_ids": ["CASE-007", "CASE-018", "CASE-022", "CASE-029", "CASE-079"],
+    "can_address": {
+      "zh": ["学习资源不均", "年轻人和儿童的第三空间不足", "车站前只通行不滞留", "夜间安全且非消费的学习场所不足"],
+      "ja": ["学習資源の偏り", "若者や子どもの第三の居場所不足", "駅前が通過だけになっている状態", "夜間に安全で非商業的に学べる場所の不足"],
+      "en": ["Uneven access to learning resources", "Lack of third places for youth and children", "Station areas used only for passing through", "Lack of safe non-commercial night study places"]
+    },
+    "needs_research": {
+      "zh": ["目标使用者是谁：儿童、学生、高龄者、上班族还是多文化居民。", "周边已有学校、图书馆、公民馆、咖啡店和自习空间如何分工。", "开馆时间、运营主体、噪音和安静区如何共存。"],
+      "ja": ["主な利用者は子ども、学生、高齢者、働く人、多文化住民の誰か。", "周辺の学校、図書館、公民館、カフェ、自習空間とどう役割分担するか。", "開館時間、運営主体、音のある活動と静かな場をどう共存させるか。"],
+      "en": ["Who the primary users are: children, students, older adults, workers, or multicultural residents.", "How nearby schools, libraries, kominkan, cafes, and study spaces divide roles.", "How opening hours, operation, active areas, and quiet areas coexist."]
+    },
+    "evidence_urls": ["https://www.mext.go.jp/a_menu/shougai/tosho/index.htm", "https://www.nier.go.jp/English/educationjapan/pdf/201109LLL.pdf"]
+  },
+  {
+    "id": "PROGRAM-002",
+    "name": "社区中心 / 公民馆",
+    "name_ja": "コミュニティセンター / 公民館",
+    "name_en": "Community center / Kominkan",
+    "summary": "社区中心不是万能大厅。它的价值在于把学习、咨询、儿童、高龄者、灾害时转换和市民活动组织成日常能使用的公共节点。",
+    "summary_ja": "コミュニティセンターは万能ホールではない。学習、相談、子ども、高齢者、防災時の転換、市民活動を日常的な公共ノードとして組み立てる用途である。",
+    "summary_en": "A community center is not a generic hall. It organizes learning, consultation, children, aging, disaster conversion, and civic activity into a daily public node.",
+    "keywords": ["社区中心", "公民馆", "市民活动", "咨询", "一站式服务"],
+    "keywords_ja": ["コミュニティセンター", "公民館", "市民活動", "相談", "一拠点式サービス"],
+    "keywords_en": ["community center", "kominkan", "civic activity", "consultation", "one-stop service"],
+    "possible_issue_ids": ["ISSUE-067", "ISSUE-076", "ISSUE-079", "ISSUE-081", "ISSUE-088"],
+    "site_type_ids": ["SITE-008", "SITE-011", "SITE-010", "SITE-033"],
+    "reference_case_ids": ["CASE-076", "CASE-079", "CASE-081", "CASE-022"],
+    "can_address": {
+      "zh": ["公共服务分散", "居民活动缺少日常据点", "灾害时设施不会自然转换", "儿童、高龄者和家长支援断裂"],
+      "ja": ["公共サービスの分散", "住民活動の日常拠点不足", "災害時に自然に切り替わらない施設", "子ども、高齢者、保護者支援の分断"],
+      "en": ["Fragmented public services", "Lack of daily bases for resident activity", "Facilities that do not convert naturally during disasters", "Separated support for children, older adults, and caregivers"]
+    },
+    "needs_research": {
+      "zh": ["这个社区中心服务的是一个街区、一所学校区，还是整个市中心。", "哪些功能必须常设，哪些只在特定时间切换。", "它和役所、学校、图书馆、福祉设施之间的关系。"],
+      "ja": ["対象範囲は街区、学区、中心市街地のどれか。", "常設する機能と時間帯で切り替える機能を分ける。", "役所、学校、図書館、福祉施設との関係を読む。"],
+      "en": ["Whether it serves a block, a school district, or a city center.", "Which functions must be permanent and which can switch by time.", "Its relationship with city hall, schools, libraries, and welfare facilities."]
+    },
+    "evidence_urls": ["https://www.mext.go.jp/component/a_menu/education/detail/__icsFiles/afieldfile/2009/09/16/1284462_1_2.pdf", "https://www.nier.go.jp/English/educationjapan/pdf/201109LLL.pdf"]
+  },
+  {
+    "id": "PROGRAM-003",
+    "name": "公共浴场 / 健康交流站",
+    "name_ja": "公衆浴場 / 健康交流拠点",
+    "name_en": "Public bath / Health community hub",
+    "summary": "公共浴场不只是洗澡。它可以成为高龄者健康确认、邻里交流、年轻人回流和街区记忆更新的入口。",
+    "summary_ja": "公衆浴場は入浴だけではない。高齢者の健康確認、近隣交流、若い利用者の回帰、街区記憶の更新につながる入口になる。",
+    "summary_en": "A public bath is not only for bathing. It can become an entry for health checks, neighborhood contact, young users, and renewal of local memory.",
+    "keywords": ["公共浴场", "健康", "高龄者", "社区交流", "桑拿"],
+    "keywords_ja": ["公衆浴場", "健康", "高齢者", "コミュニティ", "サウナ"],
+    "keywords_en": ["public bath", "health", "aging", "community", "sauna"],
+    "possible_issue_ids": ["ISSUE-025", "ISSUE-033", "ISSUE-075", "ISSUE-078"],
+    "site_type_ids": ["SITE-013", "SITE-039", "SITE-018", "SITE-011"],
+    "reference_case_ids": ["CASE-033", "CASE-027", "CASE-040"],
+    "can_address": {
+      "zh": ["高龄者日常健康确认不足", "街区交流场所减少", "旧浴场建筑和文化衰退", "年轻人缺少低门槛的恢复性第三空间"],
+      "ja": ["高齢者の日常的な健康確認不足", "街区交流の場の減少", "旧浴場建築と文化の衰退", "若者にとって低い敷居の回復的第三空間不足"],
+      "en": ["Lack of daily health touchpoints for older adults", "Decline of neighborhood gathering places", "Decline of bathhouse buildings and culture", "Lack of low-barrier restorative third places for young users"]
+    },
+    "needs_research": {
+      "zh": ["浴场是否仍在营业、休业或只剩建筑壳。", "周边是否有高龄居民、单身户、学生或年轻工作者。", "洗浴、休息、运动、咨询和小商业如何互不干扰。"],
+      "ja": ["浴場が営業中、休業中、建物だけ残る状態のどれか。", "周辺に高齢住民、単身世帯、学生、若い働き手がいるか。", "入浴、休息、運動、相談、小商いをどう干渉させずに重ねるか。"],
+      "en": ["Whether the bath is operating, closed, or only a building shell remains.", "Whether the area has older residents, single households, students, or young workers.", "How bathing, rest, exercise, consultation, and small commerce can overlap without conflict."]
+    },
+    "evidence_urls": ["https://www.mhlw.go.jp/bunya/kenkou/seikatsu-eisei04/04.html", "https://www.1010.or.jp/"]
+  },
+  {
+    "id": "PROGRAM-004",
+    "name": "公共厨房 / 食育中心",
+    "name_ja": "公共キッチン / 食育センター",
+    "name_en": "Public kitchen / Food education center",
+    "summary": "厨房可以把地域食、共食、儿童食堂、食品损失和空屋再生连接起来。重点不是做餐厅，而是让食物流动和人的关系重新被看见。",
+    "summary_ja": "キッチンは地域食、共食、子ども食堂、食品ロス、空き家再生をつなげられる。飲食店ではなく、食の流れと人の関係を見える化する用途である。",
+    "summary_en": "A kitchen can connect local food, shared meals, children’s cafeterias, food loss, and vacant-house reuse. It makes food flows and relationships visible, rather than simply becoming a restaurant.",
+    "keywords": ["公共厨房", "地域食", "共食", "食品损失", "食育"],
+    "keywords_ja": ["公共キッチン", "地域食", "共食", "食品ロス", "食育"],
+    "keywords_en": ["public kitchen", "local food", "shared meals", "food loss", "food education"],
+    "possible_issue_ids": ["ISSUE-015", "ISSUE-017", "ISSUE-024", "ISSUE-082", "ISSUE-083"],
+    "site_type_ids": ["SITE-002", "SITE-042", "SITE-012", "SITE-003"],
+    "reference_case_ids": ["CASE-002", "CASE-020", "CASE-063", "CASE-116"],
+    "can_address": {
+      "zh": ["孤食和共食机会减少", "食品损失和循环教育缺口", "地域食文化弱化", "空屋和旧民家缺少可持续再利用方式"],
+      "ja": ["孤食と共食機会の減少", "食品ロスと循環教育の不足", "地域食文化の弱体化", "空き家や旧民家の持続的な再利用不足"],
+      "en": ["Reduced opportunities for shared meals", "Gaps in food loss and circular education", "Weakening local food culture", "Lack of sustainable reuse for vacant houses and old homes"]
+    },
+    "needs_research": {
+      "zh": ["食材来源、余剰食材流向和卫生管理。", "谁来运营：NPO、商店街、学校、农家还是行政。", "厨房、用餐、学习、储藏和配送的动线关系。"],
+      "ja": ["食材の供給元、余剰食材の流れ、衛生管理。", "運営主体はNPO、商店街、学校、農家、行政のどれか。", "厨房、食事、学習、保管、配送の動線関係。"],
+      "en": ["Food sources, surplus food flows, and hygiene management.", "Whether operation is by NPO, shopping street, school, farmers, or government.", "Circulation between cooking, eating, learning, storage, and delivery."]
+    },
+    "evidence_urls": ["https://www.maff.go.jp/j/syokuiku/", "https://www.caa.go.jp/policies/policy/consumer_policy/information/food_loss/"]
+  },
+  {
+    "id": "PROGRAM-005",
+    "name": "开放工房 / 修理咖啡",
+    "name_ja": "開かれた工房 / リペアカフェ",
+    "name_en": "Open workshop / Repair cafe",
+    "summary": "工房可以回应旧工业地再利用、学生制作、障碍者就业、循环经济和街区参与。重点是让制作过程成为公共学习，而不只是封闭作业室。",
+    "summary_ja": "工房は旧工業地再利用、学生制作、障がい者就労、循環経済、街区参加に応答できる。閉じた作業室ではなく、制作過程を公共的な学びにする用途である。",
+    "summary_en": "A workshop can respond to industrial reuse, student making, disability employment, circular economy, and block participation. It turns making into public learning rather than a closed workroom.",
+    "keywords": ["开放工房", "修理", "循环经济", "制作", "就业支援"],
+    "keywords_ja": ["開かれた工房", "修理", "循環経済", "制作", "就労支援"],
+    "keywords_en": ["open workshop", "repair", "circular economy", "making", "employment support"],
+    "possible_issue_ids": ["ISSUE-014", "ISSUE-023", "ISSUE-039", "ISSUE-084", "ISSUE-089"],
+    "site_type_ids": ["SITE-009", "SITE-043", "SITE-045", "SITE-014"],
+    "reference_case_ids": ["CASE-034", "CASE-089", "CASE-002"],
+    "can_address": {
+      "zh": ["旧工厂和仓库闲置", "制作教育和地域生活脱节", "修理再利用意识不足", "就业支援不容易被街区看见"],
+      "ja": ["旧工場や倉庫の遊休化", "制作教育と地域生活の分断", "修理や再利用の意識不足", "就労支援が街区に見えにくい状態"],
+      "en": ["Idle factories and warehouses", "Separation of making education from local life", "Weak repair and reuse culture", "Employment support hidden from the street"]
+    },
+    "needs_research": {
+      "zh": ["噪音、粉尘、搬入和安全管理。", "公共参观区、学习区和专业作业区如何分开又互相可见。", "材料从哪里来，废材如何再次进入使用。"],
+      "ja": ["騒音、粉塵、搬入、安全管理。", "見学、学習、専門作業を分けつつ互いに見える関係。", "材料の出所と廃材の再利用ルート。"],
+      "en": ["Noise, dust, loading, and safety control.", "How public viewing, learning, and professional work zones are separated yet visible.", "Where materials come from and how waste materials re-enter use."]
+    },
+    "evidence_urls": ["https://www.env.go.jp/recycle/circul/venous_industry/en/index.html", "https://www.meti.go.jp/policy/recycle/"]
+  },
+  {
+    "id": "PROGRAM-006",
+    "name": "道之驿 / 地域服务站",
+    "name_ja": "道の駅 / 地域サービス拠点",
+    "name_en": "Michi-no-Eki / Regional service hub",
+    "summary": "道之驿不只是开车休息点。它可以承接地域食、移动服务、防灾、医疗前咨询、旅游和居民生活服务。",
+    "summary_ja": "道の駅は車の休憩所だけではない。地域食、移動サービス、防災、医療前相談、観光、住民生活サービスを受け止められる。",
+    "summary_en": "A Michi-no-Eki is not only a roadside rest stop. It can hold local food, mobility services, disaster support, pre-medical consultation, tourism, and daily services.",
+    "keywords": ["道之驿", "地域服务", "移动服务", "地域食", "防灾"],
+    "keywords_ja": ["道の駅", "地域サービス", "移動サービス", "地域食", "防災"],
+    "keywords_en": ["michi-no-eki", "regional service", "mobility service", "local food", "disaster"],
+    "possible_issue_ids": ["ISSUE-019", "ISSUE-028", "ISSUE-044", "ISSUE-063", "ISSUE-082"],
+    "site_type_ids": ["SITE-024", "SITE-034", "SITE-012", "SITE-004"],
+    "reference_case_ids": ["CASE-020", "CASE-043", "CASE-063", "CASE-033"],
+    "can_address": {
+      "zh": ["地方交通弱化", "买物、医疗咨询和行政服务距离过远", "地域食和观光之间缺少生活尺度连接", "平时使用和灾害时支援脱节"],
+      "ja": ["地域交通の弱体化", "買い物、医療相談、行政サービスの距離", "地域食と観光を生活尺度で結ぶ場所の不足", "平常時利用と災害時支援の分断"],
+      "en": ["Weakened local transport", "Distance from shopping, health consultation, and public services", "Lack of everyday links between local food and tourism", "Separation between daily use and disaster support"]
+    },
+    "needs_research": {
+      "zh": ["周边交通方式：车、巴士、步行、配送和移动诊疗。", "它服务游客还是居民，或者如何同时服务。", "平时售卖、休息、咨询和灾害时转换的空间边界。"],
+      "ja": ["周辺交通：車、バス、徒歩、配送、移動診療。", "観光客向けか住民向けか、またはどう両立するか。", "平時の販売、休息、相談と災害時転換の空間境界。"],
+      "en": ["Nearby mobility: car, bus, walking, delivery, and mobile care.", "Whether it serves visitors, residents, or both.", "Spatial boundaries between sales, rest, consultation, and disaster conversion."]
+    },
+    "evidence_urls": ["https://www.mlit.go.jp/road/road_e/q7_restareas.html", "https://scenic.ceri.go.jp/michi_no_eki_handbook/pdf/michi-no-eki-handbook202002en.pdf"]
+  },
+  {
+    "id": "PROGRAM-007",
+    "name": "儿童学习 / 课后支援",
+    "name_ja": "子ども学習 / 放課後支援",
+    "name_en": "Children's learning / After-school support",
+    "summary": "儿童相关空间不只是托管。它可以同时处理安全、学习、外国家庭支援、不登校、贫困和亲子咨询。",
+    "summary_ja": "子どもの空間は預かりだけではない。安全、学習、外国ルーツ家庭支援、不登校、貧困、親子相談を同時に扱える。",
+    "summary_en": "Children’s spaces are not only childcare. They can address safety, learning, foreign-root family support, school refusal, poverty, and parent-child consultation.",
+    "keywords": ["儿童学习", "课后", "亲子", "不登校", "多文化儿童"],
+    "keywords_ja": ["子ども学習", "放課後", "親子", "不登校", "外国ルーツの子ども"],
+    "keywords_en": ["children learning", "after school", "parent-child", "school refusal", "foreign-root children"],
+    "possible_issue_ids": ["ISSUE-003", "ISSUE-017", "ISSUE-029", "ISSUE-034", "ISSUE-065", "ISSUE-087"],
+    "site_type_ids": ["SITE-017", "SITE-033", "SITE-005", "SITE-008"],
+    "reference_case_ids": ["CASE-023", "CASE-076", "CASE-029", "CASE-079"],
+    "can_address": {
+      "zh": ["放学后安全和停留不足", "低收入家庭学习支援不足", "外国家庭语言和升学信息缺口", "不登校儿童缺少非学校型学习空间"],
+      "ja": ["放課後の安全と滞在場所不足", "低所得家庭の学習支援不足", "外国ルーツ家庭の言語と進路情報不足", "不登校の子どもの学校外学習空間不足"],
+      "en": ["Lack of safe after-school places", "Learning support gaps for low-income families", "Language and pathway information gaps for foreign-root families", "Lack of non-school learning spaces for school-refusal children"]
+    },
+    "needs_research": {
+      "zh": ["对象年龄段和每天使用时段。", "学校、家庭、NPO、行政之间谁负责什么。", "安静学习、游戏、咨询、饮食和接送动线如何共存。"],
+      "ja": ["対象年齢と利用時間帯。", "学校、家庭、NPO、行政の役割分担。", "静かな学習、遊び、相談、食事、送迎動線の共存。"],
+      "en": ["Target ages and daily time slots.", "Role division between school, family, NPO, and government.", "Coexistence of quiet study, play, consultation, food, and pickup/drop-off circulation."]
+    },
+    "evidence_urls": ["https://www.cfa.go.jp/en/index-en", "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1302902.htm"]
+  },
+  {
+    "id": "PROGRAM-008",
+    "name": "防灾学习 / 复合避难",
+    "name_ja": "防災学習 / 複合避難",
+    "name_en": "Disaster learning / Mixed evacuation",
+    "summary": "防灾空间如果平时不用，灾害时也很难自然聚集。它应当把学习、备蓄、隐私、日常活动和地形理解连接起来。",
+    "summary_ja": "防災空間は平時に使われなければ、災害時にも自然に集まりにくい。学習、備蓄、プライバシー、日常活動、地形理解をつなげる用途である。",
+    "summary_en": "If a disaster space is unused in ordinary time, people may not gather there naturally during emergencies. It should connect learning, stockpiles, privacy, daily activity, and terrain awareness.",
+    "keywords": ["防灾学习", "避难", "备蓄", "灾后复兴", "水边防灾"],
+    "keywords_ja": ["防災学習", "避難", "備蓄", "災後復興", "水辺防災"],
+    "keywords_en": ["disaster learning", "evacuation", "stockpile", "post-disaster recovery", "waterfront disaster"],
+    "possible_issue_ids": ["ISSUE-007", "ISSUE-009", "ISSUE-032", "ISSUE-040", "ISSUE-081", "ISSUE-090"],
+    "site_type_ids": ["SITE-010", "SITE-041", "SITE-005", "SITE-020"],
+    "reference_case_ids": ["CASE-015", "CASE-081", "CASE-020"],
+    "can_address": {
+      "zh": ["避难设施只在灾害时才被想起", "避难所缺少隐私和生活尊严", "居民平时不了解水位、地形和风险", "灾后记忆和日常恢复缺少公共场所"],
+      "ja": ["避難施設が災害時だけ想起される状態", "避難所のプライバシーと生活の尊厳不足", "住民が普段から水位、地形、リスクを理解しにくい状態", "災後記憶と日常回復の公共空間不足"],
+      "en": ["Evacuation facilities remembered only during disasters", "Lack of privacy and dignity in shelters", "Residents not understanding water level, terrain, and risk in daily life", "Lack of public places for post-disaster memory and recovery"]
+    },
+    "needs_research": {
+      "zh": ["当地灾害类型：水害、地震、火灾、滑坡还是复合风险。", "平时谁使用，灾害时如何切换。", "备蓄、厕所、睡眠、信息、宠物和家庭隐私如何安排。"],
+      "ja": ["地域の災害種別：水害、地震、火災、土砂災害、複合リスク。", "平時の利用者と災害時の切り替え方。", "備蓄、トイレ、睡眠、情報、ペット、家族のプライバシーの配置。"],
+      "en": ["Local disaster types: flood, earthquake, fire, landslide, or combined risk.", "Who uses it in ordinary time and how it switches during disaster.", "Layout for stockpiles, toilets, sleep, information, pets, and family privacy."]
+    },
+    "evidence_urls": ["https://www.bousai.go.jp/index-e.html", "https://www.mlit.go.jp/river/bousai/main/saigai/index.html"]
+  }
+]

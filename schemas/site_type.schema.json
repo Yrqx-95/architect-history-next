@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://archistory.local/schemas/graduation/site_type.schema.json",
+  "title": "Graduation Site Type",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "address_example",
+    "fit_reason",
+    "map_url",
+    "keywords",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SITE-[0-9]{3}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 30
+    },
+    "name_ja": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "name_en": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "address_example": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "address_example_ja": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "address_example_en": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "fit_reason": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 120
+    },
+    "fit_reason_ja": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 240
+    },
+    "fit_reason_en": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 360
+    },
+    "map_url": {
+      "type": "string",
+      "anyOf": [
+        {
+          "const": ""
+        },
+        {
+          "format": "uri"
+        }
+      ]
+    },
+    "keywords": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "keywords_ja": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "keywords_en": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "candidate_locations": {
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["area", "name", "angle"],
+        "properties": {
+          "area": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "area_ja": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "area_en": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "name_ja": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "name_en": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "angle": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 160
+          },
+          "angle_ja": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 200
+          },
+          "angle_en": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 240
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published"]
+    }
+  },
+  "additionalProperties": false
+}
