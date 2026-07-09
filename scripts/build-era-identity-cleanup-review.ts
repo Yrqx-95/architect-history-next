@@ -204,8 +204,10 @@ type WikidataEntity = {
   claims?: Record<string, Array<{ mainsnak?: { datavalue?: { value?: unknown } } }>>
 }
 
-async function fetchWikidata(ids: string[]) {
+export async function fetchWikidata(ids: string[]) {
   const uniqueIds = [...new Set(ids.filter(Boolean))]
+  if (uniqueIds.length === 0) return {}
+
   const entityUrl = new URL('https://www.wikidata.org/w/api.php')
   entityUrl.searchParams.set('action', 'wbgetentities')
   entityUrl.searchParams.set('ids', uniqueIds.join('|'))

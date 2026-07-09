@@ -1,6 +1,6 @@
 # Era Identity Cleanup Review
 
-Generated: 2026-07-09T04:45:32.388Z
+Generated: 2026-07-09T07:35:34.611Z
 
 ## Scope
 
@@ -16,14 +16,12 @@ Generated: 2026-07-09T04:45:32.388Z
 | safe-metadata-cleanup | 0 |
 | commons-name-candidate | 0 |
 | manual-name-research | 0 |
-| archive-scope-review | 2 |
+| archive-scope-review | 0 |
 
 ## Review Queue
 
 | Lane | Confidence | Current slug | Current name | Wikidata | Wikidata description | Suggested name | Suggested slug | Country | Architect | Type/location | Note |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| archive-scope-review | medium | untitled | Untitled | Q127587635 | artwork in public space by Peter Eisenman in Aachen, Germany | Untitled | untitled | LU -> DE | peter-eisenman | bus shelter / Aachen | Wikidata describes this as public artwork/infrastructure, not a clear building archive record. |
-| archive-scope-review | medium | q136394553 | Q136394553 | Q136394553 |  | Fontana di Piazzale della Pace (Parma) | fontana-di-piazzale-della-pace-parma | (blank) -> IT | mario-botta | reflecting pool / Parma | Wikidata describes this as public artwork/infrastructure, not a clear building archive record. |
 
 ## Recommended Next Step
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { classifyIdentityCleanupCandidate, slugFromName } from '../../scripts/build-era-identity-cleanup-review'
+import { classifyIdentityCleanupCandidate, fetchWikidata, slugFromName } from '../../scripts/build-era-identity-cleanup-review'
 
 describe('era identity cleanup review', () => {
   it('flags a named Wikidata record with wrong country code as safe metadata cleanup', () => {
@@ -59,5 +59,9 @@ describe('era identity cleanup review', () => {
   it('builds stable lowercase slugs from public names', () => {
     expect(slugFromName('Capela do Monte')).toBe('capela-do-monte')
     expect(slugFromName('Jesús Church (San Sebastián)')).toBe('jesus-church-san-sebastian')
+  })
+
+  it('handles an empty Wikidata queue after all identity candidates are resolved', async () => {
+    await expect(fetchWikidata([])).resolves.toEqual({})
   })
 })

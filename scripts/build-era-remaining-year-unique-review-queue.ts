@@ -235,7 +235,14 @@ function markdownReport(report: {
 
   lines.push('', '## Recommended Next Step', '')
   lines.push('- Do not auto-write this queue as one batch.')
-  lines.push('- Resolve `contemporary-identity-cleanup` and `postmodern-weak-identity` as identity/taxonomy fixes first.')
+  const identityCleanupCount =
+    (report.summary.find(item => item.lane === 'contemporary-identity-cleanup')?.count || 0) +
+    (report.summary.find(item => item.lane === 'postmodern-weak-identity')?.count || 0)
+  if (identityCleanupCount > 0) {
+    lines.push('- Resolve `contemporary-identity-cleanup` and `postmodern-weak-identity` as identity/taxonomy fixes first.')
+  } else {
+    lines.push('- No identity cleanup records remain in this review snapshot.')
+  }
   lines.push('- Review `historical-date-review` records against project phase/year semantics before assigning any era.')
   lines.push('- Keep `postmodern-style-holdout` separate from chronological batch work until the era/style vocabulary is settled.')
   lines.push('')

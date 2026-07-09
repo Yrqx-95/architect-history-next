@@ -2,6 +2,58 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Era Archive Scope Reviewed Write
+
+### Intent
+
+- Resolve the final two weak-identity archive-scope records without deleting existing image-backed archive material.
+- Treat public art / infrastructure records as boundary built-environment works using existing taxonomy, not as ordinary building records.
+- Clear malformed Q-id / `Untitled` records from the era cleanup queue.
+
+### Changes
+
+- Added `db/migrations/v22-normalize-archive-scope-identity-era-slugs.sql`.
+- Added `docs/archive/data-governance/ERA_IDENTITY_ARCHIVE_SCOPE_REVIEWED_WRITE_REPORT.md`.
+- Updated `scripts/build-era-identity-cleanup-review.ts` so an empty identity cleanup queue exits cleanly.
+- Updated `scripts/build-era-remaining-year-unique-review-queue.ts` so the recommended next step reflects when identity cleanup is already empty.
+- Added a unit test for the empty Wikidata queue case.
+- Prepared decisions for:
+  - `untitled` / `Q127587635` -> `jc-decaux-bus-shelter-aachen`
+  - `q136394553` / `Q136394553` -> `fontana-di-piazzale-della-pace-parma`
+
+### Validation
+
+- Confirmed target slug collisions were 0 before write.
+- Verified both records have existing image rows:
+  - `untitled`: 7 images.
+  - `q136394553`: 12 images.
+- Confirmed existing taxonomy contains `transportation` and `public-space`, so no new `building_types` were needed.
+- Applied Supabase migration `normalize_archive_scope_identity_era_slugs`.
+- Verified both written records after migration:
+  - correct slug, display name, city/country, type, and era.
+  - matching `building_eras` row present.
+- Supabase after write:
+  - `buildings.era_slug`: 422 filled, 453 missing, 875 total.
+  - `building_eras`: 422 rows.
+- Ran `npm run data:review-era-identity`: 0 candidates remain.
+- Ran `npm run data:review-era-year-unique`: 9 candidates remain.
+- Ran `npm run data:plan-eras`: 343 `missing-year`, 101 `year-overlap`, 9 `year-unique`.
+- Ran `npm run data:audit`: 0 errors, 860 warnings, 2490 info, 3350 total.
+- Ran `npm run test:unit`: 4 files, 12 tests passed.
+- Ran `npm run typecheck`: passed.
+- Ran `npm run lint`: passed.
+- Ran `npm run build`: passed, 4195 static pages generated.
+- Ran `git diff --check`: passed.
+
+### Remaining Risk
+
+- These are boundary records, not conventional buildings.
+- `postmodern` for `JC Decaux Bus Shelter, Aachen` is chronological; style wording should still be handled separately if the site later distinguishes era from style more explicitly.
+
+### Next Step
+
+- Review the remaining 9 `year-unique` records: 3 historical-date semantics issues and 6 postmodern-style vocabulary holdouts.
+
 ## 2026-07-09 - Era Manual Identity Reviewed Write
 
 ### Intent

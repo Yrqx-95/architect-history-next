@@ -1,6 +1,6 @@
 # Era Slug Remaining Year-Unique Review
 
-Generated: 2026-07-09T04:45:31.082Z
+Generated: 2026-07-09T13:03:20.577Z
 
 ## Scope
 
@@ -15,16 +15,15 @@ Generated: 2026-07-09T04:45:31.082Z
 |---|---:|
 | historical-date-review | 3 |
 | postmodern-style-holdout | 6 |
-| postmodern-weak-identity | 1 |
-| contemporary-identity-cleanup | 1 |
+| postmodern-weak-identity | 0 |
+| contemporary-identity-cleanup | 0 |
 | unexpected-year-unique | 0 |
 
 ## Summary By Candidate Era
 
 | Candidate era | Count |
 |---|---:|
-| postmodern | 7 |
-| contemporary | 1 |
+| postmodern | 6 |
 | early-modern | 1 |
 | industrial-revolution | 1 |
 | post-war | 1 |
@@ -42,12 +41,10 @@ Generated: 2026-07-09T04:45:31.082Z
 | postmodern-style-holdout | naoshima | Naoshima Contemporary Art Museum | 1992 | postmodern | tadao-ando | cultural | minimalism, exposed-concrete | Ando museum with minimalism/exposed-concrete reading; review with the Ando group before assigning postmodern. | Resolve whether this should remain an era exception or receive a clearer period label with style caveats. |
 | postmodern-style-holdout | therme-vals | Therme Vals | 1996 | postmodern | zumthor | leisure | contemporary-swiss, minimalism | Zumthor work better explained through material atmosphere, minimalism, and Swiss contemporary architecture. | Resolve whether this should remain an era exception or receive a clearer period label with style caveats. |
 | postmodern-style-holdout | kunsthaus-bregenz | Kunsthaus Bregenz | 1997 | postmodern | zumthor | cultural | contemporary-swiss, minimalism | Zumthor work better explained through material atmosphere, minimalism, and Swiss contemporary architecture. | Resolve whether this should remain an era exception or receive a clearer period label with style caveats. |
-| postmodern-weak-identity | untitled | Untitled | 1996 | postmodern | peter-eisenman |  |  | Untitled public-art/infrastructure-like record with likely country-code conflict; resolve whether it belongs in the building archive before era assignment. | Fix identity, country, type, and display label before assigning era metadata. |
-| contemporary-identity-cleanup | q136394553 | Q136394553 | 2001 | contemporary | mario-botta |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
 
 ## Recommended Next Step
 
 - Do not auto-write this queue as one batch.
-- Resolve `contemporary-identity-cleanup` and `postmodern-weak-identity` as identity/taxonomy fixes first.
+- No identity cleanup records remain in this review snapshot.
 - Review `historical-date-review` records against project phase/year semantics before assigning any era.
 - Keep `postmodern-style-holdout` separate from chronological batch work until the era/style vocabulary is settled.
