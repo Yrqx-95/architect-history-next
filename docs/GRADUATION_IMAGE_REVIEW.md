@@ -481,3 +481,32 @@ Retried the first remaining remote-image queue item after waiting until the next
 | CASE-044 Nabeshima Shoto Park Toilet | Keep remote URL for now | `npm run graduation:images:localize -- --ids=CASE-044,CASE-045 --limit=2 --delay-ms=8000 --retry=1` | Wikimedia still returned upstream `429` at `CASE-044`, so the script stopped before touching `CASE-045`. |
 
 Implementation note: no new image was downloaded in this retry attempt. `CASE-044` and the remaining 16 retry targets still require a later slow retry window. The audit script now reports local/remote/placeholder image counts and the manifest retry queue automatically.
+
+## Remote Commons Retry Pass 2026-07-09
+
+Retried the first two remaining remote-image queue items in a bounded batch using the dedicated retry queue.
+
+Command shape:
+
+- `npm run graduation:images:dry-run -- --retry-queue --ids=CASE-044,CASE-045 --limit=2`
+- `npm run graduation:images:localize -- --retry-queue --ids=CASE-044,CASE-045 --limit=2 --delay-ms=5000 --retry=1`
+- `npm run graduation:data`
+- `npm run graduation:images:optimize -- --retry-queue --ids=CASE-044,CASE-045 --max-edge=1600 --quality=60`
+- `npm run graduation:audit`
+
+| Case | Decision | Optimized size |
+|---|---|---:|
+| CASE-044 Nabeshima Shoto Park Toilet | Localized and linked to local asset | 89,881 bytes |
+| CASE-045 Teshima Art Museum | Localized and optimized from a large Commons JPEG | 273,456 bytes |
+
+Current case image status after this pass:
+
+- total cases: 139
+- local graduation case images: 47
+- remote images: 53
+- generic placeholders: 39
+- records with explicit source/license/credit metadata: 100
+- image manifest entries: 47
+- dedicated retry queue entries: 14
+
+Implementation note: `CASE-044` and `CASE-045` were moved from `content/graduation_image_retry_queue.json` into `content/graduation_image_manifest.json`. The next retry batch should start with `CASE-046` and `CASE-047`. The optimization script now supports `--ids` and `--retry-queue` so small retry batches can be optimized without sweeping unrelated images.

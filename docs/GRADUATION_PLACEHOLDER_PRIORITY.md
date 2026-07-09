@@ -1,6 +1,6 @@
 # Graduation Placeholder Priority
 
-Generated: 2026-07-04
+Generated: 2026-07-04; updated: 2026-07-09
 
 ## Purpose
 
@@ -8,11 +8,11 @@ This file prevents repeated image-search work. It ranks remaining Graduation Ins
 
 ## Current Counts
 
-- Total cases: 100
+- Total cases: 139
 - Generic placeholders: 39
-- Local graduation case images: 32
-- Remote images: 29
-- Records with explicit image source/license/credit metadata: 61
+- Local graduation case images: 47
+- Remote images: 53
+- Records with explicit image source/license/credit metadata: 100
 
 ## Highest Priority Queue
 
@@ -100,17 +100,21 @@ This file prevents repeated image-search work. It ranks remaining Graduation Ins
 | CASE-040 Miyashita Park | Existing exact Commons image was localized and optimized with the slow retry workflow; this reduces remote runtime dependency without changing source/license metadata. |
 | CASE-041 Inujima Seirensho Art Museum | Existing exact Commons image was localized and optimized with the slow retry workflow; this reduces remote runtime dependency without changing source/license metadata. |
 | CASE-042 Nasushiobara City Library Miruru | Existing exact Commons image was localized and optimized with the slow retry workflow; this reduces remote runtime dependency without changing source/license metadata. |
+| CASE-044 Nabeshima Shoto Park Toilet | Existing exact Commons image was localized and optimized with the slow retry workflow; this reduces remote runtime dependency without changing source/license metadata. |
+| CASE-045 Teshima Art Museum | Existing exact Commons image was localized and optimized with the slow retry workflow; this reduces remote runtime dependency without changing source/license metadata. |
 
 ## Remote Image Retry Queue
 
-The image manifest now contains deterministic local targets for these remote Commons cases, but Wikimedia returned upstream `429` before the files could be downloaded: `CASE-044`, `CASE-045`, `CASE-046`, `CASE-047`, `CASE-050`, `CASE-051`, `CASE-052`, `CASE-053`, `CASE-054`, `CASE-055`, `CASE-058`, `CASE-060`, `CASE-061`, `CASE-071`, `CASE-074`, `CASE-081`.
+The retry queue now contains deterministic local targets for these remote Commons cases, but Wikimedia returned upstream `429` before the files could be downloaded: `CASE-046`, `CASE-047`, `CASE-050`, `CASE-051`, `CASE-052`, `CASE-053`, `CASE-054`, `CASE-055`, `CASE-058`, `CASE-060`, `CASE-061`, `CASE-071`, `CASE-074`, `CASE-081`.
 
 Use the slow retry workflow rather than a burst:
 
-- `npm run graduation:images:localize -- --ids=CASE-044,CASE-045 --limit=2 --delay-ms=5000 --retry=1`
+- `npm run graduation:images:dry-run -- --retry-queue --ids=CASE-046,CASE-047 --limit=2`
+- `npm run graduation:images:localize -- --retry-queue --ids=CASE-046,CASE-047 --limit=2 --delay-ms=5000 --retry=1`
 - stop immediately if `stoppedByRateLimit` is `true`
-- then run `npm run graduation:images:optimize -- --max-edge=1600 --quality=60`
 - then run `npm run graduation:data`
+- then run `npm run graduation:images:optimize -- --retry-queue --ids=CASE-046,CASE-047 --max-edge=1600 --quality=60`
+- then run `npm run graduation:audit`
 
 ## Reviewed And Deferred Since This Queue Was Created
 

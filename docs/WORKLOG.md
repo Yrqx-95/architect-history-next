@@ -2,6 +2,55 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Graduation Image Retry And Task Transition
+
+### Intent
+
+- Close the obvious unfinished graduation handoff items before starting the next graduation-focused pass.
+- Continue the documented slow image retry queue without widening scope.
+- Update stale graduation status documents so future work starts from the real 100 issues / 50 site types / 139 cases state.
+
+### Changes
+
+- Localized the next two retry-queue Commons images:
+  - `CASE-044` Nabeshima Shoto Park Toilet.
+  - `CASE-045` Teshima Art Museum.
+- Moved `CASE-044` and `CASE-045` from `content/graduation_image_retry_queue.json` into `content/graduation_image_manifest.json`.
+- Rebuilt graduation data from CSV so `src/content/graduation/cases.json` and `public/data/graduation/*` point those cases to local image paths.
+- Updated `scripts/optimize-graduation-case-images.mjs` so `--ids` and `--retry-queue` are honored by the optimizer.
+- Updated:
+  - `docs/GRADUATION_IMAGE_REVIEW.md`
+  - `docs/GRADUATION_PLACEHOLDER_PRIORITY.md`
+  - `docs/GRADUATION_PLAN_COMPLIANCE.md`
+  - `docs/GRADUATION_CONTENT_QA.md`
+
+### Validation
+
+- Ran `npm run graduation:images:dry-run -- --retry-queue --ids=CASE-044,CASE-045 --limit=2`.
+- Ran `npm run graduation:images:localize -- --retry-queue --ids=CASE-044,CASE-045 --limit=2 --delay-ms=5000 --retry=1`: 2 downloaded, `stoppedByRateLimit: false`.
+- Ran `npm run graduation:data`: 100 issues, 50 site types, 139 cases rebuilt.
+- Ran `npm run graduation:images:optimize -- --retry-queue --ids=CASE-044,CASE-045 --max-edge=1600 --quality=60`: checked 2, optimized 1.
+- Ran `npm run graduation:audit`: 0 problems.
+
+### Current Graduation Status
+
+- Issues: 100 total / 100 published / 0 draft.
+- Site types: 50 total / 20 published / 30 draft.
+- Cases: 139 total / 100 published / 39 draft.
+- Case images: 47 local / 53 remote / 39 placeholder.
+- Published placeholder cases: 0.
+- Dedicated retry queue: 14 entries, next recommended batch is `CASE-046` and `CASE-047`.
+
+### Remaining Risk
+
+- Nine existing local graduation images were re-optimized by the earlier broad optimizer call before the `--ids` guard was added; all were reduced in byte size, but visual spot-checking should still be done before deployment if image fidelity is a concern.
+- The remaining 14 retry images still depend on Wikimedia availability and should stay in 1-2 item batches.
+- The 30 draft site types are structurally valid but not all surfaced publicly.
+
+### Next Step
+
+- Start the graduation task proper from quality QA, not expansion: render-check key graduation pages and decide whether the next high-value improvement is remote-image localization, draft site-type surfacing, or user-simulation QA.
+
 ## 2026-07-09 - Graduation Background Rollback And Era Holdout Review
 
 ### Intent

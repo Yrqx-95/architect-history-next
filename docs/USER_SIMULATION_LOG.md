@@ -20,6 +20,73 @@ After meaningful product or design changes, simulate a real visitor using Archis
 - Do not invent visual taste from scratch; compare against mature public references when aesthetics are being changed.
 - If a design choice is below about 90% confidence, ask before making expensive or hard-to-reverse changes.
 
+## 2026-07-09 - Simulation 57: Graduation Image Retry And Core Flow QA
+
+Status: local user-simulation QA passed after image retry localization.
+
+Persona: Chinese architecture student entering the graduation inspiration section after new case images were localized.
+
+Goal: verify that the graduation module still works as a research path after moving two remote Commons images to local assets.
+
+Path simulated:
+
+1. `/zh/graduation`
+2. `/zh/graduation/issues`
+3. open detailed filters and select `SITE-002`
+4. `/zh/graduation/cases/CASE-044`
+5. `/zh/graduation/cases/CASE-045`
+6. `/zh/graduation/random`
+7. click `再来一次`
+8. mobile 390px on `/zh/graduation/random`
+
+User-view findings:
+
+1. The graduation home still presents the social-issue entry clearly.
+2. Detailed filtering by site type updates the URL to `siteType=SITE-002` and shows the expected child-care issue.
+3. `CASE-044` and `CASE-045` now render local case images with image attribution.
+4. `CASE-044` is a shorter case detail page, but it is not blank: title, image, year, location, source, and related issue all render.
+5. `CASE-045` renders the localized Teshima Art Museum image through the local graduation image path.
+6. The random-entry page keeps the generated bundle after clicking `再来一次`, including issue/site/case links and JSON/CSV export buttons.
+7. Mobile 390px has no horizontal overflow on the random-entry page.
+
+Validation:
+
+- Screenshot evidence:
+  - `/tmp/archistory-graduation-qa-2026-07-09/desktop-home.png`
+  - `/tmp/archistory-graduation-qa-2026-07-09/issues-filtered-site-002.png`
+  - `/tmp/archistory-graduation-qa-2026-07-09/case-045-local-image.png`
+  - `/tmp/archistory-graduation-qa-2026-07-09/random-after-reroll.png`
+  - `/tmp/archistory-graduation-qa-2026-07-09/mobile-random-playwright.png`
+- Browser QA:
+  - page identity and nonblank checks passed for home, issue filtering, case details, and random entry.
+  - `CASE-044` image natural size: 750 x 500.
+  - `CASE-045` image rendered from the local graduation image path.
+  - random page retained `浏览入口`, `社会问题`, and `JSON 出力` after reroll.
+- Mobile fallback QA:
+  - Used project Playwright for 390px because the in-app Browser viewport override did not apply reliably to the active tab.
+  - `clientWidth: 390`, `scrollWidth: 390`, horizontal overflow: `false`.
+  - console warnings/errors: `0`.
+
+Remaining risk:
+
+- This was a sampled path, not a full 139-case visual audit.
+- The nine earlier re-optimized local images were not individually compared against their previous visual quality.
+- The next 14 retry-queue images still depend on Wikimedia availability and should remain slow-batch work.
+
+Rollback scope:
+
+- `content/cases.csv`
+- `src/content/graduation/cases.json`
+- `public/data/graduation/cases.*`
+- `content/graduation_image_manifest.json`
+- `content/graduation_image_retry_queue.json`
+- `public/images/graduation/cases/case-044-nabeshima-shoto-park-toilet.jpg`
+- `public/images/graduation/cases/case-045-teshima-art-museum.jpg`
+- `scripts/optimize-graduation-case-images.mjs`
+- graduation QA/status docs
+
+Next recommended step: continue graduation quality mode with either `CASE-046` / `CASE-047` slow image retry or a focused review of whether the 30 draft site types should become public.
+
 ## 2026-07-06 - Simulation 56: Graduation Existing Interaction Polish
 
 Status: production interaction polish passed after deploy.

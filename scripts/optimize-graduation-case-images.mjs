@@ -9,17 +9,23 @@ import { promisify } from 'node:util'
 const execFile = promisify(execFileCallback)
 const root = process.cwd()
 const manifestPath = path.join(root, 'content/graduation_image_manifest.json')
+const retryQueuePath = path.join(root, 'content/graduation_image_retry_queue.json')
 const casesPath = path.join(root, 'src/content/graduation/cases.json')
 const applyChanges = process.argv.includes('--apply')
+const useRetryQueue = process.argv.includes('--retry-queue')
 const maxEdge = readNumberArg('--max-edge') ?? 2000
 const quality = readNumberArg('--quality') ?? 82
+const selectedIds = readListArg('--ids')
 
 const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'))
+const retryQueue = useRetryQueue ? JSON.parse(await fs.readFile(retryQueuePath, 'utf8')) : []
 const cases = JSON.parse(await fs.readFile(casesPath, 'utf8'))
-const imageItems = collectImageItems(manifest, cases)
+const imageItems = collectImageItems([...manifest, ...retryQueue], cases)
 const results = []
 
 for (const item of imageItems) {
+  if (selectedIds && !selectedIds.has(item.id)) continue
+
   const filePath = path.join(root, 'public', item.localPath)
   const before = await inspectFile(filePath)
 
@@ -49,7 +55,9 @@ console.log(JSON.stringify({
   mode: applyChanges ? 'apply' : 'dry-run',
   maxEdge,
   quality,
-  checked: imageItems.length,
+  source: useRetryQueue ? 'manifest+retry-queue' : 'manifest',
+  selectedIds: selectedIds ? Array.from(selectedIds) : null,
+  checked: results.length,
   optimized: results.filter(item => item.status === 'optimized').length,
   missing: results.filter(item => item.status === 'missing-local-file').length,
   contentOnly: imageItems.filter(item => item.source === 'content').length,
@@ -91,6 +99,17 @@ function readNumberArg(name) {
   if (!raw) return null
   const value = Number(raw.slice(name.length + 1))
   return Number.isFinite(value) && value > 0 ? value : null
+}
+
+function readListArg(name) {
+  const raw = process.argv.find(arg => arg.startsWith(`${name}=`))
+  if (!raw) return null
+  const values = raw
+    .slice(name.length + 1)
+    .split(',')
+    .map(value => value.trim())
+    .filter(Boolean)
+  return values.length > 0 ? new Set(values) : null
 }
 
 async function inspectFile(filePath) {

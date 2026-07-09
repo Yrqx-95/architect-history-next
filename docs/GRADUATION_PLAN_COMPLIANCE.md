@@ -1,6 +1,6 @@
 # Graduation V1 Plan Compliance
 
-Last updated: 2026-07-04
+Last updated: 2026-07-09
 
 This file tracks implementation against the user's V1 Graduation Inspiration Library plan. The plan is the priority source for future work on this submenu.
 
@@ -29,14 +29,14 @@ When choosing the next task for the graduation submenu, prefer unfinished items 
 | Local JSON data | Done | `src/content/graduation/*.json`. |
 | Editable CSV source files | Done | Added `content/issues.csv`, `content/site_types.csv`, and `content/cases.csv`. |
 | CSV to JSON build script | Done | Added `scripts/build-graduation-data.mjs` and npm scripts `graduation:data` / `graduation:data:from-json`. |
-| JSON Schemas | Done | Added `schemas/issue.schema.json`, `schemas/site_type.schema.json`, and `schemas/case.schema.json`; current 100/50/100 data validates against them. |
+| JSON Schemas | Done | Added `schemas/issue.schema.json`, `schemas/site_type.schema.json`, and `schemas/case.schema.json`; current 100 issues / 50 site types / 139 cases validate against them. |
 | API contract / OpenAPI draft | Done | Added `api/openapi.yaml` with the planned home, issue, site, case, random, brief, and export contract. |
 | Wireframes document | Done | Added `docs/graduation/wireframes.md`. |
 | Random algorithm document | Done | Added `docs/graduation/random.md`. |
 | Content guide | Done | Added `docs/graduation/content-guide.md`. |
 | Source and image policy | Done | Added `docs/graduation/SOURCE_POLICY.md`. |
-| Seed content 20/10/20 | Done | Current seed data exceeds the seed target: 100 issues, 50 site types, 100 cases. |
-| Formal target content 100/30-50/100 | Done | Current content is 100 issues, 50 site types, 100 cases; site types are within the formal target range. |
+| Seed content 20/10/20 | Done | Current seed data exceeds the seed target: 100 issues, 50 site types, 139 cases. |
+| Formal target content 100/30-50/100 | Done | Current content is 100 issues, 50 site types, 139 cases; site types are within the formal target range and cases now exceed the original V1 target. |
 | Shareable filter URLs | Done | List filters are reflected in URL query strings for refreshable/shareable filtered views. |
 | Content QA report | Done | Added `npm run graduation:audit`, generating `docs/GRADUATION_CONTENT_QA.md`. |
 | Draft review pass | Done | Added `docs/GRADUATION_DRAFT_REVIEW.md`; promoted source-backed issues and site types conservatively. |
@@ -53,16 +53,18 @@ When choosing the next task for the graduation submenu, prefer unfinished items 
 ## Next Plan-First Tasks
 
 1. Improve case confidence before large case publication:
-   - current cases: 100 total / 39 published / 61 draft
-   - placeholder images: 61/100
-   - explicit image source URLs: 39/100
+   - current cases: 139 total / 100 published / 39 draft
+   - placeholder images: 39/139
+   - published placeholder cases: 0
+   - explicit image source URLs: 100/139
+   - local case images: 47/139
 2. Run a publication-quality content review:
-   - current issues: 100 total / 30 published / 70 draft
+   - current issues: 100 total / 100 published / 0 draft
    - current site types: 50 total / 20 published / 30 draft
-3. Start rendered user-simulation QA on the full 100/50/100 data set:
+3. Start rendered user-simulation QA on the full 100/50/139 data set:
    - browse from home -> issue -> site -> case -> export
    - test random inspiration on mobile and desktop
 
 ## Current Recommendation
 
-Next implementation should stop raw content expansion and shift to quality: safe-image review, wording/source review, and user-simulation QA on the full 100/50/100 dataset.
+Next implementation should stay in quality mode, not raw expansion: continue slow retry localization for the remaining 14 remote Commons images, review whether any of the 30 draft site types should be surfaced, and run rendered user-simulation QA on the full 100/50/139 dataset.

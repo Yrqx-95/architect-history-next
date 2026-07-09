@@ -230,6 +230,22 @@
     "credit": "アラツク"
   },
   {
+    "id": "CASE-044",
+    "localPath": "/images/graduation/cases/case-044-nabeshima-shoto-park-toilet.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Shoto_park_2302.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shoto_park_2302.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "鋸香具師"
+  },
+  {
+    "id": "CASE-045",
+    "localPath": "/images/graduation/cases/case-045-teshima-art-museum.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Exterior_of_the_Teshima_Art_Museum.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Exterior_of_the_Teshima_Art_Museum.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Bea Phi / Wikimedia Commons"
+  },
+  {
     "id": "CASE-056",
     "localPath": "/images/graduation/cases/case-056-tainan-spring.jpg",
     "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/2/21/%E8%87%BA%E5%8D%97%E6%B2%B3%E6%A8%82%E5%BB%A3%E5%A0%B4.jpg",
