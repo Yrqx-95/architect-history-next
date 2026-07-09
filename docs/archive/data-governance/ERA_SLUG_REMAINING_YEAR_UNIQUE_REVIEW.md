@@ -1,6 +1,6 @@
 # Era Slug Remaining Year-Unique Review
 
-Generated: 2026-07-09T04:12:12.101Z
+Generated: 2026-07-09T04:45:31.082Z
 
 ## Scope
 
@@ -15,16 +15,16 @@ Generated: 2026-07-09T04:12:12.101Z
 |---|---:|
 | historical-date-review | 3 |
 | postmodern-style-holdout | 6 |
-| postmodern-weak-identity | 5 |
-| contemporary-identity-cleanup | 5 |
+| postmodern-weak-identity | 1 |
+| contemporary-identity-cleanup | 1 |
 | unexpected-year-unique | 0 |
 
 ## Summary By Candidate Era
 
 | Candidate era | Count |
 |---|---:|
-| postmodern | 11 |
-| contemporary | 5 |
+| postmodern | 7 |
+| contemporary | 1 |
 | early-modern | 1 |
 | industrial-revolution | 1 |
 | post-war | 1 |
@@ -42,16 +42,8 @@ Generated: 2026-07-09T04:12:12.101Z
 | postmodern-style-holdout | naoshima | Naoshima Contemporary Art Museum | 1992 | postmodern | tadao-ando | cultural | minimalism, exposed-concrete | Ando museum with minimalism/exposed-concrete reading; review with the Ando group before assigning postmodern. | Resolve whether this should remain an era exception or receive a clearer period label with style caveats. |
 | postmodern-style-holdout | therme-vals | Therme Vals | 1996 | postmodern | zumthor | leisure | contemporary-swiss, minimalism | Zumthor work better explained through material atmosphere, minimalism, and Swiss contemporary architecture. | Resolve whether this should remain an era exception or receive a clearer period label with style caveats. |
 | postmodern-style-holdout | kunsthaus-bregenz | Kunsthaus Bregenz | 1997 | postmodern | zumthor | cultural | contemporary-swiss, minimalism | Zumthor work better explained through material atmosphere, minimalism, and Swiss contemporary architecture. | Resolve whether this should remain an era exception or receive a clearer period label with style caveats. |
-| postmodern-weak-identity | q116481414 | Q116481414 | 1984 | postmodern | christian-de-portzamparc |  |  | Wikidata-style placeholder slug with no public-facing label; resolve identity before era assignment. | Fix identity, country, type, and display label before assigning era metadata. |
-| postmodern-weak-identity | q125679109 | Q125679109 | 1985 | postmodern | alvaro-siza-vieira |  |  | Wikidata-style placeholder slug; review with related Siza/Castanheira Schilderswijk housing records before era assignment. | Fix identity, country, type, and display label before assigning era metadata. |
-| postmodern-weak-identity | q125679110 | Q125679110 | 1985 | postmodern | alvaro-siza-vieira |  |  | Wikidata-style placeholder slug; review with related Siza/Castanheira Schilderswijk housing records before era assignment. | Fix identity, country, type, and display label before assigning era metadata. |
 | postmodern-weak-identity | untitled | Untitled | 1996 | postmodern | peter-eisenman |  |  | Untitled public-art/infrastructure-like record with likely country-code conflict; resolve whether it belongs in the building archive before era assignment. | Fix identity, country, type, and display label before assigning era metadata. |
-| postmodern-weak-identity | q125679108 | Q125679108 | 1999 | postmodern | alvaro-siza-vieira |  |  | Wikidata-style placeholder slug with likely country-code conflict; resolve identity and country before era assignment. | Fix identity, country, type, and display label before assigning era metadata. |
 | contemporary-identity-cleanup | q136394553 | Q136394553 | 2001 | contemporary | mario-botta |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
-| contemporary-identity-cleanup | q125679066 | Q125679066 | 2005 | contemporary | bernard-tschumi |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
-| contemporary-identity-cleanup | q3412221 | Q3412221 | 2007 | contemporary | jean-philippe-vassal |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
-| contemporary-identity-cleanup | q123517303 | Q123517303 | 2008 | contemporary | eduardo-souto-de-moura |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
-| contemporary-identity-cleanup | (missing slug) | 耶稣堂 (圣塞瓦斯蒂安) | 2011 | contemporary | rafael-moneo |  |  | Missing slug; cannot safely write era metadata until the record has a stable slug. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
 
 ## Recommended Next Step
 

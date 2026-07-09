@@ -1,6 +1,6 @@
 # Era Identity Cleanup Review
 
-Generated: 2026-07-09T04:13:25.051Z
+Generated: 2026-07-09T04:45:32.388Z
 
 ## Scope
 
@@ -15,23 +15,15 @@ Generated: 2026-07-09T04:13:25.051Z
 |---|---:|
 | safe-metadata-cleanup | 0 |
 | commons-name-candidate | 0 |
-| manual-name-research | 8 |
+| manual-name-research | 0 |
 | archive-scope-review | 2 |
 
 ## Review Queue
 
 | Lane | Confidence | Current slug | Current name | Wikidata | Wikidata description | Suggested name | Suggested slug | Country | Architect | Type/location | Note |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| manual-name-research | medium | q116481414 | Q116481414 | Q116481414 |  |  |  | (blank) -> FR | christian-de-portzamparc | music school / 7th arrondissement of Paris | No public-facing English label or Commons category; derive name manually from description/address before writing. |
-| manual-name-research | medium | q125679109 | Q125679109 | Q125679109 | housing complex at Parallelweg, Schilderswijk, Den Haag, the Netherlands |  |  | NL -> NL | alvaro-siza-vieira | housing estate / The Hague | No public-facing English label or Commons category; derive name manually from description/address before writing. |
-| manual-name-research | medium | q125679110 | Q125679110 | Q125679110 | housing complex at Van der Vennestraat, Schilderswijk, Den Haag, the Netherlands |  |  | NL -> NL | alvaro-siza-vieira | housing estate / The Hague | No public-facing English label or Commons category; derive name manually from description/address before writing. |
 | archive-scope-review | medium | untitled | Untitled | Q127587635 | artwork in public space by Peter Eisenman in Aachen, Germany | Untitled | untitled | LU -> DE | peter-eisenman | bus shelter / Aachen | Wikidata describes this as public artwork/infrastructure, not a clear building archive record. |
-| manual-name-research | medium | q125679108 | Q125679108 | Q125679108 | housing complex at Avenue Céramique 22-26, Céramique-terrein, Maastricht, the Netherlands |  |  | LU -> NL | alvaro-siza-vieira | housing estate / Maastricht | No public-facing English label or Commons category; derive name manually from description/address before writing. |
 | archive-scope-review | medium | q136394553 | Q136394553 | Q136394553 |  | Fontana di Piazzale della Pace (Parma) | fontana-di-piazzale-della-pace-parma | (blank) -> IT | mario-botta | reflecting pool / Parma | Wikidata describes this as public artwork/infrastructure, not a clear building archive record. |
-| manual-name-research | medium | q125679066 | Q125679066 | Q125679066 | architectural structure at Passage 26 - 77, Centrum, Den Haag, the Netherlands |  |  | NL -> NL | bernard-tschumi | architectural structure / The Hague | No public-facing English label or Commons category; derive name manually from description/address before writing. |
-| manual-name-research | medium | q3412221 | Q3412221 | Q3412221 |  |  |  | FR -> FR | jean-philippe-vassal | campus / Bordeaux | No public-facing English label or Commons category; derive name manually from description/address before writing. |
-| manual-name-research | medium | q123517303 | Q123517303 | Q123517303 |  |  |  | PT -> PT | eduardo-souto-de-moura | arts center / Sé, Santa Maria e Meixedo | No public-facing English label or Commons category; derive name manually from description/address before writing. |
-| manual-name-research | medium | (missing slug) | 耶稣堂 (圣塞瓦斯蒂安) | Q9006868 | church building in Donostia-San Sebastian, Spain |  |  | ES -> ES | rafael-moneo | church building / San Sebastián | No public-facing English label or Commons category; derive name manually from description/address before writing. |
 
 ## Recommended Next Step
 

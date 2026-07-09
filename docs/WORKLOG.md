@@ -2,6 +2,99 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Era Manual Identity Reviewed Write
+
+### Intent
+
+- Continue the weak-identity cleanup after the Commons-backed records were resolved.
+- Research the remaining manual-name records against external sources before writing names, slugs, countries, types, and era metadata.
+- Keep archive-scope/public-art records out of the normal building era write path.
+
+### Changes
+
+- Applied Supabase migration `normalize_manual_identity_era_slugs`.
+- Added `db/migrations/v21-normalize-manual-identity-era-slugs.sql`.
+- Added `docs/archive/data-governance/ERA_IDENTITY_MANUAL_REVIEWED_WRITE_REPORT.md`.
+- Regenerated:
+  - `docs/archive/data-governance/ERA_IDENTITY_CLEANUP_REVIEW.md`
+  - `docs/archive/data-governance/ERA_SLUG_REMAINING_YEAR_UNIQUE_REVIEW.md`
+
+### Written Records
+
+- `q116481414` -> `conservatoire-erik-satie`
+  - `name_en`: `Conservatoire Erik Satie`
+  - `type_slug`: `educational`
+  - `city/country`: `Paris`, `France / FR`
+  - `era_slug`: `postmodern`
+- `q125679109` -> `punt-en-komma-social-housing`
+  - `name_en`: `Punt en Komma Social Housing`
+  - `type_slug`: `residential`
+  - `city/country`: `The Hague`, `Netherlands / NL`
+  - `era_slug`: `postmodern`
+- `q125679110` -> `duas-habitacoes-e-duas-lojas`
+  - `name_en`: `Duas Habitações e Duas Lojas`
+  - `type_slug`: `mixed-use`
+  - `city/country`: `The Hague`, `Netherlands / NL`
+  - `era_slug`: `postmodern`
+- `q125679108` -> `ceramique-terrein-apartments-offices`
+  - `name_en`: `Céramique Terrein Apartments and Offices`
+  - `type_slug`: `mixed-use`
+  - `city/country`: `Maastricht`, `Netherlands / NL`
+  - `era_slug`: `postmodern`
+- `q125679066` -> `de-passage-the-hague`
+  - `name_en`: `De Passage`
+  - `type_slug`: `commercial`
+  - `city/country`: `The Hague`, `Netherlands / NL`
+  - `era_slug`: `contemporary`
+- `q3412221` -> `university-center-management-sciences-bordeaux`
+  - `name_en`: `University Center of Management Sciences, Bordeaux`
+  - `type_slug`: `educational`
+  - `city/country`: `Bordeaux`, `France / FR`
+  - `era_slug`: `contemporary`
+- `q123517303` -> `centro-de-arte-contemporanea-graca-morais`
+  - `name_en`: `Centro de Arte Contemporânea Graça Morais`
+  - `type_slug`: `cultural`
+  - `city/country`: `Bragança`, `Portugal / PT`
+  - `era_slug`: `contemporary`
+- blank slug / `Q9006868` -> `iesu-church-san-sebastian`
+  - `name_en`: `Iesu Church in San Sebastián`
+  - `type_slug`: `religious`
+  - `city/country`: `San Sebastián`, `Spain / ES`
+  - `era_slug`: `contemporary`
+
+### Validation
+
+- Confirmed target slug collisions were all 0 before write.
+- Verified all 8 written records after migration:
+  - correct slug, display name, city/country, type, and era.
+  - matching `building_eras` row present.
+- Supabase after write:
+  - `buildings.era_slug`: 420 filled, 455 missing, 875 total.
+  - `building_eras`: 420 rows.
+- Ran `npm run data:review-era-identity`: 2 candidates remain.
+- Ran `npm run data:review-era-year-unique`: 11 candidates remain.
+- Ran `npm run data:plan-eras`: 343 `missing-year`, 101 `year-overlap`, 11 `year-unique`.
+- Ran `npm run data:audit`: 0 errors, 865 warnings, 2490 info, 3355 total.
+
+### Remaining Risk
+
+- The remaining identity cleanup queue is archive-scope only:
+  - `untitled` / `Q127587635`: public artwork/infrastructure-like bus shelter record with country mismatch.
+  - `q136394553` / `Q136394553`: reflecting pool / fountain-like record.
+- The remaining 6 `postmodern-style-holdout` records should not be auto-written until the front-end era/style wording is settled.
+- The remaining 3 historical-date records need phase/year semantics review before era assignment.
+
+### Rollback Scope
+
+- `db/migrations/v21-normalize-manual-identity-era-slugs.sql`
+- `docs/archive/data-governance/ERA_IDENTITY_MANUAL_REVIEWED_WRITE_REPORT.md`
+- regenerated era identity/year-unique review reports
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Review archive-scope records next, deciding whether `Untitled` and `Fontana di Piazzale della Pace (Parma)` belong in `buildings` at all before any era metadata is assigned.
+
 ## 2026-07-09 - Era Commons Identity Reviewed Write
 
 ### Intent
