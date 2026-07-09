@@ -246,6 +246,22 @@
     "credit": "Bea Phi / Wikimedia Commons"
   },
   {
+    "id": "CASE-046",
+    "localPath": "/images/graduation/cases/case-046-chichu-art-museum.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Chichu_art_museum02s2560.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chichu_art_museum02s2560.jpg",
+    "license": "CC BY 2.5",
+    "credit": "663highland / Wikimedia Commons"
+  },
+  {
+    "id": "CASE-047",
+    "localPath": "/images/graduation/cases/case-047-towada-art-center.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Towada_art_center.JPG",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Towada_art_center.JPG",
+    "license": "CC0",
+    "credit": "Angaurits / Wikimedia Commons"
+  },
+  {
     "id": "CASE-056",
     "localPath": "/images/graduation/cases/case-056-tainan-spring.jpg",
     "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/2/21/%E8%87%BA%E5%8D%97%E6%B2%B3%E6%A8%82%E5%BB%A3%E5%A0%B4.jpg",

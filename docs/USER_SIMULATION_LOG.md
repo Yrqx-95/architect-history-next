@@ -20,6 +20,52 @@ After meaningful product or design changes, simulate a real visitor using Archis
 - Do not invent visual taste from scratch; compare against mature public references when aesthetics are being changed.
 - If a design choice is below about 90% confidence, ask before making expensive or hard-to-reverse changes.
 
+## 2026-07-10 - Simulation 59: Graduation Cases 046-047 Local Images
+
+Status: local user-simulation QA passed before release gates.
+
+Persona: Chinese architecture student comparing museum precedents for a graduation project.
+
+Goal: confirm that Chichu Art Museum and Towada Art Center open as usable, source-attributed case records after their remote images were localized.
+
+Path simulated:
+
+1. `/zh/graduation/cases/CASE-046`
+2. click `返回` to `/zh/graduation/cases`
+3. `/zh/graduation/cases/CASE-047`
+
+User-view findings:
+
+1. Both case pages show the correct title, concept, year, location, architect, keywords, and related issues.
+2. Both case images render from local graduation image paths through the Next.js image pipeline.
+3. `CASE-046` shows `CC BY 2.5` and `663highland / Wikimedia Commons`.
+4. `CASE-047` shows `CC0` and `Angaurits / Wikimedia Commons`.
+5. The return link moves from the detail page back to the case index as expected.
+
+Validation:
+
+- Application Browser QA on `http://127.0.0.1:3013`.
+- `CASE-046` rendered image: 800 x 533; console warnings/errors: 0.
+- `CASE-047` rendered image: 800 x 600; console warnings/errors: 0.
+- No framework error overlay on either sampled page.
+- Screenshot evidence:
+  - `/tmp/archistory-graduation-case-046-2026-07-10.png`
+  - `/tmp/archistory-graduation-case-047-2026-07-10.png`
+
+Remaining risk:
+
+- This simulation did not repeat mobile QA because the changed surface was case image data, not layout.
+- The browser's semantic locator timed out twice for the `CASE-047` image, while direct DOM inspection confirmed the image was complete and correctly attributed.
+
+Rollback scope:
+
+- graduation case CSV and generated case data.
+- graduation image manifest and retry queue.
+- the two local image files.
+- graduation image/status documentation.
+
+Next recommended step: release this bounded batch, then continue with `CASE-050` and `CASE-051` only after production smoke passes.
+
 ## 2026-07-10 - Simulation 58: Graduation Warm Background Restore
 
 Status: local visual QA passed before release gates.

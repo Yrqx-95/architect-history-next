@@ -1,21 +1,5 @@
 [
   {
-    "id": "CASE-046",
-    "localPath": "/images/graduation/cases/case-046-chichu-art-museum.jpg",
-    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Chichu_art_museum02s2560.jpg",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chichu_art_museum02s2560.jpg",
-    "license": "CC BY 2.5",
-    "credit": "663highland / Wikimedia Commons"
-  },
-  {
-    "id": "CASE-047",
-    "localPath": "/images/graduation/cases/case-047-towada-art-center.jpg",
-    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Towada_art_center.JPG",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Towada_art_center.JPG",
-    "license": "CC0",
-    "credit": "Angaurits / Wikimedia Commons"
-  },
-  {
     "id": "CASE-050",
     "localPath": "/images/graduation/cases/case-050-hisaya-odori-park.jpg",
     "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Media_Hiroba_of_Hisaya-odori_Park_and_Nagoya_TV_Tower_-_2.jpg",

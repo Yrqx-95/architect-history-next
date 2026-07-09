@@ -510,3 +510,24 @@ Current case image status after this pass:
 - dedicated retry queue entries: 14
 
 Implementation note: `CASE-044` and `CASE-045` were moved from `content/graduation_image_retry_queue.json` into `content/graduation_image_manifest.json`. The next retry batch should start with `CASE-046` and `CASE-047`. The optimization script now supports `--ids` and `--retry-queue` so small retry batches can be optimized without sweeping unrelated images.
+
+## Remote Commons Retry Pass 2026-07-10
+
+Retried the next two remote-image queue items in the same bounded slow batch.
+
+| Case | Decision | Optimized size |
+|---|---|---:|
+| CASE-046 Chichu Art Museum | Localized and optimized from a 3450 x 2300 Commons JPEG | 262,153 bytes |
+| CASE-047 Towada Art Center | Localized; the 1600 x 1200 Commons JPEG already met the optimization target | 167,228 bytes |
+
+Current case image status after this pass:
+
+- total cases: 139
+- local graduation case images: 49
+- remote images: 51
+- generic placeholders: 39
+- records with explicit source/license/credit metadata: 100
+- image manifest entries: 49
+- dedicated retry queue entries: 12
+
+Implementation note: `CASE-046` and `CASE-047` were moved from `content/graduation_image_retry_queue.json` into `content/graduation_image_manifest.json`. The next retry batch should start with `CASE-050` and `CASE-051`.

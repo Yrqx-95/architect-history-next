@@ -2,6 +2,58 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-10 - Graduation Image Retry Pass 046-047
+
+### Intent
+
+- Continue the graduation quality backlog from its documented handoff point.
+- Localize only the next two source-safe Commons images without widening the batch.
+- Keep data, manifests, QA status, and handoff logs aligned.
+
+### Changes
+
+- Localized and linked:
+  - `CASE-046` Chichu Art Museum.
+  - `CASE-047` Towada Art Center.
+- Optimized `CASE-046` from 3,290,690 bytes to 262,153 bytes at 1600 x 1066.
+- Kept `CASE-047` at 167,228 bytes and 1600 x 1200 because it already met the target.
+- Moved both cases from `content/graduation_image_retry_queue.json` to `content/graduation_image_manifest.json`.
+- Rebuilt graduation case data and refreshed image/status documentation.
+
+### Validation
+
+- Slow localization: 2 downloaded, `stoppedByRateLimit: false`.
+- `npm run graduation:data`: 100 issues, 50 site types, 139 cases rebuilt.
+- `npm run graduation:audit`: 0 problems.
+- Browser QA on `/zh/graduation/cases/CASE-046` and `/zh/graduation/cases/CASE-047`:
+  - both pages are nonblank and show the expected title.
+  - both local images completed loading.
+  - image source, license, and credit are visible.
+  - console warnings/errors: 0.
+  - detail-to-case-index return interaction passed.
+- Screenshot evidence:
+  - `/tmp/archistory-graduation-case-046-2026-07-10.png`
+  - `/tmp/archistory-graduation-case-047-2026-07-10.png`
+
+### Current Graduation Status
+
+- Issues: 100 total / 100 published / 0 draft.
+- Site types: 50 total / 20 published / 30 draft.
+- Cases: 139 total / 100 published / 39 draft.
+- Case images: 49 local / 51 remote / 39 placeholder.
+- Published placeholder cases: 0.
+- Dedicated retry queue: 12 entries, next recommended batch is `CASE-050` and `CASE-051`.
+
+### Remaining Risk
+
+- Twelve source-safe Commons images still depend on upstream availability.
+- This pass sampled the two changed case pages; it did not repeat the full graduation flow or all viewports.
+- The in-app browser's semantic image locator timed out twice on `CASE-047`; direct DOM inspection and screenshot evidence confirmed the image loaded correctly, so this appears to be a test-interface timing issue rather than an app defect.
+
+### Next Step
+
+- Run release gates, commit, push, deploy, and smoke-test the two production case pages.
+
 ## 2026-07-10 - Graduation Warm Background Restore
 
 ### Intent
