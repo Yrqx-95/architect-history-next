@@ -20,6 +20,46 @@ After meaningful product or design changes, simulate a real visitor using Archis
 - Do not invent visual taste from scratch; compare against mature public references when aesthetics are being changed.
 - If a design choice is below about 90% confidence, ask before making expensive or hard-to-reverse changes.
 
+## 2026-07-10 - Simulation 58: Graduation Warm Background Restore
+
+Status: local visual QA passed before release gates.
+
+Persona: Japanese architecture student returning to the graduation inspiration page after the background color was reported as wrong.
+
+Goal: verify that the graduation page uses the warmer archive background again without breaking the page shell.
+
+Path simulated:
+
+1. `/ja/graduation`
+
+User-view findings:
+
+1. The graduation page now renders inside `.graduation-system` with the warm archive gradient instead of the cold civic gray/green wash.
+2. The hero title, V1 scope block, and entry cards still render normally.
+3. The page has no horizontal overflow at 1440px.
+
+Validation:
+
+- Playwright local QA on `http://localhost:3012/ja/graduation`.
+- Computed `.graduation-system` values:
+  - background gradient: `#fffdf8 -> #f7f4ed -> #f1ece2`.
+  - `--ui-surface`: `#fffdf8`.
+  - `--ui-surface-muted`: `#eee9de`.
+  - `--ui-accent`: `#8f4f30`.
+- Screenshot evidence: `/tmp/archistory-graduation-warm-theme-2026-07-10.png`.
+- Console/page errors: 0.
+
+Remaining risk:
+
+- Only the visual palette was checked in this simulation; full graduation flow QA remains covered by Simulation 57 and should be repeated after larger graduation changes.
+
+Rollback scope:
+
+- `src/app/globals.css`
+- `tests/unit/graduation-theme.test.ts`
+
+Next recommended step: run release gates, deploy, and smoke-test the production graduation page.
+
 ## 2026-07-09 - Simulation 57: Graduation Image Retry And Core Flow QA
 
 Status: local user-simulation QA passed after image retry localization.

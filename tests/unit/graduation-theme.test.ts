@@ -10,13 +10,13 @@ function cssBlock(selector: string) {
 }
 
 describe('graduation theme', () => {
-  it('keeps the graduation module on the civic gray background instead of the warm archive wash', () => {
+  it('keeps the graduation module on the warm archive background instead of the civic gray wash', () => {
     const block = cssBlock('.graduation-system')
 
-    expect(block).toContain('--ui-surface: #f6f8f7')
-    expect(block).toContain('--ui-surface-muted: #eef2f1')
-    expect(block).toContain('linear-gradient(180deg, #ffffff 0%, #f7f9f8 42%, #f2f5f4 100%)')
-    expect(block).not.toContain('#fffdf8')
-    expect(block).not.toContain('#eee9de')
+    expect(block).toContain('--ui-surface: #fffdf8')
+    expect(block).toContain('--ui-surface-muted: #eee9de')
+    expect(block).toContain('linear-gradient(180deg, #fffdf8 0%, #f7f4ed 48%, #f1ece2 100%)')
+    expect(block).not.toContain('#f6f8f7')
+    expect(block).not.toContain('#eef2f1')
   })
 })

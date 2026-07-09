@@ -443,17 +443,17 @@ img { max-width: 100%; height: auto; }
    ============================================================ */
 
 .graduation-system {
-  --ui-surface: #f6f8f7;
-  --ui-surface-muted: #eef2f1;
+  --ui-surface: #fffdf8;
+  --ui-surface-muted: #eee9de;
   --ui-surface-raised: #ffffff;
-  --ui-border: #c9d0cf;
-  --ui-border-subtle: #dde2e0;
-  --ui-text-primary: #151817;
-  --ui-text-secondary: #323837;
-  --ui-text-muted: #68716e;
-  --ui-text-soft: #8a918d;
-  --ui-accent: #315f68;
-  --ui-accent-hover: #183f47;
+  --ui-border: #cfc6b8;
+  --ui-border-subtle: #ddd6ca;
+  --ui-text-primary: #201c18;
+  --ui-text-secondary: #373029;
+  --ui-text-muted: #74685c;
+  --ui-text-soft: #6b6055;
+  --ui-accent: #8f4f30;
+  --ui-accent-hover: #6f3b21;
   box-sizing: border-box;
   width: 100vw;
   min-height: calc(100vh - 6rem);
@@ -462,24 +462,24 @@ img { max-width: 100%; height: auto; }
   margin-bottom: -2rem;
   padding: 0 max(0.75rem, calc((100vw - var(--container-wide)) / 2)) 3rem;
   background:
-    linear-gradient(180deg, #ffffff 0%, #f7f9f8 42%, #f2f5f4 100%);
+    linear-gradient(180deg, #fffdf8 0%, #f7f4ed 48%, #f1ece2 100%);
   color: var(--ui-text-primary);
 }
 
 .dark .graduation-system {
-  --ui-surface: #151819;
-  --ui-surface-muted: #202627;
-  --ui-surface-raised: #1b2021;
-  --ui-border: #465052;
-  --ui-border-subtle: #30383a;
-  --ui-text-primary: #f4f7f5;
-  --ui-text-secondary: #dce4e1;
-  --ui-text-muted: #abb8b4;
-  --ui-text-soft: #8e9b98;
-  --ui-accent: #92c7ce;
-  --ui-accent-hover: #c0e5e9;
+  --ui-surface: #1a1815;
+  --ui-surface-muted: #24211d;
+  --ui-surface-raised: #201d19;
+  --ui-border: #51483e;
+  --ui-border-subtle: #352f29;
+  --ui-text-primary: #f3eee3;
+  --ui-text-secondary: #ded4c3;
+  --ui-text-muted: #a89a87;
+  --ui-text-soft: #857664;
+  --ui-accent: #c7885f;
+  --ui-accent-hover: #dfa879;
   background:
-    linear-gradient(180deg, #151819 0%, #171d1e 42%, #111516 100%);
+    linear-gradient(180deg, #1a1815 0%, #15130f 48%, #11100e 100%);
 }
 
 .graduation-system .heading-display {

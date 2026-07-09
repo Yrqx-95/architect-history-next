@@ -2,6 +2,42 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-10 - Graduation Warm Background Restore
+
+### Intent
+
+- Finish the explicit graduation visual request before moving deeper into the graduation task backlog.
+- Restore the graduation module away from the cold civic gray/green wash and back to the earlier warm archive palette.
+- Keep a regression test so future cleanup work does not accidentally flip the module background again.
+
+### Changes
+
+- Updated `.graduation-system` in `src/app/globals.css`:
+  - light mode restored to the warm archive surface and gradient.
+  - dark mode restored to the matching warm dark archive palette.
+- Updated `tests/unit/graduation-theme.test.ts` so the protected expectation is warm archive, not civic gray.
+
+### Validation
+
+- Ran `npm run test:unit -- tests/unit/graduation-theme.test.ts`: passed.
+- Started local dev server on port `3012` and checked `/ja/graduation` with Playwright:
+  - `.graduation-system` exists.
+  - computed gradient is `#fffdf8 -> #f7f4ed -> #f1ece2`.
+  - `--ui-surface` is `#fffdf8`.
+  - `--ui-surface-muted` is `#eee9de`.
+  - console/page errors: 0.
+  - horizontal overflow: none at 1440px.
+- Screenshot evidence: `/tmp/archistory-graduation-warm-theme-2026-07-10.png`.
+
+### Remaining Risk
+
+- This pass only restored the theme palette; it did not redesign graduation layout, typography, or card density.
+- The user-facing "previous color" was inferred from the pre-civic-gray CSS history and the screenshot complaint.
+
+### Next Step
+
+- Run the normal release gates, commit, push, deploy, and then smoke-test `/ja/graduation` and `/zh/graduation` on production.
+
 ## 2026-07-09 - Graduation Image Retry And Task Transition
 
 ### Intent
