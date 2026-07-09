@@ -48,6 +48,7 @@ export type IdentityCleanupInput = {
   wikidata_description_en: string
   wikidata_country_label_en: string
   wikidata_country_code: string
+  wikidata_instance_of_label_en?: string
   commons_category: string
 }
 
@@ -129,7 +130,7 @@ export function classifyIdentityCleanupCandidate(input: IdentityCleanupInput): I
   const currentLooksWeak = !input.current_slug || isQidText(input.current_slug) || isQidText(input.current_name_en)
   const countryMismatch = Boolean(input.wikidata_country_code && input.current_country_code && input.wikidata_country_code !== input.current_country_code)
 
-  if (/artwork in public space|bus shelter/i.test(input.wikidata_description_en)) {
+  if (/artwork in public space|bus shelter/i.test(input.wikidata_description_en) || /reflecting pool|fountain/i.test(input.wikidata_instance_of_label_en || '')) {
     return {
       ...input,
       review_lane: 'archive-scope-review',
@@ -277,6 +278,7 @@ function buildInput(building: Building, snapshot: WikidataSnapshot): IdentityCle
     wikidata_description_en: snapshot.description_en,
     wikidata_country_label_en: snapshot.country_label_en,
     wikidata_country_code: snapshot.country_code,
+    wikidata_instance_of_label_en: snapshot.instance_of_label_en,
     commons_category: snapshot.commons_category,
   }
 }
@@ -332,7 +334,11 @@ function markdownReport(report: {
   } else {
     lines.push('- No `safe-metadata-cleanup` records remain in this review snapshot.')
   }
-  lines.push('- Keep `commons-name-candidate` as review-first: Commons category names are useful but not always final display names.')
+  if ((laneCounts.get('commons-name-candidate') || 0) > 0) {
+    lines.push('- Keep `commons-name-candidate` as review-first: Commons category names are useful but not always final display names.')
+  } else {
+    lines.push('- No `commons-name-candidate` records remain in this review snapshot.')
+  }
   lines.push('- Do not assign era metadata to `archive-scope-review` records until deciding whether they belong in `buildings`.')
   lines.push('- Run `data:plan-eras` after any future metadata write to confirm the remaining queue changes as expected.')
   lines.push('')

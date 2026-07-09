@@ -38,6 +38,24 @@ describe('era identity cleanup review', () => {
     expect(item.confidence).toBe('medium')
   })
 
+  it('sends reflecting pools to archive scope review even when Commons has a name', () => {
+    const item = classifyIdentityCleanupCandidate({
+      current_slug: 'q136394553',
+      current_name_en: 'Q136394553',
+      current_country_code: '',
+      wikidata_id: 'Q136394553',
+      wikidata_label_en: '',
+      wikidata_description_en: '',
+      wikidata_country_label_en: 'Italy',
+      wikidata_country_code: 'IT',
+      wikidata_instance_of_label_en: 'reflecting pool',
+      commons_category: 'Category:Fontana di Piazzale della Pace (Parma)',
+    })
+
+    expect(item.review_lane).toBe('archive-scope-review')
+    expect(item.suggested_slug).toBe('fontana-di-piazzale-della-pace-parma')
+  })
+
   it('builds stable lowercase slugs from public names', () => {
     expect(slugFromName('Capela do Monte')).toBe('capela-do-monte')
     expect(slugFromName('Jesús Church (San Sebastián)')).toBe('jesus-church-san-sebastian')

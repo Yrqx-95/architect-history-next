@@ -2,6 +2,81 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Era Commons Identity Reviewed Write
+
+### Intent
+
+- Continue the weak-identity era cleanup by reviewing the remaining Commons-backed candidates.
+- Write only records whose Commons name, Wikidata instance type, architect, country, and year support a clear building record.
+- Keep non-building/ambiguous scope records out of era assignment.
+
+### Changes
+
+- Updated `scripts/build-era-identity-cleanup-review.ts` so reflecting pool / fountain records are treated as `archive-scope-review`.
+- Added a unit test covering the reflecting-pool scope rule.
+- Applied Supabase migration `normalize_commons_identity_era_slugs`.
+- Added `db/migrations/v20-normalize-commons-identity-era-slugs.sql`.
+- Added `docs/archive/data-governance/ERA_IDENTITY_COMMONS_REVIEWED_WRITE_REPORT.md`.
+- Regenerated:
+  - `docs/archive/data-governance/ERA_IDENTITY_CLEANUP_REVIEW.md`
+  - `docs/archive/data-governance/ERA_SLUG_REMAINING_YEAR_UNIQUE_REVIEW.md`
+
+### Written Records
+
+- `q125679342` -> `kantoorgebouw-het-oosten`
+  - `name_en`: `Kantoorgebouw Het Oosten`
+  - `type_slug`: `office`
+  - `city/country`: `Amsterdam`, `Netherlands / NL`
+  - `era_slug`: `postmodern`
+- `q134893563` -> `terracos-de-braganca`
+  - `name_en`: `Terraços de Bragança`
+  - `type_slug`: `residential`
+  - `city/country`: `Lisbon`, `Portugal / PT`
+  - `era_slug`: `contemporary`
+- `q118539028` -> `capela-do-monte`
+  - `name_en`: `Capela do Monte`
+  - `type_slug`: `religious`
+  - `city/country`: `Bensafrim e Barão de São João`, `Portugal / PT`
+  - `era_slug`: `contemporary`
+
+### Validation
+
+- Confirmed target slug collisions were all 0 before write.
+- Verified all 3 written records after migration:
+  - correct slug, display name, city/country, type, and era.
+  - matching `building_eras` row present.
+- Supabase after write:
+  - `buildings.era_slug`: 412 filled, 463 missing, 875 total.
+  - `building_eras`: 412 rows.
+- Ran `npm run data:review-era-identity`: 10 candidates remain.
+- Ran `npm run data:review-era-year-unique`: 19 candidates remain.
+- Ran `npm run data:plan-eras`: 343 `missing-year`, 101 `year-overlap`, 19 `year-unique`.
+- Ran `npm run data:audit`: 0 errors, 882 warnings, 2490 info, 3372 total.
+- Ran `npm run test:unit`: 4 files, 11 tests passed.
+- Ran `npm run typecheck`: passed.
+- Ran `npm run lint`: passed.
+- Ran `npm run build`: passed, 4192 static pages generated.
+- Ran `git diff --check`: passed.
+
+### Remaining Risk
+
+- `Q136394553` / `Fontana di Piazzale della Pace (Parma)` is now held as `archive-scope-review` because Wikidata classifies it as a reflecting pool.
+- The remaining 8 manual-name records need naming research before any migration.
+- The remaining 2 archive-scope records should not receive era metadata until deciding whether they belong in `buildings`.
+
+### Rollback Scope
+
+- `scripts/build-era-identity-cleanup-review.ts`
+- `tests/unit/era-identity-cleanup.test.ts`
+- `db/migrations/v20-normalize-commons-identity-era-slugs.sql`
+- `docs/archive/data-governance/ERA_IDENTITY_COMMONS_REVIEWED_WRITE_REPORT.md`
+- regenerated era identity/year-unique review reports
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Start manual-name research for the remaining 8 Q-id/blank-slug records, grouping the Siza housing records together so they are not named inconsistently.
+
 ## 2026-07-09 - Era Weak Identity Cleanup Review
 
 ### Intent
