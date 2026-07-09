@@ -2,6 +2,66 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Graduation Warm Background And Remaining Year-Unique Review
+
+### Intent
+
+- Respond to user feedback that the graduation design unit background should return to the previous look.
+- Continue era cleanup by reviewing the remaining `year-unique` candidates without automatically writing ambiguous records.
+
+### Changes
+
+- Updated `src/app/globals.css` so `.graduation-system` uses the warm archive palette again:
+  - light background gradient: `#fffdf8` → `#f7f4ed` → `#f1ece2`.
+  - surface tokens restored to the global warm stone values.
+  - dark mode restored to the global warm dark values.
+- Added `tests/unit/graduation-theme.test.ts` to guard against the graduation unit drifting back to the rejected civic green/grey wash.
+- Added `scripts/build-era-remaining-year-unique-review-queue.ts`.
+- Added `data:review-era-year-unique` to `package.json`.
+- Registered the script in `SCRIPT_REGISTRY.md`.
+- Added `docs/archive/data-governance/ERA_SLUG_REMAINING_YEAR_UNIQUE_REVIEW.md`.
+- Generated ignored local reports:
+  - `reports/era-slug-remaining-year-unique-review.md`
+  - `reports/era-slug-remaining-year-unique-review.json`
+
+### Validation
+
+- Confirmed the theme regression test fails before the CSS fix and passes after the CSS fix.
+- Browser QA on `http://127.0.0.1:3031/ja/graduation`:
+  - page title: `卒業設計インスピレーション | Archistory`.
+  - `.graduation-system` exists.
+  - computed `--ui-surface`: `#fffdf8`.
+  - computed `--ui-surface-muted`: `#eee9de`.
+  - computed background image: `linear-gradient(rgb(255, 253, 248) 0%, rgb(247, 244, 237) 48%, rgb(241, 236, 226) 100%)`.
+  - console warnings/errors: 0.
+- Ran `npm run data:review-era-year-unique`: 23 candidates.
+- Remaining year-unique queue split:
+  - 3 `historical-date-review`.
+  - 6 `postmodern-style-holdout`.
+  - 6 `postmodern-weak-identity`.
+  - 8 `contemporary-identity-cleanup`.
+  - 0 `unexpected-year-unique`.
+
+### Remaining Risk
+
+- This round deliberately does not write Supabase and does not create a v19 migration.
+- The 23 remaining `year-unique` records are not safe as a single batch; they need identity, date/phase, or taxonomy decisions first.
+- The browser QA was local; production still needs deployment and smoke testing after commit.
+
+### Rollback Scope
+
+- `src/app/globals.css`
+- `tests/unit/graduation-theme.test.ts`
+- `scripts/build-era-remaining-year-unique-review-queue.ts`
+- `package.json`
+- `SCRIPT_REGISTRY.md`
+- `docs/archive/data-governance/ERA_SLUG_REMAINING_YEAR_UNIQUE_REVIEW.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Run the full verification set, commit, push, deploy to production, then smoke-test `/ja/graduation` and rerun the era planning checks.
+
 ## 2026-07-09 - Postmodern V18 Apply And Verification
 
 ### Intent
