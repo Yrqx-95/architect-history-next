@@ -2,6 +2,74 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Era Weak Identity Cleanup Review
+
+### Intent
+
+- Continue the era cleanup after the remaining `year-unique` queue showed that the next blocker is weak building identity, not era range logic.
+- Keep the work read-only until display names, slugs, countries, and archive scope are reviewed.
+
+### Changes
+
+- Added `scripts/build-era-identity-cleanup-review.ts`.
+- Added `tests/unit/era-identity-cleanup.test.ts`.
+- Added `data:review-era-identity` to `package.json`.
+- Registered the script in `SCRIPT_REGISTRY.md`.
+- Added `docs/archive/data-governance/ERA_IDENTITY_CLEANUP_REVIEW.md`.
+- Added `db/migrations/v19-normalize-new-orleans-rotterdam-identity-era.sql`.
+- Applied Supabase migration `normalize_new_orleans_rotterdam_identity_era`.
+- Added `docs/archive/data-governance/ERA_IDENTITY_NEW_ORLEANS_ROTTERDAM_WRITE_REPORT.md`.
+- Generated ignored local reports:
+  - `reports/era-identity-cleanup-review.md`
+  - `reports/era-identity-cleanup-review.json`
+
+### Validation
+
+- Confirmed the new identity cleanup unit test fails before the script exists and passes after implementation.
+- Queried Supabase for the 14 weak-identity records from the remaining `year-unique` queue.
+- Fetched Wikidata labels, descriptions, Commons categories, country, location, architect, type, inception, and coordinate facts for each row's `wikidata_id`.
+- Ran `npm run data:review-era-identity` before write: 14 candidates.
+- Confirmed `new-orleans-rotterdam` had no slug collision.
+- Verified the written record after migration:
+  - `slug`: `new-orleans-rotterdam`.
+  - `name_en`: `New Orleans (Rotterdam)`.
+  - `country_code`: `NL`.
+  - `era_slug`: `contemporary`.
+  - matching `building_eras` row present.
+- Supabase after write:
+  - `buildings.era_slug`: 409 filled, 466 missing, 875 total.
+  - `building_eras`: 409 rows.
+- Ran `npm run data:review-era-identity` after write: 13 candidates remain.
+- Ran `npm run data:review-era-year-unique`: 22 candidates remain.
+- Ran `npm run data:plan-eras`: 343 `missing-year`, 101 `year-overlap`, 22 `year-unique`.
+- Ran `npm run data:audit`: 0 errors, 888 warnings, 2490 info, 3378 total.
+- Ran `npm run test:unit`: 4 files, 10 tests passed.
+- Ran `npm run typecheck`: passed.
+- Ran `npm run lint`: passed.
+- Ran `npm run build`: passed, 4192 static pages generated.
+- Ran `git diff --check`: passed.
+
+### Remaining Risk
+
+- Several Wikidata records still lack English labels; Commons category names are useful hints but should not be treated as final display copy without review.
+- One record is described as public artwork/infrastructure, so archive scope should be decided before assigning any era metadata.
+- Only the high-confidence `new-orleans` correction was written; the other 13 weak identity records remain intentionally unassigned.
+
+### Rollback Scope
+
+- `scripts/build-era-identity-cleanup-review.ts`
+- `tests/unit/era-identity-cleanup.test.ts`
+- `db/migrations/v19-normalize-new-orleans-rotterdam-identity-era.sql`
+- `package.json`
+- `SCRIPT_REGISTRY.md`
+- `docs/archive/data-governance/ERA_IDENTITY_CLEANUP_REVIEW.md`
+- `docs/archive/data-governance/ERA_IDENTITY_NEW_ORLEANS_ROTTERDAM_WRITE_REPORT.md`
+- this `docs/WORKLOG.md` entry
+
+### Next Step
+
+- Review the 4 `commons-name-candidate` records manually before preparing any additional identity migration.
+
 ## 2026-07-09 - Graduation Warm Background And Remaining Year-Unique Review
 
 ### Intent

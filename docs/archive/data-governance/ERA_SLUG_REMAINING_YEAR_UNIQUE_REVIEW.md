@@ -1,6 +1,6 @@
 # Era Slug Remaining Year-Unique Review
 
-Generated: 2026-07-09T00:34:58.917Z
+Generated: 2026-07-09T03:36:25.369Z
 
 ## Scope
 
@@ -16,7 +16,7 @@ Generated: 2026-07-09T00:34:58.917Z
 | historical-date-review | 3 |
 | postmodern-style-holdout | 6 |
 | postmodern-weak-identity | 6 |
-| contemporary-identity-cleanup | 8 |
+| contemporary-identity-cleanup | 7 |
 | unexpected-year-unique | 0 |
 
 ## Summary By Candidate Era
@@ -24,7 +24,7 @@ Generated: 2026-07-09T00:34:58.917Z
 | Candidate era | Count |
 |---|---:|
 | postmodern | 12 |
-| contemporary | 8 |
+| contemporary | 7 |
 | early-modern | 1 |
 | industrial-revolution | 1 |
 | post-war | 1 |
@@ -51,7 +51,6 @@ Generated: 2026-07-09T00:34:58.917Z
 | contemporary-identity-cleanup | q136394553 | Q136394553 | 2001 | contemporary | mario-botta |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
 | contemporary-identity-cleanup | q134893563 | Q134893563 | 2004 | contemporary | alvaro-siza-vieira |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
 | contemporary-identity-cleanup | q125679066 | Q125679066 | 2005 | contemporary | bernard-tschumi |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
-| contemporary-identity-cleanup | new-orleans | New Orleans | 2007 | contemporary | alvaro-siza-vieira |  |  | Name/slug identifies a place rather than a clear building record; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
 | contemporary-identity-cleanup | q3412221 | Q3412221 | 2007 | contemporary | jean-philippe-vassal |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
 | contemporary-identity-cleanup | q123517303 | Q123517303 | 2008 | contemporary | eduardo-souto-de-moura |  |  | Wikidata-style placeholder slug; keep for identity cleanup before era assignment. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
 | contemporary-identity-cleanup | (missing slug) | 耶稣堂 (圣塞瓦斯蒂安) | 2011 | contemporary | rafael-moneo |  |  | Missing slug; cannot safely write era metadata until the record has a stable slug. | Fix identity/slug first; do not hide malformed records inside an era normalization batch. |
