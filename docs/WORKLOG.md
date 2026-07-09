@@ -2,6 +2,42 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-09 - Graduation Background Rollback And Era Holdout Review
+
+### Intent
+
+- Restore the graduation module background to the earlier civic gray/green palette.
+- Continue the remaining era cleanup without forcing the last historical-date records into misleading chronological eras.
+- Preserve the evidence for why no v23 Supabase era write was produced in this pass.
+
+### Changes
+
+- Reverted `.graduation-system` in `src/app/globals.css` from the warm archive palette back to the earlier civic gray palette.
+- Updated `tests/unit/graduation-theme.test.ts` to protect the restored graduation palette.
+- Updated `scripts/build-era-remaining-year-unique-review-queue.ts` so the three historical-date records are source-backed holdouts.
+- Regenerated `docs/archive/data-governance/ERA_SLUG_REMAINING_YEAR_UNIQUE_REVIEW.md`.
+
+### Source-Backed Decisions
+
+- `fondazione-querini-stampalia`: keep unassigned. The 1869 date is the institution/foundation chronology, while the Carlo Scarpa architectural intervention is 1959-1963.
+- `cleveland-museum-of-art-building`: keep unassigned. This is a thin companion/duplicate; canonical `cleveland-museum-of-art` already carries `early-modern`.
+- `swedish-centre-for-architecture-and`: keep unassigned. 1962 is the institution founding, while Rafael Moneo belongs to the 1991 competition / 1998 Skeppsholmen complex.
+
+### Validation
+
+- Ran `npm run data:review-era-year-unique`: 9 candidates remain, now documented as 3 source-backed historical-date holdouts and 6 postmodern style holdouts.
+
+### Remaining Risk
+
+- No Supabase data changed in this pass.
+- The remaining 6 postmodern-style holdouts still need vocabulary/taxonomy review before any era write.
+- The three historical-date holdouts may need a future duplicate/entity model, not just an era assignment.
+
+### Next Step
+
+- Verify the graduation page visually after local build.
+- Then run the normal release gates and deploy the UI/report-only change.
+
 ## 2026-07-09 - Era Archive Scope Reviewed Write
 
 ### Intent

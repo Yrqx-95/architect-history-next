@@ -42,6 +42,13 @@ type ReviewItem = {
   style_slugs: string[]
 }
 
+type HistoricalDateFinding = {
+  slug: string
+  finding: string
+  source: string
+  url: string
+}
+
 const REPORT_DIR = ensureReportDir()
 const REPORT_JSON = path.join(REPORT_DIR, 'era-slug-remaining-year-unique-review.json')
 const REPORT_MD = path.join(REPORT_DIR, 'era-slug-remaining-year-unique-review.md')
@@ -49,12 +56,36 @@ const ARCHIVE_REPORT = path.join(ROOT, 'docs/archive/data-governance/ERA_SLUG_RE
 
 const HISTORICAL_DATE_REVIEW: Record<string, string> = {
   'fondazione-querini-stampalia':
-    'Current year_start points to the institution/building chronology rather than the Scarpa intervention most readers will expect; review date meaning before assigning industrial-revolution.',
+    'Source-backed holdout: 1869 points to the foundation/institution chronology, while the Carlo Scarpa architectural intervention belongs to 1959-1963; do not assign industrial-revolution to the Scarpa reading.',
   'cleveland-museum-of-art-building':
-    'Candidate era is mechanically clear, but architect metadata is missing; review whether 1913 is the intended building phase before assigning early-modern.',
+    'Source-backed holdout: 1913 points to the institution/founding, while the Hubbell & Benes building opened in 1916 and the canonical cleveland-museum-of-art record already carries early-modern.',
   'swedish-centre-for-architecture-and':
-    'Current architect/year pairing looks suspicious for this institution; review identity, architect, and building phase before assigning post-war.',
+    'Source-backed holdout: 1962 points to the museum institution, while Rafael Moneo belongs to the 1991 competition / 1998 Skeppsholmen museum complex; do not assign post-war from the mixed record.',
 }
+
+const HISTORICAL_DATE_FINDINGS: HistoricalDateFinding[] = [
+  {
+    slug: 'fondazione-querini-stampalia',
+    finding:
+      'The official Fondazione page says the foundation has promoted its mission since 1869, but its architecture page separately dates Carlo Scarpa redesigning the ground floor and garden to 1959-1963.',
+    source: 'Fondazione Querini Stampalia, Architecture',
+    url: 'https://www.querinistampalia.org/en/category-collection/architecture/',
+  },
+  {
+    slug: 'cleveland-museum-of-art-building',
+    finding:
+      'The Cleveland Museum of Art article identifies Benjamin S. Hubbell and Dominick W. Benes as architects of the Cleveland Museum of Art (1916); the canonical cleveland-museum-of-art record already has early-modern.',
+    source: 'Cleveland Museum of Art, Cultural Visionary',
+    url: 'https://www.clevelandart.org/articles/cultural-visonary',
+  },
+  {
+    slug: 'swedish-centre-for-architecture-and',
+    finding:
+      'ArkDes dates the museum founding to 1962, Rafael Moneo winning the international competition to 1991, and the new Skeppsholmen buildings to 1998.',
+    source: 'ArkDes, The history of ArkDes',
+    url: 'https://arkdes.se/en/about/the-history-of-arkdes/',
+  },
+]
 
 const POSTMODERN_STYLE_HOLDOUT: Record<string, string> = {
   'national-assembly-dhaka':
@@ -233,6 +264,20 @@ function markdownReport(report: {
     )
   }
 
+  const historicalFindings = HISTORICAL_DATE_FINDINGS.filter(finding =>
+    report.items.some(item => item.slug === finding.slug)
+  )
+  if (historicalFindings.length > 0) {
+    lines.push('', '## Source-Backed Historical Date Findings', '')
+    lines.push('| Building | Finding | Source |')
+    lines.push('|---|---|---|')
+    for (const item of historicalFindings) {
+      lines.push(
+        `| ${item.slug} | ${item.finding.replaceAll('|', '\\|')} | [${item.source.replaceAll('|', '\\|')}](${item.url}) |`
+      )
+    }
+  }
+
   lines.push('', '## Recommended Next Step', '')
   lines.push('- Do not auto-write this queue as one batch.')
   const identityCleanupCount =
@@ -243,7 +288,7 @@ function markdownReport(report: {
   } else {
     lines.push('- No identity cleanup records remain in this review snapshot.')
   }
-  lines.push('- Review `historical-date-review` records against project phase/year semantics before assigning any era.')
+  lines.push('- Treat `historical-date-review` as source-backed holdouts, not as ready era writes.')
   lines.push('- Keep `postmodern-style-holdout` separate from chronological batch work until the era/style vocabulary is settled.')
   lines.push('')
 
