@@ -7941,6 +7941,14 @@ If rejected, revert only:
 - The research list currently lives only in the current browser. It will not sync across devices; this is intentional until there is evidence that account-based sync is worth the added complexity.
 - The content evidence gap remains separate: quantitative issue evidence, precise candidate-site data, and plan/section drawings still need source verification and should not be filled with inferred values.
 - Recommended next step: use the current research-list flow for several real graduation-topic sessions, then improve only the parts users repeatedly leave empty or misunderstand.
+
+### Production Result
+
+- Commit: `bf7625e feat: add graduation research list`.
+- Vercel production deployment: `dpl_6iZFNTD4dQcL8qZQ1mZiG7GVnBDB`.
+- Production URL: `https://archistory.app`.
+- Production smoke test passed on `/zh/graduation/issues/ISSUE-001` and `/zh/graduation/research`.
+- Save, drawer, reload persistence, and full-list rendering passed with console warnings/errors `0`.
   - hydration mismatch after stable option sorting: `0`
 - Passed interaction:
   - selecting `多文化` showed `表示 4 · 公開済み`
