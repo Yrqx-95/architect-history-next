@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Children, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { Children, createContext, useContext, useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import { graduationIssueGuides, isPublicGraduationCase, type GraduationBrief, type GraduationCandidateLocation, type GraduationCase, type GraduationIssue, type GraduationIssueGuide, type GraduationLocalizedList, type GraduationLocalizedText, type GraduationProgram, type GraduationSiteType } from '@/lib/graduation'
 import { proxySrc } from '@/lib/proxy-image'
 
@@ -16,7 +17,35 @@ type Props = {
   brief: GraduationBrief
 }
 
-type Section = 'home' | 'issues' | 'programs' | 'sites' | 'cases' | 'random' | 'brief'
+type Section = 'home' | 'issues' | 'programs' | 'sites' | 'cases' | 'random' | 'brief' | 'research'
+
+type GraduationResearchState = {
+  issueId: string | null
+  siteId: string | null
+  caseIds: string[]
+  nextStep: string
+}
+
+type GraduationResearchContextValue = {
+  state: GraduationResearchState
+  drawerOpen: boolean
+  setDrawerOpen: (open: boolean) => void
+  saveIssue: (id: string) => void
+  saveSite: (id: string) => void
+  toggleCase: (id: string) => void
+  setNextStep: (value: string) => void
+  clear: () => void
+}
+
+const emptyResearchState: GraduationResearchState = {
+  issueId: null,
+  siteId: null,
+  caseIds: [],
+  nextStep: '',
+}
+
+const researchStorageKey = 'archistory:graduation-research:v1'
+const GraduationResearchContext = createContext<GraduationResearchContextValue | null>(null)
 
 const labels = {
   zh: {
@@ -446,6 +475,64 @@ function issueDisplayCases(issue: GraduationIssue, directCases: GraduationCase[]
   return [...directCases, ...supplemental, ...fallback].slice(0, Math.max(8, directCases.length))
 }
 
+function useGraduationResearch() {
+  const value = useContext(GraduationResearchContext)
+  if (!value) throw new Error('Graduation research controls must be used inside the provider')
+  return value
+}
+
+function GraduationResearchProvider({ children }: { children: ReactNode }) {
+  const [state, setState] = useState<GraduationResearchState>(emptyResearchState)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    queueMicrotask(() => {
+      if (!active) return
+      try {
+        const saved = window.localStorage.getItem(researchStorageKey)
+        if (saved) {
+          const parsed = JSON.parse(saved) as Partial<GraduationResearchState>
+          setState({
+            issueId: typeof parsed.issueId === 'string' ? parsed.issueId : null,
+            siteId: typeof parsed.siteId === 'string' ? parsed.siteId : null,
+            caseIds: Array.isArray(parsed.caseIds) ? parsed.caseIds.filter((id): id is string => typeof id === 'string').slice(0, 6) : [],
+            nextStep: typeof parsed.nextStep === 'string' ? parsed.nextStep : '',
+          })
+        }
+      } catch {
+        window.localStorage.removeItem(researchStorageKey)
+      } finally {
+        setHydrated(true)
+      }
+    })
+    return () => { active = false }
+  }, [])
+
+  useEffect(() => {
+    if (hydrated) window.localStorage.setItem(researchStorageKey, JSON.stringify(state))
+  }, [hydrated, state])
+
+  const value: GraduationResearchContextValue = {
+    state,
+    drawerOpen,
+    setDrawerOpen,
+    saveIssue: id => setState(current => ({ ...current, issueId: current.issueId === id ? null : id })),
+    saveSite: id => setState(current => ({ ...current, siteId: current.siteId === id ? null : id })),
+    toggleCase: id => setState(current => ({
+      ...current,
+      caseIds: current.caseIds.includes(id)
+        ? current.caseIds.filter(caseId => caseId !== id)
+        : [...current.caseIds, id].slice(-6),
+    })),
+    setNextStep: nextStep => setState(current => ({ ...current, nextStep })),
+    clear: () => setState(emptyResearchState),
+  }
+
+  return <GraduationResearchContext.Provider value={value}>{children}</GraduationResearchContext.Provider>
+}
+
 export default function GraduationInspirationApp({ lang, slug, issues, sites, cases, programs, brief }: Props) {
   const copy = getCopy(lang)
   const contentLang = lang === 'ja' || lang === 'en' ? lang : 'zh'
@@ -455,7 +542,15 @@ export default function GraduationInspirationApp({ lang, slug, issues, sites, ca
   const siteMap = useMemo(() => new Map(sites.map(site => [site.id, site])), [sites])
   const caseMap = useMemo(() => new Map(cases.map(item => [item.id, item])), [cases])
   const issueMap = useMemo(() => new Map(issues.map(issue => [issue.id, issue])), [issues])
-  const frame = (node: ReactNode) => <div className="graduation-system">{node}</div>
+  const frame = (node: ReactNode) => (
+    <GraduationResearchProvider>
+      <div className="graduation-system">
+        <ResearchBar prefix={prefix} />
+        {node}
+        <ResearchDrawer prefix={prefix} issues={issues} sites={sites} cases={cases} />
+      </div>
+    </GraduationResearchProvider>
+  )
 
   if (section === 'issues' && detailId) {
     const issue = issues.find(item => item.id === detailId)
@@ -483,7 +578,148 @@ export default function GraduationInspirationApp({ lang, slug, issues, sites, ca
   if (section === 'cases') return frame(<ListPage copy={copy} prefix={prefix} type="cases" issues={issues} sites={sites} cases={cases} />)
   if (section === 'random') return frame(<RandomPage copy={copy} prefix={prefix} issues={issues} sites={sites} cases={cases} siteMap={siteMap} caseMap={caseMap} />)
   if (section === 'brief') return frame(<BriefPage copy={copy} prefix={prefix} markdown={briefMarkdown(brief, contentLang)} />)
+  if (section === 'research') return frame(<ResearchPage copy={copy} prefix={prefix} issueMap={issueMap} siteMap={siteMap} caseMap={caseMap} />)
   return frame(<HomePage copy={copy} prefix={prefix} issues={issues} programs={programs} cases={cases} />)
+}
+
+function ResearchBar({ prefix }: { prefix: string }) {
+  const lang = langFromPrefix(prefix)
+  const { state, drawerOpen, setDrawerOpen } = useGraduationResearch()
+  const count = Number(Boolean(state.issueId)) + Number(Boolean(state.siteId)) + state.caseIds.length
+
+  return (
+    <div className="graduation-research-bar flex min-h-14 items-center justify-between border-b border-subtle">
+      <p className="hidden text-xs text-muted sm:block">
+        {localizedUiText(lang, '把一个问题、一个场地和少量案例收在一起。', 'Keep one issue, one site, and a few cases together.', '一つの課題、一つの敷地、少数の事例をまとめます。')}
+      </p>
+      <button
+        type="button"
+        className="ml-auto inline-flex min-h-10 items-center gap-2 border-b border-default text-sm font-semibold text-primary transition-colors hover:border-[color:var(--ui-accent)] hover:text-accent"
+        onClick={() => setDrawerOpen(!drawerOpen)}
+        aria-expanded={drawerOpen}
+        aria-controls="graduation-research-drawer"
+      >
+        <span>{localizedUiText(lang, '研究清单', 'Research list', '研究リスト')}</span>
+        <span className="font-mono text-xs text-muted">{count}</span>
+      </button>
+    </div>
+  )
+}
+
+function ResearchDrawer({ prefix, issues, sites, cases }: {
+  prefix: string
+  issues: GraduationIssue[]
+  sites: GraduationSiteType[]
+  cases: GraduationCase[]
+}) {
+  const lang = langFromPrefix(prefix)
+  const { state, drawerOpen, setDrawerOpen } = useGraduationResearch()
+  const issue = issues.find(item => item.id === state.issueId)
+  const site = sites.find(item => item.id === state.siteId)
+  const selectedCases = state.caseIds.map(id => cases.find(item => item.id === id)).filter(Boolean) as GraduationCase[]
+  const count = Number(Boolean(issue)) + Number(Boolean(site)) + selectedCases.length
+  const nextStep = state.nextStep.trim() || localizedUiText(
+    lang,
+    issue && !site ? '下一步：从推荐场地里选一个具体地点。' : site && selectedCases.length === 0 ? '下一步：选两个案例比较空间策略。' : '下一步：把问题、场地和案例整理成一页调查笔记。',
+    issue && !site ? 'Next: choose one specific location from the suggested sites.' : site && selectedCases.length === 0 ? 'Next: choose two cases and compare their spatial strategies.' : 'Next: turn the issue, site, and cases into a one-page research note.',
+    issue && !site ? '次：推奨敷地から具体的な場所を一つ選ぶ。' : site && selectedCases.length === 0 ? '次：二つの事例を選び、空間戦略を比較する。' : '次：課題、敷地、事例を一枚の調査メモにまとめる。'
+  )
+
+  useEffect(() => {
+    if (!drawerOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setDrawerOpen(false)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    document.body.classList.add('graduation-drawer-open')
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.classList.remove('graduation-drawer-open')
+    }
+  }, [drawerOpen, setDrawerOpen])
+
+  if (!drawerOpen) return null
+
+  return createPortal(
+    <>
+      <button className="graduation-research-backdrop" type="button" aria-label={localizedUiText(lang, '关闭研究清单', 'Close research list', '研究リストを閉じる')} onClick={() => setDrawerOpen(false)} />
+      <aside id="graduation-research-drawer" className="graduation-research-drawer graduation-research-theme" role="dialog" aria-modal="true" aria-labelledby="graduation-research-title">
+        <header className="flex items-start justify-between gap-6 border-b border-subtle pb-5">
+          <div>
+            <p className="eyebrow">{localizedUiText(lang, '当前研究', 'Current research', '現在の研究')}</p>
+            <h2 id="graduation-research-title" className="mt-2 text-2xl font-semibold text-primary">
+              {localizedUiText(lang, '研究清单', 'Research list', '研究リスト')} · {count}
+            </h2>
+          </div>
+          <button type="button" className="min-h-10 min-w-10 text-xl text-muted hover:text-primary" onClick={() => setDrawerOpen(false)} aria-label={localizedUiText(lang, '关闭', 'Close', '閉じる')}>x</button>
+        </header>
+
+        {count === 0 ? (
+          <div className="py-8">
+            <p className="text-base font-semibold text-primary">{localizedUiText(lang, '清单还是空的', 'Your list is empty', 'リストはまだ空です')}</p>
+            <p className="mt-3 text-sm leading-7 text-secondary">{localizedUiText(lang, '打开问题、场地或案例详情，把真正有用的内容加入这里。', 'Open an issue, site, or case and save only what is useful.', '課題、敷地、事例の詳細から、必要なものだけ追加します。')}</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-[color:var(--ui-border-subtle)]">
+            <section className="py-6">
+              <h3 className="text-xs font-semibold text-muted">{localizedUiText(lang, '当前方向', 'Current direction', '現在の方向')}</h3>
+              <div className="mt-4 space-y-4">
+                {issue && <ResearchDrawerLink href={`${prefix}/issues/${issue.id}`} label={localizedUiText(lang, '问题', 'Issue', '課題')} value={issueTitle(issue, lang)} onClick={() => setDrawerOpen(false)} />}
+                {site && <ResearchDrawerLink href={`${prefix}/sites/${site.id}`} label={localizedUiText(lang, '场地', 'Site', '敷地')} value={siteName(site, lang)} onClick={() => setDrawerOpen(false)} />}
+              </div>
+            </section>
+            {selectedCases.length > 0 && (
+              <section className="py-6">
+                <h3 className="text-xs font-semibold text-muted">{localizedUiText(lang, '参考案例', 'Reference cases', '参考事例')}</h3>
+                <div className="mt-4 divide-y divide-[color:var(--ui-border-subtle)]">
+                  {selectedCases.slice(0, 2).map(item => (
+                    <Link key={item.id} href={`${prefix}/cases/${item.id}`} className="block py-3 text-sm font-medium text-primary transition-colors hover:text-accent" onClick={() => setDrawerOpen(false)}>{caseName(item, lang)}</Link>
+                  ))}
+                </div>
+                {selectedCases.length > 2 && <p className="mt-2 text-xs text-muted">{localizedUiText(lang, `另 ${selectedCases.length - 2} 个`, `${selectedCases.length - 2} more`, `ほか ${selectedCases.length - 2} 件`)}</p>}
+              </section>
+            )}
+            <section className="py-6">
+              <h3 className="text-xs font-semibold text-muted">{localizedUiText(lang, '下一步', 'Next step', '次の一歩')}</h3>
+              <p className="mt-3 text-sm leading-7 text-secondary">{nextStep}</p>
+            </section>
+          </div>
+        )}
+
+        <Link href={`${prefix}/research`} className="mt-auto flex min-h-12 items-center justify-between border-t border-default pt-5 text-sm font-semibold text-primary transition-colors hover:text-accent" onClick={() => setDrawerOpen(false)}>
+          <span>{localizedUiText(lang, '查看完整研究清单', 'Open full research list', '研究リストを開く')}</span>
+          <span aria-hidden="true">→</span>
+        </Link>
+      </aside>
+    </>,
+    document.body
+  )
+}
+
+function ResearchDrawerLink({ href, label, value, onClick }: { href: string; label: string; value: string; onClick: () => void }) {
+  return (
+    <Link href={href} className="group grid grid-cols-[4rem_minmax(0,1fr)] gap-3" onClick={onClick}>
+      <span className="text-xs text-muted">{label}</span>
+      <span className="text-sm font-semibold leading-6 text-primary transition-colors group-hover:text-accent">{value}</span>
+    </Link>
+  )
+}
+
+function ResearchSaveButton({ kind, id, prefix }: { kind: 'issue' | 'site' | 'case'; id: string; prefix: string }) {
+  const lang = langFromPrefix(prefix)
+  const { state, saveIssue, saveSite, toggleCase } = useGraduationResearch()
+  const selected = kind === 'issue' ? state.issueId === id : kind === 'site' ? state.siteId === id : state.caseIds.includes(id)
+  const onClick = () => {
+    if (kind === 'issue') saveIssue(id)
+    else if (kind === 'site') saveSite(id)
+    else toggleCase(id)
+  }
+
+  return (
+    <button type="button" className={`inline-flex min-h-11 items-center border px-4 text-sm font-semibold transition-colors ${selected ? 'border-[color:var(--ui-text-primary)] bg-[color:var(--ui-text-primary)] text-[color:var(--ui-surface)]' : 'border-default text-primary hover:border-[color:var(--ui-accent)] hover:text-accent'}`} onClick={onClick} aria-pressed={selected}>
+      {selected ? localizedUiText(lang, '已加入研究清单', 'Saved to research list', '研究リストに追加済み') : localizedUiText(lang, '加入研究清单', 'Save to research list', '研究リストに追加')}
+    </button>
+  )
 }
 
 function GraduationHero({ copy, prefix, title, body, actions, aside }: {
@@ -1010,6 +1246,7 @@ function IssueDetail({ copy, prefix, issue, cases, siteMap, caseMap }: {
       title={issueTitle(issue, lang)}
       summary={issueSummary(issue, lang)}
       backHref={`${prefix}/issues`}
+      actions={<ResearchSaveButton kind="issue" id={issue.id} prefix={prefix} />}
       meta={[
         { label: copy.recommendedSites, value: String(relatedSites.length) },
         { label: copy.relatedCases, value: String(displayCases.length) },
@@ -1219,6 +1456,7 @@ function SiteDetail({ copy, prefix, site, issues, cases }: {
       title={siteName(site, lang)}
       summary={siteReason(site, lang)}
       backHref={`${prefix}/sites`}
+      actions={<ResearchSaveButton kind="site" id={site.id} prefix={prefix} />}
       meta={[
         { label: copy.navIssues, value: String(relatedIssues.length) },
         { label: copy.relatedCases, value: String(relatedCases.length) },
@@ -1251,6 +1489,7 @@ function CaseDetail({ copy, prefix, item, issues }: {
       title={caseName(item, lang)}
       summary={caseConcept(item, lang)}
       backHref={`${prefix}/cases`}
+      actions={<ResearchSaveButton kind="case" id={item.id} prefix={prefix} />}
       meta={[
         { label: langAware(copy, '年份', 'Year', '年'), value: item.year ? String(item.year) : '-' },
         { label: langAware(copy, '地点', 'Location', '所在地'), value: caseLocation(item, lang) || '-' },
@@ -1376,6 +1615,125 @@ function RandomPage({ copy, prefix, issues, siteMap, caseMap }: {
   )
 }
 
+function ResearchPage({ copy, prefix, issueMap, siteMap, caseMap }: {
+  copy: Copy
+  prefix: string
+  issueMap: Map<string, GraduationIssue>
+  siteMap: Map<string, GraduationSiteType>
+  caseMap: Map<string, GraduationCase>
+}) {
+  const lang = langFromPrefix(prefix)
+  const { state, saveIssue, saveSite, toggleCase, setNextStep, clear } = useGraduationResearch()
+  const issue = state.issueId ? issueMap.get(state.issueId) : undefined
+  const site = state.siteId ? siteMap.get(state.siteId) : undefined
+  const selectedCases = state.caseIds.map(id => caseMap.get(id)).filter(Boolean) as GraduationCase[]
+  const count = Number(Boolean(issue)) + Number(Boolean(site)) + selectedCases.length
+  const exportResearch = () => {
+    const lines = [
+      `# ${localizedUiText(lang, '毕业设计研究清单', 'Graduation research list', '卒業設計研究リスト')}`,
+      '',
+      `## ${localizedUiText(lang, '当前方向', 'Current direction', '現在の方向')}`,
+      issue ? `- ${localizedUiText(lang, '问题', 'Issue', '課題')}: ${issueTitle(issue, lang)}` : '',
+      site ? `- ${localizedUiText(lang, '场地', 'Site', '敷地')}: ${siteName(site, lang)}` : '',
+      '',
+      `## ${localizedUiText(lang, '参考案例', 'Reference cases', '参考事例')}`,
+      ...selectedCases.map(item => `- ${caseName(item, lang)}${item.year ? ` (${item.year})` : ''}`),
+      '',
+      `## ${localizedUiText(lang, '下一步', 'Next step', '次の一歩')}`,
+      state.nextStep || '-',
+    ].filter((line, index, all) => line !== '' || all[index - 1] !== '')
+    downloadText('graduation-research.md', lines.join('\n'), 'text/markdown;charset=utf-8')
+  }
+
+  return (
+    <div className="space-y-10">
+      <GraduationHero
+        copy={copy}
+        prefix={prefix}
+        title={localizedUiText(lang, '我的研究清单', 'My research list', '研究リスト')}
+        body={localizedUiText(lang, '只保留一个问题、一个场地和少量案例，先把方向说清楚。', 'Keep one issue, one site, and a few cases so the direction stays clear.', '一つの課題、一つの敷地、少数の事例に絞り、方向を明確にします。')}
+        aside={(
+          <div>
+            <p className="text-xs font-medium text-muted">{localizedUiText(lang, '已保存', 'Saved', '保存済み')}</p>
+            <p className="mt-2 text-3xl font-semibold text-primary">{count}</p>
+          </div>
+        )}
+      />
+
+      {count === 0 ? (
+        <section className="border-y border-subtle py-10">
+          <h2 className="heading-section">{localizedUiText(lang, '还没有研究方向', 'No direction saved yet', '研究方向はまだありません')}</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-secondary">{localizedUiText(lang, '先从社会问题开始，打开详情后加入研究清单。', 'Start with a social issue, open its detail page, and save it.', 'まず社会課題を開き、詳細ページから研究リストに追加します。')}</p>
+          <div className="mt-6"><NavButton href={`${prefix}/issues`}>{copy.goIssues}</NavButton></div>
+        </section>
+      ) : (
+        <>
+          <section className="border-y border-subtle">
+            <ResearchPageRow
+              label={localizedUiText(lang, '问题', 'Issue', '課題')}
+              value={issue ? issueTitle(issue, lang) : localizedUiText(lang, '尚未选择', 'Not selected', '未選択')}
+              href={issue ? `${prefix}/issues/${issue.id}` : `${prefix}/issues`}
+              onRemove={issue ? () => saveIssue(issue.id) : undefined}
+              lang={lang}
+            />
+            <ResearchPageRow
+              label={localizedUiText(lang, '场地', 'Site', '敷地')}
+              value={site ? siteName(site, lang) : localizedUiText(lang, '尚未选择', 'Not selected', '未選択')}
+              href={site ? `${prefix}/sites/${site.id}` : `${prefix}/sites`}
+              onRemove={site ? () => saveSite(site.id) : undefined}
+              lang={lang}
+            />
+          </section>
+
+          <section>
+            <div className="flex items-end justify-between gap-4 border-b border-subtle pb-3">
+              <h2 className="heading-section">{localizedUiText(lang, '参考案例', 'Reference cases', '参考事例')}</h2>
+              <Link href={`${prefix}/cases`} className="text-xs font-semibold text-muted hover:text-accent">{copy.navCases} →</Link>
+            </div>
+            {selectedCases.length === 0 ? (
+              <p className="py-6 text-sm text-secondary">{localizedUiText(lang, '尚未选择案例。两个到三个就够了。', 'No cases selected. Two or three are enough.', '事例は未選択です。二、三件で十分です。')}</p>
+            ) : selectedCases.map(item => (
+              <ResearchPageRow key={item.id} label={item.id} value={caseName(item, lang)} href={`${prefix}/cases/${item.id}`} onRemove={() => toggleCase(item.id)} lang={lang} />
+            ))}
+          </section>
+
+          <section className="border-y border-subtle py-6">
+            <label className="block text-sm font-semibold text-primary" htmlFor="graduation-next-step">{localizedUiText(lang, '下一步', 'Next step', '次の一歩')}</label>
+            <textarea
+              id="graduation-next-step"
+              className="mt-4 min-h-28 w-full resize-y border border-default bg-[color:var(--ui-surface-raised)] p-4 text-sm leading-7 text-primary outline-none focus:border-[color:var(--ui-accent)]"
+              value={state.nextStep}
+              onChange={event => setNextStep(event.target.value)}
+              placeholder={localizedUiText(lang, '例如：周末去候选地点记录人流和空置空间。', 'For example: visit the candidate site and record movement and unused space.', '例：週末に候補地へ行き、人の流れと余白を記録する。')}
+            />
+          </section>
+
+          <div className="flex flex-wrap gap-4">
+            <ActionButton onClick={exportResearch}>{localizedUiText(lang, '下载研究笔记', 'Download research note', '研究メモをダウンロード')}</ActionButton>
+            <button type="button" className="min-h-10 border-b border-subtle text-xs font-medium text-muted hover:border-[color:var(--ui-text-primary)] hover:text-primary" onClick={clear}>{localizedUiText(lang, '清空清单', 'Clear list', 'リストを空にする')}</button>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
+function ResearchPageRow({ label, value, href, onRemove, lang }: {
+  label: string
+  value: string
+  href: string
+  onRemove?: () => void
+  lang: GraduationLanguage
+}) {
+  return (
+    <div className="grid gap-3 border-b border-subtle py-5 last:border-b-0 sm:grid-cols-[7rem_minmax(0,1fr)_auto] sm:items-center">
+      <span className="text-xs font-medium text-muted">{label}</span>
+      <Link href={href} className="text-base font-semibold leading-7 text-primary hover:text-accent">{value}</Link>
+      {onRemove && <button type="button" className="justify-self-start text-xs font-medium text-muted hover:text-primary sm:justify-self-end" onClick={onRemove}>{localizedUiText(lang, '移除', 'Remove', '削除')}</button>}
+    </div>
+  )
+}
+
 function BriefPage({ copy, prefix, markdown }: { copy: Copy; prefix: string; markdown: string }) {
   return (
     <DetailShell copy={copy} prefix={prefix} active="brief" title={copy.navBrief} summary={langAware(copy, '把课程要求翻成可执行清单。', 'Course requirements as an actionable checklist.', '課題要件を実行可能なリストへ。')} backHref={prefix}>
@@ -1391,7 +1749,7 @@ function BriefPage({ copy, prefix, markdown }: { copy: Copy; prefix: string; mar
   )
 }
 
-function DetailShell({ copy, prefix, active, title, summary, backHref, meta, children }: {
+function DetailShell({ copy, prefix, active, title, summary, backHref, meta, actions, children }: {
   copy: Copy
   prefix: string
   active: 'issues' | 'programs' | 'sites' | 'cases' | 'random' | 'brief'
@@ -1399,6 +1757,7 @@ function DetailShell({ copy, prefix, active, title, summary, backHref, meta, chi
   summary: string
   backHref: string
   meta?: DetailMeta[]
+  actions?: ReactNode
   children: ReactNode
 }) {
   return (
@@ -1408,6 +1767,7 @@ function DetailShell({ copy, prefix, active, title, summary, backHref, meta, chi
         prefix={prefix}
         title={title}
         body={summary}
+        actions={actions}
         aside={meta ? (
           <dl className="grid sm:grid-cols-3 lg:block">
             {meta.map((item, index) => (
@@ -1971,7 +2331,11 @@ function NotFound({ copy, prefix }: { copy: Copy; prefix: string }) {
 }
 
 function downloadJson(filename: string, data: unknown) {
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+  downloadText(filename, JSON.stringify(data, null, 2), 'application/json')
+}
+
+function downloadText(filename: string, content: string, type: string) {
+  const blob = new Blob([content], { type })
   const url = URL.createObjectURL(blob)
   const anchor = document.createElement('a')
   anchor.href = url

@@ -535,6 +535,69 @@ img { max-width: 100%; height: auto; }
   background: color-mix(in srgb, var(--ui-surface-muted) 56%, transparent);
 }
 
+.graduation-research-bar {
+  margin-bottom: 2rem;
+}
+
+.graduation-research-backdrop {
+  position: fixed;
+  inset: 3.5rem 0 0;
+  z-index: 70;
+  border: 0;
+  background: rgb(32 28 24 / 22%);
+}
+
+.graduation-research-theme {
+  --ui-surface: #fffdf8;
+  --ui-border: #cfc6b8;
+  --ui-border-subtle: #ddd6ca;
+  --ui-text-primary: #201c18;
+  --ui-text-secondary: #373029;
+  --ui-text-muted: #74685c;
+  --ui-accent: #8f4f30;
+}
+
+.dark .graduation-research-theme {
+  --ui-surface: #1a1815;
+  --ui-border: #51483e;
+  --ui-border-subtle: #352f29;
+  --ui-text-primary: #f3eee3;
+  --ui-text-secondary: #ded4c3;
+  --ui-text-muted: #a89a87;
+  --ui-accent: #c7885f;
+}
+
+.graduation-research-drawer {
+  position: fixed;
+  top: 3.5rem;
+  right: 0;
+  bottom: 0;
+  z-index: 71;
+  display: flex;
+  width: min(22rem, 100vw);
+  flex-direction: column;
+  overflow-y: auto;
+  border-left: 1px solid var(--ui-border);
+  padding: 1.5rem;
+  background: var(--ui-surface);
+  color: var(--ui-text-primary);
+}
+
+body.graduation-drawer-open {
+  overflow: hidden;
+}
+
+@media (max-width: 639px) {
+  .graduation-research-bar {
+    margin-bottom: 1.5rem;
+  }
+
+  .graduation-research-drawer {
+    width: 100vw;
+    border-left: 0;
+  }
+}
+
 /* ============================================================
    Prose Configuration — Long-form Architectural Reading
    ============================================================ */

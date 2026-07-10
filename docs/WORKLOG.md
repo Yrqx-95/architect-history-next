@@ -7908,6 +7908,39 @@ If rejected, revert only:
   - total `表示 100 · 公開済み`
   - detailed option counts: tag `49`, site `21`, program `4`
   - console warnings/errors: `0`
+
+## 2026-07-10 - Graduation Research List Simplification
+
+### Intent
+
+- Turn the approved simplified right-side research summary into working product code.
+- Reduce information density while keeping the graduation module visually consistent with the wider Archistory interface.
+- Keep the previously restored warm graduation background.
+
+### Changes
+
+- Added a local, login-free research list for one issue, one site, and up to six cases.
+- Added a single save/remove action to issue, site, and case detail pages.
+- Added a temporary desktop drawer and a full-width mobile drawer with only current direction, selected cases, next step, and one link to the full list.
+- Added `/[lang]/graduation/research` for editing selections, writing the next step, clearing the list, and downloading a Markdown research note.
+- Added the research route to static generation and a persistence-focused end-to-end test.
+- Kept the warm archive background tokens and gradient unchanged.
+
+### Validation
+
+- Passed: `npm run typecheck`.
+- Passed: `npm run lint`.
+- Passed: `npm run build`.
+- Passed: focused Playwright persistence flow.
+- Desktop Browser QA: drawer opens at `22rem`, hierarchy matches the simplified concept, and console warnings/errors are `0`.
+- Mobile Browser QA: `390 x 844`, drawer bounds `390 x 788` below the site header, document scroll width `390`, and console warnings/errors are `0`.
+- Design QA: `design-qa.md`, final result `passed`.
+
+### Risk And Next Step
+
+- The research list currently lives only in the current browser. It will not sync across devices; this is intentional until there is evidence that account-based sync is worth the added complexity.
+- The content evidence gap remains separate: quantitative issue evidence, precise candidate-site data, and plan/section drawings still need source verification and should not be filled with inferred values.
+- Recommended next step: use the current research-list flow for several real graduation-topic sessions, then improve only the parts users repeatedly leave empty or misunderstand.
   - hydration mismatch after stable option sorting: `0`
 - Passed interaction:
   - selecting `多文化` showed `表示 4 · 公開済み`

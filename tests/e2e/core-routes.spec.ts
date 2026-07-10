@@ -130,6 +130,24 @@ test.describe('core public routes', () => {
     expect(casesCsvText).toContain('CASE-100,Portland Japanese Garden Cultural Village')
   })
 
+  test('graduation research list persists a saved issue', async ({ page }) => {
+    await page.goto('/zh/graduation/issues/ISSUE-001')
+    await page.evaluate(() => window.localStorage.removeItem('archistory:graduation-research:v1'))
+    await page.reload()
+
+    await page.getByRole('button', { name: '加入研究清单' }).click()
+    await expect(page.getByRole('button', { name: /研究清单 1/ })).toBeVisible()
+    await page.reload()
+    await expect(page.getByRole('button', { name: /研究清单 1/ })).toBeVisible()
+
+    await page.getByRole('button', { name: /研究清单 1/ }).click()
+    await expect(page.getByRole('dialog', { name: /研究清单/ })).toContainText('独居高龄者与社区断裂')
+    await page.getByRole('link', { name: '查看完整研究清单' }).click()
+    await expect(page).toHaveURL(/\/zh\/graduation\/research/)
+    await expect(page.getByRole('heading', { name: '我的研究清单' })).toBeVisible()
+    await expect(page.getByText('独居高龄者与社区断裂')).toBeVisible()
+  })
+
   test('image proxy rejects untrusted domains and accepts trusted image domains', async ({ request }) => {
     const invalid = await request.get('/api/image-proxy?url=not-a-url')
     expect(invalid.status()).toBe(400)
