@@ -138,6 +138,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   return {
     title: t(lang, 'mapTitle'),
     description: t(lang, 'mapSub'),
+    robots: { index: false, follow: false },
   }
 }
 

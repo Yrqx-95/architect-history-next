@@ -1,13 +1,11 @@
-import Link from 'next/link'
 import { t } from '@/lib/i18n'
 
 interface SearchEmptyStateProps {
   lang: string
-  prefix: string
   mode: 'empty' | 'no-results'
 }
 
-export default function SearchEmptyState({ lang, prefix, mode }: SearchEmptyStateProps) {
+export default function SearchEmptyState({ lang, mode }: SearchEmptyStateProps) {
   const isNoResults = mode === 'no-results'
 
   return (
@@ -17,9 +15,13 @@ export default function SearchEmptyState({ lang, prefix, mode }: SearchEmptyStat
         {isNoResults ? t(lang, 'searchNoResultsHint') : t(lang, 'searchEmptyBody')}
       </p>
       {isNoResults && (
-        <Link href={`${prefix}/browse`} className="mt-5 inline-flex text-sm text-accent underline underline-offset-4 hover:text-primary">
-          {t(lang, 'browseCategory')}
-        </Link>
+        <p className="mt-5 text-sm text-muted">
+          {lang === 'en'
+            ? 'Use the archive entry points below if you want to browse instead.'
+            : lang === 'ja'
+              ? '下の入口からアーカイブを見ても大丈夫です。'
+              : '也可以直接从下面的档案入口继续。'}
+        </p>
       )}
     </div>
   )

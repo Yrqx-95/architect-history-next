@@ -1,9 +1,9 @@
-import type { BuildingWithCover } from '@/lib/types'
 import { NextRequest, NextResponse } from 'next/server'
-import { getArchitects, getBuildingsWithCovers } from '@/lib/data'
-import type { Architect } from '@/lib/types'
+import { getSearchIndex } from '@/lib/data'
+import type { SearchArchitect, SearchBuilding } from '@/lib/data'
 
 const QUERY_CACHE_TTL = 60_000
+const MAX_QUERY_LENGTH = 120
 const queryCache = new Map<string, { ts: number; data: SearchResponse }>()
 
 type SearchResponse = {
@@ -68,7 +68,7 @@ function sortByScore<T>(items: { item: T; score: number; tieBreaker: string }[])
     .map(result => result.item)
 }
 
-function toArchitectResult({ slug, name_zh, name_en, name_ja, birth_year, death_year, era_slug }: Architect) {
+function toArchitectResult({ slug, name_zh, name_en, name_ja, birth_year, death_year, era_slug }: SearchArchitect) {
   return {
     slug,
     name_zh,
@@ -83,7 +83,7 @@ function toArchitectResult({ slug, name_zh, name_en, name_ja, birth_year, death_
 function toBuildingResult({
   slug, name_zh, name_en, name_ja, year_start, city, country, country_code, type_slug,
   architect_slug, cover_url, cover_photographer, cover_license, cover_source_url,
-}: BuildingWithCover) {
+}: SearchBuilding) {
   return {
     slug,
     name_zh,
@@ -115,6 +115,9 @@ export async function GET(request: NextRequest) {
   if (!q) {
     return NextResponse.json({ architects: [], buildings: [] })
   }
+  if (q.length > MAX_QUERY_LENGTH) {
+    return NextResponse.json({ error: 'Query is too long' }, { status: 400 })
+  }
 
   const cacheKey = normalize(q)
   const cached = queryCache.get(cacheKey)
@@ -122,10 +125,7 @@ export async function GET(request: NextRequest) {
     return cachedResponse(cached.data)
   }
 
-  const [architects, buildings] = await Promise.all([
-    getArchitects(),
-    getBuildingsWithCovers(),
-  ])
+  const { architects, buildings } = await getSearchIndex()
   const architectNames = new Map(architects.map(architect => [
     architect.slug,
     [architect.name_en, architect.name_zh, architect.name_ja, architect.slug].filter(Boolean),

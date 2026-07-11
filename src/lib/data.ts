@@ -20,6 +20,7 @@ const cachedImageOverrides = localImageOverrides as Record<string, ImageOverride
 
 // Simple in-memory cache for the request lifecycle
 const cache = new Map<string, { data: unknown; ts: number }>()
+const pendingCache = new Map<string, Promise<unknown>>()
 const TTL = 300_000
 const FETCH_PAGE_SIZE = 500
 const FETCH_MAX_ATTEMPTS = 6
@@ -37,12 +38,20 @@ function isTransientSupabaseError(message: string) {
 async function cached<T>(key: string, fn: () => Promise<T>): Promise<T> {
   const entry = cache.get(key)
   if (entry && Date.now() - entry.ts < TTL) return entry.data as T
-  const data = await fn()
-  cache.set(key, { data, ts: Date.now() })
-  return data
+  const pending = pendingCache.get(key)
+  if (pending) return pending as Promise<T>
+
+  const request = fn().then(data => {
+    cache.set(key, { data, ts: Date.now() })
+    return data
+  }).finally(() => {
+    pendingCache.delete(key)
+  })
+  pendingCache.set(key, request)
+  return request
 }
 
-async function fetchAll<T>(table: string): Promise<T[]> {
+async function fetchAll<T>(table: string, select = '*'): Promise<T[]> {
   const supabase = createClient()
   const results: T[] = []
   let from = 0
@@ -51,7 +60,7 @@ async function fetchAll<T>(table: string): Promise<T[]> {
     let data: T[] | null = null
     let error: { message: string } | null = null
     for (let attempt = 0; attempt < FETCH_MAX_ATTEMPTS; attempt += 1) {
-      const response = await supabase.from(table).select('*').range(from, to)
+      const response = await supabase.from(table).select(select).range(from, to)
       data = (response.data as T[] | null) || null
       error = response.error ? { message: response.error.message } : null
       if (!error || !isTransientSupabaseError(error.message) || attempt === FETCH_MAX_ATTEMPTS - 1) break
@@ -160,6 +169,51 @@ export async function getBuildingsWithCovers(): Promise<BuildingWithCover[]> {
         cover_source_url: useOverride ? override?.cover_source_url || null : useImage ? image?.source_url as string || null : null,
       }
     })
+  })
+}
+
+export type SearchArchitect = Pick<Architect,
+  'slug' | 'name_zh' | 'name_en' | 'name_ja' | 'birth_year' | 'death_year' |
+  'era_slug' | 'nationalities' | 'style_slugs' | 'core_ideas'
+>
+
+export type SearchBuilding = Pick<Building,
+  'id' | 'slug' | 'name_zh' | 'name_en' | 'name_ja' | 'year_start' | 'year_end' |
+  'city' | 'country' | 'country_code' | 'type_slug' | 'architect_slug' | 'era_slug' |
+  'style_slugs' | 'description' | 'significance'
+> & Pick<BuildingWithCover, 'cover_url' | 'cover_photographer' | 'cover_license' | 'cover_source_url'>
+
+/** Compact search corpus: avoids hydrating full buildings and galleries on a search cache miss. */
+export async function getSearchIndex(): Promise<{ architects: SearchArchitect[]; buildings: SearchBuilding[] }> {
+  return cached('search-index-v1', async () => {
+    const supabase = createClient()
+    const [architects, buildings, images] = await Promise.all([
+      fetchAll<SearchArchitect>('architects', 'slug,name_zh,name_en,name_ja,birth_year,death_year,era_slug,nationalities,style_slugs,core_ideas'),
+      fetchAll<Pick<Building, 'id' | 'slug' | 'name_zh' | 'name_en' | 'name_ja' | 'year_start' | 'year_end' | 'city' | 'country' | 'country_code' | 'type_slug' | 'architect_slug' | 'era_slug' | 'style_slugs' | 'description' | 'significance'>>('buildings', 'id,slug,name_zh,name_en,name_ja,year_start,year_end,city,country,country_code,type_slug,architect_slug,era_slug,style_slugs,description,significance'),
+      supabase.from('images').select('building_id,url_original,photographer,license,source_url').eq('is_primary', true),
+    ])
+    if (images.error) throw new Error(`images: ${images.error.message}`)
+    const imageByBuilding = new Map<string, Record<string, unknown>>()
+    for (const image of images.data || []) imageByBuilding.set(image.building_id as string, image)
+
+    return {
+      architects,
+      buildings: buildings.map(building => {
+        const image = imageByBuilding.get(building.id)
+        const override = cachedImageOverrides[building.slug] || curatedImageOverrides[building.slug]
+        const overrideCoverUrl = isDisplayableImageUrl(override?.cover_url) ? override.cover_url : null
+        const imageCoverUrl = isDisplayableImageUrl(image?.url_original) ? image?.url_original as string : null
+        const useOverride = Boolean(overrideCoverUrl)
+        const useImage = !useOverride && Boolean(imageCoverUrl)
+        return {
+          ...building,
+          cover_url: overrideCoverUrl || imageCoverUrl || null,
+          cover_photographer: useOverride ? override?.cover_photographer || null : useImage ? image?.photographer as string || null : null,
+          cover_license: useOverride ? override?.cover_license || null : useImage ? image?.license as string || null : null,
+          cover_source_url: useOverride ? override?.cover_source_url || null : useImage ? image?.source_url as string || null : null,
+        }
+      }),
+    }
   })
 }
 

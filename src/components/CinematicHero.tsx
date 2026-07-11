@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 
 interface CinematicHeroProps {
   imageUrl: string | null
@@ -35,16 +34,11 @@ export default function CinematicHero({ imageUrl, imageAlt = '', children }: Cin
         <div className="absolute bottom-0 left-0 right-0 h-px bg-paper-100/50 dark:bg-charcoal-700/70" />
         <div className="absolute inset-4 border border-paper-100/12 dark:border-paper-100/8 sm:left-8 sm:right-8 sm:top-8 sm:bottom-8" />
 
-        <motion.div
-          className="absolute inset-0 flex items-end"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-        >
+        <div className="absolute inset-0 flex items-end">
           <div className="w-full max-w-7xl mx-auto px-8 pb-14 sm:px-8 sm:pb-20 lg:px-12">
             {children}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -7,14 +7,20 @@
 
 ## 🔴 高优先级（影响用户体验或数据正确性）
 
-### 1. 孤儿 style_slugs 仍阻断数据审计通过
+### 当前：Next.js 内嵌 PostCSS 的中等风险告警
+
+- **位置**：`next@16.2.6` 的传递依赖 `postcss`
+- **状态**：2026-07-10 `npm audit --omit=dev` 报告 2 个 moderate、0 high、0 critical。
+- **边界**：这是构建链风险，不是用户请求能直接触发的站内 API 漏洞；`npm audit fix --force` 没有给出安全的兼容修复路径。
+- **下一步**：单开一次受控 Next.js 升级，先在分支跑 `typecheck`、`lint`、全量 e2e 和生产构建，再更新生产版本。
+
+### 1. 历史：孤儿 style_slugs 曾阻断数据审计（当前已解除）
 
 - **位置**：Supabase `buildings.style_slugs` + `styles.slug`
-- **问题**：当前仍有 22 个 style assignments 指向不存在的 `styles.slug`
+- **问题**：2026-06 时曾有 22 个 style assignments 指向不存在的 `styles.slug`
 - **影响**：搜索、筛选、推荐和后续全文索引都会把错误 taxonomy 固化进去
 - **进展**：A 类已通过 `scripts/style-slug-aliases.json` 显式映射并执行 `npm run data:normalize-styles -- --write`；135 个建筑、191 条 assignment 已修正，并生成 `db/migrations/v5-normalize-style-slugs.sql`
-- **剩余**：B=7 个唯一值 / 17 条 assignment；C=4 个唯一值 / 5 条 assignment
-- **修复**：B 类先人工判断是否新增 `styles`；C 类逐个看建筑本身后决定删除、映射、新增 style 或修正文案
+- **当前状态**：2026-07-10 的 `npm run data:audit` 为 0 error。本条保留为数据迁移记录，不再视为发布阻断。
 
 ### 2. 部分旧数据仍用显示名作为 type_slug（2026-06-08 已修复）
 

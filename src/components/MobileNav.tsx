@@ -19,21 +19,29 @@ export default function MobileNav({ lang }: { lang: string }) {
   const prefix = `/${lang}`
   const title = lang === 'en' ? 'Menu' : lang === 'ja' ? 'メニュー' : '菜单'
   const searchLabel = lang === 'en' ? 'Search' : lang === 'ja' ? '検索' : '搜索'
-  const learnLabel = t(lang, 'learn')
-  const archiveToolsLabel = lang === 'en' ? 'Archive tools' : lang === 'ja' ? '資料ツール' : '资料工具'
+  const archiveLabel = t(lang, 'browse')
+  const learnLabel = lang === 'en' ? 'Study' : lang === 'ja' ? '学ぶ' : '学习'
+  const studyToolsLabel = lang === 'en' ? 'Study tools' : lang === 'ja' ? '学習ツール' : '学习工具'
+  const archiveToolsLabel = lang === 'en' ? 'Archive paths' : lang === 'ja' ? '資料館の入口' : '档案入口'
   const languageLabel = lang === 'en' ? 'Language' : lang === 'ja' ? '言語' : '语言'
   const settingsLabel = lang === 'en' ? 'Settings' : lang === 'ja' ? '設定' : '设置'
   const scriptLabel = lang === 'zh' ? '中文显示' : ''
   const primaryLinks = [
-    { href: '/browse', label: learnLabel },
-    { href: '/browse/buildings', label: t(lang, 'buildings') },
-    { href: '/timeline', label: t(lang, 'timeline') },
     { href: '/search', label: t(lang, 'search') },
+    { href: '/browse', label: archiveLabel },
+    { href: '/graduation', label: t(lang, 'graduation') },
+    { href: '/code', label: learnLabel },
+  ]
+  const archiveLinks = [
+    { href: '/browse/buildings', label: t(lang, 'buildings') },
+    { href: '/browse/architects', label: t(lang, 'architects') },
+    { href: '/browse/style', label: t(lang, 'styles') },
+    { href: '/browse/country', label: lang === 'en' ? 'Countries / Regions' : lang === 'ja' ? '国・地域' : '国家与地区' },
   ]
   const learnLinks = [
-    { href: '/graduation', label: t(lang, 'graduation') },
-    { href: '/code', label: t(lang, 'code') },
     { href: '/glossary', label: t(lang, 'glossary') },
+    { href: '/timeline', label: t(lang, 'timeline') },
+    { href: '/graph', label: lang === 'en' ? 'Relations' : lang === 'ja' ? '関係図' : '关系图' },
   ]
 
   const localizedPath = (nextLang: string) => {
@@ -95,7 +103,7 @@ export default function MobileNav({ lang }: { lang: string }) {
               <div>
                 <p className="text-base font-semibold text-primary">Archistory</p>
                 <p className="mt-0.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-muted">
-                  {lang === 'en' ? 'Architecture archive' : lang === 'ja' ? '建築資料館メニュー' : '建筑资料馆菜单'}
+                  {lang === 'en' ? 'Architecture archive' : lang === 'ja' ? '建築アーカイブメニュー' : '建筑档案菜单'}
                 </p>
               </div>
               <button
@@ -148,6 +156,23 @@ export default function MobileNav({ lang }: { lang: string }) {
               <section className="border-b border-subtle py-4">
                 <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{archiveToolsLabel}</p>
                 <div className="space-y-1">
+                  {archiveLinks.map(item => (
+                    <Link
+                      key={`${item.href}-${item.label}`}
+                      href={prefix + item.href}
+                      onClick={() => setOpen(false)}
+                      className="flex min-h-11 items-center justify-between border-b border-subtle px-1 text-sm font-medium text-secondary transition-colors last:border-b-0 hover:text-primary"
+                    >
+                      <span>{item.label}</span>
+                      <span aria-hidden="true" className="text-soft">→</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
+              <section className="border-b border-subtle py-4">
+                <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{studyToolsLabel}</p>
+                <div className="space-y-1">
                   {learnLinks.map(item => (
                     <Link
                       key={`${item.href}-${item.label}`}
@@ -164,7 +189,7 @@ export default function MobileNav({ lang }: { lang: string }) {
 
               <section className="pt-4">
                 <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-muted">{settingsLabel}</p>
-                <div className="space-y-4 rounded-md border border-subtle bg-surface-raised p-3 shadow-semantic-card">
+                <div className="space-y-4 border-y border-subtle py-3">
                   <div>
                     <p className="mb-2 text-xs font-medium text-secondary">{languageLabel}</p>
                     <div className="grid grid-cols-3 gap-2">

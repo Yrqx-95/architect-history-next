@@ -14,7 +14,7 @@ export default function SearchBuildingResults({ lang, prefix, buildings }: Searc
   if (buildings.length === 0) return null
 
   return (
-    <section>
+    <section id="search-buildings" className="scroll-mt-24">
       <h2 className="heading-3 mb-4">
         {t(lang, 'buildings')} <span className="font-normal text-muted">({buildings.length})</span>
       </h2>

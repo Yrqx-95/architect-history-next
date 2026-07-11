@@ -9,6 +9,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | Script | Purpose | Notes |
 |---|---|---|
 | `scripts/build-image-registry.mjs` | Generates image registry from available image sources | Runtime-adjacent until image authority is migrated |
+| `scripts/build-image-fill-queue.mjs` | Builds a read-only queue for buildings missing policy-safe images and checks Wikidata P18 Commons candidates | Keep as the unattended image-fill entrypoint; `--advance` traverses later batches, retries rate limits once, and accumulates a local catalog |
 | `scripts/cache-curated-images.mjs` | Caches curated images locally | Runtime-adjacent but should eventually move to object storage flow |
 | `scripts/audit-images.mjs` | Checks image quality/source availability | Supports image reliability |
 | `scripts/build-architect-portraits.mjs` | Builds architect portrait report/assets | Supports visible architect image quality |
@@ -24,6 +25,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | `scripts/build-era-identity-cleanup-review.ts` | Builds a read-only Wikidata-backed identity cleanup review for weak era candidates | Keep until weak identity records are resolved; writes no database changes |
 | `scripts/build-era-remaining-year-unique-review-queue.ts` | Builds a read-only review queue for remaining year-unique era exceptions | Keep until era completion ends; writes no database changes |
 | `scripts/build-era-postmodern-review-queue.ts` | Builds a read-only postmodern era manual review queue | Keep until postmodern era completion ends; writes no database changes |
+| `scripts/prepare-image-fill-reviewed.mjs` | Revalidates one image queue batch and generates guarded insert/rollback SQL drafts | Governance boundary between unattended discovery and any reviewed database write; does not apply SQL |
 | `scripts/prepare-era-slug-postmodern-reviewed.ts` | Generates the reviewed postmodern chronological era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
 | `scripts/prepare-era-slug-year-unique-a.ts` | Generates the first reviewed year-unique era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
 | `scripts/prepare-era-slug-contemporary-year-unique.ts` | Generates the reviewed contemporary year-unique era write batch | Keep until era completion ends; refuses to overwrite reviewed migration/report unless explicitly overridden |
@@ -79,6 +81,9 @@ From `package.json`:
 - `data:orphan-styles` → governance
 - `images:audit` → runtime-support
 - `images:registry` → runtime-support
+- `images:queue` → runtime-support / read-only image-fill queue
+- `images:queue:advance` → runtime-support / advancing unattended image-fill queue
+- `images:prepare-reviewed` → governance / reviewed image write preparation only
 - `images:cache` → runtime-support
 - `content:audit` → one-off or periodic governance
 - `content:audit-display` → one-off or periodic governance

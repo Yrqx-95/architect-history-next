@@ -1,7 +1,17 @@
 # STATUS.md — 项目当前状态
 
-> 最后更新：2026-06-08
-> 基于代码实际分析，非模板填充
+> 当前快照：2026-07-11。以下 2026-06 条目为历史记录，不应作为当前发布状态。
+
+## 当前发布基线
+
+- 生产构建通过；`npm test` 全绿：12/12 unit、17/17 production e2e。
+- `npm run quality:gate` 通过：数据关系 error 0、毕业设计 QA problem 0、建筑图片缺失 0。
+- 发布状态仍为 `review-required`：860 warning、2,490 info、875 座建筑使用 fallback 文案、739 座建筑缺可追溯来源正文。
+- 内容与展示缺口继续进入人工审核队列，不把 fallback 文案伪装成完成内容。
+- `npm run content:review-sources` 可生成只读来源审核队列；链接仅作为查证入口，不自动生成或写入内容。
+- 已完成首批 5 座建筑的人工来源审核与正式阅读层补充，记录见 `docs/reports/content-review-batch-001.md`。
+- 2026-07-11 生产发布被 Vercel 团队 fair-use 限制拦截（HTTP 402）；本地 `vercel build --prod` 预构建成功，但没有新部署产生。
+- 毕业设计 catch-all 路由、未知实体和草稿内容均返回真实 404。
 
 ## 2026-06-08 浏览页体验修复与部署记录
 

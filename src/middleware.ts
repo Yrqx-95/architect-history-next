@@ -26,12 +26,11 @@ function preferredLang(header: string | null): Lang {
   return (match?.lang as Lang | undefined) || 'zh'
 }
 
-export function proxy(request: NextRequest) {
+/** Edge-compatible language redirect retained for Cloudflare Workers support. */
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  if (hasLangPrefix(pathname)) {
-    return NextResponse.next()
-  }
+  if (hasLangPrefix(pathname)) return NextResponse.next()
 
   const url = request.nextUrl.clone()
   const lang = preferredLang(request.headers.get('accept-language'))

@@ -39,8 +39,6 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
     visibleCountries,
     cleanSnippet,
     heroBuilding,
-    studyBuilding,
-    exploreBuilding,
     featuredLead,
     secondaryFeatured,
     heroImage,
@@ -133,73 +131,57 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
 
       <HomeSectionReveal scale>
         <section className="section">
-          <div className="mb-6 flex items-end justify-between gap-4">
+          <div className="mb-6 grid gap-3 md:grid-cols-[minmax(0,1fr)_22rem] md:items-end">
             <div>
-              <h2 className="heading-2">{lang === 'en' ? 'Enter the archive' : lang === 'ja' ? '資料館へ入る' : '从资料馆进入'}</h2>
+              <p className="eyebrow mb-3">{lang === 'en' ? 'Choose a path' : lang === 'ja' ? '入口を選ぶ' : '选择进入方式'}</p>
+              <h2 className="heading-2">{lang === 'en' ? 'Find what you need without guessing' : lang === 'ja' ? '迷わずに探す' : '不用猜，从这里开始'}</h2>
             </div>
+            <p className="caption md:text-right">
+              {lang === 'en'
+                ? 'Start from the state you are in now: known target, open browsing, or thesis direction.'
+                : lang === 'ja'
+                  ? '名前がわかる、広く見たい、卒業設計を考える。その状態から入ります。'
+                  : '按你现在的状态进入：知道名字、随便浏览、或正在找毕设方向。'}
+            </p>
           </div>
-          <div className="grid border-y border-subtle lg:grid-cols-2 lg:divide-x lg:divide-[color:var(--ui-border-subtle)]">
-            <Link href={`${prefix}/browse/buildings`} className="group grid min-h-[16rem] gap-5 py-5 transition-colors hover:bg-surface-muted/45 md:grid-cols-[minmax(0,1fr)_14rem] lg:pr-5">
-              <div className="flex flex-col justify-between px-1 sm:px-2">
+          <div className="grid border-y border-subtle md:grid-cols-3 md:divide-x md:divide-[color:var(--ui-border-subtle)]">
+            {[
+              {
+                href: `${prefix}/search`,
+                index: '01',
+                title: lang === 'en' ? 'I know what I want' : lang === 'ja' ? '名前で探す' : '我知道想找什么',
+                body: lang === 'en' ? 'Search a building, architect, city, period, type, or style.' : lang === 'ja' ? '建築、建築家、都市、時代、用途、様式を検索します。' : '搜索建筑、建筑师、城市、年代、类型或风格。',
+                action: t(lang, 'search'),
+              },
+              {
+                href: `${prefix}/browse`,
+                index: '02',
+                title: lang === 'en' ? 'I want to browse' : lang === 'ja' ? '広く見たい' : '我想随便看看',
+                body: lang === 'en' ? 'Enter through architects, works, periods, regions, and building types.' : lang === 'ja' ? '建築家、作品、時代、地域、用途から入ります。' : '从建筑师、作品、时代、地区和建筑类型进入。',
+                action: t(lang, 'browse'),
+              },
+              {
+                href: `${prefix}/graduation`,
+                index: '03',
+                title: lang === 'en' ? 'I need a thesis direction' : lang === 'ja' ? '卒業設計を考える' : '我在找毕设方向',
+                body: lang === 'en' ? 'Start from social issues, site types, programs, and reference cases.' : lang === 'ja' ? '社会課題、敷地、用途、事例から方向を探します。' : '从社会问题、场地、用途和案例里找方向。',
+                action: t(lang, 'graduation'),
+              },
+            ].map(item => (
+              <Link key={item.href} href={item.href} className="interactive-row group flex min-h-[13rem] flex-col justify-between px-3 py-5 transition-colors hover:bg-surface-muted/45 sm:px-4">
                 <div>
-                  <p className="eyebrow">01 / Archive Room</p>
-                  <h3 className="mt-5 text-3xl font-semibold leading-tight text-primary transition-colors group-hover:text-accent">
-                    {learningCopy.freeTitle}
+                  <p className="caption tabular-nums">{item.index}</p>
+                  <h3 className="mt-5 text-2xl font-semibold leading-tight text-primary transition-colors group-hover:text-accent">
+                    {item.title}
                   </h3>
-                  <p className="mt-4 max-w-sm text-sm leading-relaxed text-secondary">
-                    {learningCopy.freeBody}
-                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-secondary">{item.body}</p>
                 </div>
                 <div className="mt-8 flex items-center justify-between border-t border-subtle pt-4 text-sm font-medium text-primary">
-                  <span>{learningCopy.freeMeta}</span>
+                  <span>{item.action}</span>
                   <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
                 </div>
-              </div>
-              {studyBuilding?.cover_url && (
-                <div className="image-frame aspect-[16/10] rounded-sm md:aspect-auto md:h-full md:min-h-[16rem]">
-                  <EditorialImage
-                    src={studyBuilding.cover_url}
-                    alt={displayName(studyBuilding, lang)}
-                    label={displayName(studyBuilding, lang)}
-                    sizes="(max-width: 1024px) 100vw, 32vw"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              )}
-            </Link>
-
-            <Link href={`${prefix}/browse`} className="group grid min-h-[16rem] gap-5 border-t border-subtle py-5 transition-colors hover:bg-surface-muted/45 md:grid-cols-[minmax(0,1fr)_14rem] lg:border-t-0 lg:pl-5">
-              <div className="flex flex-col justify-between px-1 sm:px-2">
-                <div>
-                  <p className="eyebrow">02 / Index</p>
-                  <h3 className="mt-5 text-3xl font-semibold leading-tight text-primary transition-colors group-hover:text-accent">
-                    {t(lang, 'browse')}
-                  </h3>
-                  <p className="mt-4 max-w-sm text-sm leading-relaxed text-secondary">
-                    {lang === 'en'
-                      ? 'Enter by architect, building, period, style, type, or region. The archive stays broad, but the entry points stay clear.'
-                      : lang === 'ja'
-                        ? '建築家、作品、時代、様式、類型、地域から入る。アーカイブは広く、入口は明快に。'
-                        : '从建筑师、作品、时代、风格、类型或地域进入。档案可以很大，入口必须清楚。'}
-                  </p>
-                </div>
-                <div className="mt-8 flex items-center justify-between border-t border-subtle pt-4 text-sm font-medium text-primary">
-                  <span>{lang === 'en' ? 'Open the index' : lang === 'ja' ? '索引を開く' : '打开索引'}</span>
-                  <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-                </div>
-              </div>
-              {exploreBuilding?.cover_url && (
-                <div className="image-frame aspect-[16/10] rounded-sm md:aspect-auto md:h-full md:min-h-[16rem]">
-                  <EditorialImage
-                    src={exploreBuilding.cover_url}
-                    alt={displayName(exploreBuilding, lang)}
-                    label={displayName(exploreBuilding, lang)}
-                    sizes="(max-width: 1024px) 100vw, 32vw"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              )}
-            </Link>
+              </Link>
+            ))}
           </div>
         </section>
       </HomeSectionReveal>

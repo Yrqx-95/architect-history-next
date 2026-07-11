@@ -1,15 +1,16 @@
 openapi: 3.1.0
 info:
-  title: Archistory Graduation Inspiration API
+  title: Archistory Graduation Inspiration API Plan (not deployed)
   version: 0.1.0
-  summary: Static-first contract for the Graduation Inspiration Library submenu.
+  summary: Planned contract for a future Graduation Inspiration API.
   description: >
-    V1 is content-driven, no-login, and no-AI. The current implementation may
-    read local JSON directly, but this contract defines the planned data surface
-    for future static endpoints or server routes.
+    This file is a design proposal, not a live API contract. Graduation currently
+    reads generated static data at build time. Do not integrate against these
+    endpoints until a deployed implementation and contract version are published.
+x-archistory-status: planned-not-deployed
 servers:
   - url: /
-    description: Same-origin static site or app route base.
+    description: Intended same-origin base for a future implementation.
 tags:
   - name: home
   - name: issues

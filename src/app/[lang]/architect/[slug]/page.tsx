@@ -21,6 +21,7 @@ import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
 import ArchitectDeepArticle from '@/components/ArchitectDeepArticle'
 import ArchitectPortraitFigure from '@/components/ArchitectPortraitFigure'
+import ContentMaturityNote from '@/components/ContentMaturityNote'
 
 export const dynamicParams = false
 
@@ -164,6 +165,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const hasLocalizedBio = lang === 'en'
     ? rawBioClean.length >= 60
     : /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(rawBioClean) && rawBioClean.length >= 40
+  const usesFallbackBio = !contentOverlay && !hasLocalizedBio
   const bioText = contentOverlay ? (rawBioText || '') : (hasLocalizedBio ? rawBioClean : fallbackBioText)
   const coreIdeas: string[] = contentOverlay
     ? []
@@ -240,7 +242,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
     <PageShell>
       <Breadcrumb items={[
         { label: t(lang, 'home'), href: `/${lang}` },
-        { label: t(lang, 'architects'), href: `/${lang}/browse` },
+        { label: t(lang, 'architects'), href: `/${lang}/browse/architects` },
         { label: nameText },
       ]} />
 
@@ -280,6 +282,8 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
                 </p>
               </div>
             )}
+
+            {usesFallbackBio && <ContentMaturityNote lang={lang} subject="architect" />}
 
             {/* Metadata ribbon — horizontal, no card */}
             {metaRows.length > 0 && (

@@ -22,8 +22,8 @@
 | 语言 | TypeScript | 5.x (strict) |
 | 样式 | Tailwind CSS | v4 |
 | 排版 | @tailwindcss/typography | 0.5 |
-| 动画 | framer-motion | 12.40 |
-| 平滑滚动 | lenis | 1.3 |
+| 动画 | CSS + IntersectionObserver | — |
+| 平滑滚动 | 浏览器原生滚动 | — |
 | 数据库 | Supabase (PostgreSQL) | — |
 | 部署 | Vercel | Production |
 | 三语 | zh / en / ja | — |

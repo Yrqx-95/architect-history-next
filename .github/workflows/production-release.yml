@@ -1,0 +1,74 @@
+name: Reviewed production release
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Why this reviewed release is required
+        required: true
+        type: string
+  repository_dispatch:
+    types: [archistory-reviewed-data]
+
+concurrency:
+  group: archistory-production-release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  verify-build-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare build environment
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          printf '%s\n' \
+            "NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL" \
+            "NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY" \
+            "SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY" \
+            > .env.local
+          printf '%s\n' 'NEXTJS_ENV=production' > .dev.vars
+
+      - name: Run publication quality gate
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: npm run quality:gate
+
+      - name: Run complete test suite
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: npm test
+
+      - name: Build and deploy the verified Cloudflare Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: npm run deploy
+
+      - name: Verify production route semantics
+        run: |
+          home_status=$(curl --retry 6 --retry-delay 5 --retry-all-errors --silent --show-error --output /dev/null --write-out '%{http_code}' https://archistory.app/zh)
+          missing_status=$(curl --retry 6 --retry-delay 5 --retry-all-errors --silent --show-error --output /dev/null --write-out '%{http_code}' https://archistory.app/zh/building/__release-check-missing__)
+          test "$home_status" = "200"
+          test "$missing_status" = "404"
