@@ -77,16 +77,20 @@
 
 完成证据：新增结构草案 `db/migrations/v23-graduation-building-unification-draft.sql`、逆依赖回滚和字段所有权设计文档 `docs/GRADUATION_UNIFICATION_SCHEMA.md`。四张表均有 RLS 和显式 Data API 权限；公开 profile 只读 `published`、公开用途分配只读 `approved`；CASE 主键格式、唯一 building 归属、用途 alias 唯一性、多用途复合主键、外键索引和审核时间一致性均有约束。只读核验线上 875 个 buildings、20 个 building_types、PostgreSQL 17.6、目标表与触发器无命名冲突；没有执行 DDL/DML。结构验证器通过，8 个 unit 文件共 31 个测试、typecheck、lint 全部通过。
 
+合并证据：PR #10 的 Quality baseline run `29163802259` 成功，merge commit `de8d7bf7372f4c03fd96edfeaaaa2c47392e7253`。本阶段只有未应用的结构草案、文档和验证工具，没有触发生产部署。
+
 ### G4 — 建立智能用途分类
 
-- [ ] 定义第一版用途词表：library、museum、theatre、school、university、community-center、elderly-care、social-housing、mixed-use 等。
-- [ ] 为每个用途建立 zh / zh-Hant / en / ja 别名。
-- [ ] 明确一级 `building_types` 与细粒度 `building_functions` 的区别。
-- [ ] 生成 875 座建筑的只读用途候选队列。
+- [x] 定义第一版用途词表：library、museum、theatre、school、university、community-center、elderly-care、social-housing、mixed-use 等。
+- [x] 为每个用途建立 zh / zh-Hant / en / ja 别名。
+- [x] 明确一级 `building_types` 与细粒度 `building_functions` 的区别。
+- [x] 生成 875 座建筑的只读用途候选队列。
 - [ ] 先审核“图书馆”用途批次，验证多用途关系。
-- [ ] 禁止根据名称单独批量写入；结合来源与项目功能说明。
+- [x] 禁止根据名称单独批量写入；结合来源与项目功能说明。
 
 完成条件：搜索“图书馆 / library / 図書館”能基于统一用途关系得到相同建筑集合。
+
+当前证据：`db/taxonomies/building-functions-v1.json` 定义 9 个用途和四语别名；alias 唯一性与四语 library 解析已有单元测试。只读生成器从 875 个主体得到 144 个候选关联：library 20、museum 84、theatre 11、school 10、university 14、community-center 0、elderly-care 0、social-housing 1、mixed-use 4。所有记录均为 `candidate`，明确标记名称只是发现信号，不能生成批准写入。下一步必须为 20 个 library 候选补可追溯项目功能来源并逐条审核。
 
 ### G5 — 迁移首批已批准映射
 

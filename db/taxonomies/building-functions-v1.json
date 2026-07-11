@@ -1,0 +1,106 @@
+{
+  "version": "1.0.0-draft",
+  "status": "review",
+  "locales": ["zh", "zh-Hant", "en", "ja"],
+  "functions": [
+    {
+      "slug": "library",
+      "broad_type_slug": "cultural",
+      "names": { "zh": "图书馆", "zh-Hant": "圖書館", "en": "Library", "ja": "図書館" },
+      "aliases": {
+        "zh": ["图书馆", "图书室"],
+        "zh-Hant": ["圖書館", "圖書室"],
+        "en": ["library", "libraries", "biblioteca", "bibliothèque", "bibliothek"],
+        "ja": ["図書館", "図書室"]
+      }
+    },
+    {
+      "slug": "museum",
+      "broad_type_slug": "cultural",
+      "names": { "zh": "博物馆／美术馆", "zh-Hant": "博物館／美術館", "en": "Museum", "ja": "博物館・美術館" },
+      "aliases": {
+        "zh": ["博物馆", "美术馆"],
+        "zh-Hant": ["博物館", "美術館"],
+        "en": ["museum", "art museum", "kunsthaus", "kunsthalle"],
+        "ja": ["博物館", "美術館", "ミュージアム"]
+      }
+    },
+    {
+      "slug": "theatre",
+      "broad_type_slug": "cultural",
+      "names": { "zh": "剧院／剧场", "zh-Hant": "劇院／劇場", "en": "Theatre", "ja": "劇場" },
+      "aliases": {
+        "zh": ["剧院", "剧场", "歌剧院"],
+        "zh-Hant": ["劇院", "劇場", "歌劇院"],
+        "en": ["theatre", "theater", "opera house", "playhouse"],
+        "ja": ["劇場", "歌劇場", "シアター"]
+      }
+    },
+    {
+      "slug": "school",
+      "broad_type_slug": "educational",
+      "names": { "zh": "学校", "zh-Hant": "學校", "en": "School", "ja": "学校" },
+      "aliases": {
+        "zh": ["学校", "小学", "中学", "幼儿园"],
+        "zh-Hant": ["學校", "小學", "中學", "幼兒園"],
+        "en": ["school", "primary school", "secondary school", "kindergarten"],
+        "ja": ["学校", "小学校", "中学校", "幼稚園"]
+      }
+    },
+    {
+      "slug": "university",
+      "broad_type_slug": "educational",
+      "names": { "zh": "大学", "zh-Hant": "大學", "en": "University", "ja": "大学" },
+      "aliases": {
+        "zh": ["大学", "学院"],
+        "zh-Hant": ["大學", "學院"],
+        "en": ["university", "college", "faculty building", "campus"],
+        "ja": ["大学", "大学院", "学部棟", "キャンパス"]
+      }
+    },
+    {
+      "slug": "community-center",
+      "broad_type_slug": "civic-public",
+      "names": { "zh": "社区中心", "zh-Hant": "社區中心", "en": "Community Center", "ja": "コミュニティセンター" },
+      "aliases": {
+        "zh": ["社区中心", "社区活动中心", "市民中心"],
+        "zh-Hant": ["社區中心", "社區活動中心", "市民中心"],
+        "en": ["community center", "community centre", "civic center", "civic centre"],
+        "ja": ["コミュニティセンター", "地域センター", "市民センター", "公民館"]
+      }
+    },
+    {
+      "slug": "elderly-care",
+      "broad_type_slug": "healthcare",
+      "names": { "zh": "养老与高龄照护", "zh-Hant": "養老與高齡照護", "en": "Elderly Care", "ja": "高齢者ケア" },
+      "aliases": {
+        "zh": ["养老院", "养老设施", "老年照护", "高龄者设施"],
+        "zh-Hant": ["養老院", "養老設施", "老年照護", "高齡者設施"],
+        "en": ["elderly care", "senior care", "nursing home", "assisted living"],
+        "ja": ["高齢者施設", "老人ホーム", "介護施設", "高齢者ケア"]
+      }
+    },
+    {
+      "slug": "social-housing",
+      "broad_type_slug": "residential",
+      "names": { "zh": "社会住宅", "zh-Hant": "社會住宅", "en": "Social Housing", "ja": "公営・社会住宅" },
+      "aliases": {
+        "zh": ["社会住宅", "公共住宅", "保障性住房", "廉租房"],
+        "zh-Hant": ["社會住宅", "公共住宅", "保障性住房", "廉租屋"],
+        "en": ["social housing", "public housing", "affordable housing", "council housing"],
+        "ja": ["社会住宅", "公営住宅", "公共住宅", "低所得者住宅"]
+      }
+    },
+    {
+      "slug": "mixed-use",
+      "broad_type_slug": "mixed-use",
+      "names": { "zh": "混合用途", "zh-Hant": "混合用途", "en": "Mixed Use", "ja": "複合用途" },
+      "aliases": {
+        "zh": ["混合用途", "综合体", "复合设施"],
+        "zh-Hant": ["混合用途", "綜合體", "複合設施"],
+        "en": ["mixed use", "mixed-use", "multi-use complex", "multipurpose complex"],
+        "ja": ["複合用途", "複合施設", "ミクストユース"]
+      }
+    }
+  ]
+}
