@@ -3354,7 +3354,7 @@
     "image_source_url": "https://commons.wikimedia.org/wiki/File:Ebina_City_Arima_Library_201510.JPG",
     "image_license": "CC BY-SA 4.0",
     "image_credit": "Photo: Oos~commonswiki / Wikimedia Commons",
-    "image_note": "Source-safe image review 2026-07-04: exact Ebina City Arima Library image confirmed through Wikimedia Commons metadata.",
+    "image_note": "Historical context only: this 2015 image predates the 2021 renovation. It remains visible on the legacy CASE page but is excluded from canonical building migration until a source-safe post-renovation image is found.",
     "plan_url": "",
     "section_url": "",
     "concept": "既有图书馆和社区中心更新，通过温和室内改造提升学习、停留和市民活动体验。",
@@ -3382,7 +3382,7 @@
       "citizenactivity"
     ],
     "source_url": "https://www.arimalib-kadokomi.com/",
-    "year": 2020,
+    "year": 2021,
     "architect": "MIKAMI Architects",
     "status": "published"
   },
@@ -3467,7 +3467,7 @@
       "citizenexchange"
     ],
     "source_url": "https://unemori-archi.com/?works=sukagawa-civic-center-tentative-name",
-    "year": 2019,
+    "year": 2018,
     "architect": "UNEMORI ARCHITECTS + Ishimoto Architectural and Engineering Firm",
     "status": "published"
   },
@@ -4281,7 +4281,8 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Dokk1_version_3.jpg",
     "image_source_url": "https://commons.wikimedia.org/wiki/File:Dokk1_version_3.jpg",
     "image_license": "CC BY-SA 4.0",
-    "image_credit": "Wikimedia Commons",
+    "image_credit": "Villy Fink Isaksen / Wikimedia Commons",
+    "image_note": "Copyright review 2026-07-12: Dokk1 identity confirmed visually; photographer Villy Fink Isaksen and CC BY-SA 4.0 verified on the Wikimedia Commons file page.",
     "plan_url": "",
     "section_url": "",
     "concept": "图书馆、市民服务、交通和港湾广场复合成城市客厅。",
@@ -4781,7 +4782,7 @@
       "都市象徴",
       "若者"
     ],
-    "source_url": "https://www.architecture.com/explore-architecture/inside-the-riba-collections/peckham-library",
+    "source_url": "https://www.southwark.gov.uk/culture-and-sport/libraries/find-library/peckham-library",
     "year": 2000,
     "architect": "Alsop and Störmer",
     "status": "published"
@@ -4794,10 +4795,11 @@
     "location": "Alexandria Egypt",
     "location_ja": "アレクサンドリア エジプト",
     "location_en": "Alexandria Egypt",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Bibliotheca_Alexandrina-Grafemi.jpg",
-    "image_source_url": "https://commons.wikimedia.org/wiki/File:Bibliotheca_Alexandrina-Grafemi.jpg",
-    "image_license": "CC BY-SA 3.0",
-    "image_credit": "Ninlil / Wikimedia Commons",
+    "image_url": "/images/graduation/cases/case-113-bibliotheca-alexandrina.jpg",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:BA_outside_view.jpg",
+    "image_license": "CC BY 2.5",
+    "image_credit": "Mahmoud Saaid / Wikimedia Commons",
+    "image_note": "Copyright review 2026-07-12: full sloping circular library roof and facade verified against Snøhetta's official project; Mahmoud Saaid, CC BY 2.5.",
     "plan_url": "",
     "section_url": "",
     "concept": "巨大な図書館を都市、海、研究、文化記憶と結びつけた事例。知識施設を都市スケールで考える参考になる。",
@@ -4867,9 +4869,9 @@
       "制作",
       "市民活動"
     ],
-    "source_url": "https://www.mecanoo.nl/Projects/project/214/LocHal-Library",
+    "source_url": "https://www.civicarchitects.eu/projects/lochal-tilburg",
     "year": 2019,
-    "architect": "Civic Architects + Braaksma & Roos + Mecanoo",
+    "architect": "Civic Architects + Braaksma & Roos; Mecanoo library interiors",
     "status": "published"
   },
   {
@@ -5525,10 +5527,11 @@
     "location": "Spijkenisse Netherlands",
     "location_ja": "スパイケニッセ オランダ",
     "location_en": "Spijkenisse Netherlands",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Boekenberg%20Spijkenisse.jpg",
-    "image_source_url": "https://commons.wikimedia.org/wiki/File:Boekenberg_Spijkenisse.jpg",
-    "image_license": "See image source",
-    "image_credit": "Wikimedia Commons",
+    "image_url": "/images/graduation/cases/case-130-book-mountain.jpg",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Boekenberg_DSCF1911.JPG",
+    "image_license": "CC BY-SA 3.0",
+    "image_credit": "G.Lanting / Wikimedia Commons",
+    "image_note": "Copyright review 2026-07-12: high-resolution interior clearly shows Book Mountain's continuous terraced bookshelves; G.Lanting, CC BY-SA 3.0.",
     "plan_url": "",
     "section_url": "",
     "concept": "本棚を山のように積み上げ、図書館を地域の象徴的な学習風景にした事例。読書と空間体験を結べる。",
@@ -5555,7 +5558,7 @@
       "読書",
       "学習風景"
     ],
-    "source_url": "https://www.mvrdv.com/projects/53/book-mountain",
+    "source_url": "https://www.mvrdv.com/projects/126/book-",
     "year": 2012,
     "architect": "MVRDV",
     "status": "published"
@@ -5826,10 +5829,11 @@
     "location": "Birmingham United Kingdom",
     "location_ja": "バーミンガム イギリス",
     "location_en": "Birmingham United Kingdom",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Library%20of%20Birmingham%202013.jpg",
-    "image_source_url": "https://commons.wikimedia.org/wiki/File:Library_of_Birmingham_2013.jpg",
-    "image_license": "See image source",
-    "image_credit": "Wikimedia Commons",
+    "image_url": "/images/graduation/cases/case-137-library-of-birmingham.jpg",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Exterior_Library_of_Birmingham_England.jpg",
+    "image_license": "CC BY-SA 4.0",
+    "image_credit": "Fatih Renkligil / Wikimedia Commons",
+    "image_note": "Copyright review 2026-07-12: complete exterior and Mecanoo facade identity visually verified; Fatih Renkligil, CC BY-SA 4.0.",
     "plan_url": "",
     "section_url": "",
     "concept": "大規模図書館を都市中心部の学習、展望、滞在の拠点にした事例。公共図書館の象徴性を読める。",
@@ -5856,7 +5860,7 @@
       "展望",
       "公共性"
     ],
-    "source_url": "https://www.mecanoo.nl/Projects/project/54/Library-of-Birmingham",
+    "source_url": "https://www.mecanoo.nl/Projects/project/57/Library-of-Birmingham?t=0",
     "year": 2013,
     "architect": "Mecanoo",
     "status": "published"
