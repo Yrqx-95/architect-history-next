@@ -39,6 +39,7 @@
     "graduation:audit": "node scripts/audit-graduation-content.mjs",
     "graduation:match-buildings": "tsx --env-file=.env.local scripts/match-graduation-cases-to-buildings.ts",
     "graduation:validate-schema": "node scripts/validate-graduation-unification-schema.mjs",
+    "graduation:function-candidates": "tsx --env-file=.env.local scripts/build-building-function-candidates.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",
