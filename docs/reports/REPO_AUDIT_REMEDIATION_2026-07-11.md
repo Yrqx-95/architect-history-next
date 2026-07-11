@@ -41,9 +41,10 @@ This tracker maps the eight findings from the full repository audit to current v
    - Still review-required: 860 warnings, 2,490 info findings, 875 buildings using fallback text, 106 architects using fallback text, and 739 buildings missing traceable source text.
    - Building and architect pages now disclose fallback copy as introductory guidance that has not completed claim-by-claim source review; records with formal editorial overlays do not show this notice.
    - E2E coverage verifies both disclosure paths and the formal-content exclusion path.
-   - `npm run content:review-sources` now produces a read-only, ranked review queue with the current source entry points, identity risks, and a no-auto-prose rule. After source-review batches 001 and 002, the current queue has 593 reference-ready records, 109 identity-review records, and 38 evidence-gap records; it found no records with an existing official-site entry point.
+   - `npm run content:review-sources` now produces a read-only, ranked review queue with the current source entry points, identity risks, and a no-auto-prose rule. After source-review batches 001–003, the current queue has 589 reference-ready records, 109 identity-review records, and 38 evidence-gap records; it found no records with an existing official-site entry point.
    - Content review batch 001 manually added formal, visibly sourced reading layers for Yoyogi National Gymnasium, Finlandia Hall, Centre Georges Pompidou, Acropolis Museum, and Beinecke Rare Book & Manuscript Library. See `docs/reports/content-review-batch-001.md`.
    - Content review batch 002 added the same source-visible layer for Aarhus City Hall, Aga Khan Museum, Alvar Aalto Museum, and Bagsværd Church using responsible institutional sources. See `docs/reports/content-review-batch-002.md`.
+   - Content review batch 003 added source-visible layers for the Cenotaph for the A-bomb Victims, Bordeaux Law Courts, Des Moines Public Library, and Bellevue Theatre. See `docs/reports/content-review-batch-003.md`.
    - This is a content-production and evidence problem, not a single code fix.
 
 ## Verified complete: release coupling

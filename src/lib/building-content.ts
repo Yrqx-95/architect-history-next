@@ -3313,6 +3313,101 @@ const sourceReviewedOverlays: Record<string, BuildingContentOverlay> = {
       wiki('Bagsværd Church: They built the church', 'https://www.bagsvaerdkirke.dk/in-english/architecture/they-built-the-church'),
     ],
   }),
+  'cenotaph-for-the-a-bomb-victims': study('cenotaph-for-the-a-bomb-victims', {
+    summary: {
+      zh: '广岛原爆死难者慰灵碑于 1952 年完成，是丹下健三团队所构想的和平纪念公园南北轴线中心。它把纪念碑、原爆圆顶馆和和平纪念资料馆组织成一条可视的城市关系。',
+      ja: '原爆死没者慰霊碑は1952年に完成し、丹下健三グループが構想した平和記念公園の南北軸の中心にある。慰霊碑、原爆ドーム、平和記念資料館を見通しの中で結ぶ。',
+    },
+    significance: {
+      zh: '它的价值不只在单一碑体，而在于用视线把悼念、历史证物与城市公共空间联系起来。',
+      ja: '価値は単体の碑だけでなく、視線によって追悼、歴史的証拠、都市の公共空間を結ぶことにある。',
+    },
+    context: {
+      zh: '广岛市档案记录，1949 年的公园竞赛由丹下健三团队获得首奖，慰灵碑于 1952 年 8 月完成，石棺中安放原爆死难者名簿。',
+      ja: '広島市の資料は、1949年の公園競技で丹下健三グループが一等となり、慰霊碑が1952年8月に完成し、石棺に原爆死没者名簿が納められたことを記録する。',
+    },
+    design: {
+      zh: '拱形屋盖保护下方石棺，同时为视线留出开口。从资料馆柱廊穿过慰灵碑看向原爆圆顶馆的关系，被广岛市称为重要的“南北轴线”。',
+      ja: 'アーチ状の屋根が下の石棺を守りつつ、視線の開口を残す。資料館のピロティから慰霊碑を通して原爆ドームを見る関係は、広島市が重視する「南北軸」である。',
+    },
+    reading: {
+      zh: '阅读时不应只靠近观察碑体，而应沿轴线前后移动，体会纪念如何通过距离、框景与公园日常生活持续发生。',
+      ja: '碑に近づくだけでなく、軸線上を前後に動き、距離、フレーミング、公園の日常の中で追悼がどう持続するかを読むとよい。',
+    },
+    sources: [
+      wiki('City of Hiroshima: The Birth of Hiroshima, Peace Memorial City', 'https://www.city.hiroshima.lg.jp/tourism-culture/history/1003068/1027532/1027533/1008361.html'),
+      wiki('City of Hiroshima: Peace Memorial Park landscape', 'https://www.city.hiroshima.lg.jp/english/tourism/1029842/1009899.html'),
+    ],
+  }),
+  'bordeaux-courthouse': study('bordeaux-courthouse', {
+    summary: {
+      zh: '波尔多法院是 Richard Rogers Partnership 在 1992 年国际竞赛中胜出后完成的司法建筑。七个雪松包覆的法庭舱体被抬起，置于石材基座、玻璃幕墙和起伏铜屋顶之间。',
+      ja: 'ボルドー司法宮は、リチャード・ロジャース・パートナーシップが1992年の国際競技で勝利して実現した。七つのシダー材の法廷ポッドが、石の基壇、ガラスカーテン、起伏する銅屋根の間に持ち上げられる。',
+    },
+    significance: {
+      zh: '它尝试把传统上封闭威严的司法机构变得可辨认：公共空间、法庭和分离流线都被直接表达。',
+      ja: '伝統的に閉鎖的で威圧的な司法機関を読み取れるものにし、公共空間、法廷、分離された動線を直接表す。',
+    },
+    context: {
+      zh: 'RSHP 官方资料记录项目建于 1992–1998 年，业主为法国司法部。设计必须同时提高公共可达性，并严格分离公众、法官及相关当事人流线。',
+      ja: 'RSHPの公式資料は、1992–1998年、クライアントがフランス司法省であることを記す。公共的な到達性を高めながら、一般、裁判官、当事者の動線を厳密に分ける必要があった。',
+    },
+    design: {
+      zh: '法庭舱体顶部采光，高而收缩的截面促进自然通风；玻璃围护内的公共大厅则绕过这些舱体，并通过桥廊组织不同安全级别的路径。',
+      ja: '法廷ポッドは上部から採光し、高く絞られた断面が自然換気を促す。ガラスの内側の公共ホールがポッドの周囲を流れ、橋が異なるセキュリティレベルの経路を組織する。',
+    },
+    reading: {
+      zh: '可观察“看得见”和“必须分离”两种要求如何并存。透明并不意味着取消安全边界，而是让边界的组织逻辑变得可理解。',
+      ja: '「見えること」と「分離すべきこと」がどう両立するかを見るとよい。透明性は安全境界を消すことではなく、境界の組織原理を理解可能にする。',
+    },
+    sources: [wiki('RSHP: Bordeaux Law Courts', 'https://rshp.com/projects/civic/bordeaux-law-courts/')],
+  }),
+  'central-library-des-moines': study('central-library-des-moines', {
+    summary: {
+      zh: '得梅因公共图书馆由 David Chipperfield Architects 设计，2006 年完成，是 Western Gateway Park 城市更新中连接市中心与新公园的公共节点。',
+      ja: 'デモイン公共図書館はデイヴィッド・チッパーフィールド・アーキテクツの設計で2006年に完成し、Western Gateway Parkの都市再生で都心と新しい公園を結ぶ公共的節点である。',
+    },
+    significance: {
+      zh: '它将图书馆从单纯的藏书容器扩展为公园边的社区基础设施，阅读、教育、会议、儿童活动和城市通行被组织在同一个低层建筑中。',
+      ja: '図書館を単なる書物の容器から公園辺の地域インフラへ拡張し、閲覧、教育、会議、子どもの活動、都市の通行を一つの低層建築に組織する。',
+    },
+    context: {
+      zh: '事务所官方资料将项目时间记为 2002–2006 年，并把它定位为公园更新的核心。除图书功能外，建筑还容纳灵活活动、教育、儿童、会议和餐饮空间。',
+      ja: '事務所の公式資料は計画期間を2002–2006年とし、公園再生の中心と位置づける。図書機能に加え、柔軟な活動、教育、児童、会議、カフェの空間を含む。',
+    },
+    design: {
+      zh: '两层混凝土结构被红色复合玻璃金属表皮包裹，三层玻璃中的展开铜网降低眩光和太阳得热，同时保留向公园的视线。',
+      ja: '二層のコンクリート構造を赤い複合ガラス・金属外皮が包む。トリプルガラス内のエキスパンド銅メッシュがまぶしさと日射熱を抑え、公園への視線を保つ。',
+    },
+    reading: {
+      zh: '平面在城市街区一侧回应正交网格，向公园一侧则更自由地展开。可沿 Gateway Gallery 穿过建筑，理解图书馆如何成为城市与景观之间的桥。',
+      ja: '平面は市街地側では直交グリッドに応答し、公園側ではより自由に伸びる。Gateway Galleryを通り抜け、図書館が都市と風景の橋となる方法を読める。',
+    },
+    sources: [wiki('David Chipperfield Architects: Des Moines Public Library', 'https://davidchipperfield.com/projects/des-moines-public-library')],
+  }),
+  'bellevue-teatret': study('bellevue-teatret', {
+    summary: {
+      zh: 'Bellevue Theatre 由 Arne Jacobsen 设计，1936 年与邻近的 Bellavista 住宅同期建成。它将早期丹麦功能主义的几何语言用于剧场运作和滨海休闲文化。',
+      ja: 'ベルビュー劇場はアルネ・ヤコブセンの設計で1936年に隣接するベラヴィスタ住宅とともに建設された。初期デンマーク機能主義の幾何を、劇場運営と海辺の余暇文化に結びつける。',
+    },
+    significance: {
+      zh: '它说明功能主义并不只属于住宅和办公，也可以塑造舞台、观众厅与城市娱乐的公共经验。',
+      ja: '機能主義が住宅やオフィスだけでなく、舞台、客席、都市娯楽の公共的経験を形づくれることを示す。',
+    },
+    context: {
+      zh: 'Realdania 资料记录其建成时间、Jacobsen 的设计归属以及 1988 年因艺术与建筑价值被列为保护建筑。后续更新需要在现代剧场运作与原作保护之间平衡。',
+      ja: 'Realdaniaの資料は竣工年、ヤコブセンの設計、1988年に芸術的・建築的価値により保護建造物となったことを記す。後の改修は現代の劇場運営と原作保存の均衡を求められた。',
+    },
+    design: {
+      zh: '剧场与 Bellavista 的立方体组成形成统一街区意象，但剧场必须同时处理观众容量、舞台技术和演出运营，因而其现代形式与专业功能密切绑定。',
+      ja: '劇場とベラヴィスタの立方体的構成が統一した街区像をつくる。一方で劇場は客席数、舞台技術、公演運営を同時に扱うため、近代的形式は専門機能と密接に結びつく。',
+    },
+    reading: {
+      zh: '可把它与 Bellavista 和 Bellevue 海滩一起阅读，理解 Jacobsen 如何不是设计一个孤立地标，而是用建筑、家具和活动构成一段海岸现代生活。',
+      ja: 'ベラヴィスタやベルビュービーチと一緒に読むと、ヤコブセンが孤立したランドマークでなく、建築、家具、活動による海岸の近代生活を構成したことが分かる。',
+    },
+    sources: [wiki('Realdania: Bellevue Teatret', 'https://realdania.dk/projekter/bellevue-teatret')],
+  }),
 }
 
 export const buildingContentOverlays: Record<string, BuildingContentOverlay> = {
