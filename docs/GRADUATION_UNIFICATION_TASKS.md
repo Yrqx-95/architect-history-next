@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：完成 `G5` 的双轨读取 Reviewed production release 与线上验证；验证通过后才进入 `G6`。
+当前下一步：进入 `G6`，对 101 个 new-building candidates 按来源可靠度和毕业页面价值分批审核；第一批只做身份、来源和图片版权决策，不直接批量写库。
 
 ## 最终目标
 
@@ -96,7 +96,7 @@
 
 合并证据：PR #12 的 Quality baseline run `29164234121` 成功，merge commit `a5c1985b3cc09c09cd44b335317b31750645df29`。本阶段只有审核数据、报告和测试，没有生产数据库写入或网站部署。
 
-### G5 — 迁移首批已批准映射
+### G5 — 迁移首批已批准映射（已完成）
 
 - [x] 为 G1/G2 批准记录生成 guarded migration 和 rollback。
 - [x] 在写入前验证 CASE ID、building ID、source URL 和行数。
@@ -106,7 +106,7 @@
 
 完成条件：批准案例从统一主体读取基础资料，旧页面和导出没有变化。
 
-当前证据：PR #13 合并了 21 profiles、9 functions、122 aliases、23 approved assignments 的版本化数据包、guarded apply、rollback 和 PGlite dry-run；merge commit `0df1a59cccadf2ca98aa04638a3677fed19cdb9e`。PR #14 将结构草案正式化；merge commit `e45278e0cf495d001a39def28c9ffb2437e6b6e0`。生产已按顺序执行 `graduation_building_unification_foundation`（`20260711190612`）和 `graduation_unification_batch_001`（`20260711190655`）：21 个唯一 profile、9 functions、122 aliases、23 approved assignments，0 orphan，anon Data API 数量与数据包完全一致，四张新表 RLS 与只读策略有效。双轨代码保留全部 100 个 JSON 案例，只让 21 个 published profile 覆盖已审核事实；Supabase 异常时回退完整 JSON。图片独立门禁结果为 0/21 canonical 图片获准接管，因此全部继续使用已审核 JSON 图片。54 个 unit、19 个 E2E、production build、typecheck、lint 全部通过。详见 `GRADUATION_UNIFICATION_BATCH_001_PRODUCTION.md` 与 `GRADUATION_CANONICAL_IMAGE_GATE_001.md`。尚待 Reviewed production release 和线上验证，所以 G5 仍标记为进行中。
+完成证据：PR #13 合并了 21 profiles、9 functions、122 aliases、23 approved assignments 的版本化数据包、guarded apply、rollback 和 PGlite dry-run；merge commit `0df1a59cccadf2ca98aa04638a3677fed19cdb9e`。PR #14 将结构草案正式化；merge commit `e45278e0cf495d001a39def28c9ffb2437e6b6e0`。生产已按顺序执行 `graduation_building_unification_foundation`（`20260711190612`）和 `graduation_unification_batch_001`（`20260711190655`）：21 个唯一 profile、9 functions、122 aliases、23 approved assignments，0 orphan，anon Data API 数量与数据包完全一致，四张新表 RLS 与只读策略有效。PR #15 合并 Supabase + JSON 双轨读取、API/页面回归测试与图片准入闸门；merge commit `c7be179d0423ac32994af5c4cc5230a9f9e17172`。Reviewed production release run `29165219866` 成功；质量门、54 个 unit、19 个 E2E、production build、Cloudflare deploy 与线上路由语义检查全部通过。线上 API 实测 `source=supabase+json`、100 个公开案例、21 个 unified profile、0 missing relation、0 canonical image takeover、21 image fallback；CASE-104 返回 HTTP 200 并显示 canonical 名称/地点/年份、完整联合建筑师和已审核 CC BY-SA 4.0 图片；旧 139 条兼容 JSON 仍返回 HTTP 200。详见 `GRADUATION_UNIFICATION_BATCH_001_PRODUCTION.md` 与 `GRADUATION_CANONICAL_IMAGE_GATE_001.md`。
 
 ### G6 — 处理 101 个 new-building candidates
 

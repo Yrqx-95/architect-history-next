@@ -4,7 +4,7 @@
 
 Supabase project：`usuqjsjluietcnudxwvz`
 
-状态：数据库迁移已完成；应用双轨读取待 Reviewed production release
+状态：已完成并上线
 
 ## 已执行迁移
 
@@ -51,4 +51,17 @@ advisor 仍显示一组项目原有问题，包括扩展位于 `public`、旧表
 - lint：通过；
 - 双轨运行时抽查：100 个公开案例、21 个已统一 CASE、0 个缺失主体关系、21 个图片 fallback。
 
-Reviewed production release 完成后，必须再次从线上 API 和 CASE-104 页面验证以上结果，才能把 G5 标记为已完成。
+## 发布与线上验证
+
+PR #15 已合并，merge commit 为 `c7be179d0423ac32994af5c4cc5230a9f9e17172`。Reviewed production release run `29165219866` 于 2026-07-12 成功完成，质量门、完整测试、Cloudflare deploy 和生产路由语义检查全部通过。
+
+线上复核结果：
+
+- `/api/v1/graduation/cases`：HTTP 200，`source=supabase+json`；
+- 100 个公开运行时案例、21 个 profile、21 个 unified CASE；
+- missing fallback / building relation 均为 0；
+- canonical image takeover 为 0，reviewed JSON image fallback 为 21；
+- `/zh/graduation/cases/CASE-104`：HTTP 200，显示 canonical 中文名称、地点、2004 年、`OMA + LMN Architects` 和已审核 `CC BY-SA 4.0` 图片；
+- `/data/graduation/cases.json`：HTTP 200，139 条兼容记录继续可用。
+
+G5 完成。下一阶段是 G6 的 101 个 new-building candidates 分批审核。
