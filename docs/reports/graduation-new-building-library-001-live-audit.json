@@ -1,0 +1,230 @@
+{
+  "generated_at": "2026-07-11T19:50:28.220Z",
+  "scope": "G6 new-building library batch 001",
+  "summary": {
+    "cases": 8,
+    "source_urls": 12,
+    "source_failures": 0,
+    "commons_files": 8,
+    "commons_metadata_failures": 0
+  },
+  "failures": [],
+  "results": [
+    {
+      "case_id": "CASE-018",
+      "source_checks": [
+        {
+          "url": "https://www.lib.kanazawa.ishikawa.jp/umimirai/outline/architectural-information",
+          "status": 200,
+          "final_url": "https://www.lib.kanazawa.ishikawa.jp/umimirai/outline/architectural-information",
+          "ok": true
+        },
+        {
+          "url": "https://www.lib.kanazawa.ishikawa.jp/umimirai/outline",
+          "status": 200,
+          "final_url": "https://www.lib.kanazawa.ishikawa.jp/umimirai/outline",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:Kanazawa Umimirai Library exterior ac (4).jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:Kanazawa_Umimirai_Library_exterior_ac_(4).jpg",
+        "artist": "Asturio Cantabrio",
+        "license": "CC BY-SA 4.0",
+        "width": 5993,
+        "height": 3985,
+        "size": 3353200,
+        "sha1": "a29d486c8fb9a8ee1cae1e70a6ebc8d7b2d32433",
+        "description": "石川県金沢市 金沢海みらい図書館。金沢市図書館のひとつ。",
+        "author_matches": true,
+        "license_matches": true
+      }
+    },
+    {
+      "case_id": "CASE-021",
+      "source_checks": [
+        {
+          "url": "https://kkaa.co.jp/en/project/toyama-kirari/",
+          "status": 200,
+          "final_url": "https://kkaa.co.jp/en/project/toyama-kirari/",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:TOYAMA KIRARI exterior in the morning ac (3).jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:TOYAMA_KIRARI_exterior_in_the_morning_ac_(3).jpg",
+        "artist": "Asturio Cantabrio",
+        "license": "CC BY-SA 4.0",
+        "width": 6016,
+        "height": 4000,
+        "size": 7044673,
+        "sha1": "6f87f2bdaf23f9d3d9a4c0c9635bed600e40d662",
+        "description": "TOYAMAキラリの外観。7月30日の9時ちょうど頃。",
+        "author_matches": true,
+        "license_matches": true
+      }
+    },
+    {
+      "case_id": "CASE-022",
+      "source_checks": [
+        {
+          "url": "https://g-mediacosmos.jp/cosmos/about/",
+          "status": 200,
+          "final_url": "https://g-mediacosmos.jp/cosmos/about/",
+          "ok": true
+        },
+        {
+          "url": "https://g-mediacosmos.jp/cosmos/about/character.html",
+          "status": 200,
+          "final_url": "https://g-mediacosmos.jp/cosmos/about/character.html",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:Gifu Media Cosmos exterior ac (1).jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:Gifu_Media_Cosmos_exterior_ac_(1).jpg",
+        "artist": "Asturio Cantabrio",
+        "license": "CC BY-SA 4.0",
+        "width": 6016,
+        "height": 3589,
+        "size": 3678143,
+        "sha1": "27dc93d2403edddbcf4087dfa11a904d06d2e548",
+        "description": "みんなの森 ぎふメディアコスモス。",
+        "author_matches": true,
+        "license_matches": true
+      }
+    },
+    {
+      "case_id": "CASE-023",
+      "source_checks": [
+        {
+          "url": "https://kodomohonnomori.osaka/about/",
+          "status": 200,
+          "final_url": "https://kodomohonnomori.osaka/about/",
+          "ok": true
+        },
+        {
+          "url": "https://kodomohonnomori.osaka/facilities/",
+          "status": 200,
+          "final_url": "https://kodomohonnomori.osaka/facilities/",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:Nakanoshima Children`s Book Forest.jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:Nakanoshima_Children%60s_Book_Forest.jpg",
+        "artist": "KishujiRapid",
+        "license": "CC BY-SA 4.0",
+        "width": 3953,
+        "height": 2635,
+        "size": 2146203,
+        "sha1": "369c95cb988083773977c754a460fafeb6135ea6",
+        "description": "こども本の森 中之島",
+        "author_matches": true,
+        "license_matches": true
+      }
+    },
+    {
+      "case_id": "CASE-027",
+      "source_checks": [
+        {
+          "url": "https://kkaa.co.jp/en/project/yusuhara-community-library-yururi-yusuhara/",
+          "status": 200,
+          "final_url": "https://kkaa.co.jp/en/project/yusuhara-community-library-yururi-yusuhara/",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:ゆすはら雲の上の図書館（梼原町立図書館） 02.jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:%E3%82%86%E3%81%99%E3%81%AF%E3%82%89%E9%9B%B2%E3%81%AE%E4%B8%8A%E3%81%AE%E5%9B%B3%E6%9B%B8%E9%A4%A8%EF%BC%88%E6%A2%BC%E5%8E%9F%E7%94%BA%E7%AB%8B%E5%9B%B3%E6%9B%B8%E9%A4%A8%EF%BC%89_02.jpg",
+        "artist": "Asset utilitist",
+        "license": "CC0",
+        "width": 5152,
+        "height": 3864,
+        "size": 5965199,
+        "sha1": "32c67df2539616688476cdd6273212199589a38d",
+        "description": "ゆすはら雲の上の図書館（梼原町立図書館）の内装",
+        "author_matches": true,
+        "license_matches": true
+      }
+    },
+    {
+      "case_id": "CASE-029",
+      "source_checks": [
+        {
+          "url": "https://www.musashino.or.jp/place/1001617/1001618.html",
+          "status": 200,
+          "final_url": "https://www.musashino.or.jp/place/1001617/1001618.html",
+          "ok": true
+        },
+        {
+          "url": "https://www.musashino.or.jp/place/1001617/1003094.html",
+          "status": 200,
+          "final_url": "https://www.musashino.or.jp/place/1001617/1003094.html",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:Musashino Place exterior ac (1).jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:Musashino_Place_exterior_ac_(1).jpg",
+        "artist": "Asturio Cantabrio",
+        "license": "CC BY-SA 4.0",
+        "width": 5863,
+        "height": 3899,
+        "size": 3356228,
+        "sha1": "981d5afce774daafcedbd7bb545b6d3a2e729e1a",
+        "description": "東京都武蔵野市の武蔵野プレイス。",
+        "author_matches": true,
+        "license_matches": true
+      }
+    },
+    {
+      "case_id": "CASE-042",
+      "source_checks": [
+        {
+          "url": "https://www.u-a-o.jp/project/20200401/a-public-library-at-the-heart-of-a-compact-vibrant-city",
+          "status": 200,
+          "final_url": "https://www.u-a-o.jp/project/20200401/a-public-library-at-the-heart-of-a-compact-vibrant-city",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:Nasushiobara Library Miruru 1.jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:Nasushiobara_Library_Miruru_1.jpg",
+        "artist": "Miyuki Meinaka",
+        "license": "CC BY-SA 4.0",
+        "width": 4608,
+        "height": 3456,
+        "size": 3394961,
+        "sha1": "aad37e83bbf6b3f28d087d99e522d1e91778cb24",
+        "description": "This is Nasushiobara Library Miruru in Nasushiobara, Tochigi, Japan.",
+        "author_matches": true,
+        "license_matches": true
+      }
+    },
+    {
+      "case_id": "CASE-070",
+      "source_checks": [
+        {
+          "url": "https://mikami-arc.co.jp/work/%E7%A0%BA%E6%B3%A2%E5%B8%82%E7%AB%8B%E7%A0%BA%E6%B3%A2%E5%9B%B3%E6%9B%B8%E9%A4%A8",
+          "status": 200,
+          "final_url": "https://mikami-arc.co.jp/work/%E7%A0%BA%E6%B3%A2%E5%B8%82%E7%AB%8B%E7%A0%BA%E6%B3%A2%E5%9B%B3%E6%9B%B8%E9%A4%A8",
+          "ok": true
+        }
+      ],
+      "commons": {
+        "title": "File:砺波市立砺波図書館.jpg",
+        "description_url": "https://commons.wikimedia.org/wiki/File:%E7%A0%BA%E6%B3%A2%E5%B8%82%E7%AB%8B%E7%A0%BA%E6%B3%A2%E5%9B%B3%E6%9B%B8%E9%A4%A8.jpg",
+        "artist": "Whatsfb",
+        "license": "CC BY-SA 4.0",
+        "width": 4160,
+        "height": 3120,
+        "size": 1934326,
+        "sha1": "b4dc5d630eafb3f7796556dafed8a2eab2b4d9f5",
+        "description": "2020年11月1日に移転開館した砺波市立砺波図書館",
+        "author_matches": true,
+        "license_matches": true
+      }
+    }
+  ]
+}
