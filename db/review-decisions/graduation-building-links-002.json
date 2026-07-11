@@ -1,0 +1,210 @@
+{
+  "version": 2,
+  "reviewed_at": "2026-07-12",
+  "scope": "G2 probable-match and original identity-review queue",
+  "source_report": "reports/graduation-building-match-report.json",
+  "summary": {
+    "approved": 3,
+    "rejected": 17,
+    "needs_research": 0,
+    "routed_to_new_building": 17
+  },
+  "decisions": [
+    {
+      "case_id": "CASE-102",
+      "decision": "approved",
+      "building_slug": "kiasma",
+      "case_source_url": "https://www.stevenholl.com/project/kiasma-museum/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": [
+        "Kiasma is the canonical short name for Kiasma Museum of Contemporary Art",
+        "completion year 1998 is identical",
+        "architect Steven Holl is identical",
+        "country code FI matches Helsinki, Finland"
+      ],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Kiasma_museum,_Helsinki.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Cynefin / Wikimedia Commons",
+        "visual_evidence": "The curved internal ramp, white concrete galleries and roof lighting match Kiasma's distinctive interior."
+      }
+    },
+    {
+      "case_id": "CASE-107",
+      "decision": "approved",
+      "building_slug": "taichung-metropolitan-opera",
+      "case_source_url": "https://www.toyo-ito.co.jp/WWW/Project_Descript/2016-/2016-p_01/2016-p_01_en.html",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": [
+        "National Taichung Theater and Taichung Metropolitan Opera House are English naming variants of the same venue",
+        "completion year 2016 is identical",
+        "architect Toyo Ito is identical",
+        "city Taichung and country Taiwan are identical"
+      ],
+      "image": {
+        "status": "approved-after-replacement",
+        "source_url": "https://commons.wikimedia.org/wiki/File:National_Taichung_Theater_20180523.jpg",
+        "license": "CC BY 4.0",
+        "credit": "Robert (S099001) / Wikimedia Commons",
+        "visual_evidence": "Replacement image shows the complete curved concrete facade, entrance signage and civic forecourt; the previous night image showed mainly neighboring towers."
+      }
+    },
+    {
+      "case_id": "CASE-121",
+      "decision": "approved",
+      "building_slug": "hamburg-elbphilharmonie",
+      "case_source_url": "https://www.herzogdemeuron.com/projects/230-elbphilharmonie-hamburg/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": [
+        "Elbphilharmonie and Elbphilharmonie Hamburg are the same named project",
+        "completion year 2017 is identical",
+        "architect Herzog & de Meuron is identical",
+        "city Hamburg and country Germany are identical"
+      ],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Elbphilharmonie_Hamburg_Germany.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Lapscause / Wikimedia Commons",
+        "visual_evidence": "The wave-shaped glass concert hall above the retained brick warehouse unmistakably identifies Elbphilharmonie."
+      }
+    },
+    {
+      "case_id": "CASE-001",
+      "decision": "rejected",
+      "rejected_building_slug": "kanazawa-bunka-hall",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.goi.co.jp/building/share_kanazawa/",
+      "reason": "Share Kanazawa is a GOI-designed welfare and mixed-community project; Kanazawa Bunka Hall is a different cultural venue that only shares the city name."
+    },
+    {
+      "case_id": "CASE-036",
+      "decision": "rejected",
+      "rejected_building_slug": "musashino-art-museum",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.tamabi.ac.jp/en/about/library/",
+      "reason": "Tama Art University Library and Musashino Art University Library belong to different universities, years and architects."
+    },
+    {
+      "case_id": "CASE-041",
+      "decision": "rejected",
+      "rejected_building_slug": "musashino-art-museum",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://benesse-artsite.jp/en/art/seirensho.html",
+      "reason": "Inujima Seirensho Art Museum is an industrial-site museum on Inujima; Musashino Art University Library is an unrelated Tokyo university building."
+    },
+    {
+      "case_id": "CASE-045",
+      "decision": "rejected",
+      "rejected_building_slug": "musashino-art-museum",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://benesse-artsite.jp/en/art/teshima-artmuseum.html",
+      "reason": "Teshima Art Museum and Musashino Art University Library merely share a 2010 completion year; project, island location and architect differ."
+    },
+    {
+      "case_id": "CASE-052",
+      "decision": "rejected",
+      "rejected_building_slug": "miho-museum",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.nikken.co.jp/en/projects/cultural/hoki_museum.html",
+      "reason": "Hoki Museum is a 2010 Nikken Sekkei museum in Chiba; Miho Museum is a 1997 I. M. Pei project in Shiga."
+    },
+    {
+      "case_id": "CASE-053",
+      "decision": "rejected",
+      "rejected_building_slug": "aspen-art-museum",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://shigerubanarchitects.com/works/oita-prefectural-art-museum/",
+      "reason": "Oita Prefectural Art Museum and Aspen Art Museum only share architect and completion year; project name, city, country and program identity differ. Architect normalization now routes the Oita case directly to new-building-candidate instead of a misleading prefectural-museum match."
+    },
+    {
+      "case_id": "CASE-055",
+      "decision": "rejected",
+      "rejected_building_slug": "yamanashi-prefectural-museum-of-art",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://kkaa.co.jp/en/project/nagasaki-prefectural-art-museum/",
+      "reason": "Nagasaki and Yamanashi prefectural art museums are separate institutions in different prefectures with different architects."
+    },
+    {
+      "case_id": "CASE-058",
+      "decision": "rejected",
+      "rejected_building_slug": "iwasaki-art-museum",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.sagawa-artmuseum.or.jp/en/",
+      "reason": "Sagawa Art Museum and Iwasaki Art Museum are different institutions, cities and completion years."
+    },
+    {
+      "case_id": "CASE-060",
+      "decision": "rejected",
+      "rejected_building_slug": "fukuoka-art-museum",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://fukuda-art-museum.jp/en/concept",
+      "reason": "Fukuda Art Museum in Kyoto opened in 2019; Fukuoka Art Museum is a separate 1979 institution in Fukuoka."
+    },
+    {
+      "case_id": "CASE-070",
+      "decision": "rejected",
+      "rejected_building_slug": "new-york-public-library-for",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://mikami-arc.co.jp/work/%E7%A0%BA%E6%B3%A2%E5%B8%82%E7%AB%8B%E7%A0%BA%E6%B3%A2%E5%9B%B3%E6%9B%B8%E9%A4%A8",
+      "reason": "Tonami Public Library is a 2020 Japanese municipal library; the New York performing-arts library is unrelated in geography, program and year."
+    },
+    {
+      "case_id": "CASE-092",
+      "decision": "rejected",
+      "rejected_building_slug": "kagawa-prefectural-office",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.library.pref.ishikawa.lg.jp/category/aboutlibrary/2983.html",
+      "reason": "Ishikawa Prefectural Library is a 2022 library; Kagawa Prefectural Government Office is a 1958 government building in another prefecture."
+    },
+    {
+      "case_id": "CASE-098",
+      "decision": "rejected",
+      "rejected_building_slug": "central-library-des-moines",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://oodihelsinki.fi/en/what-is-oodi/architecture/",
+      "reason": "Helsinki Central Library Oodi and Central Library, Des Moines are separate libraries in different countries, years and architects."
+    },
+    {
+      "case_id": "CASE-109",
+      "decision": "rejected",
+      "rejected_building_slug": "kunsthal",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.museum-joanneum.at/kunsthaus-graz",
+      "reason": "Kunsthaus Graz is a 2003 Peter Cook and Colin Fournier project; Kunsthal Rotterdam is a 1992 OMA project."
+    },
+    {
+      "case_id": "CASE-114",
+      "decision": "rejected",
+      "rejected_building_slug": "schocken-library",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.mecanoo.nl/Projects/project/214/LocHal-Library",
+      "reason": "LocHal is a 2019 Tilburg railway-workshop conversion; Schocken Library is an unrelated historic library separated by 84 years."
+    },
+    {
+      "case_id": "CASE-116",
+      "decision": "rejected",
+      "rejected_building_slug": "kunsthal",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.mvrdv.com/projects/115/markthal",
+      "reason": "Markthal Rotterdam is a 2014 MVRDV market-housing complex; Kunsthal Rotterdam is a 1992 OMA exhibition building."
+    },
+    {
+      "case_id": "CASE-117",
+      "decision": "rejected",
+      "rejected_building_slug": "guangzhou-opera-house",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.snohetta.com/projects/norwegian-national-opera-and-ballet",
+      "reason": "Oslo Opera House and Guangzhou Opera House are separate projects in different countries, years and architects."
+    },
+    {
+      "case_id": "CASE-122",
+      "decision": "rejected",
+      "rejected_building_slug": "walt-disney-concert-hall",
+      "outcome": "new-building-candidate",
+      "case_source_url": "https://www.henninglarsen.com/projects/harpa-reykjavik-concert-hall-and-conference-centre",
+      "reason": "Harpa in Reykjavik and Walt Disney Concert Hall in Los Angeles are separate concert halls with different architects and completion years."
+    }
+  ]
+}

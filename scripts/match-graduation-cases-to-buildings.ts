@@ -81,6 +81,41 @@ export function normalizeIdentity(value: unknown) {
     .replace(/\s+/g, ' ')
 }
 
+export function normalizeArchitectIdentity(value: unknown) {
+  return normalizeIdentity(value)
+    .replace(/\b(architects?|architecture|associates?|atelier|office|studio|corporation|company|co|group|and)\b/g, ' ')
+    .trim()
+    .replace(/\s+/g, ' ')
+}
+
+function architectIdentityCandidates(value: unknown) {
+  const raw = String(value || '')
+  return [raw, ...raw.split(/\s*[+/]\s*|,\s*/)]
+    .map(normalizeArchitectIdentity)
+    .filter(Boolean)
+}
+
+function normalizeVenueAlias(value: unknown) {
+  return normalizeIdentity(value)
+    .replace(/\b(national|metropolitan)\b/g, ' ')
+    .replace(/\b(theatre|theater)\b/g, ' opera house ')
+    .trim()
+    .replace(/\s+/g, ' ')
+}
+
+const genericContainedNames = new Set(['museum', 'library', 'theater', 'theatre', 'opera', 'house', 'center', 'centre'])
+
+function identityNameSimilarity(left: string, right: string) {
+  if (left === right) return 1
+  const venueLeft = normalizeVenueAlias(left)
+  const venueRight = normalizeVenueAlias(right)
+  if (venueLeft && venueLeft === venueRight) return 0.9
+
+  const [shorter, longer] = left.length <= right.length ? [left, right] : [right, left]
+  if (shorter.length >= 5 && !genericContainedNames.has(shorter) && (` ${longer} `).includes(` ${shorter} `)) return 0.9
+  return diceSimilarity(left, right)
+}
+
 function characterBigrams(value: string) {
   const compact = value.replaceAll(' ', '')
   if (compact.length < 2) return compact ? [compact] : []
@@ -112,21 +147,22 @@ function caseNames(item: GraduationCase) {
 }
 
 function buildingNames(building: Building) {
-  return [building.name_en, building.name_zh, building.name_ja, building.slug].map(normalizeIdentity).filter(Boolean)
+  return [building.name_en, building.name_zh, building.name_ja].map(normalizeIdentity).filter(Boolean)
 }
 
 function bestNameSimilarity(item: GraduationCase, building: Building) {
-  return Math.max(0, ...caseNames(item).flatMap(caseName => buildingNames(building).map(buildingName => {
-    if (caseName === buildingName) return 1
-    return diceSimilarity(caseName, buildingName)
-  })))
+  const slugIdentity = normalizeIdentity(building.slug)
+  return Math.max(0, ...caseNames(item).flatMap(caseName => [
+    ...buildingNames(building).map(buildingName => identityNameSimilarity(caseName, buildingName)),
+    diceSimilarity(caseName, slugIdentity),
+  ]))
 }
 
 function architectLookup(architects: Architect[]) {
   const lookup = new Map<string, string>()
   for (const architect of architects) {
     for (const name of [architect.slug, architect.name_en, architect.name_zh, architect.name_ja, ...(architect.alt_names || [])]) {
-      const key = normalizeIdentity(name)
+      const key = normalizeArchitectIdentity(name)
       if (key) lookup.set(key, architect.slug)
     }
   }
@@ -134,14 +170,18 @@ function architectLookup(architects: Architect[]) {
 }
 
 function resolveCaseArchitect(item: GraduationCase, lookup: Map<string, string>) {
-  const raw = normalizeIdentity(item.architect)
-  if (!raw) return null
-  const direct = lookup.get(raw)
-  if (direct) return direct
+  const identities = architectIdentityCandidates(item.architect)
+  if (identities.length === 0) return null
+  for (const identity of identities) {
+    const direct = lookup.get(identity)
+    if (direct) return direct
+  }
   let best: { slug: string; similarity: number } | null = null
-  for (const [name, slug] of lookup) {
-    const similarity = diceSimilarity(raw, name)
-    if (!best || similarity > best.similarity) best = { slug, similarity }
+  for (const identity of identities) {
+    for (const [name, slug] of lookup) {
+      const similarity = diceSimilarity(identity, name)
+      if (!best || similarity > best.similarity) best = { slug, similarity }
+    }
   }
   return best && best.similarity >= 0.88 ? best.slug : null
 }

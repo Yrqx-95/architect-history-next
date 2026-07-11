@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：`G2` 审核 1 条 probable-match 与 19 条 identity-review，逐条排除假阳性并记录明确结论。
+当前下一步：`G3` 设计统一数据库结构、约束、RLS、索引与可回滚迁移草案，不直接写入生产数据库。
 
 ## 最终目标
 
@@ -47,18 +47,20 @@
 
 完成条件：18 条全部有明确决策和证据；未确认记录不会进入迁移。
 
-完成证据：18 条全部 `approved`；逐张视觉审核并记录 Commons 摄影者、许可和来源；替换了未展示建筑本体的 CASE-129 Centre Pompidou 图片；补齐 8 条笼统图片署名/许可并修正 CopenHill 文件名大小写。主体表 18 条 `official_url` 均为空，已作为 G5 迁移时必须从已审案例来源回填的显式数据缺口。决策结构测试 4 个、全部 unit tests 21 个、毕业内容 QA、typecheck、lint、production build 均通过。
+完成证据：18 条全部 `approved`；逐张视觉审核并记录 Commons 摄影者、许可和来源；替换了未展示建筑本体的 CASE-129 Centre Pompidou 图片；补齐 8 条笼统图片署名/许可并修正 CopenHill 文件名大小写。主体表 18 条 `official_url` 均为空，已作为 G5 迁移时必须从已审案例来源回填的显式数据缺口。决策结构测试 4 个、全部 unit tests 21 个、毕业内容 QA、typecheck、lint、production build 均通过。PR #8 合并，merge commit `f07efc1194f9fdfe087399fbac1acee74350fea7`；Reviewed production release run `29162774086` 成功，线上 CASE-129 已验证使用新图片与具体版权信息。
 
-### G2 — 审核 probable 与 identity-review（当前）
+### G2 — 审核 probable 与 identity-review（已完成）
 
-- [ ] 人工核验 Elbphilharmonie probable match。
-- [ ] 逐条处理 19 个 identity-review，优先解决名称相似导致的假阳性。
-- [ ] 将确认不存在于主体库的记录转入 new-building 队列。
-- [ ] 更新匹配器的别名规则，但不为单个案例硬编码错误映射。
+- [x] 人工核验 Elbphilharmonie probable match。
+- [x] 逐条处理 19 个 identity-review，优先解决名称相似导致的假阳性。
+- [x] 将确认不存在于主体库的记录转入 new-building 队列。
+- [x] 更新匹配器的别名规则，但不为单个案例硬编码错误映射。
 
 完成条件：probable 和 identity-review 队列归零或每条都有明确阻塞原因。
 
-### G3 — 设计统一数据库结构
+完成证据：通用归一化后得到 3 probable、16 identity-review；三条 probable（Kiasma、台中国家歌剧院、Elbphilharmonie）全部以名称别名、年份、建筑师和地点批准；16 条当前 identity-review 全部明确拒绝错误候选并转入 new-building，原 CASE-053 也因建筑师归一化自动降入 new-building。版本化决策文件 `db/review-decisions/graduation-building-links-002.json` 共 20 条：3 approved、17 rejected、0 needs-research。CASE-107 替换为完整展示建筑立面的 CC BY 4.0 图片；CASE-121 补齐摄影者与 CC BY-SA 4.0。匹配器新增事务所后缀、短专名和剧场名称通用规则，并增加防止地点 slug 假匹配的回归测试。
+
+### G3 — 设计统一数据库结构（当前）
 
 - [ ] 设计 `graduation_case_profiles`，以 `building_id` 引用唯一建筑主体。
 - [ ] 设计 `building_functions` 细粒度用途词表。

@@ -77,3 +77,26 @@ All public-schema tables must have RLS and explicit read policies before Data AP
 ## Known blindspot
 
 The matcher can detect conflicts but cannot prove architectural identity from names alone. Generic names such as museums, libraries, theatres, and prefectural facilities produce strong-looking false similarities; those records remain in `identity-review` even when a human may later determine that they are new canonical buildings.
+
+## G2 reviewed outcome
+
+The second review pass resolved the original one probable match and nineteen identity-review items. It also improved general matching behavior without adding one-off CASE-to-slug rules:
+
+- architecture-practice suffixes such as `Architects` and `& Associates` are normalized;
+- distinctive short project names can match their expanded institutional names;
+- `theater` / `theatre` and `opera house` wording is treated as a probable alias, never as an exact automatic link;
+- building slugs are excluded from distinctive-name containment so a location-only slug such as `naoshima` cannot create a false alias.
+
+The recalibrated raw queue is 18 exact, 3 probable, 102 new-building candidates and 16 identity-review items. The versioned G2 decision file covers all 3 probable and all 16 current identity-review items, plus CASE-053 which the improved architect normalization safely moved from identity-review to new-building-candidate.
+
+Approved aliases:
+
+| Graduation case | Canonical building | Evidence |
+|---|---|---|
+| CASE-102 — Kiasma Museum of Contemporary Art | `kiasma` | canonical short name, same 1998 completion, Steven Holl, Finland |
+| CASE-107 — National Taichung Theater | `taichung-metropolitan-opera` | English venue-name variant, same 2016 completion, Toyo Ito, Taichung |
+| CASE-121 — Elbphilharmonie | `hamburg-elbphilharmonie` | expanded city name, same 2017 completion, Herzog & de Meuron, Hamburg |
+
+The other 17 fuzzy candidates were rejected as links and routed to canonical new-building research. CASE-107 received a replacement facade image because the previous licensed night photograph showed mainly the surrounding skyline. CASE-121's previously generic Commons credit was replaced with photographer `Lapscause` and `CC BY-SA 4.0`.
+
+Decision artifact: `db/review-decisions/graduation-building-links-002.json`.
