@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：进入 `G6`，对 101 个 new-building candidates 按来源可靠度和毕业页面价值分批审核；第一批只做身份、来源和图片版权决策，不直接批量写库。
+当前下一步：继续 `G6` library batch 001，为已审核的 8 个主体和缺失建筑师生成 guarded migration、rollback 与 PGlite dry-run；不直接写生产数据库。
 
 ## 最终目标
 
@@ -108,15 +108,17 @@
 
 完成证据：PR #13 合并了 21 profiles、9 functions、122 aliases、23 approved assignments 的版本化数据包、guarded apply、rollback 和 PGlite dry-run；merge commit `0df1a59cccadf2ca98aa04638a3677fed19cdb9e`。PR #14 将结构草案正式化；merge commit `e45278e0cf495d001a39def28c9ffb2437e6b6e0`。生产已按顺序执行 `graduation_building_unification_foundation`（`20260711190612`）和 `graduation_unification_batch_001`（`20260711190655`）：21 个唯一 profile、9 functions、122 aliases、23 approved assignments，0 orphan，anon Data API 数量与数据包完全一致，四张新表 RLS 与只读策略有效。PR #15 合并 Supabase + JSON 双轨读取、API/页面回归测试与图片准入闸门；merge commit `c7be179d0423ac32994af5c4cc5230a9f9e17172`。Reviewed production release run `29165219866` 成功；质量门、54 个 unit、19 个 E2E、production build、Cloudflare deploy 与线上路由语义检查全部通过。线上 API 实测 `source=supabase+json`、100 个公开案例、21 个 unified profile、0 missing relation、0 canonical image takeover、21 image fallback；CASE-104 返回 HTTP 200 并显示 canonical 名称/地点/年份、完整联合建筑师和已审核 CC BY-SA 4.0 图片；旧 139 条兼容 JSON 仍返回 HTTP 200。详见 `GRADUATION_UNIFICATION_BATCH_001_PRODUCTION.md` 与 `GRADUATION_CANONICAL_IMAGE_GATE_001.md`。
 
-### G6 — 处理 101 个 new-building candidates
+### G6 — 处理 118 个 new-building candidates
 
-- [ ] 按来源可靠度和毕业页面使用价值分批。
+- [x] 按来源可靠度和毕业页面使用价值分批。
 - [ ] 新建主体前核验建筑身份、建筑师、年份、地点和官方来源。
 - [ ] 图片按 Archistory 版权规则重新审核，不直接继承未经确认的旧图片。
 - [ ] 每批有 apply、rollback、写后审计和发布记录。
 - [ ] 新主体建立后再创建 graduation profile。
 
 完成条件：每条记录已链接主体、明确拒绝或留下可解释的证据缺口。
+
+当前证据：重新以集合核对 139 个 CASE 后，21 个已链接、118 个需要新建主体；旧的 101 是匹配器重算和 G2 错误候选转入新建队列之前的历史快照。版本化队列现在覆盖 118 条，其中 23 条和 library 用途相关。Library batch 001 先审核 CASE-018/021/022/023/027/029/042/070：8 条身份、官方来源、年份、地点和用途均通过；12 个官方证据 URL 实时访问 0 failure，8 个 Commons 文件作者与许可比对 0 mismatch。CASE-027 替换横置低价值图片，CASE-070 纠正“旧馆误当新馆”的错误图片。决策仍为 reviewed-only，没有执行生产 INSERT。详见 `GRADUATION_NEW_BUILDING_LIBRARY_001.md`。
 
 ### G7 — 统一搜索与筛选
 
