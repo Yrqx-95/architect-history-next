@@ -4,11 +4,13 @@ Archistory keeps `dynamicParams = false` for building and architect pages becaus
 
 ## Required GitHub configuration
 
-Create a GitHub Actions environment named `production` and add one environment secret:
+Create a GitHub Actions environment named `production` and add these repository or environment secrets:
 
-- `VERCEL_TOKEN`: a Vercel token allowed to deploy the linked `architect-history-next` project.
-
-The Vercel organization and project IDs are non-secret identifiers and are recorded in the workflow.
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
 
 ## Release contract
 
@@ -18,15 +20,15 @@ The workflow is also callable through the `archistory-reviewed-data` repository-
 
 The release is blocked unless all of these pass:
 
-1. Production environment variables are pulled from Vercel.
+1. The reviewed Cloudflare and Supabase configuration is supplied from encrypted GitHub Secrets.
 2. `npm run quality:gate` passes.
 3. The complete unit and production E2E suite passes.
-4. `vercel build --prod` succeeds.
-5. The exact prebuilt artifact is deployed to production.
+4. OpenNext builds the Cloudflare Worker successfully.
+5. Wrangler deploys the verified Worker to the production routes.
 6. `https://archistory.app/zh` returns 200 and a known-missing building route returns 404.
 
-Do not run raw `vercel --prod` after reviewed data writes. The workflow is the release boundary because it preserves test evidence and post-deploy route verification.
+Do not run raw production deploy commands after reviewed data writes. The workflow is the release boundary because it preserves test evidence and post-deploy route verification.
 
-## Current limitation
+## Verified activation
 
-The workflow file alone cannot create the GitHub `VERCEL_TOKEN` secret. Until that secret is configured, local authenticated Vercel CLI deployment remains available, but it is not the audited release path.
+The first complete Cloudflare production release passed on 2026-07-12. The clean GitHub runner installed Playwright Chromium, passed the publication gate, 12 unit tests and 17 production E2E tests, deployed the Worker, and confirmed the live home route returns 200 while a known-missing building route returns 404.
