@@ -53,7 +53,7 @@ export default function ArchitectDeepArticle({
       {/* ============================================================
           Article Sections — wide editorial band with scholar margins
           ============================================================ */}
-      <div className="relative left-1/2 w-screen -translate-x-1/2 px-4 sm:px-6">
+      <div className="relative left-1/2 w-[var(--viewport-inline-safe)] -translate-x-1/2 px-4 sm:px-6">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-y-10 lg:grid-cols-[9rem_minmax(0,48rem)_13rem] lg:gap-x-10">
           <aside className="hidden lg:block">
             <div className="sticky top-24 border-t border-subtle pt-4">

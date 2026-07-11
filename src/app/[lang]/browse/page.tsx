@@ -42,7 +42,6 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
   const qualityBuildings = buildings.filter(b => isMinimallyComplete(b))
   const buildingCountByArchitect = countBy(buildings, building => building.architect_slug)
   const architectVisualBySlug = buildArchitectVisualMap(qualityBuildings)
-  const architectBySlug = new Map(architects.map(architect => [architect.slug, architect]))
   const eraLabelFor = (value?: string | null) => {
     if (!value) return ''
     const era = eras.find(item => matchesTaxonomy(value, item))
@@ -50,12 +49,6 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
     return lang === 'ja' && isProbablySimplifiedChinese(value) ? '' : value
   }
 
-  const architectsForEra = (era: Era) => architects.filter(architect => matchesTaxonomy(architect.era_slug, era))
-  const buildingsForEra = (era: Era) => buildings.filter(building => {
-    if (matchesTaxonomy(building.era_slug, era)) return true
-    const architect = building.architect_slug ? architectBySlug.get(building.architect_slug) : null
-    return matchesTaxonomy(architect?.era_slug, era)
-  })
   const architectsForStyle = (style: { slug: string; name_en?: string | null; name_zh?: string | null; name_ja?: string | null }) =>
     architects.filter(architect => listMatchesTaxonomy(architect.style_slugs, style))
   const typeCountFor = (type: BuildingType) => buildings.filter(building => matchesTaxonomy(building.type_slug, type)).length
@@ -74,25 +67,6 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
       architects: rankedArchitects.filter(architect => matchesTaxonomy(architect.era_slug, era)).slice(0, 5),
     }))
     .filter(group => group.architects.length > 0)
-
-  const eraItems: BrowseItem[] = [...eras]
-    .sort((a, b) => (a.year_start || 9999) - (b.year_start || 9999))
-    .map(era => {
-      const architectCount = architectsForEra(era).length
-      const buildingCount = buildingsForEra(era).length
-      return {
-        id: era.id,
-        href: `${prefix}/browse/era/${era.slug}`,
-        label: displayName(era, lang),
-        meta: [
-          era.year_start ? `${era.year_start}${era.year_end ? `-${era.year_end}` : ''}` : '',
-          architectCount > 0 ? `${architectCount} ${t(lang, 'architects')}` : '',
-          buildingCount > 0 ? `${buildingCount} ${t(lang, 'buildings')}` : '',
-        ].filter(Boolean).join(' · '),
-        count: architectCount + buildingCount,
-      }
-    })
-    .filter(item => item.count > 0)
 
   const styleItems: BrowseItem[] = [...styles]
     .map(style => ({ style, count: architectsForStyle(style).length }))
@@ -129,13 +103,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
 
   const architectMap = new Map(architects.map(a => [a.slug, displayName(a, lang)]))
   const featuredBuildings = qualityBuildings.slice(0, 6)
-  const historyPathCount = eraItems.length + styleItems.length
   const archiveGroups = [
-    {
-      title: lang === 'en' ? 'Periods' : lang === 'ja' ? '時代' : '时代',
-      body: lang === 'en' ? 'Read works and architects through time.' : lang === 'ja' ? '時代ごとに建築家と作品を読む。' : '按时代阅读建筑师与作品。',
-      items: eraItems.slice(0, 8),
-    },
     {
       title: t(lang, 'styles'),
       body: lang === 'en' ? 'Open formal languages and related works.' : lang === 'ja' ? '様式や形式言語から関連作品へ入る。' : '从风格与形式语言进入相关作品。',
@@ -171,11 +139,27 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
 
       <Reveal>
         <section className="section pt-0">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <EntryCard href={`${prefix}/browse/architects`} label={t(lang, 'architects')} value={`${architects.length}`} meta={lang === 'en' ? 'people' : lang === 'ja' ? '人' : '人物'} />
-            <EntryCard href={`${prefix}/browse/buildings`} label={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'} value={`${qualityBuildings.length}`} meta={t(lang, 'buildings')} />
-            <EntryCard href={`${prefix}/browse/style`} label={lang === 'en' ? 'Periods and styles' : lang === 'ja' ? '時代と様式' : '时代与风格'} value={`${historyPathCount}`} meta={lang === 'en' ? 'archive entries' : lang === 'ja' ? '入口' : '可浏览入口'} />
-            <EntryCard href={`${prefix}/browse/country`} label={t(lang, 'countries')} value={`${countryItems.length}`} meta={lang === 'en' ? 'regions' : lang === 'ja' ? '地域' : '地区'} />
+          <div className="border-y border-subtle py-5">
+            <form action={`${prefix}/search`} className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+              <label className="relative block">
+                <span className="sr-only">{t(lang, 'search')}</span>
+                <input
+                  type="search"
+                  name="q"
+                  placeholder={lang === 'en' ? 'Search a work, architect, city, or period' : lang === 'ja' ? '作品、建築家、都市、時代を検索' : '搜索建筑、建筑师、城市或年代'}
+                  className="min-h-12 w-full border-0 border-b border-subtle bg-transparent py-3 pl-0 pr-4 text-base text-primary placeholder:text-muted focus:border-default focus:outline-none"
+                />
+              </label>
+              <button type="submit" className="interactive-row min-h-12 border-y border-subtle px-4 text-sm font-medium text-primary transition-colors hover:bg-surface-muted/45 lg:border-y-0 lg:border-l">
+                {t(lang, 'search')} →
+              </button>
+            </form>
+            <div className="mt-5 grid border-t border-subtle pt-4 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-[color:var(--ui-border-subtle)]">
+              <ArchivePath href={`${prefix}/browse/buildings`} label={lang === 'en' ? 'Works' : lang === 'ja' ? '作品' : '建筑作品'} hint={lang === 'en' ? 'Start from built examples.' : lang === 'ja' ? '作品から入る。' : '从具体建筑开始。'} />
+              <ArchivePath href={`${prefix}/browse/architects`} label={t(lang, 'architects')} hint={lang === 'en' ? 'Follow people and lineages.' : lang === 'ja' ? '人物と系譜を見る。' : '按人物和谱系阅读。'} />
+              <ArchivePath href={`${prefix}/browse/style`} label={lang === 'en' ? 'Periods / Styles' : lang === 'ja' ? '時代 / 様式' : '时代 / 风格'} hint={lang === 'en' ? 'Narrow by time and language.' : lang === 'ja' ? '時代と形式で絞る。' : '按年代和形式收窄。'} />
+              <ArchivePath href={`${prefix}/browse/country`} label={t(lang, 'countries')} hint={lang === 'en' ? 'Jump by region.' : lang === 'ja' ? '地域から探す。' : '按地区进入。'} />
+            </div>
           </div>
         </section>
       </Reveal>
@@ -249,7 +233,7 @@ export default async function BrowsePage({ params }: { params: Promise<{ lang: s
         </section>
       </Reveal>
 
-      {(eraItems.length > 0 || styleItems.length > 0 || typeItems.length > 0 || countryItems.length > 0) && (
+      {(styleItems.length > 0 || typeItems.length > 0 || countryItems.length > 0) && (
         <Reveal>
           <section id="history-index" className="section scroll-mt-20 border-t border-subtle pt-10 sm:pt-12">
             <SectionHeading
@@ -300,14 +284,11 @@ function topCountries(buildings: Building[], lang: string): Array<{ code: string
   return [...countries.values()].sort((a, b) => b.count - a.count).slice(0, 12)
 }
 
-function EntryCard({ href, label, value, meta }: { href: string; label: string; value: string; meta: string }) {
+function ArchivePath({ href, label, hint }: { href: string; label: string; hint: string }) {
   return (
-    <Link href={href} className="interactive-row group border-y border-subtle px-2 py-4">
-      <p className="label">{label}</p>
-      <div className="mt-4 flex items-end justify-between gap-3">
-        <span className="font-serif-display text-4xl leading-none text-primary">{value}</span>
-        <span className="caption text-right">{meta}</span>
-      </div>
+    <Link href={href} className="interactive-row group block min-h-24 px-2 py-3 transition-colors hover:bg-surface-muted/45 sm:px-3">
+      <span className="text-base font-medium text-primary transition-colors group-hover:text-accent">{label}</span>
+      <span className="mt-2 block text-xs leading-relaxed text-secondary">{hint}</span>
     </Link>
   )
 }
@@ -383,7 +364,7 @@ function PeriodPath({ groups, lang, prefix }: { groups: Array<{ era: Era; archit
 
 function EraLineage({ era, architects, lang, prefix, index }: { era: Era; architects: Architect[]; lang: string; prefix: string; index: number }) {
   return (
-    <div className="grid gap-4 border-t border-subtle py-4 first:border-t-0 md:grid-cols-[3rem_12rem_minmax(0,1fr)_5rem] md:items-start">
+    <div className="grid gap-4 border-t border-subtle py-4 first:border-t-0 md:grid-cols-[3rem_12rem_minmax(0,1fr)] md:items-start">
       <p className="caption tabular-nums">{String(index).padStart(2, '0')}</p>
       <div>
         <Link href={`${prefix}/browse/era/${era.slug}`} className="body-sm font-medium text-primary transition-colors hover:text-accent">
@@ -398,9 +379,6 @@ function EraLineage({ era, architects, lang, prefix, index }: { era: Era; archit
           </Link>
         ))}
       </div>
-      <Link href={`${prefix}/browse/era/${era.slug}`} className="text-xs font-medium text-accent md:text-right">
-        {lang === 'en' ? 'Open' : lang === 'ja' ? '開く' : '打开'} →
-      </Link>
     </div>
   )
 }

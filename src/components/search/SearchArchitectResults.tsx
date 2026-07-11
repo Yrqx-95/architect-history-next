@@ -13,7 +13,7 @@ export default function SearchArchitectResults({ lang, prefix, architects }: Sea
   if (architects.length === 0) return null
 
   return (
-    <section className="mb-8">
+    <section id="search-architects" className="mb-8 scroll-mt-24">
       <h2 className="heading-3 mb-4">
         {t(lang, 'architects')} <span className="font-normal text-muted">({architects.length})</span>
       </h2>

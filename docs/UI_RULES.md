@@ -293,7 +293,7 @@ xl (≥1280px): 4-6 列
 ### 性能
 
 - 滚动驱动动画使用 CSS `animation-timeline: view()`（GPU 加速，无 JS）
-- framer-motion 动画使用 `whileInView` + `once: true`（不重复触发）
+- 需要滚动提示时使用 CSS + IntersectionObserver；内容在 JavaScript 未运行时也必须保持可见
 - `prefers-reduced-motion` 时禁用所有非必要动画
 - 移动端自动降级为静态（检测 touch 设备）
 

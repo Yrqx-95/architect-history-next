@@ -34,6 +34,26 @@ test.describe('core public routes', () => {
     expect(missing.status()).toBe(404)
   })
 
+  test('fallback building and architect copy is disclosed as introductory guidance', async ({ page }) => {
+    await page.goto('/zh/building/auerbacher-home')
+    await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')
+
+    await page.goto('/zh/architect/aldo-rossi')
+    await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')
+
+    await page.goto('/zh/building/church-of-light')
+    await expect(page.getByTestId('content-maturity-note')).toHaveCount(0)
+  })
+
+  test('manually reviewed building content exposes its institutional source', async ({ page }) => {
+    await page.goto('/zh/building/acropolis-museum')
+    await expect(page.getByTestId('content-maturity-note')).toHaveCount(0)
+    await expect(page.getByRole('link', { name: 'Acropolis Museum: The Museum Building' })).toHaveAttribute(
+      'href',
+      'https://www.theacropolismuseum.gr/en/museum-building'
+    )
+  })
+
   test('search API returns matching building results', async ({ request }) => {
     const response = await request.get('/api/search?q=villa%20savoye')
     expect(response.status()).toBe(200)
@@ -41,6 +61,19 @@ test.describe('core public routes', () => {
     const data = await response.json()
     expect(Array.isArray(data.buildings)).toBe(true)
     expect(data.buildings.some((building: { slug?: string }) => building.slug === 'villa-savoye')).toBe(true)
+
+    const overlong = await request.get(`/api/search?q=${'a'.repeat(121)}`)
+    expect(overlong.status()).toBe(400)
+  })
+
+  test('unpromoted archive routes remain accessible but are not indexed', async ({ page }) => {
+    const mapResponse = await page.goto('/zh/map')
+    expect(mapResponse?.status()).toBe(200)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow')
+
+    const pathsResponse = await page.goto('/zh/paths')
+    expect(pathsResponse?.status()).toBe(200)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow')
   })
 
   test('knowledge OS API returns building claims and grounding evidence', async ({ request }) => {
@@ -103,6 +136,20 @@ test.describe('core public routes', () => {
     await page.goto('/zh/graduation/random')
     await expect(page.getByRole('heading', { name: '随机入口' })).toBeVisible()
     await expect(page.getByRole('button', { name: '再来一次' })).toBeVisible()
+  })
+
+  test('graduation routes return 404 for unknown or unpublished content', async ({ request }) => {
+    const [unknownSection, unknownIssue, unpublishedSite, unknownCase] = await Promise.all([
+      request.get('/zh/graduation/__missing-section__'),
+      request.get('/zh/graduation/issues/__missing-issue__'),
+      request.get('/zh/graduation/sites/SITE-021'),
+      request.get('/zh/graduation/cases/__missing-case__'),
+    ])
+
+    expect(unknownSection.status()).toBe(404)
+    expect(unknownIssue.status()).toBe(404)
+    expect(unpublishedSite.status()).toBe(404)
+    expect(unknownCase.status()).toBe(404)
   })
 
   test('graduation public data exports are reachable', async ({ request }) => {

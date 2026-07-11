@@ -800,7 +800,7 @@ function HomePage({ copy, prefix, issues, programs, cases }: {
             body={langAware(copy, '先看日本有哪些社会、城市和生活问题，找到自己有反应的方向。', 'Browse social, urban, and daily-life issues first, then notice what attracts you.', '日本の社会、都市、生活課題を眺め、気になる方向を探す。')}
             primaryHref={`${prefix}/issues`}
             primaryLabel={langAware(copy, '进入社会问题页', 'Open social issues page', '社会課題ページへ')}
-            links={starterIssueLinks.map(item => ({ label: item.label[lang], href: issueSearchHref(prefix, item.query[lang]) }))}
+            links={[]}
           />
           <StarterPath
             index={2}
@@ -1849,13 +1849,15 @@ function StarterPath({ index, title, body, primaryHref, primaryLabel, links }: {
       </div>
       <h3 className="mt-5 text-xl font-semibold leading-snug text-primary">{title}</h3>
       <p className="mt-3 text-sm leading-7 text-secondary">{body}</p>
-      <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-        {links.map(item => (
-          <Link key={item.href} className="min-h-8 border-b border-subtle text-xs font-medium leading-8 text-muted transition-colors hover:border-[color:var(--ui-accent)] hover:text-accent" href={item.href}>
-            {item.label}
-          </Link>
-        ))}
-      </div>
+      {links.length > 0 && (
+        <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
+          {links.map(item => (
+            <Link key={item.href} className="min-h-8 border-b border-subtle text-xs font-medium leading-8 text-muted transition-colors hover:border-[color:var(--ui-accent)] hover:text-accent" href={item.href}>
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -175,6 +175,18 @@ const report = [
 ].join("\n");
 
 writeText("docs/GRADUATION_CONTENT_QA.md", report);
+writeText("reports/graduation-content-audit.json", JSON.stringify({
+  generated_at: new Date().toISOString(),
+  problems,
+  counts: {
+    issues: issues.length,
+    sites: sites.length,
+    cases: cases.length,
+    published_issues: issues.filter((item) => item.status === "published").length,
+    published_sites: sites.filter((item) => item.status === "published").length,
+    published_cases: publishedCases.length,
+  },
+}, null, 2) + "\n");
 console.log(`Graduation content QA: ${issues.length} issues, ${sites.length} site types, ${cases.length} cases`);
 console.log(`Problems: ${problems.length}`);
 if (problems.length > 0) {

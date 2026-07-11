@@ -22,6 +22,7 @@ import ArticleSection from '@/components/ArticleSection'
 import Reveal from '@/components/Reveal'
 import ContinueExploring from '@/components/ContinueExploring'
 import BuildingCard from '@/components/BuildingCard'
+import ContentMaturityNote from '@/components/ContentMaturityNote'
 
 export const dynamicParams = false
 
@@ -919,12 +920,15 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   })
   const overlaySummary = contentOverlay ? localizedBuildingContent(contentOverlay.summary, lang) : ''
   const hasLocalizedOverlay = Boolean(contentOverlay) && !(lang === 'en' && /[\u3400-\u9fff]/.test(overlaySummary))
+  const localizedDatabaseDescription = cleanText(displayText(building.description, lang))
+  const localizedDatabaseSignificance = cleanText(displayText(building.significance, lang))
+  const usesFallbackContent = !hasLocalizedOverlay && (!localizedDatabaseDescription || !localizedDatabaseSignificance)
   const descriptionText = hasLocalizedOverlay && contentOverlay
     ? localizedBuildingContent(contentOverlay.summary, lang)
-    : cleanText(displayText(building.description, lang)) || fallbackContent.summary
+    : localizedDatabaseDescription || fallbackContent.summary
   const sigText = hasLocalizedOverlay && contentOverlay
     ? localizedBuildingContent(contentOverlay.significance, lang)
-    : cleanText(displayText(building.significance, lang)) || fallbackContent.significance
+    : localizedDatabaseSignificance || fallbackContent.significance
   const spatialText = cleanText(displayText(building.spatial_feat, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.spatial)
   const lightText = cleanText(displayText(building.light_feat, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.light)
   const circulationText = cleanText(displayText(building.circulation, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.circulation)
@@ -960,7 +964,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
     <PageShell>
       <Breadcrumb items={[
         { label: t(lang, 'home'), href: `/${lang}` },
-        { label: t(lang, 'buildings'), href: `/${lang}/browse` },
+        { label: t(lang, 'buildings'), href: `/${lang}/browse/buildings` },
         { label: nameText },
       ]} />
 
@@ -981,6 +985,8 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
               {descriptionText}
             </p>
           )}
+
+          {usesFallbackContent && <ContentMaturityNote lang={lang} subject="building" />}
 
           {sigText && <PullQuote>{sigText}</PullQuote>}
         </div>

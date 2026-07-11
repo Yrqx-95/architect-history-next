@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       : lang === 'ja'
       ? '建築家、作品、時代、様式をつなぐ Archistory の資料ルート。'
       : '连接建筑师、作品、时代与风格的 Archistory 档案路线。',
+    robots: { index: false, follow: false },
   }
 }
 

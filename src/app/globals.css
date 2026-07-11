@@ -144,6 +144,7 @@
   --ui-accent-hover: #6f3b21;
   --ui-focus: rgba(143, 79, 48, 0.38);
   --ui-shadow-card: 0 1px 3px rgba(40, 32, 24, 0.07), 0 10px 28px rgba(40, 32, 24, 0.04);
+  --viewport-inline-safe: calc(100vw - 6px);
 }
 
 .dark {
@@ -186,10 +187,10 @@ html.dark {
 /* Homepage keeps its full-bleed editorial layout while following app theme tokens. */
 .home-editorial-surface {
   -webkit-text-size-adjust: 100%;
-  width: 100vw;
+  width: var(--viewport-inline-safe);
   min-height: 100vh;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  margin-left: calc(50% - var(--viewport-inline-safe) / 2);
+  margin-right: calc(50% - var(--viewport-inline-safe) / 2);
   margin-top: -1rem;
   margin-bottom: -1rem;
   padding-top: 1rem;
@@ -455,12 +456,12 @@ img { max-width: 100%; height: auto; }
   --ui-accent: #8f4f30;
   --ui-accent-hover: #6f3b21;
   box-sizing: border-box;
-  width: 100vw;
+  width: var(--viewport-inline-safe);
   min-height: calc(100vh - 6rem);
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  margin-left: calc(50% - var(--viewport-inline-safe) / 2);
+  margin-right: calc(50% - var(--viewport-inline-safe) / 2);
   margin-bottom: -2rem;
-  padding: 0 max(0.75rem, calc((100vw - var(--container-wide)) / 2)) 3rem;
+  padding: 0 max(0.75rem, calc((var(--viewport-inline-safe) - var(--container-wide)) / 2)) 3rem;
   background:
     linear-gradient(180deg, #fffdf8 0%, #f7f4ed 48%, #f1ece2 100%);
   color: var(--ui-text-primary);

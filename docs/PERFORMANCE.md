@@ -1,6 +1,13 @@
 # PERFORMANCE.md — 性能审计与优化
 
-> 最后更新：2026-06-02
+> 当前快照：2026-07-10。旧段落保留为历史审计记录，数值与组件清单以当前代码和验证输出为准。
+
+## 当前基线
+
+- 静态构建：4,108 个页面（`npm run build`，2026-07-10）
+- 页面转场与平滑滚动不再引入客户端动画库；内容可直接渲染
+- 搜索数据读取有 5 分钟共享 in-flight 缓存，搜索请求长度上限为 120 字符
+- 图片代理限制单次上游响应为 12 MiB，超限时返回站内 fallback
 
 ## 当前性能概况
 
@@ -61,12 +68,10 @@ EditorialImage   — 需要 useState (图片错误处理)
 ImageGallery     — 需要 useState/useEffect/useRef (交互)
 LanguageSwitcher — 需要 usePathname (保留当前路径切换语言)
 MobileNav        — 需要 useState (开关)
-PageTransition   — framer-motion
 SearchResults    — 需要 useState/useEffect (搜索)
-SmoothScroll     — lenis 初始化
 ThemeToggle      — 需要 useState (主题切换)
 SafeImage        — next/image 需要
-Reveal           — framer-motion
+Reveal           — CSS + IntersectionObserver，默认内容可见
 ```
 
 ### 建议

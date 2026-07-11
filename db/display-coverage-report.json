@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-08T03:23:13.184Z",
+  "generated_at": "2026-07-11T15:37:26.860Z",
   "totals": {
     "architects": 106,
     "buildings": 875,
-    "images": 7276
+    "images": 7211
   },
   "displayCoverage": {
     "architectTextCoveredByFallback": 106,

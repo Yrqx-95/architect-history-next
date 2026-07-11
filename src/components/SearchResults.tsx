@@ -8,6 +8,7 @@ import SearchSummary from './search/SearchSummary'
 import SearchEmptyState from './search/SearchEmptyState'
 import SearchArchitectResults from './search/SearchArchitectResults'
 import SearchBuildingResults from './search/SearchBuildingResults'
+import SearchNextSteps from './search/SearchNextSteps'
 import type { SearchData } from './search/types'
 
 export default function SearchResults({ lang }: { lang: string }) {
@@ -86,7 +87,15 @@ export default function SearchResults({ lang }: { lang: string }) {
       <SearchSuggestions lang={lang} suggestions={suggestions} onSelect={applySuggestion} />
 
       {searched && !loading && total > 0 && (
-        <SearchSummary lang={lang} total={total} />
+        <>
+          <SearchSummary lang={lang} total={total} />
+          <SearchNextSteps
+            lang={lang}
+            prefix={prefix}
+            architectCount={results?.architects.length || 0}
+            buildingCount={results?.buildings.length || 0}
+          />
+        </>
       )}
 
       {loading && (
@@ -96,11 +105,11 @@ export default function SearchResults({ lang }: { lang: string }) {
       )}
 
       {showEmpty && (
-        <SearchEmptyState lang={lang} prefix={prefix} mode="empty" />
+        <SearchEmptyState lang={lang} mode="empty" />
       )}
 
       {showNone && (
-        <SearchEmptyState lang={lang} prefix={prefix} mode="no-results" />
+        <SearchEmptyState lang={lang} mode="no-results" />
       )}
 
       {results && <SearchArchitectResults lang={lang} prefix={prefix} architects={results.architects} />}

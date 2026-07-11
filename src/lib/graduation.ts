@@ -187,9 +187,13 @@ export function getGraduationStaticSlugs() {
     ['random'],
     ['brief'],
     ['research'],
-    ...graduationIssues.map(issue => ['issues', issue.id]),
+    ...graduationIssues
+      .filter(issue => issue.status === 'published')
+      .map(issue => ['issues', issue.id]),
     ...graduationPrograms.map(program => ['programs', program.id]),
-    ...graduationSiteTypes.map(site => ['sites', site.id]),
+    ...graduationSiteTypes
+      .filter(site => site.status === 'published')
+      .map(site => ['sites', site.id]),
     ...publicGraduationCases.map(item => ['cases', item.id]),
   ]
 }

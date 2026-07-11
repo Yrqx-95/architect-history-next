@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
@@ -13,6 +13,9 @@
     "test:e2e": "playwright test",
     "images:audit": "node --env-file=.env.local scripts/audit-images.mjs",
     "images:registry": "node --env-file=.env.local scripts/build-image-registry.mjs",
+    "images:queue": "node --env-file=.env.local scripts/build-image-fill-queue.mjs",
+    "images:queue:advance": "node --env-file=.env.local scripts/build-image-fill-queue.mjs --advance",
+    "images:prepare-reviewed": "node --env-file=.env.local scripts/prepare-image-fill-reviewed.mjs",
     "images:cache": "node --env-file=.env.local scripts/cache-curated-images.mjs",
     "data:audit": "tsx scripts/audit-data.ts",
     "data:plan-eras": "tsx scripts/plan-era-slugs.ts",
@@ -26,22 +29,26 @@
     "data:normalize-styles": "tsx scripts/normalize-style-slugs.ts",
     "data:apply-type-p0-decisions": "tsx scripts/apply-type-slug-p0-decisions.ts",
     "data:orphan-styles": "tsx scripts/report-orphan-style-slugs.ts",
-    "content:audit": "node --env-file=.env.local scripts/audit-content-coverage.mjs",
+    "content:audit": "tsx --env-file=.env.local scripts/audit-content-coverage.mjs",
     "content:audit-display": "node --env-file=.env.local scripts/audit-display-coverage.mjs",
+    "content:review-sources": "tsx --env-file=.env.local scripts/build-content-source-review-queue.ts",
+    "quality:gate": "npm run data:audit && npm run content:audit && npm run content:audit-display && npm run graduation:audit && node scripts/build-publication-readiness.mjs",
     "content:portraits": "node --env-file=.env.local scripts/build-architect-portraits.mjs",
     "graduation:data": "node scripts/build-graduation-data.mjs",
     "graduation:data:from-json": "node scripts/build-graduation-data.mjs --from-json",
     "graduation:audit": "node scripts/audit-graduation-content.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
-    "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply"
+    "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.10.3",
+    "@opennextjs/cloudflare": "^1.20.1",
     "@supabase/supabase-js": "^2.106.1",
     "@tailwindcss/typography": "^0.5.19",
-    "framer-motion": "^12.40.0",
-    "lenis": "^1.3.23",
     "next": "16.2.6",
     "opencc-js": "^1.3.1",
     "react": "19.2.4",
@@ -58,6 +65,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.8",
+    "wrangler": "^4.110.0"
   }
 }
