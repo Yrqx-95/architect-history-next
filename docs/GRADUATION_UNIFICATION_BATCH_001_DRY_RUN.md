@@ -43,7 +43,7 @@
 
 PGlite 当前使用 PostgreSQL 18 引擎，线上 Supabase 是 PostgreSQL 17.6。本批次只使用 PostgreSQL 17 已支持的表、generated column、RLS、trigger、约束和部分索引语法；上线前仍需在生产变更窗口再次做 schema preflight 和写后查询。
 
-这次演练没有验证 Next.js 双轨读取，因为相应运行时代码属于 G5 后半段；也没有把 draft migration 标记为正式生产 migration。
+这次演练没有验证 Next.js 双轨读取，因为相应运行时代码属于 G5 后半段。foundation 已在演练通过后进入正式 migration 评审，但在 Supabase 写后验证完成前仍不能视为已上线。
 
 ## 依赖安全
 

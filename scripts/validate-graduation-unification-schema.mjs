@@ -3,8 +3,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = process.cwd()
-export const FORWARD_PATH = path.join(ROOT, 'db/migrations/v23-graduation-building-unification-draft.sql')
-export const ROLLBACK_PATH = path.join(ROOT, 'db/migrations/v23-graduation-building-unification-draft-rollback.sql')
+export const FORWARD_PATH = path.join(ROOT, 'db/migrations/v23-graduation-building-unification.sql')
+export const ROLLBACK_PATH = path.join(ROOT, 'db/migrations/v23-graduation-building-unification-rollback.sql')
 
 const TABLES = [
   'graduation_case_profiles',
@@ -20,7 +20,7 @@ function requirePattern(errors, sql, pattern, message) {
 export function validateGraduationUnificationSchema(forwardSql, rollbackSql) {
   const errors = []
 
-  requirePattern(errors, forwardSql, /DRAFT ONLY/i, 'Forward SQL must remain explicitly marked DRAFT ONLY.')
+  requirePattern(errors, forwardSql, /V23: Graduation case \/ building unification foundation/, 'Forward SQL must identify the reviewed V23 foundation migration.')
   requirePattern(errors, forwardSql, /BEGIN;[\s\S]*COMMIT;/, 'Forward SQL must be transactional.')
   requirePattern(errors, rollbackSql, /BEGIN;[\s\S]*COMMIT;/, 'Rollback SQL must be transactional.')
 
@@ -110,7 +110,7 @@ export function validateGraduationUnificationSchema(forwardSql, rollbackSql) {
     .split('\n')
     .filter(line => /^\s*(INSERT INTO|UPDATE\s+public\.|DELETE FROM|TRUNCATE)\b/i.test(line))
   if (executableDml.length > 0) {
-    errors.push(`Structure-only G3 draft contains data mutation: ${executableDml.join(' | ')}`)
+    errors.push(`Structure-only foundation contains data mutation: ${executableDml.join(' | ')}`)
   }
 
   if (/DROP TABLE IF EXISTS public\.(buildings|architects|images|building_types)\b/.test(rollbackSql)) {

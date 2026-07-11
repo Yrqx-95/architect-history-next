@@ -1,10 +1,10 @@
 # 毕业案例与主体建筑统一结构设计（G3）
 
-状态：设计草案，未应用到生产数据库
+状态：已通过隔离 PostgreSQL 双向演练，待 reviewed production migration
 
-对应迁移：`db/migrations/v23-graduation-building-unification-draft.sql`
+对应迁移：`db/migrations/v23-graduation-building-unification.sql`
 
-对应回滚：`db/migrations/v23-graduation-building-unification-draft-rollback.sql`
+对应回滚：`db/migrations/v23-graduation-building-unification-rollback.sql`
 
 ## 设计结论
 
