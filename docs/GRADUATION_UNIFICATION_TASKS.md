@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：`G1` 审核 18 条 exact-match 的来源、图片身份与版权，生成版本化决策文件。
+当前下一步：`G2` 审核 1 条 probable-match 与 19 条 identity-review，逐条排除假阳性并记录明确结论。
 
 ## 最终目标
 
@@ -35,19 +35,21 @@
 
 完成证据：毕业内容 QA 0 problem、typecheck 通过、lint 通过、17 个 unit tests 通过。
 
-### G1 — 审核 18 条 exact-match（当前）
+### G1 — 审核 18 条 exact-match（已完成）
 
-- [ ] 对照毕业案例 `source_url` 与主体建筑来源，确认是同一项目。
-- [ ] 对照建筑师、建成年份、城市和别名。
-- [ ] 检查毕业案例图片与主体图片是否都指向正确建筑。
-- [ ] 检查图片许可、摄影者和来源链接是否可继续使用。
-- [ ] 对每条记录写明 `approved` / `rejected` / `needs-research`。
-- [ ] 生成版本化决策文件，例如 `db/review-decisions/graduation-building-links-001.json`。
-- [ ] 为决策文件增加结构测试，禁止重复 CASE ID 或 building slug 误用。
+- [x] 对照毕业案例 `source_url` 与主体建筑来源，确认是同一项目。
+- [x] 对照建筑师、建成年份、城市和别名。
+- [x] 检查毕业案例图片与主体图片是否都指向正确建筑。
+- [x] 检查图片许可、摄影者和来源链接是否可继续使用。
+- [x] 对每条记录写明 `approved` / `rejected` / `needs-research`。
+- [x] 生成版本化决策文件 `db/review-decisions/graduation-building-links-001.json`。
+- [x] 为决策文件增加结构测试，禁止重复 CASE ID 或 building slug 误用。
 
 完成条件：18 条全部有明确决策和证据；未确认记录不会进入迁移。
 
-### G2 — 审核 probable 与 identity-review
+完成证据：18 条全部 `approved`；逐张视觉审核并记录 Commons 摄影者、许可和来源；替换了未展示建筑本体的 CASE-129 Centre Pompidou 图片；补齐 8 条笼统图片署名/许可并修正 CopenHill 文件名大小写。主体表 18 条 `official_url` 均为空，已作为 G5 迁移时必须从已审案例来源回填的显式数据缺口。决策结构测试 4 个、全部 unit tests 21 个、毕业内容 QA、typecheck、lint、production build 均通过。
+
+### G2 — 审核 probable 与 identity-review（当前）
 
 - [ ] 人工核验 Elbphilharmonie probable match。
 - [ ] 逐条处理 19 个 identity-review，优先解决名称相似导致的假阳性。
