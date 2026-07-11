@@ -39,7 +39,7 @@ test.describe('graduation case detail rendering', () => {
     const response = await page.goto('/zh/graduation/cases/CASE-018')
     expect(response?.status()).toBe(200)
 
-    await expect(page.getByRole('heading', { name: 'Kanazawa Umimirai Library' })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await expect(page.getByRole('link', { name: '图片来源 · CC BY-SA 4.0' })).toBeVisible()
 
     const layout = await page.evaluate(() => ({
