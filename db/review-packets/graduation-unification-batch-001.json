@@ -1,0 +1,2001 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-unification-batch-001",
+  "generated_at": "2026-07-11T18:56:37.215Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation-unification foundation schema is applied",
+    "all four target tables contain no conflicting batch keys",
+    "canonical building UUID and slug pairs still match this pack"
+  ],
+  "counts": {
+    "profiles": 21,
+    "functions": 9,
+    "aliases": 122,
+    "assignments": 23
+  },
+  "profiles": [
+    {
+      "case_id": "CASE-007",
+      "building_id": "582e9988-dfa5-4b9e-8498-b7a82b827c28",
+      "building_slug": "sendai-mediatheque",
+      "concept_zh": "以开放楼板和管状结构承载图书馆、展览与市民活动的多层公共性。",
+      "concept_zh_hant": null,
+      "concept_en": "Sendai Mediatheque is a reference case for reading library, Design topic: 媒体, publicness, learning. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "図書館、ギャラリー、メディア機能を一つの公共建築に重ねた事例。用途を固定せず、市民が多様に使える空間構成を比較できる。",
+      "keywords_zh": [
+        "图书馆",
+        "媒体",
+        "公共性",
+        "学习",
+        "第三空间"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "library",
+        "Design topic: 媒体",
+        "publicness",
+        "learning",
+        "third place"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "メディア",
+        "公共性",
+        "学習",
+        "第三空間"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.smt.jp/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-046",
+      "building_id": "fe4d501b-0cdb-4e50-94b8-d4e87af41cc0",
+      "building_slug": "naoshima-chichu-art-museum",
+      "concept_zh": "大部分埋入地下的美术馆以自然光和几何庭院回应自然景观与艺术体验。",
+      "concept_zh_hant": null,
+      "concept_en": "Chichu Art Museum is a reference case for reading art museum, Design topic: 地下, Design topic: nature光, Design topic: 离岛. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "「Chichu Art Museum」は、美術館・地下・自然光・離島の関係を読み取る参考事例。用途の複合、運営、居場所のつくり方を卒業設計に転用して考えられる。",
+      "keywords_zh": [
+        "美术馆",
+        "地下",
+        "自然光",
+        "离岛",
+        "景观"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "art museum",
+        "Design topic: 地下",
+        "Design topic: nature光",
+        "Design topic: 离岛",
+        "Design topic: 景观"
+      ],
+      "keywords_ja": [
+        "美術館",
+        "地下",
+        "自然光",
+        "離島",
+        "景観"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://benesse-artsite.jp/en/art/chichu.html",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-099",
+      "building_id": "7ae9d279-1d5c-4c28-801e-2ae38f6552b7",
+      "building_slug": "tate-modern",
+      "concept_zh": "旧发电站转为当代美术馆，以涡轮大厅和新展览空间展示产业遗产再利用的公共力量。",
+      "concept_zh_hant": null,
+      "concept_en": "Tate Modern is a reference case for reading industrial heritage, art museum, Design topic: 发电站regeneration, Design topic: public大厅. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "旧発電所を美術館へ転用した事例。産業遺産を壊さず、巨大な内部空間を都市の文化拠点へ変える方法を比較できる。",
+      "keywords_zh": [
+        "产业遗产",
+        "美术馆",
+        "发电站再生",
+        "公共大厅",
+        "文化设施"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "industrial heritage",
+        "art museum",
+        "Design topic: 发电站regeneration",
+        "Design topic: public大厅",
+        "culturefacility"
+      ],
+      "keywords_ja": [
+        "産業遺産",
+        "美術館",
+        "再利用",
+        "公共空間",
+        "都市文化"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.herzogdemeuron.com/projects/126-tate-modern/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-103",
+      "building_id": "c18e2e30-a728-49f5-ad19-503ead0ce1e0",
+      "building_slug": "kanazawa-museum",
+      "concept_zh": "圆形平面把美术馆变成可从多方向进入的城市公共场。",
+      "concept_zh_hant": null,
+      "concept_en": "A circular museum that opens to the city from multiple directions and works like a civic field.",
+      "concept_ja": "円形平面と複数の入口により、美術館を街に開いた公共広場のように扱う事例。市民利用と展示の境界を読める。",
+      "keywords_zh": [
+        "美术馆",
+        "市民广场",
+        "公共性",
+        "多入口",
+        "地域文化"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "museum",
+        "civic plaza",
+        "publicness",
+        "multiple entrances",
+        "regional culture"
+      ],
+      "keywords_ja": [
+        "美術館",
+        "市民広場",
+        "公共性",
+        "複数入口",
+        "地域文化"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.kanazawa21.jp/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-106",
+      "building_id": "a1ca0778-8b46-4400-9b96-56996578c705",
+      "building_slug": "rolex-learning-center",
+      "concept_zh": "连续地景式楼板把学习、交流、休息和校园动线连接起来。",
+      "concept_zh_hant": null,
+      "concept_en": "A continuous landscape-like floor linking learning, encounter, rest, and campus circulation.",
+      "concept_ja": "起伏する一枚の床で、学習、交流、休憩、キャンパス動線を連続させた事例。境界の少ない学習空間を考える参考になる。",
+      "keywords_zh": [
+        "学习中心",
+        "校园",
+        "连续地景",
+        "交流",
+        "开放学习"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "learning center",
+        "campus",
+        "continuous landscape",
+        "exchange",
+        "open learning"
+      ],
+      "keywords_ja": [
+        "学習センター",
+        "キャンパス",
+        "連続地形",
+        "交流",
+        "開放学習"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.archdaily.com/53536/rolex-learning-center-sanaa-by-iwan-baan",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-119",
+      "building_id": "8cc3634e-9443-4c07-951c-f3c76ff20ecf",
+      "building_slug": "louvre-lens",
+      "concept_zh": "低く水平に広がる美術館を公園と接続し、地域再生の文化拠点にした事例。柔らかい公共性を読める。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Louvre-Lens: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "低く水平に広がる美術館を公園と接続し、地域再生の文化拠点にした事例。柔らかい公共性を読める。",
+      "keywords_zh": [
+        "美術館",
+        "公園",
+        "地域再生",
+        "低層",
+        "公共性"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "美術館",
+        "公園",
+        "地域再生",
+        "低層",
+        "公共性"
+      ],
+      "keywords_ja": [
+        "美術館",
+        "公園",
+        "地域再生",
+        "低層",
+        "公共性"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.louvre.fr/en/explore/the-palace/the-louvre-lens",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-123",
+      "building_id": "f110abb5-d8ff-456c-a268-99a9fa403554",
+      "building_slug": "aga-khan-museum",
+      "concept_zh": "庭園、水盤、美術館を通じてイスラム文化を公共教育へ開く事例。多文化と静かな学習空間を考えられる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Aga Khan Museum: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "庭園、水盤、美術館を通じてイスラム文化を公共教育へ開く事例。多文化と静かな学習空間を考えられる。",
+      "keywords_zh": [
+        "美術館",
+        "多文化",
+        "庭園",
+        "水盤",
+        "公共教育"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "美術館",
+        "多文化",
+        "庭園",
+        "水盤",
+        "公共教育"
+      ],
+      "keywords_ja": [
+        "美術館",
+        "多文化",
+        "庭園",
+        "水盤",
+        "公共教育"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.moriyama-teshima.com/projects/aga-khan-museum/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-125",
+      "building_id": "d80be7f7-a8ab-46c3-97ee-a5c7fce26b21",
+      "building_slug": "vitra-haus",
+      "concept_zh": "住宅の原型を積み重ねた展示施設。家具、住まい、ブランド体験、回遊を結びつける参考になる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for VitraHaus: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "住宅の原型を積み重ねた展示施設。家具、住まい、ブランド体験、回遊を結びつける参考になる。",
+      "keywords_zh": [
+        "展示施設",
+        "住宅原型",
+        "ブランド体験",
+        "回遊",
+        "文化観光"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "展示施設",
+        "住宅原型",
+        "ブランド体験",
+        "回遊",
+        "文化観光"
+      ],
+      "keywords_ja": [
+        "展示施設",
+        "住宅原型",
+        "ブランド体験",
+        "回遊",
+        "文化観光"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.herzogdemeuron.com/projects/246-vitrahaus/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-138",
+      "building_id": "7e7252fd-c528-435a-93e7-db2c7db85d82",
+      "building_slug": "copenhill",
+      "concept_zh": "清掃工場をスキー場、クライミング、展望の公共施設へ重ねた事例。環境インフラを都市活動に変える参考になる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for CopenHill: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "清掃工場をスキー場、クライミング、展望の公共施設へ重ねた事例。環境インフラを都市活動に変える参考になる。",
+      "keywords_zh": [
+        "環境インフラ",
+        "清掃工場",
+        "スポーツ",
+        "展望",
+        "都市活動"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "環境インフラ",
+        "清掃工場",
+        "スポーツ",
+        "展望",
+        "都市活動"
+      ],
+      "keywords_ja": [
+        "環境インフラ",
+        "清掃工場",
+        "スポーツ",
+        "展望",
+        "都市活動"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://big.dk/projects/copenhill-191",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-128",
+      "building_id": "b1b8cb5d-1ad2-44e0-a791-e5d56fb20edd",
+      "building_slug": "sesc-pompeia",
+      "concept_zh": "旧工場をスポーツ、劇場、食堂、滞在の文化センターへ転用した事例。日常の公共性と再利用を学べる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for SESC Pompeia: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "旧工場をスポーツ、劇場、食堂、滞在の文化センターへ転用した事例。日常の公共性と再利用を学べる。",
+      "keywords_zh": [
+        "工場再生",
+        "文化センター",
+        "スポーツ",
+        "食堂",
+        "日常公共性"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "工場再生",
+        "文化センター",
+        "スポーツ",
+        "食堂",
+        "日常公共性"
+      ],
+      "keywords_ja": [
+        "工場再生",
+        "文化センター",
+        "スポーツ",
+        "食堂",
+        "日常公共性"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://arquitecturaviva.com/works/sesc-pompeia-factory",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-061",
+      "building_id": "49a21106-36cc-46ad-a50b-eae2ee7e5668",
+      "building_slug": "national-stadium-tokyo",
+      "concept_zh": "大型体育场以层叠木质檐口和公园化边界回应国家赛事设施的日常化问题。",
+      "concept_zh_hant": null,
+      "concept_en": "Japan National Stadium is a reference case for reading Design topic: 体育场, Design topic: 赛事heritage, Design topic: 木材, park. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "「Japan National Stadium」は、スポーツ場・イベント遺産・木材・公園の関係を読み取る参考事例。用途の複合、運営、居場所のつくり方を卒業設計に転用して考えられる。",
+      "keywords_zh": [
+        "体育场",
+        "赛事遗产",
+        "木材",
+        "公园",
+        "城市开放空间"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "Design topic: 体育场",
+        "Design topic: 赛事heritage",
+        "Design topic: 木材",
+        "park",
+        "urbanopenspace"
+      ],
+      "keywords_ja": [
+        "スポーツ場",
+        "イベント遺産",
+        "木材",
+        "公園",
+        "都市開放空間"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://kkaa.co.jp/en/project/japan-national-stadium/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-104",
+      "building_id": "444deee7-5b62-43aa-8b2c-dbc46648e083",
+      "building_slug": "seattle-central-library",
+      "concept_zh": "把图书馆程序堆叠成透明的城市知识基础设施。",
+      "concept_zh_hant": null,
+      "concept_en": "A transparent civic knowledge infrastructure formed by stacking library programs.",
+      "concept_ja": "図書館の機能を積層し、透明な都市インフラとして表現した事例。情報、閲覧、移動、公共性の関係を比較できる。",
+      "keywords_zh": [
+        "图书馆",
+        "知识基础设施",
+        "透明",
+        "城市中心",
+        "学习"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "library",
+        "knowledge infrastructure",
+        "transparency",
+        "city center",
+        "learning"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "知識インフラ",
+        "透明性",
+        "都心",
+        "学習"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.oma.com/projects/seattle-central-library",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-108",
+      "building_id": "7ac209df-dd1c-4600-ac2b-b6f013a9bbff",
+      "building_slug": "pompidou-metz",
+      "concept_zh": "大屋根下に展示、広场和城市活动を包み込む文化拠点。",
+      "concept_zh_hant": null,
+      "concept_en": "A museum under a large roof that receives exhibition, plaza, events, and urban movement.",
+      "concept_ja": "大きな屋根の下に展示、広場、イベント、都市の通り抜けを受け止める美術館。文化施設と都市活動の重ね方を読める。",
+      "keywords_zh": [
+        "美术馆",
+        "大屋根",
+        "市民广场",
+        "展示",
+        "文化活动"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "museum",
+        "large roof",
+        "civic plaza",
+        "exhibition",
+        "cultural activity"
+      ],
+      "keywords_ja": [
+        "美術館",
+        "大屋根",
+        "市民広場",
+        "展示",
+        "文化活動"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://shigerubanarchitects.com/works/cultural/centre-pompidou-metz/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-120",
+      "building_id": "1af2ea73-49d7-4e47-9146-cae45adaddeb",
+      "building_slug": "guangzhou-opera-house",
+      "concept_zh": "劇場と都市広場を強い造形で結び、水辺の文化ランドマークをつくった事例。大規模文化施設の入口を比較できる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Guangzhou Opera House: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "劇場と都市広場を強い造形で結び、水辺の文化ランドマークをつくった事例。大規模文化施設の入口を比較できる。",
+      "keywords_zh": [
+        "劇場",
+        "文化拠点",
+        "水辺",
+        "都市広場",
+        "ランドマーク"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "劇場",
+        "文化拠点",
+        "水辺",
+        "都市広場",
+        "ランドマーク"
+      ],
+      "keywords_ja": [
+        "劇場",
+        "文化拠点",
+        "水辺",
+        "都市広場",
+        "ランドマーク"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.zaha-hadid.com/architecture/guangzhou-opera-house/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-127",
+      "building_id": "e212bd81-0c29-417a-ab24-db4a93661b19",
+      "building_slug": "cctv-headquarters",
+      "concept_zh": "巨大なループ状の高層建築で制作、管理、都市景観を接続した事例。大規模複合施設の構成を比較できる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for CCTV Headquarters: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "巨大なループ状の高層建築で制作、管理、都市景観を接続した事例。大規模複合施設の構成を比較できる。",
+      "keywords_zh": [
+        "大規模複合",
+        "メディア",
+        "高層",
+        "都市景観",
+        "構造"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "大規模複合",
+        "メディア",
+        "高層",
+        "都市景観",
+        "構造"
+      ],
+      "keywords_ja": [
+        "大規模複合",
+        "メディア",
+        "高層",
+        "都市景観",
+        "構造"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.oma.com/projects/cctv-headquarters",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-129",
+      "building_id": "6c32f1bb-fdd4-40b4-8380-256f039b231a",
+      "building_slug": "centre-pompidou",
+      "concept_zh": "展示、図書館、広場、都市イベントを外部化した文化センター。巨大公共施設と街の関係を比較できる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Centre Pompidou: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "展示、図書館、広場、都市イベントを外部化した文化センター。巨大公共施設と街の関係を比較できる。",
+      "keywords_zh": [
+        "文化センター",
+        "図書館",
+        "市民広場",
+        "展示",
+        "都市イベント"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "文化センター",
+        "図書館",
+        "市民広場",
+        "展示",
+        "都市イベント"
+      ],
+      "keywords_ja": [
+        "文化センター",
+        "図書館",
+        "市民広場",
+        "展示",
+        "都市イベント"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.centrepompidou.fr/en/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-131",
+      "building_id": "b06ab0b3-b06d-4965-b14d-dff4b53a6110",
+      "building_slug": "casa-da-musica",
+      "concept_zh": "音楽ホールを都市の中の不定形な公共物として配置した事例。ホール、広場、街の接点を読める。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Casa da Música: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "音楽ホールを都市の中の不定形な公共物として配置した事例。ホール、広場、街の接点を読める。",
+      "keywords_zh": [
+        "音楽ホール",
+        "都市広場",
+        "文化拠点",
+        "公共入口",
+        "上演"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "音楽ホール",
+        "都市広場",
+        "文化拠点",
+        "公共入口",
+        "上演"
+      ],
+      "keywords_ja": [
+        "音楽ホール",
+        "都市広場",
+        "文化拠点",
+        "公共入口",
+        "上演"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.oma.com/projects/casa-da-musica",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-135",
+      "building_id": "750ce23f-0a58-47eb-a898-762fe3c0cd0e",
+      "building_slug": "kunsthal",
+      "concept_zh": "複数の動線を交差させ、展示と公園、道路、入口を接続した美術館。都市の流れと展示施設の関係を読める。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Kunsthal Rotterdam: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "複数の動線を交差させ、展示と公園、道路、入口を接続した美術館。都市の流れと展示施設の関係を読める。",
+      "keywords_zh": [
+        "美術館",
+        "動線",
+        "公園",
+        "都市接続",
+        "展示"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "美術館",
+        "動線",
+        "公園",
+        "都市接続",
+        "展示"
+      ],
+      "keywords_ja": [
+        "美術館",
+        "動線",
+        "公園",
+        "都市接続",
+        "展示"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.oma.com/projects/kunsthal",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-102",
+      "building_id": "e8a453f5-8c49-456c-a4c8-d72217357571",
+      "building_slug": "kiasma",
+      "concept_zh": "以柔和动线和自然光组织当代艺术、美术馆入口和城市界面。",
+      "concept_zh_hant": null,
+      "concept_en": "A contemporary art museum organized through light, curved movement, and a strong urban threshold.",
+      "concept_ja": "自然光と曲線的な動線で展示室、入口、都市との接点をつなぐ美術館。静けさと公共性の両方を読む参考になる。",
+      "keywords_zh": [
+        "美术馆",
+        "自然光",
+        "城市界面",
+        "展览",
+        "静谧"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "museum",
+        "natural light",
+        "urban interface",
+        "exhibition",
+        "quietness"
+      ],
+      "keywords_ja": [
+        "美術館",
+        "自然光",
+        "都市界面",
+        "展示",
+        "静けさ"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.stevenholl.com/project/kiasma-museum/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-107",
+      "building_id": "e611522f-a42e-4915-b518-653bad66b8b3",
+      "building_slug": "taichung-metropolitan-opera",
+      "concept_zh": "表演厅、公共大厅和连续曲面空间共同构成城市文化地标。",
+      "concept_zh_hant": null,
+      "concept_en": "A performing arts complex where theaters, public foyers, and curved spatial continuity form a civic landmark.",
+      "concept_ja": "劇場、公共ロビー、連続する曲面空間が都市の文化拠点をつくる事例。鑑賞前後の滞在や市民利用を考えられる。",
+      "keywords_zh": [
+        "剧场",
+        "文化地标",
+        "公共大厅",
+        "表演",
+        "城市活动"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "theater",
+        "cultural landmark",
+        "public foyer",
+        "performance",
+        "urban activity"
+      ],
+      "keywords_ja": [
+        "劇場",
+        "文化拠点",
+        "公共ロビー",
+        "上演",
+        "都市活動"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.toyo-ito.co.jp/WWW/Project_Descript/2016-/2016-p_01/2016-p_01_en.html",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-121",
+      "building_id": "4d89cb59-b2c1-40fe-89e8-35216f340a08",
+      "building_slug": "hamburg-elbphilharmonie",
+      "concept_zh": "港の倉庫の上にコンサートホールを重ね、都市の水辺と観光、文化を接続した事例。産業遺産更新の参考になる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Elbphilharmonie: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "港の倉庫の上にコンサートホールを重ね、都市の水辺と観光、文化を接続した事例。産業遺産更新の参考になる。",
+      "keywords_zh": [
+        "音楽ホール",
+        "倉庫再生",
+        "港",
+        "文化観光",
+        "都市景観"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "音楽ホール",
+        "倉庫再生",
+        "港",
+        "文化観光",
+        "都市景観"
+      ],
+      "keywords_ja": [
+        "音楽ホール",
+        "倉庫再生",
+        "港",
+        "文化観光",
+        "都市景観"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.herzogdemeuron.com/projects/230-elbphilharmonie-hamburg/",
+      "publication_status": "published"
+    }
+  ],
+  "functions": [
+    {
+      "slug": "library",
+      "broad_type_slug": "cultural",
+      "names": {
+        "zh": "图书馆",
+        "zh-Hant": "圖書館",
+        "en": "Library",
+        "ja": "図書館"
+      },
+      "aliases": {
+        "zh": [
+          "图书馆",
+          "图书室"
+        ],
+        "zh-Hant": [
+          "圖書館",
+          "圖書室"
+        ],
+        "en": [
+          "library",
+          "libraries",
+          "biblioteca",
+          "bibliothèque",
+          "bibliothek"
+        ],
+        "ja": [
+          "図書館",
+          "図書室"
+        ]
+      }
+    },
+    {
+      "slug": "museum",
+      "broad_type_slug": "cultural",
+      "names": {
+        "zh": "博物馆／美术馆",
+        "zh-Hant": "博物館／美術館",
+        "en": "Museum",
+        "ja": "博物館・美術館"
+      },
+      "aliases": {
+        "zh": [
+          "博物馆",
+          "美术馆"
+        ],
+        "zh-Hant": [
+          "博物館",
+          "美術館"
+        ],
+        "en": [
+          "museum",
+          "art museum",
+          "kunsthaus",
+          "kunsthalle"
+        ],
+        "ja": [
+          "博物館",
+          "美術館",
+          "ミュージアム"
+        ]
+      }
+    },
+    {
+      "slug": "theatre",
+      "broad_type_slug": "cultural",
+      "names": {
+        "zh": "剧院／剧场",
+        "zh-Hant": "劇院／劇場",
+        "en": "Theatre",
+        "ja": "劇場"
+      },
+      "aliases": {
+        "zh": [
+          "剧院",
+          "剧场",
+          "歌剧院"
+        ],
+        "zh-Hant": [
+          "劇院",
+          "劇場",
+          "歌劇院"
+        ],
+        "en": [
+          "theatre",
+          "theater",
+          "opera house",
+          "playhouse"
+        ],
+        "ja": [
+          "劇場",
+          "歌劇場",
+          "シアター"
+        ]
+      }
+    },
+    {
+      "slug": "school",
+      "broad_type_slug": "educational",
+      "names": {
+        "zh": "学校",
+        "zh-Hant": "學校",
+        "en": "School",
+        "ja": "学校"
+      },
+      "aliases": {
+        "zh": [
+          "学校",
+          "小学",
+          "中学",
+          "幼儿园"
+        ],
+        "zh-Hant": [
+          "學校",
+          "小學",
+          "中學",
+          "幼兒園"
+        ],
+        "en": [
+          "school",
+          "primary school",
+          "secondary school",
+          "kindergarten"
+        ],
+        "ja": [
+          "学校",
+          "小学校",
+          "中学校",
+          "幼稚園"
+        ]
+      }
+    },
+    {
+      "slug": "university",
+      "broad_type_slug": "educational",
+      "names": {
+        "zh": "大学",
+        "zh-Hant": "大學",
+        "en": "University",
+        "ja": "大学"
+      },
+      "aliases": {
+        "zh": [
+          "大学",
+          "学院"
+        ],
+        "zh-Hant": [
+          "大學",
+          "學院"
+        ],
+        "en": [
+          "university",
+          "college",
+          "faculty building",
+          "campus"
+        ],
+        "ja": [
+          "大学",
+          "大学院",
+          "学部棟",
+          "キャンパス"
+        ]
+      }
+    },
+    {
+      "slug": "community-center",
+      "broad_type_slug": "civic-public",
+      "names": {
+        "zh": "社区中心",
+        "zh-Hant": "社區中心",
+        "en": "Community Center",
+        "ja": "コミュニティセンター"
+      },
+      "aliases": {
+        "zh": [
+          "社区中心",
+          "社区活动中心",
+          "市民中心"
+        ],
+        "zh-Hant": [
+          "社區中心",
+          "社區活動中心",
+          "市民中心"
+        ],
+        "en": [
+          "community center",
+          "community centre",
+          "civic center",
+          "civic centre"
+        ],
+        "ja": [
+          "コミュニティセンター",
+          "地域センター",
+          "市民センター",
+          "公民館"
+        ]
+      }
+    },
+    {
+      "slug": "elderly-care",
+      "broad_type_slug": "healthcare",
+      "names": {
+        "zh": "养老与高龄照护",
+        "zh-Hant": "養老與高齡照護",
+        "en": "Elderly Care",
+        "ja": "高齢者ケア"
+      },
+      "aliases": {
+        "zh": [
+          "养老院",
+          "养老设施",
+          "老年照护",
+          "高龄者设施"
+        ],
+        "zh-Hant": [
+          "養老院",
+          "養老設施",
+          "老年照護",
+          "高齡者設施"
+        ],
+        "en": [
+          "elderly care",
+          "senior care",
+          "nursing home",
+          "assisted living"
+        ],
+        "ja": [
+          "高齢者施設",
+          "老人ホーム",
+          "介護施設",
+          "高齢者ケア"
+        ]
+      }
+    },
+    {
+      "slug": "social-housing",
+      "broad_type_slug": "residential",
+      "names": {
+        "zh": "社会住宅",
+        "zh-Hant": "社會住宅",
+        "en": "Social Housing",
+        "ja": "公営・社会住宅"
+      },
+      "aliases": {
+        "zh": [
+          "社会住宅",
+          "公共住宅",
+          "保障性住房",
+          "廉租房"
+        ],
+        "zh-Hant": [
+          "社會住宅",
+          "公共住宅",
+          "保障性住房",
+          "廉租屋"
+        ],
+        "en": [
+          "social housing",
+          "public housing",
+          "affordable housing",
+          "council housing"
+        ],
+        "ja": [
+          "社会住宅",
+          "公営住宅",
+          "公共住宅",
+          "低所得者住宅"
+        ]
+      }
+    },
+    {
+      "slug": "mixed-use",
+      "broad_type_slug": "mixed-use",
+      "names": {
+        "zh": "混合用途",
+        "zh-Hant": "混合用途",
+        "en": "Mixed Use",
+        "ja": "複合用途"
+      },
+      "aliases": {
+        "zh": [
+          "混合用途",
+          "综合体",
+          "复合设施"
+        ],
+        "zh-Hant": [
+          "混合用途",
+          "綜合體",
+          "複合設施"
+        ],
+        "en": [
+          "mixed use",
+          "mixed-use",
+          "multi-use complex",
+          "multipurpose complex"
+        ],
+        "ja": [
+          "複合用途",
+          "複合施設",
+          "ミクストユース"
+        ]
+      }
+    }
+  ],
+  "aliases": [
+    {
+      "function_slug": "library",
+      "locale": "zh",
+      "alias": "图书馆",
+      "normalized_alias": "图书馆"
+    },
+    {
+      "function_slug": "library",
+      "locale": "zh",
+      "alias": "图书室",
+      "normalized_alias": "图书室"
+    },
+    {
+      "function_slug": "library",
+      "locale": "zh-Hant",
+      "alias": "圖書館",
+      "normalized_alias": "圖書館"
+    },
+    {
+      "function_slug": "library",
+      "locale": "zh-Hant",
+      "alias": "圖書室",
+      "normalized_alias": "圖書室"
+    },
+    {
+      "function_slug": "library",
+      "locale": "en",
+      "alias": "library",
+      "normalized_alias": "library"
+    },
+    {
+      "function_slug": "library",
+      "locale": "en",
+      "alias": "libraries",
+      "normalized_alias": "libraries"
+    },
+    {
+      "function_slug": "library",
+      "locale": "en",
+      "alias": "biblioteca",
+      "normalized_alias": "biblioteca"
+    },
+    {
+      "function_slug": "library",
+      "locale": "en",
+      "alias": "bibliothèque",
+      "normalized_alias": "bibliothèque"
+    },
+    {
+      "function_slug": "library",
+      "locale": "en",
+      "alias": "bibliothek",
+      "normalized_alias": "bibliothek"
+    },
+    {
+      "function_slug": "library",
+      "locale": "ja",
+      "alias": "図書館",
+      "normalized_alias": "図書館"
+    },
+    {
+      "function_slug": "library",
+      "locale": "ja",
+      "alias": "図書室",
+      "normalized_alias": "図書室"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "zh",
+      "alias": "博物馆",
+      "normalized_alias": "博物馆"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "zh",
+      "alias": "美术馆",
+      "normalized_alias": "美术馆"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "zh-Hant",
+      "alias": "博物館",
+      "normalized_alias": "博物館"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "zh-Hant",
+      "alias": "美術館",
+      "normalized_alias": "美術館"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "en",
+      "alias": "museum",
+      "normalized_alias": "museum"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "en",
+      "alias": "art museum",
+      "normalized_alias": "art museum"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "en",
+      "alias": "kunsthaus",
+      "normalized_alias": "kunsthaus"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "en",
+      "alias": "kunsthalle",
+      "normalized_alias": "kunsthalle"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "ja",
+      "alias": "博物館",
+      "normalized_alias": "博物館"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "ja",
+      "alias": "美術館",
+      "normalized_alias": "美術館"
+    },
+    {
+      "function_slug": "museum",
+      "locale": "ja",
+      "alias": "ミュージアム",
+      "normalized_alias": "ミュージアム"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "zh",
+      "alias": "剧院",
+      "normalized_alias": "剧院"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "zh",
+      "alias": "剧场",
+      "normalized_alias": "剧场"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "zh",
+      "alias": "歌剧院",
+      "normalized_alias": "歌剧院"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "zh-Hant",
+      "alias": "劇院",
+      "normalized_alias": "劇院"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "zh-Hant",
+      "alias": "劇場",
+      "normalized_alias": "劇場"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "zh-Hant",
+      "alias": "歌劇院",
+      "normalized_alias": "歌劇院"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "en",
+      "alias": "theatre",
+      "normalized_alias": "theatre"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "en",
+      "alias": "theater",
+      "normalized_alias": "theater"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "en",
+      "alias": "opera house",
+      "normalized_alias": "opera house"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "en",
+      "alias": "playhouse",
+      "normalized_alias": "playhouse"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "ja",
+      "alias": "劇場",
+      "normalized_alias": "劇場"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "ja",
+      "alias": "歌劇場",
+      "normalized_alias": "歌劇場"
+    },
+    {
+      "function_slug": "theatre",
+      "locale": "ja",
+      "alias": "シアター",
+      "normalized_alias": "シアター"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh",
+      "alias": "学校",
+      "normalized_alias": "学校"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh",
+      "alias": "小学",
+      "normalized_alias": "小学"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh",
+      "alias": "中学",
+      "normalized_alias": "中学"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh",
+      "alias": "幼儿园",
+      "normalized_alias": "幼儿园"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh-Hant",
+      "alias": "學校",
+      "normalized_alias": "學校"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh-Hant",
+      "alias": "小學",
+      "normalized_alias": "小學"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh-Hant",
+      "alias": "中學",
+      "normalized_alias": "中學"
+    },
+    {
+      "function_slug": "school",
+      "locale": "zh-Hant",
+      "alias": "幼兒園",
+      "normalized_alias": "幼兒園"
+    },
+    {
+      "function_slug": "school",
+      "locale": "en",
+      "alias": "school",
+      "normalized_alias": "school"
+    },
+    {
+      "function_slug": "school",
+      "locale": "en",
+      "alias": "primary school",
+      "normalized_alias": "primary school"
+    },
+    {
+      "function_slug": "school",
+      "locale": "en",
+      "alias": "secondary school",
+      "normalized_alias": "secondary school"
+    },
+    {
+      "function_slug": "school",
+      "locale": "en",
+      "alias": "kindergarten",
+      "normalized_alias": "kindergarten"
+    },
+    {
+      "function_slug": "school",
+      "locale": "ja",
+      "alias": "学校",
+      "normalized_alias": "学校"
+    },
+    {
+      "function_slug": "school",
+      "locale": "ja",
+      "alias": "小学校",
+      "normalized_alias": "小学校"
+    },
+    {
+      "function_slug": "school",
+      "locale": "ja",
+      "alias": "中学校",
+      "normalized_alias": "中学校"
+    },
+    {
+      "function_slug": "school",
+      "locale": "ja",
+      "alias": "幼稚園",
+      "normalized_alias": "幼稚園"
+    },
+    {
+      "function_slug": "university",
+      "locale": "zh",
+      "alias": "大学",
+      "normalized_alias": "大学"
+    },
+    {
+      "function_slug": "university",
+      "locale": "zh",
+      "alias": "学院",
+      "normalized_alias": "学院"
+    },
+    {
+      "function_slug": "university",
+      "locale": "zh-Hant",
+      "alias": "大學",
+      "normalized_alias": "大學"
+    },
+    {
+      "function_slug": "university",
+      "locale": "zh-Hant",
+      "alias": "學院",
+      "normalized_alias": "學院"
+    },
+    {
+      "function_slug": "university",
+      "locale": "en",
+      "alias": "university",
+      "normalized_alias": "university"
+    },
+    {
+      "function_slug": "university",
+      "locale": "en",
+      "alias": "college",
+      "normalized_alias": "college"
+    },
+    {
+      "function_slug": "university",
+      "locale": "en",
+      "alias": "faculty building",
+      "normalized_alias": "faculty building"
+    },
+    {
+      "function_slug": "university",
+      "locale": "en",
+      "alias": "campus",
+      "normalized_alias": "campus"
+    },
+    {
+      "function_slug": "university",
+      "locale": "ja",
+      "alias": "大学",
+      "normalized_alias": "大学"
+    },
+    {
+      "function_slug": "university",
+      "locale": "ja",
+      "alias": "大学院",
+      "normalized_alias": "大学院"
+    },
+    {
+      "function_slug": "university",
+      "locale": "ja",
+      "alias": "学部棟",
+      "normalized_alias": "学部棟"
+    },
+    {
+      "function_slug": "university",
+      "locale": "ja",
+      "alias": "キャンパス",
+      "normalized_alias": "キャンパス"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "zh",
+      "alias": "社区中心",
+      "normalized_alias": "社区中心"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "zh",
+      "alias": "社区活动中心",
+      "normalized_alias": "社区活动中心"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "zh",
+      "alias": "市民中心",
+      "normalized_alias": "市民中心"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "zh-Hant",
+      "alias": "社區中心",
+      "normalized_alias": "社區中心"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "zh-Hant",
+      "alias": "社區活動中心",
+      "normalized_alias": "社區活動中心"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "zh-Hant",
+      "alias": "市民中心",
+      "normalized_alias": "市民中心"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "en",
+      "alias": "community center",
+      "normalized_alias": "community center"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "en",
+      "alias": "community centre",
+      "normalized_alias": "community centre"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "en",
+      "alias": "civic center",
+      "normalized_alias": "civic center"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "en",
+      "alias": "civic centre",
+      "normalized_alias": "civic centre"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "ja",
+      "alias": "コミュニティセンター",
+      "normalized_alias": "コミュニティセンター"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "ja",
+      "alias": "地域センター",
+      "normalized_alias": "地域センター"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "ja",
+      "alias": "市民センター",
+      "normalized_alias": "市民センター"
+    },
+    {
+      "function_slug": "community-center",
+      "locale": "ja",
+      "alias": "公民館",
+      "normalized_alias": "公民館"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh",
+      "alias": "养老院",
+      "normalized_alias": "养老院"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh",
+      "alias": "养老设施",
+      "normalized_alias": "养老设施"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh",
+      "alias": "老年照护",
+      "normalized_alias": "老年照护"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh",
+      "alias": "高龄者设施",
+      "normalized_alias": "高龄者设施"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh-Hant",
+      "alias": "養老院",
+      "normalized_alias": "養老院"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh-Hant",
+      "alias": "養老設施",
+      "normalized_alias": "養老設施"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh-Hant",
+      "alias": "老年照護",
+      "normalized_alias": "老年照護"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "zh-Hant",
+      "alias": "高齡者設施",
+      "normalized_alias": "高齡者設施"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "en",
+      "alias": "elderly care",
+      "normalized_alias": "elderly care"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "en",
+      "alias": "senior care",
+      "normalized_alias": "senior care"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "en",
+      "alias": "nursing home",
+      "normalized_alias": "nursing home"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "en",
+      "alias": "assisted living",
+      "normalized_alias": "assisted living"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "ja",
+      "alias": "高齢者施設",
+      "normalized_alias": "高齢者施設"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "ja",
+      "alias": "老人ホーム",
+      "normalized_alias": "老人ホーム"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "ja",
+      "alias": "介護施設",
+      "normalized_alias": "介護施設"
+    },
+    {
+      "function_slug": "elderly-care",
+      "locale": "ja",
+      "alias": "高齢者ケア",
+      "normalized_alias": "高齢者ケア"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh",
+      "alias": "社会住宅",
+      "normalized_alias": "社会住宅"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh",
+      "alias": "公共住宅",
+      "normalized_alias": "公共住宅"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh",
+      "alias": "保障性住房",
+      "normalized_alias": "保障性住房"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh",
+      "alias": "廉租房",
+      "normalized_alias": "廉租房"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh-Hant",
+      "alias": "社會住宅",
+      "normalized_alias": "社會住宅"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh-Hant",
+      "alias": "公共住宅",
+      "normalized_alias": "公共住宅"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh-Hant",
+      "alias": "保障性住房",
+      "normalized_alias": "保障性住房"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "zh-Hant",
+      "alias": "廉租屋",
+      "normalized_alias": "廉租屋"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "en",
+      "alias": "social housing",
+      "normalized_alias": "social housing"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "en",
+      "alias": "public housing",
+      "normalized_alias": "public housing"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "en",
+      "alias": "affordable housing",
+      "normalized_alias": "affordable housing"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "en",
+      "alias": "council housing",
+      "normalized_alias": "council housing"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "ja",
+      "alias": "社会住宅",
+      "normalized_alias": "社会住宅"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "ja",
+      "alias": "公営住宅",
+      "normalized_alias": "公営住宅"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "ja",
+      "alias": "公共住宅",
+      "normalized_alias": "公共住宅"
+    },
+    {
+      "function_slug": "social-housing",
+      "locale": "ja",
+      "alias": "低所得者住宅",
+      "normalized_alias": "低所得者住宅"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "zh",
+      "alias": "混合用途",
+      "normalized_alias": "混合用途"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "zh",
+      "alias": "综合体",
+      "normalized_alias": "综合体"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "zh",
+      "alias": "复合设施",
+      "normalized_alias": "复合设施"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "zh-Hant",
+      "alias": "混合用途",
+      "normalized_alias": "混合用途"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "zh-Hant",
+      "alias": "綜合體",
+      "normalized_alias": "綜合體"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "zh-Hant",
+      "alias": "複合設施",
+      "normalized_alias": "複合設施"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "en",
+      "alias": "mixed use",
+      "normalized_alias": "mixed use"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "en",
+      "alias": "mixed-use",
+      "normalized_alias": "mixed-use"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "en",
+      "alias": "multi-use complex",
+      "normalized_alias": "multi-use complex"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "en",
+      "alias": "multipurpose complex",
+      "normalized_alias": "multipurpose complex"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "ja",
+      "alias": "複合用途",
+      "normalized_alias": "複合用途"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "ja",
+      "alias": "複合施設",
+      "normalized_alias": "複合施設"
+    },
+    {
+      "function_slug": "mixed-use",
+      "locale": "ja",
+      "alias": "ミクストユース",
+      "normalized_alias": "ミクストユース"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "45e768be-5423-4315-b982-c14ff6dcacda",
+      "building_slug": "atlanta-fulton-county-central-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q105751960",
+      "evidence_note": "Atlanta Fulton County Central Library is classified as a library building in the United States.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "d57bbedb-6ed6-49ec-aa9b-2698c4f50cf7",
+      "building_slug": "beinecke-rare-book-manuscript-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q814779",
+      "evidence_note": "Beinecke Rare Book & Manuscript Library is classified as an academic, rare-book and library building.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "faa20fe8-e4be-4dde-a9b9-137c89c6e4cd",
+      "building_slug": "biblioteca-comunale-centrale-antonio-tiraboschi",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q3639566",
+      "evidence_note": "Biblioteca Antonio Tiraboschi is classified as a public library and a library of an Italian territorial body.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "2f9e5b43-f509-4b50-aa6c-34ab79e0659d",
+      "building_slug": "biblioteca-municipal-de-viana-do",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q17318051",
+      "evidence_note": "Biblioteca Municipal de Viana do Castelo is classified as a library, public library, municipal library and library building.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b60c6ff1-0ddc-4c17-9aec-cf4cac8cd386",
+      "building_slug": "c-v-starr-east-asian",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q118903541",
+      "evidence_note": "C. V. Starr East Asian Library is classified as a library building in the United States.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "0a272df1-7d88-445a-8fa3-b084e937ce51",
+      "building_slug": "central-library-des-moines",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q66042452",
+      "evidence_note": "Central Library, Des Moines is classified as a library building in the United States.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "0e48c41e-53ae-41dd-bc7d-f6d508afe942",
+      "building_slug": "dortmund-city-and-state-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.dortmund.de/themen/bildung/stadt-und-landesbibliothek/",
+      "evidence_note": "The City of Dortmund operates this building as the Stadt- und Landesbibliothek.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "8bd1a441-71ca-4bcf-90df-f6d97eaee9b1",
+      "building_slug": "grosse-pointe-public-library-central",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q106900422",
+      "evidence_note": "Grosse Pointe Public Library Central Branch is classified as a library building in the United States.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "c7547211-daeb-477e-912c-6dab71109027",
+      "building_slug": "hill-museum-manuscript-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q5762205",
+      "evidence_note": "Hill Museum & Manuscript Library is explicitly classified as both a library and a museum.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "c7547211-daeb-477e-912c-6dab71109027",
+      "building_slug": "hill-museum-manuscript-library",
+      "function_slug": "museum",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q5762205",
+      "evidence_note": "Hill Museum & Manuscript Library is explicitly classified as both a library and a museum.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "2efb1ed3-23c9-47ab-b088-6932da4f8e23",
+      "building_slug": "laurentian-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.bmlonline.it/",
+      "evidence_note": "The official Biblioteca Medicea Laurenziana site identifies and operates the Laurentian Library.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "63c9fd31-6ac6-49e0-b5e8-58a2eac5bbec",
+      "building_slug": "library-of-the-university-of",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q3755932",
+      "evidence_note": "The University of Deusto building is classified as an academic and main library.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "8e52c196-ae39-4bb0-9cca-2fedc1140d70",
+      "building_slug": "lyndon-baines-johnson-library-and",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.lbjlibrary.org/",
+      "evidence_note": "The official LBJ Presidential Library site describes a research library and public museum in Austin, Texas.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "8e52c196-ae39-4bb0-9cca-2fedc1140d70",
+      "building_slug": "lyndon-baines-johnson-library-and",
+      "function_slug": "museum",
+      "confidence": "1.000",
+      "evidence_url": "https://www.lbjlibrary.org/",
+      "evidence_note": "The official LBJ Presidential Library site describes a research library and public museum in Austin, Texas.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "5a412752-58bc-4fdd-9677-446e7b1375ae",
+      "building_slug": "musashino-art-museum",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://mauml.musabi.ac.jp/en/",
+      "evidence_note": "Musashino Art University's official Museum & Library site operates both museum and library facilities.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "5a412752-58bc-4fdd-9677-446e7b1375ae",
+      "building_slug": "musashino-art-museum",
+      "function_slug": "museum",
+      "confidence": "1.000",
+      "evidence_url": "https://mauml.musabi.ac.jp/en/",
+      "evidence_note": "Musashino Art University's official Museum & Library site operates both museum and library facilities.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "6253770b-bc9d-44b5-81c2-f7a97430c78f",
+      "building_slug": "new-york-public-library-for",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q7013890",
+      "evidence_note": "New York Public Library for the Performing Arts is classified as a public, research and branch library.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "505d64e1-35f7-4419-9f10-36c40af6607b",
+      "building_slug": "niagara-falls-public-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q65068973",
+      "evidence_note": "Niagara Falls Public Library is classified as a main library in the United States.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "a52fc3e3-78a4-4be7-851b-163997e379b2",
+      "building_slug": "r-dovre-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q21098720",
+      "evidence_note": "Rødovre Library is classified as a municipal library in Denmark.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b3c550f7-67b9-4516-bd47-b6941cd46995",
+      "building_slug": "rovaniemi-city-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q10547804",
+      "evidence_note": "Rovaniemi City Library is classified as a library and municipal library in Finland.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "557b9c4c-8f0a-49bf-b489-b836aadbbd87",
+      "building_slug": "schocken-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.wikidata.org/wiki/Q6756158",
+      "evidence_note": "Schocken Library is classified as an academic and reference library in Israel.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "444deee7-5b62-43aa-8b2c-dbc46648e083",
+      "building_slug": "seattle-central-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.spl.org/hours-and-locations/central-library",
+      "evidence_note": "The Seattle Public Library's official page identifies the Central Library and its library collections and services.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "0ed33a5f-0285-419d-87a2-a8a7e313fd8e",
+      "building_slug": "vyborg-library",
+      "function_slug": "library",
+      "confidence": "1.000",
+      "evidence_url": "https://www.alvaraalto.fi/en/architecture/alvar-aalto-library/",
+      "evidence_note": "The Alvar Aalto Foundation documents the Vyborg Central Library and its completion in 1935.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}

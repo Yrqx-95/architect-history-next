@@ -94,15 +94,19 @@
 
 完成证据：版本化决策文件 `db/review-decisions/building-function-library-001.json` 覆盖全部 20 个 library 候选；16 条由 Wikidata `instance of` 关系确认，4 条由官方机构或建筑师基金会页面确认，20 个证据 URL 全部可访问。20 条全部批准 library，Hill Museum & Manuscript Library、LBJ Library and Museum、Musashino Art University Museum & Library 同时批准 museum，验证了多用途关系。四语查询均先解析为 `library` slug，再返回同一 approved 集合；9 个专项测试通过。另发现 5 条主体元数据 warning，已单独记录，未混入用途写入。
 
+合并证据：PR #12 的 Quality baseline run `29164234121` 成功，merge commit `a5c1985b3cc09c09cd44b335317b31750645df29`。本阶段只有审核数据、报告和测试，没有生产数据库写入或网站部署。
+
 ### G5 — 迁移首批已批准映射
 
-- [ ] 为 G1/G2 批准记录生成 guarded migration 和 rollback。
-- [ ] 在写入前验证 CASE ID、building ID、source URL 和行数。
+- [x] 为 G1/G2 批准记录生成 guarded migration 和 rollback。
+- [x] 在写入前验证 CASE ID、building ID、source URL 和行数。
 - [ ] 写入后查询验证 profile 数、外键和重复约束。
 - [ ] 保留旧 JSON，开启 Supabase + JSON 双轨读取。
 - [ ] 新增 API/页面测试，比较双轨结果一致性。
 
 完成条件：批准案例从统一主体读取基础资料，旧页面和导出没有变化。
+
+当前证据：`graduation-unification-batch-001` 已生成 21 profiles、9 functions、122 aliases、23 approved assignments 的版本化数据包、guarded apply 和 rollback。PGlite 隔离 PostgreSQL 完成 foundation→seed→RLS→rollback→第二次 forward→第二次 rollback 全流程；写入行数完全匹配，anon/authenticated 只能看到 published/active/approved，anon 写入被拒绝，40 个 canonical buildings 未改变。50 个 unit tests、typecheck、lint 通过。尚未执行生产写入，也尚未实现 Supabase + JSON 双轨读取，因此 G5 仍在进行中。
 
 ### G6 — 处理 101 个 new-building candidates
 
