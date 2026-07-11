@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：`G3` 设计统一数据库结构、约束、RLS、索引与可回滚迁移草案，不直接写入生产数据库。
+当前下一步：`G4` 定义第一版细粒度用途词表与四语别名，并生成 875 座建筑的只读候选队列；先审核图书馆批次，不直接写入生产数据库。
 
 ## 最终目标
 
@@ -60,18 +60,22 @@
 
 完成证据：通用归一化后得到 3 probable、16 identity-review；三条 probable（Kiasma、台中国家歌剧院、Elbphilharmonie）全部以名称别名、年份、建筑师和地点批准；16 条当前 identity-review 全部明确拒绝错误候选并转入 new-building，原 CASE-053 也因建筑师归一化自动降入 new-building。版本化决策文件 `db/review-decisions/graduation-building-links-002.json` 共 20 条：3 approved、17 rejected、0 needs-research。CASE-107 替换为完整展示建筑立面的 CC BY 4.0 图片；CASE-121 补齐摄影者与 CC BY-SA 4.0。匹配器新增事务所后缀、短专名和剧场名称通用规则，并增加防止地点 slug 假匹配的回归测试。
 
-### G3 — 设计统一数据库结构（当前）
+发布证据：PR #9 合并，merge commit `0613fbf87eb24bdd6d56fabd850cc594ebb9709b`；Reviewed production release run `29163477904` 成功。线上 CASE-107 与 CASE-121 均返回 HTTP 200；公开 JSON 已分别返回 Robert (S099001) / CC BY 4.0 与 Lapscause / CC BY-SA 4.0 的具体版权信息。
 
-- [ ] 设计 `graduation_case_profiles`，以 `building_id` 引用唯一建筑主体。
-- [ ] 设计 `building_functions` 细粒度用途词表。
-- [ ] 设计 `building_function_aliases` 多语言同义词表。
-- [ ] 设计 `building_function_assignments` 多对多关联表。
-- [ ] 设计 `CASE-xxx` 兼容映射与唯一约束。
-- [ ] 明确字段所有权：基础事实归 `buildings`，毕业分析归 profile。
-- [ ] 设计 RLS、索引、唯一约束和审计时间字段。
-- [ ] 生成迁移草案和回滚，不直接应用。
+### G3 — 设计统一数据库结构（已完成）
+
+- [x] 设计 `graduation_case_profiles`，以 `building_id` 引用唯一建筑主体。
+- [x] 设计 `building_functions` 细粒度用途词表。
+- [x] 设计 `building_function_aliases` 多语言同义词表。
+- [x] 设计 `building_function_assignments` 多对多关联表。
+- [x] 设计 `CASE-xxx` 兼容映射与唯一约束。
+- [x] 明确字段所有权：基础事实归 `buildings`，毕业分析归 profile。
+- [x] 设计 RLS、索引、唯一约束和审计时间字段。
+- [x] 生成迁移草案和回滚，不直接应用。
 
 完成条件：schema、RLS、索引、回滚和 Data API 权限全部通过审查。
+
+完成证据：新增结构草案 `db/migrations/v23-graduation-building-unification-draft.sql`、逆依赖回滚和字段所有权设计文档 `docs/GRADUATION_UNIFICATION_SCHEMA.md`。四张表均有 RLS 和显式 Data API 权限；公开 profile 只读 `published`、公开用途分配只读 `approved`；CASE 主键格式、唯一 building 归属、用途 alias 唯一性、多用途复合主键、外键索引和审核时间一致性均有约束。只读核验线上 875 个 buildings、20 个 building_types、PostgreSQL 17.6、目标表与触发器无命名冲突；没有执行 DDL/DML。结构验证器通过，8 个 unit 文件共 31 个测试、typecheck、lint 全部通过。
 
 ### G4 — 建立智能用途分类
 
