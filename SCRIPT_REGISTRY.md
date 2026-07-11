@@ -44,6 +44,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 |---|---|---|
 | `scripts/build-graduation-data.mjs` | Builds graduation JSON and public exports from source CSV | Keep as the source-to-runtime sync tool |
 | `scripts/audit-graduation-content.mjs` | Audits graduation content relationships, image state, source state, and public readiness | Keep as the graduation release/data gate |
+| `scripts/match-graduation-cases-to-buildings.ts` | Produces a read-only multilingual identity match between graduation cases and canonical Supabase buildings | Keep until graduation cases use canonical `building_id`; never treat its fuzzy candidates as approved links |
 | `scripts/localize-graduation-case-images.mjs` | Links or downloads graduation case images from manifest records | Default uses current manifest; use `--retry-queue` only for future image candidates |
 | `scripts/optimize-graduation-case-images.mjs` | Optimizes current local graduation case images | Skips writes when optimized output would be larger |
 
@@ -91,6 +92,7 @@ From `package.json`:
 - `graduation:data` → graduation
 - `graduation:data:from-json` → graduation
 - `graduation:audit` → graduation
+- `graduation:match-buildings` → graduation / read-only identity audit
 - `graduation:images:dry-run` → graduation
 - `graduation:images:localize` → graduation
 - `graduation:images:optimize` → graduation
