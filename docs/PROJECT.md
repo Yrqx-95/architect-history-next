@@ -60,6 +60,9 @@
 6. 迁移图片系统到对象存储（R2 / Supabase Storage）
 7. 数据从 JSON 文件迁移到 Supabase 规范化表
 
+毕业制作案例与主体建筑的统一工作使用独立、可验收的主任务清单：
+[GRADUATION_UNIFICATION_TASKS.md](GRADUATION_UNIFICATION_TASKS.md)。后续不得只依赖聊天记录推进。
+
 ## UI 风格方向
 
 核心关键词：**建筑杂志感、高信息密度、强 typography、清晰 grid、专业感**
@@ -105,5 +108,6 @@
 
 ### 提交与部署
 
-- 每次功能变更：`npm run build` 验证 → `npx vercel --prod --yes` 部署
-- 部署后验证至少 3 个关键路由 + 新图片 HTTP 200
+- 每次功能或公共数据变更：通过 `.github/workflows/production-release.yml` 的 Reviewed production release 发布到 Cloudflare。
+- 发布前必须通过质量门禁、完整测试和 Worker 构建；发布后验证关键路由、真实 404 与新内容来源。
+- 只改文档或只读治理脚本时不触发全站生产部署。
