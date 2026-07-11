@@ -48,14 +48,14 @@ G6 的真实剩余数是 118，不是旧清单中的 101：
 - 8 个 Commons 文件，0 missing；
 - 作者与许可比对，0 mismatch。
 
-输出保存在 `docs/reports/graduation-new-building-library-001-live-audit.json`。这份快照只证明 2026-07-12 的来源状态；正式迁移前仍需再跑一次，避免来源或许可后来改变。
+输出保存在 `docs/reports/graduation-new-building-library-001-live-audit.json`。生产迁移前已再次运行，结果仍为 12 个来源 URL 0 failure、8 个 Commons 文件 0 metadata mismatch。
 
-## 尚未授权的动作
+## 生产迁移状态
 
-本批没有生产 INSERT。8 个主体和 4 个当前缺失建筑师实体的 guarded migration、rollback 与 PGlite dry-run 已生成并通过；主体 schema 仍只支持一个 architect，因此迁移以 MIKAMI Architects 为主关系，同时保留 graduation profile 中 CASE-070 的共同设计字符串，不能丢掉押田建筑设计事务所的参与信息。
+8 个主体和 4 个当前缺失建筑师实体的 guarded migration、rollback 与 PGlite dry-run 均已通过；生产迁移 `graduation_library_batch_001`（`20260711201728`）已执行。写后核验得到 4 个新建筑师、8 个主体、8 张主图、8 个 published profile、17 个 approved assignment，所有孤儿、建筑师映射错误和重复主图/主用途均为 0。主体 schema 仍只支持一个 architect，因此迁移以 MIKAMI Architects 为主关系，同时保留 graduation profile 中 CASE-070 的共同设计字符串，不能丢掉押田建筑设计事务所的参与信息。
 
 ## 图片修正发布
 
 PR #17 合并为 `88655f3a1808bab04871b6927522e15059874bef`；Reviewed production release run `29166038170` 成功。线上 CASE-027 与 CASE-070 均返回 HTTP 200；两张线上图片的 SHA-1 与审核后的仓库文件完全一致，公开 JSON 也返回新的作者、许可、作品页和纠错说明。
 
-数据库迁移准备现已完成，详见 `GRADUATION_LIBRARY_BATCH_001_DRY_RUN.md`；生产 INSERT 仍未执行。
+PR #18 合并迁移包；PR #19 更新 29 个 unified profile 的生产回归基线。Reviewed production release run `29167078871` 成功；线上 8 个 CASE 页面和 8 个主体建筑页全部返回 HTTP 200。完整写入和验收证据见 `GRADUATION_LIBRARY_BATCH_001_PRODUCTION.md`。
