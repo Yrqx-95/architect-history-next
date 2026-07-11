@@ -121,6 +121,8 @@
 
 当前证据：重新以集合核对 139 个 CASE 后，21 个已链接、118 个需要新建主体；旧的 101 是匹配器重算和 G2 错误候选转入新建队列之前的历史快照。版本化队列覆盖 118 条，其中 23 条和 library 用途相关。Library batch 001 审核并迁移 CASE-018/021/022/023/027/029/042/070：8 条身份、官方来源、年份、地点和用途均通过；12 个官方证据 URL 实时访问 0 failure，8 个 Commons 文件作者与许可比对 0 mismatch。CASE-027 替换横置低价值图片，CASE-070 纠正“旧馆误当新馆”的错误图片。PR #17 发布审核图片，PR #18 合并 guarded migration，生产冲突预检两次均为 0；迁移 `graduation_library_batch_001`（`20260711201728`）写入 4 个新 architect、8 buildings、8 primary images、8 published profiles 和 17 approved assignments，写后 0 orphan、0 architect mismatch、0 duplicate primary image/function。PR #19 修正 21→29 的生产测试基线并把布局回归与数据回归分离；Reviewed production release run `29167078871` 成功。线上 API 实测 100 个公开案例、29 个 unified profile、0 missing relation；8 个 CASE 页面和 8 个主体建筑页均 HTTP 200，CASE 页面均显示已审核许可署名。G6 当前完成 8/118，剩余 110；library 子集完成 8/23，剩余 15。详见 `GRADUATION_NEW_BUILDING_LIBRARY_001.md`、`GRADUATION_LIBRARY_BATCH_001_DRY_RUN.md` 与 `GRADUATION_LIBRARY_BATCH_001_PRODUCTION.md`。
 
+Library batch 002 初筛已覆盖剩余 15 条：14 张现图完成视觉检查，CASE-137 原文件失效；CASE-079 年份应从 2020 修正为 2021 且现图是改造前旧馆，CASE-112 官方来源 URL 已失效，CASE-101 缺摄影者署名，CASE-113/130/137 需要换主图，CASE-130 许可证应明确为 CC BY 3.0 NL。其余 10 条进入官方事实逐项复核，不等于已经批准。详见 `GRADUATION_NEW_BUILDING_LIBRARY_002_TRIAGE.md`。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
