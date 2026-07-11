@@ -12,7 +12,7 @@ This tracker maps the eight findings from the full repository audit to current v
 
 2. Release test credibility
    - The fixed-pixel screenshot assertion was replaced with semantic visibility, image integrity, viewport containment, and element-bound checks.
-   - `npm test`: 12/12 unit and 15/15 production E2E passed.
+   - `npm test`: 12/12 unit and 17/17 production E2E passed.
 
 4. Unpromoted route boundary
    - `/learn` remains reachable as the intentional archive room.
@@ -41,20 +41,21 @@ This tracker maps the eight findings from the full repository audit to current v
    - Still review-required: 860 warnings, 2,490 info findings, 875 buildings using fallback text, 106 architects using fallback text, and 739 buildings missing traceable source text.
    - Building and architect pages now disclose fallback copy as introductory guidance that has not completed claim-by-claim source review; records with formal editorial overlays do not show this notice.
    - E2E coverage verifies both disclosure paths and the formal-content exclusion path.
-   - `npm run content:review-sources` now produces a read-only, ranked review queue with the current source entry points, identity risks, and a no-auto-prose rule. The current queue has 602 reference-ready records, 109 identity-review records, and 38 evidence-gap records; it found no records with an existing official-site entry point.
+   - `npm run content:review-sources` now produces a read-only, ranked review queue with the current source entry points, identity risks, and a no-auto-prose rule. After source-review batches 001 and 002, the current queue has 593 reference-ready records, 109 identity-review records, and 38 evidence-gap records; it found no records with an existing official-site entry point.
    - Content review batch 001 manually added formal, visibly sourced reading layers for Yoyogi National Gymnasium, Finlandia Hall, Centre Georges Pompidou, Acropolis Museum, and Beinecke Rare Book & Manuscript Library. See `docs/reports/content-review-batch-001.md`.
+   - Content review batch 002 added the same source-visible layer for Aarhus City Hall, Aga Khan Museum, Alvar Aalto Museum, and Bagsværd Church using responsible institutional sources. See `docs/reports/content-review-batch-002.md`.
    - This is a content-production and evidence problem, not a single code fix.
 
-## Partially complete: release coupling
+## Verified complete: release coupling
 
 5. Data write to deployment coupling
    - Building and architect routes still use `dynamicParams = false`.
    - An ISR experiment was rejected because missing building and architect routes returned HTTP 200 instead of 404 under the current Next.js route structure.
-   - `.github/workflows/production-release.yml` now provides one reviewed release path: production environment pull, quality gate, complete tests, prebuilt production deployment, then live 200/404 checks.
+   - `.github/workflows/production-release.yml` now provides one reviewed release path: encrypted GitHub environment input, quality gate, complete tests, Cloudflare Worker build/deploy, then live 200/404 checks.
    - The workflow supports both manual dispatch and the `archistory-reviewed-data` repository-dispatch event.
-   - Activation still requires a GitHub `production` environment secret named `VERCEL_TOKEN`; repository code cannot create that credential.
-   - Direct production deployment is currently blocked by Vercel with HTTP 402 (`resource_creation_blocked`: team fair-use limit). Local Vercel prebuild succeeds; no new deployment was created.
+   - The required Cloudflare and Supabase values are stored as encrypted GitHub Secrets; Vercel is disconnected from GitHub and is no longer part of the release path.
+   - The first verified Cloudflare release completed on 2026-07-12 after installing Playwright Chromium on the clean GitHub runner. Publication quality checks, 12 unit tests, 17 E2E tests, Worker deployment, and live 200/404 checks all passed.
 
 ## Next smallest verified step
 
-Configure the GitHub `production` environment with `VERCEL_TOKEN`, run the reviewed release workflow once, and preserve its post-deploy 200/404 evidence. Keep `dynamicParams = false`; the rejected ISR experiment demonstrated that it breaks the required HTTP 404 contract in the current app.
+Continue the ranked content-source review queue in small, evidence-backed batches. Keep `dynamicParams = false`; the rejected ISR experiment demonstrated that it breaks the required HTTP 404 contract in the current app. Every reviewed data write must continue through the verified Cloudflare release workflow.
