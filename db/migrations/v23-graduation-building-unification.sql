@@ -1,8 +1,8 @@
 -- ============================================================
--- V23 DRAFT: Graduation case / building unification foundation
+-- V23: Graduation case / building unification foundation
 --
--- DRAFT ONLY. Do not apply this migration until G5 has approved seed data,
--- a database dry-run, and a reviewed production change window.
+-- Approved for migration after G5 reviewed seed data, isolated PostgreSQL
+-- forward/rollback rehearsal, and repository quality-gate review.
 --
 -- This migration creates structure only. It does not insert, update, merge,
 -- or delete any building, graduation case, image, or function assignment.

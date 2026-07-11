@@ -8,11 +8,11 @@ const pack = JSON.parse(
   fs.readFileSync(path.join(ROOT, 'db/review-packets/graduation-unification-batch-001.json'), 'utf8'),
 )
 const foundationSql = fs.readFileSync(
-  path.join(ROOT, 'db/migrations/v23-graduation-building-unification-draft.sql'),
+  path.join(ROOT, 'db/migrations/v23-graduation-building-unification.sql'),
   'utf8',
 )
 const foundationRollbackSql = fs.readFileSync(
-  path.join(ROOT, 'db/migrations/v23-graduation-building-unification-draft-rollback.sql'),
+  path.join(ROOT, 'db/migrations/v23-graduation-building-unification-rollback.sql'),
   'utf8',
 )
 const seedSql = fs.readFileSync(
