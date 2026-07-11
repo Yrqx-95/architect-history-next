@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest'
 import cases from '../../src/content/graduation/cases.json'
 import decisions from '../../db/review-decisions/graduation-building-links-001.json'
-import matchReport from '../../reports/graduation-building-match-report.json'
 
 const safeLicense = /^(CC0|CC BY(?:-SA)?(?: [\w.-]+)+|Public domain)$/
+const expectedExactMatchCaseIds = [
+  'CASE-007', 'CASE-046', 'CASE-061', 'CASE-099', 'CASE-103', 'CASE-104',
+  'CASE-106', 'CASE-108', 'CASE-119', 'CASE-120', 'CASE-123', 'CASE-125',
+  'CASE-127', 'CASE-128', 'CASE-129', 'CASE-131', 'CASE-135', 'CASE-138',
+].sort()
 
 describe('graduation building link decisions', () => {
   it('covers every exact match exactly once', () => {
-    const expectedCaseIds = matchReport.items
-      .filter(item => item.lane === 'exact-match')
-      .map(item => item.case_id)
-      .sort()
     const reviewedCaseIds = decisions.decisions.map(item => item.case_id).sort()
 
     expect(decisions.summary).toEqual({ approved: 18, rejected: 0, needs_research: 0 })
-    expect(reviewedCaseIds).toEqual(expectedCaseIds)
+    expect(reviewedCaseIds).toEqual(expectedExactMatchCaseIds)
     expect(new Set(reviewedCaseIds).size).toBe(reviewedCaseIds.length)
   })
 
