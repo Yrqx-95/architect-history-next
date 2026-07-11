@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：`G4` 定义第一版细粒度用途词表与四语别名，并生成 875 座建筑的只读候选队列；先审核图书馆批次，不直接写入生产数据库。
+当前下一步：`G5` 为 G1/G2 已批准 CASE 映射和 G4 已批准 library/museum 用途关系生成 guarded migration、rollback 与 dry-run；先验证，不直接写入生产数据库。
 
 ## 最终目标
 
@@ -79,18 +79,20 @@
 
 合并证据：PR #10 的 Quality baseline run `29163802259` 成功，merge commit `de8d7bf7372f4c03fd96edfeaaaa2c47392e7253`。本阶段只有未应用的结构草案、文档和验证工具，没有触发生产部署。
 
-### G4 — 建立智能用途分类
+### G4 — 建立智能用途分类（已完成）
 
 - [x] 定义第一版用途词表：library、museum、theatre、school、university、community-center、elderly-care、social-housing、mixed-use 等。
 - [x] 为每个用途建立 zh / zh-Hant / en / ja 别名。
 - [x] 明确一级 `building_types` 与细粒度 `building_functions` 的区别。
 - [x] 生成 875 座建筑的只读用途候选队列。
-- [ ] 先审核“图书馆”用途批次，验证多用途关系。
+- [x] 先审核“图书馆”用途批次，验证多用途关系。
 - [x] 禁止根据名称单独批量写入；结合来源与项目功能说明。
 
 完成条件：搜索“图书馆 / library / 図書館”能基于统一用途关系得到相同建筑集合。
 
-当前证据：`db/taxonomies/building-functions-v1.json` 定义 9 个用途和四语别名；alias 唯一性与四语 library 解析已有单元测试。只读生成器从 875 个主体得到 144 个候选关联：library 20、museum 84、theatre 11、school 10、university 14、community-center 0、elderly-care 0、social-housing 1、mixed-use 4。所有记录均为 `candidate`，明确标记名称只是发现信号，不能生成批准写入。下一步必须为 20 个 library 候选补可追溯项目功能来源并逐条审核。
+候选生成证据：`db/taxonomies/building-functions-v1.json` 定义 9 个用途和四语别名；alias 唯一性与四语 library 解析已有单元测试。只读生成器从 875 个主体得到 144 个候选关联：library 20、museum 84、theatre 11、school 10、university 14、community-center 0、elderly-care 0、social-housing 1、mixed-use 4。所有自动生成记录均为 `candidate`，明确标记名称只是发现信号，不能生成批准写入。
+
+完成证据：版本化决策文件 `db/review-decisions/building-function-library-001.json` 覆盖全部 20 个 library 候选；16 条由 Wikidata `instance of` 关系确认，4 条由官方机构或建筑师基金会页面确认，20 个证据 URL 全部可访问。20 条全部批准 library，Hill Museum & Manuscript Library、LBJ Library and Museum、Musashino Art University Museum & Library 同时批准 museum，验证了多用途关系。四语查询均先解析为 `library` slug，再返回同一 approved 集合；9 个专项测试通过。另发现 5 条主体元数据 warning，已单独记录，未混入用途写入。
 
 ### G5 — 迁移首批已批准映射
 

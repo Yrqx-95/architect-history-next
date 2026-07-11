@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "batch_id": "building-function-library-001",
+  "reviewed_at": "2026-07-12",
+  "status": "reviewed",
+  "scope": {
+    "candidate_queue": "db/review-queues/building-function-candidates-001.json",
+    "function_slug": "library",
+    "candidate_count": 20
+  },
+  "rules": [
+    "A name signal alone cannot approve a function assignment.",
+    "Approval requires an official institutional page or a traceable Wikidata instance-of statement.",
+    "Function approval does not silently correct canonical building metadata.",
+    "A building may receive multiple approved functions when the source explicitly supports each use."
+  ],
+  "decisions": [
+    {
+      "building_id": "45e768be-5423-4315-b982-c14ff6dcacda",
+      "building_slug": "atlanta-fulton-county-central-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q105751960",
+        "claim": "Atlanta Fulton County Central Library is classified as a library building in the United States."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "d57bbedb-6ed6-49ec-aa9b-2698c4f50cf7",
+      "building_slug": "beinecke-rare-book-manuscript-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q814779",
+        "claim": "Beinecke Rare Book & Manuscript Library is classified as an academic, rare-book and library building."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "faa20fe8-e4be-4dde-a9b9-137c89c6e4cd",
+      "building_slug": "biblioteca-comunale-centrale-antonio-tiraboschi",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q3639566",
+        "claim": "Biblioteca Antonio Tiraboschi is classified as a public library and a library of an Italian territorial body."
+      },
+      "metadata_findings": [
+        {
+          "severity": "warning",
+          "field": "country_code",
+          "current": "CH",
+          "source_value": "IT",
+          "action": "Route to canonical building metadata review; do not change in this function batch."
+        },
+        {
+          "severity": "warning",
+          "field": "year_start",
+          "current": 1975,
+          "source_value": "Wikidata inception may describe the institution rather than Mario Botta's building",
+          "action": "Verify the building completion year against a project source before correction."
+        }
+      ]
+    },
+    {
+      "building_id": "2f9e5b43-f509-4b50-aa6c-34ab79e0659d",
+      "building_slug": "biblioteca-municipal-de-viana-do",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q17318051",
+        "claim": "Biblioteca Municipal de Viana do Castelo is classified as a library, public library, municipal library and library building."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "b60c6ff1-0ddc-4c17-9aec-cf4cac8cd386",
+      "building_slug": "c-v-starr-east-asian",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q118903541",
+        "claim": "C. V. Starr East Asian Library is classified as a library building in the United States."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "0a272df1-7d88-445a-8fa3-b084e937ce51",
+      "building_slug": "central-library-des-moines",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q66042452",
+        "claim": "Central Library, Des Moines is classified as a library building in the United States."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "0e48c41e-53ae-41dd-bc7d-f6d508afe942",
+      "building_slug": "dortmund-city-and-state-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "official-institution",
+        "url": "https://www.dortmund.de/themen/bildung/stadt-und-landesbibliothek/",
+        "claim": "The City of Dortmund operates this building as the Stadt- und Landesbibliothek."
+      },
+      "metadata_findings": [
+        {
+          "severity": "warning",
+          "field": "country_code",
+          "current": "NL",
+          "source_value": "DE",
+          "action": "Route to canonical building metadata review; the official city source is Dortmund, Germany."
+        }
+      ]
+    },
+    {
+      "building_id": "8bd1a441-71ca-4bcf-90df-f6d97eaee9b1",
+      "building_slug": "grosse-pointe-public-library-central",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q106900422",
+        "claim": "Grosse Pointe Public Library Central Branch is classified as a library building in the United States."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "c7547211-daeb-477e-912c-6dab71109027",
+      "building_slug": "hill-museum-manuscript-library",
+      "decision": "approved",
+      "approved_functions": ["library", "museum"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q5762205",
+        "claim": "Hill Museum & Manuscript Library is explicitly classified as both a library and a museum."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "2efb1ed3-23c9-47ab-b088-6932da4f8e23",
+      "building_slug": "laurentian-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "official-institution",
+        "url": "https://www.bmlonline.it/",
+        "claim": "The official Biblioteca Medicea Laurenziana site identifies and operates the Laurentian Library."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "63c9fd31-6ac6-49e0-b5e8-58a2eac5bbec",
+      "building_slug": "library-of-the-university-of",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q3755932",
+        "claim": "The University of Deusto building is classified as an academic and main library."
+      },
+      "metadata_findings": [
+        {
+          "severity": "warning",
+          "field": "year_start",
+          "current": 1986,
+          "source_value": "Wikidata contains both 1986 and 2009 inception statements",
+          "action": "Separate institution inception from Rafael Moneo building completion before correction."
+        },
+        {
+          "severity": "info",
+          "field": "type_slug",
+          "current": null,
+          "source_value": "educational",
+          "action": "Consider broad-type review separately; library function approval is independent."
+        }
+      ]
+    },
+    {
+      "building_id": "8e52c196-ae39-4bb0-9cca-2fedc1140d70",
+      "building_slug": "lyndon-baines-johnson-library-and",
+      "decision": "approved",
+      "approved_functions": ["library", "museum"],
+      "evidence": {
+        "source_type": "official-institution",
+        "url": "https://www.lbjlibrary.org/",
+        "claim": "The official LBJ Presidential Library site describes a research library and public museum in Austin, Texas."
+      },
+      "metadata_findings": [
+        {
+          "severity": "warning",
+          "field": "country_code",
+          "current": "MX",
+          "source_value": "US",
+          "action": "Route to canonical building metadata review; the official address is Austin, Texas."
+        }
+      ]
+    },
+    {
+      "building_id": "5a412752-58bc-4fdd-9677-446e7b1375ae",
+      "building_slug": "musashino-art-museum",
+      "decision": "approved",
+      "approved_functions": ["library", "museum"],
+      "evidence": {
+        "source_type": "official-institution",
+        "url": "https://mauml.musabi.ac.jp/en/",
+        "claim": "Musashino Art University's official Museum & Library site operates both museum and library facilities."
+      },
+      "metadata_findings": [
+        {
+          "severity": "info",
+          "field": "name_en",
+          "current": "Musashino Art University Library",
+          "source_value": "Musashino Art University Museum & Library",
+          "action": "Review canonical English naming separately without changing the stable slug."
+        }
+      ]
+    },
+    {
+      "building_id": "6253770b-bc9d-44b5-81c2-f7a97430c78f",
+      "building_slug": "new-york-public-library-for",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q7013890",
+        "claim": "New York Public Library for the Performing Arts is classified as a public, research and branch library."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "505d64e1-35f7-4419-9f10-36c40af6607b",
+      "building_slug": "niagara-falls-public-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q65068973",
+        "claim": "Niagara Falls Public Library is classified as a main library in the United States."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "a52fc3e3-78a4-4be7-851b-163997e379b2",
+      "building_slug": "r-dovre-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q21098720",
+        "claim": "Rødovre Library is classified as a municipal library in Denmark."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "b3c550f7-67b9-4516-bd47-b6941cd46995",
+      "building_slug": "rovaniemi-city-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q10547804",
+        "claim": "Rovaniemi City Library is classified as a library and municipal library in Finland."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "557b9c4c-8f0a-49bf-b489-b836aadbbd87",
+      "building_slug": "schocken-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "wikidata-instance-of",
+        "url": "https://www.wikidata.org/wiki/Q6756158",
+        "claim": "Schocken Library is classified as an academic and reference library in Israel."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "444deee7-5b62-43aa-8b2c-dbc46648e083",
+      "building_slug": "seattle-central-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "official-institution",
+        "url": "https://www.spl.org/hours-and-locations/central-library",
+        "claim": "The Seattle Public Library's official page identifies the Central Library and its library collections and services."
+      },
+      "metadata_findings": []
+    },
+    {
+      "building_id": "0ed33a5f-0285-419d-87a2-a8a7e313fd8e",
+      "building_slug": "vyborg-library",
+      "decision": "approved",
+      "approved_functions": ["library"],
+      "evidence": {
+        "source_type": "official-architect-foundation",
+        "url": "https://www.alvaraalto.fi/en/architecture/alvar-aalto-library/",
+        "claim": "The Alvar Aalto Foundation documents the Vyborg Central Library and its completion in 1935."
+      },
+      "metadata_findings": []
+    }
+  ]
+}
