@@ -8,12 +8,29 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(100)
-    expect(payload.diagnostics.profileCount).toBe(21)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(21)
+    expect(payload.diagnostics.profileCount).toBe(29)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(29)
+    expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
+      'CASE-018',
+      'CASE-021',
+      'CASE-022',
+      'CASE-023',
+      'CASE-027',
+      'CASE-029',
+      'CASE-042',
+      'CASE-070',
+    ]))
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(21)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(29)
+
+    const libraryCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-018')
+    expect(libraryCase).toMatchObject({
+      name: '金泽海未来图书馆',
+      location: '金泽 日本',
+      year: 2011,
+    })
   })
 
   test('CASE route keeps its ID while rendering canonical facts and the reviewed fallback image', async ({ page }) => {
