@@ -44,6 +44,8 @@
     "graduation:verify-unification": "node scripts/verify-graduation-unification-dry-run.mjs",
     "graduation:prepare-library-001": "node --env-file=.env.local scripts/prepare-graduation-library-batch-001.mjs",
     "graduation:verify-library-001": "node scripts/verify-graduation-library-batch-001-dry-run.mjs",
+    "graduation:prepare-library-002": "node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
+    "graduation:verify-library-002": "node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",

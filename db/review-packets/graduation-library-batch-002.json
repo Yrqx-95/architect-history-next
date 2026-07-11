@@ -1,0 +1,1417 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-library-batch-002",
+  "generated_at": "2026-07-11T23:33:13.605Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all target UUIDs, slugs, CASE IDs and image source URLs are absent",
+    "library, community-center, museum and mixed-use functions remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 13,
+    "new_architects": 11,
+    "buildings": 14,
+    "images": 14,
+    "profiles": 14,
+    "assignments": 36
+  },
+  "architects": [
+    {
+      "id": "c5b0b342-a782-443b-821c-e5c3f94fbf74",
+      "slug": "toyo-ito",
+      "name_zh": "伊东丰雄",
+      "name_en": "Toyo Ito",
+      "name_ja": "伊東豊雄",
+      "official_url": null,
+      "is_new": false
+    },
+    {
+      "id": "86ca23bf-5739-5281-974b-d90b06019106",
+      "slug": "coelacanth-associates-nagoya",
+      "name_zh": "Coelacanth and Associates Nagoya",
+      "name_en": "Coelacanth and Associates Nagoya",
+      "name_ja": "シーラカンスアンドアソシエイツナゴヤ",
+      "official_url": "https://www.c-and-a.co.jp/en/",
+      "is_new": true
+    },
+    {
+      "id": "4ec76862-cf0a-505f-82fc-e01b8fca9274",
+      "slug": "unemori-architects",
+      "name_zh": "畷森泰行建筑设计事务所",
+      "name_en": "UNEMORI ARCHITECTS",
+      "name_ja": "畷森泰行建築設計事務所",
+      "official_url": "https://unemori-archi.com/",
+      "is_new": true
+    },
+    {
+      "id": "47eb1eb9-882a-54c1-95e7-b89ef7661097",
+      "slug": "mitsuru-senda-environment-design-institute",
+      "name_zh": "仙田满／环境设计研究所",
+      "name_en": "Mitsuru Senda / Environment Design Institute",
+      "name_ja": "仙田満／環境デザイン研究所",
+      "official_url": "https://www.ms-edi.co.jp/",
+      "is_new": true
+    },
+    {
+      "id": "38b07fbd-27a4-5950-adf5-b6e156b4c2f2",
+      "slug": "ala-architects",
+      "name_zh": "ALA 建筑事务所",
+      "name_en": "ALA Architects",
+      "name_ja": "ALA Architects",
+      "official_url": "https://ala.fi/",
+      "is_new": true
+    },
+    {
+      "id": "34c5e223-fe8a-548e-b784-f78aea76b68b",
+      "slug": "schmidt-hammer-lassen",
+      "name_zh": "施密特·哈姆·拉森",
+      "name_en": "Schmidt Hammer Lassen",
+      "name_ja": "シュミット・ハンマー・ラッセン",
+      "official_url": "https://www.shl.dk/",
+      "is_new": true
+    },
+    {
+      "id": "b8c0aa1f-3beb-5c87-ba25-f129da4cd0ff",
+      "slug": "lundhagem-atelier-oslo",
+      "name_zh": "Lundhagem + Atelier Oslo",
+      "name_en": "Lundhagem + Atelier Oslo",
+      "name_ja": "Lundhagem + Atelier Oslo",
+      "official_url": "https://www.lundhagem.no/",
+      "is_new": true
+    },
+    {
+      "id": "fd59bda6-b2df-541c-9471-3125c0d1fff7",
+      "slug": "alsop-stormer",
+      "name_zh": "Alsop and Störmer",
+      "name_en": "Alsop and Störmer",
+      "name_ja": "Alsop and Störmer",
+      "official_url": "https://www.southwark.gov.uk/culture-and-sport/libraries/find-library/peckham-library",
+      "is_new": true
+    },
+    {
+      "id": "5f42cdc6-66ef-5689-9cbb-87ff3c519534",
+      "slug": "snohetta",
+      "name_zh": "Snøhetta",
+      "name_en": "Snøhetta",
+      "name_ja": "スノヘッタ",
+      "official_url": "https://www.snohetta.com/",
+      "is_new": true
+    },
+    {
+      "id": "2dc0da5c-e404-5871-a5db-850d9c91609b",
+      "slug": "civic-architects",
+      "name_zh": "Civic Architects",
+      "name_en": "Civic Architects",
+      "name_ja": "Civic Architects",
+      "official_url": "https://www.civicarchitects.eu/",
+      "is_new": true
+    },
+    {
+      "id": "fe639daa-a3f3-5c6e-a15e-a0c5ac73c2d8",
+      "slug": "adjaye-associates",
+      "name_zh": "Adjaye Associates",
+      "name_en": "Adjaye Associates",
+      "name_ja": "Adjaye Associates",
+      "official_url": "https://www.adjaye.com/",
+      "is_new": true
+    },
+    {
+      "id": "4a1fdf1b-ed02-45f6-9b9c-95ae623972df",
+      "slug": "mvrdv",
+      "name_zh": "MVRDV",
+      "name_en": "MVRDV",
+      "name_ja": "MVRDV",
+      "official_url": null,
+      "is_new": false
+    },
+    {
+      "id": "3233a12a-1620-5ee0-b655-e9e56edb9f81",
+      "slug": "mecanoo",
+      "name_zh": "Mecanoo",
+      "name_en": "Mecanoo",
+      "name_ja": "メカノー",
+      "official_url": "https://www.mecanoo.nl/",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "2739a5c9-404f-50d7-bbe7-5cf17516cb98",
+      "case_id": "CASE-036",
+      "slug": "tama-art-university-hachioji-library",
+      "name_zh": "多摩美术大学八王子图书馆",
+      "name_en": "Tama Art University Hachioji Library",
+      "name_ja": "多摩美術大学八王子図書館",
+      "year_start": 2007,
+      "city": "八王子",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "educational",
+      "architect_slug": "toyo-ito",
+      "official_url": "https://www.tamabi.ac.jp/en/about/library/",
+      "architect_id": "c5b0b342-a782-443b-821c-e5c3f94fbf74",
+      "status": "published"
+    },
+    {
+      "id": "bed234bc-94f7-57d1-8592-3ea05e6bbbb5",
+      "case_id": "CASE-076",
+      "slug": "kozakai-kifukan-community-center",
+      "name_zh": "小坂井葵风馆",
+      "name_en": "Kozakai Kifukan Community Center",
+      "name_ja": "小坂井葵風館",
+      "year_start": 2021,
+      "city": "丰川",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "civic-public",
+      "architect_slug": "coelacanth-associates-nagoya",
+      "official_url": "https://www.c-and-a.co.jp/en/projects/kozakaikifukan/",
+      "architect_id": "86ca23bf-5739-5281-974b-d90b06019106",
+      "status": "published"
+    },
+    {
+      "id": "1ed15436-687d-5020-a0ef-b1e28a0f19e1",
+      "case_id": "CASE-081",
+      "slug": "sukagawa-community-center-tette",
+      "name_zh": "须贺川市民交流中心 tette",
+      "name_en": "Sukagawa Community Center tette",
+      "name_ja": "須賀川市民交流センター tette",
+      "year_start": 2018,
+      "city": "须贺川",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "civic-public",
+      "architect_slug": "unemori-architects",
+      "official_url": "https://unemori-archi.com/?works=sukagawa-civic-center-tentative-name",
+      "architect_id": "4ec76862-cf0a-505f-82fc-e01b8fca9274",
+      "status": "published"
+    },
+    {
+      "id": "f64260d6-2859-5735-b053-c74bafa46aed",
+      "case_id": "CASE-092",
+      "slug": "ishikawa-prefectural-library",
+      "name_zh": "石川县立图书馆",
+      "name_en": "Ishikawa Prefectural Library",
+      "name_ja": "石川県立図書館",
+      "year_start": 2022,
+      "city": "金泽",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "cultural",
+      "architect_slug": "mitsuru-senda-environment-design-institute",
+      "official_url": "https://www.library.pref.ishikawa.lg.jp/category/aboutlibrary/2983.html",
+      "architect_id": "47eb1eb9-882a-54c1-95e7-b89ef7661097",
+      "status": "published"
+    },
+    {
+      "id": "6b926e74-2b36-53d4-a5e2-7dae96b56904",
+      "case_id": "CASE-095",
+      "slug": "nakajima-library-akita-international-university",
+      "name_zh": "国际教养大学中岛纪念图书馆",
+      "name_en": "Nakajima Library, Akita International University",
+      "name_ja": "国際教養大学 中嶋記念図書館",
+      "year_start": 2008,
+      "city": "秋田",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "educational",
+      "architect_slug": "mitsuru-senda-environment-design-institute",
+      "official_url": "https://web.aiu.ac.jp/en/education/support/library/outline/",
+      "architect_id": "47eb1eb9-882a-54c1-95e7-b89ef7661097",
+      "status": "published"
+    },
+    {
+      "id": "5eb66d05-ac6b-5b59-8207-0be231f3706e",
+      "case_id": "CASE-098",
+      "slug": "helsinki-central-library-oodi",
+      "name_zh": "赫尔辛基中央图书馆 Oodi",
+      "name_en": "Helsinki Central Library Oodi",
+      "name_ja": "ヘルシンキ中央図書館 Oodi",
+      "year_start": 2018,
+      "city": "赫尔辛基",
+      "country": "芬兰",
+      "country_code": "FI",
+      "type_slug": "cultural",
+      "architect_slug": "ala-architects",
+      "official_url": "https://oodihelsinki.fi/en/what-is-oodi/architecture/",
+      "architect_id": "38b07fbd-27a4-5950-adf5-b6e156b4c2f2",
+      "status": "published"
+    },
+    {
+      "id": "06beedb1-fe15-5724-bc46-994a829e5ce1",
+      "case_id": "CASE-101",
+      "slug": "dokk1",
+      "name_zh": "Dokk1 奥胡斯中央图书馆与文化馆",
+      "name_en": "Dokk1 — Aarhus Central Library and Culture House",
+      "name_ja": "Dokk1 オーフス中央図書館・文化館",
+      "year_start": 2015,
+      "city": "奥胡斯",
+      "country": "丹麦",
+      "country_code": "DK",
+      "type_slug": "cultural",
+      "architect_slug": "schmidt-hammer-lassen",
+      "official_url": "https://www.shl.dk/en/work/dokk1-aarhus-central-library-and-culture-house/experience",
+      "architect_id": "34c5e223-fe8a-548e-b784-f78aea76b68b",
+      "status": "published"
+    },
+    {
+      "id": "6901a4d1-0a4a-5833-b59d-01d2bcf1cc75",
+      "case_id": "CASE-105",
+      "slug": "deichman-bjorvika",
+      "name_zh": "Deichman Bjørvika 图书馆",
+      "name_en": "Deichman Bjørvika",
+      "name_ja": "デイクマン・ビョルヴィカ",
+      "year_start": 2020,
+      "city": "奥斯陆",
+      "country": "挪威",
+      "country_code": "NO",
+      "type_slug": "cultural",
+      "architect_slug": "lundhagem-atelier-oslo",
+      "official_url": "https://www.lundhagem.no/work/deichman-library",
+      "architect_id": "b8c0aa1f-3beb-5c87-ba25-f129da4cd0ff",
+      "status": "published"
+    },
+    {
+      "id": "badd5949-61cf-5e7c-83c2-80415f8c7592",
+      "case_id": "CASE-112",
+      "slug": "peckham-library",
+      "name_zh": "佩卡姆图书馆",
+      "name_en": "Peckham Library",
+      "name_ja": "ペッカム図書館",
+      "year_start": 2000,
+      "city": "伦敦",
+      "country": "英国",
+      "country_code": "GB",
+      "type_slug": "cultural",
+      "architect_slug": "alsop-stormer",
+      "official_url": "https://www.southwark.gov.uk/culture-and-sport/libraries/find-library/peckham-library",
+      "architect_id": "fd59bda6-b2df-541c-9471-3125c0d1fff7",
+      "status": "published"
+    },
+    {
+      "id": "01f36d99-7beb-5310-acba-623b775ca9ca",
+      "case_id": "CASE-113",
+      "slug": "bibliotheca-alexandrina",
+      "name_zh": "亚历山大图书馆",
+      "name_en": "Bibliotheca Alexandrina",
+      "name_ja": "新アレクサンドリア図書館",
+      "year_start": 2002,
+      "city": "亚历山大",
+      "country": "埃及",
+      "country_code": "EG",
+      "type_slug": "cultural",
+      "architect_slug": "snohetta",
+      "official_url": "https://www.snohetta.com/projects/bibliotheca-alexandrina",
+      "architect_id": "5f42cdc6-66ef-5689-9cbb-87ff3c519534",
+      "status": "published"
+    },
+    {
+      "id": "e6b45af1-459e-56d2-b8a7-e4efa60a3776",
+      "case_id": "CASE-114",
+      "slug": "lochal-public-library",
+      "name_zh": "LocHal 公共图书馆",
+      "name_en": "LocHal Public Library",
+      "name_ja": "LocHal 公共図書館",
+      "year_start": 2019,
+      "city": "蒂尔堡",
+      "country": "荷兰",
+      "country_code": "NL",
+      "type_slug": "cultural",
+      "architect_slug": "civic-architects",
+      "official_url": "https://www.civicarchitects.eu/projects/lochal-tilburg",
+      "architect_id": "2dc0da5c-e404-5871-a5db-850d9c91609b",
+      "status": "published"
+    },
+    {
+      "id": "abd3201b-abdd-5acf-a52c-c9914f65698f",
+      "case_id": "CASE-115",
+      "slug": "idea-store-whitechapel",
+      "name_zh": "白教堂 Idea Store",
+      "name_en": "Idea Store Whitechapel",
+      "name_ja": "アイデア・ストア・ホワイトチャペル",
+      "year_start": 2005,
+      "city": "伦敦",
+      "country": "英国",
+      "country_code": "GB",
+      "type_slug": "civic-public",
+      "architect_slug": "adjaye-associates",
+      "official_url": "https://www.adjaye.com/work/idea-store-whitechapel/",
+      "architect_id": "fe639daa-a3f3-5c6e-a15e-a0c5ac73c2d8",
+      "status": "published"
+    },
+    {
+      "id": "7cdda9cd-7b2c-57b0-8b29-db78d2ff7248",
+      "case_id": "CASE-130",
+      "slug": "book-mountain-spijkenisse",
+      "name_zh": "斯派克尼瑟书山图书馆",
+      "name_en": "Book Mountain Spijkenisse",
+      "name_ja": "ブック・マウンテン・スパイケニッセ",
+      "year_start": 2012,
+      "city": "斯派克尼瑟",
+      "country": "荷兰",
+      "country_code": "NL",
+      "type_slug": "cultural",
+      "architect_slug": "mvrdv",
+      "official_url": "https://www.mvrdv.com/projects/126/book-",
+      "architect_id": "4a1fdf1b-ed02-45f6-9b9c-95ae623972df",
+      "status": "published"
+    },
+    {
+      "id": "6f349aa6-a2bc-58f0-be15-347f1c8aae62",
+      "case_id": "CASE-137",
+      "slug": "library-of-birmingham",
+      "name_zh": "伯明翰图书馆",
+      "name_en": "Library of Birmingham",
+      "name_ja": "バーミンガム図書館",
+      "year_start": 2013,
+      "city": "伯明翰",
+      "country": "英国",
+      "country_code": "GB",
+      "type_slug": "cultural",
+      "architect_slug": "mecanoo",
+      "official_url": "https://www.mecanoo.nl/Projects/project/57/Library-of-Birmingham?t=0",
+      "architect_id": "3233a12a-1620-5ee0-b655-e9e56edb9f81",
+      "status": "published"
+    }
+  ],
+  "images": [
+    {
+      "id": "43d895d3-7cd6-518f-8e35-d5e7362c48c4",
+      "building_id": "2739a5c9-404f-50d7-bbe7-5cf17516cb98",
+      "building_slug": "tama-art-university-hachioji-library",
+      "case_id": "CASE-036",
+      "url_original": "/images/graduation/cases/case-036-tama-art-university-library.jpg",
+      "photographer": "Wiiii",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tama_Art_University_Library.JPG",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "dbdc9212-67d9-5c06-8992-dfea6f470791",
+      "building_id": "bed234bc-94f7-57d1-8592-3ea05e6bbbb5",
+      "building_slug": "kozakai-kifukan-community-center",
+      "case_id": "CASE-076",
+      "url_original": "/images/graduation/cases/case-076-kozakai-kifukan-community-center.jpg",
+      "photographer": "Asturio Cantabrio",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Kozakai_Kifukan_2021-05_ac_(1).jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "367b2843-ca8b-5dc4-a16a-df9dffdf280f",
+      "building_id": "1ed15436-687d-5020-a0ef-b1e28a0f19e1",
+      "building_slug": "sukagawa-community-center-tette",
+      "case_id": "CASE-081",
+      "url_original": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Sukagawa_Citizen_Exchange_Center_Tette.jpg",
+      "photographer": "Suikotei",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sukagawa_Citizen_Exchange_Center_Tette.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "c5f883b5-df00-558f-879d-4d7a4adfb83f",
+      "building_id": "f64260d6-2859-5735-b053-c74bafa46aed",
+      "building_slug": "ishikawa-prefectural-library",
+      "case_id": "CASE-092",
+      "url_original": "/images/graduation/cases/case-092-ishikawa-prefectural-library.jpg",
+      "photographer": "Asturio Cantabrio",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ishikawa_Prefectural_Library_2022-07_ac_(1).jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "f2b48137-99c5-51f4-a47b-2ebd24bc8808",
+      "building_id": "6b926e74-2b36-53d4-a5e2-7dae96b56904",
+      "building_slug": "nakajima-library-akita-international-university",
+      "case_id": "CASE-095",
+      "url_original": "/images/graduation/cases/case-095-nakajima-library-akita-international-university.jpg",
+      "photographer": "Mariwlqs",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Inside_Nakajima_Library.jpg",
+      "img_type": "interior",
+      "is_primary": true
+    },
+    {
+      "id": "64f156d7-fcb7-5219-bef3-b34ccc4fa8a2",
+      "building_id": "5eb66d05-ac6b-5b59-8207-0be231f3706e",
+      "building_slug": "helsinki-central-library-oodi",
+      "case_id": "CASE-098",
+      "url_original": "/images/graduation/cases/case-098-helsinki-central-library-oodi.jpg",
+      "photographer": "TuukkaH",
+      "source": "Wikimedia Commons",
+      "license": "CC0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Helsinki_Central_Library_Oodi_from_north.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "1903c53a-9d21-5548-9015-d55c5ce44c05",
+      "building_id": "06beedb1-fe15-5724-bc46-994a829e5ce1",
+      "building_slug": "dokk1",
+      "case_id": "CASE-101",
+      "url_original": "https://upload.wikimedia.org/wikipedia/commons/5/51/Dokk1_version_3.jpg",
+      "photographer": "Villy Fink Isaksen",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Dokk1_version_3.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "14c61c3e-5666-5e49-b091-7efc643cba0d",
+      "building_id": "6901a4d1-0a4a-5833-b59d-01d2bcf1cc75",
+      "building_slug": "deichman-bjorvika",
+      "case_id": "CASE-105",
+      "url_original": "https://upload.wikimedia.org/wikipedia/commons/3/32/Deichman_Bj%C3%B8rvika%2C_Oslo_-_53132063275.jpg",
+      "photographer": "charlotte henard",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Deichman_Bj%C3%B8rvika,_Oslo_-_53132063275.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "33513367-283f-57f9-8b88-0ca205ba119a",
+      "building_id": "badd5949-61cf-5e7c-83c2-80415f8c7592",
+      "building_slug": "peckham-library",
+      "case_id": "CASE-112",
+      "url_original": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Peckham%20library%20exterior%201.jpg",
+      "photographer": "Mcginnly",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Peckham_library_exterior_1.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "42741e78-8080-503b-b217-ac43f3ecd34a",
+      "building_id": "01f36d99-7beb-5310-acba-623b775ca9ca",
+      "building_slug": "bibliotheca-alexandrina",
+      "case_id": "CASE-113",
+      "url_original": "/images/graduation/cases/case-113-bibliotheca-alexandrina.jpg",
+      "photographer": "Mahmoud Saaid",
+      "source": "Wikimedia Commons",
+      "license": "CC BY 2.5",
+      "source_url": "https://commons.wikimedia.org/wiki/File:BA_outside_view.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "e3446519-a9f1-599d-82ee-b7ac9d2adf32",
+      "building_id": "e6b45af1-459e-56d2-b8a7-e4efa60a3776",
+      "building_slug": "lochal-public-library",
+      "case_id": "CASE-114",
+      "url_original": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Exterieur_aanzicht_Bibliotheek_LocHal_Tilburg%2C_april_2019.jpg",
+      "photographer": "OlafJanssen",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Exterieur_aanzicht_Bibliotheek_LocHal_Tilburg,_april_2019.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "9f3d5569-1d00-5d8b-b2d5-87e870491041",
+      "building_id": "abd3201b-abdd-5acf-a52c-c9914f65698f",
+      "building_slug": "idea-store-whitechapel",
+      "case_id": "CASE-115",
+      "url_original": "https://upload.wikimedia.org/wikipedia/commons/8/81/Idea_store_2.jpg",
+      "photographer": "Mcginnly",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Idea_store_2.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "b734edbb-6fc1-56e9-ab4b-1a700743fc2d",
+      "building_id": "7cdda9cd-7b2c-57b0-8b29-db78d2ff7248",
+      "building_slug": "book-mountain-spijkenisse",
+      "case_id": "CASE-130",
+      "url_original": "/images/graduation/cases/case-130-book-mountain.jpg",
+      "photographer": "G.Lanting",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Boekenberg_DSCF1911.JPG",
+      "img_type": "interior",
+      "is_primary": true
+    },
+    {
+      "id": "5ef712a9-c2a1-5a5b-8c0c-7a614efe610b",
+      "building_id": "6f349aa6-a2bc-58f0-be15-347f1c8aae62",
+      "building_slug": "library-of-birmingham",
+      "case_id": "CASE-137",
+      "url_original": "/images/graduation/cases/case-137-library-of-birmingham.jpg",
+      "photographer": "Fatih Renkligil",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Exterior_Library_of_Birmingham_England.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-036",
+      "building_id": "2739a5c9-404f-50d7-bbe7-5cf17516cb98",
+      "building_slug": "tama-art-university-hachioji-library",
+      "concept_zh": "艺术大学图书馆以拱形连续空间支持阅读、放松、研究和创作灵感。",
+      "concept_zh_hant": null,
+      "concept_en": "Tama Art University Library is a reference case for reading library, Design topic: art大学, learning, creative production. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "アーチ状の構造が連続する大学図書館。静かな学習、創作前の調査、開放的な通り抜けが同居する空間を比較できる。",
+      "keywords_zh": [
+        "图书馆",
+        "艺术大学",
+        "学习",
+        "创作",
+        "开放空间"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "library",
+        "Design topic: art大学",
+        "learning",
+        "creative production",
+        "openspace"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "アート大学",
+        "学習",
+        "創作",
+        "開放空間"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.tamabi.ac.jp/en/about/library/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-076",
+      "building_id": "bed234bc-94f7-57d1-8592-3ea05e6bbbb5",
+      "building_slug": "kozakai-kifukan-community-center",
+      "concept_zh": "社区中心、图书馆、儿童中心和市政分所复合，用共享中庭组织一站式公共服务。",
+      "concept_zh_hant": null,
+      "concept_en": "Kozakai Kifukan Community Center is a reference case for reading communitycenter, library, childrencenter, Design topic: 市政service. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "コミュニティセンター、図書館、子ども支援、行政サービスをまとめた地域拠点。日常の用事を一つの公共施設に重ねる参考になる。",
+      "keywords_zh": [
+        "社区中心",
+        "图书馆",
+        "儿童中心",
+        "市政服务",
+        "复合公共建筑"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "communitycenter",
+        "library",
+        "childrencenter",
+        "Design topic: 市政service",
+        "Design topic: 复合public建筑"
+      ],
+      "keywords_ja": [
+        "コミュニティセンター",
+        "図書館",
+        "子ども支援",
+        "行政サービス",
+        "地域拠点"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.c-and-a.co.jp/en/projects/kozakaikifukan/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-081",
+      "building_id": "1ed15436-687d-5020-a0ef-b1e28a0f19e1",
+      "building_slug": "sukagawa-community-center-tette",
+      "concept_zh": "东日本大震灾后的市民交流中心复合图书馆、博物馆、育儿支援和咖啡，重建城市中心的公共生活。",
+      "concept_zh_hant": null,
+      "concept_en": "Sukagawa Community Center tette is a reference case for reading Design topic: post-disaster复兴, communitycenter, library, childcaresupport. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "「Sukagawa Community Center tette」は、災後復興・コミュニティセンター・図書館・子育て支援の関係を読み取る参考事例。用途の複合、運営、居場所のつくり方を卒業設計に転用して考えられる。",
+      "keywords_zh": [
+        "灾后复兴",
+        "社区中心",
+        "图书馆",
+        "育儿支援",
+        "市民交流"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "Design topic: post-disaster复兴",
+        "communitycenter",
+        "library",
+        "childcaresupport",
+        "citizenexchange"
+      ],
+      "keywords_ja": [
+        "災後復興",
+        "コミュニティセンター",
+        "図書館",
+        "子育て支援",
+        "市民交流"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://unemori-archi.com/?works=sukagawa-civic-center-tentative-name",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-092",
+      "building_id": "f64260d6-2859-5735-b053-c74bafa46aed",
+      "building_slug": "ishikawa-prefectural-library",
+      "concept_zh": "大型公共图书馆通过环形书架、阶梯阅读和交流空间，把阅读设施转为开放文化客厅。",
+      "concept_zh_hant": null,
+      "concept_en": "Ishikawa Prefectural Library is a reference case for reading library, cultureexchange, learning, Design topic: 无障碍. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "大きな閲覧空間と多様な滞在場所を持つ県立図書館。調べる、相談する、休む、学ぶ行為を広く受け止める公共性を読める。",
+      "keywords_zh": [
+        "图书馆",
+        "文化交流",
+        "学习",
+        "无障碍",
+        "公共客厅"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "library",
+        "cultureexchange",
+        "learning",
+        "Design topic: 无障碍",
+        "public living room"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "学習",
+        "地域拠点",
+        "滞在",
+        "情報相談"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.library.pref.ishikawa.lg.jp/category/aboutlibrary/2983.html",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-095",
+      "building_id": "6b926e74-2b36-53d4-a5e2-7dae96b56904",
+      "building_slug": "nakajima-library-akita-international-university",
+      "concept_zh": "24小时大学图书馆以本之竞技场组织学习，提供全天候、安静且高度集中的知识空间。",
+      "concept_zh_hant": null,
+      "concept_en": "Nakajima Library Akita International University is a reference case for reading nightlearning, Design topic: 大学library, Design topic: 24小时, Design topic: 木构. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "大学図書館の静かな学習環境。集中、滞在、資料探索を支え、学校外の学びや制作前の調査空間として比較できる。",
+      "keywords_zh": [
+        "夜间学习",
+        "大学图书馆",
+        "24小时",
+        "木构",
+        "自习"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "nightlearning",
+        "Design topic: 大学library",
+        "Design topic: 24小时",
+        "Design topic: 木构",
+        "Design topic: 自习"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "大学",
+        "学習",
+        "静かな滞在",
+        "資料探索"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://web.aiu.ac.jp/en/education/support/library/outline/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-098",
+      "building_id": "5eb66d05-ac6b-5b59-8207-0be231f3706e",
+      "building_slug": "helsinki-central-library-oodi",
+      "concept_zh": "中央图书馆把阅读、制作、活动和城市阳台复合，成为免费、安全、开放的市民客厅。",
+      "concept_zh_hant": null,
+      "concept_en": "Helsinki Central Library Oodi is a reference case for reading library, Design topic: citizen客厅, makingspace, Design topic: urban阳台. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "図書館を読書だけでなく、制作、学習、市民活動のプラットフォームとして開く事例。多様な利用者が滞在できる公共性を読める。",
+      "keywords_zh": [
+        "图书馆",
+        "市民客厅",
+        "制作空间",
+        "城市阳台",
+        "公共性"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "library",
+        "Design topic: citizen客厅",
+        "makingspace",
+        "Design topic: urban阳台",
+        "publicness"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "市民活動",
+        "学習",
+        "制作",
+        "開放性"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://oodihelsinki.fi/en/what-is-oodi/architecture/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-101",
+      "building_id": "06beedb1-fe15-5724-bc46-994a829e5ce1",
+      "building_slug": "dokk1",
+      "concept_zh": "图书馆、市民服务、交通和港湾广场复合成城市客厅。",
+      "concept_zh_hant": null,
+      "concept_en": "A hybrid civic library combining library, citizen service, transit, and harbor public space.",
+      "concept_ja": "図書館、市民サービス、交通、港の広場を重ねた大型公共リビング。駅前や水辺の学習拠点を考える参考になる。",
+      "keywords_zh": [
+        "图书馆",
+        "市民服务",
+        "港湾",
+        "公共客厅",
+        "交通"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "library",
+        "citizen service",
+        "harbor",
+        "public living room",
+        "transit"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "市民サービス",
+        "港",
+        "公共リビング",
+        "交通"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.shl.dk/en/work/dokk1-aarhus-central-library-and-culture-house/experience",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-105",
+      "building_id": "6901a4d1-0a4a-5833-b59d-01d2bcf1cc75",
+      "building_slug": "deichman-bjorvika",
+      "concept_zh": "海边图书馆把学习、制作、剧场和城市客厅叠合在一起。",
+      "concept_zh_hant": null,
+      "concept_en": "A waterfront library combining learning, making, performance, cafe, and civic living room functions.",
+      "concept_ja": "水辺の図書館に、学習、制作、劇場、カフェ、都市のリビングを重ねた事例。駅前や港の公共施設を考える参考になる。",
+      "keywords_zh": [
+        "图书馆",
+        "水边",
+        "市民活动",
+        "制作",
+        "城市客厅"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "library",
+        "waterfront",
+        "civic activity",
+        "making",
+        "urban living room"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "水辺",
+        "市民活動",
+        "制作",
+        "都市リビング"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.lundhagem.no/work/deichman-library",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-112",
+      "building_id": "badd5949-61cf-5e7c-83c2-80415f8c7592",
+      "building_slug": "peckham-library",
+      "concept_zh": "図書館を高く持ち上げ、街に開いた入口と学習空間をつくった事例。地域の知識拠点と象徴性を比較できる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Peckham Library: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "図書館を高く持ち上げ、街に開いた入口と学習空間をつくった事例。地域の知識拠点と象徴性を比較できる。",
+      "keywords_zh": [
+        "図書館",
+        "地域学習",
+        "公共入口",
+        "都市象徴",
+        "若者"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "図書館",
+        "地域学習",
+        "公共入口",
+        "都市象徴",
+        "若者"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "地域学習",
+        "公共入口",
+        "都市象徴",
+        "若者"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.southwark.gov.uk/culture-and-sport/libraries/find-library/peckham-library",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-113",
+      "building_id": "01f36d99-7beb-5310-acba-623b775ca9ca",
+      "building_slug": "bibliotheca-alexandrina",
+      "concept_zh": "巨大な図書館を都市、海、研究、文化記憶と結びつけた事例。知識施設を都市スケールで考える参考になる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Bibliotheca Alexandrina: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "巨大な図書館を都市、海、研究、文化記憶と結びつけた事例。知識施設を都市スケールで考える参考になる。",
+      "keywords_zh": [
+        "図書館",
+        "文化記憶",
+        "研究",
+        "海辺",
+        "公共性"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "図書館",
+        "文化記憶",
+        "研究",
+        "海辺",
+        "公共性"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "文化記憶",
+        "研究",
+        "海辺",
+        "公共性"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.snohetta.com/projects/bibliotheca-alexandrina",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-114",
+      "building_id": "e6b45af1-459e-56d2-b8a7-e4efa60a3776",
+      "building_slug": "lochal-public-library",
+      "concept_zh": "旧鉄道工場を図書館、制作、イベント、学習の場に転用した事例。産業遺産と知識空間の接続を読める。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for LocHal Library: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "旧鉄道工場を図書館、制作、イベント、学習の場に転用した事例。産業遺産と知識空間の接続を読める。",
+      "keywords_zh": [
+        "図書館",
+        "産業遺産",
+        "再利用",
+        "制作",
+        "市民活動"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "図書館",
+        "産業遺産",
+        "再利用",
+        "制作",
+        "市民活動"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "産業遺産",
+        "再利用",
+        "制作",
+        "市民活動"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.civicarchitects.eu/projects/lochal-tilburg",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-115",
+      "building_id": "abd3201b-abdd-5acf-a52c-c9914f65698f",
+      "building_slug": "idea-store-whitechapel",
+      "concept_zh": "図書館と生涯学習を商店街のような日常動線に重ねた事例。多文化地域の学習入口として比較できる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Idea Store Whitechapel: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "図書館と生涯学習を商店街のような日常動線に重ねた事例。多文化地域の学習入口として比較できる。",
+      "keywords_zh": [
+        "図書館",
+        "生涯学習",
+        "多文化",
+        "商店街",
+        "公共サービス"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "図書館",
+        "生涯学習",
+        "多文化",
+        "商店街",
+        "公共サービス"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "生涯学習",
+        "多文化",
+        "商店街",
+        "公共サービス"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.adjaye.com/work/idea-store-whitechapel/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-130",
+      "building_id": "7cdda9cd-7b2c-57b0-8b29-db78d2ff7248",
+      "building_slug": "book-mountain-spijkenisse",
+      "concept_zh": "本棚を山のように積み上げ、図書館を地域の象徴的な学習風景にした事例。読書と空間体験を結べる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Book Mountain: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "本棚を山のように積み上げ、図書館を地域の象徴的な学習風景にした事例。読書と空間体験を結べる。",
+      "keywords_zh": [
+        "図書館",
+        "本棚",
+        "地域象徴",
+        "読書",
+        "学習風景"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "図書館",
+        "本棚",
+        "地域象徴",
+        "読書",
+        "学習風景"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "本棚",
+        "地域象徴",
+        "読書",
+        "学習風景"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.mvrdv.com/projects/126/book-",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-137",
+      "building_id": "6f349aa6-a2bc-58f0-be15-347f1c8aae62",
+      "building_slug": "library-of-birmingham",
+      "concept_zh": "大規模図書館を都市中心部の学習、展望、滞在の拠点にした事例。公共図書館の象徴性を読める。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Library of Birmingham: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "大規模図書館を都市中心部の学習、展望、滞在の拠点にした事例。公共図書館の象徴性を読める。",
+      "keywords_zh": [
+        "図書館",
+        "都心",
+        "学習",
+        "展望",
+        "公共性"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "図書館",
+        "都心",
+        "学習",
+        "展望",
+        "公共性"
+      ],
+      "keywords_ja": [
+        "図書館",
+        "都心",
+        "学習",
+        "展望",
+        "公共性"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.mecanoo.nl/Projects/project/57/Library-of-Birmingham?t=0",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "2739a5c9-404f-50d7-bbe7-5cf17516cb98",
+      "building_slug": "tama-art-university-hachioji-library",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.tamabi.ac.jp/en/about/library/",
+      "evidence_note": "Tama Art University states that Toyo Ito designed the Hachioji Library and that the new library opened in 2007.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "2739a5c9-404f-50d7-bbe7-5cf17516cb98",
+      "building_slug": "tama-art-university-hachioji-library",
+      "function_slug": "university",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.tamabi.ac.jp/en/about/library/",
+      "evidence_note": "Tama Art University states that Toyo Ito designed the Hachioji Library and that the new library opened in 2007.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "bed234bc-94f7-57d1-8592-3ea05e6bbbb5",
+      "building_slug": "kozakai-kifukan-community-center",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.c-and-a.co.jp/en/projects/kozakaikifukan/",
+      "evidence_note": "C+A records March 2021 completion in Toyokawa and identifies library, community center, children's center and city hall branch uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "bed234bc-94f7-57d1-8592-3ea05e6bbbb5",
+      "building_slug": "kozakai-kifukan-community-center",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.c-and-a.co.jp/en/projects/kozakaikifukan/",
+      "evidence_note": "C+A records March 2021 completion in Toyokawa and identifies library, community center, children's center and city hall branch uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "bed234bc-94f7-57d1-8592-3ea05e6bbbb5",
+      "building_slug": "kozakai-kifukan-community-center",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.c-and-a.co.jp/en/projects/kozakaikifukan/",
+      "evidence_note": "C+A records March 2021 completion in Toyokawa and identifies library, community center, children's center and city hall branch uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "1ed15436-687d-5020-a0ef-b1e28a0f19e1",
+      "building_slug": "sukagawa-community-center-tette",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://unemori-archi.com/?works=sukagawa-civic-center-tentative-name",
+      "evidence_note": "UNEMORI records August 2018 completion, joint design with Ishimoto, and library, lifelong learning, childcare and civic support functions.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "1ed15436-687d-5020-a0ef-b1e28a0f19e1",
+      "building_slug": "sukagawa-community-center-tette",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://unemori-archi.com/?works=sukagawa-civic-center-tentative-name",
+      "evidence_note": "UNEMORI records August 2018 completion, joint design with Ishimoto, and library, lifelong learning, childcare and civic support functions.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "1ed15436-687d-5020-a0ef-b1e28a0f19e1",
+      "building_slug": "sukagawa-community-center-tette",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://unemori-archi.com/?works=sukagawa-civic-center-tentative-name",
+      "evidence_note": "UNEMORI records August 2018 completion, joint design with Ishimoto, and library, lifelong learning, childcare and civic support functions.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "f64260d6-2859-5735-b053-c74bafa46aed",
+      "building_slug": "ishikawa-prefectural-library",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.library.pref.ishikawa.lg.jp/category/aboutlibrary/2983.html",
+      "evidence_note": "The library records its July 2022 opening and names Mitsuru Senda / Environment Design Institute among the building designers.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "f64260d6-2859-5735-b053-c74bafa46aed",
+      "building_slug": "ishikawa-prefectural-library",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.library.pref.ishikawa.lg.jp/category/aboutlibrary/2983.html",
+      "evidence_note": "The library records its July 2022 opening and names Mitsuru Senda / Environment Design Institute among the building designers.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "6b926e74-2b36-53d4-a5e2-7dae96b56904",
+      "building_slug": "nakajima-library-akita-international-university",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://web.aiu.ac.jp/en/education/support/library/outline/",
+      "evidence_note": "Akita International University identifies Mitsuru Senda as architect; the university report records library completion in March 2008.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "6b926e74-2b36-53d4-a5e2-7dae96b56904",
+      "building_slug": "nakajima-library-akita-international-university",
+      "function_slug": "university",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://web.aiu.ac.jp/en/education/support/library/outline/",
+      "evidence_note": "Akita International University identifies Mitsuru Senda as architect; the university report records library completion in March 2008.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "5eb66d05-ac6b-5b59-8207-0be231f3706e",
+      "building_slug": "helsinki-central-library-oodi",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://oodihelsinki.fi/en/what-is-oodi/architecture/",
+      "evidence_note": "Oodi identifies ALA Architects and describes the library's event, workshop, meeting, study and civic spaces.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "5eb66d05-ac6b-5b59-8207-0be231f3706e",
+      "building_slug": "helsinki-central-library-oodi",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://oodihelsinki.fi/en/what-is-oodi/architecture/",
+      "evidence_note": "Oodi identifies ALA Architects and describes the library's event, workshop, meeting, study and civic spaces.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "5eb66d05-ac6b-5b59-8207-0be231f3706e",
+      "building_slug": "helsinki-central-library-oodi",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://oodihelsinki.fi/en/what-is-oodi/architecture/",
+      "evidence_note": "Oodi identifies ALA Architects and describes the library's event, workshop, meeting, study and civic spaces.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "06beedb1-fe15-5724-bc46-994a829e5ce1",
+      "building_slug": "dokk1",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.shl.dk/en/work/dokk1-aarhus-central-library-and-culture-house/experience",
+      "evidence_note": "Schmidt Hammer Lassen records completion in 2015 and public library, citizen services, offices and automated parking uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "06beedb1-fe15-5724-bc46-994a829e5ce1",
+      "building_slug": "dokk1",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.shl.dk/en/work/dokk1-aarhus-central-library-and-culture-house/experience",
+      "evidence_note": "Schmidt Hammer Lassen records completion in 2015 and public library, citizen services, offices and automated parking uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "06beedb1-fe15-5724-bc46-994a829e5ce1",
+      "building_slug": "dokk1",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.shl.dk/en/work/dokk1-aarhus-central-library-and-culture-house/experience",
+      "evidence_note": "Schmidt Hammer Lassen records completion in 2015 and public library, citizen services, offices and automated parking uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "6901a4d1-0a4a-5833-b59d-01d2bcf1cc75",
+      "building_slug": "deichman-bjorvika",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.lundhagem.no/work/deichman-library",
+      "evidence_note": "Lundhagem records the Oslo project as a 2020 collaboration with Atelier Oslo.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "badd5949-61cf-5e7c-83c2-80415f8c7592",
+      "building_slug": "peckham-library",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.southwark.gov.uk/culture-and-sport/libraries/find-library/peckham-library",
+      "evidence_note": "Southwark operates the current library; council material records Will Alsop design and the 2000 Stirling Award.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "badd5949-61cf-5e7c-83c2-80415f8c7592",
+      "building_slug": "peckham-library",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.southwark.gov.uk/culture-and-sport/libraries/find-library/peckham-library",
+      "evidence_note": "Southwark operates the current library; council material records Will Alsop design and the 2000 Stirling Award.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "01f36d99-7beb-5310-acba-623b775ca9ca",
+      "building_slug": "bibliotheca-alexandrina",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.snohetta.com/projects/bibliotheca-alexandrina",
+      "evidence_note": "Snøhetta identifies the completed circular library and its museums, planetarium, research and educational functions.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "01f36d99-7beb-5310-acba-623b775ca9ca",
+      "building_slug": "bibliotheca-alexandrina",
+      "function_slug": "museum",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.snohetta.com/projects/bibliotheca-alexandrina",
+      "evidence_note": "Snøhetta identifies the completed circular library and its museums, planetarium, research and educational functions.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "01f36d99-7beb-5310-acba-623b775ca9ca",
+      "building_slug": "bibliotheca-alexandrina",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.snohetta.com/projects/bibliotheca-alexandrina",
+      "evidence_note": "Snøhetta identifies the completed circular library and its museums, planetarium, research and educational functions.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "e6b45af1-459e-56d2-b8a7-e4efa60a3776",
+      "building_slug": "lochal-public-library",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.civicarchitects.eu/projects/lochal-tilburg",
+      "evidence_note": "Civic Architects identifies the lead, Braaksma & Roos restoration and Mecanoo library interiors, plus library, co-working and event uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "e6b45af1-459e-56d2-b8a7-e4efa60a3776",
+      "building_slug": "lochal-public-library",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.civicarchitects.eu/projects/lochal-tilburg",
+      "evidence_note": "Civic Architects identifies the lead, Braaksma & Roos restoration and Mecanoo library interiors, plus library, co-working and event uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "e6b45af1-459e-56d2-b8a7-e4efa60a3776",
+      "building_slug": "lochal-public-library",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.civicarchitects.eu/projects/lochal-tilburg",
+      "evidence_note": "Civic Architects identifies the lead, Braaksma & Roos restoration and Mecanoo library interiors, plus library, co-working and event uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "abd3201b-abdd-5acf-a52c-c9914f65698f",
+      "building_slug": "idea-store-whitechapel",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.adjaye.com/work/idea-store-whitechapel/",
+      "evidence_note": "Adjaye Associates records London, 2005, and a civic education programme combining information, learning and community facilities.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "abd3201b-abdd-5acf-a52c-c9914f65698f",
+      "building_slug": "idea-store-whitechapel",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.adjaye.com/work/idea-store-whitechapel/",
+      "evidence_note": "Adjaye Associates records London, 2005, and a civic education programme combining information, learning and community facilities.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "abd3201b-abdd-5acf-a52c-c9914f65698f",
+      "building_slug": "idea-store-whitechapel",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.adjaye.com/work/idea-store-whitechapel/",
+      "evidence_note": "Adjaye Associates records London, 2005, and a civic education programme combining information, learning and community facilities.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "7cdda9cd-7b2c-57b0-8b29-db78d2ff7248",
+      "building_slug": "book-mountain-spijkenisse",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mvrdv.com/projects/126/book-",
+      "evidence_note": "MVRDV records 2003–2012 realisation in Spijkenisse and library, education centre, auditorium, offices and retail uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "7cdda9cd-7b2c-57b0-8b29-db78d2ff7248",
+      "building_slug": "book-mountain-spijkenisse",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mvrdv.com/projects/126/book-",
+      "evidence_note": "MVRDV records 2003–2012 realisation in Spijkenisse and library, education centre, auditorium, offices and retail uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "7cdda9cd-7b2c-57b0-8b29-db78d2ff7248",
+      "building_slug": "book-mountain-spijkenisse",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mvrdv.com/projects/126/book-",
+      "evidence_note": "MVRDV records 2003–2012 realisation in Spijkenisse and library, education centre, auditorium, offices and retail uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "6f349aa6-a2bc-58f0-be15-347f1c8aae62",
+      "building_slug": "library-of-birmingham",
+      "function_slug": "library",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mecanoo.nl/Projects/project/57/Library-of-Birmingham?t=0",
+      "evidence_note": "Mecanoo records 2010–2013 realisation in Birmingham and integrated library, archive, exhibition, wellbeing, auditorium and REP Theatre uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "6f349aa6-a2bc-58f0-be15-347f1c8aae62",
+      "building_slug": "library-of-birmingham",
+      "function_slug": "theatre",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mecanoo.nl/Projects/project/57/Library-of-Birmingham?t=0",
+      "evidence_note": "Mecanoo records 2010–2013 realisation in Birmingham and integrated library, archive, exhibition, wellbeing, auditorium and REP Theatre uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "6f349aa6-a2bc-58f0-be15-347f1c8aae62",
+      "building_slug": "library-of-birmingham",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mecanoo.nl/Projects/project/57/Library-of-Birmingham?t=0",
+      "evidence_note": "Mecanoo records 2010–2013 realisation in Birmingham and integrated library, archive, exhibition, wellbeing, auditorium and REP Theatre uses.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}
