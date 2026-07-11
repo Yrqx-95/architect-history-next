@@ -8,8 +8,8 @@ import {
   graduationIssues,
   graduationPrograms,
   graduationSiteTypes,
-  publicGraduationCases,
 } from '@/lib/graduation'
+import { getUnifiedPublicGraduationCases } from '@/lib/graduation-unified'
 
 const GRADUATION_SECTIONS = new Set([
   'issues',
@@ -60,6 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 
 export default async function GraduationPage({ params }: { params: Promise<{ lang: string; slug?: string[] }> }) {
   const { lang, slug = [] } = await params
+  const { cases } = await getUnifiedPublicGraduationCases()
   const [section, id, ...rest] = slug
 
   if (
@@ -69,7 +70,7 @@ export default async function GraduationPage({ params }: { params: Promise<{ lan
     (section === 'issues' && id && !graduationIssues.some(issue => issue.id === id && issue.status === 'published')) ||
     (section === 'programs' && id && !graduationPrograms.some(program => program.id === id)) ||
     (section === 'sites' && id && !graduationSiteTypes.some(site => site.id === id && site.status === 'published')) ||
-    (section === 'cases' && id && !publicGraduationCases.some(item => item.id === id))
+    (section === 'cases' && id && !cases.some(item => item.id === id))
   ) {
     notFound()
   }
@@ -81,7 +82,7 @@ export default async function GraduationPage({ params }: { params: Promise<{ lan
         slug={slug}
         issues={graduationIssues}
         sites={graduationSiteTypes}
-        cases={publicGraduationCases}
+        cases={cases}
         programs={graduationPrograms}
         brief={graduationBrief}
       />

@@ -1,0 +1,34 @@
+import { expect, test } from '@playwright/test'
+
+test.describe('graduation Supabase + JSON dual read', () => {
+  test('API exposes the reviewed unified subset and explicit image fallback diagnostics', async ({ request }) => {
+    const response = await request.get('/api/v1/graduation/cases')
+    expect(response.status()).toBe(200)
+    const payload = await response.json()
+
+    expect(payload.source).toBe('supabase+json')
+    expect(payload.cases).toHaveLength(100)
+    expect(payload.diagnostics.profileCount).toBe(21)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(21)
+    expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
+    expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
+    expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(21)
+  })
+
+  test('CASE route keeps its ID while rendering canonical facts and the reviewed fallback image', async ({ page }) => {
+    const response = await page.goto('/zh/graduation/cases/CASE-104')
+    expect(response?.status()).toBe(200)
+
+    await expect(page.getByRole('heading', { name: '西雅图中央图书馆' })).toBeVisible()
+    await expect(page.getByText('西雅图 美国 · 2004')).toBeVisible()
+    await expect(page.getByText('OMA + LMN Architects')).toBeVisible()
+    await expect(page.getByRole('link', { name: '图片来源 · CC BY-SA 4.0' })).toBeVisible()
+
+    const image = page.locator('main img')
+    await expect(image).toHaveAttribute('alt', '西雅图中央图书馆')
+    const src = await image.getAttribute('src')
+    const decodedSrc = decodeURIComponent(decodeURIComponent(src || ''))
+    expect(decodedSrc).toContain('Seattle_(WA,_USA),_Seattle_Central_Library')
+  })
+})
