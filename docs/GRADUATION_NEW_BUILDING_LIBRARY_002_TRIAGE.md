@@ -2,7 +2,7 @@
 
 日期：2026-07-12  
 范围：`graduation-new-building-queue-001` 中 15 个 `library-next` 案例  
-状态：只读初筛，尚未批准数据库写入
+状态：初筛已转入正式审核；14 条通过，CASE-079 保留为 `no_safe_image_yet`
 
 ## 初筛结论
 
@@ -46,3 +46,7 @@ CASE-130 的 Commons 作品页列出摄影/来源为 Centrum Hout，许可为 CC
 2. 为 CASE-112 更换可访问的一手来源。
 3. 对其余 10 条核验规范名称、建筑师、年份、城市、国家和多用途关系。
 4. 全部通过后才生成 `graduation-new-buildings-library-002.json` 决策文件；在此之前不生成 apply SQL。
+
+## 后续结果
+
+上述图片替换、版权署名、年份、来源与设计责任均已完成复核。正式结论见 `GRADUATION_NEW_BUILDING_LIBRARY_002_REVIEW.md`。

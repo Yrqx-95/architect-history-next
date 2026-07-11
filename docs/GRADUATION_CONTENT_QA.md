@@ -1,6 +1,6 @@
 # Graduation Content QA
 
-Generated: 2026-07-11T18:50:46.448Z
+Generated: 2026-07-11T23:16:54.316Z
 
 ## Counts
 
@@ -22,19 +22,19 @@ Generated: 2026-07-11T18:50:46.448Z
 
 - Issues with source URLs: 100/100
 - Cases with source URL: 139/139
-- Cases using local case images: 49/139
-- Cases using remote images: 51/139
+- Cases using local case images: 52/139
+- Cases using remote images: 48/139
 - Cases using placeholder image: 39/139
 - Cases with explicit image source URL: 100/139
 - Graduation image manifest entries: 49
 - Graduation image retry queue entries: 12
 - Local case image files missing from public folder: 0
-- Local case images missing from manifest: 0
+- Local case images missing from manifest: 3
 - Manifest entries not used by current case data: 0
 - Manifest entries missing local files: 0
 
 Broken local case image references: none
-Local case images missing from manifest: none
+Local case images missing from manifest: CASE-113, CASE-130, CASE-137
 Manifest entries not used by current cases: none
 Remaining manifest retry queue: none
 Dedicated retry queue: CASE-050, CASE-051, CASE-052, CASE-053, CASE-054, CASE-055, CASE-058, CASE-060, CASE-061, CASE-071, CASE-074, CASE-081
@@ -42,8 +42,8 @@ Dedicated retry queue: CASE-050, CASE-051, CASE-052, CASE-053, CASE-054, CASE-05
 ## Published Readiness
 
 - Published cases: 100
-- Published cases using local images: 49/100
-- Published cases using remote images: 51/100
+- Published cases using local images: 52/100
+- Published cases using remote images: 48/100
 - Published cases using placeholder images: 0/100
 - Published cases missing image source/license/credit: 0
 - Draft cases with source-safe non-placeholder images: 0
@@ -64,4 +64,4 @@ Published issue draft-case references: none
 
 ## Next Recommendation
 
-- Retry queued remote Commons images only when expanding image coverage; use the retry queue in slow 1-2 item batches, starting with CASE-050 and CASE-051.
+- Sync image manifest coverage for local case images not yet tracked there: CASE-113, CASE-130, CASE-137.
