@@ -2,7 +2,7 @@
 
 日期：2026-07-12
 
-状态：8 条身份与图片审核完成；未生成数据库写入
+状态：8 条身份与图片审核完成；图片修正已发布；数据库迁移包已进入 dry-run 阶段
 
 ## 数量校正
 
@@ -52,4 +52,10 @@ G6 的真实剩余数是 118，不是旧清单中的 101：
 
 ## 尚未授权的动作
 
-本批没有生产 INSERT。下一步先为 8 个主体和 4 个当前缺失的建筑师实体生成 guarded migration、rollback 与 PGlite dry-run；还要解决主体 schema 只支持一个 architect 的限制，不能丢掉 CASE-070 的共同设计信息。
+本批没有生产 INSERT。8 个主体和 4 个当前缺失建筑师实体的 guarded migration、rollback 与 PGlite dry-run 已生成并通过；主体 schema 仍只支持一个 architect，因此迁移以 MIKAMI Architects 为主关系，同时保留 graduation profile 中 CASE-070 的共同设计字符串，不能丢掉押田建筑设计事务所的参与信息。
+
+## 图片修正发布
+
+PR #17 合并为 `88655f3a1808bab04871b6927522e15059874bef`；Reviewed production release run `29166038170` 成功。线上 CASE-027 与 CASE-070 均返回 HTTP 200；两张线上图片的 SHA-1 与审核后的仓库文件完全一致，公开 JSON 也返回新的作者、许可、作品页和纠错说明。
+
+数据库迁移准备现已完成，详见 `GRADUATION_LIBRARY_BATCH_001_DRY_RUN.md`；生产 INSERT 仍未执行。
