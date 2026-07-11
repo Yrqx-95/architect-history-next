@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：`G5` 为 G1/G2 已批准 CASE 映射和 G4 已批准 library/museum 用途关系生成 guarded migration、rollback 与 dry-run；先验证，不直接写入生产数据库。
+当前下一步：完成 `G5` 的双轨读取 Reviewed production release 与线上验证；验证通过后才进入 `G6`。
 
 ## 最终目标
 
@@ -100,13 +100,13 @@
 
 - [x] 为 G1/G2 批准记录生成 guarded migration 和 rollback。
 - [x] 在写入前验证 CASE ID、building ID、source URL 和行数。
-- [ ] 写入后查询验证 profile 数、外键和重复约束。
-- [ ] 保留旧 JSON，开启 Supabase + JSON 双轨读取。
-- [ ] 新增 API/页面测试，比较双轨结果一致性。
+- [x] 写入后查询验证 profile 数、外键和重复约束。
+- [x] 保留旧 JSON，开启 Supabase + JSON 双轨读取。
+- [x] 新增 API/页面测试，比较双轨结果一致性。
 
 完成条件：批准案例从统一主体读取基础资料，旧页面和导出没有变化。
 
-当前证据：`graduation-unification-batch-001` 已生成 21 profiles、9 functions、122 aliases、23 approved assignments 的版本化数据包、guarded apply 和 rollback。PGlite 隔离 PostgreSQL 完成 foundation→seed→RLS→rollback→第二次 forward→第二次 rollback 全流程；写入行数完全匹配，anon/authenticated 只能看到 published/active/approved，anon 写入被拒绝，40 个 canonical buildings 未改变。50 个 unit tests、typecheck、lint 通过。尚未执行生产写入，也尚未实现 Supabase + JSON 双轨读取，因此 G5 仍在进行中。
+当前证据：PR #13 合并了 21 profiles、9 functions、122 aliases、23 approved assignments 的版本化数据包、guarded apply、rollback 和 PGlite dry-run；merge commit `0df1a59cccadf2ca98aa04638a3677fed19cdb9e`。PR #14 将结构草案正式化；merge commit `e45278e0cf495d001a39def28c9ffb2437e6b6e0`。生产已按顺序执行 `graduation_building_unification_foundation`（`20260711190612`）和 `graduation_unification_batch_001`（`20260711190655`）：21 个唯一 profile、9 functions、122 aliases、23 approved assignments，0 orphan，anon Data API 数量与数据包完全一致，四张新表 RLS 与只读策略有效。双轨代码保留全部 100 个 JSON 案例，只让 21 个 published profile 覆盖已审核事实；Supabase 异常时回退完整 JSON。图片独立门禁结果为 0/21 canonical 图片获准接管，因此全部继续使用已审核 JSON 图片。54 个 unit、19 个 E2E、production build、typecheck、lint 全部通过。详见 `GRADUATION_UNIFICATION_BATCH_001_PRODUCTION.md` 与 `GRADUATION_CANONICAL_IMAGE_GATE_001.md`。尚待 Reviewed production release 和线上验证，所以 G5 仍标记为进行中。
 
 ### G6 — 处理 101 个 new-building candidates
 
