@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：让 `G6` library batch 001 的 guarded migration、rollback、PGlite 演练与结构测试通过 PR；合并后重新预检，再决定生产写入。
+当前下一步：继续 `G6` 的 library batch 002，从剩余 110 个 new-building candidates 中先审核 15 个尚未处理的 library 相关案例；逐条核验身份、官方来源、图片内容、作者与许可后，再生成下一批迁移。
 
 ## 最终目标
 
@@ -111,6 +111,7 @@
 ### G6 — 处理 118 个 new-building candidates
 
 - [x] 按来源可靠度和毕业页面使用价值分批。
+- [x] Library batch 001：8 个主体完成身份、来源、用途、图片版权审核、生产迁移、发布与线上验收。
 - [ ] 新建主体前核验建筑身份、建筑师、年份、地点和官方来源。
 - [ ] 图片按 Archistory 版权规则重新审核，不直接继承未经确认的旧图片。
 - [ ] 每批有 apply、rollback、写后审计和发布记录。
@@ -118,7 +119,7 @@
 
 完成条件：每条记录已链接主体、明确拒绝或留下可解释的证据缺口。
 
-当前证据：重新以集合核对 139 个 CASE 后，21 个已链接、118 个需要新建主体；旧的 101 是匹配器重算和 G2 错误候选转入新建队列之前的历史快照。版本化队列现在覆盖 118 条，其中 23 条和 library 用途相关。Library batch 001 先审核 CASE-018/021/022/023/027/029/042/070：8 条身份、官方来源、年份、地点和用途均通过；12 个官方证据 URL 实时访问 0 failure，8 个 Commons 文件作者与许可比对 0 mismatch。CASE-027 替换横置低价值图片，CASE-070 纠正“旧馆误当新馆”的错误图片。PR #17 与 Reviewed production release run `29166038170` 成功；两张线上图片哈希与审核文件一致。迁移包现包含 4 个新 architect、8 buildings、8 images、8 profiles 和 17 assignments；生产冲突预检为 0，PGlite 完成 forward→外部关系阻断→rollback→第二轮 forward/rollback。仍未执行生产 INSERT。详见 `GRADUATION_NEW_BUILDING_LIBRARY_001.md` 与 `GRADUATION_LIBRARY_BATCH_001_DRY_RUN.md`。
+当前证据：重新以集合核对 139 个 CASE 后，21 个已链接、118 个需要新建主体；旧的 101 是匹配器重算和 G2 错误候选转入新建队列之前的历史快照。版本化队列覆盖 118 条，其中 23 条和 library 用途相关。Library batch 001 审核并迁移 CASE-018/021/022/023/027/029/042/070：8 条身份、官方来源、年份、地点和用途均通过；12 个官方证据 URL 实时访问 0 failure，8 个 Commons 文件作者与许可比对 0 mismatch。CASE-027 替换横置低价值图片，CASE-070 纠正“旧馆误当新馆”的错误图片。PR #17 发布审核图片，PR #18 合并 guarded migration，生产冲突预检两次均为 0；迁移 `graduation_library_batch_001`（`20260711201728`）写入 4 个新 architect、8 buildings、8 primary images、8 published profiles 和 17 approved assignments，写后 0 orphan、0 architect mismatch、0 duplicate primary image/function。PR #19 修正 21→29 的生产测试基线并把布局回归与数据回归分离；Reviewed production release run `29167078871` 成功。线上 API 实测 100 个公开案例、29 个 unified profile、0 missing relation；8 个 CASE 页面和 8 个主体建筑页均 HTTP 200，CASE 页面均显示已审核许可署名。G6 当前完成 8/118，剩余 110；library 子集完成 8/23，剩余 15。详见 `GRADUATION_NEW_BUILDING_LIBRARY_001.md`、`GRADUATION_LIBRARY_BATCH_001_DRY_RUN.md` 与 `GRADUATION_LIBRARY_BATCH_001_PRODUCTION.md`。
 
 ### G7 — 统一搜索与筛选
 
