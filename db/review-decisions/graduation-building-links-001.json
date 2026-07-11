@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G1 exact-match review",
+  "source_report": "reports/graduation-building-match-report.json",
+  "review_method": [
+    "Compared normalized multilingual names, architect identity, completion year, city and aliases.",
+    "Opened each graduation project source and compared it with the canonical building record.",
+    "Visually inspected all 18 graduation images and checked their Wikimedia Commons identity, author and license evidence.",
+    "Recorded the missing official_url on every canonical building as a migration-time enrichment requirement."
+  ],
+  "summary": {
+    "approved": 18,
+    "rejected": 0,
+    "needs_research": 0
+  },
+  "decisions": [
+    {
+      "case_id": "CASE-007",
+      "building_slug": "sendai-mediatheque",
+      "decision": "approved",
+      "case_source_url": "https://www.smt.jp/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:SendaiMediatheque.jpg",
+        "license": "CC BY-SA 3.0",
+        "credit": "Atsi Otani / Wikimedia Commons",
+        "visual_evidence": "Facade signage and the transparent multi-storey tube structure identify Sendai Mediatheque."
+      }
+    },
+    {
+      "case_id": "CASE-046",
+      "building_slug": "naoshima-chichu-art-museum",
+      "decision": "approved",
+      "case_source_url": "https://benesse-artsite.jp/en/art/chichu.html",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chichu_art_museum02s2560.jpg",
+        "license": "CC BY 2.5",
+        "credit": "663highland / Wikimedia Commons",
+        "visual_evidence": "The Naoshima hillside and largely buried museum volumes match Chichu Art Museum; Commons description names the project."
+      }
+    },
+    {
+      "case_id": "CASE-099",
+      "building_slug": "tate-modern",
+      "decision": "approved",
+      "case_source_url": "https://www.herzogdemeuron.com/projects/126-tate-modern/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Tate_Modern_London_June_2016.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Photo: King of Hearts / Wikimedia Commons",
+        "visual_evidence": "The Bankside power-station brick mass and chimney clearly identify Tate Modern."
+      }
+    },
+    {
+      "case_id": "CASE-103",
+      "building_slug": "kanazawa-museum",
+      "decision": "approved",
+      "case_source_url": "https://www.kanazawa21.jp/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:21st_Century_Museum_of_Contemporary_Art,_Kanazawa001.jpg",
+        "license": "CC BY 2.1 jp",
+        "credit": "金沢市 / Wikimedia Commons",
+        "visual_evidence": "The circular glass perimeter, low white gallery volumes and known outdoor installations identify the Kanazawa museum."
+      }
+    },
+    {
+      "case_id": "CASE-106",
+      "building_slug": "rolex-learning-center",
+      "decision": "approved",
+      "case_source_url": "https://www.archdaily.com/53536/rolex-learning-center-sanaa-by-iwan-baan",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:EPFL_Rolex_Learning_Center-005.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Fridolin freudenfett / Wikimedia Commons",
+        "visual_evidence": "The continuous sloping interior floor and thin columns are distinctive Rolex Learning Center features."
+      }
+    },
+    {
+      "case_id": "CASE-119",
+      "building_slug": "louvre-lens",
+      "decision": "approved",
+      "case_source_url": "https://www.louvre.fr/en/explore/the-palace/the-louvre-lens",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:PHOTO_LOUVRE_LENS_Lens_2012_SANAA_ARCHITECTURE_DESIGN_1.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Madeira78 / Wikimedia Commons",
+        "visual_evidence": "The low reflective SANAA galleries set in the Lens landscape match Louvre-Lens."
+      }
+    },
+    {
+      "case_id": "CASE-123",
+      "building_slug": "aga-khan-museum",
+      "decision": "approved",
+      "case_source_url": "https://www.moriyama-teshima.com/projects/aga-khan-museum/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Aga_Khan_Museum_in_Toronto_-_Entrance.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "JohnOyston / Wikimedia Commons",
+        "visual_evidence": "The image visibly includes the Aga Khan Museum name and its faceted white entrance."
+      }
+    },
+    {
+      "case_id": "CASE-125",
+      "building_slug": "vitra-haus",
+      "decision": "approved",
+      "case_source_url": "https://www.herzogdemeuron.com/projects/246-vitrahaus/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:VitraHaus_in_Weil_am_Rhein_11.JPG",
+        "license": "Public domain",
+        "credit": "Brücke-Osteuropa / Wikimedia Commons",
+        "visual_evidence": "The photograph shows the Vitra Design Museum Shop within VitraHaus and the stacked house profile."
+      }
+    },
+    {
+      "case_id": "CASE-138",
+      "building_slug": "copenhill",
+      "decision": "approved",
+      "case_source_url": "https://big.dk/projects/copenhill-191",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Copenhill_5.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "kallerna / Wikimedia Commons",
+        "visual_evidence": "The facade-integrated climbing wall and waste-to-energy exhaust identify CopenHill; source filename casing was corrected."
+      }
+    },
+    {
+      "case_id": "CASE-128",
+      "building_slug": "sesc-pompeia",
+      "decision": "approved",
+      "case_source_url": "https://arquitecturaviva.com/works/sesc-pompeia-factory",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "architect is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sesc_pompeia.JPG",
+        "license": "CC BY-SA 3.0",
+        "credit": "Nevinho / Wikimedia Commons",
+        "visual_evidence": "The reused brick factory halls and SESC cultural-program signage identify the Pompeia complex."
+      }
+    },
+    {
+      "case_id": "CASE-061",
+      "building_slug": "national-stadium-tokyo",
+      "decision": "approved",
+      "case_source_url": "https://kkaa.co.jp/en/project/japan-national-stadium/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:New_national_stadium_tokyo_1.jpg",
+        "license": "CC BY-SA 3.0 de",
+        "credit": "Arne Müseler",
+        "visual_evidence": "Aerial view shows the new oval stadium, layered timber eaves and Meiji Jingu Gaien context."
+      }
+    },
+    {
+      "case_id": "CASE-104",
+      "building_slug": "seattle-central-library",
+      "decision": "approved",
+      "case_source_url": "https://www.oma.com/projects/seattle-central-library",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Seattle_(WA,_USA),_Seattle_Central_Library_--_2022_--_200930.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Dietmar Rabich / Wikimedia Commons",
+        "visual_evidence": "The cantilevered faceted glass-and-steel mesh volume identifies Seattle Central Library."
+      }
+    },
+    {
+      "case_id": "CASE-108",
+      "building_slug": "pompidou-metz",
+      "decision": "approved",
+      "case_source_url": "https://shigerubanarchitects.com/works/cultural/centre-pompidou-metz/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mus%C3%A9e,_Centre_Pompidou_de_Metz.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Celeda / Wikimedia Commons",
+        "visual_evidence": "The woven hexagonal canopy, central mast and projecting gallery box identify Centre Pompidou-Metz."
+      }
+    },
+    {
+      "case_id": "CASE-120",
+      "building_slug": "guangzhou-opera-house",
+      "decision": "approved",
+      "case_source_url": "https://www.zaha-hadid.com/architecture/guangzhou-opera-house/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Guangzhou_Opera_House_-_53337501049.jpg",
+        "license": "CC BY 2.0",
+        "credit": "xiquinhosilva / Wikimedia Commons",
+        "visual_evidence": "The faceted pebble-like granite envelope and glazed fissures identify Guangzhou Opera House."
+      }
+    },
+    {
+      "case_id": "CASE-127",
+      "building_slug": "cctv-headquarters",
+      "decision": "approved",
+      "case_source_url": "https://www.oma.com/projects/cctv-headquarters",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:CCTV_Headquarters.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "維基小霸王 / Wikimedia Commons",
+        "visual_evidence": "The continuous leaning loop and diagonal structural grid unmistakably identify CCTV Headquarters."
+      }
+    },
+    {
+      "case_id": "CASE-129",
+      "building_slug": "centre-pompidou",
+      "decision": "approved",
+      "case_source_url": "https://www.centrepompidou.fr/en/",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved-after-replacement",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Pompidou_Center_Paris.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Igor.Zeiger.Photograher / Wikimedia Commons",
+        "visual_evidence": "Replacement image clearly shows the exposed color-coded services and external structure; the previous image only showed the adjacent plaza/view."
+      }
+    },
+    {
+      "case_id": "CASE-131",
+      "building_slug": "casa-da-musica",
+      "decision": "approved",
+      "case_source_url": "https://www.oma.com/projects/casa-da-musica",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Casa_da_M%C3%BAsica_-_Porto%2C_Portugal%2C_2012_-_001.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Rafael Lemieszek / Wikimedia Commons",
+        "visual_evidence": "The freestanding faceted white concert-hall volume identifies Casa da Música."
+      }
+    },
+    {
+      "case_id": "CASE-135",
+      "building_slug": "kunsthal",
+      "decision": "approved",
+      "case_source_url": "https://www.oma.com/projects/kunsthal",
+      "canonical_source_status": "missing-official-url; copy reviewed case source during guarded migration",
+      "identity_evidence": ["normalized multilingual name is identical", "year is identical"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Kunsthal_Rotterdam_2011.JPG",
+        "license": "Public domain",
+        "credit": "Mies me / Wikimedia Commons",
+        "visual_evidence": "The glazed hall, inclined circulation deck and park-edge setting match Kunsthal Rotterdam."
+      }
+    }
+  ]
+}
