@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：完成共享 canonical building 批次生成器升级的 PR；随后继续 `G6` 下一个边界清晰的用途批次。`CASE-037` / `CASE-090` 已确认是同一陆前高田 Home-for-All 建成项目，但因没有准确且开放许可安全的建筑照片继续保持 `no_safe_image_yet`，不生成 migration。
+当前下一步：合并 education batch 001 的只读审核 PR；随后从剩余 G6 队列选择下一个边界清晰的用途批次。CASE-006 身份和 school 用途已确认，但准确 Flickr 图片的重新授权链不完整，继续保持 `no_safe_image_yet`，不生成 migration。
 
 ## 最终目标
 
@@ -148,7 +148,9 @@ V24 profile many-to-one schema 已完成生产迁移与发布。PR #39 合并 gu
 
 Disaster/community batch 001 已完成 CASE-037/090 的只读身份与图片审核。Home For All 与 Shelter 的一手记录在地点、面积、木造二层、2012 年 11 月完成、四个设计事务所及施工方字段一致，确认两条 CASE 是同一 `Home-for-All in Rikuzentakata` 建成项目的不同毕业分析；2016 拆除及 2022 近陆前高田站重建作为同一建筑历史记录，不另建主体。既有开放图片仍只是威尼斯双年展展览或模型，官方建成图片没有开放许可，因此 2 条均为 `no_safe_image_yet`、0 migration。生成器已在独立分支增加 existing building UUID/slug 精确复用、独立多 profile、跳过重复 building/architect/image/function、共享引用 rollback 保护，并通过 110 unit tests 与四个历史批次的隔离 PostgreSQL 18.3 回归。详见 `GRADUATION_NEW_BUILDING_DISASTER_COMMUNITY_001_TRIAGE.md`。
 
-下一个最小可验证步骤：通过 PR 合并共享 building 生成器升级；不迁移 CASE-037/090，继续 G6 下一个用途批次。
+Education batch 001 已完成 CASE-006 Fuji Kindergarten 的只读审核。手塚官方项目、园方和立川市资料确认 Tezuka Architects、2007、立川及幼儿园用途，`school` function 通过。重新搜索发现两张内容准确且 Flickr 页面标示 CC BY 2.0 的照片，但上传者为 Forgemind ArchiMedia，标题或手塚官方页将原摄影者标为 Katsuhisa Kida；当前没有证据证明上传者有权替原摄影者重新授权。因此该记录不是“无准确图片”，而是“准确图片的开放授权链不完整”，继续 `no_safe_image_yet`、0 migration。详见 `GRADUATION_NEW_BUILDING_EDUCATION_001_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 合并 education batch 001；不迁移 CASE-006，继续 G6 下一个用途批次。
 
 ### G7 — 统一搜索与筛选
 
