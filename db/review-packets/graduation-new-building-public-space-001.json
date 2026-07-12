@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-12",
+  "scope": "G6 urban public-space batch 001",
+  "source_queue": "db/review-packets/graduation-new-building-queue-001.json",
+  "write_policy": "read-only review packet; no database write authorized",
+  "case_ids": ["CASE-014", "CASE-050", "CASE-056", "CASE-110", "CASE-111"],
+  "items": [
+    {
+      "case_id": "CASE-014",
+      "name": "Sumida River Terrace",
+      "source_url": "https://www.tokyoupdates.metro.tokyo.lg.jp/en/post-1729/",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:Sumidagawa-River08080801.jpg",
+      "known_gaps": ["bounded project identity", "completion year", "design author"]
+    },
+    {
+      "case_id": "CASE-050",
+      "name": "Hisaya-odori Park",
+      "source_url": "https://www.mitsuifudosan.co.jp/english/corporate/news/2020/0623/",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:Media_Hiroba_of_Hisaya-odori_Park_and_Nagoya_TV_Tower_-_2.jpg",
+      "known_gaps": ["public-space function taxonomy"]
+    },
+    {
+      "case_id": "CASE-056",
+      "name": "Tainan Spring",
+      "source_url": "https://www.mvrdv.com/projects/272/tainan-axis",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E5%8D%97%E6%B2%B3%E6%A8%82%E5%BB%A3%E5%A0%B4.jpg",
+      "known_gaps": ["public-space function taxonomy"]
+    },
+    {
+      "case_id": "CASE-110",
+      "name": "The High Line",
+      "source_url": "https://www.fieldoperations.net/project/high-line",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:High_Line_20th_Street_looking_downtown.jpg",
+      "known_gaps": ["incorrect current image credit and license", "public-space function taxonomy"]
+    },
+    {
+      "case_id": "CASE-111",
+      "name": "Superkilen",
+      "source_url": "https://big.dk/projects/superkilen-1621",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:Superkilen_hill-top_view.jpg",
+      "known_gaps": ["current image is a weak cover", "public-space function taxonomy"]
+    }
+  ]
+}
