@@ -170,6 +170,10 @@ Public-space taxonomy 001 与图片准备已完成。词表新增 `public-space`
 
 下一个最小可验证步骤：通过 PR 合并 taxonomy、图片与 migration；生产冲突复查为 0 后应用 taxonomy，核验 11 functions / 165 aliases、RLS/policy、advisors，并运行 Reviewed release。
 
+Public-space taxonomy 001 已完成生产迁移、发布与线上验收。PR #49 合并后生产冲突复查仍为 0；Supabase migration `building_function_public_space_001`（`20260712062946`）将 10/139 functions/aliases 更新为 11/165，assignments 保持 106。目标 1 function / 26 aliases / 4 locales，RLS、policy、anon/authenticated SELECT 与 anon REST 全部通过；advisors 无本迁移新增问题。Reviewed production release `29182787593` 成功，CASE-110/111 页面和 CASE-111 730822-byte 图片均 HTTP 200，线上 API 为 101 public cases / 65 profiles / 0 missing relation。详见 `GRADUATION_PUBLIC_SPACE_TAXONOMY_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：生成 4 条 approved public-space canonical building/profile migration pack，执行全历史隔离 PostgreSQL dry-run；CASE-014 继续保持 identity_not_bounded，不得进入 migration。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
