@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-028 Shiroiya Hotel 只读审核；随后建立多语言 `hotel` function taxonomy。
+当前下一步：完成 `hotel` 四语 taxonomy 隔离 PostgreSQL dry-run 和生产冲突预检；通过 PR 后才允许生产写入。
 
 ## 最终目标
 
@@ -249,6 +249,10 @@ MIYASHITA PARK batch 005 已完成生产迁移、双阶段发布和线上验收�
 Shiroiya Hotel batch 006 已完成 CASE-028 的只读审核。官方确认项目由既有主楼改造与新建 Green Tower 共同组成同一酒店复合体，Sou Fujimoto 设计、2020 年完成、位于前桥。Commons 图为 こやまひろ 自有作品、2000×1500、CC BY 4.0，人工确认准确。生产可复用 `fujimoto`，building/profile conflict 均为 0，但缺少 `hotel`/`hospitality` function；不能只用 mixed-use 或 retail 隐藏核心住宿用途。本批批准在新增 `hotel` taxonomy 后迁移；G6 已迁移仍为 55/118，尚未正式审核队列从 40 减至 39。详见 `GRADUATION_NEW_BUILDING_SHIROIYA_HOTEL_006_TRIAGE.md`。
 
 下一个最小可验证步骤：通过 PR 合并审核决策；随后建立 `hotel` 中英日多语言 taxonomy、guarded migration、rollback 与隔离 PostgreSQL dry-run。
+
+Hotel taxonomy 001 已完成本地与生产只读预检：新增 `hotel` / `commercial` 四语 20 aliases，不把泛旅游或住宅意图并入酒店搜索。生产为 0 function conflict / 0 alias conflict / 0 assignment / 1 commercial type，基线 13 functions / 209 aliases / 127 assignments；相关三表 RLS/policy 正常，advisors 保持既有 13 security / 27 performance。隔离 PostgreSQL forward、assignment rollback guard、精确 rollback 和 replay 均通过；55 files / 193 tests、typecheck、lint 与 migration 字节一致通过。完整 E2E 18/19，唯一失败来自受保护的并发 `architect-content.ts` 工作，本批未修改。Supabase migration 尚未写入生产。详见 `GRADUATION_HOTEL_TAXONOMY_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 hotel taxonomy；紧接着重复生产冲突预检，通过后才 apply migration。
 
 ### G7 — 统一搜索与筛选
 

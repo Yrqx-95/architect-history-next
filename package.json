@@ -67,6 +67,7 @@
     "graduation:queue-education-001": "node scripts/build-graduation-new-building-education-queue-001.mjs",
     "graduation:queue-transport-001": "node scripts/build-graduation-new-building-transport-queue-001.mjs",
     "graduation:verify-transport-taxonomy": "node scripts/verify-building-function-transport-hub-001-dry-run.mjs",
+    "graduation:verify-hotel-taxonomy": "node scripts/verify-building-function-hotel-001-dry-run.mjs",
     "graduation:verify-public-space-taxonomy": "node scripts/verify-building-function-public-space-001-dry-run.mjs",
     "graduation:verify-public-toilet-taxonomy": "node scripts/verify-building-function-public-toilet-001-dry-run.mjs",
     "graduation:verify-retail-taxonomy": "node scripts/verify-building-function-retail-001-dry-run.mjs",

@@ -145,6 +145,17 @@
         "en": ["retail", "retail facility", "retail complex", "shopping complex", "shopping street"],
         "ja": ["小売施設", "商業施設", "ショッピングセンター", "商業複合施設", "商店街"]
       }
+    },
+    {
+      "slug": "hotel",
+      "broad_type_slug": "commercial",
+      "names": { "zh": "酒店", "zh-Hant": "酒店", "en": "Hotel", "ja": "ホテル" },
+      "aliases": {
+        "zh": ["酒店", "旅馆", "宾馆", "住宿设施", "精品酒店"],
+        "zh-Hant": ["酒店", "旅館", "賓館", "住宿設施", "精品酒店"],
+        "en": ["hotel", "hotels", "hospitality", "lodging", "boutique hotel"],
+        "ja": ["ホテル", "宿泊施設", "旅館", "ブティックホテル", "デザインホテル"]
+      }
     }
   ]
 }
