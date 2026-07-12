@@ -79,6 +79,20 @@ test.describe('graduation Supabase + JSON dual read', () => {
       location: '亚历山大 埃及',
       year: 2002,
     })
+
+    const hisayaCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-050')
+    expect(hisayaCase).toMatchObject({
+      name: '久屋大通公园',
+      architect: 'TAISEI DESIGN + Nikken Sekkei',
+      year: 2020,
+    })
+
+    const superkilenCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-111')
+    expect(superkilenCase).toMatchObject({
+      name: 'Superkilen 多元文化公园',
+      architect: 'BIG + Topotek 1 + Superflex',
+      year: 2012,
+    })
   })
 
   test('CASE route keeps its ID while rendering canonical facts and the reviewed fallback image', async ({ page }) => {
