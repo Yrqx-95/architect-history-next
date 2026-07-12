@@ -36,7 +36,7 @@ describe('graduation new-building community/civic batch 001 decisions', () => {
     expect(item.image).toMatchObject({
       status: 'approved',
       license: 'CC BY-SA 4.0',
-      credit: 'Another Believer / Wikimedia Commons',
+      credit: 'Photo: Another Believer / Wikimedia Commons',
     })
     expect(item.image.visual_evidence.length).toBeGreaterThan(80)
   })

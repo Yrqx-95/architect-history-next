@@ -54,6 +54,8 @@
     "graduation:verify-museum-001": "GRADUATION_VERIFY_BATCH=museum-001 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:prepare-theatre-001": "GRADUATION_REVIEW_BATCH=theatre-001 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
     "graduation:verify-theatre-001": "GRADUATION_VERIFY_BATCH=theatre-001 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
+    "graduation:prepare-community-civic-001": "GRADUATION_REVIEW_BATCH=community-civic-001 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
+    "graduation:verify-community-civic-001": "GRADUATION_VERIFY_BATCH=community-civic-001 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",

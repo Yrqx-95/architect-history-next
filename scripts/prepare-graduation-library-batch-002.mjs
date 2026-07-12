@@ -48,6 +48,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=theatre-001)',
     required_functions_note: 'theatre and mixed-use functions remain active',
   },
+  'community-civic-001': {
+    batch_id: 'graduation-community-civic-batch-001',
+    decision_path: 'db/review-decisions/graduation-new-buildings-community-civic-001.json',
+    output_path: 'db/review-packets/graduation-community-civic-batch-001.json',
+    apply_path: 'db/manual-operations/graduation-community-civic-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-community-civic-batch-001-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: ['CASE-019', 'CASE-064', 'CASE-067', 'CASE-069', 'CASE-088'],
+    primary_function: 'community-center',
+    interior_case_ids: [],
+    sql_title: 'Graduation community civic batch 001',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=community-civic-001)',
+    required_functions_note: 'community-center, theatre and mixed-use functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -168,6 +182,12 @@ const architectDrafts = {
     name_en: 'Diller Scofidio + Renfro + Rockwell Group',
     name_ja: 'ディラー・スコフィディオ＋レンフロ + ロックウェル・グループ',
     official_url: 'https://dsrny.com/project/the-shed',
+  },
+  'kazumi-adachi-kiyoshi-sawano-hideo-matsunaga-isamu-noguchi': {
+    name_zh: 'Kazumi Adachi + Kiyoshi Sawano + Hideo Matsunaga + Isamu Noguchi',
+    name_en: 'Kazumi Adachi + Kiyoshi Sawano + Hideo Matsunaga + Isamu Noguchi',
+    name_ja: 'カズミ・アダチ + キヨシ・サワノ + ヒデオ・マツナガ + イサム・ノグチ',
+    official_url: 'https://jaccc.org/about/',
   },
 }
 
