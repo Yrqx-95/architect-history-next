@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-12",
+  "scope": "G6 public-toilet batch 001",
+  "source_queue": "db/review-packets/graduation-new-building-queue-001.json",
+  "write_policy": "read-only review packet; no database write authorized",
+  "case_ids": ["CASE-031", "CASE-044", "CASE-049"],
+  "selection_policy": "Public-toilet records with a narrow program boundary; distinguish a multi-site initiative from individual completed facilities.",
+  "items": [
+    {
+      "case_id": "CASE-031",
+      "name": "The Tokyo Toilet",
+      "source_url": "https://tokyotoilet.jp/en/",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:Tokyo_Toilet_Project_04.jpg",
+      "known_gaps": ["project-level identity is not one building", "current image depicts only the Ebisu Park toilet"]
+    },
+    {
+      "case_id": "CASE-044",
+      "name": "Nabeshima Shoto Park Toilet",
+      "source_url": "https://tokyotoilet.jp/en/nabesima_park/",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:Shoto_park_2302.jpg",
+      "known_gaps": ["public-toilet function taxonomy"]
+    },
+    {
+      "case_id": "CASE-049",
+      "name": "Mokumoku Yuusui Toilet",
+      "source_url": "https://kkaa.co.jp/en/project/mokumoku-yuusui-toilet/",
+      "image_source_url": null,
+      "known_gaps": ["official source currently returns 404", "accurate open-license image", "public-toilet function taxonomy"]
+    }
+  ]
+}
