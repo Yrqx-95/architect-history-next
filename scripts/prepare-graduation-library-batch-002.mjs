@@ -174,6 +174,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=shiroiya-hotel-006)',
     required_functions_note: 'hotel and retail functions remain active',
   },
+  'acros-fukuoka-007': {
+    batch_id: 'graduation-acros-fukuoka-batch-007',
+    decision_path: 'db/review-decisions/graduation-new-buildings-acros-fukuoka-007.json',
+    output_path: 'db/review-packets/graduation-acros-fukuoka-batch-007.json',
+    apply_path: 'db/manual-operations/graduation-acros-fukuoka-batch-007-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-acros-fukuoka-batch-007-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'mixed-use',
+    interior_case_ids: [],
+    sql_title: 'Graduation ACROS Fukuoka batch 007',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=acros-fukuoka-007)',
+    required_functions_note: 'mixed-use, theatre, retail and public-space functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -282,6 +296,12 @@ const architectDrafts = {
     name_en: 'Takenaka Corporation + Nikken Sekkei',
     name_ja: '竹中工務店 + 日建設計',
     official_url: 'https://www.nikken.co.jp/en/projects/urban_design_and_planning/miyashita_park.html',
+  },
+  'nihon-sekkei-takenaka-corporation': {
+    name_zh: '日本设计 + 竹中工务店',
+    name_en: 'Nihon Sekkei + Takenaka Corporation',
+    name_ja: '日本設計 + 竹中工務店',
+    official_url: 'https://www.acros.or.jp/r_facilities/about.html',
   },
   'yasuda-atelier': {
     name_zh: '安田工作室', name_en: 'Yasuda Atelier', name_ja: '安田アトリエ', official_url: 'https://www.yasudaatelier.com/',
