@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：合并 transport batch 001 的 65-profile 生产测试基线；随后运行最终 Reviewed production release，并验证 3 CASE + 3 building 路由。
+当前下一步：选择一个边界清晰的 G6 小批次，先做只读身份、用途和图片许可审核；未通过准确图片与开放许可双重门槛的记录不得生成 migration。
 
 ## 最终目标
 
@@ -158,9 +158,9 @@ Transport-hub taxonomy 001 已完成生产迁移与发布。PR #44 合并 taxono
 
 Transport batch 001 migration pack 已生成：1 new architect、3 buildings、3 primary images、3 published profiles、5 assignments。生产只读预检为 0 building/image/profile/architect conflict，required functions 2/2、type 1/1。隔离 PostgreSQL 18.3 全历史重放、两次 forward/rollback 与外部 relation guard 全部通过。详见 `GRADUATION_TRANSPORT_BATCH_001_DRY_RUN.md`。
 
-Transport batch 001 已完成生产写入。PR #45 合并生成包后，第二次生产冲突复查仍为 0；Supabase migration `graduation_transport_batch_001`（`20260712055147`）写入 1 architect、3 buildings、3 primary images、3 profiles 与 5 assignments。生产总数从 62/916/7265/101 更新为 65 profiles / 919 buildings / 7268 images / 106 assignments；本批 3 条 primary `transport-hub` 全部存在，orphan、architect mismatch、duplicate primary image/function 均为 0。RLS/policy 保持，advisors 无本迁移新增问题。最终 Reviewed production release 尚待 65-profile 测试基线合并后执行。
+Transport batch 001 已完成生产写入、发布与线上验收。PR #45 合并生成包后，第二次生产冲突复查仍为 0；Supabase migration `graduation_transport_batch_001`（`20260712055147`）写入 1 architect、3 buildings、3 primary images、3 profiles 与 5 assignments。生产总数从 62/916/7265/101 更新为 65 profiles / 919 buildings / 7268 images / 106 assignments；本批 3 条 primary `transport-hub` 全部存在，orphan、architect mismatch、duplicate primary image/function 均为 0。RLS/policy 保持，advisors 无本迁移新增问题。PR #46 将读取基线更新为 65；最终 Reviewed production release `29181886192` 的质量门、完整测试、Cloudflare deploy 与 route semantics 全部通过。线上 API 为 `source=supabase+json`、101 public cases、65 profiles、0 missing relation；3 个 CASE、3 个 canonical building 和 3 张图片均 HTTP 200，三种语言 building 路由 9/9 为 200。G6 已迁移 44/118，尚未迁移 74；版本化队列中尚未完成正式审核的记录为 56。详见 `GRADUATION_TRANSPORT_BATCH_001_PRODUCTION.md`。
 
-下一个最小可验证步骤：通过 PR 合并 65-profile 生产测试基线；运行最终 release 和六条路由验收。
+下一个最小可验证步骤：从尚未正式审核的 56 条队列中选择一个用途边界清晰的小批次，只读核验建筑身份、用途、准确图片和开放许可，再决定是否进入 migration 准备。
 
 ### G7 — 统一搜索与筛选
 
