@@ -61,6 +61,7 @@
     "graduation:queue-disaster-community-001": "node scripts/build-graduation-new-building-disaster-community-queue-001.mjs",
     "graduation:queue-education-001": "node scripts/build-graduation-new-building-education-queue-001.mjs",
     "graduation:queue-transport-001": "node scripts/build-graduation-new-building-transport-queue-001.mjs",
+    "graduation:verify-transport-taxonomy": "node scripts/verify-building-function-transport-hub-001-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",

@@ -352,10 +352,10 @@
   {
     "id": "CASE-094",
     "localPath": "/images/graduation/cases/case-094-takanawa-gateway-station.jpg",
-    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Takanawa_Gateway_Station_%2850011454533%29.jpg",
-    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Takanawa_Gateway_Station_(50011454533).jpg",
-    "license": "CC BY 2.0",
-    "credit": "Photo: Dick Thomas Johnson / Wikimedia Commons"
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/9/97/Takanawa_Gateway_Station_200316a1.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Takanawa_Gateway_Station_200316a1.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Photo: 江戸村のとくぞう / Wikimedia Commons"
   },
   {
     "id": "CASE-095",
@@ -412,6 +412,14 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Harpa_From_Arnarh%C3%B3ll_(33650129491).jpg",
     "license": "CC BY-SA 2.0",
     "credit": "Gary J. Wood / Wikimedia Commons"
+  },
+  {
+    "id": "CASE-133",
+    "localPath": "/images/graduation/cases/case-133-yokohama-international-passenger-terminal.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Yokohama_International_Passenger_Terminal_11.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yokohama_International_Passenger_Terminal_11.jpg",
+    "license": "CC0",
+    "credit": "Photo: Syced / Wikimedia Commons"
   },
   {
     "id": "CASE-139",

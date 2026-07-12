@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：合并 transport batch 001 的只读审核 PR；随后同步 CASE-094/133 图片与元数据，新增四语 `transport-hub` 用途，再生成 guarded migration/rollback 并执行全历史隔离 PostgreSQL dry-run。
+当前下一步：合并 transport-hub taxonomy 与 CASE-094/133 图片修正 PR；生产复查后应用 taxonomy migration，运行 advisors、写后 RLS/数量核验和 Reviewed production release。随后生成三条 transport building/profile migration pack。
 
 ## 最终目标
 
@@ -152,7 +152,9 @@ Education batch 001 已完成 CASE-006 Fuji Kindergarten 的只读审核。手�
 
 Transport batch 001 已完成 CASE-008/094/133 的只读审核。三条身份、交通用途和开放许可图片通过，生产主体查重为 0；CASE-094 当前铁路场图片被人工视觉审核拒绝，已找到江戸村のとくぞう / CC BY-SA 4.0 的清晰站体替代图；CASE-133 现图确认为 Syced 自有作品 / CC0，需补齐公开元数据。现有 9 个细用途没有交通节点，禁止用 `mixed-use` 冒充主用途；migration 前需新增四语 `transport-hub` function。三条获准进入 migration 准备，但本阶段不授权写入。详见 `GRADUATION_NEW_BUILDING_TRANSPORT_001_TRIAGE.md`。
 
-下一个最小可验证步骤：通过 PR 合并 transport 001 正式决策；同步两条图片，再扩展用途词表并生成 migration pack。
+Transport-hub taxonomy 001 与图片准备已完成。词表新增 `transport-hub` / `transportation` 及四语 17 aliases；生产只读预检为 0 function conflict、0 alias conflict、0 assignment。隔离 PostgreSQL 18.3 重放 foundation 与首批 taxonomy 后，forward、依赖 assignment rollback guard、精确 rollback、第二次 forward/rollback 全部通过。CASE-094 新图优化为 2000×1328 / 588249 bytes，CASE-133 为 2000×1500 / 849421 bytes；graduation QA 0 problem。Supabase migration 文件通过 CLI 生成，尚未应用生产。详见 `GRADUATION_TRANSPORT_TAXONOMY_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 taxonomy、图片与 migration；生产写入并完成发布后再准备 transport building/profile pack。
 
 ### G7 — 统一搜索与筛选
 
