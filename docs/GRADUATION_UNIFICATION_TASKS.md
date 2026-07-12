@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-044 guarded migration pack；生产冲突复查仍为 0 后写入，核验 70 profiles / 924 buildings / 7273 images / 113 assignments，再更新 E2E 基线并运行 Reviewed release。
+当前下一步：从尚未正式审核的 48 条 G6 队列中选择下一个用途边界清晰的小批次，只读核验身份、用途、准确图片和开放许可；未通过双重门槛的记录不得生成 migration。
 
 ## 最终目标
 
@@ -197,6 +197,10 @@ Public-toilet taxonomy 001 与 CASE-031 图片纠偏已完成生产发布。PR #
 CASE-044 public-toilet batch 001 migration pack 已生成：复用既有 `kengo-kuma` architect，创建 1 building、1 primary image、1 published profile 和 2 assignments；CASE-031/049 不在任何 seed 中。第一次生产预检发现 decision 把细用途 `public-toilet` 错当成 building broad `type_slug`，而生产不存在该 building type；已改为 `civic-public` broad type，并保留 `public-toilet` primary function。验证器同时收紧为只从版本化 function taxonomy 派生允许的 broad types，不再由当前 pack 自创测试 type。修正后生产预检为 architect exact 1、building/image/profile/assignment conflict 全部 0、functions 2/2、type 1/1。全历史隔离 PostgreSQL 18.3 的两次 forward/rollback 与外部 curated-image guard 全部通过；42 files / 149 tests、typecheck、QA 均通过，migration 与 reviewed SQL 字节一致。生产尚未写入。详见 `GRADUATION_PUBLIC_TOILET_BATCH_001_DRY_RUN.md`。
 
 下一个最小可验证步骤：通过 PR 合并 migration pack；生产冲突复查仍为 0 后应用 migration，写后核验 70 profiles / 924 buildings / 7273 images / 113 assignments 与关系安全门。
+
+CASE-044 public-toilet batch 001 已完成生产写入、发布与线上验收。Supabase migration `graduation_public_toilet_batch_001`（`20260712094552`）复用既有 `kengo-kuma` architect，写入 1 building、1 primary image、1 published profile 和 2 approved assignments；building broad type 为 `civic-public`，primary function 为 `public-toilet`。生产总数从 69/923/7272/111 更新为 70 profiles / 924 buildings / 7273 images / 113 assignments；orphan、architect mismatch、duplicate primary image/function 均为 0，RLS/policy 与 advisors 通过。PR #60 更新读取基线；Reviewed release `29188112986` 成功。线上 API 为 101 cases / 70 profiles / 0 missing relation，CASE-044 三语 CASE、三语 building 与图片全部 HTTP 200。G6 已迁移 49/118，尚未迁移 69；版本化队列中尚未完成正式审核的记录为 48。详见 `GRADUATION_PUBLIC_TOILET_BATCH_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 48 条未正式审核记录中选择用途边界清晰的小批次，只读核验建筑身份、年份、地点、设计者、准确图片、摄影者和开放许可，再决定是否进入 migration 准备。
 
 ### G7 — 统一搜索与筛选
 
