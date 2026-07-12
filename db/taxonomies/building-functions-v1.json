@@ -134,6 +134,17 @@
         "en": ["public toilet", "public restroom", "restroom", "washroom", "public lavatory", "civic toilet"],
         "ja": ["公共トイレ", "公衆トイレ", "公衆便所", "公共便所", "パブリックトイレ", "公園トイレ"]
       }
+    },
+    {
+      "slug": "retail",
+      "broad_type_slug": "commercial",
+      "names": { "zh": "零售商业", "zh-Hant": "零售商業", "en": "Retail", "ja": "小売施設" },
+      "aliases": {
+        "zh": ["零售商业", "零售设施", "商业设施", "购物中心", "商业街"],
+        "zh-Hant": ["零售商業", "零售設施", "商業設施", "購物中心", "商業街"],
+        "en": ["retail", "retail facility", "retail complex", "shopping complex", "shopping street"],
+        "ja": ["小売施設", "商業施設", "ショッピングセンター", "商業複合施設", "商店街"]
+      }
     }
   ]
 }
