@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：继续 `G6` 的 library batch 002，从剩余 110 个 new-building candidates 中先审核 15 个尚未处理的 library 相关案例；逐条核验身份、官方来源、图片内容、作者与许可后，再生成下一批迁移。
+当前下一步：继续 `G6` 的 museum batch 001，通过 PR 合并已审核公开图片修正、正式决策和已通过 PGlite dry-run 的 guarded migration；合并后做生产冲突复查，再执行版本化 Supabase migration 与 Reviewed production release。`CASE-079` 保留为有证据的 `no_safe_image_yet`，不得用 2015 年旧馆图代表 2021 年改造。
 
 ## 最终目标
 
@@ -122,6 +122,12 @@
 当前证据：重新以集合核对 139 个 CASE 后，21 个已链接、118 个需要新建主体；旧的 101 是匹配器重算和 G2 错误候选转入新建队列之前的历史快照。版本化队列覆盖 118 条，其中 23 条和 library 用途相关。Library batch 001 审核并迁移 CASE-018/021/022/023/027/029/042/070：8 条身份、官方来源、年份、地点和用途均通过；12 个官方证据 URL 实时访问 0 failure，8 个 Commons 文件作者与许可比对 0 mismatch。CASE-027 替换横置低价值图片，CASE-070 纠正“旧馆误当新馆”的错误图片。PR #17 发布审核图片，PR #18 合并 guarded migration，生产冲突预检两次均为 0；迁移 `graduation_library_batch_001`（`20260711201728`）写入 4 个新 architect、8 buildings、8 primary images、8 published profiles 和 17 approved assignments，写后 0 orphan、0 architect mismatch、0 duplicate primary image/function。PR #19 修正 21→29 的生产测试基线并把布局回归与数据回归分离；Reviewed production release run `29167078871` 成功。线上 API 实测 100 个公开案例、29 个 unified profile、0 missing relation；8 个 CASE 页面和 8 个主体建筑页均 HTTP 200，CASE 页面均显示已审核许可署名。G6 当前完成 8/118，剩余 110；library 子集完成 8/23，剩余 15。详见 `GRADUATION_NEW_BUILDING_LIBRARY_001.md`、`GRADUATION_LIBRARY_BATCH_001_DRY_RUN.md` 与 `GRADUATION_LIBRARY_BATCH_001_PRODUCTION.md`。
 
 Library batch 002 已完成生产迁移与发布。Supabase migration `graduation_library_batch_002`（`20260711233931`）写入 11 个新 architect、14 buildings、14 primary images、14 profiles 和 36 assignments；写后 orphan、architect mismatch、duplicate primary image/function 全部为 0。PR #24 将生产 profile 基线从 29 更新为 43；Reviewed production release `29172691510` 的质量门、68 unit、19 E2E、Cloudflare deploy 和路由语义检查全部通过。线上 API 为 100 个公开案例、43 unified profiles、0 missing relation；14 个 CASE 页和 14 个 building 页均 HTTP 200，替换图与摄影者署名在线可见。G6 当前完成 22/118，剩余 96；library 子集完成 22/23，唯一剩余 CASE-079 是 `no_safe_image_yet`。详见 `GRADUATION_LIBRARY_BATCH_002_PRODUCTION.md`。
+
+Museum batch 001 已建立只读审核队列，覆盖 CASE-041/045/047/051/052/053/054/055/058/060/109/118/124/132 共 14 条。实时核验确认 14 个 Commons 文件均存在且许可可追溯；13 张当前图片内容正确，CASE-051 的施工中图片被拒绝并找到 2024 年 Souka Kinmei / CC0 完工替代图。CASE-124 的旧官方 URL 404，已找到现行 Henning Larsen 页面；CASE-124/132 的准确作者与 CC BY-SA 4.0 许可已查清。该队列仍不授权数据库写入；下一步先查生产冲突并形成版本化正式决策。详见 `GRADUATION_NEW_BUILDING_MUSEUM_001_TRIAGE.md`。
+
+Museum batch 001 的生产只读预检为 0 building slug conflict、0 CASE profile conflict，`museum` function 已存在；Kengo Kuma、Shigeru Ban、Zaha Hadid 三个主体建筑师已存在，按姓名复查未发现其余九个建筑师的别名重复。14 条版本化正式决策已建立并通过结构测试：全部身份与 museum 用途批准，CASE-051 替换施工图，CASE-124/132 修正作者与许可，CASE-118/124 更新现行官方 URL；文件仍明确禁止生产写入。下一步准备 guarded migration、rollback 与 dry-run。
+
+Museum batch 001 的公开数据同步、migration pack 与 dry-run 已完成。CASE-051 新图本地化为 2000×1123、613KB、无 EXIF；CASE-124/132 和六条 Commons 来源署名已同步到 CSV 与公开 JSON。生成包包含 9 个新建筑师、14 buildings、14 primary images、14 profiles、16 assignments。隔离 PostgreSQL 依次重放 foundation、unification batch 001、library batch 001/002 后，第一次 forward、外部关系 rollback guard、精确 rollback、第二次 forward 与第二次 rollback 全部通过。详见 `GRADUATION_MUSEUM_BATCH_001_DRY_RUN.md`。
 
 ### G7 — 统一搜索与筛选
 
