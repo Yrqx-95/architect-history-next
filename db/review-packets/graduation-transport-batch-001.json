@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-transport-batch-001",
+  "generated_at": "2026-07-12T05:46:22.238Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "transport-hub and mixed-use functions remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 3,
+    "new_architects": 1,
+    "buildings": 3,
+    "images": 3,
+    "profiles": 3,
+    "assignments": 5
+  },
+  "architects": [
+    {
+      "id": "aa16eb77-f51a-418b-a464-d46ce25cc0d8",
+      "slug": "shigeru-ban",
+      "name_zh": "坂茂",
+      "name_en": "Shigeru Ban",
+      "name_ja": "坂茂",
+      "official_url": null,
+      "is_new": false
+    },
+    {
+      "id": "51797239-be38-4dbd-9d7e-e413ddf3c78a",
+      "slug": "kengo-kuma",
+      "name_zh": "隈研吾",
+      "name_en": "Kengo Kuma",
+      "name_ja": "隈研吾",
+      "official_url": null,
+      "is_new": false
+    },
+    {
+      "id": "5d3c8548-eab2-5718-8f99-12743b0b9721",
+      "slug": "foreign-office-architects",
+      "name_zh": "Foreign Office Architects",
+      "name_en": "Foreign Office Architects",
+      "name_ja": "Foreign Office Architects",
+      "official_url": "https://www.moma.org/artists/27436",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "9083a770-b66b-54b7-a553-89da21628820",
+      "case_id": "CASE-008",
+      "slug": "onagawa-station-yupoppo",
+      "name_zh": "女川站与女川温泉 Yupoppo",
+      "name_en": "Onagawa Station and Onagawa Onsen Yupoppo",
+      "name_ja": "女川駅舎・女川温泉温浴施設ゆぽっぽ",
+      "year_start": 2015,
+      "city": "女川",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "transportation",
+      "architect_slug": "shigeru-ban",
+      "official_url": "https://shigerubanarchitects.com/works/cultural/onagawa-station/",
+      "architect_id": "aa16eb77-f51a-418b-a464-d46ce25cc0d8",
+      "status": "published"
+    },
+    {
+      "id": "08ce470e-40f7-592d-806d-37b852eaafe1",
+      "case_id": "CASE-094",
+      "slug": "takanawa-gateway-station",
+      "name_zh": "高轮 Gateway 站",
+      "name_en": "Takanawa Gateway Station",
+      "name_ja": "高輪ゲートウェイ駅",
+      "year_start": 2020,
+      "city": "东京",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "transportation",
+      "architect_slug": "kengo-kuma",
+      "official_url": "https://kkaa.co.jp/en/project/takanawa-gateway-station/",
+      "architect_id": "51797239-be38-4dbd-9d7e-e413ddf3c78a",
+      "status": "published"
+    },
+    {
+      "id": "eda9faa2-e337-579d-a511-766ccee61d1c",
+      "case_id": "CASE-133",
+      "slug": "yokohama-international-passenger-terminal",
+      "name_zh": "横滨国际客运码头",
+      "name_en": "Yokohama International Passenger Terminal",
+      "name_ja": "横浜港大さん橋国際客船ターミナル",
+      "year_start": 2002,
+      "city": "横滨",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "transportation",
+      "architect_slug": "foreign-office-architects",
+      "official_url": "https://osanbashi.jp/en/about/",
+      "architect_id": "5d3c8548-eab2-5718-8f99-12743b0b9721",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "136fa1ba-e4e3-52cc-a922-3b78f341aa5c",
+      "building_id": "9083a770-b66b-54b7-a553-89da21628820",
+      "building_slug": "onagawa-station-yupoppo",
+      "case_id": "CASE-008",
+      "url_original": "/images/graduation/cases/case-008-onagawa-station-yupopo.jpg",
+      "photographer": "Mister0124",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:JR_East_Onagawa_Station_building%2C_Miyagi_Pref_20240420.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "99e66f2c-d094-583f-a8ed-d93cd04a53e1",
+      "building_id": "08ce470e-40f7-592d-806d-37b852eaafe1",
+      "building_slug": "takanawa-gateway-station",
+      "case_id": "CASE-094",
+      "url_original": "/images/graduation/cases/case-094-takanawa-gateway-station.jpg",
+      "photographer": "江戸村のとくぞう",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Takanawa_Gateway_Station_200316a1.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "4c917d6d-f3be-562d-8a15-3e7a53440666",
+      "building_id": "eda9faa2-e337-579d-a511-766ccee61d1c",
+      "building_slug": "yokohama-international-passenger-terminal",
+      "case_id": "CASE-133",
+      "url_original": "/images/graduation/cases/case-133-yokohama-international-passenger-terminal.jpg",
+      "photographer": "Syced",
+      "source": "Wikimedia Commons",
+      "license": "CC0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Yokohama_International_Passenger_Terminal_11.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-008",
+      "building_id": "9083a770-b66b-54b7-a553-89da21628820",
+      "building_slug": "onagawa-station-yupoppo",
+      "concept_zh": "车站与温浴设施复合，成为灾后城镇重建中的公共客厅。",
+      "concept_zh_hant": null,
+      "concept_en": "Onagawa Station and Yupo'po is a reference case for reading station, Design topic: 温浴, Design topic: 复兴, transport. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "駅、温浴、地域交流を復興後の生活動線に組み込んだ事例。移動の場所を待つだけの空間ではなく、滞在と再会の場へ変えている。",
+      "keywords_zh": [
+        "车站",
+        "温浴",
+        "复兴",
+        "交通",
+        "夜间安全",
+        "步行"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "station",
+        "Design topic: 温浴",
+        "Design topic: 复兴",
+        "transport",
+        "nightsafety",
+        "Design topic: 步行"
+      ],
+      "keywords_ja": [
+        "駅",
+        "温浴",
+        "復興",
+        "交通",
+        "夜間安全",
+        "歩行"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://shigerubanarchitects.com/works/cultural/onagawa-station/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-094",
+      "building_id": "08ce470e-40f7-592d-806d-37b852eaafe1",
+      "building_slug": "takanawa-gateway-station",
+      "concept_zh": "新车站以大屋顶和开放站厅回应再开发街区，把交通节点转为城市入口和活动平台。",
+      "concept_zh_hant": null,
+      "concept_en": "Takanawa Gateway Station is a reference case for reading station, Design topic: transport枢纽, urbanentry, Design topic: 大roof. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "駅を都市の移動拠点としてだけでなく、木架構、案内、滞留を含む公共空間として設計した事例。歩行支援の視点で読める。",
+      "keywords_zh": [
+        "车站",
+        "交通枢纽",
+        "城市入口",
+        "大屋顶",
+        "再开发"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "station",
+        "Design topic: transport枢纽",
+        "urbanentry",
+        "Design topic: 大roof",
+        "Design topic: 再开发"
+      ],
+      "keywords_ja": [
+        "駅",
+        "交通",
+        "木架構",
+        "歩行",
+        "都市インフラ"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://kkaa.co.jp/en/project/takanawa-gateway-station/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-133",
+      "building_id": "eda9faa2-e337-579d-a511-766ccee61d1c",
+      "building_slug": "yokohama-international-passenger-terminal",
+      "concept_zh": "屋根、床、広場、動線が連続する港のターミナル。交通施設を都市の公共地形にする参考になる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Yokohama International Passenger Terminal: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "屋根、床、広場、動線が連続する港のターミナル。交通施設を都市の公共地形にする参考になる。",
+      "keywords_zh": [
+        "港",
+        "ターミナル",
+        "公共地形",
+        "歩行",
+        "都市入口"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "港",
+        "ターミナル",
+        "公共地形",
+        "歩行",
+        "都市入口"
+      ],
+      "keywords_ja": [
+        "港",
+        "ターミナル",
+        "公共地形",
+        "歩行",
+        "都市入口"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://osanbashi.jp/en/about/",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "9083a770-b66b-54b7-a553-89da21628820",
+      "building_slug": "onagawa-station-yupoppo",
+      "function_slug": "transport-hub",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://shigerubanarchitects.com/works/cultural/onagawa-station/",
+      "evidence_note": "Shigeru Ban Architects records a completed 2015 new-built station in Japan. The official description confirms the three-storey railway and public-bath complex, curved LVL lattice roof and membrane structure visible in the reviewed image.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "9083a770-b66b-54b7-a553-89da21628820",
+      "building_slug": "onagawa-station-yupoppo",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://shigerubanarchitects.com/works/cultural/onagawa-station/",
+      "evidence_note": "Shigeru Ban Architects records a completed 2015 new-built station in Japan. The official description confirms the three-storey railway and public-bath complex, curved LVL lattice roof and membrane structure visible in the reviewed image.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "08ce470e-40f7-592d-806d-37b852eaafe1",
+      "building_slug": "takanawa-gateway-station",
+      "function_slug": "transport-hub",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://kkaa.co.jp/en/project/takanawa-gateway-station/",
+      "evidence_note": "Kengo Kuma and Associates identifies the completed Tokyo infrastructure project and its large membrane roof supported by origami-shaped steel and cedar frames. The station opened in March 2020; the architect page currently lists March 2021 completion for the full project, so year_start remains the public opening year while the evidence note preserves this distinction.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "eda9faa2-e337-579d-a511-766ccee61d1c",
+      "building_slug": "yokohama-international-passenger-terminal",
+      "function_slug": "transport-hub",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://osanbashi.jp/en/about/",
+      "evidence_note": "The terminal operator and City of Yokohama confirm the current seventh-generation international passenger terminal completed in 2002, with a public rooftop plaza and passenger facilities. JA and MoMA identify Foreign Office Architects, Farshid Moussavi and Alejandro Zaera-Polo as the design authors.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "eda9faa2-e337-579d-a511-766ccee61d1c",
+      "building_slug": "yokohama-international-passenger-terminal",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://osanbashi.jp/en/about/",
+      "evidence_note": "The terminal operator and City of Yokohama confirm the current seventh-generation international passenger terminal completed in 2002, with a public rooftop plaza and passenger facilities. JA and MoMA identify Foreign Office Architects, Farshid Moussavi and Alejandro Zaera-Polo as the design authors.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}
