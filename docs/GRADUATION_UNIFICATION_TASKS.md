@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 41 条未正式审核记录中选择建筑本体边界清晰且图片对象准确的小批次；CASE-002 与 CASE-035 保持阻塞状态。
+当前下一步：本地化并验证 CASE-040 的 Nesnad / CC BY 4.0 替代图，同步权威公开数据后再生成 migration。
 
 ## 最终目标
 
@@ -236,7 +236,9 @@ Zero-waste batch 003 已完成 CASE-002 Kamikatsu Zero Waste Center 的只读审
 
 KOIL interior batch 004 已完成 CASE-035 的只读审核。Naruse Inokuma 官方资料确认该对象是 2014 年 4 月完成、2,576 m² 的创新中心室内设计与监理，并非事务所独立设计的宿主建筑。现有 `KOIL_GARDEN.jpg` 虽为 Souka Kinmei 自有作品、CC0、1924×1080，但人工查看确认它拍摄的是带 `KOIL GARDEN by MITSUI FUDOSAN` 标识的另一处低层外部设施，不是 2014 年创新中心室内。权利安全不能替代对象正确性，本批迁移批准 0 条；G6 已迁移仍为 54/118，尚未正式审核队列从 42 减至 41。详见 `GRADUATION_NEW_BUILDING_KOIL_INTERIOR_004_TRIAGE.md`。
 
-下一个最小可验证步骤：从剩余 41 条中选择建筑本体边界清晰、图片对象准确且摄影者与许可完整的小批次；CASE-035 保留 CASE 路由，等待 interior-project linked-to-host-building 数据模型或改用中性 placeholder。
+MIYASHITA PARK batch 005 已完成 CASE-040 的只读审核。Nikken 官方页确认 2020 年涩谷 PPP 重建项目包含公园、停车、四层零售和十八层酒店；Takenaka 为 lead architect，Nikken 为 project architect，必须使用联合实体保留两者。现图虽为 Syced / CC0，但人工确认主体是 Tower Records 和铁路，不是项目本体。新候选 `Miyashita Park 2025 May 26 various 01.jpg` 为 Nesnad 自有作品、4032×3024、CC BY 4.0，人工确认准确展示复合体、屋顶绿化与项目标识。生产 target building/profile conflict 0，functions 3/3、type 1/1。本批批准在图片替换后进入 migration；G6 已迁移仍为 54/118，尚未正式审核队列从 41 减至 40。详见 `GRADUATION_NEW_BUILDING_MIYASHITA_PARK_005_TRIAGE.md`。
+
+下一个最小可验证步骤：将 Nesnad 原图优化并本地化为 CASE-040 cover，更新摄影者、许可、来源和审核说明，运行图片人工复核与完整 QA 后再生成 guarded migration。
 
 ### G7 — 统一搜索与筛选
 

@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 new-building Miyashita Park batch 005",
+  "source_queue": "db/review-packets/graduation-new-building-miyashita-park-005.json",
+  "write_status": "reviewed-only; no production insert authorized until the approved replacement image is localized, public metadata is rebuilt, and a guarded migration passes isolated PostgreSQL dry-run",
+  "review_method": [
+    "Checked Nikken Sekkei's official page for project identity, location, completion, scale, PPP reconstruction scope, program and the distinct Takenaka/Nikken design roles.",
+    "Verified that the 2020 complex combines the reconstructed public park and parking with four retail floors and an eighteen-storey hotel.",
+    "Opened the current Commons image and rejected it because its subject is the Tower Records building and railway viewed from Miyashita Park, not MIYASHITA PARK itself.",
+    "Searched Commons for replacement candidates and opened four 2025 Nesnad images; selected image 01 because it clearly shows the elevated complex, rooftop planting and MIYASHITA PARK name.",
+    "Verified Nesnad own-work authorship, 4032 by 3024 dimensions and CC BY 4.0 rights for the replacement.",
+    "Queried production read-only and found separate Takenaka and Nikken architects, all required functions and type, and zero target building or CASE profile conflicts."
+  ],
+  "summary": {
+    "reviewed": 1,
+    "identity_approved": 1,
+    "function_approved": 1,
+    "replacement_image_approved": 1,
+    "migration_approved_after_asset_replacement": 1,
+    "current_image_rejected": 1,
+    "new_combined_architect_required": 1
+  },
+  "excluded": [],
+  "decisions": [
+    {
+      "case_id": "CASE-040",
+      "decision": "approved_after_image_replacement",
+      "canonical_building": {
+        "slug": "miyashita-park",
+        "name_zh": "宫下公园",
+        "name_en": "MIYASHITA PARK",
+        "name_ja": "MIYASHITA PARK",
+        "year_start": 2020,
+        "city": "东京",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "mixed-use",
+        "architect_slug": "takenaka-corporation-nikken-sekkei",
+        "official_url": "https://www.nikken.co.jp/en/projects/urban_design_and_planning/miyashita_park.html"
+      },
+      "architect_identity": {
+        "name_zh": "竹中工务店 + 日建设计",
+        "name_en": "Takenaka Corporation + Nikken Sekkei",
+        "name_ja": "竹中工務店 + 日建設計",
+        "roles": [
+          "Takenaka Corporation: lead architect, schematic design, developed design and design supervision",
+          "Nikken Sekkei: project architect, concept design, schematic design and retail design supervision"
+        ]
+      },
+      "function_slugs": ["mixed-use", "retail", "public-space"],
+      "current_image": {
+        "status": "rejected_wrong_subject",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Miyashita_Park_on_a_sunny_day_13.jpg",
+        "license": "CC0",
+        "photographer": "Syced",
+        "reason": "The image centers Tower Records and railway infrastructure; it is a view from Miyashita Park rather than a useful image of the project."
+      },
+      "image": {
+        "status": "approved_replacement_pending_localization",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Miyashita_Park_2025_May_26_various_01.jpg",
+        "download_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Miyashita_Park_2025_May_26_various_01.jpg",
+        "license": "CC BY 4.0",
+        "credit": "Photo: Nesnad / Wikimedia Commons",
+        "width": 4032,
+        "height": 3024,
+        "visual_evidence": "The image clearly shows the elevated MIYASHITA PARK complex, circulation structure, rooftop planting and project name.",
+        "rights_evidence": "Commons identifies Nesnad as creator of the own-work photograph and licenses it under CC BY 4.0."
+      },
+      "production_preflight": {
+        "existing_takenaka": "1be57c89-0007-56f8-a7d1-96b09e5b1bc5 / takenaka-corporation",
+        "existing_nikken": "61138a5c-9829-5fca-9619-9872e84dbce5 / nikken-sekkei",
+        "combined_architect_matches": 0,
+        "target_building_conflicts": 0,
+        "target_profile_conflicts": 0,
+        "required_function_matches": 3,
+        "required_type_matches": 1
+      },
+      "identity_evidence": [
+        "Nikken Sekkei identifies MIYASHITA PARK as the 2020 Shibuya PPP reconstruction with park, parking, four retail floors and an eighteen-storey hotel.",
+        "The official role table identifies Takenaka Corporation as lead architect and Nikken Sekkei as project architect."
+      ]
+    }
+  ]
+}
