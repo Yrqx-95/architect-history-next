@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从尚未正式审核的 48 条 G6 队列中选择下一个用途边界清晰的小批次，只读核验身份、用途、准确图片和开放许可；未通过双重门槛的记录不得生成 migration。
+当前下一步：通过 PR 固化 CASE-038/039 下北泽 retail 批次只读决策；随后替换 BONUS TRACK 低清图，并建立 `retail` 四语 taxonomy、guarded rollback 与隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -201,6 +201,10 @@ CASE-044 public-toilet batch 001 migration pack 已生成：复用既有 `kengo-
 CASE-044 public-toilet batch 001 已完成生产写入、发布与线上验收。Supabase migration `graduation_public_toilet_batch_001`（`20260712094552`）复用既有 `kengo-kuma` architect，写入 1 building、1 primary image、1 published profile 和 2 approved assignments；building broad type 为 `civic-public`，primary function 为 `public-toilet`。生产总数从 69/923/7272/111 更新为 70 profiles / 924 buildings / 7273 images / 113 assignments；orphan、architect mismatch、duplicate primary image/function 均为 0，RLS/policy 与 advisors 通过。PR #60 更新读取基线；Reviewed release `29188112986` 成功。线上 API 为 101 cases / 70 profiles / 0 missing relation，CASE-044 三语 CASE、三语 building 与图片全部 HTTP 200。G6 已迁移 49/118，尚未迁移 69；版本化队列中尚未完成正式审核的记录为 48。详见 `GRADUATION_PUBLIC_TOILET_BATCH_001_PRODUCTION.md`。
 
 下一个最小可验证步骤：从剩余 48 条未正式审核记录中选择用途边界清晰的小批次，只读核验建筑身份、年份、地点、设计者、准确图片、摄影者和开放许可，再决定是否进入 migration 准备。
+
+Shimokitazawa retail / mixed-use batch 001 已完成 CASE-038/039 的只读审核。BONUS TRACK 与 MIKAN SHIMOKITA 是下北泽两个独立地点、不同年份和设计团队的建成商业项目，身份、年份、用途与图片均通过。BONUS TRACK 的 MDPI DOI/JATS 确认 Version of Record 为 CC BY 4.0，Figure 3 图注明确为 morinakayasuaki，已取得并核对 2340×1568 原始 figure；现有 550×369 本地图需在迁移前替换。MIKAN Commons 图片为 Souka Kinmei 自有作品、2800×1572、CC0。生产无 target building/architect/profile conflict，`commercial` broad type 已存在。现有用途缺少零售商业，迁移前必须新增 `retail` function，不能只用宽泛 `mixed-use`。本批 2 条均未生产写入；G6 已迁移 49/118，尚未迁移 69，未正式审核队列从 48 减至 46。详见 `GRADUATION_NEW_BUILDING_SHIMOKITAZAWA_RETAIL_001_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化只读决策；随后用已审核 MDPI Figure 3 替换 BONUS TRACK 低清图，为 `retail` 建立四语 taxonomy migration、alias 冲突预检、guarded rollback 与隔离 PostgreSQL dry-run。
 
 ### G7 — 统一搜索与筛选
 
