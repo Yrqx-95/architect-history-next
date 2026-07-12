@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 38 条尚未正式审核的 G6 队列中选择下一个边界清晰、身份与图片权利可验证的小批次。
+当前下一步：通过 PR 固化 CASE-033 Yu no Eki Ohyu batch 008 只读审核决策；合并后才准备 guarded migration、rollback 与全历史隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -275,6 +275,10 @@ CASE-016 ACROS Fukuoka batch 007 migration pack 已生成。兼容数据 archite
 CASE-016 ACROS Fukuoka batch 007 已完成生产迁移、发布和线上验收。Supabase migration `graduation_acros_fukuoka_batch_007`（`20260712153752`）写入 1 joint formal-design architect / 1 building / 1 primary image / 1 published profile / 4 assignments；总数更新为 78/932/7281/133，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。四条 assignment evidence 均保留 Emilio Ambasz 的 basic-concept 角色。PR #92 将生产基线更新为 78 并加入 canonical 回归；Reviewed release `29198674126` 在 8m11s 内成功。6 个中英日 CASE/building 路由和图片全部 HTTP 200，API 为 101 cases / 78 profiles / 0 missing，并返回 Nihon Sekkei + Takenaka Corporation 与 Kenta Mabuchi / CC BY-SA 2.0。G6 已迁移 57/118，尚未迁移 61；尚未正式审核队列 38。详见 `GRADUATION_ACROS_FUKUOKA_BATCH_007_PRODUCTION.md`。
 
 下一个最小可验证步骤：从剩余 38 条未正式审核记录中选择下一个不需降低身份或图片权利标准的边界清晰小批次，先完成只读调查和生产冲突预检。
+
+Yu no Eki Ohyu batch 008 已完成 CASE-033 的正式只读审核。Kengo Kuma 官方确认项目为 2018 年秋田县鹿角市、1,026 m² 的 community center，组合 shop、café、open-air theater、park、footbath 和 biotope；鹿角市确认其法定道路休息站身份、地址、停车、充电、24 小时厕所、市场和足汤。broad type 决定为 `transportation`，functions 为 `transport-hub` primary、`community-center`/`retail`/`public-space` secondary；不因附属露天活动空间误加 `theatre`。Commons 原图为掬茶 own work、6000×3376、CC BY-SA 4.0；仓库 1600×900 文件人工确认准确展示建筑主体。生产可复用 `kengo-kuma`，target building/profile conflict 0，required functions 4/4、type 1/1；尚未生成 migration 或写生产。G6 已迁移仍为 57/118，尚未迁移 61；尚未正式审核队列从 38 减至 37。详见 `GRADUATION_NEW_BUILDING_YU_NO_EKI_OHYU_008_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化 CASE-033 只读决策；合并后同步 compatibility architect，生成 1 building / 1 primary image / 1 profile / 4 assignments 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。
 
 ### G7 — 统一搜索与筛选
 
