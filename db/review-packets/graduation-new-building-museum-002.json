@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-12T01:10:49.153Z",
+  "batch_id": "graduation-new-building-museum-002",
+  "stage": "G6",
+  "source_queue": "db/review-packets/graduation-new-building-queue-001.json",
+  "selection_policy": "The only remaining unlinked case whose title and official institution description explicitly identify a museum or art-center function after museum batch 001. Selection does not imply approval.",
+  "write_policy": "Read-only triage queue. No database write, image download, image replacement, or public-data change is authorized by this file.",
+  "counts": {
+    "candidates": 1,
+    "metadata_claim_present": 0,
+    "license_missing": 1
+  },
+  "carried_blockers": [
+    {
+      "case_id": "CASE-079",
+      "status": "no_safe_image_yet",
+      "reason": "Only an openly licensed 2015 pre-renovation image is available for the 2021 renovation; official post-renovation images have no reusable license."
+    }
+  ],
+  "items": [
+    {
+      "case_id": "CASE-048",
+      "name": "Aranya Art Center",
+      "name_en": "Aranya Art Center",
+      "name_ja": "Aranya Art Center",
+      "previous_lane": "new-building-candidate",
+      "priority": "standard",
+      "priority_reason": "Review after the library-focused batches unless a stronger editorial need emerges.",
+      "source_url": "https://neriandhu.com/en/works/the-void-aranya-art-center",
+      "source_domain": "neriandhu.com",
+      "image_source_url": null,
+      "image_source_domain": null,
+      "image_license": null,
+      "image_credit": null,
+      "year": 2019,
+      "architect": "Neri&Hu",
+      "metadata_gaps": [
+        "image_source_url",
+        "image_license",
+        "image_credit"
+      ],
+      "review_scope": [
+        "identity",
+        "architect",
+        "year",
+        "location",
+        "official_source",
+        "museum_function",
+        "image_content",
+        "image_author",
+        "image_license"
+      ],
+      "review_status": "unreviewed",
+      "image_claim_status": "license-missing-needs-replacement-or-verification"
+    }
+  ]
+}
