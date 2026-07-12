@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-031 图片纠偏与 `public-toilet` taxonomy migration；完成 Reviewed 静态发布后复查生产冲突，应用 taxonomy 并核验 12 functions / 189 aliases / 111 assignments、RLS/policy 与 advisors。
+当前下一步：为 CASE-044 生成复用既有 `kengo-kuma` architect 的 guarded building/image/profile migration pack，执行全历史隔离 PostgreSQL dry-run；CASE-031 不建主体，CASE-049 继续 `no_safe_image_yet`。
 
 ## 最终目标
 
@@ -189,6 +189,10 @@ Public-toilet batch 001 已完成 CASE-031/044/049 的只读审核。CASE-031 �
 Public-toilet taxonomy 001 与 CASE-031 图片纠偏已完成本地准备。词表新增 `public-toilet`，复用 `civic-public` broad type，四语共 24 aliases；生产只读预检为 0 function conflict、0 alias conflict、0 assignment，`civic-public` type 1 条，当前基线 11 functions / 165 aliases / 111 assignments。隔离 PostgreSQL 18.3 按历史顺序重放 base 与 `public-space` 后，forward、依赖 assignment rollback guard、精确 rollback 与第二次 replay 全部通过。CASE-031 已从具体的恵比寿公園厕所图片恢复中性占位图，清空误导性的图片来源、许可和摄影者，但保留 CASE 路由与分析层。Supabase migration 文件由 CLI 创建并与 reviewed apply SQL 字节一致，尚未应用生产。详见 `GRADUATION_PUBLIC_TOILET_TAXONOMY_001_DRY_RUN.md`。
 
 下一个最小可验证步骤：通过 PR 合并 taxonomy、guarded migration/rollback、CASE-031 fallback 修正和测试；Reviewed 静态发布成功后复查生产冲突，仍为 0 才应用 taxonomy migration。
+
+Public-toilet taxonomy 001 与 CASE-031 图片纠偏已完成生产发布。PR #56 合并 taxonomy、guarded SQL、migration、CASE-031 placeholder 与测试；首次 Reviewed release `29184612266` 在完整 E2E 阶段发现公开 API 从 101 降至 100，原因是 placeholder CASE 被过滤，该次未部署。PR #57 改为允许显式 placeholder 保留 published CASE route，同时继续要求所有真实图片必须有 source/license/credit；修复后的静态 release `29184818646` 成功。最终生产冲突复查仍为 0 后，Supabase migration `building_function_public_toilet_001`（`20260712075921`）将 11/165 functions/aliases 更新为 12/189，assignments 保持 111；目标 1 function / 24 aliases / 4 locales / 0 assignments。两表 RLS、policy、anon/authenticated SELECT、匿名 REST 与 advisors 均通过。数据库写后 Reviewed release `29185134025` 成功；线上 API 为 101 cases / 69 profiles / 0 missing relation，CASE-031 中英日路由与 placeholder 均 HTTP 200。详见 `GRADUATION_PUBLIC_TOILET_TAXONOMY_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：生成仅包含 CASE-044 的 canonical building/profile migration pack，复用 `kengo-kuma` architect，写入准确 CC BY-SA 4.0 图片，并执行全历史隔离 PostgreSQL forward/guard/rollback/replay。
 
 ### G7 — 统一搜索与筛选
 
