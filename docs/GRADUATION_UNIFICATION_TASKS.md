@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 固化 CASE-016 ACROS Fukuoka batch 007 只读审核决策；合并后才准备 guarded migration、rollback 与全历史隔离 PostgreSQL dry-run。
+当前下一步：运行 CASE-016 migration pack 的完整质量门；通过后以独立 PR 合并，生产写入前重复冲突预检。
 
 ## 最终目标
 
@@ -267,6 +267,10 @@ CASE-028 Shiroiya Hotel batch 006 已完成生产迁移、兼容纠偏、发布�
 ACROS Fukuoka batch 007 已完成 CASE-016 的只读审核。ACROS 官方与竹中工务店资料一致确认：基本构想为日本设计、竹中工务店、Emilio Ambasz，正式设计为日本设计、竹中工务店；因此拒绝当前单一 `Emilio Ambasz` 表达，canonical architect 决定为新联合实体 `Nihon Sekkei + Takenaka Corporation`，并把 Emilio Ambasz 保留为 building 来源说明中的 basic concept contributor。Commons 原图为 Kenta Mabuchi / Flickr、2426×1625、CC BY-SA 2.0，FlickreviewR 已确认；仓库 1600×1071 文件人工确认准确展示建筑本体与阶梯绿化。broad type 为 `mixed-use`，functions 为 `mixed-use` primary、`theatre`/`retail`/`public-space` secondary，不把“公民复合设施”误缩窄成 `community-center`。生产 target building/profile conflict 0，可复用 Takenaka，required functions 4/4、type 1/1；尚未生成 migration 或写生产。G6 已迁移仍为 56/118，尚未迁移 62；尚未正式审核队列从 39 减至 38。详见 `GRADUATION_NEW_BUILDING_ACROS_FUKUOKA_007_TRIAGE.md`。
 
 下一个最小可验证步骤：通过 PR 固化 CASE-016 只读决策；合并后同步 compatibility architect，生成 1 joint architect / 1 building / 1 primary image / 1 profile / 4 assignments 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。生产写入前必须重复冲突预检。
+
+CASE-016 ACROS Fukuoka batch 007 migration pack 已生成。兼容数据 architect 已从错误的单一 `Emilio Ambasz` 对齐为 `Nihon Sekkei + Takenaka Corporation`；migration 建立 1 new joint architect / 1 building / 1 primary image / 1 profile / 4 assignments，`mixed-use` primary，`theatre`、`retail`、`public-space` secondary。全历史隔离 PostgreSQL 18.3 已重放至 Shiroiya Hotel，forward、外部 curated-image rollback guard、精确 rollback/replay 全部通过。Supabase migration `20260712153311_graduation_acros_fukuoka_batch_007.sql` 由项目内 CLI 创建并与 reviewed apply SQL 字节一致。生产基线 77/931/7280/129，预期写后 78/932/7281/133；尚未生产写入。详见 `GRADUATION_ACROS_FUKUOKA_BATCH_007_DRY_RUN.md`。
+
+下一个最小可验证步骤：运行 unit、graduation QA、typecheck、lint、图片 QA 与 `git diff --check`；通过 PR 合并 migration pack 后立即重复生产冲突预检，仍为 0 才允许 apply。
 
 ### G7 — 统一搜索与筛选
 
