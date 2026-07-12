@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：为 CASE-044 生成复用既有 `kengo-kuma` architect 的 guarded building/image/profile migration pack，执行全历史隔离 PostgreSQL dry-run；CASE-031 不建主体，CASE-049 继续 `no_safe_image_yet`。
+当前下一步：通过 PR 合并 CASE-044 guarded migration pack；生产冲突复查仍为 0 后写入，核验 70 profiles / 924 buildings / 7273 images / 113 assignments，再更新 E2E 基线并运行 Reviewed release。
 
 ## 最终目标
 
@@ -193,6 +193,10 @@ Public-toilet taxonomy 001 与 CASE-031 图片纠偏已完成本地准备。词�
 Public-toilet taxonomy 001 与 CASE-031 图片纠偏已完成生产发布。PR #56 合并 taxonomy、guarded SQL、migration、CASE-031 placeholder 与测试；首次 Reviewed release `29184612266` 在完整 E2E 阶段发现公开 API 从 101 降至 100，原因是 placeholder CASE 被过滤，该次未部署。PR #57 改为允许显式 placeholder 保留 published CASE route，同时继续要求所有真实图片必须有 source/license/credit；修复后的静态 release `29184818646` 成功。最终生产冲突复查仍为 0 后，Supabase migration `building_function_public_toilet_001`（`20260712075921`）将 11/165 functions/aliases 更新为 12/189，assignments 保持 111；目标 1 function / 24 aliases / 4 locales / 0 assignments。两表 RLS、policy、anon/authenticated SELECT、匿名 REST 与 advisors 均通过。数据库写后 Reviewed release `29185134025` 成功；线上 API 为 101 cases / 69 profiles / 0 missing relation，CASE-031 中英日路由与 placeholder 均 HTTP 200。详见 `GRADUATION_PUBLIC_TOILET_TAXONOMY_001_PRODUCTION.md`。
 
 下一个最小可验证步骤：生成仅包含 CASE-044 的 canonical building/profile migration pack，复用 `kengo-kuma` architect，写入准确 CC BY-SA 4.0 图片，并执行全历史隔离 PostgreSQL forward/guard/rollback/replay。
+
+CASE-044 public-toilet batch 001 migration pack 已生成：复用既有 `kengo-kuma` architect，创建 1 building、1 primary image、1 published profile 和 2 assignments；CASE-031/049 不在任何 seed 中。第一次生产预检发现 decision 把细用途 `public-toilet` 错当成 building broad `type_slug`，而生产不存在该 building type；已改为 `civic-public` broad type，并保留 `public-toilet` primary function。验证器同时收紧为只从版本化 function taxonomy 派生允许的 broad types，不再由当前 pack 自创测试 type。修正后生产预检为 architect exact 1、building/image/profile/assignment conflict 全部 0、functions 2/2、type 1/1。全历史隔离 PostgreSQL 18.3 的两次 forward/rollback 与外部 curated-image guard 全部通过；42 files / 149 tests、typecheck、QA 均通过，migration 与 reviewed SQL 字节一致。生产尚未写入。详见 `GRADUATION_PUBLIC_TOILET_BATCH_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 migration pack；生产冲突复查仍为 0 后应用 migration，写后核验 70 profiles / 924 buildings / 7273 images / 113 assignments 与关系安全门。
 
 ### G7 — 统一搜索与筛选
 
