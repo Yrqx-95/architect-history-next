@@ -8,8 +8,8 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(101)
-    expect(payload.diagnostics.profileCount).toBe(61)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(61)
+    expect(payload.diagnostics.profileCount).toBe(62)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(62)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
       'CASE-018',
       'CASE-021',
@@ -24,6 +24,7 @@ test.describe('graduation Supabase + JSON dual read', () => {
       'CASE-081',
       'CASE-092',
       'CASE-095',
+      'CASE-096',
       'CASE-098',
       'CASE-101',
       'CASE-105',
@@ -56,7 +57,7 @@ test.describe('graduation Supabase + JSON dual read', () => {
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(61)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(62)
 
     const libraryCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-018')
     expect(libraryCase).toMatchObject({
