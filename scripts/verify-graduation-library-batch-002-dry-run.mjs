@@ -44,6 +44,24 @@ const verifyConfigs = {
     rollback_path: 'db/manual-operations/graduation-theatre-batch-001-rollback.sql',
     label: 'Graduation theatre batch 001',
   },
+  'community-civic-001': {
+    pack_path: 'db/review-packets/graduation-community-civic-batch-001.json',
+    prior_pack_paths: [
+      'db/review-packets/graduation-library-batch-001.json',
+      'db/review-packets/graduation-library-batch-002.json',
+      'db/review-packets/graduation-museum-batch-001.json',
+      'db/review-packets/graduation-theatre-batch-001.json',
+    ],
+    prior_seed_paths: [
+      'db/manual-operations/graduation-library-batch-001-apply.sql',
+      'db/manual-operations/graduation-library-batch-002-apply.sql',
+      'db/manual-operations/graduation-museum-batch-001-apply.sql',
+      'db/manual-operations/graduation-theatre-batch-001-apply.sql',
+    ],
+    apply_path: 'db/manual-operations/graduation-community-civic-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-community-civic-batch-001-rollback.sql',
+    label: 'Graduation community civic batch 001',
+  },
 }
 const verifyConfig = verifyConfigs[verifyKey]
 if (!verifyConfig) throw new Error(`Unknown graduation verify batch: ${verifyKey}`)
@@ -125,7 +143,11 @@ try {
   )
   const existingArchitects = [...new Map(
     [
-      ...priorPacks.flatMap(item => item.architects).filter(item => !item.is_new),
+      ...priorPacks.flatMap(item => item.architects).filter(item => (
+        !item.is_new
+        && !priorNewArchitectIds.has(item.id)
+        && !priorNewArchitectSlugs.has(item.slug)
+      )),
       ...pack.architects.filter(item => (
         !item.is_new
         && !priorNewArchitectIds.has(item.id)

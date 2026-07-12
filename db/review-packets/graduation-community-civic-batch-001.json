@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-community-civic-batch-001",
+  "generated_at": "2026-07-12T02:26:33.543Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all target UUIDs, slugs, CASE IDs and image source URLs are absent",
+    "community-center, theatre and mixed-use functions remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 1,
+    "new_architects": 1,
+    "buildings": 1,
+    "images": 1,
+    "profiles": 1,
+    "assignments": 3
+  },
+  "architects": [
+    {
+      "id": "24032837-3d52-5173-8180-dbe970eec9b8",
+      "slug": "kazumi-adachi-kiyoshi-sawano-hideo-matsunaga-isamu-noguchi",
+      "name_zh": "Kazumi Adachi + Kiyoshi Sawano + Hideo Matsunaga + Isamu Noguchi",
+      "name_en": "Kazumi Adachi + Kiyoshi Sawano + Hideo Matsunaga + Isamu Noguchi",
+      "name_ja": "カズミ・アダチ + キヨシ・サワノ + ヒデオ・マツナガ + イサム・ノグチ",
+      "official_url": "https://jaccc.org/about/",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "b22f662d-39d9-551a-ac6c-05fd46d22e22",
+      "case_id": "CASE-096",
+      "slug": "japanese-american-cultural-community-center",
+      "name_zh": "日美文化与社区中心",
+      "name_en": "Japanese American Cultural & Community Center",
+      "name_ja": "日米文化会館",
+      "year_start": 1983,
+      "city": "洛杉矶",
+      "country": "美国",
+      "country_code": "US",
+      "type_slug": "cultural",
+      "architect_slug": "kazumi-adachi-kiyoshi-sawano-hideo-matsunaga-isamu-noguchi",
+      "official_url": "https://jaccc.org/about/",
+      "architect_id": "24032837-3d52-5173-8180-dbe970eec9b8",
+      "status": "published"
+    }
+  ],
+  "images": [
+    {
+      "id": "31a57674-5697-5c86-b555-c7ed1876df43",
+      "building_id": "b22f662d-39d9-551a-ac6c-05fd46d22e22",
+      "building_slug": "japanese-american-cultural-community-center",
+      "case_id": "CASE-096",
+      "url_original": "/images/graduation/cases/case-096-japanese-american-community-cultural-center.jpg",
+      "photographer": "Another Believer",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Japanese_American_Cultural_and_Community_Center_%26_Frances_Hashimoto_Plaza.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-096",
+      "building_id": "b22f662d-39d9-551a-ac6c-05fd46d22e22",
+      "building_slug": "japanese-american-cultural-community-center",
+      "concept_zh": "文化中心与广场承接族群记忆、表演和公共活动，展示多文化社区如何建立归属感。",
+      "concept_zh_hant": null,
+      "concept_en": "Japanese American Community and Cultural Center is a reference case for reading multicultural, communityculture, Design topic: 表演, Design topic: 广场. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "日系アメリカ人コミュニティの文化拠点。展示、集会、教育を通じて、移民の記憶と公共文化を支える事例として読める。",
+      "keywords_zh": [
+        "多文化",
+        "社区文化",
+        "表演",
+        "广场",
+        "族群记忆"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "multicultural",
+        "communityculture",
+        "Design topic: 表演",
+        "Design topic: 广场",
+        "Design topic: 族群记忆"
+      ],
+      "keywords_ja": [
+        "多文化",
+        "コミュニティ",
+        "文化センター",
+        "公共記憶",
+        "移民"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.laconservancy.org/learn/historic-places/japanese-american-community-and-cultural-center/",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "b22f662d-39d9-551a-ac6c-05fd46d22e22",
+      "building_slug": "japanese-american-cultural-community-center",
+      "function_slug": "community-center",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://jaccc.org/about/",
+      "evidence_note": "JACCC identifies its Little Tokyo campus as a permanent arts-and-culture community center and confirms Isamu Noguchi's outdoor plaza. JACCC records the Aratani Theatre as an 880-seat performing-arts venue opened in 1983. LA Conservancy records the 1978–1983 complex, the Center Building by Kazumi Adachi, Kiyoshi Sawano and Hideo Matsunaga, and the adjacent plaza by Isamu Noguchi.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b22f662d-39d9-551a-ac6c-05fd46d22e22",
+      "building_slug": "japanese-american-cultural-community-center",
+      "function_slug": "theatre",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://jaccc.org/about/",
+      "evidence_note": "JACCC identifies its Little Tokyo campus as a permanent arts-and-culture community center and confirms Isamu Noguchi's outdoor plaza. JACCC records the Aratani Theatre as an 880-seat performing-arts venue opened in 1983. LA Conservancy records the 1978–1983 complex, the Center Building by Kazumi Adachi, Kiyoshi Sawano and Hideo Matsunaga, and the adjacent plaza by Isamu Noguchi.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b22f662d-39d9-551a-ac6c-05fd46d22e22",
+      "building_slug": "japanese-american-cultural-community-center",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://jaccc.org/about/",
+      "evidence_note": "JACCC identifies its Little Tokyo campus as a permanent arts-and-culture community center and confirms Isamu Noguchi's outdoor plaza. JACCC records the Aratani Theatre as an 880-seat performing-arts venue opened in 1983. LA Conservancy records the 1978–1983 complex, the Center Building by Kazumi Adachi, Kiyoshi Sawano and Hideo Matsunaga, and the adjacent plaza by Isamu Noguchi.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}
