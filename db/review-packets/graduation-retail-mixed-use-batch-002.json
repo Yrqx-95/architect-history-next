@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-retail-mixed-use-batch-002",
+  "generated_at": "2026-07-12T11:25:00.269Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "retail, mixed-use and public-space functions remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 2,
+    "new_architects": 1,
+    "buildings": 2,
+    "images": 2,
+    "profiles": 2,
+    "assignments": 5
+  },
+  "architects": [
+    {
+      "id": "c358fc57-68cd-5715-8a3c-b5732065e727",
+      "slug": "klein-dytham-architecture",
+      "name_zh": "Klein Dytham architecture",
+      "name_en": "Klein Dytham architecture",
+      "name_ja": "クライン・ダイサム・アーキテクツ",
+      "official_url": "https://www.klein-dytham.com/",
+      "is_new": true
+    },
+    {
+      "id": "4a1fdf1b-ed02-45f6-9b9c-95ae623972df",
+      "slug": "mvrdv",
+      "name_zh": "MVRDV",
+      "name_en": "MVRDV",
+      "name_ja": "MVRDV",
+      "official_url": null,
+      "is_new": false
+    }
+  ],
+  "buildings": [
+    {
+      "id": "c033bd48-f416-5c0f-a026-36ac1e0b9a60",
+      "case_id": "CASE-074",
+      "slug": "daikanyama-t-site",
+      "name_zh": "代官山 T-SITE",
+      "name_en": "Daikanyama T-SITE",
+      "name_ja": "代官山 T-SITE",
+      "year_start": 2011,
+      "city": "东京",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "mixed-use",
+      "architect_slug": "klein-dytham-architecture",
+      "official_url": "https://www.klein-dytham.com/daikanyama-t-site",
+      "architect_id": "c358fc57-68cd-5715-8a3c-b5732065e727",
+      "status": "published"
+    },
+    {
+      "id": "813079df-4752-5a8f-b3cd-b16e07233cb5",
+      "case_id": "CASE-116",
+      "slug": "markthal-rotterdam",
+      "name_zh": "鹿特丹市场大厅",
+      "name_en": "Markthal Rotterdam",
+      "name_ja": "ロッテルダム・マルクトハル",
+      "year_start": 2014,
+      "city": "鹿特丹",
+      "country": "荷兰",
+      "country_code": "NL",
+      "type_slug": "mixed-use",
+      "architect_slug": "mvrdv",
+      "official_url": "https://www.mvrdv.com/projects/115/markthal",
+      "architect_id": "4a1fdf1b-ed02-45f6-9b9c-95ae623972df",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "a922c9cd-87d6-5187-a64f-c03b5aa21647",
+      "building_id": "c033bd48-f416-5c0f-a026-36ac1e0b9a60",
+      "building_slug": "daikanyama-t-site",
+      "case_id": "CASE-074",
+      "url_original": "/images/graduation/cases/case-074-daikanyama-t-site.jpg",
+      "photographer": "Jonathan Lin",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Daikanyama_T-SITE_2016-04-04.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "f7a58c75-b3a3-5eec-86aa-0286701b9d7c",
+      "building_id": "813079df-4752-5a8f-b3cd-b16e07233cb5",
+      "building_slug": "markthal-rotterdam",
+      "case_id": "CASE-116",
+      "url_original": "/images/graduation/cases/case-116-markthal-rotterdam.jpg",
+      "photographer": "Michielverbeek",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Rotterdam,_het_Potlood_door_de_Markthallen_heen_foto5_2016-02-28_10.46.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-074",
+      "building_id": "c033bd48-f416-5c0f-a026-36ac1e0b9a60",
+      "building_slug": "daikanyama-t-site",
+      "concept_zh": "书店、咖啡、影音和庭院被组织成低层文化街区，提供消费之外的长时间停留体验。",
+      "concept_zh_hant": null,
+      "concept_en": "Daikanyama T-SITE is a reference case for reading bookstore, cultural complex, cafe, Design topic: 低层neighborhood. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "「Daikanyama T-SITE」は、書店・文化複合・カフェ・低層街区の関係を読み取る参考事例。用途の複合、運営、居場所のつくり方を卒業設計に転用して考えられる。",
+      "keywords_zh": [
+        "书店",
+        "文化复合",
+        "咖啡",
+        "低层街区",
+        "第三空间"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "bookstore",
+        "cultural complex",
+        "cafe",
+        "Design topic: 低层neighborhood",
+        "third place"
+      ],
+      "keywords_ja": [
+        "書店",
+        "文化複合",
+        "カフェ",
+        "低層街区",
+        "第三空間"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.klein-dytham.com/daikanyama-t-site",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-116",
+      "building_id": "813079df-4752-5a8f-b3cd-b16e07233cb5",
+      "building_slug": "markthal-rotterdam",
+      "concept_zh": "市場、住宅、観光、都市広場を大きなアーチの中にまとめた事例。日常の食と都市の賑わいを扱える。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Markthal Rotterdam: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "市場、住宅、観光、都市広場を大きなアーチの中にまとめた事例。日常の食と都市の賑わいを扱える。",
+      "keywords_zh": [
+        "市場",
+        "大屋根",
+        "食文化",
+        "都市広場",
+        "複合用途"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "市場",
+        "大屋根",
+        "食文化",
+        "都市広場",
+        "複合用途"
+      ],
+      "keywords_ja": [
+        "市場",
+        "大屋根",
+        "食文化",
+        "都市広場",
+        "複合用途"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.mvrdv.com/projects/115/markthal",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "c033bd48-f416-5c0f-a026-36ac1e0b9a60",
+      "building_slug": "daikanyama-t-site",
+      "function_slug": "retail",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.klein-dytham.com/daikanyama-t-site",
+      "evidence_note": "Klein Dytham architecture identifies Daikanyama T-SITE as its project in Daikanyama, Shibuya-ku, Tokyo and lists the principal use as retail and apartments. The official project page states that the campus-like Tsutaya complex opened to the public in December 2011 and credits architecture and interior design to Klein Dytham architecture.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "c033bd48-f416-5c0f-a026-36ac1e0b9a60",
+      "building_slug": "daikanyama-t-site",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.klein-dytham.com/daikanyama-t-site",
+      "evidence_note": "Klein Dytham architecture identifies Daikanyama T-SITE as its project in Daikanyama, Shibuya-ku, Tokyo and lists the principal use as retail and apartments. The official project page states that the campus-like Tsutaya complex opened to the public in December 2011 and credits architecture and interior design to Klein Dytham architecture.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "813079df-4752-5a8f-b3cd-b16e07233cb5",
+      "building_slug": "markthal-rotterdam",
+      "function_slug": "retail",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mvrdv.com/projects/115/markthal",
+      "evidence_note": "MVRDV identifies Markthal as a realised Rotterdam project completed in 2014, combining food, leisure, living and parking. The official project page lists retail and residential programs and describes the central market hall as a covered public square beneath the apartment arch.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "813079df-4752-5a8f-b3cd-b16e07233cb5",
+      "building_slug": "markthal-rotterdam",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mvrdv.com/projects/115/markthal",
+      "evidence_note": "MVRDV identifies Markthal as a realised Rotterdam project completed in 2014, combining food, leisure, living and parking. The official project page lists retail and residential programs and describes the central market hall as a covered public square beneath the apartment arch.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "813079df-4752-5a8f-b3cd-b16e07233cb5",
+      "building_slug": "markthal-rotterdam",
+      "function_slug": "public-space",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.mvrdv.com/projects/115/markthal",
+      "evidence_note": "MVRDV identifies Markthal as a realised Rotterdam project completed in 2014, combining food, leisure, living and parking. The official project page lists retail and residential programs and describes the central market hall as a covered public square beneath the apartment arch.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}

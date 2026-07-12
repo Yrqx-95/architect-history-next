@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 发布 CASE-074/116 两张已审核本地图与正式权利元数据；Reviewed 静态发布通过后，再生成 guarded migration pack 和隔离 PostgreSQL dry-run。
+当前下一步：通过 PR 合并 CASE-074/116 guarded migration pack；合并后重复生产冲突预检，仍为 0 才写入 2 buildings / 2 profiles / 5 assignments。
 
 ## 最终目标
 
@@ -218,7 +218,9 @@ Retail-led mixed-use batch 002 已完成 CASE-074/116 的只读审核。Klein Dy
 
 Retail-led mixed-use batch 002 的图片与公开数据已完成本地准备。CASE-074 优化为 2000×1356 / 826075 bytes / SHA-256 `1c0d1f0a61a6962b1a0dad829e4fe97d51e7a121e752728accc25b4da0aea5c7`；CASE-116 为 2000×1500 / 998567 bytes / SHA-256 `fb6583a1511215e133910bb1c56daf033c32e45fa0e79ffd8c57f8e773e18958`。两张最终 JPEG 已人工复核，权威 CSV、公开 CSV/JSON 与源 JSON 已同步本地路径、摄影者、许可和审核说明。46 files / 164 unit tests、lint、typecheck、graduation QA 全部通过。尚未生成或写入数据库 migration。
 
-下一个最小可验证步骤：通过 PR 合并并运行 Reviewed 静态发布，确认两个 CASE 路由和图片在线；随后生成 migration pack。
+Retail-led mixed-use batch 002 migration pack 已生成：2 architects（1 new Klein Dytham、1 existing MVRDV）/ 2 buildings / 2 primary images / 2 profiles / 5 assignments。两栋 broad type 为 `mixed-use`，`retail` 为 primary；Markthal 另有 `public-space` secondary。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产只读预检为新 architect 与四类 target conflict 全部 0、MVRDV exact match 1、functions 3/3、type 1/1；基线 72/926/7275/118，预期写后 74/928/7277/123。migration 与 reviewed apply SQL 字节一致，尚未生产写入。详见 `GRADUATION_RETAIL_MIXED_USE_BATCH_002_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复生产冲突预检，仍为 0 才执行生产 migration 与完整写后验收。
 
 ### G7 — 统一搜索与筛选
 
