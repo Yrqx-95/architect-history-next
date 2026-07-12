@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：运行 CASE-033 migration pack 的完整质量门；通过后以独立 PR 合并，生产写入前重复冲突预检。
+当前下一步：从剩余 37 条尚未正式审核的 G6 队列中选择下一个边界清晰、身份与图片权利可验证的小批次。
 
 ## 最终目标
 
@@ -271,6 +271,10 @@ ACROS Fukuoka batch 007 已完成 CASE-016 的只读审核。ACROS 官方与竹�
 CASE-016 ACROS Fukuoka batch 007 migration pack 已生成。兼容数据 architect 已从错误的单一 `Emilio Ambasz` 对齐为 `Nihon Sekkei + Takenaka Corporation`；migration 建立 1 new joint architect / 1 building / 1 primary image / 1 profile / 4 assignments，`mixed-use` primary，`theatre`、`retail`、`public-space` secondary。全历史隔离 PostgreSQL 18.3 已重放至 Shiroiya Hotel，forward、外部 curated-image rollback guard、精确 rollback/replay 全部通过。Supabase migration `20260712153311_graduation_acros_fukuoka_batch_007.sql` 由项目内 CLI 创建并与 reviewed apply SQL 字节一致。生产基线 77/931/7280/129，预期写后 78/932/7281/133；尚未生产写入。详见 `GRADUATION_ACROS_FUKUOKA_BATCH_007_DRY_RUN.md`。
 
 下一个最小可验证步骤：运行 unit、graduation QA、typecheck、lint、图片 QA 与 `git diff --check`；通过 PR 合并 migration pack 后立即重复生产冲突预检，仍为 0 才允许 apply。
+
+CASE-033 Yu no Eki Ohyu batch 008 已完成生产迁移、测试基线纠偏、发布和线上验收。Supabase migration `graduation_yu_no_eki_ohyu_batch_008`（`20260712231018`）复用 `kengo-kuma`，写入 1 building / 1 primary image / 1 published profile / 4 assignments；总数更新为 79/933/7282/137，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。第一次 Reviewed release `29213008830` 因渲染 E2E 仍硬编码旧 fallback 标题而在部署前停止；PR #97 将布局测试改为验证实际 H1 与 image alt 一致，同时保留 unified-read 的严格 canonical 断言。第二次 release `29213243381` 在 8m11s 内完整成功。6 个中英日 CASE/building 路由和图片全部 HTTP 200，API 为 101 cases / 79 profiles / 0 missing，并返回 Kengo Kuma 与掬茶 / CC BY-SA 4.0。G6 已迁移 58/118，尚未迁移 60；尚未正式审核队列 37。详见 `GRADUATION_YU_NO_EKI_OHYU_BATCH_008_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 37 条未正式审核记录中选择下一个不需降低身份或图片权利标准的边界清晰小批次，先完成只读调查和生产冲突预检。
 
 CASE-016 ACROS Fukuoka batch 007 已完成生产迁移、发布和线上验收。Supabase migration `graduation_acros_fukuoka_batch_007`（`20260712153752`）写入 1 joint formal-design architect / 1 building / 1 primary image / 1 published profile / 4 assignments；总数更新为 78/932/7281/133，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。四条 assignment evidence 均保留 Emilio Ambasz 的 basic-concept 角色。PR #92 将生产基线更新为 78 并加入 canonical 回归；Reviewed release `29198674126` 在 8m11s 内成功。6 个中英日 CASE/building 路由和图片全部 HTTP 200，API 为 101 cases / 78 profiles / 0 missing，并返回 Nihon Sekkei + Takenaka Corporation 与 Kenta Mabuchi / CC BY-SA 2.0。G6 已迁移 57/118，尚未迁移 61；尚未正式审核队列 38。详见 `GRADUATION_ACROS_FUKUOKA_BATCH_007_PRODUCTION.md`。
 
