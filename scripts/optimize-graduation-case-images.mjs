@@ -12,6 +12,7 @@ const manifestPath = path.join(root, 'content/graduation_image_manifest.json')
 const retryQueuePath = path.join(root, 'content/graduation_image_retry_queue.json')
 const casesPath = path.join(root, 'src/content/graduation/cases.json')
 const applyChanges = process.argv.includes('--apply')
+const forceOptimization = process.argv.includes('--force')
 const useRetryQueue = process.argv.includes('--retry-queue')
 const maxEdge = readNumberArg('--max-edge') ?? 2000
 const quality = readNumberArg('--quality') ?? 82
@@ -39,7 +40,7 @@ for (const item of imageItems) {
     continue
   }
 
-  const optimized = await optimizeJpeg(filePath, maxEdge, quality)
+  const optimized = await optimizeJpeg(filePath, maxEdge, quality, forceOptimization)
   const after = await inspectFile(filePath)
   results.push({
     id: item.id,
@@ -53,6 +54,7 @@ for (const item of imageItems) {
 
 console.log(JSON.stringify({
   mode: applyChanges ? 'apply' : 'dry-run',
+  forceOptimization,
   maxEdge,
   quality,
   source: useRetryQueue ? 'manifest+retry-queue' : 'manifest',
@@ -121,11 +123,11 @@ async function inspectFile(filePath) {
   }
 }
 
-async function optimizeJpeg(filePath, edge, jpegQuality) {
+async function optimizeJpeg(filePath, edge, jpegQuality, force) {
   const source = await fs.readFile(filePath)
   if (!isJpeg(source)) return false
   const current = inspectJpeg(source)
-  if (current && current.maxEdge <= edge && !current.hasMetadata) return false
+  if (!force && current && current.maxEdge <= edge && !current.hasMetadata) return false
 
   const tmpPath = path.join(os.tmpdir(), `archistory-graduation-${Date.now()}-${path.basename(filePath)}`)
   await execFile('sips', [

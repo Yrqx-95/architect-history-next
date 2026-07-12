@@ -4,9 +4,43 @@ import path from 'node:path'
 
 import { fetchAll, ROOT } from './supabase-script-utils.ts'
 
-const OUTPUT_JSON = path.join(ROOT, 'db/review-packets/graduation-library-batch-002.json')
-const APPLY_SQL = path.join(ROOT, 'db/manual-operations/graduation-library-batch-002-apply.sql')
-const ROLLBACK_SQL = path.join(ROOT, 'db/manual-operations/graduation-library-batch-002-rollback.sql')
+const batchKey = process.env.GRADUATION_REVIEW_BATCH || 'library-002'
+const batchConfigs = {
+  'library-002': {
+    batch_id: 'graduation-library-batch-002',
+    decision_path: 'db/review-decisions/graduation-new-buildings-library-002.json',
+    output_path: 'db/review-packets/graduation-library-batch-002.json',
+    apply_path: 'db/manual-operations/graduation-library-batch-002-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-library-batch-002-rollback.sql',
+    expected_decisions: 14,
+    expected_excluded: ['CASE-079'],
+    primary_function: 'library',
+    interior_case_ids: ['CASE-095', 'CASE-130'],
+    sql_title: 'Graduation library batch 002',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs',
+    required_functions_note: 'library, community-center, museum and mixed-use functions remain active',
+  },
+  'museum-001': {
+    batch_id: 'graduation-museum-batch-001',
+    decision_path: 'db/review-decisions/graduation-new-buildings-museum-001.json',
+    output_path: 'db/review-packets/graduation-museum-batch-001.json',
+    apply_path: 'db/manual-operations/graduation-museum-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-museum-batch-001-rollback.sql',
+    expected_decisions: 14,
+    expected_excluded: [],
+    primary_function: 'museum',
+    interior_case_ids: ['CASE-118'],
+    sql_title: 'Graduation museum batch 001',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=museum-001)',
+    required_functions_note: 'museum, library and mixed-use functions remain active',
+  },
+}
+const batchConfig = batchConfigs[batchKey]
+if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
+
+const OUTPUT_JSON = path.join(ROOT, batchConfig.output_path)
+const APPLY_SQL = path.join(ROOT, batchConfig.apply_path)
+const ROLLBACK_SQL = path.join(ROOT, batchConfig.rollback_path)
 const UUID_NAMESPACE = 'b5f08bf3-2cd7-5f6b-8b53-630d3e630c9e'
 
 function readJson(relativePath) {
@@ -88,11 +122,38 @@ const architectDrafts = {
   mecanoo: {
     name_zh: 'Mecanoo', name_en: 'Mecanoo', name_ja: 'メカノー', official_url: 'https://www.mecanoo.nl/',
   },
+  'hiroshi-sambuichi': {
+    name_zh: '三分一博志', name_en: 'Hiroshi Sambuichi', name_ja: '三分一博志', official_url: 'https://benesse-artsite.jp/en/art/seirensho.html',
+  },
+  'ryue-nishizawa': {
+    name_zh: '西泽立卫', name_en: 'Ryue Nishizawa', name_ja: '西沢立衛', official_url: 'https://towadaartcenter.com/en/about/',
+  },
+  'nikken-sekkei': {
+    name_zh: '日建设计', name_en: 'Nikken Sekkei', name_ja: '日建設計', official_url: 'https://www.nikken.co.jp/en/',
+  },
+  'jun-aoki-tezzo-nishizawa': {
+    name_zh: '青木淳 + 西泽彻夫', name_en: 'Jun Aoki + Tezzo Nishizawa', name_ja: '青木淳 + 西澤徹夫', official_url: 'https://kyotocity-kyocera.museum/en/architecture',
+  },
+  'takenaka-corporation': {
+    name_zh: '竹中工务店', name_en: 'Takenaka Corporation', name_ja: '竹中工務店', official_url: 'https://www.takenaka.co.jp/',
+  },
+  'yasuda-atelier': {
+    name_zh: '安田工作室', name_en: 'Yasuda Atelier', name_ja: '安田アトリエ', official_url: 'https://www.yasudaatelier.com/',
+  },
+  'peter-cook-colin-fournier': {
+    name_zh: 'Peter Cook + Colin Fournier', name_en: 'Peter Cook + Colin Fournier', name_ja: 'ピーター・クック + コリン・フルニエ', official_url: 'https://www.museum-joanneum.at/en/kunsthaus-graz/discover/architecture/thearchitects',
+  },
+  'henning-larsen': {
+    name_zh: 'Henning Larsen 建筑事务所', name_en: 'Henning Larsen', name_ja: 'ヘニング・ラーセン', official_url: 'https://www.henninglarsen.com/',
+  },
+  'heatherwick-studio': {
+    name_zh: 'Heatherwick Studio', name_en: 'Heatherwick Studio', name_ja: 'ヘザウィック・スタジオ', official_url: 'https://heatherwick.com/',
+  },
 }
 
 refuseReviewedOutputOverwrite()
 
-const decisions = readJson('db/review-decisions/graduation-new-buildings-library-002.json')
+const decisions = readJson(batchConfig.decision_path)
 const cases = readJson('src/content/graduation/cases.json')
 const productionArchitects = await fetchAll('architects')
 const productionBuildings = await fetchAll('buildings')
@@ -101,8 +162,12 @@ const casesById = new Map(cases.map(item => [item.id, item]))
 const architectsBySlug = new Map(productionArchitects.map(item => [item.slug, item]))
 
 assert(decisions.write_status.includes('no production insert authorized'), 'Decision file no longer has reviewed-only write status')
-assert(decisions.decisions.length === 14, `Expected 14 decisions, found ${decisions.decisions.length}`)
-assert(decisions.excluded.length === 1 && decisions.excluded[0].case_id === 'CASE-079', 'CASE-079 exclusion is missing')
+assert(decisions.decisions.length === batchConfig.expected_decisions, `Expected ${batchConfig.expected_decisions} decisions, found ${decisions.decisions.length}`)
+assert(
+  decisions.excluded.length === batchConfig.expected_excluded.length
+    && batchConfig.expected_excluded.every(caseId => decisions.excluded.some(item => item.case_id === caseId)),
+  `Excluded CASE set does not match ${batchConfig.expected_excluded.join(', ') || 'the expected empty set'}`,
+)
 
 const architectSlugs = [...new Set(decisions.decisions.map(item => item.canonical_building.architect_slug))]
 const architects = architectSlugs.map(slug => {
@@ -159,7 +224,7 @@ const images = decisions.decisions.map(item => {
     source: 'Wikimedia Commons',
     license: item.image.license,
     source_url: item.image.source_url,
-    img_type: ['CASE-095', 'CASE-130'].includes(item.case_id) ? 'interior' : 'exterior',
+    img_type: batchConfig.interior_case_ids.includes(item.case_id) ? 'interior' : 'exterior',
     is_primary: true,
   }
 })
@@ -197,7 +262,7 @@ const assignments = decisions.decisions.flatMap(item => {
       building_id: building.id,
       building_slug: building.slug,
       function_slug: functionSlug,
-      is_primary: functionSlug === 'library',
+      is_primary: functionSlug === batchConfig.primary_function,
       confidence: '1.000',
       evidence_url: item.canonical_building.official_url,
       evidence_note: item.identity_evidence.join(' '),
@@ -209,18 +274,19 @@ const assignments = decisions.decisions.flatMap(item => {
 assert(new Set(buildings.map(item => item.id)).size === buildings.length, 'Building UUID collision')
 assert(new Set(images.map(item => item.id)).size === images.length, 'Image UUID collision')
 assert(new Set(profiles.map(item => item.case_id)).size === profiles.length, 'Profile CASE collision')
-assert(assignments.length === 36, `Expected 36 assignments, found ${assignments.length}`)
+const expectedAssignmentCount = decisions.decisions.reduce((total, item) => total + item.function_slugs.length, 0)
+assert(assignments.length === expectedAssignmentCount, `Expected ${expectedAssignmentCount} assignments, found ${assignments.length}`)
 assert(new Set(assignments.map(item => `${item.building_id}:${item.function_slug}`)).size === assignments.length, 'Assignment collision')
 
 const pack = {
   schema_version: 1,
-  batch_id: 'graduation-library-batch-002',
+  batch_id: batchConfig.batch_id,
   generated_at: new Date().toISOString(),
   mode: 'reviewed-dry-run-output-no-database-write',
   prerequisites: [
     'graduation unification foundation and batch 001 are applied',
     'all target UUIDs, slugs, CASE IDs and image source URLs are absent',
-    'library, community-center, museum and mixed-use functions remain active',
+    batchConfig.required_functions_note,
     'existing architect UUID/slug pairs still match production',
   ],
   counts: {
@@ -254,8 +320,8 @@ function buildApplySql(pack) {
   const requiredFunctions = [...new Set(pack.assignments.map(item => item.function_slug))]
   const requiredTypes = [...new Set(pack.buildings.map(item => item.type_slug))]
 
-  return `-- Graduation library batch 002: reviewed canonical entities and relations.
--- Generated by scripts/prepare-graduation-library-batch-002.mjs.
+  return `-- ${batchConfig.sql_title}: reviewed canonical entities and relations.
+-- Generated by ${batchConfig.generator_name}.
 -- Scope: ${pack.counts.new_architects} new architects, ${pack.counts.buildings} buildings, ${pack.counts.images} images,
 -- ${pack.counts.profiles} profiles, ${pack.counts.assignments} approved function assignments.
 
@@ -269,7 +335,7 @@ BEGIN
     OR to_regclass('public.architects') IS NULL
     OR to_regclass('public.buildings') IS NULL
     OR to_regclass('public.images') IS NULL THEN
-    RAISE EXCEPTION 'Graduation library batch prerequisites are missing';
+    RAISE EXCEPTION '${batchConfig.sql_title} prerequisites are missing';
   END IF;
 END $$;
 
@@ -306,7 +372,7 @@ BEGIN
     OR (SELECT count(*) FROM image_seed) <> ${pack.counts.images}
     OR (SELECT count(*) FROM profile_seed) <> ${pack.counts.profiles}
     OR (SELECT count(*) FROM assignment_seed) <> ${pack.counts.assignments} THEN
-    RAISE EXCEPTION 'Graduation library batch seed count mismatch';
+    RAISE EXCEPTION '${batchConfig.sql_title} seed count mismatch';
   END IF;
 
   SELECT count(*) INTO existing_architect_matches
@@ -335,7 +401,7 @@ BEGIN
     + (SELECT count(*) FROM public.building_function_assignments target JOIN assignment_seed seed USING (building_id, function_slug))
   INTO conflicts;
   IF conflicts <> 0 THEN
-    RAISE EXCEPTION 'Graduation library batch requires empty target keys; found % conflicts', conflicts;
+    RAISE EXCEPTION '${batchConfig.sql_title} requires empty target keys; found % conflicts', conflicts;
   END IF;
 END $$;
 
@@ -363,7 +429,7 @@ BEGIN
     OR (SELECT count(*) FROM public.building_function_assignments target JOIN assignment_seed seed USING (building_id, function_slug) WHERE target.review_status = 'approved') <> ${pack.counts.assignments}
     OR (SELECT count(*) FROM public.images target JOIN image_seed seed USING (building_id) WHERE target.is_primary) <> ${pack.counts.images}
     OR (SELECT count(*) FROM public.building_function_assignments target JOIN assignment_seed seed USING (building_id, function_slug) WHERE target.is_primary) <> ${pack.counts.buildings} THEN
-    RAISE EXCEPTION 'Graduation library batch post-write verification failed';
+    RAISE EXCEPTION '${batchConfig.sql_title} post-write verification failed';
   END IF;
 END $$;
 
@@ -378,7 +444,7 @@ function buildRollbackSql(pack) {
   const profileValues = pack.profiles.map(item => `  (${sqlText(item.case_id)}, ${sqlText(item.building_id)}::uuid)`).join(',\n')
   const assignmentValues = pack.assignments.map(item => `  (${sqlText(item.building_id)}::uuid, ${sqlText(item.function_slug)})`).join(',\n')
 
-  return `-- Rollback graduation library batch 002 only.
+  return `-- Rollback ${batchConfig.sql_title.toLowerCase()} only.
 -- Refuses to run if reviewed rows drifted or acquired external relations.
 
 BEGIN;
@@ -424,7 +490,7 @@ BEGIN
     + (SELECT count(*) FROM public.buildings target JOIN architect_rollback seed ON target.architect_id = seed.id LEFT JOIN building_rollback expected ON target.id = expected.id WHERE expected.id IS NULL)
   INTO external_relations;
   IF external_relations <> 0 THEN
-    RAISE EXCEPTION 'Rollback refused: found % external relations added after batch 002', external_relations;
+    RAISE EXCEPTION 'Rollback refused: found % external relations added after ${batchConfig.batch_id}', external_relations;
   END IF;
 END $$;
 

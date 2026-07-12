@@ -4,17 +4,44 @@ import path from 'node:path'
 import { PGlite } from '@electric-sql/pglite'
 
 const ROOT = process.cwd()
+const verifyKey = process.env.GRADUATION_VERIFY_BATCH || 'library-002'
+const verifyConfigs = {
+  'library-002': {
+    pack_path: 'db/review-packets/graduation-library-batch-002.json',
+    prior_pack_paths: ['db/review-packets/graduation-library-batch-001.json'],
+    prior_seed_paths: ['db/manual-operations/graduation-library-batch-001-apply.sql'],
+    apply_path: 'db/manual-operations/graduation-library-batch-002-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-library-batch-002-rollback.sql',
+    label: 'Graduation library batch 002',
+  },
+  'museum-001': {
+    pack_path: 'db/review-packets/graduation-museum-batch-001.json',
+    prior_pack_paths: [
+      'db/review-packets/graduation-library-batch-001.json',
+      'db/review-packets/graduation-library-batch-002.json',
+    ],
+    prior_seed_paths: [
+      'db/manual-operations/graduation-library-batch-001-apply.sql',
+      'db/manual-operations/graduation-library-batch-002-apply.sql',
+    ],
+    apply_path: 'db/manual-operations/graduation-museum-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-museum-batch-001-rollback.sql',
+    label: 'Graduation museum batch 001',
+  },
+}
+const verifyConfig = verifyConfigs[verifyKey]
+if (!verifyConfig) throw new Error(`Unknown graduation verify batch: ${verifyKey}`)
+
 const basePack = readJson('db/review-packets/graduation-unification-batch-001.json')
-const priorPack = readJson('db/review-packets/graduation-library-batch-001.json')
-const pack = readJson('db/review-packets/graduation-library-batch-002.json')
+const priorPacks = verifyConfig.prior_pack_paths.map(readJson)
+const pack = readJson(verifyConfig.pack_path)
 const foundationSql = readText('db/migrations/v23-graduation-building-unification.sql')
 const baseSeedSql = readText('db/manual-operations/graduation-unification-batch-001-apply.sql')
-const priorSeedSql = readText('db/manual-operations/graduation-library-batch-001-apply.sql')
-const applySql = readText('db/manual-operations/graduation-library-batch-002-apply.sql')
-const rollbackSql = readText('db/manual-operations/graduation-library-batch-002-rollback.sql')
+const priorSeedSqls = verifyConfig.prior_seed_paths.map(readText)
+const applySql = readText(verifyConfig.apply_path)
+const rollbackSql = readText(verifyConfig.rollback_path)
 
 const db = await PGlite.create()
-let baseBuildingCount = 0
 let priorCounts
 
 try {
@@ -75,7 +102,10 @@ try {
   await db.exec(`INSERT INTO public.building_types (slug) VALUES ${broadTypes.map(slug => `(${sqlText(slug)})`).join(', ')};`)
 
   const existingArchitects = [...new Map(
-    [...priorPack.architects, ...pack.architects]
+    [
+      ...priorPacks.flatMap(item => item.architects),
+      ...pack.architects,
+    ]
       .filter(item => !item.is_new)
       .map(item => [item.id, item]),
   ).values()]
@@ -83,12 +113,11 @@ try {
 
   const baseBuildings = new Map()
   for (const item of [...basePack.profiles, ...basePack.assignments]) baseBuildings.set(item.building_id, item.building_slug)
-  baseBuildingCount = baseBuildings.size
   await db.exec(`INSERT INTO public.buildings (id, slug, name_en, status) VALUES ${[...baseBuildings].map(([id, slug]) => `(${sqlText(id)}::uuid, ${sqlText(slug)}, ${sqlText(slug)}, 'published')`).join(', ')};`)
 
   await db.exec(foundationSql)
   await db.exec(baseSeedSql)
-  await db.exec(priorSeedSql)
+  for (const priorSeedSql of priorSeedSqls) await db.exec(priorSeedSql)
   priorCounts = await readCounts()
   await db.exec(applySql)
   await assertForwardState('first forward')
@@ -112,7 +141,7 @@ try {
   await db.exec(rollbackSql)
   await assertBaseState('second rollback')
 
-  console.log('Graduation library batch 002 isolated PostgreSQL dry-run passed.')
+  console.log(`${verifyConfig.label} isolated PostgreSQL dry-run passed.`)
   console.log(`- PostgreSQL engine: ${await scalar("select current_setting('server_version_num')::integer")}`)
   console.log(`- forward: ${pack.counts.new_architects} new architects, ${pack.counts.buildings} buildings, ${pack.counts.images} images, ${pack.counts.profiles} profiles, ${pack.counts.assignments} assignments`)
   console.log('- rollback refused an injected external curated-image relation')
