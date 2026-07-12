@@ -150,10 +150,10 @@ export function isPublicGraduationCase(item: GraduationCase | undefined): item i
     item &&
     item.status === 'published' &&
     item.image_url &&
-    item.image_url !== '/images/graduation/case-placeholder.svg' &&
-    item.image_source_url &&
-    item.image_license &&
-    item.image_credit
+    (
+      item.image_url === '/images/graduation/case-placeholder.svg' ||
+      (item.image_source_url && item.image_license && item.image_credit)
+    )
   )
 }
 
