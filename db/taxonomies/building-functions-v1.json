@@ -112,6 +112,17 @@
         "en": ["transport hub", "transportation hub", "station", "passenger terminal", "cruise terminal"],
         "ja": ["交通拠点", "駅", "旅客ターミナル", "客船ターミナル"]
       }
+    },
+    {
+      "slug": "public-space",
+      "broad_type_slug": "public-space",
+      "names": { "zh": "公共空间", "zh-Hant": "公共空間", "en": "Public Space", "ja": "公共空間" },
+      "aliases": {
+        "zh": ["公共空间", "城市公共空间", "公园", "广场", "滨水步道", "线性公园"],
+        "zh-Hant": ["公共空間", "城市公共空間", "公園", "廣場", "濱水步道", "線性公園"],
+        "en": ["public space", "urban public space", "park", "plaza", "promenade", "waterfront promenade", "linear park"],
+        "ja": ["公共空間", "都市公共空間", "公園", "広場", "水辺遊歩道", "プロムナード", "線形公園"]
+      }
     }
   ]
 }

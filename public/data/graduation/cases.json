@@ -4672,8 +4672,9 @@
     "location_en": "New York United States",
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/High_Line_20th_Street_looking_downtown.jpg",
     "image_source_url": "https://commons.wikimedia.org/wiki/File:High_Line_20th_Street_looking_downtown.jpg",
-    "image_license": "CC BY-SA 3.0",
-    "image_credit": "David Berkowitz / Wikimedia Commons",
+    "image_license": "CC BY-SA 4.0",
+    "image_credit": "Photo: Beyond My Ken / Wikimedia Commons",
+    "image_note": "Image rights review 2026-07-12: MediaWiki API reports own work by Beyond My Ken under CC BY-SA 4.0.",
     "plan_url": "",
     "section_url": "",
     "concept": "废弃高架货运线被转化为线形公园和城市步行体验。",
@@ -4700,9 +4701,9 @@
       "urban renewal",
       "rest"
     ],
-    "source_url": "https://www.thehighline.org/history/",
+    "source_url": "https://www.fieldoperations.net/project/high-line",
     "year": 2009,
-    "architect": "James Corner Field Operations + Diller Scofidio + Renfro",
+    "architect": "Field Operations + Diller Scofidio + Renfro + Piet Oudolf",
     "status": "published"
   },
   {
@@ -4713,10 +4714,11 @@
     "location": "Copenhagen Denmark",
     "location_ja": "コペンハーゲン デンマーク",
     "location_en": "Copenhagen Denmark",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Superkilen_Park%2C_Copenhagen_%2839688100743%29.jpg",
-    "image_source_url": "https://commons.wikimedia.org/wiki/File:Superkilen_Park,_Copenhagen_(39688100743).jpg",
-    "image_license": "CC BY-SA 2.0",
-    "image_credit": "mike / Wikimedia Commons",
+    "image_url": "/images/graduation/cases/case-111-superkilen.jpg",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Superkilen_hill-top_view.jpg",
+    "image_license": "CC BY 2.0",
+    "image_credit": "Photo: Emily / Wikimedia Commons",
+    "image_note": "Image review 2026-07-12: wide Black Square view selected over the previous close-up sign image; Flickr provenance and CC BY 2.0 verified through MediaWiki API.",
     "plan_url": "",
     "section_url": "",
     "concept": "多国籍な都市家具と色面で線形公園をつくり、移民地区の公共空間を可視化した事例。",
@@ -4743,7 +4745,7 @@
       "歩行",
       "公共空間"
     ],
-    "source_url": "https://big.dk/projects/superkilen-151",
+    "source_url": "https://big.dk/projects/superkilen-1621",
     "year": 2012,
     "architect": "BIG + Topotek1 + Superflex",
     "status": "published"

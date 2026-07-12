@@ -166,6 +166,10 @@ Urban public-space batch 001 已完成 CASE-014/050/056/110/111 的只读审核�
 
 下一个最小可验证步骤：同步 CASE-110 元数据和 CASE-111 本地图；建立 `public-space` taxonomy 的 alias 冲突预检、guarded migration/rollback 与隔离 PostgreSQL dry-run。
 
+Public-space taxonomy 001 与图片准备已完成。词表新增 `public-space` / `public-space` broad type 及四语 26 aliases；生产只读预检为 0 function conflict、0 alias conflict、0 assignment，目标 broad type 1 条。CASE-110 已修正为 Beyond My Ken / CC BY-SA 4.0；CASE-111 已替换为 Emily / CC BY 2.0 的 Black Square 全景并优化为 2000×1333 / 730822 bytes。Graduation QA 为 0 problem。隔离 PostgreSQL 18.3 的 forward、依赖 assignment rollback guard、精确 rollback 与第二次 replay 全部通过。Supabase migration 文件由 CLI 生成，尚未应用生产。详见 `GRADUATION_PUBLIC_SPACE_TAXONOMY_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 taxonomy、图片与 migration；生产冲突复查为 0 后应用 taxonomy，核验 11 functions / 165 aliases、RLS/policy、advisors，并运行 Reviewed release。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
