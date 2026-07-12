@@ -104,6 +104,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=public-toilet-001)',
     required_functions_note: 'public-toilet and public-space functions remain active',
   },
+  'shimokitazawa-retail-001': {
+    batch_id: 'graduation-shimokitazawa-retail-batch-001',
+    decision_path: 'db/review-decisions/graduation-new-buildings-shimokitazawa-retail-001.json',
+    output_path: 'db/review-packets/graduation-shimokitazawa-retail-batch-001.json',
+    apply_path: 'db/manual-operations/graduation-shimokitazawa-retail-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-shimokitazawa-retail-batch-001-rollback.sql',
+    expected_decisions: 2,
+    expected_excluded: [],
+    primary_function: 'retail',
+    interior_case_ids: [],
+    sql_title: 'Graduation Shimokitazawa retail batch 001',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=shimokitazawa-retail-001)',
+    required_functions_note: 'retail, mixed-use and public-space functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -255,6 +269,18 @@ const architectDrafts = {
     name_ja: 'BIG＋Topotek 1＋Superflex',
     official_url: 'https://big.dk/projects/superkilen-1621',
   },
+  'tsubame-architects': {
+    name_zh: 'TSUBAME ARCHITECTS',
+    name_en: 'TSUBAME ARCHITECTS',
+    name_ja: 'ツバメアーキテクツ',
+    official_url: 'https://tbma.jp/en/',
+  },
+  'taiju-yamashita-design-and-architecture': {
+    name_zh: '山下泰树设计建筑事务所',
+    name_en: 'Taiju Yamashita Design and Architecture',
+    name_ja: '山下泰樹建築デザイン事務所',
+    official_url: 'https://tjda.com/en/',
+  },
 }
 
 refuseReviewedOutputOverwrite()
@@ -339,7 +365,7 @@ const images = createDecisions.map(item => {
     case_id: item.case_id,
     url_original: source.image_url,
     photographer: item.image.credit.replace(/\s*\/ Wikimedia Commons$/, '').replace(/^Photo:\s*/, ''),
-    source: 'Wikimedia Commons',
+    source: item.image.source_url.includes('commons.wikimedia.org') ? 'Wikimedia Commons' : 'MDPI',
     license: item.image.license,
     source_url: item.image.source_url,
     img_type: batchConfig.interior_case_ids.includes(item.case_id) ? 'interior' : 'exterior',

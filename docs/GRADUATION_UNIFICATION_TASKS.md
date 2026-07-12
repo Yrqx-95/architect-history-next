@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：生成并隔离验证 CASE-038/039 建筑 migration pack；确认 2 buildings / 2 primary images / 2 profiles 与 5 assignments，guarded rollback 和生产冲突预检通过后再走 PR。
+当前下一步：通过 PR 合并 CASE-038/039 migration pack；合并后重复生产冲突预检，仍为 0 才写入 2 buildings / 2 images / 2 profiles / 5 assignments。
 
 ## 最终目标
 
@@ -208,7 +208,9 @@ Shimokitazawa retail / mixed-use batch 001 已完成 CASE-038/039 的只读审�
 
 Retail taxonomy 001 与 CASE-038 高清图片已完成生产迁移、发布和线上验收。PR #63 合并版本化 taxonomy 与图片；Supabase migration `building_function_retail_001`（`20260712102033`）将 12/189 更新为 13 functions / 209 aliases，`retail` 四语各 5 个 alias、0 assignments。RLS/policy/anon SELECT 正常，advisors 无新增。Reviewed release `29188986536` 成功；CASE-038/039 中英日路由、CASE-038 2000×1340 图片均 HTTP 200，线上图片 SHA-256 与仓库一致。API 为 101 cases / 70 profiles / 0 missing relation。详见 `GRADUATION_RETAIL_TAXONOMY_001_PRODUCTION.md`。
 
-下一个最小可验证步骤：生成 CASE-038/039 migration pack，隔离验证 2 buildings、2 primary images、2 profiles、5 assignments 和 guarded rollback；本阶段不直接写生产。
+CASE-038/039 migration pack 已生成：2 new architects / 2 buildings / 2 primary images / 2 profiles / 5 assignments。两条 CASE 保留不同 concept/keywords；两栋 building broad type 为 `commercial`，`retail` 为各自 primary function。生成器修正了非 Commons 图片 repository 被统一误标的问题，CASE-038 明确为 MDPI。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产只读预检为五类 conflict 全部 0、required functions 3/3、type 1/1；基线 70/924/7273/113，预期写后 72/926/7275/118。尚未生产写入。详见 `GRADUATION_SHIMOKITAZAWA_RETAIL_BATCH_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复生产冲突预检，仍为 0 才执行生产 migration 与完整写后验收。
 
 ### G7 — 统一搜索与筛选
 
