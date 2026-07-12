@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 76-profile E2E 基线与 CASE-040 canonical 回归断言；随后运行最终 Reviewed release 与真实路由验收。
+当前下一步：继续审核剩余 40 条 G6 队列，优先建筑本体边界清晰、图片对象准确且权利完整的案例。
 
 ## 最终目标
 
@@ -244,7 +244,9 @@ CASE-040 migration pack 已生成：1 new joint architect / 1 building / 1 prima
 
 CASE-040 生产 migration 已成功执行，实际 version `20260712124927`。总数精确更新为 76 profiles / 930 buildings / 7279 images / 127 assignments；目标 1 architect / 1 building / 1 image / 1 profile / 3 assignments 全部匹配，orphan、primary image/function 异常均为 0，RLS 正常，advisors 保持既有 13 security / 27 performance。尚未运行数据库写后的最终 Reviewed release。
 
-下一个最小可验证步骤：合并 76-profile E2E 基线和 CASE-040 canonical 名称、联合建筑师、年份、许可与署名断言；随后运行 Reviewed release 与三语 CASE/building、图片和 API 验收。
+MIYASHITA PARK batch 005 已完成生产迁移、双阶段发布和线上验收。Supabase migration `graduation_miyashita_park_batch_005`（`20260712124927`）写入 1 joint architect / 1 building / 1 primary image / 1 profile / 3 assignments；总数更新为 76/930/7279/127，关系异常为 0。静态 release `29192872574` 与最终 release `29193418710` 均成功；3 CASE、3 building 与图片全部 HTTP 200，API 为 101 cases / 76 profiles / 0 missing，并返回准确联合建筑师与 Nesnad / CC BY 4.0 署名。G6 已迁移 55/118，尚未迁移 63；尚未正式审核队列 40。详见 `GRADUATION_MIYASHITA_PARK_BATCH_005_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 40 条中选择建筑本体边界清晰、图片对象准确且摄影者/来源/开放许可完整的小批次，先做只读审核。
 
 ### G7 — 统一搜索与筛选
 
