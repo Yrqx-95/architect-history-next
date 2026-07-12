@@ -14,6 +14,7 @@ const delayMs = readNumberArg('--delay-ms') ?? 0
 const retryCount = readNumberArg('--retry') ?? 0
 const selectedIds = readListArg('--ids')
 const stopOnRateLimit = !process.argv.includes('--continue-on-429')
+const forceDownload = process.argv.includes('--force')
 
 const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'))
 const csv = await fs.readFile(csvPath, 'utf8')
@@ -44,7 +45,7 @@ for (const item of manifest) {
   const currentImageUrl = row[imageUrlIndex]
   const existing = await inspectExisting(localFilePath)
 
-  if (existing.ok) {
+  if (existing.ok && !forceDownload) {
     row[imageUrlIndex] = item.localPath
     results.push({ id: item.id, status: currentImageUrl === item.localPath ? 'already-local' : 'linked-existing', localPath: item.localPath, bytes: existing.bytes })
     continue
@@ -90,6 +91,7 @@ console.log(JSON.stringify({
   delayMs,
   retryCount,
   selectedIds: selectedIds ? Array.from(selectedIds) : null,
+  forceDownload,
   stoppedByRateLimit,
   downloaded: results.filter(item => item.status === 'downloaded').length,
   linkedExisting: results.filter(item => item.status === 'linked-existing').length,

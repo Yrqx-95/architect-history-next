@@ -101,6 +101,17 @@
         "en": ["mixed use", "mixed-use", "multi-use complex", "multipurpose complex"],
         "ja": ["複合用途", "複合施設", "ミクストユース"]
       }
+    },
+    {
+      "slug": "transport-hub",
+      "broad_type_slug": "transportation",
+      "names": { "zh": "交通枢纽", "zh-Hant": "交通樞紐", "en": "Transport Hub", "ja": "交通拠点" },
+      "aliases": {
+        "zh": ["交通枢纽", "车站", "客运站", "客运码头"],
+        "zh-Hant": ["交通樞紐", "車站", "客運站", "客運碼頭"],
+        "en": ["transport hub", "transportation hub", "station", "passenger terminal", "cruise terminal"],
+        "ja": ["交通拠点", "駅", "旅客ターミナル", "客船ターミナル"]
+      }
     }
   ]
 }
