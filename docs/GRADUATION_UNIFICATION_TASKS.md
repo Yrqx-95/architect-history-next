@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：本地化并验证 CASE-040 的 Nesnad / CC BY 4.0 替代图，同步权威公开数据后再生成 migration。
+当前下一步：为 CASE-040 生成 guarded migration pack，运行隔离 PostgreSQL dry-run 与生产只读预检。
 
 ## 最终目标
 
@@ -238,7 +238,9 @@ KOIL interior batch 004 已完成 CASE-035 的只读审核。Naruse Inokuma 官�
 
 MIYASHITA PARK batch 005 已完成 CASE-040 的只读审核。Nikken 官方页确认 2020 年涩谷 PPP 重建项目包含公园、停车、四层零售和十八层酒店；Takenaka 为 lead architect，Nikken 为 project architect，必须使用联合实体保留两者。现图虽为 Syced / CC0，但人工确认主体是 Tower Records 和铁路，不是项目本体。新候选 `Miyashita Park 2025 May 26 various 01.jpg` 为 Nesnad 自有作品、4032×3024、CC BY 4.0，人工确认准确展示复合体、屋顶绿化与项目标识。生产 target building/profile conflict 0，functions 3/3、type 1/1。本批批准在图片替换后进入 migration；G6 已迁移仍为 54/118，尚未正式审核队列从 41 减至 40。详见 `GRADUATION_NEW_BUILDING_MIYASHITA_PARK_005_TRIAGE.md`。
 
-下一个最小可验证步骤：将 Nesnad 原图优化并本地化为 CASE-040 cover，更新摄影者、许可、来源和审核说明，运行图片人工复核与完整 QA 后再生成 guarded migration。
+CASE-040 替代图已完成本地化。Nesnad 原图优化为 2000×1500 网站 JPEG，SHA-256 `164a7731ca18c6ac26ed5519873ce9bbc0c1bbc4cd84bf427906a1373483baf2`；最终文件已人工复核，权威 CSV、公开 CSV/JSON、源 JSON 与 image manifest 已同步 `Photo: Nesnad / Wikimedia Commons`、CC BY 4.0 和准确 Commons 来源。兼容 architect 同步为 `Takenaka Corporation + Nikken Sekkei`。尚未生成或写入数据库 migration。
+
+下一个最小可验证步骤：生成 CASE-040 migration pack，验证联合 architect、mixed-use building、primary image、profile 与 3 条用途 assignments 的 guarded forward/rollback。
 
 ### G7 — 统一搜索与筛选
 

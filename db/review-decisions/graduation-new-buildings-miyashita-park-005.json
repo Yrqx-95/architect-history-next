@@ -57,13 +57,17 @@
         "reason": "The image centers Tower Records and railway infrastructure; it is a view from Miyashita Park rather than a useful image of the project."
       },
       "image": {
-        "status": "approved_replacement_pending_localization",
+        "status": "approved_existing_local_asset",
+        "local_path": "/images/graduation/cases/case-040-miyashita-park.jpg",
         "source_url": "https://commons.wikimedia.org/wiki/File:Miyashita_Park_2025_May_26_various_01.jpg",
         "download_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Miyashita_Park_2025_May_26_various_01.jpg",
         "license": "CC BY 4.0",
         "credit": "Photo: Nesnad / Wikimedia Commons",
         "width": 4032,
         "height": 3024,
+        "local_width": 2000,
+        "local_height": 1500,
+        "local_sha256": "164a7731ca18c6ac26ed5519873ce9bbc0c1bbc4cd84bf427906a1373483baf2",
         "visual_evidence": "The image clearly shows the elevated MIYASHITA PARK complex, circulation structure, rooftop planting and project name.",
         "rights_evidence": "Commons identifies Nesnad as creator of the own-work photograph and licenses it under CC BY 4.0."
       },
