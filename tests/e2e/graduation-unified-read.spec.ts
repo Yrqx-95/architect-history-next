@@ -8,8 +8,8 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(101)
-    expect(payload.diagnostics.profileCount).toBe(70)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(70)
+    expect(payload.diagnostics.profileCount).toBe(72)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(72)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
       'CASE-018',
       'CASE-021',
@@ -60,12 +60,14 @@ test.describe('graduation Supabase + JSON dual read', () => {
       'CASE-110',
       'CASE-111',
       'CASE-044',
+      'CASE-038',
+      'CASE-039',
     ]))
     expect(payload.diagnostics.unifiedCaseIds).not.toContain('CASE-079')
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(70)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(72)
 
     const libraryCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-018')
     expect(libraryCase).toMatchObject({
@@ -102,6 +104,24 @@ test.describe('graduation Supabase + JSON dual read', () => {
       year: 2021,
       image_license: 'CC BY-SA 4.0',
       image_credit: 'Photo: 鋸香具師 / Wikimedia Commons',
+    })
+
+    const bonusTrackCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-038')
+    expect(bonusTrackCase).toMatchObject({
+      name: '下北泽 BONUS TRACK',
+      architect: 'TSUBAME ARCHITECTS',
+      year: 2020,
+      image_license: 'CC BY 4.0',
+      image_credit: 'Photo: morinakayasuaki / Figure 3 in Hiroki Nakajima, Sustainability 17(17), MDPI',
+    })
+
+    const mikanCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-039')
+    expect(mikanCase).toMatchObject({
+      name: '下北泽 MIKAN SHIMOKITA',
+      architect: 'Taiju Yamashita Design and Architecture',
+      year: 2022,
+      image_license: 'CC0',
+      image_credit: 'Photo: Souka Kinmei / Wikimedia Commons',
     })
   })
 
