@@ -41,6 +41,7 @@
     "graduation:queue-museum-001": "node scripts/build-graduation-new-building-museum-queue.mjs",
     "graduation:queue-museum-002": "node scripts/build-graduation-new-building-museum-queue-002.mjs",
     "graduation:queue-theatre-001": "node scripts/build-graduation-new-building-theatre-queue-001.mjs",
+    "graduation:queue-community-civic-001": "node scripts/build-graduation-new-building-community-civic-queue-001.mjs",
     "graduation:validate-schema": "node scripts/validate-graduation-unification-schema.mjs",
     "graduation:function-candidates": "tsx --env-file=.env.local scripts/build-building-function-candidates.mjs",
     "graduation:prepare-unification": "tsx --env-file=.env.local scripts/prepare-graduation-unification-batch-001.mjs",

@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 new-building community/civic batch 001",
+  "source_queue": "db/review-packets/graduation-new-building-community-civic-001.json",
+  "write_status": "reviewed-only; no production insert authorized until guarded migration and rollback pass dry-run",
+  "review_method": [
+    "Confirmed project identity, year, place, architect responsibility and community/civic function against current municipality, institution or architect sources.",
+    "Opened the only migration-ready local image and compared the visible center building and plaza with institution and preservation records.",
+    "Verified the CASE-096 Commons file dimensions, author and CC BY-SA 4.0 license through the MediaWiki API.",
+    "Queried Commons and Openverse for exact reusable images and kept lookup failures separate from empty exact results.",
+    "Rejected the CASE-019 Kokubunji City Hall image because it depicts a different municipal building rather than Cocobunji Plaza.",
+    "Queried production for canonical building, profile, architect and taxonomy conflicts before preparing this decision set."
+  ],
+  "summary": {
+    "reviewed": 6,
+    "identity_approved": 6,
+    "migration_approved": 1,
+    "image_approved": 1,
+    "wrong_image_rejected": 1,
+    "no_safe_image_yet": 5,
+    "metadata_corrections_required": 2
+  },
+  "excluded": [
+    {
+      "case_id": "CASE-019",
+      "decision": "no_safe_image_yet",
+      "reason": "Cocobunji Plaza opened in 2018 and is a civic cultural/activity facility inside cocobunji WEST, but the current CC BY-SA 3.0 image is the former Kokubunji City Hall photographed in 2005. Exact Commons and Openverse searches found no reusable Cocobunji Plaza image.",
+      "required_correction": "Set the project year to 2018 when an exact reusable image becomes available; do not reuse the current city-hall image.",
+      "evidence_urls": [
+        "https://www.city.kokubunji.tokyo.jp/shisetsu/shikanren/hall/1017572.html",
+        "https://www.city.kokubunji.tokyo.jp/_res/projects/default_project/_page_/001/017/792/30syuyoutorikumi.pdf",
+        "https://commons.wikimedia.org/wiki/File:Kokubunji_City_Hall.jpg"
+      ]
+    },
+    {
+      "case_id": "CASE-064",
+      "decision": "no_safe_image_yet",
+      "reason": "KKAA confirms the completed 2000 Takayanagi Community Center in Niigata and its civic/community identity. Commons and Openverse returned no exact reusable image; the official project photographs are credited to Mitsumasa Fujitsuka without an open reuse license.",
+      "evidence_urls": [
+        "https://kkaa.co.jp/en/project/takayanagi-community-center/"
+      ]
+    },
+    {
+      "case_id": "CASE-067",
+      "decision": "no_safe_image_yet",
+      "reason": "KKAA confirms the completed January 2024 Sendagaya Community Center and Harajuku Kindergarten complex and explicitly classifies it as Community and Civic. Commons and Openverse returned no exact reusable image; official photography is credited to Kawasumi-Kobayashi Kenji Photograph Office without an open reuse license.",
+      "evidence_urls": [
+        "https://kkaa.co.jp/en/project/shibuya-scc-sendagaya-community-centerharajyuku-kindergarden/"
+      ]
+    },
+    {
+      "case_id": "CASE-069",
+      "decision": "no_safe_image_yet",
+      "reason": "KKAA confirms the completed May 2009 Museum of Kanayama Castle Ruin and Kanayama Community Center in Gunma. The current 2012 year is incorrect. Commons and Openverse returned no exact reusable image; official photography is credited to Takeshi Yamagishi without an open reuse license.",
+      "required_correction": "Correct year from 2012 to 2009 when the case becomes migration-ready.",
+      "evidence_urls": [
+        "https://kkaa.co.jp/en/project/museum-of-kanayama-castle-ruin-kanayama-community-center/"
+      ]
+    },
+    {
+      "case_id": "CASE-088",
+      "decision": "no_safe_image_yet",
+      "reason": "Towada City and KKAA confirm the completed October 2014 civic community plaza designed by Kengo Kuma. The only Commons English-title hit was an unrelated highway interchange and Openverse returned no exact result; official photography is credited to Kenta Hasegawa without an open reuse license.",
+      "evidence_urls": [
+        "https://www.city.towada.lg.jp/shisei/shisetsu/toware.html",
+        "https://kkaa.co.jp/en/project/towada-city-plaza/"
+      ]
+    }
+  ],
+  "new_architects": [
+    {
+      "slug": "kazumi-adachi-kiyoshi-sawano-hideo-matsunaga-isamu-noguchi",
+      "name_zh": "Kazumi Adachi + Kiyoshi Sawano + Hideo Matsunaga + Isamu Noguchi",
+      "name_en": "Kazumi Adachi + Kiyoshi Sawano + Hideo Matsunaga + Isamu Noguchi",
+      "name_ja": "カズミ・アダチ + キヨシ・サワノ + ヒデオ・マツナガ + イサム・ノグチ",
+      "official_url": "https://jaccc.org/about/"
+    }
+  ],
+  "decisions": [
+    {
+      "case_id": "CASE-096",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "japanese-american-cultural-community-center",
+        "name_zh": "日美文化与社区中心",
+        "name_en": "Japanese American Cultural & Community Center",
+        "name_ja": "日米文化会館",
+        "year_start": 1983,
+        "city": "洛杉矶",
+        "country": "美国",
+        "country_code": "US",
+        "type_slug": "cultural",
+        "architect_slug": "kazumi-adachi-kiyoshi-sawano-hideo-matsunaga-isamu-noguchi",
+        "official_url": "https://jaccc.org/about/"
+      },
+      "function_slugs": ["community-center", "theatre", "mixed-use"],
+      "identity_evidence": [
+        "JACCC identifies its Little Tokyo campus as a permanent arts-and-culture community center and confirms Isamu Noguchi's outdoor plaza.",
+        "JACCC records the Aratani Theatre as an 880-seat performing-arts venue opened in 1983.",
+        "LA Conservancy records the 1978–1983 complex, the Center Building by Kazumi Adachi, Kiyoshi Sawano and Hideo Matsunaga, and the adjacent plaza by Isamu Noguchi."
+      ],
+      "evidence_urls": [
+        "https://jaccc.org/about/",
+        "https://jaccc.org/spaces/isamu-noguchi-plaza/",
+        "https://jaccc.org/spaces/aratani-theatre/",
+        "https://www.laconservancy.org/learn/historic-places/japanese-american-community-and-cultural-center/"
+      ],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Japanese_American_Cultural_and_Community_Center_%26_Frances_Hashimoto_Plaza.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Another Believer / Wikimedia Commons",
+        "visual_evidence": "The 2022 photograph clearly shows the five-story concrete JACCC Center Building, the brick Frances Hashimoto Plaza and Noguchi's basalt sculpture, matching the institution and LA Conservancy descriptions."
+      }
+    }
+  ]
+}
