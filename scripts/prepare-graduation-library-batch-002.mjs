@@ -90,6 +90,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=public-space-001)',
     required_functions_note: 'public-space and mixed-use functions remain active',
   },
+  'public-toilet-001': {
+    batch_id: 'graduation-public-toilet-batch-001',
+    decision_path: 'db/review-decisions/graduation-new-buildings-public-toilet-001.json',
+    output_path: 'db/review-packets/graduation-public-toilet-batch-001.json',
+    apply_path: 'db/manual-operations/graduation-public-toilet-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-public-toilet-batch-001-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: ['CASE-031', 'CASE-049'],
+    primary_function: 'public-toilet',
+    interior_case_ids: [],
+    sql_title: 'Graduation public toilet batch 001',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=public-toilet-001)',
+    required_functions_note: 'public-toilet and public-space functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)

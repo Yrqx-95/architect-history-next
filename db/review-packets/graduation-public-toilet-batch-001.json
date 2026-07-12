@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-public-toilet-batch-001",
+  "generated_at": "2026-07-12T09:41:39.199Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "public-toilet and public-space functions remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 1,
+    "new_architects": 0,
+    "buildings": 1,
+    "images": 1,
+    "profiles": 1,
+    "assignments": 2
+  },
+  "architects": [
+    {
+      "id": "51797239-be38-4dbd-9d7e-e413ddf3c78a",
+      "slug": "kengo-kuma",
+      "name_zh": "隈研吾",
+      "name_en": "Kengo Kuma",
+      "name_ja": "隈研吾",
+      "official_url": null,
+      "is_new": false
+    }
+  ],
+  "buildings": [
+    {
+      "id": "3e94d879-84d3-5cb7-934f-fa08bf50e0d7",
+      "case_id": "CASE-044",
+      "slug": "nabeshima-shoto-park-toilet",
+      "name_zh": "锅岛松涛公园厕所",
+      "name_en": "Nabeshima Shoto Park Toilet",
+      "name_ja": "鍋島松濤公園トイレ",
+      "year_start": 2021,
+      "city": "东京",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "civic-public",
+      "architect_slug": "kengo-kuma",
+      "official_url": "https://tokyotoilet.jp/en/nabesima_park/",
+      "architect_id": "51797239-be38-4dbd-9d7e-e413ddf3c78a",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "3dcb24c5-bdad-53d3-830d-6dfe615d06eb",
+      "building_id": "3e94d879-84d3-5cb7-934f-fa08bf50e0d7",
+      "building_slug": "nabeshima-shoto-park-toilet",
+      "case_id": "CASE-044",
+      "url_original": "/images/graduation/cases/case-044-nabeshima-shoto-park-toilet.jpg",
+      "photographer": "鋸香具師",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Shoto_park_2302.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-044",
+      "building_id": "3e94d879-84d3-5cb7-934f-fa08bf50e0d7",
+      "building_slug": "nabeshima-shoto-park-toilet",
+      "concept_zh": "五个小木屋式公共厕所散落在公园中，以步道和木百叶改善厕所的安全感和亲近感。",
+      "concept_zh_hant": null,
+      "concept_en": "Nabeshima Shoto Park Toilet is a reference case for reading public toilet, park, Design topic: 木材, safety. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "「Nabeshima Shoto Park Toilet」は、公共トイレ・公園・木材・安全の関係を読み取る参考事例。用途の複合、運営、居場所のつくり方を卒業設計に転用して考えられる。",
+      "keywords_zh": [
+        "公共厕所",
+        "公园",
+        "木材",
+        "安全",
+        "步行"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "public toilet",
+        "park",
+        "Design topic: 木材",
+        "safety",
+        "Design topic: 步行"
+      ],
+      "keywords_ja": [
+        "公共トイレ",
+        "公園",
+        "木材",
+        "安全",
+        "歩行"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://tokyotoilet.jp/en/nabesima_park/",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "3e94d879-84d3-5cb7-934f-fa08bf50e0d7",
+      "building_slug": "nabeshima-shoto-park-toilet",
+      "function_slug": "public-toilet",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://tokyotoilet.jp/en/nabesima_park/",
+      "evidence_note": "THE TOKYO TOILET official facility page identifies Nabeshima Shoto Park, 2-10-7 Shoto, Kengo Kuma and an opening date of June 24, 2021. Kengo Kuma and Associates publishes a dedicated Nabeshima Shoto Park Toilet project page and identifies the exact built facility.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "3e94d879-84d3-5cb7-934f-fa08bf50e0d7",
+      "building_slug": "nabeshima-shoto-park-toilet",
+      "function_slug": "public-space",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://tokyotoilet.jp/en/nabesima_park/",
+      "evidence_note": "THE TOKYO TOILET official facility page identifies Nabeshima Shoto Park, 2-10-7 Shoto, Kengo Kuma and an opening date of June 24, 2021. Kengo Kuma and Associates publishes a dedicated Nabeshima Shoto Park Toilet project page and identifies the exact built facility.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}

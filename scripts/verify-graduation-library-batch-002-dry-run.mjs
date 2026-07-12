@@ -107,11 +107,39 @@ const verifyConfigs = {
     rollback_path: 'db/manual-operations/graduation-public-space-batch-001-rollback.sql',
     label: 'Graduation public space batch 001',
   },
+  'public-toilet-001': {
+    pack_path: 'db/review-packets/graduation-public-toilet-batch-001.json',
+    prior_pack_paths: [
+      'db/review-packets/graduation-library-batch-001.json',
+      'db/review-packets/graduation-library-batch-002.json',
+      'db/review-packets/graduation-museum-batch-001.json',
+      'db/review-packets/graduation-theatre-batch-001.json',
+      'db/review-packets/graduation-community-civic-batch-001.json',
+      'db/review-packets/graduation-transport-batch-001.json',
+      'db/review-packets/graduation-public-space-batch-001.json',
+    ],
+    prior_seed_paths: [
+      'db/manual-operations/graduation-library-batch-001-apply.sql',
+      'db/manual-operations/graduation-library-batch-002-apply.sql',
+      'db/manual-operations/graduation-museum-batch-001-apply.sql',
+      'db/manual-operations/graduation-theatre-batch-001-apply.sql',
+      'db/manual-operations/graduation-community-civic-batch-001-apply.sql',
+      'db/manual-operations/building-function-transport-hub-001-apply.sql',
+      'db/manual-operations/graduation-transport-batch-001-apply.sql',
+      'db/manual-operations/building-function-public-space-001-apply.sql',
+      'db/manual-operations/graduation-public-space-batch-001-apply.sql',
+      'db/manual-operations/building-function-public-toilet-001-apply.sql',
+    ],
+    apply_path: 'db/manual-operations/graduation-public-toilet-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-public-toilet-batch-001-rollback.sql',
+    label: 'Graduation public toilet batch 001',
+  },
 }
 const verifyConfig = verifyConfigs[verifyKey]
 if (!verifyConfig) throw new Error(`Unknown graduation verify batch: ${verifyKey}`)
 
 const basePack = readJson('db/review-packets/graduation-unification-batch-001.json')
+const functionTaxonomy = readJson('db/taxonomies/building-functions-v1.json')
 const priorPacks = verifyConfig.prior_pack_paths.map(readJson)
 const pack = readJson(verifyConfig.pack_path)
 const foundationSql = readText('db/migrations/v23-graduation-building-unification.sql')
@@ -174,11 +202,7 @@ try {
     CREATE TABLE public.architect_influences (architect_id uuid REFERENCES public.architects(id) ON DELETE CASCADE, influenced_id uuid REFERENCES public.architects(id) ON DELETE CASCADE, PRIMARY KEY (architect_id, influenced_id));
   `)
 
-  const broadTypes = [...new Set([
-    ...basePack.functions.map(item => item.broad_type_slug),
-    ...priorPacks.flatMap(item => item.buildings).map(item => item.type_slug),
-    ...pack.buildings.map(item => item.type_slug),
-  ])]
+  const broadTypes = [...new Set(functionTaxonomy.functions.map(item => item.broad_type_slug))]
   await db.exec(`INSERT INTO public.building_types (slug) VALUES ${broadTypes.map(slug => `(${sqlText(slug)})`).join(', ')};`)
 
   const priorNewArchitectIds = new Set(

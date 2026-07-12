@@ -51,7 +51,7 @@ describe('G6 public-toilet batch 001 decisions', () => {
       canonical_building: {
         slug: 'nabeshima-shoto-park-toilet',
         architect_slug: 'kengo-kuma',
-        type_slug: 'public-toilet',
+        type_slug: 'civic-public',
       },
       function_slugs: ['public-toilet', 'public-space'],
       image: {
