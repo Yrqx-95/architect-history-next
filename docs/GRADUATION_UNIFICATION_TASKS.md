@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：合并 `G6` community/civic batch 001 的 CASE-096 guarded migration pack；合并后执行生产冲突复查、应用版本化 Supabase migration、同步 61→62 生产读取基线并执行 Reviewed production release。CASE-019/048/064/067/069/079/088/091 保持 `no_safe_image_yet`。
+当前下一步：继续 `G6`，建立 social-care / community-support batch 001 只读队列，优先核验 CASE-001、011、024、026、065、086、087、097 的真实建筑身份、照护/社区用途、官方来源和图片许可。未完成逐图与版权审核前不生成迁移；CASE-019/048/064/067/069/079/088/091 保持 `no_safe_image_yet`。
 
 ## 最终目标
 
@@ -139,6 +139,8 @@ Theatre batch 001 已完成审核、双阶段发布、生产迁移和线上验�
 Community/civic batch 001 已完成 6 条只读候选与正式审核。CASE-096 的机构、LA Conservancy 和 Commons 证据一致：1983 年 JACCC 中心建筑、Noguchi 广场与剧场身份明确，现图人工确认展示正确建筑和广场，Another Believer / CC BY-SA 4.0 元数据已通过 MediaWiki API 复核，因此批准进入 migration 准备。CASE-019 的现图是 2005 年旧国分寺市役所而非 2018 年 Cocobunji Plaza，明确拒绝；CASE-064/067/069/088 的官方图均有摄影者版权且无开放替代图，保持 `no_safe_image_yet`。另确认 CASE-069 应由 2012 修正为 2009。生产只读查重为 0 building / profile / architect conflict，所需 3 个 function 与 cultural type 均存在。本阶段不授权写入。详见 `GRADUATION_NEW_BUILDING_COMMUNITY_CIVIC_001_TRIAGE.md`。
 
 CASE-096 migration pack 与全历史 dry-run 已完成。生成包包含 1 个新联合 architect、1 building、1 primary image、1 published profile 与 3 assignments；隔离 PostgreSQL 18.3 重放 foundation、首批统一、library 001/002、museum 001、theatre 001 后，两次 forward、外部关系 rollback guard 与两次精确 rollback 全部通过。加入新批次时发现并修复验证器的建筑师历史状态提前预置问题，library 002、museum 001 与 theatre 001 旧演练同时回归通过。生产尚未写入。详见 `GRADUATION_COMMUNITY_CIVIC_BATCH_001_DRY_RUN.md`。
+
+Community/civic batch 001 已完成生产迁移与发布。Supabase migration `graduation_community_civic_batch_001`（`20260712023102`）写入 1 个新联合 architect、CASE-096 building、1 primary image、1 published profile 和 3 approved assignments；写后 profile 总数为 62，本批计数符合预期，三类真实 orphan 均为 0。PR #36 将生产基线从 61 更新为 62；Reviewed production release `29176957382` 的质量门、完整测试、Cloudflare deploy 和路由语义检查全部通过。线上 API 为 101 个公开案例、62 unified profiles、0 missing relation；CASE-096 页面、主体建筑页与 313521-byte CC BY-SA 4.0 图片均 HTTP 200。G6 当前完成 41/118，剩余 77；8 条案例保持 `no_safe_image_yet`。详见 `GRADUATION_COMMUNITY_CIVIC_BATCH_001_PRODUCTION.md`。
 
 ### G7 — 统一搜索与筛选
 
