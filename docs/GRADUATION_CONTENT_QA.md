@@ -1,6 +1,6 @@
 # Graduation Content QA
 
-Generated: 2026-07-12T05:48:32.950Z
+Generated: 2026-07-12T06:23:07.905Z
 
 ## Counts
 
@@ -22,11 +22,11 @@ Generated: 2026-07-12T05:48:32.950Z
 
 - Issues with source URLs: 100/100
 - Cases with source URL: 139/139
-- Cases using local case images: 58/139
-- Cases using remote images: 43/139
+- Cases using local case images: 59/139
+- Cases using remote images: 42/139
 - Cases using placeholder image: 38/139
 - Cases with explicit image source URL: 101/139
-- Graduation image manifest entries: 55
+- Graduation image manifest entries: 56
 - Graduation image retry queue entries: 11
 - Local case image files missing from public folder: 0
 - Local case images missing from manifest: 3
@@ -42,8 +42,8 @@ Dedicated retry queue: CASE-050, CASE-052, CASE-053, CASE-054, CASE-055, CASE-05
 ## Published Readiness
 
 - Published cases: 101
-- Published cases using local images: 58/101
-- Published cases using remote images: 43/101
+- Published cases using local images: 59/101
+- Published cases using remote images: 42/101
 - Published cases using placeholder images: 0/101
 - Published cases missing image source/license/credit: 0
 - Draft cases with source-safe non-placeholder images: 0

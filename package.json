@@ -62,6 +62,7 @@
     "graduation:queue-education-001": "node scripts/build-graduation-new-building-education-queue-001.mjs",
     "graduation:queue-transport-001": "node scripts/build-graduation-new-building-transport-queue-001.mjs",
     "graduation:verify-transport-taxonomy": "node scripts/verify-building-function-transport-hub-001-dry-run.mjs",
+    "graduation:verify-public-space-taxonomy": "node scripts/verify-building-function-public-space-001-dry-run.mjs",
     "graduation:prepare-transport-001": "GRADUATION_REVIEW_BATCH=transport-001 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
     "graduation:verify-transport-001": "GRADUATION_VERIFY_BATCH=transport-001 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",

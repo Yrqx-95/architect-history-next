@@ -398,6 +398,14 @@
     "credit": "Photo: WLernerPJG / Wikimedia Commons"
   },
   {
+    "id": "CASE-111",
+    "localPath": "/images/graduation/cases/case-111-superkilen.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/a/af/Superkilen_hill-top_view.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Superkilen_hill-top_view.jpg",
+    "license": "CC BY 2.0",
+    "credit": "Photo: Emily / Wikimedia Commons"
+  },
+  {
     "id": "CASE-117",
     "localPath": "/images/graduation/cases/case-117-oslo-opera-house.jpg",
     "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Oslo_Opera_House_%28Den_Norske_Opera_%26_Ballett%29%2C_Norway.jpg",
