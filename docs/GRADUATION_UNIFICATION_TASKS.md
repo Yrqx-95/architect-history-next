@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：合并 education batch 001 的只读审核 PR；随后从剩余 G6 队列选择下一个边界清晰的用途批次。CASE-006 身份和 school 用途已确认，但准确 Flickr 图片的重新授权链不完整，继续保持 `no_safe_image_yet`，不生成 migration。
+当前下一步：合并 transport batch 001 的只读审核 PR；随后同步 CASE-094/133 图片与元数据，新增四语 `transport-hub` 用途，再生成 guarded migration/rollback 并执行全历史隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -150,7 +150,9 @@ Disaster/community batch 001 已完成 CASE-037/090 的只读身份与图片审�
 
 Education batch 001 已完成 CASE-006 Fuji Kindergarten 的只读审核。手塚官方项目、园方和立川市资料确认 Tezuka Architects、2007、立川及幼儿园用途，`school` function 通过。重新搜索发现两张内容准确且 Flickr 页面标示 CC BY 2.0 的照片，但上传者为 Forgemind ArchiMedia，标题或手塚官方页将原摄影者标为 Katsuhisa Kida；当前没有证据证明上传者有权替原摄影者重新授权。因此该记录不是“无准确图片”，而是“准确图片的开放授权链不完整”，继续 `no_safe_image_yet`、0 migration。详见 `GRADUATION_NEW_BUILDING_EDUCATION_001_TRIAGE.md`。
 
-下一个最小可验证步骤：通过 PR 合并 education batch 001；不迁移 CASE-006，继续 G6 下一个用途批次。
+Transport batch 001 已完成 CASE-008/094/133 的只读审核。三条身份、交通用途和开放许可图片通过，生产主体查重为 0；CASE-094 当前铁路场图片被人工视觉审核拒绝，已找到江戸村のとくぞう / CC BY-SA 4.0 的清晰站体替代图；CASE-133 现图确认为 Syced 自有作品 / CC0，需补齐公开元数据。现有 9 个细用途没有交通节点，禁止用 `mixed-use` 冒充主用途；migration 前需新增四语 `transport-hub` function。三条获准进入 migration 准备，但本阶段不授权写入。详见 `GRADUATION_NEW_BUILDING_TRANSPORT_001_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 合并 transport 001 正式决策；同步两条图片，再扩展用途词表并生成 migration pack。
 
 ### G7 — 统一搜索与筛选
 
