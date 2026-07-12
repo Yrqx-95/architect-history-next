@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-015 disaster memorial batch 002 migration pack；合并后重复生产只读预检，再决定是否写入。
+当前下一步：通过 PR 合并 75-profile E2E 基线与 CASE-015 canonical 回归断言；随后运行 Reviewed release 和真实路由验收。
 
 ## 最终目标
 
@@ -228,7 +228,9 @@ Disaster memorial batch 002 已完成 CASE-015 的只读审核。Kengo Kuma and 
 
 CASE-015 migration pack 已生成：复用既有 Kengo Kuma，准备写入 1 building / 1 primary image / 1 profile / 1 `museum` primary assignment。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产只读预检为 target building/image/profile/assignment conflict 全部 0、architect exact match 1、function/type 各 1/1；基线 74/928/7277/123，预期写后 75/929/7278/124。CLI migration 与 reviewed apply SQL 字节一致，尚未生产写入。详见 `GRADUATION_DISASTER_MEMORIAL_BATCH_002_DRY_RUN.md`。
 
-下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复生产只读预检，确认冲突仍为 0，再应用 guarded Supabase migration。
+CASE-015 生产 migration 已成功执行，实际 version `20260712115840`。总数精确更新为 75 profiles / 929 buildings / 7278 images / 124 assignments；目标 1 building / 1 image / 1 profile / 1 assignment 全部匹配，orphan、architect mismatch、primary image/function 异常均为 0。graduation profile/function assignment RLS 与 published-only policy 正常，advisors 保持既有 13 security / 27 performance。尚未运行数据库写后的 Reviewed release。
+
+下一个最小可验证步骤：通过 PR 合并 75-profile E2E 基线和 CASE-015 canonical 名称、建筑师、年份、许可与署名断言；随后运行 Reviewed release 与三语 CASE/building 路由、图片和 API 验收。
 
 ### G7 — 统一搜索与筛选
 
