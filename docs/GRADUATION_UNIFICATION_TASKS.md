@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-028 Shiroiya Hotel migration pack；随后重复生产冲突预检，通过后才写入。
+当前下一步：从剩余 39 条尚未正式审核的 G6 队列中选择下一个边界清晰、身份与图片权利可验证的小批次。
 
 ## 最终目标
 
@@ -261,6 +261,10 @@ Hotel taxonomy 001 已完成生产迁移、发布与线上验收。Supabase migr
 CASE-028 Shiroiya Hotel batch 006 migration pack 已生成：复用既有 `fujimoto`，不新增 architect；建立 1 canonical hotel complex / 1 exact CC BY 4.0 primary image / 1 published profile / 2 assignments，`hotel` primary、`retail` secondary。生产只读预检为 architect exact 1，building/image/profile/assignment conflict 全部 0，functions 2/2、type 1/1，基线 76/930/7279/127。全历史隔离 PostgreSQL forward、外部 curated-image rollback guard、精确 rollback 与 replay 全部通过；migration 由项目内 CLI 创建并与 apply SQL 字节一致。56 files / 197 tests、graduation QA 0 problem、typecheck 和 lint 通过；本地图片 1600×1200，SHA-256 `31464c57312a8c2c1b477568591f5291998834c068e6d78d5f038fcabc5a148b`。生产尚未写入。详见 `GRADUATION_SHIROIYA_HOTEL_BATCH_006_DRY_RUN.md`。
 
 下一个最小可验证步骤：运行全量单测、typecheck、lint 和图片 QA；通过 PR 后立即重复生产冲突预检。
+
+CASE-028 Shiroiya Hotel batch 006 已完成生产迁移、兼容纠偏、发布和线上验收。Supabase migration `graduation_shiroiya_hotel_batch_006`（`20260712145447`）复用 `fujimoto`，写入 1 building / 1 primary image / 1 profile / 2 assignments；总数更新为 77/931/7280/129，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 和 advisors 正常。PR #88 修正 JSON compatibility architect 漂移并加入 canonical 回归。Reviewed release `29197317708` 首次被短暂的 Supabase REST malformed response 拦截且未部署；生产 buildings 全字段控制字符扫描为 0，第二次 9m55s 完整成功。6 CASE/building 三语路由、图片全部 HTTP 200，API 为 101 cases / 77 profiles / 0 missing，并返回 Sou Fujimoto 与 こやまひろ / CC BY 4.0。G6 已迁移 56/118，尚未迁移 62，尚未正式审核队列 39。详见 `GRADUATION_SHIROIYA_HOTEL_BATCH_006_PRODUCTION.md`。
+
+下一个最小可验证步骤：对剩余 39 条做只读排序，选择下一个不需降低身份或图片权利标准的边界清晰小批次。
 
 ### G7 — 统一搜索与筛选
 
