@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：为 CASE-015 disaster memorial batch 002 生成 guarded migration pack，并完成隔离 PostgreSQL dry-run 与生产只读预检。
+当前下一步：通过 PR 合并 CASE-015 disaster memorial batch 002 migration pack；合并后重复生产只读预检，再决定是否写入。
 
 ## 最终目标
 
@@ -226,7 +226,9 @@ Retail-led mixed-use batch 002 已完成生产迁移、发布和线上验收。S
 
 Disaster memorial batch 002 已完成 CASE-015 的只读审核。Kengo Kuma and Associates 官方页确认南三陆311纪念馆位于宫城县、2022 年完成、1,433 m² / 2 层，并展示灾害记忆与艺术作品；canonical broad type 决定为 `cultural`，既有 `museum` 为唯一 primary function，不把官方宽泛的 Community 分类误写为具体 `community-center`。Commons 原图为 Yasu 自有作品、5753×3835、CC BY-SA 3.0；仓库已有同源 1600×1066 图片，原图与本地图均人工确认准确。生产只读查询确认复用既有 `kengo-kuma`，target building/profile conflict 均为 0，function/type 各 1/1。本批批准进入 migration 准备，但尚未授权生产写入。G6 已迁移仍为 53/118，尚未正式审核队列从 44 减至 43。详见 `GRADUATION_NEW_BUILDING_DISASTER_MEMORIAL_002_TRIAGE.md`。
 
-下一个最小可验证步骤：为 CASE-015 生成 guarded migration pack，运行完整历史隔离 PostgreSQL forward / rollback refusal / exact rollback / replay，并在生产只读预检无冲突后再提交 migration PR。
+CASE-015 migration pack 已生成：复用既有 Kengo Kuma，准备写入 1 building / 1 primary image / 1 profile / 1 `museum` primary assignment。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产只读预检为 target building/image/profile/assignment conflict 全部 0、architect exact match 1、function/type 各 1/1；基线 74/928/7277/123，预期写后 75/929/7278/124。CLI migration 与 reviewed apply SQL 字节一致，尚未生产写入。详见 `GRADUATION_DISASTER_MEMORIAL_BATCH_002_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复生产只读预检，确认冲突仍为 0，再应用 guarded Supabase migration。
 
 ### G7 — 统一搜索与筛选
 
