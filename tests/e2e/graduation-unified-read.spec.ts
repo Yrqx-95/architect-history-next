@@ -7,7 +7,7 @@ test.describe('graduation Supabase + JSON dual read', () => {
     const payload = await response.json()
 
     expect(payload.source).toBe('supabase+json')
-    expect(payload.cases).toHaveLength(100)
+    expect(payload.cases).toHaveLength(101)
     expect(payload.diagnostics.profileCount).toBe(57)
     expect(payload.diagnostics.unifiedCaseIds).toHaveLength(57)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
