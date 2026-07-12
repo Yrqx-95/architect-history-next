@@ -1,6 +1,6 @@
 # Graduation Content QA
 
-Generated: 2026-07-12T00:40:17.506Z
+Generated: 2026-07-12T01:35:26.173Z
 
 ## Counts
 
@@ -8,7 +8,7 @@ Generated: 2026-07-12T00:40:17.506Z
 |---|---:|---:|---:|---:|---:|
 | Issues | 100 | 100 | 100% | 100 | 0 |
 | Site types | 50 | 30-50 | 100% | 20 | 30 |
-| Cases | 139 | 100 | 100% | 100 | 39 |
+| Cases | 139 | 100 | 100% | 101 | 38 |
 
 ## Integrity
 
@@ -22,11 +22,11 @@ Generated: 2026-07-12T00:40:17.506Z
 
 - Issues with source URLs: 100/100
 - Cases with source URL: 139/139
-- Cases using local case images: 53/139
-- Cases using remote images: 47/139
-- Cases using placeholder image: 39/139
-- Cases with explicit image source URL: 100/139
-- Graduation image manifest entries: 50
+- Cases using local case images: 57/139
+- Cases using remote images: 44/139
+- Cases using placeholder image: 38/139
+- Cases with explicit image source URL: 101/139
+- Graduation image manifest entries: 54
 - Graduation image retry queue entries: 11
 - Local case image files missing from public folder: 0
 - Local case images missing from manifest: 3
@@ -41,10 +41,10 @@ Dedicated retry queue: CASE-050, CASE-052, CASE-053, CASE-054, CASE-055, CASE-05
 
 ## Published Readiness
 
-- Published cases: 100
-- Published cases using local images: 53/100
-- Published cases using remote images: 47/100
-- Published cases using placeholder images: 0/100
+- Published cases: 101
+- Published cases using local images: 57/101
+- Published cases using remote images: 44/101
+- Published cases using placeholder images: 0/101
 - Published cases missing image source/license/credit: 0
 - Draft cases with source-safe non-placeholder images: 0
 

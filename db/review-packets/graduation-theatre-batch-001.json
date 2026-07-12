@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-theatre-batch-001",
+  "generated_at": "2026-07-12T01:32:09.937Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all target UUIDs, slugs, CASE IDs and image source URLs are absent",
+    "theatre and mixed-use functions remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 4,
+    "new_architects": 1,
+    "buildings": 4,
+    "images": 4,
+    "profiles": 4,
+    "assignments": 6
+  },
+  "architects": [
+    {
+      "id": "0cbb67cb-fcaf-4a55-a82b-e6b49cee9fea",
+      "slug": "sanaa",
+      "name_zh": "SANAA",
+      "name_en": "SANAA",
+      "name_ja": "SANAA",
+      "official_url": null,
+      "is_new": false
+    },
+    {
+      "id": "5f42cdc6-66ef-5689-9cbb-87ff3c519534",
+      "slug": "snohetta",
+      "name_zh": "Snøhetta",
+      "name_en": "Snøhetta",
+      "name_ja": "スノヘッタ",
+      "official_url": "https://www.snohetta.com/",
+      "is_new": false
+    },
+    {
+      "id": "516ce1f7-20a5-5b7e-926c-7ee67ebc35b2",
+      "slug": "henning-larsen",
+      "name_zh": "Henning Larsen 建筑事务所",
+      "name_en": "Henning Larsen",
+      "name_ja": "ヘニング・ラーセン",
+      "official_url": "https://www.henninglarsen.com/",
+      "is_new": false
+    },
+    {
+      "id": "f6b78370-cbc3-5d34-9b0e-c6e1db2c6fef",
+      "slug": "diller-scofidio-renfro-rockwell-group",
+      "name_zh": "Diller Scofidio + Renfro + Rockwell Group",
+      "name_en": "Diller Scofidio + Renfro + Rockwell Group",
+      "name_ja": "ディラー・スコフィディオ＋レンフロ + ロックウェル・グループ",
+      "official_url": "https://dsrny.com/project/the-shed",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "59496d18-29b4-53e1-8158-dc29f8deba4e",
+      "case_id": "CASE-057",
+      "slug": "shogin-tact-tsuruoka",
+      "name_zh": "荘银 TACT 鹤冈（鹤冈市文化会馆）",
+      "name_en": "Shogin Tact Tsuruoka (Tsuruoka Cultural Hall)",
+      "name_ja": "荘銀タクト鶴岡（鶴岡市文化会館）",
+      "year_start": 2017,
+      "city": "鹤冈",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "cultural",
+      "architect_slug": "sanaa",
+      "official_url": "https://tact-tsuruoka.jp/information",
+      "architect_id": "0cbb67cb-fcaf-4a55-a82b-e6b49cee9fea",
+      "status": "published"
+    },
+    {
+      "id": "c30fbe23-c030-563c-b67b-d083812ddbcc",
+      "case_id": "CASE-117",
+      "slug": "oslo-opera-house",
+      "name_zh": "奥斯陆歌剧院",
+      "name_en": "Oslo Opera House",
+      "name_ja": "オスロ・オペラハウス",
+      "year_start": 2008,
+      "city": "奥斯陆",
+      "country": "挪威",
+      "country_code": "NO",
+      "type_slug": "cultural",
+      "architect_slug": "snohetta",
+      "official_url": "https://www.snohetta.com/projects/norwegian-national-opera-and-ballet",
+      "architect_id": "5f42cdc6-66ef-5689-9cbb-87ff3c519534",
+      "status": "published"
+    },
+    {
+      "id": "b2675a07-3187-515e-bcd3-97ab8e32db96",
+      "case_id": "CASE-122",
+      "slug": "harpa-concert-hall",
+      "name_zh": "哈帕音乐厅与会议中心",
+      "name_en": "Harpa Concert Hall and Conference Centre",
+      "name_ja": "ハルパ・レイキャヴィク・コンサートホール＆会議センター",
+      "year_start": 2011,
+      "city": "雷克雅未克",
+      "country": "冰岛",
+      "country_code": "IS",
+      "type_slug": "cultural",
+      "architect_slug": "henning-larsen",
+      "official_url": "https://www.henninglarsen.com/projects/harpa",
+      "architect_id": "516ce1f7-20a5-5b7e-926c-7ee67ebc35b2",
+      "status": "published"
+    },
+    {
+      "id": "2f4194a7-3bba-55b2-af26-5952f483075d",
+      "case_id": "CASE-139",
+      "slug": "the-shed-hudson-yards",
+      "name_zh": "The Shed 艺术中心",
+      "name_en": "The Shed",
+      "name_ja": "ザ・シェッド",
+      "year_start": 2019,
+      "city": "纽约",
+      "country": "美国",
+      "country_code": "US",
+      "type_slug": "cultural",
+      "architect_slug": "diller-scofidio-renfro-rockwell-group",
+      "official_url": "https://dsrny.com/project/the-shed",
+      "architect_id": "f6b78370-cbc3-5d34-9b0e-c6e1db2c6fef",
+      "status": "published"
+    }
+  ],
+  "images": [
+    {
+      "id": "c1b7eb6c-48ee-5bd8-a00a-29f133eec1a6",
+      "building_id": "59496d18-29b4-53e1-8158-dc29f8deba4e",
+      "building_slug": "shogin-tact-tsuruoka",
+      "case_id": "CASE-057",
+      "url_original": "/images/graduation/cases/case-057-shogin-tact-tsuruoka.jpg",
+      "photographer": "Ebiebi2",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tact-Tsuruoka_1.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "8be0901e-f542-55c4-8e5e-b932ab086e84",
+      "building_id": "c30fbe23-c030-563c-b67b-d083812ddbcc",
+      "building_slug": "oslo-opera-house",
+      "case_id": "CASE-117",
+      "url_original": "/images/graduation/cases/case-117-oslo-opera-house.jpg",
+      "photographer": "Christian David",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_(Den_Norske_Opera_%26_Ballett),_Norway.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "d9082466-3764-57ce-8443-5da2a41d61ab",
+      "building_id": "b2675a07-3187-515e-bcd3-97ab8e32db96",
+      "building_slug": "harpa-concert-hall",
+      "case_id": "CASE-122",
+      "url_original": "/images/graduation/cases/case-122-harpa-concert-hall.jpg",
+      "photographer": "Gary J. Wood",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Harpa_From_Arnarh%C3%B3ll_(33650129491).jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "0650b2be-99c9-58f2-88c4-09c1d2d04e52",
+      "building_id": "2f4194a7-3bba-55b2-af26-5952f483075d",
+      "building_slug": "the-shed-hudson-yards",
+      "case_id": "CASE-139",
+      "url_original": "/images/graduation/cases/case-139-the-shed-hudson-yards.jpg",
+      "photographer": "Ajay Suresh",
+      "source": "Wikimedia Commons",
+      "license": "CC BY 2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:The_Shed_-_Complete_(48206488176).jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-057",
+      "building_id": "59496d18-29b4-53e1-8158-dc29f8deba4e",
+      "building_slug": "shogin-tact-tsuruoka",
+      "concept_zh": "地方文化厅以连续屋面和多功能空间支持演出、排练、市民活动和地方文化延续。",
+      "concept_zh_hant": null,
+      "concept_en": "Tsuruoka Cultural Hall is a reference case for reading Design topic: culture厅, Design topic: 演出, citizenactivity, localculture. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "「Tsuruoka Cultural Hall」は、文化ホール・演出・市民活動・地域文化の関係を読み取る参考事例。用途の複合、運営、居場所のつくり方を卒業設計に転用して考えられる。",
+      "keywords_zh": [
+        "文化厅",
+        "演出",
+        "市民活动",
+        "地方文化",
+        "屋面"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "Design topic: culture厅",
+        "Design topic: 演出",
+        "citizenactivity",
+        "localculture",
+        "Design topic: 屋面"
+      ],
+      "keywords_ja": [
+        "文化ホール",
+        "演出",
+        "市民活動",
+        "地域文化",
+        "屋根"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://tact-tsuruoka.jp/information",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-117",
+      "building_id": "c30fbe23-c030-563c-b67b-d083812ddbcc",
+      "building_slug": "oslo-opera-house",
+      "concept_zh": "屋根を都市の歩行広場として開放し、劇場を水辺の公共地形にした事例。入口と都市開放性を読める。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Oslo Opera House: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "屋根を都市の歩行広場として開放し、劇場を水辺の公共地形にした事例。入口と都市開放性を読める。",
+      "keywords_zh": [
+        "劇場",
+        "水辺",
+        "公共屋根",
+        "都市入口",
+        "歩行"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "劇場",
+        "水辺",
+        "公共屋根",
+        "都市入口",
+        "歩行"
+      ],
+      "keywords_ja": [
+        "劇場",
+        "水辺",
+        "公共屋根",
+        "都市入口",
+        "歩行"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.snohetta.com/projects/norwegian-national-opera-and-ballet",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-122",
+      "building_id": "b2675a07-3187-515e-bcd3-97ab8e32db96",
+      "building_slug": "harpa-concert-hall",
+      "concept_zh": "港の風景とガラス外皮を結び、音楽、会議、観光を受け止める文化施設。気候と公共性の関係を読める。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for Harpa Concert Hall: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "港の風景とガラス外皮を結び、音楽、会議、観光を受け止める文化施設。気候と公共性の関係を読める。",
+      "keywords_zh": [
+        "音楽ホール",
+        "港",
+        "ガラス外皮",
+        "観光",
+        "公共ロビー"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "音楽ホール",
+        "港",
+        "ガラス外皮",
+        "観光",
+        "公共ロビー"
+      ],
+      "keywords_ja": [
+        "音楽ホール",
+        "港",
+        "ガラス外皮",
+        "観光",
+        "公共ロビー"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.henninglarsen.com/projects/harpa",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-139",
+      "building_id": "2f4194a7-3bba-55b2-af26-5952f483075d",
+      "building_slug": "the-shed-hudson-yards",
+      "concept_zh": "可動外皮によって展示、上演、イベント空間を切り替える文化施設。都市文化の変化に対応する建築を考えられる。",
+      "concept_zh_hant": null,
+      "concept_en": "Reference case for The Shed: useful for comparing public program, urban interface, operation, and spatial experience.",
+      "concept_ja": "可動外皮によって展示、上演、イベント空間を切り替える文化施設。都市文化の変化に対応する建築を考えられる。",
+      "keywords_zh": [
+        "文化施設",
+        "可動外皮",
+        "展示",
+        "上演",
+        "イベント"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "文化施設",
+        "可動外皮",
+        "展示",
+        "上演",
+        "イベント"
+      ],
+      "keywords_ja": [
+        "文化施設",
+        "可動外皮",
+        "展示",
+        "上演",
+        "イベント"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://dsrny.com/project/the-shed",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "59496d18-29b4-53e1-8158-dc29f8deba4e",
+      "building_slug": "shogin-tact-tsuruoka",
+      "function_slug": "theatre",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://tact-tsuruoka.jp/information",
+      "evidence_note": "Tsuruoka City records completion at the end of August 2017 and the March 2018 grand opening of the current cultural hall. The institution documents a live-acoustic theatre hall for concerts and civic cultural events; the design record identifies SANAA.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "c30fbe23-c030-563c-b67b-d083812ddbcc",
+      "building_slug": "oslo-opera-house",
+      "function_slug": "theatre",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.snohetta.com/projects/norwegian-national-opera-and-ballet",
+      "evidence_note": "Snøhetta records the completed 2000–2008 Norwegian National Opera and Ballet project in Oslo and describes its main theatre and public roof plaza.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b2675a07-3187-515e-bcd3-97ab8e32db96",
+      "building_slug": "harpa-concert-hall",
+      "function_slug": "theatre",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.henninglarsen.com/projects/harpa",
+      "evidence_note": "Henning Larsen records the completed 2005–2011 Reykjavík concert hall and conference centre, four auditoriums and collaboration with Olafur Eliasson on the façade. The canonical architect relation uses Henning Larsen while Batteríið Architects and the façade collaboration remain in the graduation profile evidence.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b2675a07-3187-515e-bcd3-97ab8e32db96",
+      "building_slug": "harpa-concert-hall",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.henninglarsen.com/projects/harpa",
+      "evidence_note": "Henning Larsen records the completed 2005–2011 Reykjavík concert hall and conference centre, four auditoriums and collaboration with Olafur Eliasson on the façade. The canonical architect relation uses Henning Larsen while Batteríið Architects and the façade collaboration remain in the graduation profile evidence.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "2f4194a7-3bba-55b2-af26-5952f483075d",
+      "building_slug": "the-shed-hudson-yards",
+      "function_slug": "theatre",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://dsrny.com/project/the-shed",
+      "evidence_note": "Diller Scofidio + Renfro records the April 2019 opening in New York, identifies DS+R as lead architect and Rockwell Group as collaborating architect, and describes performance, visual-art and event programmes enabled by the movable shell.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "2f4194a7-3bba-55b2-af26-5952f483075d",
+      "building_slug": "the-shed-hudson-yards",
+      "function_slug": "mixed-use",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://dsrny.com/project/the-shed",
+      "evidence_note": "Diller Scofidio + Renfro records the April 2019 opening in New York, identifies DS+R as lead architect and Rockwell Group as collaborating architect, and describes performance, visual-art and event programmes enabled by the movable shell.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}

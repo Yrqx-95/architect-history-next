@@ -278,6 +278,14 @@
     "credit": "Photo: Pbdragonwang / Wikimedia Commons"
   },
   {
+    "id": "CASE-057",
+    "localPath": "/images/graduation/cases/case-057-shogin-tact-tsuruoka.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/3/30/Tact-Tsuruoka_1.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tact-Tsuruoka_1.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Ebiebi2 / Wikimedia Commons"
+  },
+  {
     "id": "CASE-063",
     "localPath": "/images/graduation/cases/case-063-roadside-station-aino-tsuchiyama.jpg",
     "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Michinoeki_Aino-Tsuchiyama01.JPG",
@@ -388,5 +396,29 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tsubo-Niwa_at_Portland_Japanese_Garden.jpg",
     "license": "CC BY-SA 4.0",
     "credit": "Photo: WLernerPJG / Wikimedia Commons"
+  },
+  {
+    "id": "CASE-117",
+    "localPath": "/images/graduation/cases/case-117-oslo-opera-house.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Oslo_Opera_House_%28Den_Norske_Opera_%26_Ballett%29%2C_Norway.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_(Den_Norske_Opera_%26_Ballett),_Norway.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Christian David / Wikimedia Commons"
+  },
+  {
+    "id": "CASE-122",
+    "localPath": "/images/graduation/cases/case-122-harpa-concert-hall.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Harpa_From_Arnarh%C3%B3ll_%2833650129491%29.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Harpa_From_Arnarh%C3%B3ll_(33650129491).jpg",
+    "license": "CC BY-SA 2.0",
+    "credit": "Gary J. Wood / Wikimedia Commons"
+  },
+  {
+    "id": "CASE-139",
+    "localPath": "/images/graduation/cases/case-139-the-shed-hudson-yards.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/7/76/The_Shed_-_Complete_%2848206488176%29.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Shed_-_Complete_(48206488176).jpg",
+    "license": "CC BY 2.0",
+    "credit": "Ajay Suresh / Wikimedia Commons"
   }
 ]

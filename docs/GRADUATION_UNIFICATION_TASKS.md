@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：继续 `G6`，从剩余 82 个 new-building candidates 中生成 theatre / performing-arts / cultural-hall batch 001 的只读候选队列；先核验用途边界，避免把只有“文化”字样但不是表演设施的建筑混入。CASE-048 与 CASE-079 均保持 `no_safe_image_yet`，没有开放许可证据前不进入迁移。
+当前下一步：继续 `G6` 的 theatre batch 001，通过 PR 合并 4 条批准案例的公开图片修正、正式决策和已通过全历史重放 dry-run 的 guarded migration；合并后先发布本地图片，再做生产冲突复查、应用版本化 Supabase migration、同步 57→61 生产测试基线并执行 Reviewed production release。CASE-091 保持 `no_safe_image_yet`。
 
 ## 最终目标
 
@@ -132,6 +132,8 @@ Museum batch 001 的公开数据同步、migration pack 与 dry-run 已完成。
 Museum batch 001 已完成生产迁移、双阶段发布和线上验收。PR #26 合并审核数据、CASE-051 正确 CC0 图片与 guarded migration pack；首次 Reviewed production release `29174147839` 在数据库写入前先发布图片和静态数据。生产冲突复查为 0 后，Supabase migration `graduation_museum_batch_001`（`20260712005222`）写入 9 个新 architect、14 buildings、14 primary images、14 published profiles 和 16 approved assignments；写后 profile 总数 57，本批全部计数符合预期，orphan profile / architect / function assignment 均为 0。PR #27 将生产读取基线从 43 更新为 57；最终 Reviewed production release `29174472413` 的质量门、完整测试、Cloudflare deploy 和路由语义检查全部通过。线上 API 实测 `source=supabase+json`、57 unified profiles、CASE-051 已统一；CASE-051 页面和 627413-byte CC0 图片均 HTTP 200。G6 当前完成 36/118，剩余 82；library 子集唯一剩余 CASE-079 继续为 `no_safe_image_yet`。详见 `GRADUATION_MUSEUM_BATCH_001_PRODUCTION.md`。
 
 Museum batch 002 只读核验完成。剩余 82 条中只有 CASE-048 Aranya Art Center 的名称与官方机构说明明确属于 museum / art-center；官方建筑师与机构页面可确认 Neri&Hu、2019、秦皇岛和艺术中心用途，但原记录无图片来源、许可或摄影者。Commons 未找到对应建筑文件，Openverse 四组精确查询均为 0；官方展示图也没有开放复用许可，因此 CASE-048 与 CASE-079 一样标记 `no_safe_image_yet`，不下载图片、不生成 migration。明确 museum 候选现已审完，下一批转向 theatre / performing-arts / cultural-hall。详见 `GRADUATION_NEW_BUILDING_MUSEUM_002_TRIAGE.md`。
+
+Theatre batch 001 已完成只读队列、逐条身份/用途/图片版权审核、公开数据同步、guarded migration pack 与全历史重放 dry-run。5 条候选中 CASE-057/117/122/139 批准，CASE-091 因无开放许可图片保持 `no_safe_image_yet`；CASE-033 作为关键词假阳性排除。Harpa 的 2010 施工图被拒绝，The Shed 的局部近景被替换；4 张批准图片全部人工审片、本地化、移除元数据并压缩到 2000px。迁移包包含 1 个新联合 architect、4 buildings、4 primary images、4 profiles、6 assignments。隔离 PostgreSQL 重放 foundation、unification batch 001、library 001/002、museum 001 后，两次 forward、外部关系 rollback guard 与两次精确 rollback 全部通过；旧 library/museum dry-run 同时回归通过。生产尚未写入。详见 `GRADUATION_NEW_BUILDING_THEATRE_001_TRIAGE.md` 与 `GRADUATION_THEATRE_BATCH_001_DRY_RUN.md`。
 
 ### G7 — 统一搜索与筛选
 
