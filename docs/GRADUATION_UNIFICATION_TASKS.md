@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 将生产 E2E 基线更新为 72 并修正 CASE-039 JSON fallback architect 漂移；合并后运行 Reviewed release 和真实 CASE/building/image 路由验收。
+当前下一步：从剩余 46 条尚未正式审核记录中选择下一个用途边界清晰的小批次，先只读核验身份、用途、准确图片、摄影者和开放许可。
 
 ## 最终目标
 
@@ -212,7 +212,9 @@ CASE-038/039 migration pack 已生成：2 new architects / 2 buildings / 2 prima
 
 CASE-038/039 生产 migration 已成功执行，实际 version `20260712104005`。总数精确更新为 72 profiles / 926 buildings / 7275 images / 118 assignments；目标 2 architects / 2 buildings / 2 images / 2 profiles / 5 assignments，orphan、architect mismatch、primary image/function 异常均为 0；CASE-038/039 profile 分别指向各自 building，concept 和 keywords 均保持两套独立值。RLS/policy 与 advisors 正常。生产 E2E 预跑发现 CASE-039 API architect 仍由 JSON compatibility fallback 返回旧 `Taiju Yamashita Design and Associates`，而 canonical 为 `Taiju Yamashita Design and Architecture`；已修正权威 CSV 与生成数据，并加入两条 canonical 回归断言。尚未运行数据库写后的 Reviewed release。
 
-下一个最小可验证步骤：通过 PR 合并 72-profile E2E 基线与 CASE-039 fallback 修正；随后运行 Reviewed release，验收 CASE-038/039 中英日 CASE、building 路由和两张图片。
+Shimokitazawa retail batch 001 已完成生产迁移、发布和线上验收。Supabase migration `graduation_shimokitazawa_retail_batch_001`（`20260712104005`）写入 2 architects / 2 buildings / 2 primary images / 2 profiles / 5 assignments；总数更新为 72/926/7275/118，orphan、architect mismatch、primary image/function 异常均为 0，两套 profile concept/keywords 保持独立。PR #66 修正 CASE-039 JSON compatibility fallback 的 architect 漂移并加入 canonical 回归断言。Reviewed release `29189628666` 成功；6 CASE 路由、6 building 路由、2 图片全部 HTTP 200，API 为 101 cases / 72 profiles / 0 missing。G6 已迁移 51/118，尚未迁移 67；尚未正式审核队列 46。详见 `GRADUATION_SHIMOKITAZAWA_RETAIL_BATCH_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 46 条中选择用途边界清晰的小批次，只读核验身份、年份、地点、设计者、图片内容、摄影者和许可，再决定是否进入 migration 准备。
 
 ### G7 — 统一搜索与筛选
 
