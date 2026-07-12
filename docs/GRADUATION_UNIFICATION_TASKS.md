@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-040 migration pack；合并后重复生产预检与 advisors，再应用 guarded migration。
+当前下一步：通过 PR 合并 76-profile E2E 基线与 CASE-040 canonical 回归断言；随后运行最终 Reviewed release 与真实路由验收。
 
 ## 最终目标
 
@@ -242,7 +242,9 @@ CASE-040 替代图已完成本地化。Nesnad 原图优化为 2000×1500 网站 
 
 CASE-040 migration pack 已生成：1 new joint architect / 1 building / 1 primary image / 1 profile / 3 assignments，`mixed-use` primary，`retail` 与 `public-space` secondary。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产预检为五类 conflict 全部 0、functions 3/3、type 1/1；基线 75/929/7278/124，预期写后 76/930/7279/127。CLI migration 与 reviewed apply SQL 字节一致，尚未生产写入。详见 `GRADUATION_MIYASHITA_PARK_BATCH_005_DRY_RUN.md`。
 
-下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复冲突预检、检查 advisors，再应用 guarded Supabase migration。
+CASE-040 生产 migration 已成功执行，实际 version `20260712124927`。总数精确更新为 76 profiles / 930 buildings / 7279 images / 127 assignments；目标 1 architect / 1 building / 1 image / 1 profile / 3 assignments 全部匹配，orphan、primary image/function 异常均为 0，RLS 正常，advisors 保持既有 13 security / 27 performance。尚未运行数据库写后的最终 Reviewed release。
+
+下一个最小可验证步骤：合并 76-profile E2E 基线和 CASE-040 canonical 名称、联合建筑师、年份、许可与署名断言；随后运行 Reviewed release 与三语 CASE/building、图片和 API 验收。
 
 ### G7 — 统一搜索与筛选
 
