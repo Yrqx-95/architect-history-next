@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-12T12:22:56.313Z",
+  "batch_id": "graduation-new-building-koil-interior-004",
+  "stage": "G6",
+  "source_queue": "db/review-packets/graduation-new-building-queue-001.json",
+  "selection_policy": "Single KOIL record selected to distinguish the 2014 innovation-center interior project from later KOIL-branded garden facilities and the host building.",
+  "write_policy": "Read-only identity and image-scope review. No database write, image replacement or migration is authorized.",
+  "counts": {
+    "candidates": 1
+  },
+  "known_risks": [
+    "The reviewed design is a 2576 square metre interior project, not an independently authored host building.",
+    "The current Commons image depicts KOIL GARDEN, a differently named exterior facility, not the reviewed KOIL innovation-center interior."
+  ],
+  "items": [
+    {
+      "case_id": "CASE-035",
+      "name": "Kashiwa-no-ha Open Innovation Lab",
+      "name_en": "Kashiwa-no-ha Open Innovation Lab",
+      "name_ja": "Kashiwa-no-ha Open Innovation Lab",
+      "previous_lane": "new-building-candidate",
+      "priority": "standard",
+      "priority_reason": "Review after the library-focused batches unless a stronger editorial need emerges.",
+      "source_url": "https://www.koil.jp/?lang=en",
+      "source_domain": "koil.jp",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:KOIL_GARDEN.jpg",
+      "image_source_domain": "commons.wikimedia.org",
+      "image_license": "CC0",
+      "image_credit": "Photo: Souka Kinmei / Wikimedia Commons",
+      "year": 2014,
+      "architect": "Naruse Inokuma Architects",
+      "metadata_gaps": [],
+      "review_scope": [
+        "project_scope",
+        "designer",
+        "year",
+        "location",
+        "official_source",
+        "image_content",
+        "image_author",
+        "image_license"
+      ],
+      "review_status": "unreviewed"
+    }
+  ]
+}
