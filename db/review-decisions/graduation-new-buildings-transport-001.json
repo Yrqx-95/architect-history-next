@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 new-building transport batch 001",
+  "source_queue": "db/review-packets/graduation-new-building-transport-001.json",
+  "write_status": "reviewed-only; no production insert authorized until image corrections, transport taxonomy, guarded migration and rollback pass isolated PostgreSQL dry-run",
+  "review_method": [
+    "Confirmed project identity, completion, place, architect and transport program against architect, operator or municipality sources.",
+    "Queried production buildings and found no canonical building match for the three target identities.",
+    "Queried Commons through the MediaWiki API for author, own-work or Flickr provenance, dimensions, current license and source URL.",
+    "Opened all three current images and the proposed CASE-094 replacement at original detail for manual building-content verification.",
+    "Rejected the current CASE-094 rail-yard view as a canonical primary image even though its Commons metadata names the station.",
+    "Required a new transport-hub function instead of misclassifying stations and a passenger terminal as generic mixed-use buildings."
+  ],
+  "summary": {
+    "reviewed": 3,
+    "identity_approved": 3,
+    "function_approved": 3,
+    "image_approved": 3,
+    "migration_approved": 3,
+    "image_replacement_required": 1,
+    "image_metadata_correction_required": 1,
+    "new_function_required": 1
+  },
+  "taxonomy_prerequisite": {
+    "slug": "transport-hub",
+    "broad_type_slug": "transportation",
+    "reason": "All three buildings are primarily passenger-transport nodes; existing mixed-use or community-center functions would be semantically wrong."
+  },
+  "decisions": [
+    {
+      "case_id": "CASE-008",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "onagawa-station-yupoppo",
+        "name_zh": "女川站与女川温泉 Yupoppo",
+        "name_en": "Onagawa Station and Onagawa Onsen Yupoppo",
+        "name_ja": "女川駅舎・女川温泉温浴施設ゆぽっぽ",
+        "year_start": 2015,
+        "city": "女川",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "transportation",
+        "architect_slug": "shigeru-ban",
+        "official_url": "https://shigerubanarchitects.com/works/cultural/onagawa-station/"
+      },
+      "function_slugs": ["transport-hub", "mixed-use"],
+      "identity_evidence": [
+        "Shigeru Ban Architects records a completed 2015 new-built station in Japan.",
+        "The official description confirms the three-storey railway and public-bath complex, curved LVL lattice roof and membrane structure visible in the reviewed image."
+      ],
+      "evidence_urls": ["https://shigerubanarchitects.com/works/cultural/onagawa-station/"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:JR_East_Onagawa_Station_building,_Miyagi_Pref_20240420.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Photo: Mister0124 / Wikimedia Commons",
+        "visual_evidence": "Clear frontal exterior shows the Onagawa JR and yupoppo signage, three-storey facade and curved white roof.",
+        "rights_evidence": "MediaWiki API reports own work by Mister0124 under CC BY-SA 4.0."
+      }
+    },
+    {
+      "case_id": "CASE-094",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "takanawa-gateway-station",
+        "name_zh": "高轮 Gateway 站",
+        "name_en": "Takanawa Gateway Station",
+        "name_ja": "高輪ゲートウェイ駅",
+        "year_start": 2020,
+        "city": "东京",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "transportation",
+        "architect_slug": "kengo-kuma",
+        "official_url": "https://kkaa.co.jp/en/project/takanawa-gateway-station/"
+      },
+      "function_slugs": ["transport-hub"],
+      "identity_evidence": [
+        "Kengo Kuma and Associates identifies the completed Tokyo infrastructure project and its large membrane roof supported by origami-shaped steel and cedar frames.",
+        "The station opened in March 2020; the architect page currently lists March 2021 completion for the full project, so year_start remains the public opening year while the evidence note preserves this distinction."
+      ],
+      "evidence_urls": ["https://kkaa.co.jp/en/project/takanawa-gateway-station/"],
+      "image": {
+        "status": "approved_replacement_required",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Takanawa_Gateway_Station_200316a1.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Photo: 江戸村のとくぞう / Wikimedia Commons",
+        "visual_evidence": "Clear daylight exterior shows the station elevation, white membrane roof, steel frame and glazed concourse. The current CASE image is rejected because it primarily shows a night rail yard.",
+        "rights_evidence": "MediaWiki API reports own work by 江戸村のとくぞう under CC BY-SA 4.0."
+      }
+    },
+    {
+      "case_id": "CASE-133",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "yokohama-international-passenger-terminal",
+        "name_zh": "横滨国际客运码头",
+        "name_en": "Yokohama International Passenger Terminal",
+        "name_ja": "横浜港大さん橋国際客船ターミナル",
+        "year_start": 2002,
+        "city": "横滨",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "transportation",
+        "architect_slug": "foreign-office-architects",
+        "official_url": "https://osanbashi.jp/en/about/"
+      },
+      "function_slugs": ["transport-hub", "mixed-use"],
+      "identity_evidence": [
+        "The terminal operator and City of Yokohama confirm the current seventh-generation international passenger terminal completed in 2002, with a public rooftop plaza and passenger facilities.",
+        "JA and MoMA identify Foreign Office Architects, Farshid Moussavi and Alejandro Zaera-Polo as the design authors."
+      ],
+      "evidence_urls": [
+        "https://osanbashi.jp/en/about/",
+        "https://www.city.yokohama.lg.jp/lang/overseas/port/about_us/outline/osanbashi.html",
+        "https://backnumber.japan-architect.co.jp/english/2maga/ja/ja0048/work/19.html",
+        "https://www.moma.org/collection/works/95092"
+      ],
+      "image": {
+        "status": "approved_metadata_correction_required",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Yokohama_International_Passenger_Terminal_11.jpg",
+        "license": "CC0",
+        "credit": "Photo: Syced / Wikimedia Commons",
+        "visual_evidence": "Exact rooftop plaza view shows the terminal's continuous timber public landscape, folded roof forms and cruise-ship berth.",
+        "rights_evidence": "MediaWiki API reports own work by Syced dedicated under CC0."
+      }
+    }
+  ]
+}
