@@ -8,8 +8,8 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(101)
-    expect(payload.diagnostics.profileCount).toBe(76)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(76)
+    expect(payload.diagnostics.profileCount).toBe(77)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(77)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
       'CASE-018',
       'CASE-021',
@@ -66,12 +66,13 @@ test.describe('graduation Supabase + JSON dual read', () => {
       'CASE-116',
       'CASE-015',
       'CASE-040',
+      'CASE-028',
     ]))
     expect(payload.diagnostics.unifiedCaseIds).not.toContain('CASE-079')
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(76)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(77)
 
     const libraryCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-018')
     expect(libraryCase).toMatchObject({
@@ -162,6 +163,16 @@ test.describe('graduation Supabase + JSON dual read', () => {
       year: 2020,
       image_license: 'CC BY 4.0',
       image_credit: 'Photo: Nesnad / Wikimedia Commons',
+    })
+
+    const shiroiyaCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-028')
+    expect(shiroiyaCase).toMatchObject({
+      name: '白井屋酒店',
+      location: '前桥 日本',
+      architect: 'Sou Fujimoto',
+      year: 2020,
+      image_license: 'CC BY 4.0',
+      image_credit: 'こやまひろ',
     })
   })
 
