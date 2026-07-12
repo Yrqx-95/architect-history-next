@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 new-building social-care/community-support batch 001",
+  "source_queue": "db/review-packets/graduation-new-building-social-care-001.json",
+  "write_status": "reviewed-only; no production insert authorized",
+  "review_method": [
+    "Confirmed whether each record represents a unique built project rather than a programme or service model.",
+    "Compared names, location, architect and source URLs to detect duplicate CASE identities before canonical building creation.",
+    "Confirmed project year, place, programme and design responsibility against current architect, prefecture or institution sources.",
+    "Searched Wikimedia Commons and Openverse for exact reusable project images at low request frequency.",
+    "Rejected unrelated city images and the sole Women's Opportunity Center Openverse result because CC BY-NC-ND is outside the site's accepted reuse policy.",
+    "Recorded official-page photographer credits as copyright evidence, not as permission to reuse those photographs."
+  ],
+  "summary": {
+    "reviewed_cases": 8,
+    "unique_built_projects": 6,
+    "identity_approved_cases": 7,
+    "migration_approved": 0,
+    "no_safe_image_yet_cases": 7,
+    "not_a_single_building": 1,
+    "duplicate_case_pairs": 1,
+    "schema_gap_found": 1
+  },
+  "schema_gap": {
+    "case_ids": ["CASE-024", "CASE-065"],
+    "problem": "The two CASE routes describe the same AU Childcare Support building but retain different graduation concepts and keywords. graduation_case_profiles currently makes building_id unique, so both analyses cannot reference the same canonical building.",
+    "required_resolution": "Keep case_id unique, allow multiple graduation profiles to reference one building_id, add a non-unique building_id index, and preserve both CASE routes. Do not delete or silently merge either analysis."
+  },
+  "decisions": [],
+  "excluded": [
+    {
+      "case_id": "CASE-001",
+      "decision": "no_safe_image_yet",
+      "reason": "GOI confirms Share Kanazawa as a March 2014 integrated welfare and community complex. Exact Commons and Openverse searches returned no reusable project image; results for other Kanazawa buildings were rejected.",
+      "identity_evidence": [
+        "GOI Architecture & Associates records Share Kanazawa as completed in March 2014."
+      ],
+      "evidence_urls": ["https://www.goi.co.jp/building/share_kanazawa/"]
+    },
+    {
+      "case_id": "CASE-011",
+      "decision": "not_a_single_building",
+      "reason": "Toyama Prefecture defines Toyama-style day care as a service model that began with Kono Yubi Tomare in 1993 and spread across many small converted houses. The current generic plural record must not become an invented canonical building.",
+      "required_resolution": "Keep this as a programme-level research reference or replace it with a separately sourced, specifically named facility before any building migration.",
+      "evidence_urls": [
+        "https://www.pref.toyama.jp/1200/chiikikyosei/toyamagata/toyamagata2.html",
+        "https://www.pref.toyama.jp/1200/chiikikyosei/toyamagata/tanjyou.html"
+      ]
+    },
+    {
+      "case_id": "CASE-024",
+      "decision": "duplicate_identity_and_no_safe_image_yet",
+      "duplicate_of_case_id": "CASE-065",
+      "reason": "CASE-024 and CASE-065 have the same AU Childcare Support name, Sasebo location, HIBINOSEKKEI + Youji no Shiro architect and official source. The official page confirms one newly built childcare support facility, while Commons and Openverse returned no exact reusable image and official media has no open license.",
+      "evidence_urls": ["https://e-ensha.com/en-au-childcare-support/"]
+    },
+    {
+      "case_id": "CASE-065",
+      "decision": "duplicate_identity_and_no_safe_image_yet",
+      "duplicate_of_case_id": "CASE-024",
+      "reason": "CASE-065 is a second graduation analysis of the same AU Childcare Support project as CASE-024. Both CASE routes must remain, but neither can migrate until the profile schema supports many analyses per building and a reusable exact image is confirmed.",
+      "evidence_urls": ["https://e-ensha.com/en-au-childcare-support/"]
+    },
+    {
+      "case_id": "CASE-026",
+      "decision": "no_safe_image_yet",
+      "reason": "TD Atelier confirms the 2019–2020 renovation of a former clothing shop in Shingu, Wakayama as the YORIDOKO youth employment support center. Official photography is credited to Matsumura Kohei; Commons and Openverse returned no exact reusable image.",
+      "evidence_urls": ["https://www.td-ms.com/works/yoridoko/index.html"]
+    },
+    {
+      "case_id": "CASE-086",
+      "decision": "no_safe_image_yet",
+      "reason": "Yamazaki Kentaro Design Workshop confirms the Long House with an Engawa as a senior day-care center in Yachiyo. Official photography is credited to Naoomi Kurozumi; Commons and Openverse returned no exact reusable image.",
+      "evidence_urls": ["https://ykdw.org/works/long-house-with-an-engawa/"]
+    },
+    {
+      "case_id": "CASE-087",
+      "decision": "no_safe_image_yet",
+      "reason": "UNEMORI ARCHITECTS confirms the 2021 Kitakami Health & Childcare Support Complex conversion by UNEMORI + teco. Official photography is credited to Kai Nakamura; Commons and Openverse returned no exact reusable image.",
+      "evidence_urls": ["https://unemori-archi.com/?works=kitakami-health-childcare-support-composition-facility"]
+    },
+    {
+      "case_id": "CASE-097",
+      "decision": "no_safe_image_yet",
+      "reason": "Sharon Davis Design confirms the completed 2013 Women's Opportunity Center in Kayonza, Rwanda. Official images are credited to Elizabeth Felicella and Iwan Baan. Commons returned no exact image; Openverse returned one Flickr result under CC BY-NC-ND, which is not accepted for this site's reusable image library.",
+      "evidence_urls": [
+        "https://sharondavisdesign.com/project/womens-opportunity-center-rwanda/",
+        "https://www.flickr.com/photos/123888624@N08/18747541910"
+      ]
+    }
+  ]
+}
