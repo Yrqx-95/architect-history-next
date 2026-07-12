@@ -162,6 +162,10 @@ Transport batch 001 已完成生产写入、发布与线上验收。PR #45 合�
 
 下一个最小可验证步骤：从尚未正式审核的 56 条队列中选择一个用途边界清晰的小批次，只读核验建筑身份、用途、准确图片和开放许可，再决定是否进入 migration 准备。
 
+Urban public-space batch 001 已完成 CASE-014/050/056/110/111 的只读审核。CASE-050/056/110/111 身份与开放图片通过；CASE-014 是跨七区持续整备的防洪与步行系统，缺少边界明确的完成年份和设计作者，禁止虚构 canonical building。CASE-110 的现有署名/许可应由 David Berkowitz / CC BY-SA 3.0 修正为 Beyond My Ken / CC BY-SA 4.0；CASE-111 当前标牌近景准确但封面代表性不足，已选定 Emily / CC BY 2.0 的 Black Square 全景替代。现有细用途缺少城市公共空间，migration 前必须新增四语 `public-space` taxonomy。本阶段 0 生产写入。详见 `GRADUATION_NEW_BUILDING_PUBLIC_SPACE_001_TRIAGE.md`。
+
+下一个最小可验证步骤：同步 CASE-110 元数据和 CASE-111 本地图；建立 `public-space` taxonomy 的 alias 冲突预检、guarded migration/rollback 与隔离 PostgreSQL dry-run。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。

@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 urban public-space batch 001",
+  "source_queue": "db/review-packets/graduation-new-building-public-space-001.json",
+  "write_status": "reviewed-only; no production insert authorized until image corrections, public-space taxonomy, guarded migration and rollback pass isolated PostgreSQL dry-run",
+  "review_method": [
+    "Confirmed identity, place, opening or completion year, design responsibility and public-space program against municipality, client or design-team sources.",
+    "Queried production buildings and target CASE profiles; found zero canonical building or profile conflicts for the five target slugs and CASE IDs.",
+    "Queried Commons through the MediaWiki API for author, provenance, dimensions, current license and source URL.",
+    "Opened all five current images and three Superkilen alternatives for manual content verification.",
+    "Rejected migration of Sumida River Terrace because the CASE describes an evolving multi-district flood-control promenade without a bounded completion year or attributable design author.",
+    "Required a public-space function instead of classifying parks and landscape infrastructure as generic mixed-use buildings."
+  ],
+  "summary": {
+    "reviewed": 5,
+    "identity_approved": 4,
+    "function_approved": 4,
+    "image_approved": 4,
+    "migration_approved": 4,
+    "evidence_gap": 1,
+    "image_replacement_required": 1,
+    "image_metadata_correction_required": 1,
+    "new_function_required": 1
+  },
+  "taxonomy_prerequisite": {
+    "slug": "public-space",
+    "broad_type_slug": "public-space",
+    "reason": "The approved records are primarily parks, promenades or landscape public realms; mixed-use is only a secondary function for Hisaya-odori Park."
+  },
+  "excluded": [
+    {
+      "case_id": "CASE-014",
+      "decision": "identity_not_bounded",
+      "reason": "Tokyo Metropolitan Government describes Sumida River Terrace as an evolving flood-control terrace and nearly continuous promenade across seven wards, with ongoing improvements rather than one bounded project. The current record has no completion year or design author. Creating a single canonical building now would invent false authorship and chronology.",
+      "required_resolution": "Identify a separately named and bounded terrace section with a responsible design body and completion period, or retain the CASE as a system-level research reference outside canonical building migration.",
+      "image_review": {
+        "status": "accurate_but_not_sufficient_for_migration",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sumidagawa-River08080801.jpg",
+        "license": "CC BY-SA 3.0",
+        "credit": "Photo: e97h0017 / Wikimedia Commons",
+        "visual_evidence": "The image accurately shows the Shirahige west-area Sumida River Terrace promenade, embankment and river edge."
+      },
+      "evidence_urls": [
+        "https://www.tokyoupdates.metro.tokyo.lg.jp/en/post-1729/",
+        "https://commons.wikimedia.org/wiki/File:Sumidagawa-River08080801.jpg"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "case_id": "CASE-050",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "hisaya-odori-park",
+        "name_zh": "久屋大通公园",
+        "name_en": "Hisaya-odori Park",
+        "name_ja": "久屋大通公園",
+        "year_start": 2020,
+        "city": "名古屋",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "public-space",
+        "architect_slug": "taisei-design-nikken-sekkei",
+        "official_url": "https://www.mitsuifudosan.co.jp/english/corporate/news/2020/0623/"
+      },
+      "architect": {
+        "name_zh": "大成设计＋日建设计",
+        "name_en": "TAISEI DESIGN + Nikken Sekkei",
+        "name_ja": "大成建設設計本部＋日建設計",
+        "members": ["TAISEI DESIGN Planners Architects & Engineers", "Nikken Sekkei"]
+      },
+      "function_slugs": ["public-space", "mixed-use"],
+      "identity_evidence": [
+        "Nagoya City confirms the north and TV Tower areas reopened in 2020 as an integrated park-and-shops Park-PFI project.",
+        "Mitsui Fudosan identifies Nikken Sekkei and Taisei Corporation for park design, Taisei for architectural design, and Iwama Garden Create for landscaping and planting."
+      ],
+      "evidence_urls": [
+        "https://www.city.nagoya.jp/kankou/kankouinfo/1013766/1013767/1013811/1013812.html",
+        "https://www.mitsuifudosan.co.jp/english/corporate/news/2020/0623/",
+        "https://www.nikken.jp/ja/dbook/nj201806/pageindices/index18.html"
+      ],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Media_Hiroba_of_Hisaya-odori_Park_and_Nagoya_TV_Tower_-_2.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Photo: KKPCW / Wikimedia Commons",
+        "visual_evidence": "Daylight view clearly shows Media Hiroba, the rebuilt park edges and Nagoya TV Tower axis.",
+        "rights_evidence": "MediaWiki API reports own work by KKPCW under CC BY-SA 4.0."
+      }
+    },
+    {
+      "case_id": "CASE-056",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "tainan-spring",
+        "name_zh": "台南河乐广场",
+        "name_en": "Tainan Spring",
+        "name_ja": "台南スプリング",
+        "year_start": 2020,
+        "city": "台南",
+        "country": "台湾",
+        "country_code": "TW",
+        "type_slug": "public-space",
+        "architect_slug": "mvrdv",
+        "official_url": "https://www.mvrdv.com/projects/272/tainan-axis"
+      },
+      "function_slugs": ["public-space"],
+      "identity_evidence": [
+        "MVRDV records a realised 2016–2020 public-space project in Tainan commissioned by the city government.",
+        "The project transformed the former China-Town Mall basement into a sunken plaza and urban pool while retaining concrete fragments of the former structure."
+      ],
+      "evidence_urls": ["https://www.mvrdv.com/projects/272/tainan-axis"],
+      "image": {
+        "status": "approved",
+        "source_url": "https://commons.wikimedia.org/wiki/File:%E8%87%BA%E5%8D%97%E6%B2%B3%E6%A8%82%E5%BB%A3%E5%A0%B4.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Photo: Pbdragonwang / Wikimedia Commons",
+        "visual_evidence": "Elevated overview clearly shows the exact sunken pool, retained white concrete frame and planted public plaza.",
+        "rights_evidence": "MediaWiki API reports own work by Pbdragonwang under CC BY-SA 4.0."
+      }
+    },
+    {
+      "case_id": "CASE-110",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "the-high-line",
+        "name_zh": "纽约高线公园",
+        "name_en": "The High Line",
+        "name_ja": "ハイライン",
+        "year_start": 2009,
+        "city": "纽约",
+        "country": "美国",
+        "country_code": "US",
+        "type_slug": "public-space",
+        "architect_slug": "field-operations-dsr-piet-oudolf",
+        "official_url": "https://www.fieldoperations.net/project/high-line"
+      },
+      "architect": {
+        "name_zh": "Field Operations＋Diller Scofidio + Renfro＋Piet Oudolf",
+        "name_en": "Field Operations + Diller Scofidio + Renfro + Piet Oudolf",
+        "name_ja": "Field Operations＋Diller Scofidio + Renfro＋Piet Oudolf",
+        "members": ["Field Operations", "Diller Scofidio + Renfro", "Piet Oudolf"]
+      },
+      "function_slugs": ["public-space"],
+      "identity_evidence": [
+        "NYC Parks identifies James Corner Field Operations and Diller Scofidio + Renfro as lead design firms and Piet Oudolf as planting adviser.",
+        "Field Operations records the first section opening in June 2009 and the continuing phased public-park project."
+      ],
+      "evidence_urls": [
+        "https://php1-84.nycgovparks.org/parks/the-high-line/history",
+        "https://www.fieldoperations.net/project/high-line"
+      ],
+      "image": {
+        "status": "approved_metadata_correction_required",
+        "source_url": "https://commons.wikimedia.org/wiki/File:High_Line_20th_Street_looking_downtown.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Photo: Beyond My Ken / Wikimedia Commons",
+        "visual_evidence": "The image clearly shows the elevated railway structure, retained railings, planted walking surface and Manhattan context at West 20th Street.",
+        "rights_evidence": "MediaWiki API currently reports own work by Beyond My Ken under CC BY-SA 4.0; the existing David Berkowitz / CC BY-SA 3.0 record is incorrect."
+      }
+    },
+    {
+      "case_id": "CASE-111",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "superkilen",
+        "name_zh": "Superkilen 多元文化公园",
+        "name_en": "Superkilen",
+        "name_ja": "スーパーキーレン",
+        "year_start": 2012,
+        "city": "哥本哈根",
+        "country": "丹麦",
+        "country_code": "DK",
+        "type_slug": "public-space",
+        "architect_slug": "big-topotek1-superflex",
+        "official_url": "https://big.dk/projects/superkilen-1621"
+      },
+      "architect": {
+        "name_zh": "BIG＋Topotek 1＋Superflex",
+        "name_en": "BIG + Topotek 1 + Superflex",
+        "name_ja": "BIG＋Topotek 1＋Superflex",
+        "members": ["Bjarke Ingels Group", "Topotek 1", "Superflex"]
+      },
+      "function_slugs": ["public-space"],
+      "identity_evidence": [
+        "Copenhagen Municipality records Superkilen as a public park established in 2012 by BIG, Superflex and Topotek1.",
+        "BIG identifies Topotek 1 and Superflex as project collaborators; the municipality describes the Red, Black and Green public-space sections."
+      ],
+      "evidence_urls": [
+        "https://big.dk/projects/superkilen-1621",
+        "https://www.kk.dk/dagsordener-og-referater/N%C3%B8rrebro%20Lokaludvalg/m%C3%B8de-20112025/referat/punkt-8"
+      ],
+      "image": {
+        "status": "approved_replacement_required",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Superkilen_hill-top_view.jpg",
+        "license": "CC BY 2.0",
+        "credit": "Photo: Emily / Wikimedia Commons",
+        "visual_evidence": "Wide elevated view clearly shows the Black Square's striped ground plane, hill, multinational furniture and surrounding Nørrebro context. The current close-up sign image is accurate but does not adequately represent the public-space design.",
+        "rights_evidence": "MediaWiki API traces the image to Emily's Flickr upload and reports CC BY 2.0."
+      }
+    }
+  ]
+}
