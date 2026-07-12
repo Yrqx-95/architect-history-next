@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 将生产 E2E 基线更新为 74 并加入 CASE-074/116 canonical 回归断言；合并后运行 Reviewed release 与真实路由验收。
+当前下一步：从剩余 44 条未正式审核记录中选择用途边界清晰的小批次，先完成只读身份、用途与图片许可审核。
 
 ## 最终目标
 
@@ -222,7 +222,9 @@ Retail-led mixed-use batch 002 migration pack 已生成：2 architects（1 new K
 
 Retail-led mixed-use batch 002 生产 migration 已成功执行，实际 version `20260712113024`。总数精确更新为 74 profiles / 928 buildings / 7277 images / 123 assignments；目标 1 new architect / 2 buildings / 2 images / 2 profiles / 5 assignments，orphan、architect mismatch、primary image/function 异常均为 0；两条 profile concept/keywords 保持独立，RLS/policy 与 advisors 正常。尚未运行数据库写后的 Reviewed release。
 
-下一个最小可验证步骤：通过 PR 合并 74-profile E2E 基线和 CASE-074/116 canonical 回归断言；随后运行 Reviewed release 与 12 条页面路由、2 张图片验收。
+Retail-led mixed-use batch 002 已完成生产迁移、发布和线上验收。Supabase migration `graduation_retail_mixed_use_batch_002`（`20260712113024`）新增 1 个 Klein Dytham architect、复用既有 MVRDV，写入 2 buildings / 2 primary images / 2 profiles / 5 assignments；总数更新为 74/928/7277/123，orphan、architect mismatch、primary image/function 异常均为 0，两套 profile concept/keywords 保持独立。PR #71 合并 74-profile E2E 基线与 canonical 回归断言。Reviewed release `29191052908` 成功；6 CASE 路由、6 building 路由、2 图片全部 HTTP 200，API 为 101 cases / 74 profiles / 0 missing。G6 已迁移 53/118，尚未迁移 65；尚未正式审核队列 44。详见 `GRADUATION_RETAIL_MIXED_USE_BATCH_002_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 44 条未正式审核记录中选择用途边界清晰的小批次，只读核验建筑身份、年份、地点、设计者、准确图片、摄影者和开放许可，再决定是否进入 migration 准备。
 
 ### G7 — 统一搜索与筛选
 
