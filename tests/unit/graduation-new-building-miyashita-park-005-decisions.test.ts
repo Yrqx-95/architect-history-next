@@ -18,11 +18,14 @@ describe('graduation new-building Miyashita Park batch 005 decisions', () => {
   it('rejects the current wrong-subject image and approves an exact replacement', () => {
     expect(decisions.decisions[0].current_image.status).toBe('rejected_wrong_subject')
     expect(decisions.decisions[0].image).toMatchObject({
-      status: 'approved_replacement_pending_localization',
+      status: 'approved_existing_local_asset',
       license: 'CC BY 4.0',
       credit: 'Photo: Nesnad / Wikimedia Commons',
       width: 4032,
       height: 3024,
+      local_width: 2000,
+      local_height: 1500,
+      local_sha256: '164a7731ca18c6ac26ed5519873ce9bbc0c1bbc4cd84bf427906a1373483baf2',
     })
   })
 })

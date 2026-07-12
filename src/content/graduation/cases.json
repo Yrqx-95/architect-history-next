@@ -1684,9 +1684,10 @@
     "location_ja": "東京 日本",
     "location_en": "Tokyo Japan",
     "image_url": "/images/graduation/cases/case-040-miyashita-park.jpg",
-    "image_source_url": "https://commons.wikimedia.org/wiki/File:Miyashita_Park_on_a_sunny_day_13.jpg",
-    "image_license": "CC0",
-    "image_credit": "Syced / Wikimedia Commons",
+    "image_source_url": "https://commons.wikimedia.org/wiki/File:Miyashita_Park_2025_May_26_various_01.jpg",
+    "image_license": "CC BY 4.0",
+    "image_credit": "Photo: Nesnad / Wikimedia Commons",
+    "image_note": "Reviewed 2026-07-12: exact MIYASHITA PARK exterior replaces a Tower Records view taken from the park.",
     "plan_url": "",
     "section_url": "",
     "concept": "屋上公园、商业和酒店叠合，重新讨论高密度城市中公共空间与商业的关系。",
@@ -1715,7 +1716,7 @@
     ],
     "source_url": "https://www.nikken.co.jp/en/projects/urban_design_and_planning/miyashita_park.html",
     "year": 2020,
-    "architect": "Nikken Sekkei",
+    "architect": "Takenaka Corporation + Nikken Sekkei",
     "status": "published"
   },
   {
