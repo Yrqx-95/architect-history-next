@@ -150,4 +150,33 @@ describe('graduation JSON + Supabase dual read', () => {
     expect(result.cases.find(item => item.id === 'CASE-002')?.name_en).toBe('JSON-only case')
     expect(result.diagnostics.missingFallbackCaseIds).toEqual(['CASE-003'])
   })
+
+  it('keeps two CASE analyses that reference the same canonical building', () => {
+    const secondFallback: GraduationCase = {
+      ...fallback,
+      id: 'CASE-065',
+      concept: '第二套旧分析',
+      keywords: ['旧关键词二'],
+    }
+    const secondProfile: GraduationProfileRow = {
+      ...profile,
+      case_id: 'CASE-065',
+      concept_zh: '同一建筑的第二套毕业研究分析。',
+      keywords_zh: ['育儿', '土间'],
+    }
+    const result = mergeGraduationCases({
+      fallbackCases: [fallback, secondFallback],
+      profiles: [profile, secondProfile],
+      buildings: [building],
+      architects: [architect],
+      images: [safeImage],
+    })
+
+    expect(result.cases.map(item => item.id)).toEqual(['CASE-001', 'CASE-065'])
+    expect(result.cases.map(item => item.name_en)).toEqual(['Canonical Library', 'Canonical Library'])
+    expect(result.cases[0].concept).toBe(profile.concept_zh)
+    expect(result.cases[1].concept).toBe(secondProfile.concept_zh)
+    expect(result.cases[1].keywords).toEqual(secondProfile.keywords_zh)
+    expect(result.diagnostics.unifiedCaseIds).toEqual(['CASE-001', 'CASE-065'])
+  })
 })

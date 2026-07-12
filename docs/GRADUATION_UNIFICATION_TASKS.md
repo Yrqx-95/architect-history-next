@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：先修复审核中新发现的统一结构缺口：`graduation_case_profiles` 必须允许多个 CASE profile 引用同一个 canonical building，同时保持 `case_id` 唯一和所有 CASE 路由。以独立 schema migration、rollback、隔离 dry-run、RLS/查询回归完成后，再继续 `G6`。Social-care batch 001 没有图片安全的迁移候选。
+当前下一步：合并并应用 V24 profile many-to-one schema migration。生产写前确认 62 profiles / 62 distinct buildings；写后确认 CASE 主键与 building 外键保留、building_id 改为普通索引、RLS/policy/权限和行数不变，再执行 Reviewed production release。随后继续 `G6`。
 
 ## 最终目标
 
@@ -143,6 +143,8 @@ CASE-096 migration pack 与全历史 dry-run 已完成。生成包包含 1 个�
 Community/civic batch 001 已完成生产迁移与发布。Supabase migration `graduation_community_civic_batch_001`（`20260712023102`）写入 1 个新联合 architect、CASE-096 building、1 primary image、1 published profile 和 3 approved assignments；写后 profile 总数为 62，本批计数符合预期，三类真实 orphan 均为 0。PR #36 将生产基线从 61 更新为 62；Reviewed production release `29176957382` 的质量门、完整测试、Cloudflare deploy 和路由语义检查全部通过。线上 API 为 101 个公开案例、62 unified profiles、0 missing relation；CASE-096 页面、主体建筑页与 313521-byte CC BY-SA 4.0 图片均 HTTP 200。G6 当前完成 41/118，剩余 77；8 条案例保持 `no_safe_image_yet`。详见 `GRADUATION_COMMUNITY_CIVIC_BATCH_001_PRODUCTION.md`。
 
 Social-care/community-support batch 001 已完成 8 条只读审核，0 条进入迁移。CASE-001/026/086/087/097 的建筑身份与用途成立，但无准确开放图片；CASE-097 唯一 Openverse 图为 CC BY-NC-ND，按版权规则拒绝。CASE-011 是富山县推广的服务模式而非单一建筑，禁止虚构 canonical building。CASE-024 与 CASE-065 被确认是同一 AU Childcare Support 建筑的两套不同毕业分析，暴露出 `graduation_case_profiles.building_id UNIQUE` 与目标不一致：必须允许多个 CASE profile 引用同一 building，并保留两条 CASE 路由。本批没有生产写入，G6 完成数仍为 41/118。详见 `GRADUATION_NEW_BUILDING_SOCIAL_CARE_001_TRIAGE.md`。
+
+V24 profile many-to-one schema pack 已完成。Forward 只移除 `building_id` 唯一约束并新增普通反查索引；CASE 主键、building 外键、RLS、published-only policy 与权限不变。Rollback 在同一 building 已有多个 CASE 时明确拒绝，避免删除或覆盖分析。隔离 PostgreSQL 验证两个 CASE 共用一栋建筑且各自 concept/keywords 保留，anon published 读取、拒绝式 rollback、精确 rollback 与第二次 forward 全部通过；运行时合并函数也新增相同关系回归测试。生产尚未写入。详见 `GRADUATION_PROFILE_MANY_TO_ONE_DRY_RUN.md`。
 
 ### G7 — 统一搜索与筛选
 
