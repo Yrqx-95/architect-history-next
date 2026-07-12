@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：继续审核剩余 40 条 G6 队列，优先建筑本体边界清晰、图片对象准确且权利完整的案例。
+当前下一步：通过 PR 合并 CASE-028 Shiroiya Hotel 只读审核；随后建立多语言 `hotel` function taxonomy。
 
 ## 最终目标
 
@@ -246,7 +246,9 @@ CASE-040 生产 migration 已成功执行，实际 version `20260712124927`。�
 
 MIYASHITA PARK batch 005 已完成生产迁移、双阶段发布和线上验收。Supabase migration `graduation_miyashita_park_batch_005`（`20260712124927`）写入 1 joint architect / 1 building / 1 primary image / 1 profile / 3 assignments；总数更新为 76/930/7279/127，关系异常为 0。静态 release `29192872574` 与最终 release `29193418710` 均成功；3 CASE、3 building 与图片全部 HTTP 200，API 为 101 cases / 76 profiles / 0 missing，并返回准确联合建筑师与 Nesnad / CC BY 4.0 署名。G6 已迁移 55/118，尚未迁移 63；尚未正式审核队列 40。详见 `GRADUATION_MIYASHITA_PARK_BATCH_005_PRODUCTION.md`。
 
-下一个最小可验证步骤：从剩余 40 条中选择建筑本体边界清晰、图片对象准确且摄影者/来源/开放许可完整的小批次，先做只读审核。
+Shiroiya Hotel batch 006 已完成 CASE-028 的只读审核。官方确认项目由既有主楼改造与新建 Green Tower 共同组成同一酒店复合体，Sou Fujimoto 设计、2020 年完成、位于前桥。Commons 图为 こやまひろ 自有作品、2000×1500、CC BY 4.0，人工确认准确。生产可复用 `fujimoto`，building/profile conflict 均为 0，但缺少 `hotel`/`hospitality` function；不能只用 mixed-use 或 retail 隐藏核心住宿用途。本批批准在新增 `hotel` taxonomy 后迁移；G6 已迁移仍为 55/118，尚未正式审核队列从 40 减至 39。详见 `GRADUATION_NEW_BUILDING_SHIROIYA_HOTEL_006_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 合并审核决策；随后建立 `hotel` 中英日多语言 taxonomy、guarded migration、rollback 与隔离 PostgreSQL dry-run。
 
 ### G7 — 统一搜索与筛选
 
