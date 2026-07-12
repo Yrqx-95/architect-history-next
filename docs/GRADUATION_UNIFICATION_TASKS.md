@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：合并 transport batch 001 migration pack；生产冲突复查后应用 migration，运行 advisors、写后关系/RLS/数量核验和 Reviewed production release，并验证 3 CASE + 3 building 路由。
+当前下一步：合并 transport batch 001 的 65-profile 生产测试基线；随后运行最终 Reviewed production release，并验证 3 CASE + 3 building 路由。
 
 ## 最终目标
 
@@ -158,7 +158,9 @@ Transport-hub taxonomy 001 已完成生产迁移与发布。PR #44 合并 taxono
 
 Transport batch 001 migration pack 已生成：1 new architect、3 buildings、3 primary images、3 published profiles、5 assignments。生产只读预检为 0 building/image/profile/architect conflict，required functions 2/2、type 1/1。隔离 PostgreSQL 18.3 全历史重放、两次 forward/rollback 与外部 relation guard 全部通过。详见 `GRADUATION_TRANSPORT_BATCH_001_DRY_RUN.md`。
 
-下一个最小可验证步骤：通过 PR 合并 transport migration pack；生产复查、写入、发布和六条路由验收。
+Transport batch 001 已完成生产写入。PR #45 合并生成包后，第二次生产冲突复查仍为 0；Supabase migration `graduation_transport_batch_001`（`20260712055147`）写入 1 architect、3 buildings、3 primary images、3 profiles 与 5 assignments。生产总数从 62/916/7265/101 更新为 65 profiles / 919 buildings / 7268 images / 106 assignments；本批 3 条 primary `transport-hub` 全部存在，orphan、architect mismatch、duplicate primary image/function 均为 0。RLS/policy 保持，advisors 无本迁移新增问题。最终 Reviewed production release 尚待 65-profile 测试基线合并后执行。
+
+下一个最小可验证步骤：通过 PR 合并 65-profile 生产测试基线；运行最终 release 和六条路由验收。
 
 ### G7 — 统一搜索与筛选
 
