@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-yu-no-eki-ohyu-batch-008",
+  "generated_at": "2026-07-12T23:06:31.609Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "transport-hub, community-center, retail and public-space functions remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 1,
+    "new_architects": 0,
+    "buildings": 1,
+    "images": 1,
+    "profiles": 1,
+    "assignments": 4
+  },
+  "architects": [
+    {
+      "id": "51797239-be38-4dbd-9d7e-e413ddf3c78a",
+      "slug": "kengo-kuma",
+      "name_zh": "隈研吾",
+      "name_en": "Kengo Kuma",
+      "name_ja": "隈研吾",
+      "official_url": null,
+      "is_new": false
+    }
+  ],
+  "buildings": [
+    {
+      "id": "b038e5a2-c92f-5fa5-96bf-6605e1422e79",
+      "case_id": "CASE-033",
+      "slug": "yu-no-eki-ohyu",
+      "name_zh": "大湯道路休息站",
+      "name_en": "Yu no Eki Ohyu",
+      "name_ja": "湯の駅おおゆ",
+      "year_start": 2018,
+      "city": "鹿角",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "transportation",
+      "architect_slug": "kengo-kuma",
+      "official_url": "https://kkaa.co.jp/en/project/yu-no-eki-ohyu/",
+      "architect_id": "51797239-be38-4dbd-9d7e-e413ddf3c78a",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "f0b47ee2-f7cd-591a-a578-676c4fbc7356",
+      "building_id": "b038e5a2-c92f-5fa5-96bf-6605e1422e79",
+      "building_slug": "yu-no-eki-ohyu",
+      "case_id": "CASE-033",
+      "url_original": "/images/graduation/cases/case-033-yu-no-eki-ohyu.jpg",
+      "photographer": "掬茶",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Roadside_Station_Oyu_20180915a.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-033",
+      "building_id": "b038e5a2-c92f-5fa5-96bf-6605e1422e79",
+      "building_slug": "yu-no-eki-ohyu",
+      "concept_zh": "店铺、咖啡、露天剧场、公园、足汤和生态水景被放在同一大屋顶下。",
+      "concept_zh_hant": null,
+      "concept_en": "Yu no Eki Ohyu is a reference case for reading Design topic: 温泉街, Design topic: 足汤, local food, tourism. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "温泉街の足湯、食、観光案内を組み合わせた小さな滞在拠点。短時間の休憩を地域交流へつなげる設計として読める。",
+      "keywords_zh": [
+        "温泉街",
+        "足汤",
+        "地域食",
+        "旅游",
+        "健康"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "Design topic: 温泉街",
+        "Design topic: 足汤",
+        "local food",
+        "tourism",
+        "health"
+      ],
+      "keywords_ja": [
+        "温泉街",
+        "足湯",
+        "地域食",
+        "観光",
+        "健康"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://kkaa.co.jp/en/project/yu-no-eki-ohyu/",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "b038e5a2-c92f-5fa5-96bf-6605e1422e79",
+      "building_slug": "yu-no-eki-ohyu",
+      "function_slug": "transport-hub",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://kkaa.co.jp/en/project/yu-no-eki-ohyu/",
+      "evidence_note": "Kengo Kuma and Associates identifies Yu no Eki Ohyu as a completed 2018 Akita project of 1,026 square metres and one floor. The architect describes it as a community center combining a shop, cafe, open-air theater, park, footbath and biotope beneath one large roof. Kazuno City identifies the same facility as Michi-no-Eki Oyu at Towada Oyu Aza Nakayachi 19, with roadside-station parking, charging, 24-hour toilets, market, cafe and footbath. The attached open-air theater is one secondary space and does not make the whole facility a theatre.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b038e5a2-c92f-5fa5-96bf-6605e1422e79",
+      "building_slug": "yu-no-eki-ohyu",
+      "function_slug": "community-center",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://kkaa.co.jp/en/project/yu-no-eki-ohyu/",
+      "evidence_note": "Kengo Kuma and Associates identifies Yu no Eki Ohyu as a completed 2018 Akita project of 1,026 square metres and one floor. The architect describes it as a community center combining a shop, cafe, open-air theater, park, footbath and biotope beneath one large roof. Kazuno City identifies the same facility as Michi-no-Eki Oyu at Towada Oyu Aza Nakayachi 19, with roadside-station parking, charging, 24-hour toilets, market, cafe and footbath. The attached open-air theater is one secondary space and does not make the whole facility a theatre.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b038e5a2-c92f-5fa5-96bf-6605e1422e79",
+      "building_slug": "yu-no-eki-ohyu",
+      "function_slug": "retail",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://kkaa.co.jp/en/project/yu-no-eki-ohyu/",
+      "evidence_note": "Kengo Kuma and Associates identifies Yu no Eki Ohyu as a completed 2018 Akita project of 1,026 square metres and one floor. The architect describes it as a community center combining a shop, cafe, open-air theater, park, footbath and biotope beneath one large roof. Kazuno City identifies the same facility as Michi-no-Eki Oyu at Towada Oyu Aza Nakayachi 19, with roadside-station parking, charging, 24-hour toilets, market, cafe and footbath. The attached open-air theater is one secondary space and does not make the whole facility a theatre.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b038e5a2-c92f-5fa5-96bf-6605e1422e79",
+      "building_slug": "yu-no-eki-ohyu",
+      "function_slug": "public-space",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://kkaa.co.jp/en/project/yu-no-eki-ohyu/",
+      "evidence_note": "Kengo Kuma and Associates identifies Yu no Eki Ohyu as a completed 2018 Akita project of 1,026 square metres and one floor. The architect describes it as a community center combining a shop, cafe, open-air theater, park, footbath and biotope beneath one large roof. Kazuno City identifies the same facility as Michi-no-Eki Oyu at Towada Oyu Aza Nakayachi 19, with roadside-station parking, charging, 24-hour toilets, market, cafe and footbath. The attached open-air theater is one secondary space and does not make the whole facility a theatre.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}

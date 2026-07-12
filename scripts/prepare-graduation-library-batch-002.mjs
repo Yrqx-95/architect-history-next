@@ -188,6 +188,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=acros-fukuoka-007)',
     required_functions_note: 'mixed-use, theatre, retail and public-space functions remain active',
   },
+  'yu-no-eki-ohyu-008': {
+    batch_id: 'graduation-yu-no-eki-ohyu-batch-008',
+    decision_path: 'db/review-decisions/graduation-new-buildings-yu-no-eki-ohyu-008.json',
+    output_path: 'db/review-packets/graduation-yu-no-eki-ohyu-batch-008.json',
+    apply_path: 'db/manual-operations/graduation-yu-no-eki-ohyu-batch-008-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-yu-no-eki-ohyu-batch-008-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'transport-hub',
+    interior_case_ids: [],
+    sql_title: 'Graduation Yu no Eki Ohyu batch 008',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=yu-no-eki-ohyu-008)',
+    required_functions_note: 'transport-hub, community-center, retail and public-space functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)

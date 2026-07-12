@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 固化 CASE-033 Yu no Eki Ohyu batch 008 只读审核决策；合并后才准备 guarded migration、rollback 与全历史隔离 PostgreSQL dry-run。
+当前下一步：运行 CASE-033 migration pack 的完整质量门；通过后以独立 PR 合并，生产写入前重复冲突预检。
 
 ## 最终目标
 
@@ -279,6 +279,10 @@ CASE-016 ACROS Fukuoka batch 007 已完成生产迁移、发布和线上验收�
 Yu no Eki Ohyu batch 008 已完成 CASE-033 的正式只读审核。Kengo Kuma 官方确认项目为 2018 年秋田县鹿角市、1,026 m² 的 community center，组合 shop、café、open-air theater、park、footbath 和 biotope；鹿角市确认其法定道路休息站身份、地址、停车、充电、24 小时厕所、市场和足汤。broad type 决定为 `transportation`，functions 为 `transport-hub` primary、`community-center`/`retail`/`public-space` secondary；不因附属露天活动空间误加 `theatre`。Commons 原图为掬茶 own work、6000×3376、CC BY-SA 4.0；仓库 1600×900 文件人工确认准确展示建筑主体。生产可复用 `kengo-kuma`，target building/profile conflict 0，required functions 4/4、type 1/1；尚未生成 migration 或写生产。G6 已迁移仍为 57/118，尚未迁移 61；尚未正式审核队列从 38 减至 37。详见 `GRADUATION_NEW_BUILDING_YU_NO_EKI_OHYU_008_TRIAGE.md`。
 
 下一个最小可验证步骤：通过 PR 固化 CASE-033 只读决策；合并后同步 compatibility architect，生成 1 building / 1 primary image / 1 profile / 4 assignments 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。
+
+CASE-033 Yu no Eki Ohyu batch 008 migration pack 已生成。兼容数据 architect 已从 `Kengo Kuma and Associates` 对齐为 canonical `Kengo Kuma`；migration 复用既有 `kengo-kuma`，建立 1 building / 1 primary image / 1 profile / 4 assignments，`transport-hub` primary，`community-center`、`retail`、`public-space` secondary。全历史隔离 PostgreSQL 18.3 已重放至 ACROS Fukuoka，forward、外部 curated-image rollback guard、精确 rollback/replay 全部通过。Supabase migration `20260712230644_graduation_yu_no_eki_ohyu_batch_008.sql` 由项目内 CLI 创建并与 reviewed apply SQL 字节一致。生产基线 78/932/7281/133，预期写后 79/933/7282/137；尚未生产写入。详见 `GRADUATION_YU_NO_EKI_OHYU_BATCH_008_DRY_RUN.md`。
+
+下一个最小可验证步骤：运行 unit、graduation QA、typecheck、lint、图片 QA 与 `git diff --check`；通过 PR 合并 migration pack 后立即重复生产冲突预检，仍为 0 才允许 apply。
 
 ### G7 — 统一搜索与筛选
 
