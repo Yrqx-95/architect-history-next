@@ -144,7 +144,9 @@ Community/civic batch 001 已完成生产迁移与发布。Supabase migration `g
 
 Social-care/community-support batch 001 已完成 8 条只读审核，0 条进入迁移。CASE-001/026/086/087/097 的建筑身份与用途成立，但无准确开放图片；CASE-097 唯一 Openverse 图为 CC BY-NC-ND，按版权规则拒绝。CASE-011 是富山县推广的服务模式而非单一建筑，禁止虚构 canonical building。CASE-024 与 CASE-065 被确认是同一 AU Childcare Support 建筑的两套不同毕业分析，暴露出 `graduation_case_profiles.building_id UNIQUE` 与目标不一致：必须允许多个 CASE profile 引用同一 building，并保留两条 CASE 路由。本批没有生产写入，G6 完成数仍为 41/118。详见 `GRADUATION_NEW_BUILDING_SOCIAL_CARE_001_TRIAGE.md`。
 
-V24 profile many-to-one schema pack 已完成。Forward 只移除 `building_id` 唯一约束并新增普通反查索引；CASE 主键、building 外键、RLS、published-only policy 与权限不变。Rollback 在同一 building 已有多个 CASE 时明确拒绝，避免删除或覆盖分析。隔离 PostgreSQL 验证两个 CASE 共用一栋建筑且各自 concept/keywords 保留，anon published 读取、拒绝式 rollback、精确 rollback 与第二次 forward 全部通过；运行时合并函数也新增相同关系回归测试。生产尚未写入。详见 `GRADUATION_PROFILE_MANY_TO_ONE_DRY_RUN.md`。
+V24 profile many-to-one schema 已完成生产迁移与发布。PR #39 合并 guarded forward/rollback、隔离 PostgreSQL 共享建筑演练和运行时回归测试；Supabase migration `graduation_profile_many_to_one`（`20260712042433`）只移除 `building_id` 唯一约束并新增普通反查索引，未修改任何数据。写后仍为 62 profiles / 62 distinct buildings / 0 duplicate refs，CASE 主键、building 外键、RLS 与 published-only policy 均未变。Reviewed production release `29179669891` 的质量门、完整测试、Cloudflare deploy 与路由语义检查全部通过；线上 API 为 101 个公开案例、62 profiles、0 missing relation。数据库现已允许多个 CASE 保留独立分析并引用同一 canonical building。详见 `GRADUATION_PROFILE_MANY_TO_ONE_DRY_RUN.md` 与 `GRADUATION_PROFILE_MANY_TO_ONE_PRODUCTION.md`。
+
+下一个最小可验证步骤：继续 G6 下一个用途批次；在首个真实重复案例入库前，先扩展批次生成器支持多个 CASE 复用同一已有 building，不要再创建重复建筑。
 
 ### G7 — 统一搜索与筛选
 
