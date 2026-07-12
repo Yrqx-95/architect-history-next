@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 new-building disaster/community batch 001",
+  "source_queue": "db/review-packets/graduation-new-building-disaster-community-001.json",
+  "write_status": "reviewed-only; no production insert authorized because no exact open-license built-project image is available",
+  "review_method": [
+    "Compared both CASE records against the current Home For All project page and Shelter construction record.",
+    "Matched project name, Rikuzentakata location, 30.18 square metre footprint, 29.96 square metre floor area, two-storey wood structure and the same four design practices.",
+    "Kept the 2012 completion and recorded dismantling in 2016 and reconstruction near Rikuzentakata Station in 2022 as canonical history rather than a second building.",
+    "Reconfirmed that prior Commons and Openverse candidates show the Venice Biennale exhibition or models rather than the completed building.",
+    "Treated official project photography as identity evidence only because no open reuse license is stated."
+  ],
+  "summary": {
+    "reviewed": 2,
+    "identity_approved": 2,
+    "shared_canonical_groups": 1,
+    "migration_approved": 0,
+    "no_safe_image_yet": 2
+  },
+  "shared_identity": {
+    "canonical_slug": "home-for-all-rikuzentakata",
+    "case_ids": ["CASE-037", "CASE-090"],
+    "conclusion": "same_built_project_distinct_graduation_analyses",
+    "canonical_building": {
+      "name_zh": "陆前高田大家之家",
+      "name_en": "Home-for-All in Rikuzentakata",
+      "name_ja": "陸前高田のみんなの家",
+      "year_start": 2012,
+      "city": "陆前高田",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "community",
+      "architect_slug": "toyo-ito-kumiko-inui-sou-fujimoto-akihisa-hirata",
+      "official_url": "https://www.home-for-all.org/rikuzentakata",
+      "history_note": "Completed in November 2012, dismantled in 2016 for land-raising works, and reconstructed near Rikuzentakata Station in 2022 using retained salt-damaged cedar columns."
+    },
+    "function_slugs": ["community-center"],
+    "identity_evidence_urls": [
+      "https://www.home-for-all.org/rikuzentakata",
+      "https://en.shelter.inc/our-works/home-for-all-in-rikuzentakata/"
+    ]
+  },
+  "decisions": [
+    {
+      "case_id": "CASE-037",
+      "decision": "duplicate_identity_and_no_safe_image_yet",
+      "canonical_slug": "home-for-all-rikuzentakata",
+      "profile_policy": "retain_case_route_concept_and_keywords",
+      "image_status": "no_safe_image_yet",
+      "reason": "Identity is confirmed, but no exact open-license photograph of the completed or reconstructed building is available. Exhibition and model images are not acceptable covers."
+    },
+    {
+      "case_id": "CASE-090",
+      "decision": "duplicate_identity_and_no_safe_image_yet",
+      "canonical_slug": "home-for-all-rikuzentakata",
+      "profile_policy": "retain_case_route_concept_and_keywords",
+      "image_status": "no_safe_image_yet",
+      "reason": "This is the same built project as CASE-037 with a separate graduation analysis. It must reuse one canonical building after a safe image is found."
+    }
+  ]
+}

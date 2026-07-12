@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：合并并应用 V24 profile many-to-one schema migration。生产写前确认 62 profiles / 62 distinct buildings；写后确认 CASE 主键与 building 外键保留、building_id 改为普通索引、RLS/policy/权限和行数不变，再执行 Reviewed production release。随后继续 `G6`。
+当前下一步：完成共享 canonical building 批次生成器升级的 PR；随后继续 `G6` 下一个边界清晰的用途批次。`CASE-037` / `CASE-090` 已确认是同一陆前高田 Home-for-All 建成项目，但因没有准确且开放许可安全的建筑照片继续保持 `no_safe_image_yet`，不生成 migration。
 
 ## 最终目标
 
@@ -146,7 +146,9 @@ Social-care/community-support batch 001 已完成 8 条只读审核，0 条进�
 
 V24 profile many-to-one schema 已完成生产迁移与发布。PR #39 合并 guarded forward/rollback、隔离 PostgreSQL 共享建筑演练和运行时回归测试；Supabase migration `graduation_profile_many_to_one`（`20260712042433`）只移除 `building_id` 唯一约束并新增普通反查索引，未修改任何数据。写后仍为 62 profiles / 62 distinct buildings / 0 duplicate refs，CASE 主键、building 外键、RLS 与 published-only policy 均未变。Reviewed production release `29179669891` 的质量门、完整测试、Cloudflare deploy 与路由语义检查全部通过；线上 API 为 101 个公开案例、62 profiles、0 missing relation。数据库现已允许多个 CASE 保留独立分析并引用同一 canonical building。详见 `GRADUATION_PROFILE_MANY_TO_ONE_DRY_RUN.md` 与 `GRADUATION_PROFILE_MANY_TO_ONE_PRODUCTION.md`。
 
-下一个最小可验证步骤：继续 G6 下一个用途批次；在首个真实重复案例入库前，先扩展批次生成器支持多个 CASE 复用同一已有 building，不要再创建重复建筑。
+Disaster/community batch 001 已完成 CASE-037/090 的只读身份与图片审核。Home For All 与 Shelter 的一手记录在地点、面积、木造二层、2012 年 11 月完成、四个设计事务所及施工方字段一致，确认两条 CASE 是同一 `Home-for-All in Rikuzentakata` 建成项目的不同毕业分析；2016 拆除及 2022 近陆前高田站重建作为同一建筑历史记录，不另建主体。既有开放图片仍只是威尼斯双年展展览或模型，官方建成图片没有开放许可，因此 2 条均为 `no_safe_image_yet`、0 migration。生成器已在独立分支增加 existing building UUID/slug 精确复用、独立多 profile、跳过重复 building/architect/image/function、共享引用 rollback 保护，并通过 110 unit tests 与四个历史批次的隔离 PostgreSQL 18.3 回归。详见 `GRADUATION_NEW_BUILDING_DISASTER_COMMUNITY_001_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 合并共享 building 生成器升级；不迁移 CASE-037/090，继续 G6 下一个用途批次。
 
 ### G7 — 统一搜索与筛选
 

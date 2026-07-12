@@ -209,7 +209,12 @@ assert(
   `Excluded CASE set does not match ${batchConfig.expected_excluded.join(', ') || 'the expected empty set'}`,
 )
 
-const architectSlugs = [...new Set(decisions.decisions.map(item => item.canonical_building.architect_slug))]
+const migrationMode = item => item.migration_mode || 'create_canonical_building'
+const createDecisions = decisions.decisions.filter(item => migrationMode(item) === 'create_canonical_building')
+const reuseDecisions = decisions.decisions.filter(item => migrationMode(item) === 'reuse_existing_canonical_building')
+assert(createDecisions.length + reuseDecisions.length === decisions.decisions.length, 'Unsupported migration_mode in reviewed decisions')
+
+const architectSlugs = [...new Set(createDecisions.map(item => item.canonical_building.architect_slug))]
 const architects = architectSlugs.map(slug => {
   const existing = architectsBySlug.get(slug)
   if (existing) {
@@ -229,7 +234,7 @@ const architects = architectSlugs.map(slug => {
 })
 const architectBySlug = new Map(architects.map(item => [item.slug, item]))
 
-const buildings = decisions.decisions.map(item => {
+const buildings = createDecisions.map(item => {
   const source = casesById.get(item.case_id)
   const canonical = item.canonical_building
   const architect = architectBySlug.get(canonical.architect_slug)
@@ -246,8 +251,15 @@ const buildings = decisions.decisions.map(item => {
   }
 })
 const buildingByCaseId = new Map(buildings.map(item => [item.case_id, item]))
+for (const item of reuseDecisions) {
+  const canonical = item.canonical_building
+  const existing = productionBuildings.find(building => building.slug === canonical.slug)
+  assert(existing, `${item.case_id} cannot reuse missing production building ${canonical.slug}`)
+  assert(existing.id === canonical.id, `${item.case_id} existing building UUID drift for ${canonical.slug}`)
+  buildingByCaseId.set(item.case_id, { ...existing, case_id: item.case_id, reuse_existing: true })
+}
 
-const images = decisions.decisions.map(item => {
+const images = createDecisions.map(item => {
   const source = casesById.get(item.case_id)
   const building = buildingByCaseId.get(item.case_id)
   assert(source && building, `Missing image source for ${item.case_id}`)
@@ -291,9 +303,15 @@ const profiles = decisions.decisions.map(item => {
     publication_status: 'published',
   }
 })
+const reusedBuildings = [...new Map(
+  reuseDecisions.map(item => {
+    const building = buildingByCaseId.get(item.case_id)
+    return [building.id, { id: building.id, slug: building.slug }]
+  }),
+).values()]
 
 const knownFunctionSlugs = new Set(productionFunctions.map(item => item.slug))
-const assignments = decisions.decisions.flatMap(item => {
+const assignments = createDecisions.flatMap(item => {
   const building = buildingByCaseId.get(item.case_id)
   assert(building, `Missing assignment building for ${item.case_id}`)
   return item.function_slugs.map(functionSlug => {
@@ -314,7 +332,7 @@ const assignments = decisions.decisions.flatMap(item => {
 assert(new Set(buildings.map(item => item.id)).size === buildings.length, 'Building UUID collision')
 assert(new Set(images.map(item => item.id)).size === images.length, 'Image UUID collision')
 assert(new Set(profiles.map(item => item.case_id)).size === profiles.length, 'Profile CASE collision')
-const expectedAssignmentCount = decisions.decisions.reduce((total, item) => total + item.function_slugs.length, 0)
+const expectedAssignmentCount = createDecisions.reduce((total, item) => total + item.function_slugs.length, 0)
 assert(assignments.length === expectedAssignmentCount, `Expected ${expectedAssignmentCount} assignments, found ${assignments.length}`)
 assert(new Set(assignments.map(item => `${item.building_id}:${item.function_slug}`)).size === assignments.length, 'Assignment collision')
 
@@ -325,7 +343,7 @@ const pack = {
   mode: 'reviewed-dry-run-output-no-database-write',
   prerequisites: [
     'graduation unification foundation and batch 001 are applied',
-    'all target UUIDs, slugs, CASE IDs and image source URLs are absent',
+    'all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production',
     batchConfig.required_functions_note,
     'existing architect UUID/slug pairs still match production',
   ],
@@ -333,12 +351,17 @@ const pack = {
     architects: architects.length,
     new_architects: architects.filter(item => item.is_new).length,
     buildings: buildings.length,
+    ...(reusedBuildings.length ? {
+      reused_buildings: reusedBuildings.length,
+      reused_building_profiles: reuseDecisions.length,
+    } : {}),
     images: images.length,
     profiles: profiles.length,
     assignments: assignments.length,
   },
   architects,
   buildings,
+  reused_buildings: reusedBuildings,
   images,
   profiles,
   assignments,
@@ -352,11 +375,14 @@ fs.writeFileSync(ROLLBACK_SQL, buildRollbackSql(pack))
 console.log(`Prepared ${pack.batch_id}: ${JSON.stringify(pack.counts)}`)
 
 function buildApplySql(pack) {
+  const reusedBuildingCount = pack.counts.reused_buildings || 0
   const architectValues = pack.architects.map(item => `  (${sqlText(item.id)}::uuid, ${sqlText(item.slug)}, ${sqlNullable(item.name_zh)}, ${sqlText(item.name_en)}, ${sqlNullable(item.name_ja)}, ${sqlNullable(item.official_url)}, ${item.is_new})`).join(',\n')
   const buildingValues = pack.buildings.map(item => `  (${sqlText(item.id)}::uuid, ${sqlText(item.case_id)}, ${sqlText(item.slug)}, ${sqlNullable(item.name_zh)}, ${sqlText(item.name_en)}, ${sqlNullable(item.name_ja)}, ${sqlText(item.architect_id)}::uuid, ${sqlText(item.architect_slug)}, ${item.year_start}, ${sqlText(item.status)}, ${sqlText(item.city)}, ${sqlText(item.country)}, ${sqlText(item.country_code)}, ${sqlText(item.type_slug)}, ${sqlText(item.official_url)})`).join(',\n')
   const imageValues = pack.images.map(item => `  (${sqlText(item.id)}::uuid, ${sqlText(item.building_id)}::uuid, ${sqlText(item.building_slug)}, ${sqlText(item.case_id)}, ${sqlText(item.url_original)}, ${sqlText(item.photographer)}, ${sqlText(item.source)}, ${sqlText(item.license)}, ${sqlText(item.source_url)}, ${sqlText(item.img_type)}, ${item.is_primary})`).join(',\n')
   const profileValues = pack.profiles.map(item => `  (${sqlText(item.case_id)}, ${sqlText(item.building_id)}::uuid, ${sqlText(item.building_slug)}, ${sqlText(item.concept_zh)}, ${sqlNullable(item.concept_zh_hant)}, ${sqlNullable(item.concept_en)}, ${sqlNullable(item.concept_ja)}, ${sqlTextArray(item.keywords_zh)}, ${sqlTextArray(item.keywords_zh_hant)}, ${sqlTextArray(item.keywords_en)}, ${sqlTextArray(item.keywords_ja)}, ${sqlNullable(item.plan_url)}, ${sqlNullable(item.section_url)}, ${sqlText(item.source_url)}, ${sqlText(item.publication_status)})`).join(',\n')
   const assignmentValues = pack.assignments.map(item => `  (${sqlText(item.building_id)}::uuid, ${sqlText(item.building_slug)}, ${sqlText(item.function_slug)}, ${item.is_primary}, ${item.confidence}, ${sqlText(item.evidence_url)}, ${sqlText(item.evidence_note)}, ${sqlText(item.reviewed_at)}::timestamptz)`).join(',\n')
+  const reusedBuildingValues = pack.reused_buildings.map(item => `  (${sqlText(item.id)}::uuid, ${sqlText(item.slug)})`).join(',\n')
+  const insertValues = (table, values) => values ? `INSERT INTO ${table} VALUES\n${values};` : ''
   const requiredFunctions = [...new Set(pack.assignments.map(item => item.function_slug))]
   const requiredTypes = [...new Set(pack.buildings.map(item => item.type_slug))]
 
@@ -380,39 +406,55 @@ BEGIN
 END $$;
 
 CREATE TEMP TABLE architect_seed (id uuid PRIMARY KEY, slug text NOT NULL UNIQUE, name_zh text, name_en text NOT NULL, name_ja text, official_url text, is_new boolean NOT NULL) ON COMMIT DROP;
-INSERT INTO architect_seed VALUES
-${architectValues};
+${insertValues('architect_seed', architectValues)}
 
 CREATE TEMP TABLE building_seed (id uuid PRIMARY KEY, case_id text NOT NULL UNIQUE, slug text NOT NULL UNIQUE, name_zh text, name_en text NOT NULL, name_ja text, architect_id uuid NOT NULL, architect_slug text NOT NULL, year_start integer NOT NULL, status text NOT NULL, city text NOT NULL, country text NOT NULL, country_code text NOT NULL, type_slug text NOT NULL, official_url text NOT NULL) ON COMMIT DROP;
-INSERT INTO building_seed VALUES
-${buildingValues};
+${insertValues('building_seed', buildingValues)}
+
+CREATE TEMP TABLE reused_building_seed (id uuid PRIMARY KEY, slug text NOT NULL UNIQUE) ON COMMIT DROP;
+${insertValues('reused_building_seed', reusedBuildingValues)}
 
 CREATE TEMP TABLE image_seed (id uuid PRIMARY KEY, building_id uuid NOT NULL UNIQUE, building_slug text NOT NULL UNIQUE, case_id text NOT NULL UNIQUE, url_original text NOT NULL, photographer text NOT NULL, source text NOT NULL, license text NOT NULL, source_url text NOT NULL UNIQUE, img_type text NOT NULL, is_primary boolean NOT NULL) ON COMMIT DROP;
-INSERT INTO image_seed VALUES
-${imageValues};
+${insertValues('image_seed', imageValues)}
 
-CREATE TEMP TABLE profile_seed (case_id text PRIMARY KEY, building_id uuid NOT NULL UNIQUE, building_slug text NOT NULL UNIQUE, concept_zh text NOT NULL, concept_zh_hant text, concept_en text, concept_ja text, keywords_zh text[] NOT NULL, keywords_zh_hant text[] NOT NULL, keywords_en text[] NOT NULL, keywords_ja text[] NOT NULL, plan_url text, section_url text, source_url text NOT NULL, publication_status text NOT NULL) ON COMMIT DROP;
-INSERT INTO profile_seed VALUES
-${profileValues};
+CREATE TEMP TABLE profile_seed (case_id text PRIMARY KEY, building_id uuid NOT NULL, building_slug text NOT NULL, concept_zh text NOT NULL, concept_zh_hant text, concept_en text, concept_ja text, keywords_zh text[] NOT NULL, keywords_zh_hant text[] NOT NULL, keywords_en text[] NOT NULL, keywords_ja text[] NOT NULL, plan_url text, section_url text, source_url text NOT NULL, publication_status text NOT NULL) ON COMMIT DROP;
+${insertValues('profile_seed', profileValues)}
 
 CREATE TEMP TABLE assignment_seed (building_id uuid NOT NULL, building_slug text NOT NULL, function_slug text NOT NULL, is_primary boolean NOT NULL, confidence numeric(4,3) NOT NULL, evidence_url text NOT NULL, evidence_note text NOT NULL, reviewed_at timestamptz NOT NULL, PRIMARY KEY (building_id, function_slug)) ON COMMIT DROP;
-INSERT INTO assignment_seed VALUES
-${assignmentValues};
+${insertValues('assignment_seed', assignmentValues)}
 
 DO $$
 DECLARE
   existing_architect_matches integer;
+  reused_building_matches integer;
   required_function_matches integer;
   required_type_matches integer;
+  invalid_profile_buildings integer;
   conflicts integer;
 BEGIN
   IF (SELECT count(*) FROM architect_seed) <> ${pack.counts.architects}
     OR (SELECT count(*) FROM architect_seed WHERE is_new) <> ${pack.counts.new_architects}
     OR (SELECT count(*) FROM building_seed) <> ${pack.counts.buildings}
+    OR (SELECT count(*) FROM reused_building_seed) <> ${reusedBuildingCount}
     OR (SELECT count(*) FROM image_seed) <> ${pack.counts.images}
     OR (SELECT count(*) FROM profile_seed) <> ${pack.counts.profiles}
     OR (SELECT count(*) FROM assignment_seed) <> ${pack.counts.assignments} THEN
     RAISE EXCEPTION '${batchConfig.sql_title} seed count mismatch';
+  END IF;
+
+  SELECT count(*) INTO reused_building_matches
+  FROM reused_building_seed seed JOIN public.buildings target USING (id, slug);
+  IF reused_building_matches <> ${reusedBuildingCount} THEN
+    RAISE EXCEPTION 'Reused building UUID/slug pairs drifted: matched %', reused_building_matches;
+  END IF;
+
+  SELECT count(*) INTO invalid_profile_buildings
+  FROM profile_seed profile
+  LEFT JOIN building_seed created ON created.id = profile.building_id AND created.slug = profile.building_slug
+  LEFT JOIN reused_building_seed reused ON reused.id = profile.building_id AND reused.slug = profile.building_slug
+  WHERE created.id IS NULL AND reused.id IS NULL;
+  IF invalid_profile_buildings <> 0 THEN
+    RAISE EXCEPTION 'Profile seed references % unreviewed canonical buildings', invalid_profile_buildings;
   END IF;
 
   SELECT count(*) INTO existing_architect_matches
@@ -437,7 +479,7 @@ BEGIN
     (SELECT count(*) FROM public.architects target JOIN architect_seed seed ON seed.is_new AND (target.id = seed.id OR target.slug = seed.slug))
     + (SELECT count(*) FROM public.buildings target JOIN building_seed seed ON target.id = seed.id OR target.slug = seed.slug)
     + (SELECT count(*) FROM public.images target JOIN image_seed seed ON target.id = seed.id OR target.source_url = seed.source_url)
-    + (SELECT count(*) FROM public.graduation_case_profiles target JOIN profile_seed seed ON target.case_id = seed.case_id OR target.building_id = seed.building_id)
+    + (SELECT count(*) FROM public.graduation_case_profiles target JOIN profile_seed seed ON target.case_id = seed.case_id)
     + (SELECT count(*) FROM public.building_function_assignments target JOIN assignment_seed seed USING (building_id, function_slug))
   INTO conflicts;
   IF conflicts <> 0 THEN
@@ -483,6 +525,7 @@ function buildRollbackSql(pack) {
   const imageValues = pack.images.map(item => `  (${sqlText(item.id)}::uuid, ${sqlText(item.building_id)}::uuid, ${sqlText(item.source_url)})`).join(',\n')
   const profileValues = pack.profiles.map(item => `  (${sqlText(item.case_id)}, ${sqlText(item.building_id)}::uuid)`).join(',\n')
   const assignmentValues = pack.assignments.map(item => `  (${sqlText(item.building_id)}::uuid, ${sqlText(item.function_slug)})`).join(',\n')
+  const insertValues = (table, values) => values ? `INSERT INTO ${table} VALUES\n${values};` : ''
 
   return `-- Rollback ${batchConfig.sql_title.toLowerCase()} only.
 -- Refuses to run if reviewed rows drifted or acquired external relations.
@@ -490,20 +533,15 @@ function buildRollbackSql(pack) {
 BEGIN;
 
 CREATE TEMP TABLE architect_rollback (id uuid PRIMARY KEY, slug text NOT NULL UNIQUE) ON COMMIT DROP;
-INSERT INTO architect_rollback VALUES
-${newArchitectValues};
+${insertValues('architect_rollback', newArchitectValues)}
 CREATE TEMP TABLE building_rollback (id uuid PRIMARY KEY, slug text NOT NULL UNIQUE) ON COMMIT DROP;
-INSERT INTO building_rollback VALUES
-${buildingValues};
+${insertValues('building_rollback', buildingValues)}
 CREATE TEMP TABLE image_rollback (id uuid PRIMARY KEY, building_id uuid NOT NULL UNIQUE, source_url text NOT NULL UNIQUE) ON COMMIT DROP;
-INSERT INTO image_rollback VALUES
-${imageValues};
-CREATE TEMP TABLE profile_rollback (case_id text PRIMARY KEY, building_id uuid NOT NULL UNIQUE) ON COMMIT DROP;
-INSERT INTO profile_rollback VALUES
-${profileValues};
+${insertValues('image_rollback', imageValues)}
+CREATE TEMP TABLE profile_rollback (case_id text PRIMARY KEY, building_id uuid NOT NULL) ON COMMIT DROP;
+${insertValues('profile_rollback', profileValues)}
 CREATE TEMP TABLE assignment_rollback (building_id uuid NOT NULL, function_slug text NOT NULL, PRIMARY KEY (building_id, function_slug)) ON COMMIT DROP;
-INSERT INTO assignment_rollback VALUES
-${assignmentValues};
+${insertValues('assignment_rollback', assignmentValues)}
 
 DO $$
 DECLARE
