@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：选择一个边界清晰的 G6 小批次，先做只读身份、用途和图片许可审核；未通过准确图片与开放许可双重门槛的记录不得生成 migration。
+当前下一步：从尚未正式审核的 51 条 G6 队列中选择一个用途边界清晰的小批次，先只读核验建筑身份、用途、准确图片和开放许可；未通过双重门槛的记录不得生成 migration。
 
 ## 最终目标
 
@@ -177,6 +177,10 @@ Public-space taxonomy 001 已完成生产迁移、发布与线上验收。PR #49
 Urban public-space batch 001 migration pack 已生成：4 architects（3 new，MVRDV 复用）、4 buildings、4 primary images、4 published profiles、5 assignments。CASE-014 不在任何 seed 中。全历史隔离 PostgreSQL 18.3 的两次 forward/rollback 与外部 curated-image guard 全部通过；首次演练发现并修复验证器未汇总 prior pack broad types 的问题，未跳过旧 transport taxonomy。生成器曾因 CASE-050 署名漂移拒绝输出，公开数据同步为 KKPCW / CC BY-SA 4.0 后才通过。Supabase migration 文件由 CLI 创建且与 reviewed apply SQL 一致，生产尚未写入。详见 `GRADUATION_PUBLIC_SPACE_BATCH_001_DRY_RUN.md`。
 
 下一个最小可验证步骤：通过 PR 合并 migration pack；生产冲突复查为 0 后写入，核验 69 profiles、923 buildings、7272 images、111 assignments，并更新读取基线与运行最终 Reviewed release。
+
+Urban public-space batch 001 已完成生产写入、发布与线上验收。Supabase migration `graduation_public_space_batch_001`（`20260712065152`）写入 3 个新联合 architect、4 buildings、4 primary images、4 published profiles 和 5 approved assignments，并复用既有 MVRDV architect；CASE-014 保持 `identity_not_bounded`，未进入任何 seed。生产总数从 65/919/7268/106 更新为 69 profiles / 923 buildings / 7272 images / 111 assignments；orphan、architect mismatch、duplicate primary image/function 均为 0，RLS/policy 与 advisors 通过。PR #52 更新读取基线；首次 Reviewed release `29183395825` 成功。线上发现 CASE-050/111 的 graduation API architect 仍来自旧 JSON compatibility fallback，PR #53 精确同步 canonical 值并增加回归断言；最终 Reviewed release `29183774782` 在 10m02s 内成功。线上 API 为 101 public cases / 69 profiles / 0 missing relation，4 个 CASE、4 个 building 和 CASE-111 图片全部 HTTP 200。G6 已迁移 48/118，尚未迁移 70；版本化队列中尚未完成正式审核的记录为 51。详见 `GRADUATION_PUBLIC_SPACE_BATCH_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：从尚未正式审核的 51 条队列中选择一个用途边界清晰的小批次，先完成只读身份、用途、准确图片和开放许可审核；G8 前继续把 compatibility fallback 漂移作为写后验收项。
 
 ### G7 — 统一搜索与筛选
 
