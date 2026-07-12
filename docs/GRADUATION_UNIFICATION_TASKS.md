@@ -174,6 +174,10 @@ Public-space taxonomy 001 已完成生产迁移、发布与线上验收。PR #49
 
 下一个最小可验证步骤：生成 4 条 approved public-space canonical building/profile migration pack，执行全历史隔离 PostgreSQL dry-run；CASE-014 继续保持 identity_not_bounded，不得进入 migration。
 
+Urban public-space batch 001 migration pack 已生成：4 architects（3 new，MVRDV 复用）、4 buildings、4 primary images、4 published profiles、5 assignments。CASE-014 不在任何 seed 中。全历史隔离 PostgreSQL 18.3 的两次 forward/rollback 与外部 curated-image guard 全部通过；首次演练发现并修复验证器未汇总 prior pack broad types 的问题，未跳过旧 transport taxonomy。生成器曾因 CASE-050 署名漂移拒绝输出，公开数据同步为 KKPCW / CC BY-SA 4.0 后才通过。Supabase migration 文件由 CLI 创建且与 reviewed apply SQL 一致，生产尚未写入。详见 `GRADUATION_PUBLIC_SPACE_BATCH_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 migration pack；生产冲突复查为 0 后写入，核验 69 profiles、923 buildings、7272 images、111 assignments，并更新读取基线与运行最终 Reviewed release。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
