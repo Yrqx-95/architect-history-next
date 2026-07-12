@@ -15,7 +15,7 @@ const taxonomy = JSON.parse(
 
 describe('building function taxonomy', () => {
   it('contains complete four-language labels and unambiguous aliases', () => {
-    expect(taxonomy.functions).toHaveLength(11)
+    expect(taxonomy.functions).toHaveLength(12)
     for (const item of taxonomy.functions) {
       expect(Object.keys(item.names).sort()).toEqual(['en', 'ja', 'zh', 'zh-Hant'].sort())
     }
