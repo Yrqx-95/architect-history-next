@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 retail-led mixed-use batch 002",
+  "source_queue": "db/review-packets/graduation-new-building-retail-mixed-use-002.json",
+  "write_status": "reviewed-only; no production insert authorized until both Commons images are localized, metadata is synchronized, and guarded migration passes isolated PostgreSQL dry-run",
+  "review_method": [
+    "Confirmed project identity, location, year, architect and mixed retail/residential program against the architects' current first-party project pages.",
+    "Queried Commons through the MediaWiki API for exact file dimensions, authorship, own-work or Flickr provenance, and license, then manually inspected both images.",
+    "Queried production architects, buildings and graduation profiles without writing data; found only the existing MVRDV architect and no target building or CASE profile conflicts.",
+    "Used retail as the fine primary function while preserving mixed-use as the broad building type; Markthal also receives public-space because MVRDV explicitly describes the covered market square as public space."
+  ],
+  "summary": {
+    "reviewed": 2,
+    "identity_approved": 2,
+    "function_approved": 2,
+    "image_approved": 2,
+    "migration_approved": 2,
+    "image_localization_required": 2
+  },
+  "excluded": [],
+  "decisions": [
+    {
+      "case_id": "CASE-074",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "daikanyama-t-site",
+        "name_zh": "代官山 T-SITE",
+        "name_en": "Daikanyama T-SITE",
+        "name_ja": "代官山 T-SITE",
+        "year_start": 2011,
+        "city": "东京",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "mixed-use",
+        "architect_slug": "klein-dytham-architecture",
+        "official_url": "https://www.klein-dytham.com/daikanyama-t-site"
+      },
+      "architect": {
+        "name_zh": "Klein Dytham architecture",
+        "name_en": "Klein Dytham architecture",
+        "name_ja": "クライン・ダイサム・アーキテクツ",
+        "official_url": "https://www.klein-dytham.com/"
+      },
+      "function_slugs": ["retail", "mixed-use"],
+      "identity_evidence": [
+        "Klein Dytham architecture identifies Daikanyama T-SITE as its project in Daikanyama, Shibuya-ku, Tokyo and lists the principal use as retail and apartments.",
+        "The official project page states that the campus-like Tsutaya complex opened to the public in December 2011 and credits architecture and interior design to Klein Dytham architecture."
+      ],
+      "evidence_urls": ["https://www.klein-dytham.com/daikanyama-t-site"],
+      "image": {
+        "status": "approved_localization_required",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Daikanyama_T-SITE_2016-04-04.jpg",
+        "license": "CC BY-SA 2.0",
+        "credit": "Photo: Jonathan Lin / Wikimedia Commons",
+        "width": 4608,
+        "height": 3126,
+        "visual_evidence": "The image clearly shows the exact low-rise T-SITE retail volumes, glazed interiors, pedestrian court and active evening use.",
+        "rights_evidence": "MediaWiki reports Jonathan Lin, links the original Flickr work, and identifies CC BY-SA 2.0."
+      }
+    },
+    {
+      "case_id": "CASE-116",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "markthal-rotterdam",
+        "name_zh": "鹿特丹市场大厅",
+        "name_en": "Markthal Rotterdam",
+        "name_ja": "ロッテルダム・マルクトハル",
+        "year_start": 2014,
+        "city": "鹿特丹",
+        "country": "荷兰",
+        "country_code": "NL",
+        "type_slug": "mixed-use",
+        "architect_slug": "mvrdv",
+        "official_url": "https://www.mvrdv.com/projects/115/markthal"
+      },
+      "function_slugs": ["retail", "mixed-use", "public-space"],
+      "identity_evidence": [
+        "MVRDV identifies Markthal as a realised Rotterdam project completed in 2014, combining food, leisure, living and parking.",
+        "The official project page lists retail and residential programs and describes the central market hall as a covered public square beneath the apartment arch."
+      ],
+      "evidence_urls": ["https://www.mvrdv.com/projects/115/markthal"],
+      "image": {
+        "status": "approved_localization_required",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Rotterdam,_het_Potlood_door_de_Markthallen_heen_foto5_2016-02-28_10.46.jpg",
+        "license": "CC BY-SA 4.0",
+        "credit": "Photo: Michielverbeek / Wikimedia Commons",
+        "width": 4352,
+        "height": 3264,
+        "visual_evidence": "The image clearly shows the exact glazed market-hall entrance, occupied apartment arch, interior artwork and market units; the adjacent Pencil building is visible through the hall but is not the image subject.",
+        "rights_evidence": "MediaWiki reports Michielverbeek's own work under CC BY-SA 4.0."
+      }
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 46 条尚未正式审核记录中选择下一个用途边界清晰的小批次，先只读核验身份、用途、准确图片、摄影者和开放许可。
+当前下一步：通过 PR 固化 CASE-074/116 retail-led mixed-use batch 002 只读决策；随后本地化两张 Commons 图片、同步正式 credit，再准备 guarded migration 与隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -214,7 +214,9 @@ CASE-038/039 生产 migration 已成功执行，实际 version `20260712104005`�
 
 Shimokitazawa retail batch 001 已完成生产迁移、发布和线上验收。Supabase migration `graduation_shimokitazawa_retail_batch_001`（`20260712104005`）写入 2 architects / 2 buildings / 2 primary images / 2 profiles / 5 assignments；总数更新为 72/926/7275/118，orphan、architect mismatch、primary image/function 异常均为 0，两套 profile concept/keywords 保持独立。PR #66 修正 CASE-039 JSON compatibility fallback 的 architect 漂移并加入 canonical 回归断言。Reviewed release `29189628666` 成功；6 CASE 路由、6 building 路由、2 图片全部 HTTP 200，API 为 101 cases / 72 profiles / 0 missing。G6 已迁移 51/118，尚未迁移 67；尚未正式审核队列 46。详见 `GRADUATION_SHIMOKITAZAWA_RETAIL_BATCH_001_PRODUCTION.md`。
 
-下一个最小可验证步骤：从剩余 46 条中选择用途边界清晰的小批次，只读核验身份、年份、地点、设计者、图片内容、摄影者和许可，再决定是否进入 migration 准备。
+Retail-led mixed-use batch 002 已完成 CASE-074/116 的只读审核。Klein Dytham 与 MVRDV 官方页确认两栋项目身份、2011/2014 年份、设计者和 retail + residential/mixed program；Markthal 另具明确 covered public square 属性。两张 Commons 图人工确认准确，分别为 Jonathan Lin / CC BY-SA 2.0 / 4608×3126 与 Michielverbeek own work / CC BY-SA 4.0 / 4352×3264。生产仅有 MVRDV architect，可复用；Klein Dytham、两栋 building 与两个 profile 均无冲突。本批 2 条均通过，但现图仍是远程 URL，必须本地化后才可生成 migration。未正式审核队列从 46 减至 44。详见 `GRADUATION_NEW_BUILDING_RETAIL_MIXED_USE_002_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化只读决策；随后本地化并复核两张图片、同步权威 CSV 与生成数据，再准备 migration pack。
 
 ### G7 — 统一搜索与筛选
 
