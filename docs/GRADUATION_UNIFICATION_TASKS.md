@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 42 条未正式审核记录中选择用途边界清晰且摄影者、来源、许可完整的小批次，开始只读审核；CASE-002 等待作者元数据和用途 taxonomy 补齐。
+当前下一步：从剩余 41 条未正式审核记录中选择建筑本体边界清晰且图片对象准确的小批次；CASE-002 与 CASE-035 保持阻塞状态。
 
 ## 最终目标
 
@@ -234,7 +234,9 @@ Disaster memorial batch 002 已完成生产迁移、发布和线上验收。Supa
 
 Zero-waste batch 003 已完成 CASE-002 Kamikatsu Zero Waste Center 的只读审核。Hiroshi Nakamura & NAP 官方页确认 2020 年完成、上胜町地址、木造、1,176 m²，以及分类、储存、修理、再利用、教育、研究、交流与住宿的复合功能。Commons 图人工确认准确且声明 CC0，但页面明确缺少作者信息；上传者 `Sorrysorry` 不被自动写成摄影者。生产也没有 recycling/waste-management function，不能仅以 `community-center` 掩盖核心用途。本批身份通过但迁移批准 0 条；G6 已迁移仍为 54/118，尚未正式审核队列从 43 减至 42。详见 `GRADUATION_NEW_BUILDING_ZERO_WASTE_003_TRIAGE.md`。
 
-下一个最小可验证步骤：从剩余 42 条中选择摄影者、来源和开放许可完整的小批次；CASE-002 需先获得可靠作者元数据并审核 recycling-center 或 waste-management 多语言 taxonomy。
+KOIL interior batch 004 已完成 CASE-035 的只读审核。Naruse Inokuma 官方资料确认该对象是 2014 年 4 月完成、2,576 m² 的创新中心室内设计与监理，并非事务所独立设计的宿主建筑。现有 `KOIL_GARDEN.jpg` 虽为 Souka Kinmei 自有作品、CC0、1924×1080，但人工查看确认它拍摄的是带 `KOIL GARDEN by MITSUI FUDOSAN` 标识的另一处低层外部设施，不是 2014 年创新中心室内。权利安全不能替代对象正确性，本批迁移批准 0 条；G6 已迁移仍为 54/118，尚未正式审核队列从 42 减至 41。详见 `GRADUATION_NEW_BUILDING_KOIL_INTERIOR_004_TRIAGE.md`。
+
+下一个最小可验证步骤：从剩余 41 条中选择建筑本体边界清晰、图片对象准确且摄影者与许可完整的小批次；CASE-035 保留 CASE 路由，等待 interior-project linked-to-host-building 数据模型或改用中性 placeholder。
 
 ### G7 — 统一搜索与筛选
 

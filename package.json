@@ -61,6 +61,7 @@
     "graduation:queue-disaster-community-001": "node scripts/build-graduation-new-building-disaster-community-queue-001.mjs",
     "graduation:queue-disaster-memorial-002": "node scripts/build-graduation-new-building-disaster-memorial-queue-002.mjs",
     "graduation:queue-zero-waste-003": "node scripts/build-graduation-new-building-zero-waste-queue-003.mjs",
+    "graduation:queue-koil-interior-004": "node scripts/build-graduation-new-building-koil-interior-queue-004.mjs",
     "graduation:queue-education-001": "node scripts/build-graduation-new-building-education-queue-001.mjs",
     "graduation:queue-transport-001": "node scripts/build-graduation-new-building-transport-queue-001.mjs",
     "graduation:verify-transport-taxonomy": "node scripts/verify-building-function-transport-hub-001-dry-run.mjs",
