@@ -59,6 +59,7 @@
     "graduation:verify-community-civic-001": "GRADUATION_VERIFY_BATCH=community-civic-001 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:verify-profile-many-to-one": "node scripts/verify-graduation-profile-many-to-one-dry-run.mjs",
     "graduation:queue-disaster-community-001": "node scripts/build-graduation-new-building-disaster-community-queue-001.mjs",
+    "graduation:queue-disaster-memorial-002": "node scripts/build-graduation-new-building-disaster-memorial-queue-002.mjs",
     "graduation:queue-education-001": "node scripts/build-graduation-new-building-education-queue-001.mjs",
     "graduation:queue-transport-001": "node scripts/build-graduation-new-building-transport-queue-001.mjs",
     "graduation:verify-transport-taxonomy": "node scripts/verify-building-function-transport-hub-001-dry-run.mjs",

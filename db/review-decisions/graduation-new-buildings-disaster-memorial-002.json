@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-12",
+  "scope": "G6 new-building disaster memorial batch 002",
+  "source_queue": "db/review-packets/graduation-new-building-disaster-memorial-002.json",
+  "write_status": "reviewed-only; no production insert authorized until a guarded migration pack passes isolated PostgreSQL dry-run and production preflight",
+  "review_method": [
+    "Checked the Kengo Kuma and Associates project page for exact project identity, Miyagi location, 2022 completion, floor area, program and design authorship.",
+    "Used the official portfolio only as identity evidence because its credited professional photography has no stated open reuse license.",
+    "Checked the Commons file page and metadata for description, capture date, own-work authorship, dimensions and CC BY-SA 3.0 rights.",
+    "Opened both the 5753 by 3835 Commons original and the existing 1600 by 1066 repository derivative and confirmed that both show the completed memorial building.",
+    "Queried production read-only and found one existing Kengo Kuma architect, existing cultural and civic-public broad types, existing museum and community-center functions, and no target building or CASE-015 profile conflict.",
+    "Selected museum as the only function because the building displays disaster memories and artworks; did not infer the specific community-center function from the official site's broader Community category."
+  ],
+  "summary": {
+    "reviewed": 1,
+    "identity_approved": 1,
+    "function_approved": 1,
+    "image_approved": 1,
+    "migration_approved": 1,
+    "new_function_required": 0,
+    "new_architect_required": 0
+  },
+  "excluded": [],
+  "decisions": [
+    {
+      "case_id": "CASE-015",
+      "decision": "approved",
+      "canonical_building": {
+        "slug": "minamisanriku-311-memorial",
+        "name_zh": "南三陆311纪念馆",
+        "name_en": "Minamisanriku 311 Memorial",
+        "name_ja": "南三陸311メモリアル",
+        "year_start": 2022,
+        "city": "南三陆",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "cultural",
+        "architect_slug": "kengo-kuma",
+        "official_url": "https://kkaa.co.jp/en/project/minamisanriku-311-memorial/"
+      },
+      "function_slugs": ["museum"],
+      "identity_evidence": [
+        "Kengo Kuma and Associates identifies the completed 2022 Miyagi project as Minamisanriku 311 Memorial, a 1433 square metre two-storey facility designed as the culmination of the town reconstruction plan.",
+        "The official description states that disaster memories and artworks are displayed inside, supporting the museum function without inventing a separate memorial taxonomy."
+      ],
+      "evidence_urls": [
+        "https://kkaa.co.jp/en/project/minamisanriku-311-memorial/",
+        "https://commons.wikimedia.org/wiki/File:Minamisanriku_311_Memorial.jpg"
+      ],
+      "image": {
+        "status": "approved_existing_local_asset",
+        "local_path": "/images/graduation/cases/case-015-minamisanriku-311-memorial.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Minamisanriku_311_Memorial.jpg",
+        "license": "CC BY-SA 3.0",
+        "credit": "Photo: Yasu / Wikimedia Commons",
+        "source_width": 5753,
+        "source_height": 3835,
+        "local_width": 1600,
+        "local_height": 1066,
+        "local_sha256": "4c65257beed887a72068ad2df001fffab1cc966ade2484e2af256f8d49158fa1",
+        "visual_evidence": "The image clearly shows the completed memorial's torii-like opening and radial Minamisanriku cedar louvers, matching the first-party project description.",
+        "rights_evidence": "Commons identifies Yasu as the creator of the own-work photograph taken on 14 October 2022 and offers CC BY-SA 3.0."
+      },
+      "production_preflight": {
+        "existing_architect": "51797239-be38-4dbd-9d7e-e413ddf3c78a / kengo-kuma",
+        "target_building_conflicts": 0,
+        "target_profile_conflicts": 0,
+        "required_function_matches": 1,
+        "required_type_matches": 1
+      }
+    }
+  ]
+}
