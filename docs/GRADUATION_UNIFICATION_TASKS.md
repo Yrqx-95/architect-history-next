@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从尚未正式审核的 51 条 G6 队列中选择一个用途边界清晰的小批次，先只读核验建筑身份、用途、准确图片和开放许可；未通过双重门槛的记录不得生成 migration。
+当前下一步：修正 CASE-031 的单体图片误导，并为 CASE-044 建立 `public-toilet` 四语 taxonomy、alias 冲突预检、guarded rollback 与隔离 PostgreSQL dry-run；CASE-049 继续保持 `no_safe_image_yet`。
 
 ## 最终目标
 
@@ -181,6 +181,10 @@ Urban public-space batch 001 migration pack 已生成：4 architects（3 new，M
 Urban public-space batch 001 已完成生产写入、发布与线上验收。Supabase migration `graduation_public_space_batch_001`（`20260712065152`）写入 3 个新联合 architect、4 buildings、4 primary images、4 published profiles 和 5 approved assignments，并复用既有 MVRDV architect；CASE-014 保持 `identity_not_bounded`，未进入任何 seed。生产总数从 65/919/7268/106 更新为 69 profiles / 923 buildings / 7272 images / 111 assignments；orphan、architect mismatch、duplicate primary image/function 均为 0，RLS/policy 与 advisors 通过。PR #52 更新读取基线；首次 Reviewed release `29183395825` 成功。线上发现 CASE-050/111 的 graduation API architect 仍来自旧 JSON compatibility fallback，PR #53 精确同步 canonical 值并增加回归断言；最终 Reviewed release `29183774782` 在 10m02s 内成功。线上 API 为 101 public cases / 69 profiles / 0 missing relation，4 个 CASE、4 个 building 和 CASE-111 图片全部 HTTP 200。G6 已迁移 48/118，尚未迁移 70；版本化队列中尚未完成正式审核的记录为 51。详见 `GRADUATION_PUBLIC_SPACE_BATCH_001_PRODUCTION.md`。
 
 下一个最小可验证步骤：从尚未正式审核的 51 条队列中选择一个用途边界清晰的小批次，先完成只读身份、用途、准确图片和开放许可审核；G8 前继续把 compatibility fallback 漂移作为写后验收项。
+
+Public-toilet batch 001 已完成 CASE-031/044/049 的只读审核。CASE-031 是覆盖涩谷多个地点和设计者的 THE TOKYO TOILET 项目级参考，当前 Mr.Asylum / CC BY-SA 4.0 图片实际只展示片山正通＋Wonderwall 的恵比寿公園厕所，不能把项目总称映射成该单体，正式决定为 `project_scope_not_single_building`，后续先恢复占位图。CASE-044 的单体身份、2021-06-24 开放、隈研吾、用途、图片内容、鋸香具師 / CC BY-SA 4.0 均通过；生产无 building/profile conflict，复用既有 `kengo-kuma` architect，但迁移前需新增 `public-toilet` taxonomy。CASE-049 的记录源当前 404、现行 Kengo Kuma sitemap 无该项目，且没有准确开放图片，保持 `no_safe_image_yet`。本批 3 条均未生产写入；G6 已迁移 48/118，尚未迁移 70，版本化队列中尚未完成正式审核的记录从 51 减至 48。详见 `GRADUATION_NEW_BUILDING_PUBLIC_TOILET_001_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化只读决策；随后把 CASE-031 恢复为中性占位图，为 `public-toilet` 建立四语 taxonomy migration、alias 冲突预检、guarded rollback 与隔离 PostgreSQL dry-run。上述门槛通过前不写入 CASE-044。
 
 ### G7 — 统一搜索与筛选
 
