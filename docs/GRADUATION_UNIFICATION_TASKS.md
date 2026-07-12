@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 固化 BONUS TRACK 已审核高清图和 `retail` 四语 taxonomy；随后做生产预检、taxonomy migration、advisors 与 Reviewed release，再生成 CASE-038/039 建筑迁移包。
+当前下一步：生成并隔离验证 CASE-038/039 建筑 migration pack；确认 2 buildings / 2 primary images / 2 profiles 与 5 assignments，guarded rollback 和生产冲突预检通过后再走 PR。
 
 ## 最终目标
 
@@ -206,7 +206,9 @@ Shimokitazawa retail / mixed-use batch 001 已完成 CASE-038/039 的只读审�
 
 只读决策已通过 PR #62 合并。BONUS TRACK 图片已由核验过的 MDPI Figure 3 原始 TIFF 更新为 2000×1340 网站 JPEG，署名和图片说明同步到权威 CSV 与生成数据。`retail` 四语 taxonomy 已准备 20 个明确别名，排除过宽的 `shop`、`store`、`店`、`店舗`；guarded apply、依赖感知 rollback、Supabase migration 和 PostgreSQL 18 隔离 dry-run 均已建立。生产只读预检确认 `commercial` 存在、`retail` 不存在、20 个 alias 冲突为 0；尚未写生产。
 
-下一个最小可验证步骤：通过 PR 固化图片和 taxonomy；合并后再次生产预检，执行 taxonomy migration、写后 RLS/数量/advisors 核验与 Reviewed release，再生成 CASE-038/039 建筑迁移包。
+Retail taxonomy 001 与 CASE-038 高清图片已完成生产迁移、发布和线上验收。PR #63 合并版本化 taxonomy 与图片；Supabase migration `building_function_retail_001`（`20260712102033`）将 12/189 更新为 13 functions / 209 aliases，`retail` 四语各 5 个 alias、0 assignments。RLS/policy/anon SELECT 正常，advisors 无新增。Reviewed release `29188986536` 成功；CASE-038/039 中英日路由、CASE-038 2000×1340 图片均 HTTP 200，线上图片 SHA-256 与仓库一致。API 为 101 cases / 70 profiles / 0 missing relation。详见 `GRADUATION_RETAIL_TAXONOMY_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：生成 CASE-038/039 migration pack，隔离验证 2 buildings、2 primary images、2 profiles、5 assignments 和 guarded rollback；本阶段不直接写生产。
 
 ### G7 — 统一搜索与筛选
 
