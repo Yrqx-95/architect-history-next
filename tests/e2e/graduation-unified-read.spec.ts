@@ -8,8 +8,8 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(101)
-    expect(payload.diagnostics.profileCount).toBe(69)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(69)
+    expect(payload.diagnostics.profileCount).toBe(70)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(70)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
       'CASE-018',
       'CASE-021',
@@ -59,12 +59,13 @@ test.describe('graduation Supabase + JSON dual read', () => {
       'CASE-056',
       'CASE-110',
       'CASE-111',
+      'CASE-044',
     ]))
     expect(payload.diagnostics.unifiedCaseIds).not.toContain('CASE-079')
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(69)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(70)
 
     const libraryCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-018')
     expect(libraryCase).toMatchObject({
@@ -92,6 +93,15 @@ test.describe('graduation Supabase + JSON dual read', () => {
       name: 'Superkilen 多元文化公园',
       architect: 'BIG + Topotek 1 + Superflex',
       year: 2012,
+    })
+
+    const nabeshimaCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-044')
+    expect(nabeshimaCase).toMatchObject({
+      name: '锅岛松涛公园厕所',
+      architect: 'Kengo Kuma',
+      year: 2021,
+      image_license: 'CC BY-SA 4.0',
+      image_credit: 'Photo: 鋸香具師 / Wikimedia Commons',
     })
   })
 
