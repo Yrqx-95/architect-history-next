@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 43 条未正式审核记录中选择用途边界清晰且已有准确开放图片的小批次，开始只读审核。
+当前下一步：从剩余 42 条未正式审核记录中选择用途边界清晰且摄影者、来源、许可完整的小批次，开始只读审核；CASE-002 等待作者元数据和用途 taxonomy 补齐。
 
 ## 最终目标
 
@@ -232,7 +232,9 @@ CASE-015 生产 migration 已成功执行，实际 version `20260712115840`。�
 
 Disaster memorial batch 002 已完成生产迁移、发布和线上验收。Supabase migration `graduation_disaster_memorial_batch_002`（`20260712115840`）复用既有 Kengo Kuma，写入 1 building / 1 primary image / 1 profile / 1 `museum` primary assignment；总数更新为 75/929/7278/124，orphan、architect mismatch、primary image/function 异常均为 0。PR #75 修正 JSON compatibility layer 的 architect 与图片署名漂移并加入 canonical 回归断言。Reviewed release `29191945706` 成功；3 CASE 路由、3 building 路由和图片全部 HTTP 200，API 为 101 cases / 75 profiles / 0 missing。G6 已迁移 54/118，尚未迁移 64；尚未正式审核队列 43。详见 `GRADUATION_DISASTER_MEMORIAL_BATCH_002_PRODUCTION.md`。
 
-下一个最小可验证步骤：从剩余 43 条未正式审核记录中选择用途边界清晰且已有准确开放图片的小批次，只读核验身份、年份、地点、设计者、用途、图片内容、作者和许可。
+Zero-waste batch 003 已完成 CASE-002 Kamikatsu Zero Waste Center 的只读审核。Hiroshi Nakamura & NAP 官方页确认 2020 年完成、上胜町地址、木造、1,176 m²，以及分类、储存、修理、再利用、教育、研究、交流与住宿的复合功能。Commons 图人工确认准确且声明 CC0，但页面明确缺少作者信息；上传者 `Sorrysorry` 不被自动写成摄影者。生产也没有 recycling/waste-management function，不能仅以 `community-center` 掩盖核心用途。本批身份通过但迁移批准 0 条；G6 已迁移仍为 54/118，尚未正式审核队列从 43 减至 42。详见 `GRADUATION_NEW_BUILDING_ZERO_WASTE_003_TRIAGE.md`。
+
+下一个最小可验证步骤：从剩余 42 条中选择摄影者、来源和开放许可完整的小批次；CASE-002 需先获得可靠作者元数据并审核 recycling-center 或 waste-management 多语言 taxonomy。
 
 ### G7 — 统一搜索与筛选
 
