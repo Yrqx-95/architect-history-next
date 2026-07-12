@@ -155,10 +155,11 @@ try {
       )),
     ].map(item => [item.id, item]),
   ).values()]
-  await db.exec(`INSERT INTO public.architects (id, slug, name_zh, name_en, name_ja, official_url) VALUES ${existingArchitects.map(item => `(${sqlText(item.id)}::uuid, ${sqlText(item.slug)}, ${sqlNullable(item.name_zh)}, ${sqlText(item.name_en)}, ${sqlNullable(item.name_ja)}, ${sqlNullable(item.official_url)})`).join(', ')};`)
+  if (existingArchitects.length) await db.exec(`INSERT INTO public.architects (id, slug, name_zh, name_en, name_ja, official_url) VALUES ${existingArchitects.map(item => `(${sqlText(item.id)}::uuid, ${sqlText(item.slug)}, ${sqlNullable(item.name_zh)}, ${sqlText(item.name_en)}, ${sqlNullable(item.name_ja)}, ${sqlNullable(item.official_url)})`).join(', ')};`)
 
   const baseBuildings = new Map()
   for (const item of [...basePack.profiles, ...basePack.assignments]) baseBuildings.set(item.building_id, item.building_slug)
+  for (const item of pack.reused_buildings || []) baseBuildings.set(item.id, item.slug)
   await db.exec(`INSERT INTO public.buildings (id, slug, name_en, status) VALUES ${[...baseBuildings].map(([id, slug]) => `(${sqlText(id)}::uuid, ${sqlText(slug)}, ${sqlText(slug)}, 'published')`).join(', ')};`)
 
   await db.exec(foundationSql)
@@ -169,16 +170,18 @@ try {
   await assertForwardState('first forward')
 
   const guardedBuilding = pack.buildings[0]
-  await db.exec(`INSERT INTO public.curated_images (id, building_id, url_original, source, source_url, license) VALUES ('00000000-0000-4000-8000-000000000077'::uuid, ${sqlText(guardedBuilding.id)}::uuid, 'https://example.com/external.jpg', 'Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:External.jpg', 'CC BY 4.0');`)
-  let rollbackRefused = false
-  try {
-    await db.exec(rollbackSql)
-  } catch (error) {
-    rollbackRefused = String(error).includes('external relations')
-    await db.exec('ROLLBACK;')
+  if (guardedBuilding) {
+    await db.exec(`INSERT INTO public.curated_images (id, building_id, url_original, source, source_url, license) VALUES ('00000000-0000-4000-8000-000000000077'::uuid, ${sqlText(guardedBuilding.id)}::uuid, 'https://example.com/external.jpg', 'Wikimedia Commons', 'https://commons.wikimedia.org/wiki/File:External.jpg', 'CC BY 4.0');`)
+    let rollbackRefused = false
+    try {
+      await db.exec(rollbackSql)
+    } catch (error) {
+      rollbackRefused = String(error).includes('external relations')
+      await db.exec('ROLLBACK;')
+    }
+    if (!rollbackRefused) throw new Error('Rollback did not refuse an external curated image relation')
+    await db.exec(`DELETE FROM public.curated_images WHERE id = '00000000-0000-4000-8000-000000000077'::uuid;`)
   }
-  if (!rollbackRefused) throw new Error('Rollback did not refuse an external curated image relation')
-  await db.exec(`DELETE FROM public.curated_images WHERE id = '00000000-0000-4000-8000-000000000077'::uuid;`)
 
   await db.exec(rollbackSql)
   await assertBaseState('first rollback')
@@ -190,7 +193,7 @@ try {
   console.log(`${verifyConfig.label} isolated PostgreSQL dry-run passed.`)
   console.log(`- PostgreSQL engine: ${await scalar("select current_setting('server_version_num')::integer")}`)
   console.log(`- forward: ${pack.counts.new_architects} new architects, ${pack.counts.buildings} buildings, ${pack.counts.images} images, ${pack.counts.profiles} profiles, ${pack.counts.assignments} assignments`)
-  console.log('- rollback refused an injected external curated-image relation')
+  console.log(guardedBuilding ? '- rollback refused an injected external curated-image relation' : '- reused canonical building survived exact profile-only rollback')
   console.log('- exact rollback, second forward, and second rollback passed')
 } finally {
   await db.close()
