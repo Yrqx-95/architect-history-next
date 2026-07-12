@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-12T12:29:23.476Z",
+  "batch_id": "graduation-new-building-miyashita-park-005",
+  "stage": "G6",
+  "source_queue": "db/review-packets/graduation-new-building-queue-001.json",
+  "selection_policy": "Single completed 2020 PPP park, retail, parking and hotel complex with first-party design-role evidence and an exact replacement Commons image.",
+  "write_policy": "Read-only identity, function and image review. No database write or migration is authorized until the wrong current image is replaced and verified.",
+  "counts": {
+    "candidates": 1
+  },
+  "known_risks": [
+    "Takenaka Corporation is lead architect and Nikken Sekkei is project architect; neither role may be omitted.",
+    "The current image shows Tower Records viewed from Miyashita Park rather than the project itself."
+  ],
+  "items": [
+    {
+      "case_id": "CASE-040",
+      "name": "MIYASHITA PARK",
+      "name_en": "MIYASHITA PARK",
+      "name_ja": "MIYASHITA PARK",
+      "previous_lane": "new-building-candidate",
+      "priority": "standard",
+      "priority_reason": "Review after the library-focused batches unless a stronger editorial need emerges.",
+      "source_url": "https://www.nikken.co.jp/en/projects/urban_design_and_planning/miyashita_park.html",
+      "source_domain": "nikken.co.jp",
+      "image_source_url": "https://commons.wikimedia.org/wiki/File:Miyashita_Park_on_a_sunny_day_13.jpg",
+      "image_source_domain": "commons.wikimedia.org",
+      "image_license": "CC0",
+      "image_credit": "Syced / Wikimedia Commons",
+      "year": 2020,
+      "architect": "Nikken Sekkei",
+      "metadata_gaps": [],
+      "review_scope": [
+        "identity",
+        "joint_architect_roles",
+        "year",
+        "location",
+        "mixed_use_functions",
+        "current_image_content",
+        "replacement_image_author",
+        "replacement_image_license"
+      ],
+      "review_status": "unreviewed"
+    }
+  ]
+}
