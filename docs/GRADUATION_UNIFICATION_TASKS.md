@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 固化 CASE-074/116 retail-led mixed-use batch 002 只读决策；随后本地化两张 Commons 图片、同步正式 credit，再准备 guarded migration 与隔离 PostgreSQL dry-run。
+当前下一步：通过 PR 发布 CASE-074/116 两张已审核本地图与正式权利元数据；Reviewed 静态发布通过后，再生成 guarded migration pack 和隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -216,7 +216,9 @@ Shimokitazawa retail batch 001 已完成生产迁移、发布和线上验收。S
 
 Retail-led mixed-use batch 002 已完成 CASE-074/116 的只读审核。Klein Dytham 与 MVRDV 官方页确认两栋项目身份、2011/2014 年份、设计者和 retail + residential/mixed program；Markthal 另具明确 covered public square 属性。两张 Commons 图人工确认准确，分别为 Jonathan Lin / CC BY-SA 2.0 / 4608×3126 与 Michielverbeek own work / CC BY-SA 4.0 / 4352×3264。生产仅有 MVRDV architect，可复用；Klein Dytham、两栋 building 与两个 profile 均无冲突。本批 2 条均通过，但现图仍是远程 URL，必须本地化后才可生成 migration。未正式审核队列从 46 减至 44。详见 `GRADUATION_NEW_BUILDING_RETAIL_MIXED_USE_002_TRIAGE.md`。
 
-下一个最小可验证步骤：通过 PR 固化只读决策；随后本地化并复核两张图片、同步权威 CSV 与生成数据，再准备 migration pack。
+Retail-led mixed-use batch 002 的图片与公开数据已完成本地准备。CASE-074 优化为 2000×1356 / 826075 bytes / SHA-256 `1c0d1f0a61a6962b1a0dad829e4fe97d51e7a121e752728accc25b4da0aea5c7`；CASE-116 为 2000×1500 / 998567 bytes / SHA-256 `fb6583a1511215e133910bb1c56daf033c32e45fa0e79ffd8c57f8e773e18958`。两张最终 JPEG 已人工复核，权威 CSV、公开 CSV/JSON 与源 JSON 已同步本地路径、摄影者、许可和审核说明。46 files / 164 unit tests、lint、typecheck、graduation QA 全部通过。尚未生成或写入数据库 migration。
+
+下一个最小可验证步骤：通过 PR 合并并运行 Reviewed 静态发布，确认两个 CASE 路由和图片在线；随后生成 migration pack。
 
 ### G7 — 统一搜索与筛选
 

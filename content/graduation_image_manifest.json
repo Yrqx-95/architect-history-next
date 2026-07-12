@@ -310,6 +310,14 @@
     "credit": "Photo: Suikotei / Wikimedia Commons"
   },
   {
+    "id": "CASE-074",
+    "localPath": "/images/graduation/cases/case-074-daikanyama-t-site.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/3/35/Daikanyama_T-SITE_2016-04-04.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Daikanyama_T-SITE_2016-04-04.jpg",
+    "license": "CC BY-SA 2.0",
+    "credit": "Photo: Jonathan Lin / Wikimedia Commons"
+  },
+  {
     "id": "CASE-076",
     "localPath": "/images/graduation/cases/case-076-kozakai-kifukan-community-center.jpg",
     "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/3/31/Kozakai_Kifukan_2021-05_ac_%281%29.jpg",
@@ -404,6 +412,14 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:Superkilen_hill-top_view.jpg",
     "license": "CC BY 2.0",
     "credit": "Photo: Emily / Wikimedia Commons"
+  },
+  {
+    "id": "CASE-116",
+    "localPath": "/images/graduation/cases/case-116-markthal-rotterdam.jpg",
+    "remoteUrl": "https://upload.wikimedia.org/wikipedia/commons/b/be/Rotterdam%2C_het_Potlood_door_de_Markthallen_heen_foto5_2016-02-28_10.46.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rotterdam,_het_Potlood_door_de_Markthallen_heen_foto5_2016-02-28_10.46.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Photo: Michielverbeek / Wikimedia Commons"
   },
   {
     "id": "CASE-117",
