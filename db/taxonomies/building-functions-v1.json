@@ -123,6 +123,17 @@
         "en": ["public space", "urban public space", "park", "plaza", "promenade", "waterfront promenade", "linear park"],
         "ja": ["公共空間", "都市公共空間", "公園", "広場", "水辺遊歩道", "プロムナード", "線形公園"]
       }
+    },
+    {
+      "slug": "public-toilet",
+      "broad_type_slug": "civic-public",
+      "names": { "zh": "公共厕所", "zh-Hant": "公共廁所", "en": "Public Toilet", "ja": "公共トイレ" },
+      "aliases": {
+        "zh": ["公共厕所", "公厕", "公共卫生间", "公共洗手间", "公共便所", "城市公厕"],
+        "zh-Hant": ["公共廁所", "公廁", "公共衛生間", "公共洗手間", "公共便所", "城市公廁"],
+        "en": ["public toilet", "public restroom", "restroom", "washroom", "public lavatory", "civic toilet"],
+        "ja": ["公共トイレ", "公衆トイレ", "公衆便所", "公共便所", "パブリックトイレ", "公園トイレ"]
+      }
     }
   ]
 }

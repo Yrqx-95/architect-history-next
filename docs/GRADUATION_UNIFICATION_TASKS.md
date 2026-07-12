@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：修正 CASE-031 的单体图片误导，并为 CASE-044 建立 `public-toilet` 四语 taxonomy、alias 冲突预检、guarded rollback 与隔离 PostgreSQL dry-run；CASE-049 继续保持 `no_safe_image_yet`。
+当前下一步：通过 PR 合并 CASE-031 图片纠偏与 `public-toilet` taxonomy migration；完成 Reviewed 静态发布后复查生产冲突，应用 taxonomy 并核验 12 functions / 189 aliases / 111 assignments、RLS/policy 与 advisors。
 
 ## 最终目标
 
@@ -185,6 +185,10 @@ Urban public-space batch 001 已完成生产写入、发布与线上验收。Sup
 Public-toilet batch 001 已完成 CASE-031/044/049 的只读审核。CASE-031 是覆盖涩谷多个地点和设计者的 THE TOKYO TOILET 项目级参考，当前 Mr.Asylum / CC BY-SA 4.0 图片实际只展示片山正通＋Wonderwall 的恵比寿公園厕所，不能把项目总称映射成该单体，正式决定为 `project_scope_not_single_building`，后续先恢复占位图。CASE-044 的单体身份、2021-06-24 开放、隈研吾、用途、图片内容、鋸香具師 / CC BY-SA 4.0 均通过；生产无 building/profile conflict，复用既有 `kengo-kuma` architect，但迁移前需新增 `public-toilet` taxonomy。CASE-049 的记录源当前 404、现行 Kengo Kuma sitemap 无该项目，且没有准确开放图片，保持 `no_safe_image_yet`。本批 3 条均未生产写入；G6 已迁移 48/118，尚未迁移 70，版本化队列中尚未完成正式审核的记录从 51 减至 48。详见 `GRADUATION_NEW_BUILDING_PUBLIC_TOILET_001_TRIAGE.md`。
 
 下一个最小可验证步骤：通过 PR 固化只读决策；随后把 CASE-031 恢复为中性占位图，为 `public-toilet` 建立四语 taxonomy migration、alias 冲突预检、guarded rollback 与隔离 PostgreSQL dry-run。上述门槛通过前不写入 CASE-044。
+
+Public-toilet taxonomy 001 与 CASE-031 图片纠偏已完成本地准备。词表新增 `public-toilet`，复用 `civic-public` broad type，四语共 24 aliases；生产只读预检为 0 function conflict、0 alias conflict、0 assignment，`civic-public` type 1 条，当前基线 11 functions / 165 aliases / 111 assignments。隔离 PostgreSQL 18.3 按历史顺序重放 base 与 `public-space` 后，forward、依赖 assignment rollback guard、精确 rollback 与第二次 replay 全部通过。CASE-031 已从具体的恵比寿公園厕所图片恢复中性占位图，清空误导性的图片来源、许可和摄影者，但保留 CASE 路由与分析层。Supabase migration 文件由 CLI 创建并与 reviewed apply SQL 字节一致，尚未应用生产。详见 `GRADUATION_PUBLIC_TOILET_TAXONOMY_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 taxonomy、guarded migration/rollback、CASE-031 fallback 修正和测试；Reviewed 静态发布成功后复查生产冲突，仍为 0 才应用 taxonomy migration。
 
 ### G7 — 统一搜索与筛选
 
