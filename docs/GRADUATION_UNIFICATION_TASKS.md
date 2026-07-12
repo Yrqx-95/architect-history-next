@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：继续 `G6` 的 theatre batch 001，通过 PR 合并 4 条批准案例的公开图片修正、正式决策和已通过全历史重放 dry-run 的 guarded migration；合并后先发布本地图片，再做生产冲突复查、应用版本化 Supabase migration、同步 57→61 生产测试基线并执行 Reviewed production release。CASE-091 保持 `no_safe_image_yet`。
+当前下一步：继续 `G6`，为剩余 78 个 new-building candidates 建立 community-center / civic-public batch 001 只读候选队列；先排除名称关键词假阳性，再逐条核验建筑身份、实际用途、官方来源和图片许可。未形成正式审核决策前不生成生产写入；CASE-048、079、091 继续保持 `no_safe_image_yet`。
 
 ## 最终目标
 
@@ -112,6 +112,7 @@
 
 - [x] 按来源可靠度和毕业页面使用价值分批。
 - [x] Library batch 001：8 个主体完成身份、来源、用途、图片版权审核、生产迁移、发布与线上验收。
+- [x] Library batch 002、museum batch 001 与 theatre batch 001 完成审核、生产迁移、发布与线上验收。
 - [ ] 新建主体前核验建筑身份、建筑师、年份、地点和官方来源。
 - [ ] 图片按 Archistory 版权规则重新审核，不直接继承未经确认的旧图片。
 - [ ] 每批有 apply、rollback、写后审计和发布记录。
@@ -133,7 +134,7 @@ Museum batch 001 已完成生产迁移、双阶段发布和线上验收。PR #26
 
 Museum batch 002 只读核验完成。剩余 82 条中只有 CASE-048 Aranya Art Center 的名称与官方机构说明明确属于 museum / art-center；官方建筑师与机构页面可确认 Neri&Hu、2019、秦皇岛和艺术中心用途，但原记录无图片来源、许可或摄影者。Commons 未找到对应建筑文件，Openverse 四组精确查询均为 0；官方展示图也没有开放复用许可，因此 CASE-048 与 CASE-079 一样标记 `no_safe_image_yet`，不下载图片、不生成 migration。明确 museum 候选现已审完，下一批转向 theatre / performing-arts / cultural-hall。详见 `GRADUATION_NEW_BUILDING_MUSEUM_002_TRIAGE.md`。
 
-Theatre batch 001 已完成只读队列、逐条身份/用途/图片版权审核、公开数据同步、guarded migration pack 与全历史重放 dry-run。5 条候选中 CASE-057/117/122/139 批准，CASE-091 因无开放许可图片保持 `no_safe_image_yet`；CASE-033 作为关键词假阳性排除。Harpa 的 2010 施工图被拒绝，The Shed 的局部近景被替换；4 张批准图片全部人工审片、本地化、移除元数据并压缩到 2000px。迁移包包含 1 个新联合 architect、4 buildings、4 primary images、4 profiles、6 assignments。隔离 PostgreSQL 重放 foundation、unification batch 001、library 001/002、museum 001 后，两次 forward、外部关系 rollback guard 与两次精确 rollback 全部通过；旧 library/museum dry-run 同时回归通过。生产尚未写入。详见 `GRADUATION_NEW_BUILDING_THEATRE_001_TRIAGE.md` 与 `GRADUATION_THEATRE_BATCH_001_DRY_RUN.md`。
+Theatre batch 001 已完成审核、双阶段发布、生产迁移和线上验收。5 条候选中 CASE-057/117/122/139 批准，CASE-091 因无开放许可图片保持 `no_safe_image_yet`；CASE-033 作为关键词假阳性排除。PR #30/#31 先发布审核数据与 4 张本地图片；生产冲突复查为 0 后，Supabase migration `graduation_theatre_batch_001`（`20260712015846`）写入 1 个新联合 architect、4 buildings、4 primary images、4 profiles 和 6 assignments。写后 published profile 总数为 61，本批计数全部符合预期，true orphan profile / architect relation / function assignment 均为 0。PR #32 将生产基线从 57 更新为 61；最终 Reviewed production release `29176154362` 的质量门、完整测试、Cloudflare deploy 和路由语义检查全部通过。线上 API 为 101 个公开案例、61 unified profiles、0 missing relation；4 个 CASE 页、4 个主体建筑页和 4 张图片均 HTTP 200。G6 当前完成 40/118，剩余 78；CASE-048、079、091 保持 `no_safe_image_yet`。详见 `GRADUATION_NEW_BUILDING_THEATRE_001_TRIAGE.md`、`GRADUATION_THEATRE_BATCH_001_DRY_RUN.md` 与 `GRADUATION_THEATRE_BATCH_001_PRODUCTION.md`。
 
 ### G7 — 统一搜索与筛选
 
