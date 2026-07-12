@@ -8,8 +8,8 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(101)
-    expect(payload.diagnostics.profileCount).toBe(72)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(72)
+    expect(payload.diagnostics.profileCount).toBe(74)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(74)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
       'CASE-018',
       'CASE-021',
@@ -62,12 +62,14 @@ test.describe('graduation Supabase + JSON dual read', () => {
       'CASE-044',
       'CASE-038',
       'CASE-039',
+      'CASE-074',
+      'CASE-116',
     ]))
     expect(payload.diagnostics.unifiedCaseIds).not.toContain('CASE-079')
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(72)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(74)
 
     const libraryCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-018')
     expect(libraryCase).toMatchObject({
@@ -122,6 +124,24 @@ test.describe('graduation Supabase + JSON dual read', () => {
       year: 2022,
       image_license: 'CC0',
       image_credit: 'Photo: Souka Kinmei / Wikimedia Commons',
+    })
+
+    const tSiteCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-074')
+    expect(tSiteCase).toMatchObject({
+      name: '代官山 T-SITE',
+      architect: 'Klein Dytham architecture',
+      year: 2011,
+      image_license: 'CC BY-SA 2.0',
+      image_credit: 'Photo: Jonathan Lin / Wikimedia Commons',
+    })
+
+    const markthalCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-116')
+    expect(markthalCase).toMatchObject({
+      name: '鹿特丹市场大厅',
+      architect: 'MVRDV',
+      year: 2014,
+      image_license: 'CC BY-SA 4.0',
+      image_credit: 'Photo: Michielverbeek / Wikimedia Commons',
     })
   })
 

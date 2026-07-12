@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-074/116 guarded migration pack；合并后重复生产冲突预检，仍为 0 才写入 2 buildings / 2 profiles / 5 assignments。
+当前下一步：通过 PR 将生产 E2E 基线更新为 74 并加入 CASE-074/116 canonical 回归断言；合并后运行 Reviewed release 与真实路由验收。
 
 ## 最终目标
 
@@ -220,7 +220,9 @@ Retail-led mixed-use batch 002 的图片与公开数据已完成本地准备。C
 
 Retail-led mixed-use batch 002 migration pack 已生成：2 architects（1 new Klein Dytham、1 existing MVRDV）/ 2 buildings / 2 primary images / 2 profiles / 5 assignments。两栋 broad type 为 `mixed-use`，`retail` 为 primary；Markthal 另有 `public-space` secondary。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产只读预检为新 architect 与四类 target conflict 全部 0、MVRDV exact match 1、functions 3/3、type 1/1；基线 72/926/7275/118，预期写后 74/928/7277/123。migration 与 reviewed apply SQL 字节一致，尚未生产写入。详见 `GRADUATION_RETAIL_MIXED_USE_BATCH_002_DRY_RUN.md`。
 
-下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复生产冲突预检，仍为 0 才执行生产 migration 与完整写后验收。
+Retail-led mixed-use batch 002 生产 migration 已成功执行，实际 version `20260712113024`。总数精确更新为 74 profiles / 928 buildings / 7277 images / 123 assignments；目标 1 new architect / 2 buildings / 2 images / 2 profiles / 5 assignments，orphan、architect mismatch、primary image/function 异常均为 0；两条 profile concept/keywords 保持独立，RLS/policy 与 advisors 正常。尚未运行数据库写后的 Reviewed release。
+
+下一个最小可验证步骤：通过 PR 合并 74-profile E2E 基线和 CASE-074/116 canonical 回归断言；随后运行 Reviewed release 与 12 条页面路由、2 张图片验收。
 
 ### G7 — 统一搜索与筛选
 
