@@ -1,5 +1,6 @@
 import decisions from '../../db/review-decisions/graduation-new-buildings-public-toilet-001.json'
 import packet from '../../db/review-packets/graduation-new-building-public-toilet-001.json'
+import { publicGraduationCases } from '../../src/lib/graduation'
 
 import { describe, expect, it } from 'vitest'
 
@@ -17,6 +18,18 @@ describe('G6 public-toilet batch 001 decisions', () => {
     expect(item?.decision).toBe('project_scope_not_single_building')
     expect(item?.image_review.status).toBe('specific_building_but_wrong_scope_for_case')
     expect(item?.image_review.required_action).toContain('neutral placeholder')
+  })
+
+  it('preserves the published CASE-031 route with a neutral placeholder', () => {
+    const publicCase = publicGraduationCases.find((item) => item.id === 'CASE-031')
+    expect(publicGraduationCases).toHaveLength(101)
+    expect(publicCase).toMatchObject({
+      image_url: '/images/graduation/case-placeholder.svg',
+      status: 'published',
+    })
+    expect(publicCase?.image_source_url).toBeUndefined()
+    expect(publicCase?.image_license).toBeUndefined()
+    expect(publicCase?.image_credit).toBeUndefined()
   })
 
   it('keeps CASE-049 out until identity and image evidence are safe', () => {
