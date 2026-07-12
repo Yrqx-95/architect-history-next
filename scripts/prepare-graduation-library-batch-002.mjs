@@ -132,6 +132,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=retail-mixed-use-002)',
     required_functions_note: 'retail, mixed-use and public-space functions remain active',
   },
+  'disaster-memorial-002': {
+    batch_id: 'graduation-disaster-memorial-batch-002',
+    decision_path: 'db/review-decisions/graduation-new-buildings-disaster-memorial-002.json',
+    output_path: 'db/review-packets/graduation-disaster-memorial-batch-002.json',
+    apply_path: 'db/manual-operations/graduation-disaster-memorial-batch-002-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-disaster-memorial-batch-002-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'museum',
+    interior_case_ids: [],
+    sql_title: 'Graduation disaster memorial batch 002',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=disaster-memorial-002)',
+    required_functions_note: 'museum remains active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)

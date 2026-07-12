@@ -26,7 +26,7 @@ describe('graduation new-building disaster memorial batch 002 decisions', () => 
     expect(decisions.decisions[0].image).toMatchObject({
       status: 'approved_existing_local_asset',
       license: 'CC BY-SA 3.0',
-      credit: 'Photo: Yasu / Wikimedia Commons',
+      credit: 'Yasu',
       local_width: 1600,
       local_height: 1066,
       local_sha256: '4c65257beed887a72068ad2df001fffab1cc966ade2484e2af256f8d49158fa1',
