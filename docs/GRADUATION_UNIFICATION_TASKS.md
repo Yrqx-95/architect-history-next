@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：继续 `G6` 的 museum batch 001，通过 PR 合并已审核公开图片修正、正式决策和已通过 PGlite dry-run 的 guarded migration；合并后做生产冲突复查，再执行版本化 Supabase migration 与 Reviewed production release。`CASE-079` 保留为有证据的 `no_safe_image_yet`，不得用 2015 年旧馆图代表 2021 年改造。
+当前下一步：继续 `G6`，从剩余 82 个 new-building candidates 中生成 museum batch 002 的只读候选队列，逐条核验身份、官方来源、用途、图片内容与开放许可后再决定是否形成正式迁移。`CASE-079` 继续保留为有证据的 `no_safe_image_yet`，不得用 2015 年旧馆图代表 2021 年改造。
 
 ## 最终目标
 
@@ -128,6 +128,8 @@ Museum batch 001 已建立只读审核队列，覆盖 CASE-041/045/047/051/052/0
 Museum batch 001 的生产只读预检为 0 building slug conflict、0 CASE profile conflict，`museum` function 已存在；Kengo Kuma、Shigeru Ban、Zaha Hadid 三个主体建筑师已存在，按姓名复查未发现其余九个建筑师的别名重复。14 条版本化正式决策已建立并通过结构测试：全部身份与 museum 用途批准，CASE-051 替换施工图，CASE-124/132 修正作者与许可，CASE-118/124 更新现行官方 URL；文件仍明确禁止生产写入。下一步准备 guarded migration、rollback 与 dry-run。
 
 Museum batch 001 的公开数据同步、migration pack 与 dry-run 已完成。CASE-051 新图本地化为 2000×1123、613KB、无 EXIF；CASE-124/132 和六条 Commons 来源署名已同步到 CSV 与公开 JSON。生成包包含 9 个新建筑师、14 buildings、14 primary images、14 profiles、16 assignments。隔离 PostgreSQL 依次重放 foundation、unification batch 001、library batch 001/002 后，第一次 forward、外部关系 rollback guard、精确 rollback、第二次 forward 与第二次 rollback 全部通过。详见 `GRADUATION_MUSEUM_BATCH_001_DRY_RUN.md`。
+
+Museum batch 001 已完成生产迁移、双阶段发布和线上验收。PR #26 合并审核数据、CASE-051 正确 CC0 图片与 guarded migration pack；首次 Reviewed production release `29174147839` 在数据库写入前先发布图片和静态数据。生产冲突复查为 0 后，Supabase migration `graduation_museum_batch_001`（`20260712005222`）写入 9 个新 architect、14 buildings、14 primary images、14 published profiles 和 16 approved assignments；写后 profile 总数 57，本批全部计数符合预期，orphan profile / architect / function assignment 均为 0。PR #27 将生产读取基线从 43 更新为 57；最终 Reviewed production release `29174472413` 的质量门、完整测试、Cloudflare deploy 和路由语义检查全部通过。线上 API 实测 `source=supabase+json`、57 unified profiles、CASE-051 已统一；CASE-051 页面和 627413-byte CC0 图片均 HTTP 200。G6 当前完成 36/118，剩余 82；library 子集唯一剩余 CASE-079 继续为 `no_safe_image_yet`。详见 `GRADUATION_MUSEUM_BATCH_001_PRODUCTION.md`。
 
 ### G7 — 统一搜索与筛选
 
