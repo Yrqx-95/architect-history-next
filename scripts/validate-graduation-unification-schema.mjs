@@ -48,9 +48,18 @@ export function validateGraduationUnificationSchema(forwardSql, rollbackSql) {
   requirePattern(
     errors,
     forwardSql,
-    /case_id TEXT PRIMARY KEY[\s\S]*building_id UUID NOT NULL UNIQUE[\s\S]*REFERENCES public\.buildings\(id\) ON DELETE RESTRICT/,
-    'CASE compatibility must use a primary case_id and a unique restricted building reference.',
+    /case_id TEXT PRIMARY KEY[\s\S]*building_id UUID NOT NULL[\s\S]*REFERENCES public\.buildings\(id\) ON DELETE RESTRICT/,
+    'CASE compatibility must use a primary case_id and a restricted building reference.',
   )
+  requirePattern(
+    errors,
+    forwardSql,
+    /CREATE INDEX idx_graduation_case_profiles_building_id[\s\S]*ON public\.graduation_case_profiles\(building_id\)/,
+    'Graduation profiles need a non-unique building_id lookup index.',
+  )
+  if (/building_id UUID NOT NULL UNIQUE/.test(forwardSql)) {
+    errors.push('Graduation profile building_id must allow multiple CASE analyses per canonical building.')
+  }
   requirePattern(
     errors,
     forwardSql,
@@ -146,7 +155,7 @@ if (isMain) {
   }
   console.log('Graduation unification schema validation passed.')
   console.log('- 4 structure-only tables')
-  console.log('- CASE compatibility and unique building ownership')
+  console.log('- CASE compatibility and multiple analyses per canonical building')
   console.log('- RLS plus explicit Data API grants')
   console.log('- reverse-order rollback without canonical table mutation')
 }

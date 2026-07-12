@@ -8,7 +8,7 @@
 
 ## 设计结论
 
-毕业案例不再复制建筑本体。`graduation_case_profiles.building_id` 唯一引用 `buildings.id`，而稳定的 `case_id` 继续作为 `CASE-xxx` 路由标识。一个主体最多对应一个毕业分析 profile，避免同一建筑在毕业库内重复。
+毕业案例不再复制建筑本体。`graduation_case_profiles.building_id` 引用 `buildings.id`，而稳定且唯一的 `case_id` 继续作为 `CASE-xxx` 路由标识。同一主体可以对应多个毕业分析 profile，用来保留不同 CASE 的研究概念与关键词；建筑事实仍只存在一份。
 
 用途不是替换现有 `building_types`：
 
@@ -38,7 +38,7 @@
 ## CASE 兼容规则
 
 - `case_id` 是主键，并强制匹配 `CASE-000` 格式。
-- `building_id` 有唯一约束，防止一个主体产生两个互相竞争的 CASE 页面。
+- `building_id` 使用普通索引而非唯一约束；多个 CASE 可以共享同一主体，但每个 CASE 仍有独立分析与稳定 URL。
 - 删除主体使用 `ON DELETE RESTRICT`，不能在不处理 CASE 兼容性的情况下删除建筑。
 - 旧 URL 解析时先按 `case_id` 找 profile，再按 `building_id` 读取主体。
 - G5 双轨期继续保留 JSON；新查询失败时回退旧 JSON，直到 G9 完成差异监测。
@@ -54,7 +54,7 @@
 
 ## 索引与完整性
 
-- 主键和唯一约束覆盖 CASE 查询、profile 的 building 反查、alias 查询和 building 的用途查询。
+- 主键覆盖 CASE 查询；普通 `building_id` 索引覆盖主体到全部毕业分析的反查；唯一约束继续覆盖 alias 查询和 building 的用途关系。
 - 所有未被主键左前缀覆盖的外键都建立索引。
 - 已批准用途使用 `(function_slug, building_id)` 部分索引，直接服务“查全部图书馆”路径。
 - 每座建筑最多一个已批准的 primary function；其他用途仍可并存。

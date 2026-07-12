@@ -14,7 +14,7 @@ BEGIN;
 -- public.buildings, public.architects, and public.images.
 CREATE TABLE public.graduation_case_profiles (
   case_id TEXT PRIMARY KEY,
-  building_id UUID NOT NULL UNIQUE
+  building_id UUID NOT NULL
     REFERENCES public.buildings(id) ON DELETE RESTRICT,
   concept_zh TEXT NOT NULL,
   concept_zh_hant TEXT,
@@ -114,8 +114,10 @@ CREATE TABLE public.building_function_assignments (
     CHECK (updated_at >= created_at)
 );
 
--- Foreign-key and query-path indexes. Primary/unique constraints already cover
--- case_id, building_id on profiles, alias lookup, and assignment building_id.
+-- Foreign-key and query-path indexes. A building can support more than one
+-- CASE analysis, so profile building_id uses a non-unique lookup index.
+CREATE INDEX idx_graduation_case_profiles_building_id
+  ON public.graduation_case_profiles(building_id);
 CREATE INDEX idx_graduation_case_profiles_publication_status
   ON public.graduation_case_profiles(publication_status);
 CREATE INDEX idx_building_functions_parent_slug
