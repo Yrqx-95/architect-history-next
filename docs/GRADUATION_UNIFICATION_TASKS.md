@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 44 条未正式审核记录中选择用途边界清晰的小批次，先完成只读身份、用途与图片许可审核。
+当前下一步：为 CASE-015 disaster memorial batch 002 生成 guarded migration pack，并完成隔离 PostgreSQL dry-run 与生产只读预检。
 
 ## 最终目标
 
@@ -224,7 +224,9 @@ Retail-led mixed-use batch 002 生产 migration 已成功执行，实际 version
 
 Retail-led mixed-use batch 002 已完成生产迁移、发布和线上验收。Supabase migration `graduation_retail_mixed_use_batch_002`（`20260712113024`）新增 1 个 Klein Dytham architect、复用既有 MVRDV，写入 2 buildings / 2 primary images / 2 profiles / 5 assignments；总数更新为 74/928/7277/123，orphan、architect mismatch、primary image/function 异常均为 0，两套 profile concept/keywords 保持独立。PR #71 合并 74-profile E2E 基线与 canonical 回归断言。Reviewed release `29191052908` 成功；6 CASE 路由、6 building 路由、2 图片全部 HTTP 200，API 为 101 cases / 74 profiles / 0 missing。G6 已迁移 53/118，尚未迁移 65；尚未正式审核队列 44。详见 `GRADUATION_RETAIL_MIXED_USE_BATCH_002_PRODUCTION.md`。
 
-下一个最小可验证步骤：从剩余 44 条未正式审核记录中选择用途边界清晰的小批次，只读核验建筑身份、年份、地点、设计者、准确图片、摄影者和开放许可，再决定是否进入 migration 准备。
+Disaster memorial batch 002 已完成 CASE-015 的只读审核。Kengo Kuma and Associates 官方页确认南三陆311纪念馆位于宫城县、2022 年完成、1,433 m² / 2 层，并展示灾害记忆与艺术作品；canonical broad type 决定为 `cultural`，既有 `museum` 为唯一 primary function，不把官方宽泛的 Community 分类误写为具体 `community-center`。Commons 原图为 Yasu 自有作品、5753×3835、CC BY-SA 3.0；仓库已有同源 1600×1066 图片，原图与本地图均人工确认准确。生产只读查询确认复用既有 `kengo-kuma`，target building/profile conflict 均为 0，function/type 各 1/1。本批批准进入 migration 准备，但尚未授权生产写入。G6 已迁移仍为 53/118，尚未正式审核队列从 44 减至 43。详见 `GRADUATION_NEW_BUILDING_DISASTER_MEMORIAL_002_TRIAGE.md`。
+
+下一个最小可验证步骤：为 CASE-015 生成 guarded migration pack，运行完整历史隔离 PostgreSQL forward / rollback refusal / exact rollback / replay，并在生产只读预检无冲突后再提交 migration PR。
 
 ### G7 — 统一搜索与筛选
 
