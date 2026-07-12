@@ -28,6 +28,22 @@ const verifyConfigs = {
     rollback_path: 'db/manual-operations/graduation-museum-batch-001-rollback.sql',
     label: 'Graduation museum batch 001',
   },
+  'theatre-001': {
+    pack_path: 'db/review-packets/graduation-theatre-batch-001.json',
+    prior_pack_paths: [
+      'db/review-packets/graduation-library-batch-001.json',
+      'db/review-packets/graduation-library-batch-002.json',
+      'db/review-packets/graduation-museum-batch-001.json',
+    ],
+    prior_seed_paths: [
+      'db/manual-operations/graduation-library-batch-001-apply.sql',
+      'db/manual-operations/graduation-library-batch-002-apply.sql',
+      'db/manual-operations/graduation-museum-batch-001-apply.sql',
+    ],
+    apply_path: 'db/manual-operations/graduation-theatre-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-theatre-batch-001-rollback.sql',
+    label: 'Graduation theatre batch 001',
+  },
 }
 const verifyConfig = verifyConfigs[verifyKey]
 if (!verifyConfig) throw new Error(`Unknown graduation verify batch: ${verifyKey}`)
@@ -101,13 +117,21 @@ try {
   ])]
   await db.exec(`INSERT INTO public.building_types (slug) VALUES ${broadTypes.map(slug => `(${sqlText(slug)})`).join(', ')};`)
 
+  const priorNewArchitectIds = new Set(
+    priorPacks.flatMap(item => item.architects).filter(item => item.is_new).map(item => item.id),
+  )
+  const priorNewArchitectSlugs = new Set(
+    priorPacks.flatMap(item => item.architects).filter(item => item.is_new).map(item => item.slug),
+  )
   const existingArchitects = [...new Map(
     [
-      ...priorPacks.flatMap(item => item.architects),
-      ...pack.architects,
-    ]
-      .filter(item => !item.is_new)
-      .map(item => [item.id, item]),
+      ...priorPacks.flatMap(item => item.architects).filter(item => !item.is_new),
+      ...pack.architects.filter(item => (
+        !item.is_new
+        && !priorNewArchitectIds.has(item.id)
+        && !priorNewArchitectSlugs.has(item.slug)
+      )),
+    ].map(item => [item.id, item]),
   ).values()]
   await db.exec(`INSERT INTO public.architects (id, slug, name_zh, name_en, name_ja, official_url) VALUES ${existingArchitects.map(item => `(${sqlText(item.id)}::uuid, ${sqlText(item.slug)}, ${sqlNullable(item.name_zh)}, ${sqlText(item.name_en)}, ${sqlNullable(item.name_ja)}, ${sqlNullable(item.official_url)})`).join(', ')};`)
 

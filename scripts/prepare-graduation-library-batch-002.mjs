@@ -34,6 +34,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=museum-001)',
     required_functions_note: 'museum, library and mixed-use functions remain active',
   },
+  'theatre-001': {
+    batch_id: 'graduation-theatre-batch-001',
+    decision_path: 'db/review-decisions/graduation-new-buildings-theatre-001.json',
+    output_path: 'db/review-packets/graduation-theatre-batch-001.json',
+    apply_path: 'db/manual-operations/graduation-theatre-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-theatre-batch-001-rollback.sql',
+    expected_decisions: 4,
+    expected_excluded: ['CASE-091'],
+    primary_function: 'theatre',
+    interior_case_ids: [],
+    sql_title: 'Graduation theatre batch 001',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=theatre-001)',
+    required_functions_note: 'theatre and mixed-use functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -148,6 +162,12 @@ const architectDrafts = {
   },
   'heatherwick-studio': {
     name_zh: 'Heatherwick Studio', name_en: 'Heatherwick Studio', name_ja: 'ヘザウィック・スタジオ', official_url: 'https://heatherwick.com/',
+  },
+  'diller-scofidio-renfro-rockwell-group': {
+    name_zh: 'Diller Scofidio + Renfro + Rockwell Group',
+    name_en: 'Diller Scofidio + Renfro + Rockwell Group',
+    name_ja: 'ディラー・スコフィディオ＋レンフロ + ロックウェル・グループ',
+    official_url: 'https://dsrny.com/project/the-shed',
   },
 }
 
