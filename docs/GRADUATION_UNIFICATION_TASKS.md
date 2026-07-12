@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 39 条尚未正式审核的 G6 队列中选择下一个边界清晰、身份与图片权利可验证的小批次。
+当前下一步：通过 PR 固化 CASE-016 ACROS Fukuoka batch 007 只读审核决策；合并后才准备 guarded migration、rollback 与全历史隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -264,7 +264,9 @@ CASE-028 Shiroiya Hotel batch 006 migration pack 已生成：复用既有 `fujim
 
 CASE-028 Shiroiya Hotel batch 006 已完成生产迁移、兼容纠偏、发布和线上验收。Supabase migration `graduation_shiroiya_hotel_batch_006`（`20260712145447`）复用 `fujimoto`，写入 1 building / 1 primary image / 1 profile / 2 assignments；总数更新为 77/931/7280/129，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 和 advisors 正常。PR #88 修正 JSON compatibility architect 漂移并加入 canonical 回归。Reviewed release `29197317708` 首次被短暂的 Supabase REST malformed response 拦截且未部署；生产 buildings 全字段控制字符扫描为 0，第二次 9m55s 完整成功。6 CASE/building 三语路由、图片全部 HTTP 200，API 为 101 cases / 77 profiles / 0 missing，并返回 Sou Fujimoto 与 こやまひろ / CC BY 4.0。G6 已迁移 56/118，尚未迁移 62，尚未正式审核队列 39。详见 `GRADUATION_SHIROIYA_HOTEL_BATCH_006_PRODUCTION.md`。
 
-下一个最小可验证步骤：对剩余 39 条做只读排序，选择下一个不需降低身份或图片权利标准的边界清晰小批次。
+ACROS Fukuoka batch 007 已完成 CASE-016 的只读审核。ACROS 官方与竹中工务店资料一致确认：基本构想为日本设计、竹中工务店、Emilio Ambasz，正式设计为日本设计、竹中工务店；因此拒绝当前单一 `Emilio Ambasz` 表达，canonical architect 决定为新联合实体 `Nihon Sekkei + Takenaka Corporation`，并把 Emilio Ambasz 保留为 building 来源说明中的 basic concept contributor。Commons 原图为 Kenta Mabuchi / Flickr、2426×1625、CC BY-SA 2.0，FlickreviewR 已确认；仓库 1600×1071 文件人工确认准确展示建筑本体与阶梯绿化。broad type 为 `mixed-use`，functions 为 `mixed-use` primary、`theatre`/`retail`/`public-space` secondary，不把“公民复合设施”误缩窄成 `community-center`。生产 target building/profile conflict 0，可复用 Takenaka，required functions 4/4、type 1/1；尚未生成 migration 或写生产。G6 已迁移仍为 56/118，尚未迁移 62；尚未正式审核队列从 39 减至 38。详见 `GRADUATION_NEW_BUILDING_ACROS_FUKUOKA_007_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化 CASE-016 只读决策；合并后同步 compatibility architect，生成 1 joint architect / 1 building / 1 primary image / 1 profile / 4 assignments 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。生产写入前必须重复冲突预检。
 
 ### G7 — 统一搜索与筛选
 
