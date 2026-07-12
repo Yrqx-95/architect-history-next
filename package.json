@@ -65,6 +65,8 @@
     "graduation:verify-public-space-taxonomy": "node scripts/verify-building-function-public-space-001-dry-run.mjs",
     "graduation:prepare-transport-001": "GRADUATION_REVIEW_BATCH=transport-001 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
     "graduation:verify-transport-001": "GRADUATION_VERIFY_BATCH=transport-001 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
+    "graduation:prepare-public-space-001": "GRADUATION_REVIEW_BATCH=public-space-001 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
+    "graduation:verify-public-space-001": "GRADUATION_VERIFY_BATCH=public-space-001 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",

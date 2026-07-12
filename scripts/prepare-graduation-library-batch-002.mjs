@@ -76,6 +76,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=transport-001)',
     required_functions_note: 'transport-hub and mixed-use functions remain active',
   },
+  'public-space-001': {
+    batch_id: 'graduation-public-space-batch-001',
+    decision_path: 'db/review-decisions/graduation-new-buildings-public-space-001.json',
+    output_path: 'db/review-packets/graduation-public-space-batch-001.json',
+    apply_path: 'db/manual-operations/graduation-public-space-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-public-space-batch-001-rollback.sql',
+    expected_decisions: 4,
+    expected_excluded: ['CASE-014'],
+    primary_function: 'public-space',
+    interior_case_ids: [],
+    sql_title: 'Graduation public space batch 001',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=public-space-001)',
+    required_functions_note: 'public-space and mixed-use functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -208,6 +222,24 @@ const architectDrafts = {
     name_en: 'Foreign Office Architects',
     name_ja: 'Foreign Office Architects',
     official_url: 'https://www.moma.org/artists/27436',
+  },
+  'taisei-design-nikken-sekkei': {
+    name_zh: '大成设计＋日建设计',
+    name_en: 'TAISEI DESIGN + Nikken Sekkei',
+    name_ja: '大成建設設計本部＋日建設計',
+    official_url: 'https://www.mitsuifudosan.co.jp/english/corporate/news/2020/0623/',
+  },
+  'field-operations-dsr-piet-oudolf': {
+    name_zh: 'Field Operations＋Diller Scofidio + Renfro＋Piet Oudolf',
+    name_en: 'Field Operations + Diller Scofidio + Renfro + Piet Oudolf',
+    name_ja: 'Field Operations＋Diller Scofidio + Renfro＋Piet Oudolf',
+    official_url: 'https://www.fieldoperations.net/project/high-line',
+  },
+  'big-topotek1-superflex': {
+    name_zh: 'BIG＋Topotek 1＋Superflex',
+    name_en: 'BIG + Topotek 1 + Superflex',
+    name_ja: 'BIG＋Topotek 1＋Superflex',
+    official_url: 'https://big.dk/projects/superkilen-1621',
   },
 }
 

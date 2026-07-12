@@ -83,6 +83,30 @@ const verifyConfigs = {
     rollback_path: 'db/manual-operations/graduation-transport-batch-001-rollback.sql',
     label: 'Graduation transport batch 001',
   },
+  'public-space-001': {
+    pack_path: 'db/review-packets/graduation-public-space-batch-001.json',
+    prior_pack_paths: [
+      'db/review-packets/graduation-library-batch-001.json',
+      'db/review-packets/graduation-library-batch-002.json',
+      'db/review-packets/graduation-museum-batch-001.json',
+      'db/review-packets/graduation-theatre-batch-001.json',
+      'db/review-packets/graduation-community-civic-batch-001.json',
+      'db/review-packets/graduation-transport-batch-001.json',
+    ],
+    prior_seed_paths: [
+      'db/manual-operations/graduation-library-batch-001-apply.sql',
+      'db/manual-operations/graduation-library-batch-002-apply.sql',
+      'db/manual-operations/graduation-museum-batch-001-apply.sql',
+      'db/manual-operations/graduation-theatre-batch-001-apply.sql',
+      'db/manual-operations/graduation-community-civic-batch-001-apply.sql',
+      'db/manual-operations/building-function-transport-hub-001-apply.sql',
+      'db/manual-operations/graduation-transport-batch-001-apply.sql',
+      'db/manual-operations/building-function-public-space-001-apply.sql',
+    ],
+    apply_path: 'db/manual-operations/graduation-public-space-batch-001-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-public-space-batch-001-rollback.sql',
+    label: 'Graduation public space batch 001',
+  },
 }
 const verifyConfig = verifyConfigs[verifyKey]
 if (!verifyConfig) throw new Error(`Unknown graduation verify batch: ${verifyKey}`)
@@ -152,6 +176,7 @@ try {
 
   const broadTypes = [...new Set([
     ...basePack.functions.map(item => item.broad_type_slug),
+    ...priorPacks.flatMap(item => item.buildings).map(item => item.type_slug),
     ...pack.buildings.map(item => item.type_slug),
   ])]
   await db.exec(`INSERT INTO public.building_types (slug) VALUES ${broadTypes.map(slug => `(${sqlText(slug)})`).join(', ')};`)
