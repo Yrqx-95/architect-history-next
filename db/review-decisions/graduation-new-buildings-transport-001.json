@@ -27,6 +27,7 @@
     "broad_type_slug": "transportation",
     "reason": "All three buildings are primarily passenger-transport nodes; existing mixed-use or community-center functions would be semantically wrong."
   },
+  "excluded": [],
   "decisions": [
     {
       "case_id": "CASE-008",
@@ -52,7 +53,7 @@
       "evidence_urls": ["https://shigerubanarchitects.com/works/cultural/onagawa-station/"],
       "image": {
         "status": "approved",
-        "source_url": "https://commons.wikimedia.org/wiki/File:JR_East_Onagawa_Station_building,_Miyagi_Pref_20240420.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:JR_East_Onagawa_Station_building%2C_Miyagi_Pref_20240420.jpg",
         "license": "CC BY-SA 4.0",
         "credit": "Photo: Mister0124 / Wikimedia Commons",
         "visual_evidence": "Clear frontal exterior shows the Onagawa JR and yupoppo signage, three-storey facade and curved white roof.",

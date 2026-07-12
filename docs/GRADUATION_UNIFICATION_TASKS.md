@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：合并 transport-hub taxonomy 与 CASE-094/133 图片修正 PR；生产复查后应用 taxonomy migration，运行 advisors、写后 RLS/数量核验和 Reviewed production release。随后生成三条 transport building/profile migration pack。
+当前下一步：合并 transport batch 001 migration pack；生产冲突复查后应用 migration，运行 advisors、写后关系/RLS/数量核验和 Reviewed production release，并验证 3 CASE + 3 building 路由。
 
 ## 最终目标
 
@@ -154,7 +154,11 @@ Transport batch 001 已完成 CASE-008/094/133 的只读审核。三条身份、
 
 Transport-hub taxonomy 001 与图片准备已完成。词表新增 `transport-hub` / `transportation` 及四语 17 aliases；生产只读预检为 0 function conflict、0 alias conflict、0 assignment。隔离 PostgreSQL 18.3 重放 foundation 与首批 taxonomy 后，forward、依赖 assignment rollback guard、精确 rollback、第二次 forward/rollback 全部通过。CASE-094 新图优化为 2000×1328 / 588249 bytes，CASE-133 为 2000×1500 / 849421 bytes；graduation QA 0 problem。Supabase migration 文件通过 CLI 生成，尚未应用生产。详见 `GRADUATION_TRANSPORT_TAXONOMY_001_DRY_RUN.md`。
 
-下一个最小可验证步骤：通过 PR 合并 taxonomy、图片与 migration；生产写入并完成发布后再准备 transport building/profile pack。
+Transport-hub taxonomy 001 已完成生产迁移与发布。PR #44 合并 taxonomy、migration 与两张图片；Supabase migration `building_function_transport_hub_001`（`20260712053356`）将 9/122 functions/aliases 更新为 10/139，assignments 保持 101。两表 RLS、policy、anon/authenticated SELECT 与 anon REST 均通过；advisors 无本迁移新增问题。Reviewed production release `29181377729` 成功，CASE-094/133 页面和图片均 HTTP 200，线上 API 为 101 public cases / 62 profiles / 0 missing relation。详见 `GRADUATION_TRANSPORT_TAXONOMY_001_PRODUCTION.md`。
+
+Transport batch 001 migration pack 已生成：1 new architect、3 buildings、3 primary images、3 published profiles、5 assignments。生产只读预检为 0 building/image/profile/architect conflict，required functions 2/2、type 1/1。隔离 PostgreSQL 18.3 全历史重放、两次 forward/rollback 与外部 relation guard 全部通过。详见 `GRADUATION_TRANSPORT_BATCH_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 transport migration pack；生产复查、写入、发布和六条路由验收。
 
 ### G7 — 统一搜索与筛选
 
