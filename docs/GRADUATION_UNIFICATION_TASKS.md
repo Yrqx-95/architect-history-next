@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：为 CASE-040 生成 guarded migration pack，运行隔离 PostgreSQL dry-run 与生产只读预检。
+当前下一步：通过 PR 合并 CASE-040 migration pack；合并后重复生产预检与 advisors，再应用 guarded migration。
 
 ## 最终目标
 
@@ -240,7 +240,9 @@ MIYASHITA PARK batch 005 已完成 CASE-040 的只读审核。Nikken 官方页�
 
 CASE-040 替代图已完成本地化。Nesnad 原图优化为 2000×1500 网站 JPEG，SHA-256 `164a7731ca18c6ac26ed5519873ce9bbc0c1bbc4cd84bf427906a1373483baf2`；最终文件已人工复核，权威 CSV、公开 CSV/JSON、源 JSON 与 image manifest 已同步 `Photo: Nesnad / Wikimedia Commons`、CC BY 4.0 和准确 Commons 来源。兼容 architect 同步为 `Takenaka Corporation + Nikken Sekkei`。尚未生成或写入数据库 migration。
 
-下一个最小可验证步骤：生成 CASE-040 migration pack，验证联合 architect、mixed-use building、primary image、profile 与 3 条用途 assignments 的 guarded forward/rollback。
+CASE-040 migration pack 已生成：1 new joint architect / 1 building / 1 primary image / 1 profile / 3 assignments，`mixed-use` primary，`retail` 与 `public-space` secondary。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产预检为五类 conflict 全部 0、functions 3/3、type 1/1；基线 75/929/7278/124，预期写后 76/930/7279/127。CLI migration 与 reviewed apply SQL 字节一致，尚未生产写入。详见 `GRADUATION_MIYASHITA_PARK_BATCH_005_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复冲突预检、检查 advisors，再应用 guarded Supabase migration。
 
 ### G7 — 统一搜索与筛选
 
