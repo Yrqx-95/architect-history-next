@@ -160,6 +160,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=miyashita-park-005)',
     required_functions_note: 'mixed-use, retail and public-space functions remain active',
   },
+  'shiroiya-hotel-006': {
+    batch_id: 'graduation-shiroiya-hotel-batch-006',
+    decision_path: 'db/review-decisions/graduation-new-buildings-shiroiya-hotel-006.json',
+    output_path: 'db/review-packets/graduation-shiroiya-hotel-batch-006.json',
+    apply_path: 'db/manual-operations/graduation-shiroiya-hotel-batch-006-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-shiroiya-hotel-batch-006-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'hotel',
+    interior_case_ids: [],
+    sql_title: 'Graduation Shiroiya Hotel batch 006',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=shiroiya-hotel-006)',
+    required_functions_note: 'hotel and retail functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)

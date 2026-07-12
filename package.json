@@ -85,6 +85,8 @@
     "graduation:verify-disaster-memorial-002": "GRADUATION_VERIFY_BATCH=disaster-memorial-002 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:prepare-miyashita-park-005": "GRADUATION_REVIEW_BATCH=miyashita-park-005 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
     "graduation:verify-miyashita-park-005": "GRADUATION_VERIFY_BATCH=miyashita-park-005 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
+    "graduation:prepare-shiroiya-hotel-006": "GRADUATION_REVIEW_BATCH=shiroiya-hotel-006 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
+    "graduation:verify-shiroiya-hotel-006": "GRADUATION_VERIFY_BATCH=shiroiya-hotel-006 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",
