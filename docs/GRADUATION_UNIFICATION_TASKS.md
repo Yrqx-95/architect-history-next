@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 CASE-038/039 migration pack；合并后重复生产冲突预检，仍为 0 才写入 2 buildings / 2 images / 2 profiles / 5 assignments。
+当前下一步：通过 PR 将生产 E2E 基线更新为 72 并修正 CASE-039 JSON fallback architect 漂移；合并后运行 Reviewed release 和真实 CASE/building/image 路由验收。
 
 ## 最终目标
 
@@ -210,7 +210,9 @@ Retail taxonomy 001 与 CASE-038 高清图片已完成生产迁移、发布和�
 
 CASE-038/039 migration pack 已生成：2 new architects / 2 buildings / 2 primary images / 2 profiles / 5 assignments。两条 CASE 保留不同 concept/keywords；两栋 building broad type 为 `commercial`，`retail` 为各自 primary function。生成器修正了非 Commons 图片 repository 被统一误标的问题，CASE-038 明确为 MDPI。完整历史 PostgreSQL 18.3 forward、外部 curated-image rollback 拒绝、精确 rollback/replay 全部通过。生产只读预检为五类 conflict 全部 0、required functions 3/3、type 1/1；基线 70/924/7273/113，预期写后 72/926/7275/118。尚未生产写入。详见 `GRADUATION_SHIMOKITAZAWA_RETAIL_BATCH_001_DRY_RUN.md`。
 
-下一个最小可验证步骤：通过 PR 合并 migration pack；合并后重复生产冲突预检，仍为 0 才执行生产 migration 与完整写后验收。
+CASE-038/039 生产 migration 已成功执行，实际 version `20260712104005`。总数精确更新为 72 profiles / 926 buildings / 7275 images / 118 assignments；目标 2 architects / 2 buildings / 2 images / 2 profiles / 5 assignments，orphan、architect mismatch、primary image/function 异常均为 0；CASE-038/039 profile 分别指向各自 building，concept 和 keywords 均保持两套独立值。RLS/policy 与 advisors 正常。生产 E2E 预跑发现 CASE-039 API architect 仍由 JSON compatibility fallback 返回旧 `Taiju Yamashita Design and Associates`，而 canonical 为 `Taiju Yamashita Design and Architecture`；已修正权威 CSV 与生成数据，并加入两条 canonical 回归断言。尚未运行数据库写后的 Reviewed release。
+
+下一个最小可验证步骤：通过 PR 合并 72-profile E2E 基线与 CASE-039 fallback 修正；随后运行 Reviewed release，验收 CASE-038/039 中英日 CASE、building 路由和两张图片。
 
 ### G7 — 统一搜索与筛选
 
