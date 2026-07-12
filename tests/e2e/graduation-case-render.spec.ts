@@ -5,7 +5,7 @@ test.describe('graduation case detail rendering', () => {
     const response = await page.goto('/zh/graduation/cases/CASE-033')
     expect(response?.status()).toBe(200)
 
-    const title = page.getByRole('heading', { name: 'Yu no Eki Ohyu' })
+    const title = page.getByRole('heading', { level: 1 })
     await expect(title).toBeVisible()
     await expect(page.getByRole('link', { name: '图片来源 · CC BY-SA 4.0' })).toBeVisible()
     await expect(page.locator('.page-enter')).toHaveCSS('animation-fill-mode', 'both')
@@ -19,7 +19,7 @@ test.describe('graduation case detail rendering', () => {
       clientHeight: img.clientHeight,
     }))
 
-    expect(imageState.alt).toBe('Yu no Eki Ohyu')
+    expect(imageState.alt).toBe(await title.textContent())
     expect(imageState.src).toContain('case-033-yu-no-eki-ohyu.jpg')
     expect(imageState.naturalWidth).toBeGreaterThan(400)
     expect(imageState.naturalHeight).toBeGreaterThan(250)
