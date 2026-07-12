@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：通过 PR 合并 75-profile E2E 基线与 CASE-015 canonical 回归断言；随后运行 Reviewed release 和真实路由验收。
+当前下一步：从剩余 43 条未正式审核记录中选择用途边界清晰且已有准确开放图片的小批次，开始只读审核。
 
 ## 最终目标
 
@@ -230,7 +230,9 @@ CASE-015 migration pack 已生成：复用既有 Kengo Kuma，准备写入 1 bui
 
 CASE-015 生产 migration 已成功执行，实际 version `20260712115840`。总数精确更新为 75 profiles / 929 buildings / 7278 images / 124 assignments；目标 1 building / 1 image / 1 profile / 1 assignment 全部匹配，orphan、architect mismatch、primary image/function 异常均为 0。graduation profile/function assignment RLS 与 published-only policy 正常，advisors 保持既有 13 security / 27 performance。尚未运行数据库写后的 Reviewed release。
 
-下一个最小可验证步骤：通过 PR 合并 75-profile E2E 基线和 CASE-015 canonical 名称、建筑师、年份、许可与署名断言；随后运行 Reviewed release 与三语 CASE/building 路由、图片和 API 验收。
+Disaster memorial batch 002 已完成生产迁移、发布和线上验收。Supabase migration `graduation_disaster_memorial_batch_002`（`20260712115840`）复用既有 Kengo Kuma，写入 1 building / 1 primary image / 1 profile / 1 `museum` primary assignment；总数更新为 75/929/7278/124，orphan、architect mismatch、primary image/function 异常均为 0。PR #75 修正 JSON compatibility layer 的 architect 与图片署名漂移并加入 canonical 回归断言。Reviewed release `29191945706` 成功；3 CASE 路由、3 building 路由和图片全部 HTTP 200，API 为 101 cases / 75 profiles / 0 missing。G6 已迁移 54/118，尚未迁移 64；尚未正式审核队列 43。详见 `GRADUATION_DISASTER_MEMORIAL_BATCH_002_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 43 条未正式审核记录中选择用途边界清晰且已有准确开放图片的小批次，只读核验身份、年份、地点、设计者、用途、图片内容、作者和许可。
 
 ### G7 — 统一搜索与筛选
 
