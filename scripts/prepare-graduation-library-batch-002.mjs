@@ -146,6 +146,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=disaster-memorial-002)',
     required_functions_note: 'museum remains active',
   },
+  'miyashita-park-005': {
+    batch_id: 'graduation-miyashita-park-batch-005',
+    decision_path: 'db/review-decisions/graduation-new-buildings-miyashita-park-005.json',
+    output_path: 'db/review-packets/graduation-miyashita-park-batch-005.json',
+    apply_path: 'db/manual-operations/graduation-miyashita-park-batch-005-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-miyashita-park-batch-005-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'mixed-use',
+    interior_case_ids: [],
+    sql_title: 'Graduation Miyashita Park batch 005',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=miyashita-park-005)',
+    required_functions_note: 'mixed-use, retail and public-space functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -248,6 +262,12 @@ const architectDrafts = {
   },
   'takenaka-corporation': {
     name_zh: '竹中工务店', name_en: 'Takenaka Corporation', name_ja: '竹中工務店', official_url: 'https://www.takenaka.co.jp/',
+  },
+  'takenaka-corporation-nikken-sekkei': {
+    name_zh: '竹中工务店 + 日建设计',
+    name_en: 'Takenaka Corporation + Nikken Sekkei',
+    name_ja: '竹中工務店 + 日建設計',
+    official_url: 'https://www.nikken.co.jp/en/projects/urban_design_and_planning/miyashita_park.html',
   },
   'yasuda-atelier': {
     name_zh: '安田工作室', name_en: 'Yasuda Atelier', name_ja: '安田アトリエ', official_url: 'https://www.yasudaatelier.com/',
