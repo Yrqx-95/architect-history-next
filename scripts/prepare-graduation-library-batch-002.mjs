@@ -118,6 +118,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=shimokitazawa-retail-001)',
     required_functions_note: 'retail, mixed-use and public-space functions remain active',
   },
+  'retail-mixed-use-002': {
+    batch_id: 'graduation-retail-mixed-use-batch-002',
+    decision_path: 'db/review-decisions/graduation-new-buildings-retail-mixed-use-002.json',
+    output_path: 'db/review-packets/graduation-retail-mixed-use-batch-002.json',
+    apply_path: 'db/manual-operations/graduation-retail-mixed-use-batch-002-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-retail-mixed-use-batch-002-rollback.sql',
+    expected_decisions: 2,
+    expected_excluded: [],
+    primary_function: 'retail',
+    interior_case_ids: [],
+    sql_title: 'Graduation retail mixed-use batch 002',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=retail-mixed-use-002)',
+    required_functions_note: 'retail, mixed-use and public-space functions remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -280,6 +294,12 @@ const architectDrafts = {
     name_en: 'Taiju Yamashita Design and Architecture',
     name_ja: '山下泰樹建築デザイン事務所',
     official_url: 'https://tjda.com/en/',
+  },
+  'klein-dytham-architecture': {
+    name_zh: 'Klein Dytham architecture',
+    name_en: 'Klein Dytham architecture',
+    name_ja: 'クライン・ダイサム・アーキテクツ',
+    official_url: 'https://www.klein-dytham.com/',
   },
 }
 
