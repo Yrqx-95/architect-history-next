@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：完成 `hotel` 四语 taxonomy 隔离 PostgreSQL dry-run 和生产冲突预检；通过 PR 后才允许生产写入。
+当前下一步：生成 CASE-028 Shiroiya Hotel guarded migration pack，运行生产冲突预检和全历史隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -253,6 +253,10 @@ Shiroiya Hotel batch 006 已完成 CASE-028 的只读审核。官方确认项目
 Hotel taxonomy 001 已完成本地与生产只读预检：新增 `hotel` / `commercial` 四语 20 aliases，不把泛旅游或住宅意图并入酒店搜索。生产为 0 function conflict / 0 alias conflict / 0 assignment / 1 commercial type，基线 13 functions / 209 aliases / 127 assignments；相关三表 RLS/policy 正常，advisors 保持既有 13 security / 27 performance。隔离 PostgreSQL forward、assignment rollback guard、精确 rollback 和 replay 均通过；55 files / 193 tests、typecheck、lint 与 migration 字节一致通过。完整 E2E 18/19，唯一失败来自受保护的并发 `architect-content.ts` 工作，本批未修改。Supabase migration 尚未写入生产。详见 `GRADUATION_HOTEL_TAXONOMY_001_DRY_RUN.md`。
 
 下一个最小可验证步骤：通过 PR 合并 hotel taxonomy；紧接着重复生产冲突预检，通过后才 apply migration。
+
+Hotel taxonomy 001 已完成生产迁移、发布与线上验收。Supabase migration `building_function_hotel_001`（`20260712143511`）将 13/209 functions/aliases 更新为 14/229，assignments 保持 127；目标为 1 function / 20 aliases / 4 locales / 0 assignments。RLS/policy 正常，advisors 保持既有 13 security / 27 performance。Reviewed release `29196546583` 在 9m49s 内成功。线上 API 为 101 cases / 76 profiles / 0 missing；CASE-028 保持公开但尚未 unified，等待建筑 migration。当前搜索还未消费 function aliases，属 G7 范围。详见 `GRADUATION_HOTEL_TAXONOMY_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：生成 CASE-028 迁移包，复用 `fujimoto`，建立 1 canonical hotel complex / 1 primary image / 1 profile / 2 assignments，先跑隔离 dry-run。
 
 ### G7 — 统一搜索与筛选
 
