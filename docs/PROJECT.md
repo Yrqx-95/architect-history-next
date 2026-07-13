@@ -25,7 +25,7 @@
 | 动画 | CSS + IntersectionObserver | — |
 | 平滑滚动 | 浏览器原生滚动 | — |
 | 数据库 | Supabase (PostgreSQL) | — |
-| 部署 | Vercel | Production |
+| 部署 | Cloudflare Workers（Reviewed production release） | Production |
 | 三语 | zh / en / ja | — |
 
 ## 当前功能
@@ -33,11 +33,12 @@
 ### 内容浏览
 - 首页：精选建筑 hero + 风格入口 + 时代入口 + 建筑师索引
 - 浏览页：按建筑师 / 建筑 / 时代 / 风格 / 类型 / 国家浏览
-- 搜索：全站搜索（支持中文、英文，日文受限）
+- 搜索：全站搜索；中英日用途同义词、毕业分析关键词、用途/年代/国家/建筑师/毕业课题筛选
 
 ### 详情页
 - 建筑师详情：生平、教育、核心思想、代表作、影响关系图
 - 建筑详情：图片画廊、深度分析三模块（空间/光线/动线）、技术参数面板
+- 毕业案例与主体建筑：双向入口；基础事实/图片/版权统一，毕业分析层独立保留
 - 时代详情：关联风格、建筑师、建筑
 - 风格详情：父子风格关系、代表人物与建筑
 
@@ -58,7 +59,7 @@
 4. 建立图片治理体系：本地缓存 > Wikimedia > IIIF > Museum API
 5. 将 Unsplash 图片逐步替换为可信授权图片
 6. 迁移图片系统到对象存储（R2 / Supabase Storage）
-7. 数据从 JSON 文件迁移到 Supabase 规范化表
+7. 主体与毕业运行时数据统一由 Supabase 提供；JSON/CSV 仅保留兼容导出与历史证据
 
 毕业制作案例与主体建筑的统一工作使用独立、可验收的主任务清单：
 [GRADUATION_UNIFICATION_TASKS.md](GRADUATION_UNIFICATION_TASKS.md)。后续不得只依赖聊天记录推进。

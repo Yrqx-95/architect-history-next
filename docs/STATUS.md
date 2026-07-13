@@ -1,8 +1,16 @@
 # STATUS.md — 项目当前状态
 
-> 当前快照：2026-07-11。以下 2026-06 条目为历史记录，不应作为当前发布状态。
+> 当前快照：2026-07-13。以下 2026-06 条目为历史记录，不应作为当前发布状态。
 
 ## 当前发布基线
+
+- 毕业案例/主体建筑长期统一任务 G6–G9 已进入最终发布验收：101 个公开 CASE、88 个 canonical profiles、0 missing relation。
+- 118 条新建主体队列全部正式审核：67 条迁移，51 条明确拒绝或证据缺口，0 条未审核。
+- 运行时只读取 Supabase compatibility/profile/building/image 组合；JSON/CSV 保留为旧入口兼容导出，不再是运行时事实源。
+- 统一搜索支持中英日用途同义词、毕业关键词和用途/年代/国家/建筑师/毕业课题筛选；建筑结果去重并标记毕业参考视角。
+- CASE 与 canonical building 页面互相链接，基础事实、审核图片和版权口径一致。
+- 当前 Supabase 总数：88 graduation profiles / 942 buildings / 7291 images / 152 function assignments；advisors 基线 13 security / 27 performance。
+- 当前测试基线：66 unit files / 227 tests；数据 audit error 0，毕业 QA problem 0。
 
 - 生产构建通过；`npm test` 全绿：12/12 unit、17/17 production e2e。
 - `npm run quality:gate` 通过：数据关系 error 0、毕业设计 QA problem 0、建筑图片缺失 0。
