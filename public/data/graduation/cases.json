@@ -676,7 +676,7 @@
     ],
     "source_url": "https://www.acros.or.jp/",
     "year": 1995,
-    "architect": "Nihon Sekkei + Takenaka Corporation",
+    "architect": "Emilio Ambasz",
     "status": "published"
   },
   {
@@ -1202,7 +1202,7 @@
     ],
     "source_url": "https://www.shiroiya.com/en/stories/soufujimoto/",
     "year": 2020,
-    "architect": "Sou Fujimoto Architects",
+    "architect": "Sou Fujimoto",
     "status": "published"
   },
   {
@@ -1412,7 +1412,7 @@
     ],
     "source_url": "https://kkaa.co.jp/en/project/yu-no-eki-ohyu/",
     "year": 2018,
-    "architect": "Kengo Kuma",
+    "architect": "Kengo Kuma and Associates",
     "status": "published"
   },
   {
@@ -1456,7 +1456,7 @@
     ],
     "source_url": "https://en.kait.jp/facilities/kait-workshop.html",
     "year": 2008,
-    "architect": "Junya Ishigami",
+    "architect": "Junya Ishigami and Associates",
     "status": "published"
   },
   {
@@ -5360,10 +5360,10 @@
     "location": "Seville Spain",
     "location_ja": "セビリア スペイン",
     "location_en": "Seville Spain",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Metropol%20Parasol.JPG",
+    "image_url": "/images/graduation/cases/case-126-metropol-parasol.jpg",
     "image_source_url": "https://commons.wikimedia.org/wiki/File:Metropol_Parasol.JPG",
-    "image_license": "See image source",
-    "image_credit": "Wikimedia Commons",
+    "image_license": "CC BY-SA 3.0",
+    "image_credit": "Photo: Arup / Wikimedia Commons",
     "plan_url": "",
     "section_url": "",
     "concept": "大きな木質構造で市場、広場、展望、日陰をつくる事例。暑熱環境と公共活動を同時に扱える。",
@@ -5792,10 +5792,10 @@
     "location": "Melbourne Australia",
     "location_ja": "メルボルン オーストラリア",
     "location_en": "Melbourne Australia",
-    "image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Federation%20Square%20Melbourne.jpg",
+    "image_url": "/images/graduation/cases/case-136-federation-square.jpg",
     "image_source_url": "https://commons.wikimedia.org/wiki/File:Federation_Square_Melbourne.jpg",
-    "image_license": "See image source",
-    "image_credit": "Wikimedia Commons",
+    "image_license": "CC BY-SA 2.0",
+    "image_credit": "Photo: Alpha / Wikimedia Commons (Flickr)",
     "plan_url": "",
     "section_url": "",
     "concept": "広場、文化施設、交通結節点をまとめた都市の公共室。中心市街地の滞在とイベントを考える参考になる。",

@@ -27,16 +27,18 @@
     {
       "case_id":"CASE-126","decision":"approved_after_dry_run",
       "canonical_building":{"slug":"metropol-parasol","name_zh":"都市阳伞","name_en":"Metropol Parasol","name_ja":"メトロポール・パラソル","year_start":2011,"city":"塞维利亚","country":"西班牙","country_code":"ES","type_slug":"mixed-use","architect_slug":"j-mayer-h-architects","official_url":"https://jmayerh.de/metropol-parasol/?n=0"},
+      "architect_identity":{"name_zh":"J. MAYER H. 建筑事务所","name_en":"J. MAYER H. Architects","name_ja":"J. MAYER H. アーキテクツ","official_url":"https://jmayerh.de/"},
       "function_slugs":["mixed-use","public-space","museum","retail"],
       "identity_evidence":["J.MAYER.H identifies its 2004-2011 Seville project and documents the archaeological museum, farmers market, elevated plaza, food venues and panorama terrace.","The Commons own-work photograph by Arup clearly shows the exact timber parasol structure."],
-      "image":{"status":"approved_remote_asset_to_localize","source_url":"https://commons.wikimedia.org/wiki/File:Metropol_Parasol.JPG","license":"CC BY-SA 3.0","credit":"Photo: Arup / Wikimedia Commons","source_width":3072,"source_height":2048,"source_sha256":"0a7e6975707b99e9248084b1139ef872b682d101281516d859db7b2a3a6ee859"}
+      "image":{"status":"approved_local_asset","local_path":"/images/graduation/cases/case-126-metropol-parasol.jpg","source_url":"https://commons.wikimedia.org/wiki/File:Metropol_Parasol.JPG","license":"CC BY-SA 3.0","credit":"Photo: Arup / Wikimedia Commons","source_width":3072,"source_height":2048,"source_sha256":"0a7e6975707b99e9248084b1139ef872b682d101281516d859db7b2a3a6ee859","local_width":1600,"local_height":1066,"local_sha256":"cfc44733b2f40a23d8429723f08d3c53d50bef6575c16461feae54cd94584bc0"}
     },
     {
       "case_id":"CASE-136","decision":"approved_after_dry_run",
       "canonical_building":{"slug":"federation-square","name_zh":"联邦广场","name_en":"Federation Square","name_ja":"フェデレーション・スクエア","year_start":2002,"city":"墨尔本","country":"澳大利亚","country_code":"AU","type_slug":"civic-public","architect_slug":"lab-architecture-studio-bates-smart","official_url":"https://fedsquare.com/history-design"},
+      "architect_identity":{"name_zh":"Lab Architecture Studio＋Bates Smart","name_en":"Lab Architecture Studio + Bates Smart","name_ja":"Lab Architecture Studio＋Bates Smart","official_url":"https://fedsquare.com/history-design"},
       "function_slugs":["public-space","mixed-use"],
       "identity_evidence":["Fed Square documents the civic-space competition, cultural and commercial program, Lab architecture studio partnership with Bates Smart, and opening on 26 October 2002.","The Flickr-origin Commons image by Alpha clearly shows the main square and complex facades."],
-      "image":{"status":"approved_remote_asset_to_localize","source_url":"https://commons.wikimedia.org/wiki/File:Federation_Square_Melbourne.jpg","license":"CC BY-SA 2.0","credit":"Photo: Alpha / Wikimedia Commons (Flickr)","source_width":2048,"source_height":1536,"source_sha256":"36cb98d882b8e0b76da60e1da27306678b18325fdddb8884843240d376c1e52d"}
+      "image":{"status":"approved_local_asset","local_path":"/images/graduation/cases/case-136-federation-square.jpg","source_url":"https://commons.wikimedia.org/wiki/File:Federation_Square_Melbourne.jpg","license":"CC BY-SA 2.0","credit":"Photo: Alpha / Wikimedia Commons (Flickr)","source_width":2048,"source_height":1536,"source_sha256":"36cb98d882b8e0b76da60e1da27306678b18325fdddb8884843240d376c1e52d","local_width":1600,"local_height":1200,"local_sha256":"fdabd35c31e92e1397a54677df7f9e63f1bc5cc7564f02007cbb70398ac74005"}
     }
   ],
   "production_preflight":{"building_name_conflicts":0,"case_profile_conflicts":0,"required_functions_present":4,"required_functions_expected":4,"required_types_present":3,"required_types_expected":3}

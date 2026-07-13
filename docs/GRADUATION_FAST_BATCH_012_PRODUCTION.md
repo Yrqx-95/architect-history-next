@@ -12,6 +12,8 @@ Version: `20260713032152`
 - RLS and the existing public-read policies remained enabled.
 - Advisors remained at the existing 13 security / 27 performance baseline.
 
-## Remaining release gate
+## Release and live verification
 
-Merge the 82→85 production baseline and run one Reviewed production release. Verify all three CASE routes, building routes, local images, canonical architects and API diagnostics before marking the batch complete.
+- Reviewed production release `29221674096` completed successfully after the publication quality gate, complete test suite, Cloudflare deployment and production route semantics check.
+- CASE-068/077/089 routes, their canonical building routes and all three local images returned HTTP 200.
+- The live API returned `source=supabase+json`, 101 public cases, 85 profiles, 0 missing fallback cases and 0 missing building relations.

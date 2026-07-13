@@ -259,6 +259,21 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=fast-batch-012)',
     required_functions_note: 'mixed-use and public-space remain active',
   },
+  'final-review-batch-014': {
+    batch_id: 'graduation-final-review-batch-014',
+    decision_path: 'db/review-decisions/graduation-new-buildings-final-review-batch-014.json',
+    output_path: 'db/review-packets/graduation-final-review-batch-014.json',
+    apply_path: 'db/manual-operations/graduation-final-review-batch-014-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-final-review-batch-014-rollback.sql',
+    expected_decisions: 3,
+    expected_excluded: ['CASE-012', 'CASE-020', 'CASE-134'],
+    primary_function: 'public-space',
+    primary_function_by_case: {'CASE-100': 'public-space', 'CASE-126': 'mixed-use', 'CASE-136': 'public-space'},
+    interior_case_ids: [],
+    sql_title: 'Graduation Final review batch 014',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=final-review-batch-014)',
+    required_functions_note: 'public-space, mixed-use, museum and retail remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -466,6 +481,18 @@ const architectDrafts = {
     name_en: 'Klein Dytham architecture',
     name_ja: 'クライン・ダイサム・アーキテクツ',
     official_url: 'https://www.klein-dytham.com/',
+  },
+  'j-mayer-h-architects': {
+    name_zh: 'J. MAYER H. 建筑事务所',
+    name_en: 'J. MAYER H. Architects',
+    name_ja: 'J. MAYER H. アーキテクツ',
+    official_url: 'https://jmayerh.de/',
+  },
+  'lab-architecture-studio-bates-smart': {
+    name_zh: 'Lab Architecture Studio＋Bates Smart',
+    name_en: 'Lab Architecture Studio + Bates Smart',
+    name_ja: 'Lab Architecture Studio＋Bates Smart',
+    official_url: 'https://fedsquare.com/history-design',
   },
 }
 
