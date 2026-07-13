@@ -36,6 +36,7 @@ Current docs under `docs/`:
 - `docs/LEARNING_MATERIAL_INVENTORY.md` — active/future/archive classification for learning and research material.
 - `docs/CONTENT_TRUST_NEXT_PHASE_P0.md` — current content-trust baseline, Top 50 review queue, first read-only batch, and execution boundaries.
 - `docs/CONTENT_TRUST_BATCH_001_REVIEW.md` — formal read-only review and routing decisions for the first eight non-graduation records.
+- `docs/CONTENT_TRUST_3WTC_001_EXECUTION.md` — guarded 3 WTC metadata and primary-image repair, dry-run, rollback, and release gates.
 - `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
 - `docs/graduation/` — current V1 Graduation Inspiration Library handoff docs, including wireframes, random behavior, content guide, and source/image policy.
 

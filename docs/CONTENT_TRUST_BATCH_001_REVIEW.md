@@ -11,6 +11,7 @@
 - 0 条获准写入生产数据库；本批次没有 SQL、migration、图片下载或部署。
 - 已明确拒绝两张主图：`parc1` 当前图是当山铁路桥与远景天际线；`3-world-trade-center` 当前图是宽泛的下曼哈顿天际线，主体不明确。
 - `3-world-trade-center` 已审片通过替换候选：JJBers，CC BY 4.0，5152×3864，主体明确。
+- 生产预检发现 `3-world-trade-center` 同时存在两张 `is_primary=true`；修复包必须精确降级两张旧主图并收敛为唯一 primary。
 - `parc1` 暂记 `no-safe-image-yet`：韩国建筑全景权不足，Commons 分类已明确给出 NoFoP 警告，不能把 incidental skyline 图当主体图使用。
 
 ## 正式分流
