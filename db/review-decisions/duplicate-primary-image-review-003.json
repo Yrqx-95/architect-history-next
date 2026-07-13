@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "batch_id": "duplicate-primary-image-review-003",
+  "reviewed_at": "2026-07-13",
+  "status": "reviewed-applied",
+  "scope": { "reviewed_buildings": 5, "approved_buildings": 2, "deferred_buildings": 3, "approved_primary_rows": 4 },
+  "rules": [
+    "Identity, cover composition and reusable rights must all pass before a row is promoted.",
+    "A Commons or VRT record does not authorize a modern architectural work when the public evidence does not establish the relevant architectural rights.",
+    "A photograph categorized under a work is rejected when that work is not actually legible as the image subject.",
+    "No production write is authorized until isolated PostgreSQL dry-run and fresh conflict precheck pass."
+  ],
+  "decisions": [
+    {
+      "building_id": "a68816e0-5f82-4c9a-abee-41e227adedb5",
+      "building_slug": "emerson-middle-school",
+      "decision": "promote-reviewed-commons-and-demote-unrelated-unsplash",
+      "keep_image_id": "9973f007-c3e6-5b1e-aeb3-bba1bff5bcce",
+      "demote_image_ids": ["7bb70495-ff9e-51b8-843e-df87b3e045f3"],
+      "visual_finding": "The Commons image shows the signed Emerson school facade. The Unsplash image is an unrelated concrete interior.",
+      "identity_evidence": { "url": "https://neutra.org/project/emerson-junior-high-school/", "claim": "The Neutra Institute identifies Emerson Junior High School as Richard Neutra's Los Angeles school project." },
+      "retained_file_evidence": { "source_url": "https://commons.wikimedia.org/wiki/File:Emerson_Middle_School.jpg", "photographer": "Ucla90024", "license": "CC BY-SA 3.0", "license_url": "https://creativecommons.org/licenses/by-sa/3.0" },
+      "required_metadata_updates": { "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Emerson_Middle_School.jpg/500px-Emerson_Middle_School.jpg" }
+    },
+    {
+      "building_id": "a10950a0-f33e-4899-98f1-e4c49efc28f2",
+      "building_slug": "esbjerg-performing-arts-centre",
+      "decision": "promote-reviewed-commons-and-demote-unrelated-unsplash",
+      "keep_image_id": "9e2f8a93-189f-511a-b0f4-494aa18b8ff1",
+      "demote_image_ids": ["5aec24b1-5b0c-5454-b86a-dd55d71018b5"],
+      "visual_finding": "The Commons panorama clearly shows Musikhuset Esbjerg. The Unsplash image is an unrelated aerial roof view.",
+      "identity_evidence": { "url": "https://mhe.dk/om-musikhuset/", "claim": "Musikhuset Esbjerg's official history identifies Jan and Jørn Utzon as its architects." },
+      "retained_file_evidence": { "source_url": "https://commons.wikimedia.org/wiki/File:Esbjerg_-_Musikhaus.jpg", "photographer": "Taxiarchos228", "license": "FAL", "license_url": "http://artlibre.org/licence/lal/en" },
+      "required_metadata_updates": { "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Esbjerg_-_Musikhaus.jpg/500px-Esbjerg_-_Musikhaus.jpg" }
+    },
+    { "building_slug": "evry-cathedral", "decision": "defer", "reason": "The image is visually correct and has a VRT-confirmed photographer license, but the public ticket does not establish whether reuse also covers the still-protected French architectural work." },
+    { "building_slug": "fontana-di-piazzale-della-pace-parma", "decision": "defer", "reason": "The Commons file description identifies Palazzo della Pilotta; the modern fountain is not a legible image subject, and Italian modern-work rights remain unresolved." },
+    { "building_slug": "former-tokyo-metropolitan-government-building", "decision": "defer", "reason": "The building identity is correct, but the prominently included Ota Dokan sculpture lacks a separately verified globally reusable rights chain." }
+  ],
+  "verification": { "commons_method": "Wikimedia Commons imageinfo, extmetadata, current file wikitext and visual inspection", "commons_checked_at": "2026-07-13", "visual_reviewed": true, "production_written": true, "production_migration_version": "20260713134754", "production_verified_at": "2026-07-13" }
+}

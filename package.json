@@ -18,6 +18,7 @@
     "images:audit-duplicate-primary": "node --env-file=.env.local scripts/audit-duplicate-primary-images.mjs",
     "images:verify-duplicate-primary-001": "node scripts/verify-duplicate-primary-image-review-001-dry-run.mjs",
     "images:verify-duplicate-primary-002": "node scripts/verify-duplicate-primary-image-review-002-dry-run.mjs",
+    "images:verify-duplicate-primary-003": "node scripts/verify-duplicate-primary-image-review-003-dry-run.mjs",
     "images:prepare-reviewed": "node --env-file=.env.local scripts/prepare-image-fill-reviewed.mjs",
     "images:cache": "node --env-file=.env.local scripts/cache-curated-images.mjs",
     "data:audit": "tsx scripts/audit-data.ts",

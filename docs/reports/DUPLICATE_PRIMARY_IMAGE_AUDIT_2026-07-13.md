@@ -8,13 +8,13 @@ Safe auto-apply candidates: **0**
 
 ## Result
 
-- 1441 rows currently have `is_primary=true` across 942 buildings.
-- 495 buildings have more than one primary row; 4 have three.
-- 495 are Commons vs Unsplash conflicts.
+- 1439 rows currently have `is_primary=true` across 942 buildings.
+- 493 buildings have more than one primary row; 4 have three.
+- 493 are Commons vs Unsplash conflicts.
 - 0 are Commons vs Commons conflicts.
 - 0 candidate rows are missing photographer, license or source URL.
-- 229 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
-- 124 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
+- 225 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
+- 126 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
 - 142 buildings are currently shielded by a runtime cover override.
 
 ## Decision
@@ -33,8 +33,6 @@ Priority order:
 |---|---:|---|---|---|
 | `centro-commerciale-le-torri` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `club-house-du-golf-de-beauvallon` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `emerson-middle-school` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `esbjerg-performing-arts-centre` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `evry-cathedral` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `fontana-di-piazzale-della-pace-parma` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `former-tokyo-metropolitan-government-building` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
@@ -56,6 +54,8 @@ Priority order:
 | `hyogo-prefectural-museum-of-history` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `ibm-studios` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `ichimura-memorial-gymnasium` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `inadomi-house` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `interbau` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 
 ## Commons vs Commons
 
