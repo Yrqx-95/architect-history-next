@@ -324,6 +324,10 @@ Art-center taxonomy 001 已完成生产迁移。Supabase migration `building_fun
 
 下一个最小可验证步骤：完成 Reviewed production release 与线上 API/alias 验收；成功后才生成 CASE-005 的 1 joint architect / 1 building / 1 primary image / 1 profile / 1 `art-center` assignment migration pack。
 
+Art-center taxonomy 001 已完成最终发布与线上验收。Reviewed release `29219437596` 在 9m27s 内成功，publication quality gate、完整测试、Cloudflare deploy 与生产路由语义检查全部通过。线上 function 与 8 aliases 的 anon Data API 均 HTTP 200；首页 HTTP 200，毕业 API 为 `supabase+json`、101 cases / 81 profiles / 0 missing fallback / 0 missing building relation。taxonomy 前置条件现已完成，但 CASE-005 仍保持 JSON fallback 和空 compatibility architect，等待独立 building migration。
+
+下一个最小可验证步骤：同步 CASE-005 compatibility architect 为 `Shinya Sato + Mejiro Studio`，生成 1 joint architect / 1 building / 1 primary image / 1 profile / 1 `art-center` primary assignment 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。生产写入前必须再次查重。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。

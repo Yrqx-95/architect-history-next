@@ -17,8 +17,12 @@ Version: `20260713022122`
 - The three established public-read policies remained present; anon Data API reads returned the new taxonomy rows.
 - Advisors remained at the pre-existing 13 security notices and 27 performance notices, with no new `art-center` object finding.
 
-## Remaining release gate
+## Release and live verification
 
-- Run Reviewed production release after this database write.
-- Verify the public API remains healthy and the 8 aliases are readable.
-- Do not generate the CASE-005 building migration until the release and live checks succeed.
+- Reviewed production release `29219437596` succeeded in 9m27s; publication quality gate, complete tests, Cloudflare Worker deployment and production route semantics all passed.
+- The production anon Data API returned the exact `art-center` row and all 8 reviewed aliases with HTTP 200.
+- `https://archistory.app/zh` returned HTTP 200.
+- `https://archistory.app/api/v1/graduation/cases` returned HTTP 200, `source=supabase+json`, 101 cases, 81 profiles, 0 missing fallback cases and 0 missing building relations.
+- CASE-005 remains intentionally JSON-backed with an empty compatibility architect until its separate guarded building migration is reviewed.
+
+The taxonomy prerequisite is complete. CASE-005 may now proceed to compatibility alignment and an isolated building migration dry-run; production building writes are still not authorized.
