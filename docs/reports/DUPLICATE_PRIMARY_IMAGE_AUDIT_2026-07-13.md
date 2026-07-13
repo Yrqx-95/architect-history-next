@@ -8,13 +8,13 @@ Safe auto-apply candidates: **0**
 
 ## Result
 
-- 1439 rows currently have `is_primary=true` across 942 buildings.
-- 493 buildings have more than one primary row; 4 have three.
-- 493 are Commons vs Unsplash conflicts.
+- 1435 rows currently have `is_primary=true` across 942 buildings.
+- 489 buildings have more than one primary row; 4 have three.
+- 489 are Commons vs Unsplash conflicts.
 - 0 are Commons vs Commons conflicts.
 - 0 candidate rows are missing photographer, license or source URL.
-- 225 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
-- 126 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
+- 219 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
+- 128 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
 - 142 buildings are currently shielded by a runtime cover override.
 
 ## Decision
@@ -36,11 +36,7 @@ Priority order:
 | `evry-cathedral` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `fontana-di-piazzale-della-pace-parma` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `former-tokyo-metropolitan-government-building` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `foundation-e-g-buhrle-collection` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `gaumont-grand-ecran-italie` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `gipsoteca-canoviana` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `government-service-center` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `hagi-uragami-museum` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `helsinki-university-of-technology-main` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `hirosaki-city-hall` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `hirosaki-city-museum` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
@@ -56,6 +52,10 @@ Priority order:
 | `ichimura-memorial-gymnasium` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `inadomi-house` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `interbau` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `international-conference-center-hiroshima` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `international-house-of-japan` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `italie-deux` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `jc-decaux-bus-shelter-aachen` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 
 ## Commons vs Commons
 

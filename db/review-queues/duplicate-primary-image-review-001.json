@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T13:49:05.414Z",
+  "generated_at": "2026-07-13T14:39:17.415Z",
   "batch": "duplicate-primary-image-review-001",
   "status": "read-only-review-required",
   "writes_database": false,
@@ -13,16 +13,16 @@
     ]
   },
   "summary": {
-    "primary_rows": 1439,
+    "primary_rows": 1435,
     "buildings_with_primary": 942,
-    "duplicate_primary_buildings": 493,
-    "duplicate_primary_rows": 990,
+    "duplicate_primary_buildings": 489,
+    "duplicate_primary_rows": 982,
     "three_primary_buildings": 4,
-    "commons_vs_unsplash": 493,
+    "commons_vs_unsplash": 489,
     "commons_vs_commons": 0,
     "other_source_conflicts": 0,
-    "p0_visible_unsplash_with_commons_candidate": 225,
-    "p1_primary_invariant_conflict": 126,
+    "p0_visible_unsplash_with_commons_candidate": 219,
+    "p1_primary_invariant_conflict": 128,
     "p2_override_shielded": 142,
     "candidate_rows_missing_attribution": 0,
     "safe_auto_apply": 0,
@@ -345,69 +345,6 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
-      "building_id": "b4e59c10-0d66-4a93-b1ed-4da536de95f3",
-      "building_slug": "foundation-e-g-buhrle-collection",
-      "building": {
-        "name_zh": "",
-        "name_en": "Foundation E.G. Bührle Collection",
-        "name_ja": "",
-        "architect_slug": null,
-        "year_start": 1960,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "dca474e2-99e8-5069-b5cf-459a76bffd49",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "6d785cfe-949e-53a6-bfcc-95fea936fb0b",
-          "building_id": "b4e59c10-0d66-4a93-b1ed-4da536de95f3",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Frans_Hals_-_portrait_of_a_man_with_a_tassle_collar.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Frans_Hals_-_portrait_of_a_man_with_a_tassle_collar.jpg",
-          "photographer": "Frans Hals",
-          "source": "Wikimedia Commons",
-          "license": "Public domain",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Frans_Hals_-_portrait_of_a_man_with_a_tassle_collar.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "dca474e2-99e8-5069-b5cf-459a76bffd49",
-          "building_id": "b4e59c10-0d66-4a93-b1ed-4da536de95f3",
-          "url_original": "https://images.unsplash.com/photo-1508965199542-13e186cf8ba3?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1508965199542-13e186cf8ba3?w=400&q=60",
-          "photographer": "Sam Poullain",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/w737molHzkw",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
       "building_id": "2d003046-51c4-48ae-8ef3-3f973563540e",
       "building_slug": "gaumont-grand-ecran-italie",
       "building": {
@@ -460,195 +397,6 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "8875314d-f153-4328-a1b1-31439eff8c50",
-      "building_slug": "gipsoteca-canoviana",
-      "building": {
-        "name_zh": "",
-        "name_en": "Gipsoteca canoviana",
-        "name_ja": "",
-        "architect_slug": null,
-        "year_start": 1832,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "10db37df-7915-5a90-8d6c-7f9b9de53ff2",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "10db37df-7915-5a90-8d6c-7f9b9de53ff2",
-          "building_id": "8875314d-f153-4328-a1b1-31439eff8c50",
-          "url_original": "https://images.unsplash.com/photo-1775315908342-e6bc9ff42d60?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1775315908342-e6bc9ff42d60?w=400&q=60",
-          "photographer": "Paolo Chiabrando",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/olhJRxPo770",
-          "img_type": "interior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "251eaf4d-79af-5737-84ac-17790db7c952",
-          "building_id": "8875314d-f153-4328-a1b1-31439eff8c50",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Asolo-Museum_Canoviano.JPG",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Asolo-Museum_Canoviano.JPG",
-          "photographer": "No machine-readable author provided. Caracas1830 assumed (based on copyright claims).",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 2.5",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Asolo-Museum_Canoviano.JPG",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "c14255e0-1d48-4de9-94e7-dfecf34cbc19",
-      "building_slug": "government-service-center",
-      "building": {
-        "name_zh": "",
-        "name_en": "Government Service Center",
-        "name_ja": "",
-        "architect_slug": "paul-rudolph",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "d4b33686-ac3d-5a77-8dd1-162b21a4cc22",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "4ea4dc11-4b79-537b-94e4-77c5721d0845",
-          "building_id": "c14255e0-1d48-4de9-94e7-dfecf34cbc19",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/f/f6/02_Rudolph_Boston_Government_Naquib_Hossain_A_2650195.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/f/f6/02_Rudolph_Boston_Government_Naquib_Hossain_A_2650195.jpg",
-          "photographer": "Naquib Hossain",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 2.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:02_Rudolph_Boston_Government_Naquib_Hossain_A_2650195.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "d4b33686-ac3d-5a77-8dd1-162b21a4cc22",
-          "building_id": "c14255e0-1d48-4de9-94e7-dfecf34cbc19",
-          "url_original": "https://images.unsplash.com/photo-1483366774565-c783b9f70e2c?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1483366774565-c783b9f70e2c?w=400&q=60",
-          "photographer": "Kimon Maritz",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/mQiZnKwGXW0",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "f6d35c0f-fc8b-4ef9-b6ab-afad54c04072",
-      "building_slug": "hagi-uragami-museum",
-      "building": {
-        "name_zh": "",
-        "name_en": "Hagi Uragami Museum",
-        "name_ja": "",
-        "architect_slug": "kenzo-tange",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "cd29901d-a74f-56e9-8705-56c1571883bf",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "a43346b6-861f-551c-8c25-f6a28fc52dbd",
-          "building_id": "f6d35c0f-fc8b-4ef9-b6ab-afad54c04072",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/6/65/Hagi_Uragami_Mus.JPG",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/6/65/Hagi_Uragami_Mus.JPG",
-          "photographer": "Wiki708",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Hagi_Uragami_Mus.JPG",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "cd29901d-a74f-56e9-8705-56c1571883bf",
-          "building_id": "f6d35c0f-fc8b-4ef9-b6ab-afad54c04072",
-          "url_original": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=400&q=60",
-          "photographer": "Casey Horner",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/KR03PvYv3Fs",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
@@ -5007,69 +4755,6 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
-      "building_id": "5b21f20c-c2b1-4a6b-91ce-3d35f805ed3c",
-      "building_slug": "musee-herge",
-      "building": {
-        "name_zh": "",
-        "name_en": "Musée Hergé",
-        "name_ja": "",
-        "architect_slug": "christian-de-portzamparc",
-        "year_start": 2009,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "7ebbf746-0a2a-572c-92e0-35d3226b3fa7",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "3008cfe6-2757-5433-be3b-da807e22b406",
-          "building_id": "5b21f20c-c2b1-4a6b-91ce-3d35f805ed3c",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/c/c9/2001-2009_Herg%C3%A9_museum%2C_Louvain-la-Neuve%2C_Belgique%2C_01.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/c/c9/2001-2009_Herg%C3%A9_museum%2C_Louvain-la-Neuve%2C_Belgique%2C_01.jpg",
-          "photographer": "The original uploader was Portzamparc Francais at French Wikipedia.",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:2001-2009_Herg%C3%A9_museum,_Louvain-la-Neuve,_Belgique,_01.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "7ebbf746-0a2a-572c-92e0-35d3226b3fa7",
-          "building_id": "5b21f20c-c2b1-4a6b-91ce-3d35f805ed3c",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
       "building_id": "0c8c74d0-3188-4588-868b-ae013befbbb7",
       "building_slug": "museu-brasileiro-da-escultura",
       "building": {
@@ -6944,69 +6629,6 @@
           "source": "Wikimedia Commons",
           "license": "CC BY-SA 4.0",
           "source_url": "https://commons.wikimedia.org/wiki/File:Grafton_Building.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "e31e10d8-ce02-426f-ad7d-50a5d31ab2f6",
-      "building_slug": "paris-la-defense-arena",
-      "building": {
-        "name_zh": "",
-        "name_en": "Paris La Défense Arena",
-        "name_ja": "",
-        "architect_slug": "christian-de-portzamparc",
-        "year_start": 2013,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "34c11001-fb4f-5f9c-b876-420e3e36a81e",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "34c11001-fb4f-5f9c-b876-420e3e36a81e",
-          "building_id": "e31e10d8-ce02-426f-ad7d-50a5d31ab2f6",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "d67f761a-dd05-5f0a-bb73-1d6e218eb7ae",
-          "building_id": "e31e10d8-ce02-426f-ad7d-50a5d31ab2f6",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_%28FR92%29_-_2022-07-24_-_1.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_%28FR92%29_-_2022-07-24_-_1.jpg/400px-Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_%28FR92%29_-_2022-07-24_-_1.jpg",
-          "photographer": "Chabe01",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_(FR92)_-_2022-07-24_-_1.jpg",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "commons",
@@ -16755,6 +16377,69 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
+      "building_id": "5b21f20c-c2b1-4a6b-91ce-3d35f805ed3c",
+      "building_slug": "musee-herge",
+      "building": {
+        "name_zh": "",
+        "name_en": "Musée Hergé",
+        "name_ja": "",
+        "architect_slug": "christian-de-portzamparc",
+        "year_start": 2009,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "3008cfe6-2757-5433-be3b-da807e22b406",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "3008cfe6-2757-5433-be3b-da807e22b406",
+          "building_id": "5b21f20c-c2b1-4a6b-91ce-3d35f805ed3c",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/c/c9/2001-2009_Herg%C3%A9_museum%2C_Louvain-la-Neuve%2C_Belgique%2C_01.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/c/c9/2001-2009_Herg%C3%A9_museum%2C_Louvain-la-Neuve%2C_Belgique%2C_01.jpg",
+          "photographer": "The original uploader was Portzamparc Francais at French Wikipedia.",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 3.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:2001-2009_Herg%C3%A9_museum,_Louvain-la-Neuve,_Belgique,_01.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "7ebbf746-0a2a-572c-92e0-35d3226b3fa7",
+          "building_id": "5b21f20c-c2b1-4a6b-91ce-3d35f805ed3c",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
       "building_id": "4ff8bd26-5412-4af7-a3a1-8048dc0a12fc",
       "building_slug": "museo-del-teatro-romano-de",
       "building": {
@@ -17747,6 +17432,69 @@
           "source": "Wikimedia Commons",
           "license": "CC BY-SA 4.0",
           "source_url": "https://commons.wikimedia.org/wiki/File:2001-03-Paris-Parc-de-la-Villette.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "e31e10d8-ce02-426f-ad7d-50a5d31ab2f6",
+      "building_slug": "paris-la-defense-arena",
+      "building": {
+        "name_zh": "",
+        "name_en": "Paris La Défense Arena",
+        "name_ja": "",
+        "architect_slug": "christian-de-portzamparc",
+        "year_start": 2013,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "unsplash",
+        "commons"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "d67f761a-dd05-5f0a-bb73-1d6e218eb7ae",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "34c11001-fb4f-5f9c-b876-420e3e36a81e",
+          "building_id": "e31e10d8-ce02-426f-ad7d-50a5d31ab2f6",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        },
+        {
+          "id": "d67f761a-dd05-5f0a-bb73-1d6e218eb7ae",
+          "building_id": "e31e10d8-ce02-426f-ad7d-50a5d31ab2f6",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_%28FR92%29_-_2022-07-24_-_1.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_%28FR92%29_-_2022-07-24_-_1.jpg/400px-Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_%28FR92%29_-_2022-07-24_-_1.jpg",
+          "photographer": "Chabe01",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Entr%C3%A9e_4_Paris_D%C3%A9fense_Arena_-_Nanterre_(FR92)_-_2022-07-24_-_1.jpg",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "commons",
@@ -25879,8 +25627,8 @@
         "commons"
       ],
       "runtime_cover_source": "local-override",
-      "selected_database_primary_id": "46ba4d12-134c-5529-8c11-0927725c4363",
-      "selected_database_source_class": "unsplash",
+      "selected_database_primary_id": "d6b708c7-6d34-53dd-aecb-d4674e9e113a",
+      "selected_database_source_class": "commons",
       "runtime_override": {
         "cover_url": "/images/curated/c-v-starr-east-asian-1024.jpg",
         "cover_photographer": "Shunchosai Takehara Nobushige",
@@ -25901,7 +25649,7 @@
           "is_primary": true,
           "source_class": "unsplash",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": true
+          "selected_by_current_database_strategy": false
         },
         {
           "id": "d6b708c7-6d34-53dd-aecb-d4674e9e113a",
@@ -25916,7 +25664,7 @@
           "is_primary": true,
           "source_class": "commons",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": false
+          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
@@ -31115,8 +30863,8 @@
         "commons"
       ],
       "runtime_cover_source": "local-override",
-      "selected_database_primary_id": "e8723c0b-1957-5a85-b442-6cad974efa55",
-      "selected_database_source_class": "unsplash",
+      "selected_database_primary_id": "ec9509b0-0f28-5daa-abaa-c6031f4adb57",
+      "selected_database_source_class": "commons",
       "runtime_override": {
         "cover_url": "/images/curated/haus-am-checkpoint-charlie-1024.jpg",
         "cover_photographer": "Gunnar Klack",
@@ -31137,7 +30885,7 @@
           "is_primary": true,
           "source_class": "unsplash",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": true
+          "selected_by_current_database_strategy": false
         },
         {
           "id": "ec9509b0-0f28-5daa-abaa-c6031f4adb57",
@@ -31152,7 +30900,7 @@
           "is_primary": true,
           "source_class": "commons",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": false
+          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
