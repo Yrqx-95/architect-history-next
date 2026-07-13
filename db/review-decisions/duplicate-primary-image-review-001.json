@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "batch_id": "duplicate-primary-image-review-001",
+  "reviewed_at": "2026-07-13",
+  "status": "reviewed-applied",
+  "scope": {
+    "candidate_queue_at_review": "db/review-queues/duplicate-primary-image-review-001.json",
+    "reviewed_buildings": 4,
+    "reviewed_primary_rows": 8,
+    "remaining_unreviewed_buildings": 498
+  },
+  "rules": [
+    "A different image URL is an editorial candidate, not a mechanical duplicate.",
+    "The retained primary must visibly identify the canonical building and be suitable as a building cover.",
+    "The Commons file page must exist and expose an open license, photographer and source URL.",
+    "Any retained-row attribution mismatch must be corrected in the same guarded migration.",
+    "No production write is authorized by this decision artifact alone; PostgreSQL dry-run and conflict precheck remain required."
+  ],
+  "decisions": [
+    {
+      "building_id": "3890ee1c-663e-4342-ae25-617449b455cd",
+      "building_slug": "paimio-sanatorium",
+      "decision": "keep-reviewed-candidate-and-demote-broken-current",
+      "keep_image_id": "b0b9835c-3a65-50b4-88a9-b86268fa3820",
+      "demote_image_ids": [
+        "515a36a0-6fca-4163-815e-19a665135f32"
+      ],
+      "visual_finding": "The retained file shows a recognizable exterior portion of Paimio Sanatorium. The current database-selected file cannot be reviewed because both its Commons page and original asset are missing.",
+      "identity_evidence": {
+        "url": "https://paimiosanatorium.com/sanatorium/history/",
+        "claim": "The official Paimio Sanatorium site identifies the 1933 building designed by Aino and Alvar Aalto."
+      },
+      "retained_file_evidence": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:-Paimio_Sanatorium_20230627-A7201681.JPG-_(53006235979).jpg",
+        "photographer": "Tero Karppinen from Finland",
+        "license": "CC BY 2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "commons_page_status": "present",
+        "original_asset_status": "reachable"
+      },
+      "demoted_file_evidence": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Paimio_sanatorium_front.jpg",
+        "commons_page_status": "missing",
+        "original_asset_status": "missing"
+      },
+      "required_metadata_updates": {
+        "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/-Paimio_Sanatorium_20230627-A7201681.JPG-_%2853006235979%29.jpg/500px--Paimio_Sanatorium_20230627-A7201681.JPG-_%2853006235979%29.jpg"
+      }
+    },
+    {
+      "building_id": "2f00f340-e359-4d5f-a1d5-e1ce73a4d0cc",
+      "building_slug": "saynatsalo-town-hall",
+      "decision": "promote-building-exterior-and-demote-interior-detail",
+      "keep_image_id": "bdb38b5e-4f2a-4ff6-8426-977efd06903c",
+      "demote_image_ids": [
+        "e490ac8e-516e-5c70-a031-9f4b258a3649"
+      ],
+      "visual_finding": "The retained file clearly shows the red-brick town-hall exterior and courtyard. The database-selected alternative is an interior safe and furniture detail, so it is unsuitable as the primary building cover.",
+      "identity_evidence": {
+        "url": "https://www.alvaraalto.fi/en/architecture/saynatsalo-town-hall/",
+        "claim": "The Alvar Aalto Foundation identifies the red-brick courtyard, council chamber and town-hall complex."
+      },
+      "retained_file_evidence": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:S%C3%A4yn%C3%A4tsalon_kunnantalo_2.jpg",
+        "photographer": "Tiia Monto",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "commons_page_status": "present",
+        "original_asset_status": "reachable"
+      },
+      "required_metadata_updates": {
+        "photographer": "Tiia Monto",
+        "license": "CC BY-SA 4.0",
+        "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/S%C3%A4yn%C3%A4tsalon_kunnantalo_2.jpg/500px-S%C3%A4yn%C3%A4tsalon_kunnantalo_2.jpg"
+      }
+    },
+    {
+      "building_id": "4a5208c5-0415-4929-8c8c-3e2810b072eb",
+      "building_slug": "yoyogi-national-gymnasium",
+      "decision": "keep-current-building-view-and-demote-weak-context-view",
+      "keep_image_id": "418f6f8f-4081-4a68-8fb1-876ee5fa3576",
+      "demote_image_ids": [
+        "430b9484-4d33-535b-a280-803f3dc56876"
+      ],
+      "visual_finding": "The retained file clearly identifies Yoyogi National Stadium through its entrance signage and building mass. The alternative is dominated by a pedestrian bridge and skyline, with the stadium only marginally visible.",
+      "identity_evidence": {
+        "url": "https://www.jpnsport.go.jp/yoyogi/Portals/0/yoyogi/pdf/2025/241228_yoyogi%20national%20stadium_information%20flyer%EF%BC%88english%EF%BC%89.pdf",
+        "claim": "Japan Sport Council identifies Yoyogi National Stadium and its Kenzo Tange suspension-roof architecture."
+      },
+      "retained_file_evidence": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Yoyogi-National-Gymnasium-01.jpg",
+        "photographer": "Rs1421",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "commons_page_status": "present",
+        "original_asset_status": "reachable"
+      },
+      "required_metadata_updates": {
+        "photographer": "Rs1421",
+        "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Yoyogi-National-Gymnasium-01.jpg/500px-Yoyogi-National-Gymnasium-01.jpg"
+      }
+    },
+    {
+      "building_id": "66c4d9bc-5c68-45ec-b92b-b97f5016ba92",
+      "building_slug": "finlandia-hall",
+      "decision": "keep-current-and-local-override-matched-building-view",
+      "keep_image_id": "67ddf0af-bb47-4f30-9664-b7bbbbdc4a27",
+      "demote_image_ids": [
+        "c3aee188-e350-5fd8-8fd2-fb3ea5b861e3"
+      ],
+      "visual_finding": "The retained file is the stronger architectural facade view and matches the existing local cover override. The alternative is a valid wider exterior but is less focused and would unnecessarily change the visible editorial choice.",
+      "identity_evidence": {
+        "url": "https://www.finlandiatalo.fi/en/finlandia-hall/architechture-design/",
+        "claim": "Finlandia Hall's official site identifies Alvar Aalto's white Carrara-marble and black-granite facade."
+      },
+      "retained_file_evidence": {
+        "source_url": "https://commons.wikimedia.org/wiki/File:Finlandia_Wiki.jpg",
+        "photographer": "Thermos",
+        "license": "CC BY 2.5",
+        "license_url": "https://creativecommons.org/licenses/by/2.5",
+        "commons_page_status": "present",
+        "original_asset_status": "reachable"
+      },
+      "required_metadata_updates": {
+        "license": "CC BY 2.5",
+        "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Finlandia_Wiki.jpg/500px-Finlandia_Wiki.jpg"
+      }
+    }
+  ],
+  "verification": {
+    "commons_method": "Wikimedia Commons API imageinfo with url, size and extmetadata",
+    "commons_checked_at": "2026-07-13",
+    "visual_reviewed": true,
+    "production_written": true,
+    "production_migration_version": "20260713114101",
+    "production_verified_at": "2026-07-13"
+  }
+}
