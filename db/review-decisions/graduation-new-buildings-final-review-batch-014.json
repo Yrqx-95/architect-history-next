@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-13",
+  "scope": "G6 final formal-review batch 014: six remaining records",
+  "source_queue": "db/review-packets/graduation-new-building-queue-001.json",
+  "write_status": "reviewed-only; no production insert authorized until approved records are localized and one guarded migration passes full-history isolated PostgreSQL dry-run",
+  "review_method": [
+    "Opened all six current images and compared what they show with the claimed canonical project.",
+    "Verified Commons creator, source, original dimensions and license metadata through the MediaWiki API.",
+    "Checked first-party architect or operator sources for the three approved identities and design responsibility.",
+    "Queried production read-only for building-name conflicts, required broad types and active functions."
+  ],
+  "summary": {"reviewed":6,"migration_candidates":3,"blocked":3,"formally_unreviewed_remaining":0},
+  "excluded": [
+    {"case_id":"CASE-012","decision":"non_canonical_reference","reason":"The record describes generic UR housing-complex regeneration, has no year or architect, and explicitly labels its Akabanedai photograph representative rather than project-specific; a canonical building must not be invented from a typology reference."},
+    {"case_id":"CASE-020","decision":"non_canonical_reference","reason":"The record describes the generic Michi-no-Eki model and links MLIT's national program, while its image is the specific Roadside Station Oguni; the CASE does not establish Oguni as its canonical design subject or identify a design author."},
+    {"case_id":"CASE-134","decision":"representative_image_rejected","reason":"Phaeno identity and ZHA authorship are clear, and the Commons file is CC BY-SA 3.0, but visual review shows only a blurred interior exhibit apparatus rather than the building or its defining spatial architecture."}
+  ],
+  "decisions": [
+    {
+      "case_id":"CASE-100","decision":"approved_after_dry_run",
+      "canonical_building":{"slug":"portland-japanese-garden-cultural-village","name_zh":"波特兰日本庭园文化村","name_en":"Portland Japanese Garden Cultural Village","name_ja":"ポートランド日本庭園カルチュラル・ビレッジ","year_start":2017,"city":"波特兰","country":"美国","country_code":"US","type_slug":"cultural","architect_slug":"kengo-kuma","official_url":"https://kkaa.co.jp/en/project/portland-japanese-garden-cultural-village/"},
+      "function_slugs":["public-space"],
+      "identity_evidence":["KKAA identifies the completed 2017 Oregon civic project as four buildings arranged around a courtyard plaza and credits Kengo Kuma and Associates with named collaborators.","Commons keywords identify the photographed Tsubo-Niwa as the Cultural Village Tateuchi courtyard; visual review confirms the courtyard building context."],
+      "image":{"status":"approved_existing_local_asset","local_path":"/images/graduation/cases/case-100-portland-japanese-garden-cultural-village.jpg","source_url":"https://commons.wikimedia.org/wiki/File:Tsubo-Niwa_at_Portland_Japanese_Garden.jpg","license":"CC BY-SA 4.0","credit":"Photo: WLernerPJG / Wikimedia Commons","source_width":6000,"source_height":4000,"local_width":1600,"local_height":1066,"local_sha256":"af8333969a4770773c1d62cb57fb1cfefbfcaf38bde57cd3f430e39f3242a444"}
+    },
+    {
+      "case_id":"CASE-126","decision":"approved_after_dry_run",
+      "canonical_building":{"slug":"metropol-parasol","name_zh":"都市阳伞","name_en":"Metropol Parasol","name_ja":"メトロポール・パラソル","year_start":2011,"city":"塞维利亚","country":"西班牙","country_code":"ES","type_slug":"mixed-use","architect_slug":"j-mayer-h-architects","official_url":"https://jmayerh.de/metropol-parasol/?n=0"},
+      "function_slugs":["mixed-use","public-space","museum","retail"],
+      "identity_evidence":["J.MAYER.H identifies its 2004-2011 Seville project and documents the archaeological museum, farmers market, elevated plaza, food venues and panorama terrace.","The Commons own-work photograph by Arup clearly shows the exact timber parasol structure."],
+      "image":{"status":"approved_remote_asset_to_localize","source_url":"https://commons.wikimedia.org/wiki/File:Metropol_Parasol.JPG","license":"CC BY-SA 3.0","credit":"Photo: Arup / Wikimedia Commons","source_width":3072,"source_height":2048,"source_sha256":"0a7e6975707b99e9248084b1139ef872b682d101281516d859db7b2a3a6ee859"}
+    },
+    {
+      "case_id":"CASE-136","decision":"approved_after_dry_run",
+      "canonical_building":{"slug":"federation-square","name_zh":"联邦广场","name_en":"Federation Square","name_ja":"フェデレーション・スクエア","year_start":2002,"city":"墨尔本","country":"澳大利亚","country_code":"AU","type_slug":"civic-public","architect_slug":"lab-architecture-studio-bates-smart","official_url":"https://fedsquare.com/history-design"},
+      "function_slugs":["public-space","mixed-use"],
+      "identity_evidence":["Fed Square documents the civic-space competition, cultural and commercial program, Lab architecture studio partnership with Bates Smart, and opening on 26 October 2002.","The Flickr-origin Commons image by Alpha clearly shows the main square and complex facades."],
+      "image":{"status":"approved_remote_asset_to_localize","source_url":"https://commons.wikimedia.org/wiki/File:Federation_Square_Melbourne.jpg","license":"CC BY-SA 2.0","credit":"Photo: Alpha / Wikimedia Commons (Flickr)","source_width":2048,"source_height":1536,"source_sha256":"36cb98d882b8e0b76da60e1da27306678b18325fdddb8884843240d376c1e52d"}
+    }
+  ],
+  "production_preflight":{"building_name_conflicts":0,"case_profile_conflicts":0,"required_functions_present":4,"required_functions_expected":4,"required_types_present":3,"required_types_expected":3}
+}
