@@ -350,9 +350,13 @@ Fast batch 012 联合 migration pack 已生成。compatibility architect 已对�
 
 Fast batch 012 已完成生产 migration。Supabase migration `graduation_fast_batch_012`（`20260713032152`）写入 3 architects / 3 buildings / 3 primary images / 3 profiles / 4 assignments；总数从 82/936/7285/141 精确更新为 85 profiles / 939 buildings / 7288 images / 145 assignments。目标计数 3/3/3/3/4，orphan profile 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。尚未运行最终 Reviewed release。详见 `GRADUATION_FAST_BATCH_012_PRODUCTION.md`。
 
+Fast batch 012 已完成最终发布与线上验收。Reviewed release `29221674096` 的质量门、完整测试、Cloudflare deploy 与路由语义检查全部成功；CASE-068/077/089、对应主体建筑页和 3 张本地图均 HTTP 200。线上 API 为 `supabase+json`、101 cases / 85 profiles / 0 missing fallback / 0 missing building relation。
+
 Placeholder batch 013 已一次完成 21 条正式只读审核。CASE-003/004/010/013/025/030/032/048/059/062/066/072/073/075/078/080/082/083/084/085/093 的兼容记录全部只指向统一 placeholder，且 `image_source_url`、`image_license`、`image_credit` 均为空；依照既有图片准入规则统一记录为 `no_safe_image_yet`，不上传、不生成 migration、不写生产。这不是否定建筑身份，而是明确可追溯开放图片证据缺口。G6 已迁移 64/118，尚未迁移 54；尚未正式审核队列从 27 降至 6。详见 `GRADUATION_NEW_BUILDING_PLACEHOLDER_BATCH_013_TRIAGE.md`。
 
 Final review batch 014 已完成最后 6 条正式只读审核。CASE-100/126/136 的一手身份、设计责任、用途和 Commons/Flickr 权利链通过，批准进入同一 guarded migration 准备；CASE-012/020 是未指定 canonical building 的类型参考，禁止从代表图反推主体；CASE-134 图片虽为 CC BY-SA 3.0，但人工核验只显示模糊的馆内装置而非建筑，正式拒绝。生产只读查重为 0，所需 broad types 与 4 functions 均存在。G6 尚未正式审核队列从 6 降至 0；已迁移仍为 64/118，待 3 条批准项完成 migration。详见 `GRADUATION_NEW_BUILDING_FINAL_REVIEW_BATCH_014_TRIAGE.md`。
+
+Final review batch 014 migration pack 与全历史 dry-run 已完成。两张远程 Commons 图片已本地化为 1600×1066 和 1600×1200，来源、作者和许可同步到兼容数据；pack 包含 2 new architects / 3 buildings / 3 images / 3 profiles / 7 assignments。隔离 PostgreSQL 18.3 完成两次 forward、外部 curated-image rollback guard 与两次精确 rollback；migration `20260713033609_graduation_final_review_batch_014.sql` 与 reviewed apply byte-identical。生产尚未写入。详见 `GRADUATION_FINAL_REVIEW_BATCH_014_DRY_RUN.md`。
 
 下一个最小可验证步骤：合并 82→85 生产读取基线，运行一次 Reviewed production release，并验收三条 CASE/building 路由、图片、canonical architect 和 API diagnostics。
 

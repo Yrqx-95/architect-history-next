@@ -546,6 +546,20 @@ verifyConfigs['fast-batch-012'] = {
   rollback_path: 'db/manual-operations/graduation-fast-batch-012-rollback.sql',
   label: 'Graduation Fast batch 012',
 }
+verifyConfigs['final-review-batch-014'] = {
+  pack_path: 'db/review-packets/graduation-final-review-batch-014.json',
+  prior_pack_paths: [
+    ...verifyConfigs['fast-batch-012'].prior_pack_paths,
+    'db/review-packets/graduation-fast-batch-012.json',
+  ],
+  prior_seed_paths: [
+    ...verifyConfigs['fast-batch-012'].prior_seed_paths,
+    'db/manual-operations/graduation-fast-batch-012-apply.sql',
+  ],
+  apply_path: 'db/manual-operations/graduation-final-review-batch-014-apply.sql',
+  rollback_path: 'db/manual-operations/graduation-final-review-batch-014-rollback.sql',
+  label: 'Graduation Final review batch 014',
+}
 const verifyConfig = verifyConfigs[verifyKey]
 if (!verifyConfig) throw new Error(`Unknown graduation verify batch: ${verifyKey}`)
 
