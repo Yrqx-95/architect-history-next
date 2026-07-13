@@ -332,6 +332,10 @@ CASE-005 3331 Arts Chiyoda batch 011 migration pack 已生成。compatibility ar
 
 下一个最小可验证步骤：运行全量 unit、graduation QA、typecheck、lint、图片元数据检查和 `git diff --check`；通过一个 migration PR 合并后立即重复生产预检，仍为 0 才允许 apply。
 
+CASE-005 3331 Arts Chiyoda batch 011 已完成生产 migration。Supabase migration `graduation_3331_arts_chiyoda_batch_011`（`20260713024654`）写入 1 joint architect / 1 cultural building / 1 CC0 primary image / 1 published profile / 1 `art-center` primary assignment；总数精确更新为 82 profiles / 936 buildings / 7285 images / 141 assignments。目标五类记录各 1，orphan profile 与 architect mismatch 为 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。尚未运行最终 Reviewed release。详见 `GRADUATION_3331_ARTS_CHIYODA_BATCH_011_PRODUCTION.md`。
+
+下一个最小可验证步骤：合并 81→82 生产读取基线并运行一次 Reviewed production release；随后验收 CASE-005、`3331-arts-chiyoda` 三语路由、图片和 API diagnostics。成功后 G6 更新为已迁移 61/118、尚未迁移 57，正式未审核 34。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
