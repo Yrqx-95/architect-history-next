@@ -181,9 +181,9 @@
     "image_credit": "Ootahara / Wikimedia Commons",
     "plan_url": "",
     "section_url": "",
-    "concept": "由旧学校改造为艺术、展览和社区活动复合空间，保留教育建筑记忆。",
-    "concept_ja": "旧学校の教室や廊下を、展示、制作、市民活動の小さな単位へ転用した事例。既存建物の記憶を残しながら地域へ開く方法を読める。",
-    "concept_en": "3331 Arts Chiyoda is a reference case for reading Design topic: 废校, art, community, reuse. It can inform thesis thinking about mixed programs, operation, and place-making.",
+    "concept": "由旧学校改造为艺术、展览和社区活动复合空间，保留教育建筑记忆；该艺术中心已于 2023 年闭馆，本案例按历史项目研究。",
+    "concept_ja": "旧学校の教室や廊下を展示、制作、市民活動へ転用した事例。アートセンターは2023年に閉館しており、既存建物の記憶と地域への開き方を歴史的事例として読む。",
+    "concept_en": "3331 Arts Chiyoda reused a former school for art, exhibitions, making and community activity. The art center closed in 2023 and is treated here as a historical reuse case.",
     "keywords": [
       "废校",
       "艺术",
@@ -207,7 +207,7 @@
     ],
     "source_url": "https://www.3331.jp/en/",
     "year": 2010,
-    "architect": "",
+    "architect": "Shinya Sato + Mejiro Studio",
     "status": "published"
   },
   {

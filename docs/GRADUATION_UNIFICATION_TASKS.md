@@ -328,6 +328,10 @@ Art-center taxonomy 001 已完成最终发布与线上验收。Reviewed release 
 
 下一个最小可验证步骤：同步 CASE-005 compatibility architect 为 `Shinya Sato + Mejiro Studio`，生成 1 joint architect / 1 building / 1 primary image / 1 profile / 1 `art-center` primary assignment 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。生产写入前必须再次查重。
 
+CASE-005 3331 Arts Chiyoda batch 011 migration pack 已生成。compatibility architect 已对齐为 `Shinya Sato + Mejiro Studio`，中英日 profile 明确记录该艺术中心于 2023 年闭馆并按历史再利用案例研究。migration 建立 1 joint architect / 1 cultural building / 1 exact CC0 primary image / 1 published profile / 1 `art-center` primary assignment。全历史隔离 PostgreSQL 18.3 forward、外部 curated-image rollback guard、精确 rollback/replay 全部通过；Supabase migration `20260713024255_graduation_3331_arts_chiyoda_batch_011.sql` 与 reviewed apply SQL 字节一致。生产五类 conflict 全部 0，required function/type 各 1/1；基线 81/935/7284/140，预期写后 82/936/7285/141。尚未写生产。详见 `GRADUATION_3331_ARTS_CHIYODA_BATCH_011_DRY_RUN.md`。
+
+下一个最小可验证步骤：运行全量 unit、graduation QA、typecheck、lint、图片元数据检查和 `git diff --check`；通过一个 migration PR 合并后立即重复生产预检，仍为 0 才允许 apply。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。

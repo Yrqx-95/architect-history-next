@@ -96,6 +96,8 @@
     "graduation:verify-kait-workshop-009": "GRADUATION_VERIFY_BATCH=kait-workshop-009 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:prepare-roadside-station-mashiko-010": "GRADUATION_REVIEW_BATCH=roadside-station-mashiko-010 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
     "graduation:verify-roadside-station-mashiko-010": "GRADUATION_VERIFY_BATCH=roadside-station-mashiko-010 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
+    "graduation:prepare-3331-arts-chiyoda-011": "GRADUATION_REVIEW_BATCH=3331-arts-chiyoda-011 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
+    "graduation:verify-3331-arts-chiyoda-011": "GRADUATION_VERIFY_BATCH=3331-arts-chiyoda-011 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",
