@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-07-13",
+  "scope": "G6 new-building 3331 Arts Chiyoda batch 011",
+  "source_queue": "db/review-packets/graduation-new-building-queue-001.json",
+  "write_status": "reviewed-only; no production insert authorized until a narrow multilingual art-center taxonomy is approved and deployed, then a guarded building migration passes full-history isolated PostgreSQL dry-run and production conflicts are checked again",
+  "review_method": [
+    "Checked 3331 official pages for the former Rensei Junior High School identity, 2010 opening, independent art-center program, renovation authorship and 2023 closure.",
+    "Separated the historical facility from the continuing 3331 operating organization and avoided asserting a precise closure day because official pages conflict between March 15 and March 31.",
+    "Opened the Commons file and verified Ootahara own-work authorship, 4608 by 3440 dimensions and CC0 1.0 rights.",
+    "Opened the local 1600 by 1194 JPEG and confirmed that it accurately shows the former school facade, 3331 entrance sign and forecourt.",
+    "Queried production read-only and found zero architect, target building, CASE profile, image, art-center function or related alias conflicts, with the required cultural type present."
+  ],
+  "summary": {
+    "reviewed": 1,
+    "identity_approved": 1,
+    "image_approved": 1,
+    "function_approved": 0,
+    "migration_approved_after_taxonomy": 1,
+    "new_function_required": 1,
+    "new_architect_required": 1
+  },
+  "taxonomy_prerequisite": {
+    "slug": "art-center",
+    "broad_type_slug": "cultural",
+    "names": {
+      "zh": "艺术中心",
+      "zh-Hant": "藝術中心",
+      "en": "Art Center",
+      "ja": "アートセンター"
+    },
+    "aliases": {
+      "zh": ["艺术中心"],
+      "zh-Hant": ["藝術中心"],
+      "en": ["art center", "arts center", "art centre", "arts centre"],
+      "ja": ["アートセンター", "芸術センター"]
+    },
+    "excluded_aliases": ["文化中心", "文化センター", "cultural center", "cultural centre"],
+    "reason": "3331 officially identifies the facility as an independent art center. Museum and mixed-use are inaccurate, while cultural-center aliases are broader and would merge distinct civic and performance facilities into the same search intent."
+  },
+  "excluded": [],
+  "decisions": [
+    {
+      "case_id": "CASE-005",
+      "decision": "approved_after_art_center_taxonomy",
+      "canonical_building": {
+        "slug": "3331-arts-chiyoda",
+        "name_zh": "3331 Arts Chiyoda",
+        "name_en": "3331 Arts Chiyoda",
+        "name_ja": "3331 Arts Chiyoda",
+        "year_start": 2010,
+        "city": "东京",
+        "country": "日本",
+        "country_code": "JP",
+        "type_slug": "cultural",
+        "architect_slug": "shinya-sato-mejiro-studio",
+        "official_url": "https://www.3331.jp/en/about/",
+        "historical_status": "The art center opened in 2010 and closed in 2023; the continuing 3331 organization is not evidence that this facility remains open."
+      },
+      "architect_identity": {
+        "name_zh": "佐藤慎也＋目白工作室",
+        "name_en": "Shinya Sato + Mejiro Studio",
+        "name_ja": "佐藤慎也＋メジロスタジオ",
+        "official_url": "https://www.3331.jp/schedule/000361.html"
+      },
+      "function_slugs": ["art-center"],
+      "rejected_function_slugs": ["museum", "mixed-use", "community-center", "retail", "public-space"],
+      "identity_evidence": [
+        "3331 identifies the facility as an independent art center created by renovating the former Chiyoda City Rensei Junior High School and operating from 2010 until 2023.",
+        "The official 3331 Architectural Document states that Shinya Sato and Mejiro Studio were responsible for the renovation design.",
+        "Galleries, studios, creative offices, workshops, community areas, a cafe and a shop form the program of one art center; they do not make the project a museum or generic mixed-use complex."
+      ],
+      "image": {
+        "status": "approved_existing_local_asset",
+        "local_path": "/images/graduation/cases/case-005-3331-arts-chiyoda.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:3331_Arts_Chiyoda.JPG",
+        "license": "CC0",
+        "credit": "Ootahara",
+        "source_width": 4608,
+        "source_height": 3440,
+        "local_width": 1600,
+        "local_height": 1194,
+        "local_sha256": "3a4fad3c48d68feeab9570b25243c8662d2981e4c0b5dc576779698159ed1bb2",
+        "visual_evidence": "The image clearly shows the former school facade, 3331 entrance sign and forecourt.",
+        "rights_evidence": "Commons identifies Ootahara as creator of the own-work photograph and makes it available under CC0 1.0."
+      },
+      "production_preflight": {
+        "architect_matches": 0,
+        "target_building_conflicts": 0,
+        "target_profile_conflicts": 0,
+        "target_image_conflicts": 0,
+        "art_center_function_matches": 0,
+        "related_alias_conflicts": 0,
+        "cultural_type_matches": 1
+      }
+    }
+  ]
+}
