@@ -23,6 +23,10 @@ export interface SearchBuilding {
   cover_photographer: string | null
   cover_license: string | null
   cover_source_url: string | null
+  function_slugs: string[]
+  graduation_case_ids: string[]
+  graduation_issue_ids: string[]
+  perspectives: ('building' | 'graduation-reference')[]
 }
 
 export interface SearchData {
