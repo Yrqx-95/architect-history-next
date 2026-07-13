@@ -344,6 +344,10 @@ Fast batch 012 已一次完成 7 条正式只读审核。CASE-068/077/089 的身
 
 下一个最小可验证步骤：为 CASE-068/077/089 同批对齐 compatibility architect，生成 3 architects / 3 buildings / 3 images / 3 profiles / 4 assignments 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。
 
+Fast batch 012 联合 migration pack 已生成。compatibility architect 已对齐；pack 建立 3 new architects / 3 buildings / 3 exact open-license images / 3 profiles / 4 assignments。全历史隔离 PostgreSQL 18.3 已重放至 CASE-005，forward、外部 curated-image rollback guard、精确 rollback/replay 全部通过。验证器补齐了 production 已存在但未被 function taxonomy 引用的 `office` broad type 种子；Flickr source 和 photographer 归一化也已纠正。生产五类 conflict 全部 0，functions 2/2、types 2/2；基线 82/936/7285/141，预期写后 85/939/7288/145。Supabase migration `20260713031753_graduation_fast_batch_012.sql` 与 reviewed apply SQL 字节一致，尚未写生产。详见 `GRADUATION_FAST_BATCH_012_DRY_RUN.md`。
+
+下一个最小可验证步骤：运行全量质量门并通过一个 migration PR；合并后立即重复生产预检，仍为 0 才允许 apply。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。

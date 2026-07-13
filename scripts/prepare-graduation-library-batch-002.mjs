@@ -244,6 +244,21 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=3331-arts-chiyoda-011)',
     required_functions_note: 'art-center remains active under cultural',
   },
+  'fast-batch-012': {
+    batch_id: 'graduation-fast-batch-012',
+    decision_path: 'db/review-decisions/graduation-new-buildings-fast-batch-012.json',
+    output_path: 'db/review-packets/graduation-fast-batch-012.json',
+    apply_path: 'db/manual-operations/graduation-fast-batch-012-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-fast-batch-012-rollback.sql',
+    expected_decisions: 3,
+    expected_excluded: ['CASE-009', 'CASE-017', 'CASE-063', 'CASE-071'],
+    primary_function: 'mixed-use',
+    primary_function_by_case: {'CASE-068': 'public-space', 'CASE-077': 'mixed-use', 'CASE-089': 'mixed-use'},
+    interior_case_ids: [],
+    sql_title: 'Graduation Fast batch 012',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=fast-batch-012)',
+    required_functions_note: 'mixed-use and public-space remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -376,6 +391,15 @@ const architectDrafts = {
     name_en: 'Shinya Sato + Mejiro Studio',
     name_ja: '佐藤慎也＋メジロスタジオ',
     official_url: 'https://www.3331.jp/schedule/000361.html',
+  },
+  'atelier-bow-wow-tsukamoto-lab': {
+    name_zh: 'Atelier Bow-Wow＋东京工业大学塚本研究室', name_en: 'Atelier Bow-Wow + Tokyo Institute of Technology Tsukamoto Lab', name_ja: 'アトリエ・ワン＋東京工業大学塚本研究室', official_url: 'https://www.bow-wow.jp/profile/2011/MiyashitaPark/index.html',
+  },
+  'kono-designs': {
+    name_zh: 'Kono Designs', name_en: 'Kono Designs', name_ja: 'Kono Designs', official_url: 'https://konodesigns.com/',
+  },
+  'hof-van-cartesius-cooperative': {
+    name_zh: 'Hof van Cartesius 合作社', name_en: 'Hof van Cartesius Cooperative', name_ja: 'Hof van Cartesius 協同組合', official_url: 'https://www.hofvancartesius.nl/',
   },
   'yasuda-atelier': {
     name_zh: '安田工作室', name_en: 'Yasuda Atelier', name_ja: '安田アトリエ', official_url: 'https://www.yasudaatelier.com/',
@@ -526,8 +550,10 @@ const images = createDecisions.map(item => {
     building_slug: building.slug,
     case_id: item.case_id,
     url_original: source.image_url,
-    photographer: item.image.credit.replace(/\s*\/ Wikimedia Commons$/, '').replace(/^Photo:\s*/, ''),
-    source: item.image.source_url.includes('commons.wikimedia.org') ? 'Wikimedia Commons' : 'MDPI',
+    photographer: item.image.credit.replace(/\s*\/ (?:Wikimedia Commons|Flickr)$/, '').replace(/^Photo:\s*/, ''),
+    source: item.image.source_url.includes('commons.wikimedia.org')
+      ? 'Wikimedia Commons'
+      : item.image.source_url.includes('flickr.com') ? 'Flickr' : 'MDPI',
     license: item.image.license,
     source_url: item.image.source_url,
     img_type: batchConfig.interior_case_ids.includes(item.case_id) ? 'interior' : 'exterior',
@@ -574,7 +600,7 @@ const assignments = createDecisions.flatMap(item => {
       building_id: building.id,
       building_slug: building.slug,
       function_slug: functionSlug,
-      is_primary: functionSlug === batchConfig.primary_function,
+      is_primary: functionSlug === (batchConfig.primary_function_by_case?.[item.case_id] || batchConfig.primary_function),
       confidence: '1.000',
       evidence_url: item.canonical_building.official_url,
       evidence_note: item.identity_evidence.join(' '),

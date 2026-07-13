@@ -532,6 +532,20 @@ const verifyConfigs = {
     label: 'Graduation 3331 Arts Chiyoda batch 011',
   },
 }
+verifyConfigs['fast-batch-012'] = {
+  pack_path: 'db/review-packets/graduation-fast-batch-012.json',
+  prior_pack_paths: [
+    ...verifyConfigs['3331-arts-chiyoda-011'].prior_pack_paths,
+    'db/review-packets/graduation-3331-arts-chiyoda-batch-011.json',
+  ],
+  prior_seed_paths: [
+    ...verifyConfigs['3331-arts-chiyoda-011'].prior_seed_paths,
+    'db/manual-operations/graduation-3331-arts-chiyoda-batch-011-apply.sql',
+  ],
+  apply_path: 'db/manual-operations/graduation-fast-batch-012-apply.sql',
+  rollback_path: 'db/manual-operations/graduation-fast-batch-012-rollback.sql',
+  label: 'Graduation Fast batch 012',
+}
 const verifyConfig = verifyConfigs[verifyKey]
 if (!verifyConfig) throw new Error(`Unknown graduation verify batch: ${verifyKey}`)
 
@@ -599,7 +613,11 @@ try {
     CREATE TABLE public.architect_influences (architect_id uuid REFERENCES public.architects(id) ON DELETE CASCADE, influenced_id uuid REFERENCES public.architects(id) ON DELETE CASCADE, PRIMARY KEY (architect_id, influenced_id));
   `)
 
-  const broadTypes = [...new Set(functionTaxonomy.functions.map(item => item.broad_type_slug))]
+  const broadTypes = [...new Set([
+    ...functionTaxonomy.functions.map(item => item.broad_type_slug),
+    ...priorPacks.flatMap(item => item.buildings.map(building => building.type_slug)),
+    ...pack.buildings.map(building => building.type_slug),
+  ])]
   await db.exec(`INSERT INTO public.building_types (slug) VALUES ${broadTypes.map(slug => `(${sqlText(slug)})`).join(', ')};`)
 
   const priorNewArchitectIds = new Set(
