@@ -1,6 +1,6 @@
 # Document Index
 
-Last updated: 2026-07-08
+Last updated: 2026-07-13
 
 Purpose: help a new developer understand what is current product documentation, what is archived history, and what has been superseded.
 
@@ -34,6 +34,7 @@ Current docs under `docs/`:
 - `docs/HANDOFF.md` — handoff notes.
 - `docs/TECH_DEBT.md` — older technical debt log; use `TECHNICAL_DEBT_REPORT.md` in archive for latest cleanup audit context.
 - `docs/LEARNING_MATERIAL_INVENTORY.md` — active/future/archive classification for learning and research material.
+- `docs/CONTENT_TRUST_NEXT_PHASE_P0.md` — current content-trust baseline, Top 50 review queue, first read-only batch, and execution boundaries.
 - `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
 - `docs/graduation/` — current V1 Graduation Inspiration Library handoff docs, including wireframes, random behavior, content guide, and source/image policy.
 

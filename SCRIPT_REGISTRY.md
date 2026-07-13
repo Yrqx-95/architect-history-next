@@ -1,6 +1,6 @@
 # Script Registry
 
-Last updated: 2026-07-08
+Last updated: 2026-07-13
 
 Purpose: clarify which scripts support production, which govern data quality, which were one-off sprint tools, and which can be archived after confirmation.
 
@@ -19,6 +19,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | Script | Purpose | Notes |
 |---|---|---|
 | `scripts/audit-data.ts` | Main data quality audit | Keep as release/data gate |
+| `scripts/build-next-phase-content-queue.ts` | Builds the versioned 25 trust-repair / 25 product-core content queue from current audits and product exposure signals | Read-only against Supabase; writes only the reviewed packet and P0 Markdown plan after prerequisite audits |
 | `scripts/report-orphan-style-slugs.ts` | Reports orphan style assignments | Keep until style taxonomy remains stable over time |
 | `scripts/normalize-style-slugs.ts` | Dry-run/write style alias normalization | Keep for repeatability and rollback context |
 | `scripts/plan-era-slugs.ts` | Read-only era_slug candidate planning | Keep until era completion ends; writes no database changes |
@@ -88,6 +89,7 @@ From `package.json`:
 - `images:cache` → runtime-support
 - `content:audit` → one-off or periodic governance
 - `content:audit-display` → one-off or periodic governance
+- `content:next-phase-queue` → governance / read-only Top 50 planning
 - `content:portraits` → runtime-support
 - `graduation:data` → graduation
 - `graduation:data:from-json` → graduation
