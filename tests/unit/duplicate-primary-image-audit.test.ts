@@ -8,19 +8,22 @@ const decisionPath = path.join(process.cwd(), 'db/review-decisions/duplicate-pri
 const decisions = JSON.parse(fs.readFileSync(decisionPath, 'utf8'))
 const migration = fs.readFileSync(path.join(process.cwd(), 'supabase/migrations/20260713113717_duplicate_primary_image_review_001.sql'), 'utf8')
 const rollback = fs.readFileSync(path.join(process.cwd(), 'db/manual-operations/duplicate-primary-image-review-001-rollback.sql'), 'utf8')
+const decisions002 = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'db/review-decisions/duplicate-primary-image-review-002.json'), 'utf8'))
+const migration002 = fs.readFileSync(path.join(process.cwd(), 'supabase/migrations/20260713132300_duplicate_primary_image_review_002.sql'), 'utf8')
+const rollback002 = fs.readFileSync(path.join(process.cwd(), 'db/manual-operations/duplicate-primary-image-review-002-rollback.sql'), 'utf8')
 const localOverrides = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/lib/local-image-overrides.json'), 'utf8'))
 
 describe('duplicate primary image audit snapshot', () => {
   it('keeps every conflict in review-required state', () => {
     expect(queue.writes_database).toBe(false)
     expect(queue.summary).toMatchObject({
-      duplicate_primary_buildings: 498,
-      commons_vs_unsplash: 498,
+      duplicate_primary_buildings: 495,
+      commons_vs_unsplash: 495,
       commons_vs_commons: 0,
       safe_auto_apply: 0,
       formally_reviewed: 0,
     })
-    expect(queue.items).toHaveLength(498)
+    expect(queue.items).toHaveLength(495)
     expect(queue.items.every((item: { safe_auto_apply: boolean }) => item.safe_auto_apply === false)).toBe(true)
     expect(queue.items.every((item: { review_status: string }) => item.review_status === 'needs-visual-identity-review')).toBe(true)
   })
@@ -65,5 +68,23 @@ describe('duplicate primary image audit snapshot', () => {
       'curated-override',
       'supabase-primary-selection',
     ].includes(item.runtime_cover_source))).toBe(true)
+  })
+
+  it('records the second batch as three applied decisions and two license deferrals', () => {
+    expect(decisions002.status).toBe('reviewed-applied')
+    expect(decisions002.scope).toMatchObject({
+      reviewed_buildings: 5,
+      approved_buildings: 3,
+      deferred_buildings: 2,
+      approved_primary_rows: 6,
+    })
+    expect(decisions002.decisions.filter((item: { decision: string }) => item.decision === 'defer')).toHaveLength(2)
+    expect(decisions002.verification).toMatchObject({
+      production_written: true,
+      production_migration_version: '20260713132011',
+    })
+    expect(migration002).toContain("RAISE EXCEPTION 'Reviewed primary image rows changed'")
+    expect(migration002).toContain("RAISE EXCEPTION 'Unexpected primary image row exists in reviewed buildings'")
+    expect(rollback002).toContain("RAISE EXCEPTION 'Reviewed image state changed; refusing rollback'")
   })
 })

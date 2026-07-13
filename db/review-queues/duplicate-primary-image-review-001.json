@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T12:01:29.509Z",
+  "generated_at": "2026-07-13T13:21:22.508Z",
   "batch": "duplicate-primary-image-review-001",
   "status": "read-only-review-required",
   "writes_database": false,
@@ -13,16 +13,16 @@
     ]
   },
   "summary": {
-    "primary_rows": 1444,
+    "primary_rows": 1441,
     "buildings_with_primary": 942,
-    "duplicate_primary_buildings": 498,
-    "duplicate_primary_rows": 1000,
+    "duplicate_primary_buildings": 495,
+    "duplicate_primary_rows": 994,
     "three_primary_buildings": 4,
-    "commons_vs_unsplash": 498,
+    "commons_vs_unsplash": 495,
     "commons_vs_commons": 0,
     "other_source_conflicts": 0,
-    "p0_visible_unsplash_with_commons_candidate": 234,
-    "p1_primary_invariant_conflict": 122,
+    "p0_visible_unsplash_with_commons_candidate": 229,
+    "p1_primary_invariant_conflict": 124,
     "p2_override_shielded": 142,
     "candidate_rows_missing_attribution": 0,
     "safe_auto_apply": 0,
@@ -145,195 +145,6 @@
           "source_class": "unsplash",
           "attribution_complete": true,
           "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "a883ac20-0203-4acd-af98-2336613df9f3",
-      "building_slug": "cohen-house",
-      "building": {
-        "name_zh": "",
-        "name_en": "Cohen House",
-        "name_ja": "",
-        "architect_slug": "erich-mendelsohn",
-        "year_start": 1936,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "cdb2f6df-99c6-547d-a931-563c8f77dc5a",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "c2b42453-a8f3-52d1-b878-65147d52570f",
-          "building_id": "a883ac20-0203-4acd-af98-2336613df9f3",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/4/40/64_Old_Church_St.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/4/40/64_Old_Church_St.jpg",
-          "photographer": "Gillfoto",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:64_Old_Church_St.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "cdb2f6df-99c6-547d-a931-563c8f77dc5a",
-          "building_id": "a883ac20-0203-4acd-af98-2336613df9f3",
-          "url_original": "https://images.unsplash.com/photo-1616418534243-ab757ff8ce3a?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1616418534243-ab757ff8ce3a?w=400&q=60",
-          "photographer": "Foad Roshan",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/JjDQeWWCbpI",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "1a5b36e0-571f-4b88-a26f-12eeb8482254",
-      "building_slug": "corona-avenue-school",
-      "building": {
-        "name_zh": "",
-        "name_en": "Corona Avenue School",
-        "name_ja": "",
-        "architect_slug": "richard-neutra",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "fe8a9ddb-7443-5d05-9b00-a305066df046",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "f96e311e-e567-5493-8e64-e6278acd4056",
-          "building_id": "1a5b36e0-571f-4b88-a26f-12eeb8482254",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/2/27/FWP_American_Guide_Series_city_1941_California_Los_Angeles_a_guide_to_the_city_and_its_environs_34.png",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/2/27/FWP_American_Guide_Series_city_1941_California_Los_Angeles_a_guide_to_the_city_and_its_environs_34.png",
-          "photographer": "FWP",
-          "source": "Wikimedia Commons",
-          "license": "Public domain",
-          "source_url": "https://commons.wikimedia.org/wiki/File:FWP_American_Guide_Series_city_1941_California_Los_Angeles_a_guide_to_the_city_and_its_environs_34.png",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "fe8a9ddb-7443-5d05-9b00-a305066df046",
-          "building_id": "1a5b36e0-571f-4b88-a26f-12eeb8482254",
-          "url_original": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=400&q=60",
-          "photographer": "Neon Wang",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/fUsxJC1KVGQ",
-          "img_type": "interior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "5bfe38a7-dd36-40ff-bdff-8b6807cfbc09",
-      "building_slug": "dymaxion-house",
-      "building": {
-        "name_zh": "",
-        "name_en": "Dymaxion house",
-        "name_ja": "",
-        "architect_slug": "buckminster-fuller",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "0a33c904-6fdd-55ee-8df1-db43de5bb011",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "0a33c904-6fdd-55ee-8df1-db43de5bb011",
-          "building_id": "5bfe38a7-dd36-40ff-bdff-8b6807cfbc09",
-          "url_original": "https://images.unsplash.com/photo-1775315908342-e6bc9ff42d60?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1775315908342-e6bc9ff42d60?w=400&q=60",
-          "photographer": "Paolo Chiabrando",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/olhJRxPo770",
-          "img_type": "interior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "b6ad1be6-7e6b-5a4a-8961-a57347fcd8fd",
-          "building_id": "5bfe38a7-dd36-40ff-bdff-8b6807cfbc09",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Dymaxion_House_-_LOC_8c14943v.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Dymaxion_House_-_LOC_8c14943v.jpg",
-          "photographer": "Marion Post Wolcott",
-          "source": "Wikimedia Commons",
-          "license": "Public domain",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Dymaxion_House_-_LOC_8c14943v.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,
@@ -4173,69 +3984,6 @@
           "license": "Unsplash License",
           "source_url": "https://unsplash.com/photos/fUsxJC1KVGQ",
           "img_type": "interior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "dc5677c2-7e2d-4777-a225-281206bf6de8",
-      "building_slug": "lvmh-tower",
-      "building": {
-        "name_zh": "",
-        "name_en": "LVMH Tower",
-        "name_ja": "",
-        "architect_slug": "christian-de-portzamparc",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "3bee12cf-9de9-554b-ae10-deb644aee461",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "0697af1e-2114-5432-8df4-e1ec150e8026",
-          "building_id": "dc5677c2-7e2d-4777-a225-281206bf6de8",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/a/a1/1995-1999_LVMH_Tower%2C_New_York%2C.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/a/a1/1995-1999_LVMH_Tower%2C_New_York%2C.jpg",
-          "photographer": "Original uploader was Portzamparc Francais at fr.wikipedia",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:1995-1999_LVMH_Tower,_New_York,.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "3bee12cf-9de9-554b-ae10-deb644aee461",
-          "building_id": "dc5677c2-7e2d-4777-a225-281206bf6de8",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
           "is_primary": true,
           "source_class": "unsplash",
           "attribution_complete": true,
@@ -14709,69 +14457,6 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
-      "building_id": "faa6a0f0-cc6b-4ec8-b84c-bc5527a6d4ba",
-      "building_slug": "zenith-limoges-metropole",
-      "building": {
-        "name_zh": "",
-        "name_en": "Zénith Limoges Métropole",
-        "name_ja": "",
-        "architect_slug": "bernard-tschumi",
-        "year_start": 2007,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "12ce1c4a-073f-51d7-86b7-ee528944d784",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "07ee5796-24c8-585c-95da-532040ced724",
-          "building_id": "faa6a0f0-cc6b-4ec8-b84c-bc5527a6d4ba",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/3/35/Limoges_zenith_%283864886466%29.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Limoges_zenith_%283864886466%29.jpg/400px-Limoges_zenith_%283864886466%29.jpg",
-          "photographer": "Damien",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 2.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Limoges_zenith_(3864886466).jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "12ce1c4a-073f-51d7-86b7-ee528944d784",
-          "building_id": "faa6a0f0-cc6b-4ec8-b84c-bc5527a6d4ba",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
       "building_id": "433924b2-8266-4e3d-935d-e38fd1e2b589",
       "building_slug": "capela-do-monte",
       "building": {
@@ -16729,6 +16414,69 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": true
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "dc5677c2-7e2d-4777-a225-281206bf6de8",
+      "building_slug": "lvmh-tower",
+      "building": {
+        "name_zh": "",
+        "name_en": "LVMH Tower",
+        "name_ja": "",
+        "architect_slug": "christian-de-portzamparc",
+        "year_start": null,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "0697af1e-2114-5432-8df4-e1ec150e8026",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "0697af1e-2114-5432-8df4-e1ec150e8026",
+          "building_id": "dc5677c2-7e2d-4777-a225-281206bf6de8",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/a/a1/1995-1999_LVMH_Tower%2C_New_York%2C.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/a/a1/1995-1999_LVMH_Tower%2C_New_York%2C.jpg",
+          "photographer": "Original uploader was Portzamparc Francais at fr.wikipedia",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 3.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:1995-1999_LVMH_Tower,_New_York,.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "3bee12cf-9de9-554b-ae10-deb644aee461",
+          "building_id": "dc5677c2-7e2d-4777-a225-281206bf6de8",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,
@@ -22488,6 +22236,69 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
+      "building_id": "faa6a0f0-cc6b-4ec8-b84c-bc5527a6d4ba",
+      "building_slug": "zenith-limoges-metropole",
+      "building": {
+        "name_zh": "",
+        "name_en": "Zénith Limoges Métropole",
+        "name_ja": "",
+        "architect_slug": "bernard-tschumi",
+        "year_start": 2007,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "07ee5796-24c8-585c-95da-532040ced724",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "07ee5796-24c8-585c-95da-532040ced724",
+          "building_id": "faa6a0f0-cc6b-4ec8-b84c-bc5527a6d4ba",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/3/35/Limoges_zenith_%283864886466%29.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Limoges_zenith_%283864886466%29.jpg/400px-Limoges_zenith_%283864886466%29.jpg",
+          "photographer": "Damien",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 2.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Limoges_zenith_(3864886466).jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "12ce1c4a-073f-51d7-86b7-ee528944d784",
+          "building_id": "faa6a0f0-cc6b-4ec8-b84c-bc5527a6d4ba",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
       "building_id": "73139e31-4924-4b61-92bc-746cedee07dd",
       "building_slug": "122-leadenhall-street",
       "building": {
@@ -25582,8 +25393,8 @@
         "unsplash"
       ],
       "runtime_cover_source": "local-override",
-      "selected_database_primary_id": "8a19b88f-d003-56a5-847f-097636b2298b",
-      "selected_database_source_class": "unsplash",
+      "selected_database_primary_id": "2d308bf8-7eae-57a4-975b-64cd856e4dd5",
+      "selected_database_source_class": "commons",
       "runtime_override": {
         "cover_url": "/images/curated/blue-condominium-1024.jpg",
         "cover_photographer": "Beyond My Ken",
@@ -25604,7 +25415,7 @@
           "is_primary": true,
           "source_class": "commons",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": false
+          "selected_by_current_database_strategy": true
         },
         {
           "id": "8a19b88f-d003-56a5-847f-097636b2298b",
@@ -25619,7 +25430,7 @@
           "is_primary": true,
           "source_class": "unsplash",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": true
+          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,

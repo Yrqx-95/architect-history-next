@@ -8,13 +8,13 @@ Safe auto-apply candidates: **0**
 
 ## Result
 
-- 1444 rows currently have `is_primary=true` across 942 buildings.
-- 498 buildings have more than one primary row; 4 have three.
-- 498 are Commons vs Unsplash conflicts.
+- 1441 rows currently have `is_primary=true` across 942 buildings.
+- 495 buildings have more than one primary row; 4 have three.
+- 495 are Commons vs Unsplash conflicts.
 - 0 are Commons vs Commons conflicts.
 - 0 candidate rows are missing photographer, license or source URL.
-- 234 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
-- 122 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
+- 229 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
+- 124 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
 - 142 buildings are currently shielded by a runtime cover override.
 
 ## Decision
@@ -33,9 +33,6 @@ Priority order:
 |---|---:|---|---|---|
 | `centro-commerciale-le-torri` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `club-house-du-golf-de-beauvallon` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `cohen-house` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `corona-avenue-school` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
-| `dymaxion-house` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `emerson-middle-school` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `esbjerg-performing-arts-centre` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `evry-cathedral` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
@@ -56,6 +53,9 @@ Priority order:
 | `hochhaus-neue-donau` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `horizon-apartments` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 | `hotel-marcel` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `hyogo-prefectural-museum-of-history` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `ibm-studios` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
+| `ichimura-memorial-gymnasium` | 2 | unsplash | commons-vs-unsplash | needs-visual-identity-review |
 
 ## Commons vs Commons
 
