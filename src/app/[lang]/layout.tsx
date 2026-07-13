@@ -11,6 +11,7 @@ import ChineseScriptProvider from '@/components/ChineseScriptProvider'
 import ChineseScriptToggle from '@/components/ChineseScriptToggle'
 import SystemThemeSync from '@/components/SystemThemeSync'
 import ScrollRevealProvider from '@/components/ScrollRevealProvider'
+import ContextualFeedbackLink from '@/components/ContextualFeedbackLink'
 
 const LANGS = ['zh', 'en', 'ja'] as const
 
@@ -62,7 +63,6 @@ export default async function LangLayout({ children, params }: {
     { href: `${prefix}/graph`, label: lang === 'en' ? 'Relations' : lang === 'ja' ? '関係図' : '关系图' },
   ]
   const studyLabel = lang === 'en' ? 'Study' : lang === 'ja' ? '学ぶ' : '学习'
-  const feedback = { href: `${prefix}/feedback`, label: feedbackLabel(lang) }
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
@@ -165,7 +165,7 @@ export default async function LangLayout({ children, params }: {
                   ))}
                   <Link href={`${prefix}/search`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
                   <Link href={`${prefix}/graduation`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'graduation')}</Link>
-                  <Link href={feedback.href} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{feedback.label}</Link>
+                  <ContextualFeedbackLink lang={lang} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary" />
                   <p className="caption mt-3">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>
                 </div>
               </div>
@@ -174,10 +174,4 @@ export default async function LangLayout({ children, params }: {
       </body>
     </html>
   )
-}
-
-function feedbackLabel(lang: string) {
-  if (lang === 'ja') return 'フィードバック'
-  if (lang === 'en') return 'Feedback'
-  return '反馈'
 }

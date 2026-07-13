@@ -25,6 +25,18 @@ test.describe('core public routes', () => {
     expect(missing.status()).toBe(404)
   })
 
+  test('building feedback carries the current page into the email draft', async ({ page }) => {
+    await page.goto('/zh/building/villa-savoye')
+    const reportLink = page.getByRole('link', { name: '反馈当前页面' })
+    await expect(reportLink).toHaveAttribute('href', '/zh/feedback?from=%2Fzh%2Fbuilding%2Fvilla-savoye')
+    await reportLink.click()
+
+    await expect(page).toHaveURL(/\/zh\/feedback\?from=/)
+    await expect(page.getByText('/zh/building/villa-savoye', { exact: true })).toBeVisible()
+    const emailLink = page.getByRole('link', { name: '2505168-1350042@aoyamaseizu-st.ac.jp' })
+    await expect(emailLink).toHaveAttribute('href', /https%3A%2F%2Farchistory\.app%2Fzh%2Fbuilding%2Fvilla-savoye/)
+  })
+
   test('architect detail returns 200 and missing architect returns 404', async ({ page, request }) => {
     const response = await page.goto('/zh/architect/le-corbusier')
     expect(response?.status()).toBe(200)

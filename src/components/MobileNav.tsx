@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { t } from '@/lib/i18n'
 import ChineseScriptToggle from '@/components/ChineseScriptToggle'
+import ContextualFeedbackLink from '@/components/ContextualFeedbackLink'
 
 const LANGS = ['zh', 'en', 'ja'] as const
 const LANGUAGE_LABELS: Record<(typeof LANGS)[number], string> = {
@@ -150,6 +151,10 @@ export default function MobileNav({ lang }: { lang: string }) {
                       <span aria-hidden="true" className="text-soft">→</span>
                     </Link>
                   ))}
+                  <ContextualFeedbackLink
+                    lang={lang}
+                    className="flex min-h-12 items-center justify-between border-t border-subtle px-1 text-sm font-medium text-primary transition-colors hover:text-accent"
+                  />
                 </div>
               </section>
 
