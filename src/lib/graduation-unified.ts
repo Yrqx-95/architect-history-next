@@ -1,18 +1,10 @@
 import { cache } from 'react'
 
 import {
-  publicGraduationCases,
   type GraduationCase,
 } from '@/lib/graduation'
 import { isTrustedEditorialImage } from '@/lib/image-policy'
 import { createClient } from '@/lib/supabase'
-import graduationBuildingLinks from '@/content/graduation/building-links.json'
-
-const reviewedBuildingLinks = graduationBuildingLinks as Record<string, string>
-const linkedPublicGraduationCases = publicGraduationCases.map(item => ({
-  ...item,
-  building_slug: reviewedBuildingLinks[item.id],
-}))
 
 export type GraduationProfileRow = {
   case_id: string
@@ -73,7 +65,7 @@ export type GraduationDualReadDiagnostics = {
 
 export type GraduationDualReadResult = {
   cases: GraduationCase[]
-  source: 'supabase+json' | 'json-fallback'
+  source: 'supabase'
   diagnostics: GraduationDualReadDiagnostics
   error?: string
 }
@@ -163,6 +155,14 @@ export function mergeGraduationCases({
       approvedCanonicalImageSourceUrls,
     )
     const canonicalLocation = locationText(building)
+    const canonicalArchitect = architect?.name_en || building.architect_slug || ''
+    const fallbackArchitect = fallback.architect || ''
+    const canonicalArchitectKey = canonicalArchitect.toLocaleLowerCase()
+    const fallbackArchitectKey = fallbackArchitect.toLocaleLowerCase()
+    const canonicalOnlyCases = new Set(['CASE-016', 'CASE-033', 'CASE-034', 'CASE-100'])
+    const mergedArchitect = canonicalArchitectKey === fallbackArchitectKey || canonicalOnlyCases.has(profile.case_id)
+      ? canonicalArchitect || fallbackArchitect || undefined
+      : fallbackArchitect || canonicalArchitect || undefined
 
     const merged: GraduationCase = {
       ...fallback,
@@ -176,7 +176,7 @@ export function mergeGraduationCases({
       // The canonical schema currently models one architect, while several
       // reviewed cases have documented collaborators. Preserve the richer
       // reviewed string until a building_architects relation exists.
-      architect: fallback.architect || architect?.name_en || building.architect_slug || undefined,
+      architect: mergedArchitect,
       year: building.year_start ?? fallback.year,
       concept: profile.concept_zh,
       concept_en: profile.concept_en || fallback.concept_en,
@@ -208,38 +208,31 @@ export function mergeGraduationCases({
 
   return {
     cases: fallbackCases.map(item => replacements.get(item.id) || item),
-    source: 'supabase+json',
+    source: 'supabase',
     diagnostics,
   }
 }
 
 export const getUnifiedPublicGraduationCases = cache(async (): Promise<GraduationDualReadResult> => {
-  const fallbackDiagnostics: GraduationDualReadDiagnostics = {
-    profileCount: 0,
-    unifiedCaseIds: [],
-    missingFallbackCaseIds: [],
-    missingBuildingCaseIds: [],
-    canonicalImageCaseIds: [],
-    fallbackImageCaseIds: [],
-  }
-
-  try {
-    const supabase = createClient()
-    const profilesResponse = await supabase
+  const supabase = createClient({ cacheVersion: 'graduation-runtime-v88-compat-v1' })
+  const [compatibilityResponse, profilesResponse] = await Promise.all([
+    supabase
+      .from('graduation_case_compatibility')
+      .select('case_id,payload')
+      .eq('publication_status', 'published')
+      .order('case_id'),
+    supabase
       .from('graduation_case_profiles')
       .select('*')
       .eq('publication_status', 'published')
-      .order('case_id')
+      .order('case_id'),
+  ])
+    if (compatibilityResponse.error) throw compatibilityResponse.error
     if (profilesResponse.error) throw profilesResponse.error
+    const compatibilityCases = (compatibilityResponse.data || []).map(row => row.payload as GraduationCase)
+    if (compatibilityCases.length !== 101) throw new Error(`Expected 101 published compatibility cases, received ${compatibilityCases.length}`)
     const profiles = (profilesResponse.data || []) as GraduationProfileRow[]
-    if (!profiles.length) {
-      return {
-        cases: linkedPublicGraduationCases,
-        source: 'json-fallback',
-        diagnostics: fallbackDiagnostics,
-        error: 'No published graduation profiles returned by Supabase.',
-      }
-    }
+    if (profiles.length !== 88) throw new Error(`Expected 88 published graduation profiles, received ${profiles.length}`)
 
     const buildingIds = [...new Set(profiles.map(item => item.building_id))]
     const [buildingsResponse, imagesResponse] = await Promise.all([
@@ -270,7 +263,7 @@ export const getUnifiedPublicGraduationCases = cache(async (): Promise<Graduatio
     if (architectsResponse.error) throw architectsResponse.error
 
     return mergeGraduationCases({
-      fallbackCases: linkedPublicGraduationCases,
+      fallbackCases: compatibilityCases,
       profiles,
       buildings,
       architects: (architectsResponse.data || []) as GraduationArchitectRow[],
@@ -279,14 +272,9 @@ export const getUnifiedPublicGraduationCases = cache(async (): Promise<Graduatio
       // Commons authorship, license, availability and single-primary status.
       // Keep the reviewed JSON image until an image-specific decision file
       // explicitly approves a source URL.
+      // Compatibility payloads are now stored in Supabase and retain the
+      // separately reviewed CASE image. A canonical image may take over only
+      // after an image-specific approval, never merely because it is primary.
       approvedCanonicalImageSourceUrls: new Set<string>(),
     })
-  } catch (error) {
-    return {
-      cases: linkedPublicGraduationCases,
-      source: 'json-fallback',
-      diagnostics: fallbackDiagnostics,
-      error: error instanceof Error ? error.message : String(error),
-    }
-  }
 })
