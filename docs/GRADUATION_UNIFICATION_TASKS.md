@@ -379,14 +379,16 @@ G6 已完成。Final review batch 014 的 Reviewed release `29222694233` 在 10m
 
 ### G8 — 统一页面数据读取
 
-- [ ] 毕业案例详情从 `buildings` 读取基础事实和图片。
-- [ ] `graduation_case_profiles` 提供概念、研究关键词、平剖面与课题关系。
-- [ ] 主体建筑页可显示“毕业设计参考”入口。
-- [ ] 毕业页面可返回主体建筑的历史与来源层。
-- [ ] 保持现有设计层级，不制造卡片套卡片。
-- [ ] 三语、移动端、404 和可访问性验证通过。
+- [x] 毕业案例详情从 `buildings` 读取基础事实和图片。
+- [x] `graduation_case_profiles` 提供概念、研究关键词、平剖面与课题关系。
+- [x] 主体建筑页可显示“毕业设计参考”入口。
+- [x] 毕业页面可返回主体建筑的历史与来源层。
+- [x] 保持现有设计层级，不制造卡片套卡片。
+- [x] 三语、移动端、404 和可访问性验证通过。
 
 完成条件：两处展示同一建筑时基础事实、图片和版权完全一致。
+
+完成证据：主体页按 `building_id` 读取 published profiles，并以平面分隔行展示全部 CASE 入口；CASE 页继续由 profile 管理概念、三语关键词、平剖面与课题关系，同时新增 canonical building 历史/来源入口。由全部 reviewed migration packets 自动生成的 88 条 CASE→building 本地映射保证静态构建即使短暂走 JSON fallback 也不会丢失反向关系。CASE-126 / `metropol-parasol` 三语双向入口与同一图片通过 E2E；既有 390px mobile、未知/未发布 404 测试继续覆盖，链接具备本地化 accessible name，未引入卡片套卡片。详见 `GRADUATION_UNIFIED_PAGE_READ_G8.md`。
 
 ### G9 — 导出、兼容与退役旧数据
 

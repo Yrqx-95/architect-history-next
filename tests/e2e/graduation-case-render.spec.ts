@@ -58,4 +58,26 @@ test.describe('graduation case detail rendering', () => {
     expect(layout.imageRight).toBeLessThanOrEqual(390)
     expect(layout.imageWidth).toBeGreaterThan(300)
   })
+
+  test('canonical building and graduation analysis link to each other in all supported languages', async ({ page }) => {
+    const labels = {
+      zh: ['查看主体建筑的历史与资料', '查看分析'],
+      en: ['Open canonical building history and sources', 'Open analysis'],
+      ja: ['主体建築の歴史と資料を見る', '分析を見る'],
+    } as const
+
+    for (const lang of ['zh', 'en', 'ja'] as const) {
+      const caseResponse = await page.goto(`/${lang}/graduation/cases/CASE-126`)
+      expect(caseResponse?.status()).toBe(200)
+      const caseImage = decodeURIComponent(decodeURIComponent(await page.locator('main img').first().getAttribute('src') || ''))
+      expect(caseImage).toContain('case-126-metropol-parasol.jpg')
+      await expect(page.getByRole('link', { name: new RegExp(labels[lang][0]) })).toHaveAttribute('href', `/${lang}/building/metropol-parasol`)
+
+      const buildingResponse = await page.goto(`/${lang}/building/metropol-parasol`)
+      expect(buildingResponse?.status()).toBe(200)
+      const buildingImage = decodeURIComponent(decodeURIComponent(await page.locator('main img').first().getAttribute('src') || ''))
+      expect(buildingImage).toContain('case-126-metropol-parasol.jpg')
+      await expect(page.getByRole('link', { name: new RegExp(labels[lang][1]) })).toHaveAttribute('href', `/${lang}/graduation/cases/CASE-126`)
+    }
+  })
 })
