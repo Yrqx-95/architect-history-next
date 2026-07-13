@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-3331-arts-chiyoda-batch-011",
+  "generated_at": "2026-07-13T02:43:16.411Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "art-center remains active under cultural",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 1,
+    "new_architects": 1,
+    "buildings": 1,
+    "images": 1,
+    "profiles": 1,
+    "assignments": 1
+  },
+  "architects": [
+    {
+      "id": "0a252441-1979-5f14-a374-2f47ec8bfdec",
+      "slug": "shinya-sato-mejiro-studio",
+      "name_zh": "佐藤慎也＋目白工作室",
+      "name_en": "Shinya Sato + Mejiro Studio",
+      "name_ja": "佐藤慎也＋メジロスタジオ",
+      "official_url": "https://www.3331.jp/schedule/000361.html",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "d5f896a2-53a8-5388-8d91-c31621248418",
+      "case_id": "CASE-005",
+      "slug": "3331-arts-chiyoda",
+      "name_zh": "3331 Arts Chiyoda",
+      "name_en": "3331 Arts Chiyoda",
+      "name_ja": "3331 Arts Chiyoda",
+      "year_start": 2010,
+      "city": "东京",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "cultural",
+      "architect_slug": "shinya-sato-mejiro-studio",
+      "official_url": "https://www.3331.jp/en/about/",
+      "historical_status": "The art center opened in 2010 and closed in 2023; the continuing 3331 organization is not evidence that this facility remains open.",
+      "architect_id": "0a252441-1979-5f14-a374-2f47ec8bfdec",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "0756b422-e9ef-5eca-bc3a-761e3ff48f61",
+      "building_id": "d5f896a2-53a8-5388-8d91-c31621248418",
+      "building_slug": "3331-arts-chiyoda",
+      "case_id": "CASE-005",
+      "url_original": "/images/graduation/cases/case-005-3331-arts-chiyoda.jpg",
+      "photographer": "Ootahara",
+      "source": "Wikimedia Commons",
+      "license": "CC0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:3331_Arts_Chiyoda.JPG",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-005",
+      "building_id": "d5f896a2-53a8-5388-8d91-c31621248418",
+      "building_slug": "3331-arts-chiyoda",
+      "concept_zh": "由旧学校改造为艺术、展览和社区活动复合空间，保留教育建筑记忆；该艺术中心已于 2023 年闭馆，本案例按历史项目研究。",
+      "concept_zh_hant": null,
+      "concept_en": "3331 Arts Chiyoda reused a former school for art, exhibitions, making and community activity. The art center closed in 2023 and is treated here as a historical reuse case.",
+      "concept_ja": "旧学校の教室や廊下を展示、制作、市民活動へ転用した事例。アートセンターは2023年に閉館しており、既存建物の記憶と地域への開き方を歴史的事例として読む。",
+      "keywords_zh": [
+        "废校",
+        "艺术",
+        "社区",
+        "再利用",
+        "创作"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "Design topic: 废校",
+        "art",
+        "community",
+        "reuse",
+        "creative production"
+      ],
+      "keywords_ja": [
+        "廃校",
+        "アート",
+        "コミュニティ",
+        "再利用",
+        "創作"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.3331.jp/en/",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "d5f896a2-53a8-5388-8d91-c31621248418",
+      "building_slug": "3331-arts-chiyoda",
+      "function_slug": "art-center",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.3331.jp/en/about/",
+      "evidence_note": "3331 identifies the facility as an independent art center created by renovating the former Chiyoda City Rensei Junior High School and operating from 2010 until 2023. The official 3331 Architectural Document states that Shinya Sato and Mejiro Studio were responsible for the renovation design. Galleries, studios, creative offices, workshops, community areas, a cafe and a shop form the program of one art center; they do not make the project a museum or generic mixed-use complex.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}

@@ -230,6 +230,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=roadside-station-mashiko-010)',
     required_functions_note: 'transport-hub and retail remain active',
   },
+  '3331-arts-chiyoda-011': {
+    batch_id: 'graduation-3331-arts-chiyoda-batch-011',
+    decision_path: 'db/review-decisions/graduation-new-buildings-3331-arts-chiyoda-011.json',
+    output_path: 'db/review-packets/graduation-3331-arts-chiyoda-batch-011.json',
+    apply_path: 'db/manual-operations/graduation-3331-arts-chiyoda-batch-011-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-3331-arts-chiyoda-batch-011-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'art-center',
+    interior_case_ids: [],
+    sql_title: 'Graduation 3331 Arts Chiyoda batch 011',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=3331-arts-chiyoda-011)',
+    required_functions_note: 'art-center remains active under cultural',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -356,6 +370,12 @@ const architectDrafts = {
     name_en: 'MOUNT FUJI ARCHITECTS STUDIO',
     name_ja: 'MOUNT FUJI ARCHITECTS STUDIO',
     official_url: 'https://www.fuji-studio.jp/',
+  },
+  'shinya-sato-mejiro-studio': {
+    name_zh: '佐藤慎也＋目白工作室',
+    name_en: 'Shinya Sato + Mejiro Studio',
+    name_ja: '佐藤慎也＋メジロスタジオ',
+    official_url: 'https://www.3331.jp/schedule/000361.html',
   },
   'yasuda-atelier': {
     name_zh: '安田工作室', name_en: 'Yasuda Atelier', name_ja: '安田アトリエ', official_url: 'https://www.yasudaatelier.com/',
