@@ -93,18 +93,28 @@ export async function collectPagedRows<T>(fetchPage: (from: number, to: number) 
   }
 }
 
+export function preserveExistingPrimarySelections<T extends { building_id: string }>(
+  existingRows: T[],
+  completeRows: T[],
+): T[] {
+  const selected = new Map<string, T>()
+  for (const row of existingRows) selected.set(row.building_id, row)
+  for (const row of completeRows) if (!selected.has(row.building_id)) selected.set(row.building_id, row)
+  return [...selected.values()]
+}
+
 async function fetchAllPrimaryImages(): Promise<PrimaryImage[]> {
   const supabase = createClient()
-  return collectPagedRows(async (from, to) => {
+  const fetchPage = async (from: number, to: number, ordered: boolean) => {
     let data: PrimaryImage[] | null = null
     let error: { message: string } | null = null
     for (let attempt = 0; attempt < FETCH_MAX_ATTEMPTS; attempt += 1) {
-      const response = await supabase.from('images')
+      const query = supabase.from('images')
         .select('id,building_id,url_original,photographer,license,source_url')
         .eq('is_primary', true)
-        .order('building_id', { ascending: true })
-        .order('id', { ascending: true })
-        .range(from, to)
+      const response = ordered
+        ? await query.order('building_id', { ascending: true }).order('id', { ascending: true }).range(from, to)
+        : await query.range(from, to)
       data = (response.data as PrimaryImage[] | null) || null
       error = response.error ? { message: response.error.message } : null
       if (!error || !isTransientSupabaseError(error.message) || attempt === FETCH_MAX_ATTEMPTS - 1) break
@@ -112,7 +122,13 @@ async function fetchAllPrimaryImages(): Promise<PrimaryImage[]> {
     }
     if (error) throw new Error(`images: ${error.message}`)
     return data || []
-  })
+  }
+
+  const [existingRows, completeRows] = await Promise.all([
+    fetchPage(0, 999, false),
+    collectPagedRows((from, to) => fetchPage(from, to, true)),
+  ])
+  return preserveExistingPrimarySelections(existingRows, completeRows)
 }
 
 export function isDisplayableImageUrl(value: unknown): value is string {
