@@ -352,6 +352,8 @@ Fast batch 012 已完成生产 migration。Supabase migration `graduation_fast_b
 
 Placeholder batch 013 已一次完成 21 条正式只读审核。CASE-003/004/010/013/025/030/032/048/059/062/066/072/073/075/078/080/082/083/084/085/093 的兼容记录全部只指向统一 placeholder，且 `image_source_url`、`image_license`、`image_credit` 均为空；依照既有图片准入规则统一记录为 `no_safe_image_yet`，不上传、不生成 migration、不写生产。这不是否定建筑身份，而是明确可追溯开放图片证据缺口。G6 已迁移 64/118，尚未迁移 54；尚未正式审核队列从 27 降至 6。详见 `GRADUATION_NEW_BUILDING_PLACEHOLDER_BATCH_013_TRIAGE.md`。
 
+Final review batch 014 已完成最后 6 条正式只读审核。CASE-100/126/136 的一手身份、设计责任、用途和 Commons/Flickr 权利链通过，批准进入同一 guarded migration 准备；CASE-012/020 是未指定 canonical building 的类型参考，禁止从代表图反推主体；CASE-134 图片虽为 CC BY-SA 3.0，但人工核验只显示模糊的馆内装置而非建筑，正式拒绝。生产只读查重为 0，所需 broad types 与 4 functions 均存在。G6 尚未正式审核队列从 6 降至 0；已迁移仍为 64/118，待 3 条批准项完成 migration。详见 `GRADUATION_NEW_BUILDING_FINAL_REVIEW_BATCH_014_TRIAGE.md`。
+
 下一个最小可验证步骤：合并 82→85 生产读取基线，运行一次 Reviewed production release，并验收三条 CASE/building 路由、图片、canonical architect 和 API diagnostics。
 
 ### G7 — 统一搜索与筛选
