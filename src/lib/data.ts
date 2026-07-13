@@ -250,6 +250,17 @@ export async function getSearchIndex(): Promise<{ architects: SearchArchitect[];
   })
 }
 
+export async function getPublishedGraduationProfilesByBuildingId(buildingId: string): Promise<{ case_id: string }[]> {
+  const { data, error } = await createClient()
+    .from('graduation_case_profiles')
+    .select('case_id')
+    .eq('building_id', buildingId)
+    .eq('publication_status', 'published')
+    .order('case_id')
+  if (error) throw new Error(`graduation_case_profiles: ${error.message}`)
+  return (data || []) as { case_id: string }[]
+}
+
 export async function getEras() { return cached('eras', () => fetchAll<Era>('eras')) }
 export async function getStyles() { return cached('styles', () => fetchAll<Style>('styles')) }
 export async function getTypes() { return cached('types', () => fetchAll<BuildingType>('building_types')) }

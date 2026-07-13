@@ -1502,7 +1502,20 @@ function CaseDetail({ copy, prefix, item, issues }: {
           <p className="text-secondary">{caseLocation(item, lang)}{item.year ? ` · ${item.year}` : ''}</p>
           <p className="text-secondary">{item.architect || langAware(copy, '建筑师待补充', 'Architect to confirm', '建築家未確認')}</p>
           <ChipList items={caseKeywords(item, lang)} />
+          {item.building_slug && (
+            <Link className="block text-sm font-semibold text-primary underline-offset-4 hover:text-accent hover:underline" href={`/${lang}/building/${item.building_slug}`}>
+              {langAware(copy, '查看主体建筑的历史与资料', 'Open canonical building history and sources', '主体建築の歴史と資料を見る')} →
+            </Link>
+          )}
           <a className="text-sm text-secondary underline-offset-4 hover:text-primary hover:underline" href={item.source_url} target="_blank" rel="noreferrer">{copy.source}</a>
+          {item.building_official_url && item.building_official_url !== item.source_url && (
+            <a className="block text-sm text-secondary underline-offset-4 hover:text-primary hover:underline" href={item.building_official_url} target="_blank" rel="noreferrer">
+              {langAware(copy, '建筑官方来源', 'Building official source', '建築公式出典')}
+            </a>
+          )}
+          {item.building_wikipedia_url && (
+            <a className="block text-sm text-secondary underline-offset-4 hover:text-primary hover:underline" href={item.building_wikipedia_url} target="_blank" rel="noreferrer">Wikipedia</a>
+          )}
           {item.image_source_url && (
             <a className="block text-sm text-secondary underline-offset-4 hover:text-primary hover:underline" href={item.image_source_url} target="_blank" rel="noreferrer">
               {langAware(copy, '图片来源', 'Image source', '画像出典')}{item.image_license ? ` · ${item.image_license}` : ''}

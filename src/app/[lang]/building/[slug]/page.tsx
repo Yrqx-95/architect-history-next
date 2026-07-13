@@ -5,7 +5,7 @@ import type { Architect, Building, Era, Style } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { t } from '@/lib/i18n'
-import { getBuildings, getBuildingsWithCovers, getEras } from '@/lib/data'
+import { getBuildings, getBuildingsWithCovers, getEras, getPublishedGraduationProfilesByBuildingId } from '@/lib/data'
 import { getBuildingRelations } from '@/lib/relations'
 import { displayName } from '@/lib/display'
 import { findTimelinePeriodForEra, findTimelinePeriodForRange, localizedTimelineText, type TimelinePeriod } from '@/lib/timeline-periods'
@@ -868,7 +868,11 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   const { building, architect, relatedBuildings: related, images, styles: buildingStyles, era } = rels
   const prefix = `/${lang}`
   const contentOverlay = getBuildingContent(slug)
-  const [allEras, buildingsWithCovers] = await Promise.all([getEras(), getBuildingsWithCovers()])
+  const [allEras, buildingsWithCovers, graduationProfiles] = await Promise.all([
+    getEras(),
+    getBuildingsWithCovers(),
+    getPublishedGraduationProfilesByBuildingId(building.id),
+  ])
   const buildingWithCover = buildingsWithCovers.find(item => item.slug === building.slug)
   const curatedCoverImage = buildingWithCover?.cover_url
     ? {
@@ -1112,6 +1116,25 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
                 const relArch = architect && b.architect_slug === architect.slug ? displayName(architect, lang) : ''
                 return <BuildingCard key={b.id} building={b} lang={lang} architectName={relArch} />
               })}
+            </div>
+          </section>
+        </Reveal>
+      )}
+
+      {graduationProfiles.length > 0 && (
+        <Reveal>
+          <section className="section-sm border-t border-subtle pt-8 sm:pt-10" aria-labelledby="graduation-references-title">
+            <p className="eyebrow mb-2">{lang === 'en' ? 'Graduation design' : lang === 'ja' ? '卒業設計' : '毕业设计'}</p>
+            <h2 id="graduation-references-title" className="heading-3">
+              {lang === 'en' ? 'Use this building as a research reference' : lang === 'ja' ? 'この建築を卒業設計の参考として読む' : '将这座建筑作为毕业设计参考'}
+            </h2>
+            <div className="mt-5 border-y border-subtle">
+              {graduationProfiles.map(profile => (
+                <Link key={profile.case_id} href={`${prefix}/graduation/cases/${profile.case_id}`} className="interactive-row flex min-h-12 items-center justify-between border-b border-subtle px-1 text-sm last:border-b-0">
+                  <span>{profile.case_id}</span>
+                  <span className="text-muted">{lang === 'en' ? 'Open analysis' : lang === 'ja' ? '分析を見る' : '查看分析'} →</span>
+                </Link>
+              ))}
             </div>
           </section>
         </Reveal>

@@ -6,6 +6,13 @@ import {
 } from '@/lib/graduation'
 import { isTrustedEditorialImage } from '@/lib/image-policy'
 import { createClient } from '@/lib/supabase'
+import graduationBuildingLinks from '@/content/graduation/building-links.json'
+
+const reviewedBuildingLinks = graduationBuildingLinks as Record<string, string>
+const linkedPublicGraduationCases = publicGraduationCases.map(item => ({
+  ...item,
+  building_slug: reviewedBuildingLinks[item.id],
+}))
 
 export type GraduationProfileRow = {
   case_id: string
@@ -35,6 +42,8 @@ export type GraduationBuildingRow = {
   year_start: number | null
   city: string | null
   country: string | null
+  official_url?: string | null
+  wikipedia_url?: string | null
 }
 
 export type GraduationArchitectRow = {
@@ -178,6 +187,9 @@ export function mergeGraduationCases({
       plan_url: profile.plan_url || '',
       section_url: profile.section_url || '',
       source_url: profile.source_url,
+      building_slug: building.slug,
+      building_official_url: building.official_url || undefined,
+      building_wikipedia_url: building.wikipedia_url || undefined,
       status: 'published',
       ...(canonicalImage ? {
         image_url: canonicalImage.url_original,
@@ -222,7 +234,7 @@ export const getUnifiedPublicGraduationCases = cache(async (): Promise<Graduatio
     const profiles = (profilesResponse.data || []) as GraduationProfileRow[]
     if (!profiles.length) {
       return {
-        cases: publicGraduationCases,
+        cases: linkedPublicGraduationCases,
         source: 'json-fallback',
         diagnostics: fallbackDiagnostics,
         error: 'No published graduation profiles returned by Supabase.',
@@ -233,7 +245,7 @@ export const getUnifiedPublicGraduationCases = cache(async (): Promise<Graduatio
     const [buildingsResponse, imagesResponse] = await Promise.all([
       supabase
         .from('buildings')
-        .select('id,slug,name_zh,name_en,name_ja,architect_id,architect_slug,year_start,city,country')
+        .select('id,slug,name_zh,name_en,name_ja,architect_id,architect_slug,year_start,city,country,official_url,wikipedia_url')
         .in('id', buildingIds),
       supabase
         .from('images')
@@ -258,7 +270,7 @@ export const getUnifiedPublicGraduationCases = cache(async (): Promise<Graduatio
     if (architectsResponse.error) throw architectsResponse.error
 
     return mergeGraduationCases({
-      fallbackCases: publicGraduationCases,
+      fallbackCases: linkedPublicGraduationCases,
       profiles,
       buildings,
       architects: (architectsResponse.data || []) as GraduationArchitectRow[],
@@ -271,7 +283,7 @@ export const getUnifiedPublicGraduationCases = cache(async (): Promise<Graduatio
     })
   } catch (error) {
     return {
-      cases: publicGraduationCases,
+      cases: linkedPublicGraduationCases,
       source: 'json-fallback',
       diagnostics: fallbackDiagnostics,
       error: error instanceof Error ? error.message : String(error),

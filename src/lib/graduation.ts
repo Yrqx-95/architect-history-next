@@ -85,6 +85,9 @@ export type GraduationCase = {
   source_url: string
   year: number | null
   architect?: string
+  building_slug?: string
+  building_official_url?: string
+  building_wikipedia_url?: string
   status: 'draft' | 'published'
 }
 
