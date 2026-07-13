@@ -66,6 +66,40 @@ test.describe('core public routes', () => {
     expect(overlong.status()).toBe(400)
   })
 
+  test('search API unifies multilingual functions, graduation references and filters without duplicate buildings', async ({ request }) => {
+    const responses = await Promise.all([
+      request.get('/api/search?q=library'),
+      request.get(`/api/search?q=${encodeURIComponent('图书馆')}`),
+      request.get(`/api/search?q=${encodeURIComponent('図書館')}`),
+      request.get('/api/search?function=library'),
+    ])
+    for (const response of responses) expect(response.status()).toBe(200)
+    const payloads = await Promise.all(responses.map(response => response.json()))
+    const slugSets = payloads.map(payload => payload.buildings.map((building: { slug: string }) => building.slug).sort())
+    expect(slugSets[0]).toEqual(slugSets[1])
+    expect(slugSets[0]).toEqual(slugSets[2])
+    expect(slugSets[0]).toEqual(slugSets[3])
+    expect(slugSets[0].length).toBeGreaterThan(20)
+    expect(new Set(slugSets[0]).size).toBe(slugSets[0].length)
+
+    const kanazawa = payloads[0].buildings.find((building: { slug: string }) => building.slug === 'kanazawa-umimirai-library')
+    expect(kanazawa).toMatchObject({
+      function_slugs: expect.arrayContaining(['library']),
+      graduation_case_ids: expect.arrayContaining(['CASE-018']),
+      perspectives: ['building', 'graduation-reference'],
+    })
+
+    const filtered = await request.get('/api/search?function=library&period=2010s&country=JP&issue=ISSUE-003')
+    expect(filtered.status()).toBe(200)
+    const filteredPayload = await filtered.json()
+    expect(filteredPayload.buildings.some((building: { slug: string }) => building.slug === 'kanazawa-umimirai-library')).toBe(true)
+    expect(filteredPayload.buildings.every((building: { country_code?: string; year_start?: number; function_slugs: string[]; graduation_issue_ids: string[] }) =>
+      building.country_code === 'JP'
+      && Boolean(building.year_start && building.year_start >= 2010 && building.year_start < 2020)
+      && building.function_slugs.includes('library')
+      && building.graduation_issue_ids.includes('ISSUE-003'))).toBe(true)
+  })
+
   test('unpromoted archive routes remain accessible but are not indexed', async ({ page }) => {
     const mapResponse = await page.goto('/zh/map')
     expect(mapResponse?.status()).toBe(200)

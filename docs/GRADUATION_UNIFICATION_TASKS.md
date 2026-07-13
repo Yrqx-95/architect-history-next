@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：运行 CASE-034 migration pack 的完整质量门；通过后以独立 PR 合并，生产写入前重复冲突预检。
+当前下一步：G6 已完成，推进 G7 统一搜索与筛选；先让现有 `/api/search` 同时读取用途别名、approved assignments 与毕业分析关键词，再补齐用途/年代/国家/建筑师/毕业课题筛选和三语回归。
 
 ## 最终目标
 
@@ -113,10 +113,10 @@
 - [x] 按来源可靠度和毕业页面使用价值分批。
 - [x] Library batch 001：8 个主体完成身份、来源、用途、图片版权审核、生产迁移、发布与线上验收。
 - [x] Library batch 002、museum batch 001 与 theatre batch 001 完成审核、生产迁移、发布与线上验收。
-- [ ] 新建主体前核验建筑身份、建筑师、年份、地点和官方来源。
-- [ ] 图片按 Archistory 版权规则重新审核，不直接继承未经确认的旧图片。
-- [ ] 每批有 apply、rollback、写后审计和发布记录。
-- [ ] 新主体建立后再创建 graduation profile。
+- [x] 新建主体前核验建筑身份、建筑师、年份、地点和官方来源。
+- [x] 图片按 Archistory 版权规则重新审核，不直接继承未经确认的旧图片。
+- [x] 每批有 apply、rollback、写后审计和发布记录。
+- [x] 新主体建立后再创建 graduation profile。
 
 完成条件：每条记录已链接主体、明确拒绝或留下可解释的证据缺口。
 
@@ -360,18 +360,22 @@ Final review batch 014 migration pack 与全历史 dry-run 已完成。两张远
 
 Final review batch 014 已完成生产 migration。Supabase migration `graduation_final_review_batch_014`（`20260713034120`）复用 `kengo-kuma`，写入 2 architects / 3 buildings / 3 primary images / 3 profiles / 7 assignments；总数从 85/939/7288/145 精确更新为 88 profiles / 942 buildings / 7291 images / 152 assignments。目标计数 3/3/3/7，orphan profile 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。尚未运行最终 Reviewed release。详见 `GRADUATION_FINAL_REVIEW_BATCH_014_PRODUCTION.md`。
 
+G6 已完成。Final review batch 014 的 Reviewed release `29222694233` 在 10m13s 内成功，质量门、完整测试、Cloudflare deploy 和 route semantics 全部通过；3 个 CASE、3 个 canonical building 和 3 张图片均 HTTP 200。线上 API 为 `supabase+json`、101 cases / 88 profiles / 0 missing fallback / 0 missing building relation，并返回准确作者、年份和许可。118 条新建主体队列现为 67 条已迁移、51 条明确拒绝或可解释证据缺口、0 条未正式审核，满足 G6 完成条件。
+
 下一个最小可验证步骤：合并 82→85 生产读取基线，运行一次 Reviewed production release，并验收三条 CASE/building 路由、图片、canonical architect 和 API diagnostics。
 
 ### G7 — 统一搜索与筛选
 
-- [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
-- [ ] 用标准用途 slug 召回全部用途关联建筑。
-- [ ] 结果标记“主体建筑”和“毕业设计参考”视角，不显示重复卡片。
-- [ ] 增加用途、年代、国家、建筑师和毕业课题筛选。
-- [ ] 为中英日同义查询建立回归测试。
-- [ ] 测量查询性能，再决定是否增加 Postgres 全文索引。
+- [x] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
+- [x] 用标准用途 slug 召回全部用途关联建筑。
+- [x] 结果标记“主体建筑”和“毕业设计参考”视角，不显示重复卡片。
+- [x] 增加用途、年代、国家、建筑师和毕业课题筛选。
+- [x] 为中英日同义查询建立回归测试。
+- [x] 测量查询性能，再决定是否增加 Postgres 全文索引。
 
 完成条件：图书馆等核心查询召回完整、三语一致、无重复且性能可接受。
+
+完成证据：`/api/search` 的同一内存索引已接入四语 function names/aliases、approved assignments、published graduation profiles、三语毕业关键词和 issue references；`function`、`period`、`country`、`architect`、`issue` 五类筛选可组合。精确用途意图先于一般模糊评分，`library` / `图书馆` / `図書館` 与 `function=library` 返回相同完整 slug 集合，结果按 building slug 唯一并暴露 `building` / `graduation-reference` 视角。E2E 同时覆盖 CASE-018 与组合筛选。production build 本地测量：首次英文冷查询 246ms，后续多语索引查询 5–14ms，warm 2–6ms，组合筛选冷 3ms；当前不增加 Postgres 全文索引。详见 `GRADUATION_UNIFIED_SEARCH_G7.md`。
 
 ### G8 — 统一页面数据读取
 

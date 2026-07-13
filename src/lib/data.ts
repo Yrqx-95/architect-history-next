@@ -7,6 +7,8 @@ import { isMinimallyComplete, isWikidataId } from './quality'
 import { isTrustedEditorialImage } from './image-policy'
 import imageOverrides from './image-overrides.json'
 import localImageOverrides from './local-image-overrides.json'
+import graduationCases from '@/content/graduation/cases.json'
+import graduationIssues from '@/content/graduation/issues.json'
 
 type ImageOverride = {
   cover_url?: string
@@ -182,19 +184,39 @@ export type SearchBuilding = Pick<Building,
   'city' | 'country' | 'country_code' | 'type_slug' | 'architect_slug' | 'era_slug' |
   'style_slugs' | 'description' | 'significance'
 > & Pick<BuildingWithCover, 'cover_url' | 'cover_photographer' | 'cover_license' | 'cover_source_url'>
+  & {
+    function_slugs: string[]
+    function_aliases: string[]
+    graduation_case_ids: string[]
+    graduation_keywords: string[]
+    graduation_issue_ids: string[]
+  }
 
 /** Compact search corpus: avoids hydrating full buildings and galleries on a search cache miss. */
 export async function getSearchIndex(): Promise<{ architects: SearchArchitect[]; buildings: SearchBuilding[] }> {
   return cached('search-index-v1', async () => {
     const supabase = createClient()
-    const [architects, buildings, images] = await Promise.all([
+    const [architects, buildings, images, functions, aliases, assignments, profiles] = await Promise.all([
       fetchAll<SearchArchitect>('architects', 'slug,name_zh,name_en,name_ja,birth_year,death_year,era_slug,nationalities,style_slugs,core_ideas'),
       fetchAll<Pick<Building, 'id' | 'slug' | 'name_zh' | 'name_en' | 'name_ja' | 'year_start' | 'year_end' | 'city' | 'country' | 'country_code' | 'type_slug' | 'architect_slug' | 'era_slug' | 'style_slugs' | 'description' | 'significance'>>('buildings', 'id,slug,name_zh,name_en,name_ja,year_start,year_end,city,country,country_code,type_slug,architect_slug,era_slug,style_slugs,description,significance'),
       supabase.from('images').select('building_id,url_original,photographer,license,source_url').eq('is_primary', true),
+      fetchAll<{ slug: string; name_zh: string; name_zh_hant: string; name_en: string; name_ja: string }>('building_functions', 'slug,name_zh,name_zh_hant,name_en,name_ja'),
+      fetchAll<{ function_slug: string; locale: string; alias: string }>('building_function_aliases', 'function_slug,locale,alias'),
+      fetchAll<{ building_id: string; function_slug: string; review_status: string }>('building_function_assignments', 'building_id,function_slug,review_status'),
+      fetchAll<{ case_id: string; building_id: string; publication_status: string }>('graduation_case_profiles', 'case_id,building_id,publication_status'),
     ])
     if (images.error) throw new Error(`images: ${images.error.message}`)
     const imageByBuilding = new Map<string, Record<string, unknown>>()
     for (const image of images.data || []) imageByBuilding.set(image.building_id as string, image)
+    const functionNames = new Map(functions.map(item => [item.slug, [item.slug, item.name_zh, item.name_zh_hant, item.name_en, item.name_ja]]))
+    for (const alias of aliases) functionNames.set(alias.function_slug, [...(functionNames.get(alias.function_slug) || []), alias.alias])
+    const functionsByBuilding = new Map<string, string[]>()
+    for (const assignment of assignments.filter(item => item.review_status === 'approved')) functionsByBuilding.set(assignment.building_id, [...(functionsByBuilding.get(assignment.building_id) || []), assignment.function_slug])
+    const profilesByBuilding = new Map<string, string[]>()
+    for (const profile of profiles.filter(item => item.publication_status === 'published')) profilesByBuilding.set(profile.building_id, [...(profilesByBuilding.get(profile.building_id) || []), profile.case_id])
+    const caseById = new Map(graduationCases.map(item => [item.id, item]))
+    const issuesByCase = new Map<string, string[]>()
+    for (const issue of graduationIssues) for (const caseId of issue.reference_case_ids) issuesByCase.set(caseId, [...(issuesByCase.get(caseId) || []), issue.id])
 
     return {
       architects,
@@ -205,12 +227,23 @@ export async function getSearchIndex(): Promise<{ architects: SearchArchitect[];
         const imageCoverUrl = isDisplayableImageUrl(image?.url_original) ? image?.url_original as string : null
         const useOverride = Boolean(overrideCoverUrl)
         const useImage = !useOverride && Boolean(imageCoverUrl)
+        const functionSlugs = functionsByBuilding.get(building.id) || []
+        const caseIds = profilesByBuilding.get(building.id) || []
+        const cases = caseIds.map(caseId => caseById.get(caseId)).filter(Boolean)
         return {
           ...building,
           cover_url: overrideCoverUrl || imageCoverUrl || null,
           cover_photographer: useOverride ? override?.cover_photographer || null : useImage ? image?.photographer as string || null : null,
           cover_license: useOverride ? override?.cover_license || null : useImage ? image?.license as string || null : null,
           cover_source_url: useOverride ? override?.cover_source_url || null : useImage ? image?.source_url as string || null : null,
+          function_slugs: functionSlugs,
+          function_aliases: functionSlugs.flatMap(slug => functionNames.get(slug) || []),
+          graduation_case_ids: caseIds,
+          graduation_keywords: cases.flatMap(item => [
+            ...(item?.keywords || []), ...(item?.keywords_en || []), ...(item?.keywords_ja || []),
+            item?.concept, item?.concept_en, item?.concept_ja,
+          ].filter((value): value is string => Boolean(value))),
+          graduation_issue_ids: [...new Set(caseIds.flatMap(caseId => issuesByCase.get(caseId) || []))],
         }
       }),
     }

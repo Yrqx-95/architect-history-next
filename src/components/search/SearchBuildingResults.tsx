@@ -57,6 +57,12 @@ export default function SearchBuildingResults({ lang, prefix, buildings }: Searc
                 {building.type_slug && (
                   <span className="metadata mt-2 block">{building.type_slug}</span>
                 )}
+                <span className="mt-2 flex flex-wrap gap-x-2 gap-y-1 text-[11px] text-muted">
+                  <span>{lang === 'ja' ? '主体建築' : lang === 'en' ? 'Building' : '主体建筑'}</span>
+                  {building.perspectives.includes('graduation-reference') && (
+                    <span className="text-accent">{lang === 'ja' ? '卒業設計参考' : lang === 'en' ? 'Graduation reference' : '毕业设计参考'}</span>
+                  )}
+                </span>
               </div>
             </Link>
           )

@@ -13,6 +13,8 @@ Version: `20260713034120`
 - RLS remains enabled on `graduation_case_profiles` and `building_function_assignments`; each retains one public-read policy.
 - Supabase advisors remained at the established 13 security / 27 performance baseline.
 
-## Remaining release gate
+## Release and live verification
 
-Merge the 85→88 production baseline, run one Reviewed production release, and verify CASE-100/126/136, their building routes, three images and live API diagnostics before marking G6 complete.
+- Reviewed production release `29222694233` completed successfully in 10m13s; quality gate, complete tests, Cloudflare deploy and route-semantics verification passed.
+- CASE-100/126/136, their canonical building routes and all three images returned HTTP 200.
+- The live API returned `source=supabase+json`, 101 public cases, 88 profiles, 0 missing fallback cases and 0 missing building relations, with the exact reviewed architects, years and licenses.
