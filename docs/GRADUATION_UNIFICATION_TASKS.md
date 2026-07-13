@@ -350,6 +350,8 @@ Fast batch 012 联合 migration pack 已生成。compatibility architect 已对�
 
 Fast batch 012 已完成生产 migration。Supabase migration `graduation_fast_batch_012`（`20260713032152`）写入 3 architects / 3 buildings / 3 primary images / 3 profiles / 4 assignments；总数从 82/936/7285/141 精确更新为 85 profiles / 939 buildings / 7288 images / 145 assignments。目标计数 3/3/3/3/4，orphan profile 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。尚未运行最终 Reviewed release。详见 `GRADUATION_FAST_BATCH_012_PRODUCTION.md`。
 
+Placeholder batch 013 已一次完成 21 条正式只读审核。CASE-003/004/010/013/025/030/032/048/059/062/066/072/073/075/078/080/082/083/084/085/093 的兼容记录全部只指向统一 placeholder，且 `image_source_url`、`image_license`、`image_credit` 均为空；依照既有图片准入规则统一记录为 `no_safe_image_yet`，不上传、不生成 migration、不写生产。这不是否定建筑身份，而是明确可追溯开放图片证据缺口。G6 已迁移 64/118，尚未迁移 54；尚未正式审核队列从 27 降至 6。详见 `GRADUATION_NEW_BUILDING_PLACEHOLDER_BATCH_013_TRIAGE.md`。
+
 下一个最小可验证步骤：合并 82→85 生产读取基线，运行一次 Reviewed production release，并验收三条 CASE/building 路由、图片、canonical architect 和 API diagnostics。
 
 ### G7 — 统一搜索与筛选
