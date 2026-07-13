@@ -316,6 +316,10 @@ CASE-043 Roadside Station Mashiko batch 010 已完成生产迁移、发布和线
 
 下一个最小可验证步骤：通过 PR 固化 CASE-005 只读决策；随后建立 `art-center` 四语 taxonomy 的 guarded apply、rollback 与隔离 PostgreSQL dry-run。taxonomy 完成生产验收前，不生成 CASE-005 建筑 migration。
 
+Art-center taxonomy 001 已完成本地与生产只读预检。新增设计为 `art-center` / `cultural`，包含四语 8 aliases，并明确排除更宽泛的 `文化中心` / `cultural center` / `文化センター`，避免把市民馆、文化会馆和综合表演设施错误合并。生产为 0 function conflict / 0 alias conflict / 1 cultural type，基线 14 functions / 229 aliases / 140 assignments，预期写后 15/237/140。隔离 PostgreSQL 18.3 已按生产历史顺序重放 taxonomy，forward、assignment rollback guard、精确 rollback 与 replay 全部通过；Supabase migration 由项目内 CLI 创建并与 reviewed apply SQL 字节一致。全量 62 files / 214 tests、typecheck、lint 与 `git diff --check` 通过。尚未写生产。详见 `GRADUATION_ART_CENTER_TAXONOMY_001_DRY_RUN.md`。
+
+下一个最小可验证步骤：运行相关全量 unit、typecheck 与 lint；通过独立 PR 合并 taxonomy 后，立即重复生产冲突预检，仍为 0 才允许 apply。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。

@@ -26,6 +26,17 @@
       }
     },
     {
+      "slug": "art-center",
+      "broad_type_slug": "cultural",
+      "names": { "zh": "艺术中心", "zh-Hant": "藝術中心", "en": "Art Center", "ja": "アートセンター" },
+      "aliases": {
+        "zh": ["艺术中心"],
+        "zh-Hant": ["藝術中心"],
+        "en": ["art center", "arts center", "art centre", "arts centre"],
+        "ja": ["アートセンター", "芸術センター"]
+      }
+    },
+    {
       "slug": "theatre",
       "broad_type_slug": "cultural",
       "names": { "zh": "剧院／剧场", "zh-Hant": "劇院／劇場", "en": "Theatre", "ja": "劇場" },
