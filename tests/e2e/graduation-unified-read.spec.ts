@@ -8,8 +8,8 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(101)
-    expect(payload.diagnostics.profileCount).toBe(82)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(82)
+    expect(payload.diagnostics.profileCount).toBe(85)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(85)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
       'CASE-018',
       'CASE-021',
@@ -72,12 +72,19 @@ test.describe('graduation Supabase + JSON dual read', () => {
       'CASE-034',
       'CASE-043',
       'CASE-005',
+      'CASE-068',
+      'CASE-077',
+      'CASE-089',
     ]))
     expect(payload.diagnostics.unifiedCaseIds).not.toContain('CASE-079')
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(82)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(85)
+
+    expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-068')).toMatchObject({ architect: 'Atelier Bow-Wow + Tokyo Institute of Technology Tsukamoto Lab', year: 2011 })
+    expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-077')).toMatchObject({ architect: 'Kono Designs', year: 2010, image_license: 'CC BY-SA 3.0' })
+    expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-089')).toMatchObject({ architect: 'Hof van Cartesius Cooperative', year: 2017, image_license: 'CC BY-SA 2.0' })
 
     const artsChiyodaCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-005')
     expect(artsChiyodaCase).toMatchObject({
