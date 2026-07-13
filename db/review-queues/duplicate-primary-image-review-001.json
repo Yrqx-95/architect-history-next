@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T13:21:22.508Z",
+  "generated_at": "2026-07-13T13:49:05.414Z",
   "batch": "duplicate-primary-image-review-001",
   "status": "read-only-review-required",
   "writes_database": false,
@@ -13,16 +13,16 @@
     ]
   },
   "summary": {
-    "primary_rows": 1441,
+    "primary_rows": 1439,
     "buildings_with_primary": 942,
-    "duplicate_primary_buildings": 495,
-    "duplicate_primary_rows": 994,
+    "duplicate_primary_buildings": 493,
+    "duplicate_primary_rows": 990,
     "three_primary_buildings": 4,
-    "commons_vs_unsplash": 495,
+    "commons_vs_unsplash": 493,
     "commons_vs_commons": 0,
     "other_source_conflicts": 0,
-    "p0_visible_unsplash_with_commons_candidate": 229,
-    "p1_primary_invariant_conflict": 124,
+    "p0_visible_unsplash_with_commons_candidate": 225,
+    "p1_primary_invariant_conflict": 126,
     "p2_override_shielded": 142,
     "candidate_rows_missing_attribution": 0,
     "safe_auto_apply": 0,
@@ -145,132 +145,6 @@
           "source_class": "unsplash",
           "attribution_complete": true,
           "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "a68816e0-5f82-4c9a-abee-41e227adedb5",
-      "building_slug": "emerson-middle-school",
-      "building": {
-        "name_zh": "",
-        "name_en": "Emerson Middle School",
-        "name_ja": "",
-        "architect_slug": "richard-neutra",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "7bb70495-ff9e-51b8-843e-df87b3e045f3",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "7bb70495-ff9e-51b8-843e-df87b3e045f3",
-          "building_id": "a68816e0-5f82-4c9a-abee-41e227adedb5",
-          "url_original": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=400&q=60",
-          "photographer": "Neon Wang",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/fUsxJC1KVGQ",
-          "img_type": "interior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "9973f007-c3e6-5b1e-aeb3-bba1bff5bcce",
-          "building_id": "a68816e0-5f82-4c9a-abee-41e227adedb5",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Emerson_Middle_School.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Emerson_Middle_School.jpg",
-          "photographer": "Ucla90024",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Emerson_Middle_School.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "a10950a0-f33e-4899-98f1-e4c49efc28f2",
-      "building_slug": "esbjerg-performing-arts-centre",
-      "building": {
-        "name_zh": "",
-        "name_en": "Esbjerg Performing Arts Centre",
-        "name_ja": "",
-        "architect_slug": "j-rn-utzon",
-        "year_start": 1997,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "5aec24b1-5b0c-5454-b86a-dd55d71018b5",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "5aec24b1-5b0c-5454-b86a-dd55d71018b5",
-          "building_id": "a10950a0-f33e-4899-98f1-e4c49efc28f2",
-          "url_original": "https://images.unsplash.com/photo-1771033311800-04736883934b?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1771033311800-04736883934b?w=400&q=60",
-          "photographer": "Daniel Miksha",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/iKXOhOU0pH0",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "9e2f8a93-189f-511a-b0f4-494aa18b8ff1",
-          "building_id": "a10950a0-f33e-4899-98f1-e4c49efc28f2",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Esbjerg_-_Musikhaus.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Esbjerg_-_Musikhaus.jpg/400px-Esbjerg_-_Musikhaus.jpg",
-          "photographer": "Taxiarchos228",
-          "source": "Wikimedia Commons",
-          "license": "FAL",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Esbjerg_-_Musikhaus.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,
@@ -9354,69 +9228,6 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
-      "building_id": "19ecd1d4-2e14-4e16-80cc-eef94ddc1cf6",
-      "building_slug": "saint-johns-abbey",
-      "building": {
-        "name_zh": "",
-        "name_en": "Saint John's Abbey",
-        "name_ja": "",
-        "architect_slug": "marcel-breuer",
-        "year_start": 1956,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "eea2e6bd-eae4-5737-bfb5-878e3571dd58",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "4b2e0901-8d66-5149-8e69-8b0e273477fe",
-          "building_id": "19ecd1d4-2e14-4e16-80cc-eef94ddc1cf6",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/5/51/2009-0522-MN-SJU-abbeychurch.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/2009-0522-MN-SJU-abbeychurch.jpg/400px-2009-0522-MN-SJU-abbeychurch.jpg",
-          "photographer": "Bobak Ha'Eri",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:2009-0522-MN-SJU-abbeychurch.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "eea2e6bd-eae4-5737-bfb5-878e3571dd58",
-          "building_id": "19ecd1d4-2e14-4e16-80cc-eef94ddc1cf6",
-          "url_original": "https://images.unsplash.com/photo-1601624311242-d7de9926253f?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1601624311242-d7de9926253f?w=400&q=60",
-          "photographer": "Saj Shafique",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/dXXeGlezuBM",
-          "img_type": "detail",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
       "building_id": "d34fc6a8-cc66-496a-8667-fd963e463b4f",
       "building_slug": "saint-louis-art-museum",
       "building": {
@@ -10472,69 +10283,6 @@
           "source": "Wikimedia Commons",
           "license": "CC BY-SA 4.0",
           "source_url": "https://commons.wikimedia.org/wiki/File:SEYMOUR_KRIEGER_HOUSE,_BETHESDA,_MONTGOMERY_COUNTY_MD.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "de06c40d-9514-4190-9822-fbf1fac62f56",
-      "building_slug": "shangyin-opera-house",
-      "building": {
-        "name_zh": "",
-        "name_en": "Shangyin Opera House",
-        "name_ja": "",
-        "architect_slug": "christian-de-portzamparc",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "6038852b-2161-53e0-9584-9391a8151b75",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "6038852b-2161-53e0-9584-9391a8151b75",
-          "building_id": "de06c40d-9514-4190-9822-fbf1fac62f56",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "feb4096b-4ed3-5988-a4a6-bdd8b9fae591",
-          "building_id": "de06c40d-9514-4190-9822-fbf1fac62f56",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Shangyin_Opera_House_%2820191021081912%29.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Shangyin_Opera_House_%2820191021081912%29.jpg/400px-Shangyin_Opera_House_%2820191021081912%29.jpg",
-          "photographer": "N509FZ",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Shangyin_Opera_House_(20191021081912).jpg",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "commons",
@@ -19590,6 +19338,69 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
+      "building_id": "19ecd1d4-2e14-4e16-80cc-eef94ddc1cf6",
+      "building_slug": "saint-johns-abbey",
+      "building": {
+        "name_zh": "",
+        "name_en": "Saint John's Abbey",
+        "name_ja": "",
+        "architect_slug": "marcel-breuer",
+        "year_start": 1956,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "4b2e0901-8d66-5149-8e69-8b0e273477fe",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "4b2e0901-8d66-5149-8e69-8b0e273477fe",
+          "building_id": "19ecd1d4-2e14-4e16-80cc-eef94ddc1cf6",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/5/51/2009-0522-MN-SJU-abbeychurch.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/2009-0522-MN-SJU-abbeychurch.jpg/400px-2009-0522-MN-SJU-abbeychurch.jpg",
+          "photographer": "Bobak Ha'Eri",
+          "source": "Wikimedia Commons",
+          "license": "CC BY 3.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:2009-0522-MN-SJU-abbeychurch.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "eea2e6bd-eae4-5737-bfb5-878e3571dd58",
+          "building_id": "19ecd1d4-2e14-4e16-80cc-eef94ddc1cf6",
+          "url_original": "https://images.unsplash.com/photo-1601624311242-d7de9926253f?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1601624311242-d7de9926253f?w=400&q=60",
+          "photographer": "Saj Shafique",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/dXXeGlezuBM",
+          "img_type": "detail",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
       "building_id": "b1e117bc-0f21-45e9-a677-387a6169ecdb",
       "building_slug": "salgueiros-metro-station",
       "building": {
@@ -20083,6 +19894,69 @@
           "source_class": "unsplash",
           "attribution_complete": true,
           "selected_by_current_database_strategy": false
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "de06c40d-9514-4190-9822-fbf1fac62f56",
+      "building_slug": "shangyin-opera-house",
+      "building": {
+        "name_zh": "",
+        "name_en": "Shangyin Opera House",
+        "name_ja": "",
+        "architect_slug": "christian-de-portzamparc",
+        "year_start": null,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "unsplash",
+        "commons"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "feb4096b-4ed3-5988-a4a6-bdd8b9fae591",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "6038852b-2161-53e0-9584-9391a8151b75",
+          "building_id": "de06c40d-9514-4190-9822-fbf1fac62f56",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        },
+        {
+          "id": "feb4096b-4ed3-5988-a4a6-bdd8b9fae591",
+          "building_id": "de06c40d-9514-4190-9822-fbf1fac62f56",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Shangyin_Opera_House_%2820191021081912%29.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Shangyin_Opera_House_%2820191021081912%29.jpg/400px-Shangyin_Opera_House_%2820191021081912%29.jpg",
+          "photographer": "N509FZ",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Shangyin_Opera_House_(20191021081912).jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
