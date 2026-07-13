@@ -340,6 +340,10 @@ CASE-005 3331 Arts Chiyoda batch 011 已完成生产迁移、发布和线上验�
 
 下一个最小可验证步骤：从剩余 34 条未正式审核记录中按 5–10 条组成下一批，优先选择身份、开放图片和既有 taxonomy 都完整的项目；同批完成只读决策、migration pack 与 dry-run，阻塞条目跳过并记录，不再逐条拆 PR。
 
+Fast batch 012 已一次完成 7 条正式只读审核。CASE-068/077/089 的身份、设计责任、既有 taxonomy 和开放图片通过，批准合并进入一个 migration dry-run；CASE-009 因设计责任缺失、CASE-017 因主图不代表建筑、CASE-063 因旧建筑误图、CASE-071 因 2002 改修设计责任未查清而正式阻塞，不拖住批准项。人工图像核验与 Commons/Flickr 权利核验完成；生产 CASE profile 均无冲突，所需 `public-space`/`mixed-use` functions 与 broad types 已存在，生产唯一 Miyashita 名称命中为明确不同的 2020 项目。G6 已迁移仍为 61/118，尚未迁移 57；尚未正式审核队列从 34 降至 27。详见 `GRADUATION_NEW_BUILDING_FAST_BATCH_012_TRIAGE.md`。
+
+下一个最小可验证步骤：为 CASE-068/077/089 同批对齐 compatibility architect，生成 3 architects / 3 buildings / 3 images / 3 profiles / 4 assignments 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
