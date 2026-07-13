@@ -300,6 +300,10 @@ CASE-034 KAIT Workshop batch 009 已完成生产迁移、发布和线上验收�
 
 下一个最小可验证步骤：从剩余 36 条未正式审核记录中选择下一个不需降低身份或图片权利标准的边界清晰小批次，先完成只读调查和生产冲突预检。
 
+Roadside Station Mashiko batch 010 已完成 CASE-043 正式只读审核。MOUNT FUJI ARCHITECTS STUDIO 官方资料确认项目位于栃木、2016 年完成、主要用途为道之驿；道之驿运营方与关东道之驿资料确认地址、停车、餐厅和物产销售。broad type 决定为 `transportation`，functions 为 `transport-hub` primary、`retail` secondary；不以证据不足的信息扩大为 `community-center` 或 `public-space`。Commons 图为アラツク own work、4522×1129、CC BY-SA 4.0；仓库 1600×399 文件人工确认准确。生产 architect/building/image/profile conflicts 全部 0，functions 2/2、type 1/1。本批尚未生成 migration 或写生产；G6 已迁移仍为 59/118，尚未正式审核队列从 36 减至 35。详见 `GRADUATION_NEW_BUILDING_ROADSIDE_STATION_MASHIKO_010_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化 CASE-043 决策；随后生成 guarded migration/rollback，并执行全历史隔离 PostgreSQL dry-run。生产写入前必须重复冲突预检。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
