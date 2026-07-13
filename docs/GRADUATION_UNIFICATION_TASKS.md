@@ -308,6 +308,10 @@ CASE-043 Roadside Station Mashiko batch 010 migration pack 已生成：1 new arc
 
 下一个最小可验证步骤：通过 PR 合并 migration pack；随后重复生产冲突预检，仍为 0 才允许 apply。
 
+CASE-043 Roadside Station Mashiko batch 010 已完成生产迁移、发布和线上验收。Supabase migration `graduation_roadside_station_mashiko_batch_010`（`20260713013758`）写入 1 architect / 1 building / 1 primary image / 1 profile / 2 assignments；总数更新为 81/935/7284/140，目标关系、RLS/policy 正常，advisors 保持 13 security / 27 performance。首次 release `29217933562` 因 GitHub Actions 的 Wikimedia 请求得到合法 fallback PNG 而在部署前停止；PR #108 移除不稳定第三方 CI 夹具后，release `29218152614` 在 9m43s 内成功。6 个三语 CASE/building 路由和图片全部 HTTP 200，API 为 101 cases / 81 profiles / 0 missing。G6 已迁移 60/118，尚未迁移 58；尚未正式审核队列 35。详见 `GRADUATION_ROADSIDE_STATION_MASHIKO_BATCH_010_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 35 条未正式审核记录中选择身份与开放图片证据完整的下一条，先完成只读调查与生产冲突预检。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
