@@ -41,13 +41,15 @@
       "image_review": {
         "current_source_url": "https://commons.wikimedia.org/wiki/File:Dangsan_Railway_Bridge_Morning_View.jpg",
         "decision": "reject-as-primary",
-        "reason": "The source and inspected image depict Dangsan Railway Bridge with a distant Yeouido skyline, not an identity-safe view of Parc.1."
+        "reason": "The source and inspected image depict Dangsan Railway Bridge with a distant Yeouido skyline, not an identity-safe view of Parc.1.",
+        "replacement_status": "no-safe-image-yet",
+        "replacement_reason": "The Commons Parc1 category warns that South Korea does not provide Commons-acceptable freedom of panorama for this architecture. Incidental skyline files cannot be promoted into a primary building image."
       },
       "required_actions": [
         "Set city to Seoul and country to South Korea using the existing KR code.",
         "Set the broad type to mixed-use after confirming the accepted type slug.",
         "Add the RSHP project page as official source.",
-        "Find and separately license-review an identity-safe replacement image."
+        "Keep the image replacement blocked until an architect-approved, owner-approved or otherwise safely licensed subject image is available."
       ]
     },
     {
@@ -87,12 +89,20 @@
       "image_review": {
         "current_source_url": "https://commons.wikimedia.org/wiki/File:2024-06-15_08_38_00_View_west_towards_Lower_Manhattan_from_the_middle_of_the_Brooklyn_Bridge_along_the_border_of_Manhattan_and_Brooklyn_in_New_York_City,_New_York.jpg",
         "decision": "reject-as-primary",
-        "reason": "The inspected image is a broad Lower Manhattan skyline view and does not make 3 World Trade Center an unambiguous subject."
+        "reason": "The inspected image is a broad Lower Manhattan skyline view and does not make 3 World Trade Center an unambiguous subject.",
+        "replacement_candidate": {
+          "source_url": "https://commons.wikimedia.org/wiki/File:Three_World_Trade_Center,_New_York,_NY.jpg",
+          "photographer": "JJBers",
+          "license": "CC BY 4.0",
+          "dimensions": "5152x3864",
+          "visual_review": "pass",
+          "review_note": "The completed 3 World Trade Center is the clear primary subject; 4 World Trade Center is secondary at right."
+        }
       },
       "required_actions": [
         "Set city to New York City, country to United States and broad type to office.",
         "Add the official World Trade Center project page.",
-        "Find and separately license-review a building-specific replacement image."
+        "Use the reviewed JJBers Commons file as the replacement candidate after the pre-write file-page recheck."
       ]
     },
     {
