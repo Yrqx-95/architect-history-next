@@ -1,6 +1,6 @@
 # Archistory Roadmap
 
-Last updated: 2026-06-10
+Last updated: 2026-07-13
 
 Goal: make the project converge into a stable product repository.
 
@@ -12,8 +12,9 @@ Goal: make the project converge into a stable product repository.
    - Remove or ignore generated/local artifacts only after confirmation.
 
 2. **Content trust baseline**
-   - Continue reducing data-audit warnings in high-confidence batches.
-   - Prioritize descriptions, significance, Japanese names, `era_slug`, `type_slug`, and `country_code`.
+   - The unified P0 baseline and 25/25 Top 50 queue are recorded in `docs/CONTENT_TRUST_NEXT_PHASE_P0.md`.
+   - Start with the eight-record read-only candidate batch; do not write content until identity, source, current image, photographer, and license are reviewed.
+   - Keep source metadata, source text, display fallback, and translation gaps as separate metrics.
 
 3. **Image authority decision**
    - Document current image source priority.
