@@ -17,6 +17,10 @@ type ImageOverride = {
   cover_source_url?: string | null
 }
 
+type PrimaryImage = Pick<BuildingImage,
+  'id' | 'building_id' | 'url_original' | 'photographer' | 'license' | 'source_url'
+>
+
 const curatedImageOverrides = imageOverrides as Record<string, ImageOverride>
 const cachedImageOverrides = localImageOverrides as Record<string, ImageOverride>
 
@@ -75,6 +79,40 @@ async function fetchAll<T>(table: string, select = '*'): Promise<T[]> {
     from += FETCH_PAGE_SIZE
   }
   return results
+}
+
+export async function collectPagedRows<T>(fetchPage: (from: number, to: number) => Promise<T[]>): Promise<T[]> {
+  const results: T[] = []
+  let from = 0
+  while (true) {
+    const to = from + FETCH_PAGE_SIZE - 1
+    const data = await fetchPage(from, to)
+    results.push(...data)
+    if (data.length < FETCH_PAGE_SIZE) return results
+    from += FETCH_PAGE_SIZE
+  }
+}
+
+async function fetchAllPrimaryImages(): Promise<PrimaryImage[]> {
+  const supabase = createClient()
+  return collectPagedRows(async (from, to) => {
+    let data: PrimaryImage[] | null = null
+    let error: { message: string } | null = null
+    for (let attempt = 0; attempt < FETCH_MAX_ATTEMPTS; attempt += 1) {
+      const response = await supabase.from('images')
+        .select('id,building_id,url_original,photographer,license,source_url')
+        .eq('is_primary', true)
+        .order('building_id', { ascending: true })
+        .order('id', { ascending: true })
+        .range(from, to)
+      data = (response.data as PrimaryImage[] | null) || null
+      error = response.error ? { message: response.error.message } : null
+      if (!error || !isTransientSupabaseError(error.message) || attempt === FETCH_MAX_ATTEMPTS - 1) break
+      await new Promise(resolve => setTimeout(resolve, 300 * 2 ** attempt))
+    }
+    if (error) throw new Error(`images: ${error.message}`)
+    return data || []
+  })
 }
 
 export function isDisplayableImageUrl(value: unknown): value is string {
@@ -149,13 +187,10 @@ export async function getCuratedBuildings(slugs: string[]): Promise<BuildingWith
 
 export async function getBuildingsWithCovers(): Promise<BuildingWithCover[]> {
   return cached('buildings-covers', async () => {
-    const supabase = createClient()
     const buildings = await fetchAll<Building>('buildings')
-    const { data: images } = await supabase.from('images')
-      .select('building_id, url_original, photographer, license, source_url')
-      .eq('is_primary', true)
+    const images = await fetchAllPrimaryImages()
     const imgMap = new Map<string, Record<string, unknown>>()
-    if (images) images.forEach((i: Record<string, unknown>) => imgMap.set(i.building_id as string, i))
+    images.forEach(i => imgMap.set(i.building_id, i))
     return buildings.map(b => {
       const image = imgMap.get(b.id)
       const override = cachedImageOverrides[b.slug] || curatedImageOverrides[b.slug]
@@ -195,19 +230,17 @@ export type SearchBuilding = Pick<Building,
 /** Compact search corpus: avoids hydrating full buildings and galleries on a search cache miss. */
 export async function getSearchIndex(): Promise<{ architects: SearchArchitect[]; buildings: SearchBuilding[] }> {
   return cached('search-index-v1', async () => {
-    const supabase = createClient()
     const [architects, buildings, images, functions, aliases, assignments, profiles] = await Promise.all([
       fetchAll<SearchArchitect>('architects', 'slug,name_zh,name_en,name_ja,birth_year,death_year,era_slug,nationalities,style_slugs,core_ideas'),
       fetchAll<Pick<Building, 'id' | 'slug' | 'name_zh' | 'name_en' | 'name_ja' | 'year_start' | 'year_end' | 'city' | 'country' | 'country_code' | 'type_slug' | 'architect_slug' | 'era_slug' | 'style_slugs' | 'description' | 'significance'>>('buildings', 'id,slug,name_zh,name_en,name_ja,year_start,year_end,city,country,country_code,type_slug,architect_slug,era_slug,style_slugs,description,significance'),
-      supabase.from('images').select('building_id,url_original,photographer,license,source_url').eq('is_primary', true),
+      fetchAllPrimaryImages(),
       fetchAll<{ slug: string; name_zh: string; name_zh_hant: string; name_en: string; name_ja: string }>('building_functions', 'slug,name_zh,name_zh_hant,name_en,name_ja'),
       fetchAll<{ function_slug: string; locale: string; alias: string }>('building_function_aliases', 'function_slug,locale,alias'),
       fetchAll<{ building_id: string; function_slug: string; review_status: string }>('building_function_assignments', 'building_id,function_slug,review_status'),
       fetchAll<{ case_id: string; building_id: string; publication_status: string }>('graduation_case_profiles', 'case_id,building_id,publication_status'),
     ])
-    if (images.error) throw new Error(`images: ${images.error.message}`)
     const imageByBuilding = new Map<string, Record<string, unknown>>()
-    for (const image of images.data || []) imageByBuilding.set(image.building_id as string, image)
+    for (const image of images) imageByBuilding.set(image.building_id, image)
     const functionNames = new Map(functions.map(item => [item.slug, [item.slug, item.name_zh, item.name_zh_hant, item.name_en, item.name_ja]]))
     for (const alias of aliases) functionNames.set(alias.function_slug, [...(functionNames.get(alias.function_slug) || []), alias.alias])
     const functionsByBuilding = new Map<string, string[]>()
