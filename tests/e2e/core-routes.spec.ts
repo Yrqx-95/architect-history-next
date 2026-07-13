@@ -205,6 +205,14 @@ test.describe('core public routes', () => {
     const accepted = await request.get('/api/image-proxy?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1580418827493-f2b22c0a76cb%3Fauto%3Dformat%26fit%3Dcrop%26w%3D32%26q%3D20')
     expect(accepted.status()).toBe(200)
     expect(accepted.headers()['content-type']).toMatch(/^image\//)
+
+    const portrait = await request.get(
+      '/api/image-proxy?url=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fc%2Fc8%2FLe_Corbusier_%25281964%2529.jpg',
+    )
+    expect(portrait.status()).toBe(200)
+    expect(portrait.headers()['content-type']).toBe('image/jpeg')
+    expect(portrait.headers()['x-archistory-image-fallback']).toBeUndefined()
+    expect((await portrait.body()).subarray(0, 3)).toEqual(Buffer.from([0xff, 0xd8, 0xff]))
   })
 
   test('root route redirects according to Accept-Language', async ({ request }) => {

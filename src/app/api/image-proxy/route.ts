@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isExternalImageHost } from '@/lib/image-domains'
 
-export const runtime = 'edge'
+// Keep the default Node.js runtime. OpenNext Cloudflare runs route handlers in
+// its Node runtime; opting this route into Next's Edge runtime makes the
+// generated Worker fail before GET executes.
 export const revalidate = 86400 // Cache for 1 day
 
 const FALLBACK_PNG_BASE64 =
