@@ -320,6 +320,10 @@ Art-center taxonomy 001 已完成本地与生产只读预检。新增设计为 `
 
 下一个最小可验证步骤：运行相关全量 unit、typecheck 与 lint；通过独立 PR 合并 taxonomy 后，立即重复生产冲突预检，仍为 0 才允许 apply。
 
+Art-center taxonomy 001 已完成生产迁移。Supabase migration `building_function_art_center_001`（`20260713022122`）写入 1 active function / 8 aliases / 4 locales / 0 assignments；总数从 14/229/140 精确更新为 15 functions / 237 aliases / 140 assignments。三张 taxonomy 表 RLS 全部开启，既有 3 条 public-read policy 正常；advisors 保持 13 security / 27 performance，没有新增 `art-center` finding。尚未运行数据库写后的 Reviewed release。详见 `GRADUATION_ART_CENTER_TAXONOMY_001_PRODUCTION.md`。
+
+下一个最小可验证步骤：完成 Reviewed production release 与线上 API/alias 验收；成功后才生成 CASE-005 的 1 joint architect / 1 building / 1 primary image / 1 profile / 1 `art-center` assignment migration pack。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
