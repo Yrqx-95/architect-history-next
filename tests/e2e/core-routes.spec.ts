@@ -215,6 +215,16 @@ test.describe('core public routes', () => {
     expect((await portrait.body()).subarray(0, 3)).toEqual(Buffer.from([0xff, 0xd8, 0xff]))
   })
 
+  test('homepage renders external portraits directly from the validated proxy', async ({ page }) => {
+    await page.goto('/zh')
+    const portrait = page.getByAltText('勒·柯布西耶肖像').first()
+    await expect(portrait).toBeVisible()
+    await expect.poll(() => portrait.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0)
+    const currentSrc = await portrait.evaluate(image => (image as HTMLImageElement).currentSrc)
+    expect(currentSrc).toContain('/api/image-proxy?')
+    expect(currentSrc).not.toContain('/_next/image?')
+  })
+
   test('root route redirects according to Accept-Language', async ({ request }) => {
     const response = await request.get('/', {
       headers: { 'accept-language': 'ja,en;q=0.8,zh;q=0.7' },
