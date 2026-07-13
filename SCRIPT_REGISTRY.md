@@ -12,6 +12,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | `scripts/build-image-fill-queue.mjs` | Builds a read-only queue for buildings missing policy-safe images and checks Wikidata P18 Commons candidates | Keep as the unattended image-fill entrypoint; `--advance` traverses later batches, retries rate limits once, and accumulates a local catalog |
 | `scripts/cache-curated-images.mjs` | Caches curated images locally | Runtime-adjacent but should eventually move to object storage flow |
 | `scripts/audit-images.mjs` | Checks image quality/source availability | Supports image reliability |
+| `scripts/audit-duplicate-primary-images.mjs` | Produces a read-only Supabase audit and review queue for buildings with multiple primary image rows | Never auto-demotes rows; preserves the current visible selection and requires visual identity/license review before any write batch |
 | `scripts/build-architect-portraits.mjs` | Builds architect portrait report/assets | Supports visible architect image quality |
 
 ## governance
@@ -21,6 +22,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | `scripts/audit-data.ts` | Main data quality audit | Keep as release/data gate |
 | `scripts/build-next-phase-content-queue.ts` | Builds the versioned 25 trust-repair / 25 product-core content queue from current audits and product exposure signals | Read-only against Supabase; writes only the reviewed packet and P0 Markdown plan after prerequisite audits |
 | `scripts/verify-content-trust-3wtc-001-dry-run.mjs` | Runs the reviewed 3 WTC metadata and primary-image repair plus guarded rollback in isolated PostgreSQL | Keep with batch 001 migration history; no production connection or write |
+| `scripts/verify-duplicate-primary-image-review-001-dry-run.mjs` | Replays the first reviewed duplicate-primary migration and guarded rollback in isolated PostgreSQL | Covers four Commons-vs-Commons decisions; no production connection or write |
 | `scripts/report-orphan-style-slugs.ts` | Reports orphan style assignments | Keep until style taxonomy remains stable over time |
 | `scripts/normalize-style-slugs.ts` | Dry-run/write style alias normalization | Keep for repeatability and rollback context |
 | `scripts/plan-era-slugs.ts` | Read-only era_slug candidate planning | Keep until era completion ends; writes no database changes |
@@ -86,6 +88,8 @@ From `package.json`:
 - `images:registry` → runtime-support
 - `images:queue` → runtime-support / read-only image-fill queue
 - `images:queue:advance` → runtime-support / advancing unattended image-fill queue
+- `images:audit-duplicate-primary` → governance / read-only duplicate-primary review queue
+- `images:verify-duplicate-primary-001` → governance / isolated PostgreSQL migration and rollback verification
 - `images:prepare-reviewed` → governance / reviewed image write preparation only
 - `images:cache` → runtime-support
 - `content:audit` → one-off or periodic governance

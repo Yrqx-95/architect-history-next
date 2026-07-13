@@ -37,6 +37,8 @@ Current docs under `docs/`:
 - `docs/CONTENT_TRUST_NEXT_PHASE_P0.md` — current content-trust baseline, Top 50 review queue, first read-only batch, and execution boundaries.
 - `docs/CONTENT_TRUST_BATCH_001_REVIEW.md` — formal read-only review and routing decisions for the first eight non-graduation records.
 - `docs/CONTENT_TRUST_3WTC_001_EXECUTION.md` — guarded 3 WTC metadata and primary-image repair, dry-run, rollback, and release gates.
+- `docs/DUPLICATE_PRIMARY_IMAGE_REVIEW_001.md` — formal keep/demote and attribution-repair decisions for the first four Commons-vs-Commons primary-image conflicts.
+- `docs/reports/DUPLICATE_PRIMARY_IMAGE_AUDIT_2026-07-13.md` — read-only production audit and review priorities for buildings with multiple primary image rows.
 - `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
 - `docs/graduation/` — current V1 Graduation Inspiration Library handoff docs, including wireframes, random behavior, content guide, and source/image policy.
 
