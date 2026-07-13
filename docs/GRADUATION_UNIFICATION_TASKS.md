@@ -348,6 +348,10 @@ Fast batch 012 联合 migration pack 已生成。compatibility architect 已对�
 
 下一个最小可验证步骤：运行全量质量门并通过一个 migration PR；合并后立即重复生产预检，仍为 0 才允许 apply。
 
+Fast batch 012 已完成生产 migration。Supabase migration `graduation_fast_batch_012`（`20260713032152`）写入 3 architects / 3 buildings / 3 primary images / 3 profiles / 4 assignments；总数从 82/936/7285/141 精确更新为 85 profiles / 939 buildings / 7288 images / 145 assignments。目标计数 3/3/3/3/4，orphan profile 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。尚未运行最终 Reviewed release。详见 `GRADUATION_FAST_BATCH_012_PRODUCTION.md`。
+
+下一个最小可验证步骤：合并 82→85 生产读取基线，运行一次 Reviewed production release，并验收三条 CASE/building 路由、图片、canonical architect 和 API diagnostics。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
