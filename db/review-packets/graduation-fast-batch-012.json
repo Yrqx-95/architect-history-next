@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-fast-batch-012",
+  "generated_at": "2026-07-13T03:17:42.509Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "mixed-use and public-space remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 3,
+    "new_architects": 3,
+    "buildings": 3,
+    "images": 3,
+    "profiles": 3,
+    "assignments": 4
+  },
+  "architects": [
+    {
+      "id": "b684977c-b4f7-5770-9793-205fd676e725",
+      "slug": "atelier-bow-wow-tsukamoto-lab",
+      "name_zh": "Atelier Bow-Wow＋东京工业大学塚本研究室",
+      "name_en": "Atelier Bow-Wow + Tokyo Institute of Technology Tsukamoto Lab",
+      "name_ja": "アトリエ・ワン＋東京工業大学塚本研究室",
+      "official_url": "https://www.bow-wow.jp/profile/2011/MiyashitaPark/index.html",
+      "is_new": true
+    },
+    {
+      "id": "764ac6cc-04c1-5249-be15-dbecb2a2c03f",
+      "slug": "kono-designs",
+      "name_zh": "Kono Designs",
+      "name_en": "Kono Designs",
+      "name_ja": "Kono Designs",
+      "official_url": "https://konodesigns.com/",
+      "is_new": true
+    },
+    {
+      "id": "8c177e90-4b08-53cb-90d1-24866e9a5aa9",
+      "slug": "hof-van-cartesius-cooperative",
+      "name_zh": "Hof van Cartesius 合作社",
+      "name_en": "Hof van Cartesius Cooperative",
+      "name_ja": "Hof van Cartesius 協同組合",
+      "official_url": "https://www.hofvancartesius.nl/",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "fe73d607-773c-56b2-a2df-e10df13183a9",
+      "case_id": "CASE-068",
+      "slug": "miyashita-park-2011",
+      "name_zh": "宫下公园（2011）",
+      "name_en": "Miyashita Park (2011)",
+      "name_ja": "みやしたこうえん（2011）",
+      "year_start": 2011,
+      "city": "东京",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "public-space",
+      "architect_slug": "atelier-bow-wow-tsukamoto-lab",
+      "official_url": "https://www.bow-wow.jp/profile/2011/MiyashitaPark/index.html",
+      "architect_id": "b684977c-b4f7-5770-9793-205fd676e725",
+      "status": "published"
+    },
+    {
+      "id": "9f56bc37-7db9-5942-97df-db5e540e8f6c",
+      "case_id": "CASE-077",
+      "slug": "pasona-urban-farm",
+      "name_zh": "Pasona 都市农场",
+      "name_en": "Pasona Urban Farm",
+      "name_ja": "パソナ・アーバンファーム",
+      "year_start": 2010,
+      "city": "东京",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "office",
+      "architect_slug": "kono-designs",
+      "official_url": "https://konodesigns.com/urban-farm/",
+      "architect_id": "764ac6cc-04c1-5249-be15-dbecb2a2c03f",
+      "status": "published"
+    },
+    {
+      "id": "b99e82b8-dfbe-5ada-8778-aa368b227f62",
+      "case_id": "CASE-089",
+      "slug": "het-hof-van-cartesius",
+      "name_zh": "Het Hof van Cartesius",
+      "name_en": "Het Hof van Cartesius",
+      "name_ja": "Het Hof van Cartesius",
+      "year_start": 2017,
+      "city": "乌得勒支",
+      "country": "荷兰",
+      "country_code": "NL",
+      "type_slug": "office",
+      "architect_slug": "hof-van-cartesius-cooperative",
+      "official_url": "https://www.hofvancartesius.nl/blog/hof-van-cartesius-a-place-where-people-thrive",
+      "architect_id": "8c177e90-4b08-53cb-90d1-24866e9a5aa9",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "63c546bd-e863-5d63-9315-f97cbb5be93c",
+      "building_id": "fe73d607-773c-56b2-a2df-e10df13183a9",
+      "building_slug": "miyashita-park-2011",
+      "case_id": "CASE-068",
+      "url_original": "/images/graduation/cases/case-068-miyashita-park-atelier-bow-wow.jpg",
+      "photographer": "Douglas P. Perkins",
+      "source": "Wikimedia Commons",
+      "license": "CC BY 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Miyashita_Park.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "4050256b-e24a-50c2-82f2-5a8bf850f201",
+      "building_id": "9f56bc37-7db9-5942-97df-db5e540e8f6c",
+      "building_slug": "pasona-urban-farm",
+      "case_id": "CASE-077",
+      "url_original": "/images/graduation/cases/case-077-pasona-urban-farm.jpg",
+      "photographer": "螺钉",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Pasona_building.JPG",
+      "img_type": "exterior",
+      "is_primary": true
+    },
+    {
+      "id": "52122937-b27f-55ba-a05d-5bc430ff6153",
+      "building_id": "b99e82b8-dfbe-5ada-8778-aa368b227f62",
+      "building_slug": "het-hof-van-cartesius",
+      "case_id": "CASE-089",
+      "url_original": "/images/graduation/cases/case-089-het-hof-van-cartesius.jpg",
+      "photographer": "nandasluijsmans",
+      "source": "Flickr",
+      "license": "CC BY-SA 2.0",
+      "source_url": "https://www.flickr.com/photos/141420435@N08/52620631677",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-068",
+      "building_id": "fe73d607-773c-56b2-a2df-e10df13183a9",
+      "building_slug": "miyashita-park-2011",
+      "concept_zh": "线状公园更新把运动设施和城市缝隙连接起来，讨论青年活动与公共管理关系。",
+      "concept_zh_hant": null,
+      "concept_en": "Miyashita Park Atelier Bow-Wow is a reference case for reading Design topic: 高架下, park, Design topic: youth运动, Design topic: urban缝隙. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "高架下の公園空間を若者の運動や都市の余白として扱う事例。インフラ下の公共性、管理、活動の関係を比較できる。",
+      "keywords_zh": [
+        "高架下",
+        "公园",
+        "青年运动",
+        "城市缝隙",
+        "公共管理"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "Design topic: 高架下",
+        "park",
+        "Design topic: youth运动",
+        "Design topic: urban缝隙",
+        "Design topic: public管理"
+      ],
+      "keywords_ja": [
+        "高架下",
+        "公園",
+        "若者運動",
+        "都市の余白",
+        "公共性"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.bow-wow.jp/profile/2011/MiyashitaPark/index.html",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-077",
+      "building_id": "9f56bc37-7db9-5942-97df-db5e540e8f6c",
+      "building_slug": "pasona-urban-farm",
+      "concept_zh": "办公楼改造中嵌入都市农场、屋顶花园和食物教育，把工作场所与城市农业连接起来。",
+      "concept_zh_hant": null,
+      "concept_en": "Pasona Urban Farm is a reference case for reading Design topic: 都市农业, Design topic: 办公, food education, Design topic: roof花园. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "都市農業をオフィス空間に埋め込んだ事例。食の生産を見える日常に変え、働く場所と食育を結びつけている。",
+      "keywords_zh": [
+        "都市农业",
+        "办公",
+        "食育",
+        "屋顶花园",
+        "环境教育"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "Design topic: 都市农业",
+        "Design topic: 办公",
+        "food education",
+        "Design topic: roof花园",
+        "environmental education"
+      ],
+      "keywords_ja": [
+        "都市農業",
+        "オフィス",
+        "食育",
+        "屋上庭園",
+        "環境教育"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://konodesigns.com/urban-farm/",
+      "publication_status": "published"
+    },
+    {
+      "case_id": "CASE-089",
+      "building_id": "b99e82b8-dfbe-5ada-8778-aa368b227f62",
+      "building_slug": "het-hof-van-cartesius",
+      "concept_zh": "循环经济合作社用二手和生物基材料建造创意工坊群，展示修理、再利用和小企业共生模式。",
+      "concept_zh_hant": null,
+      "concept_en": "Het Hof van Cartesius is a reference case for reading circular economy, repairworkshop, reuse, Design topic: 创意industry. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "再利用材を使った小規模事業者と制作コミュニティの拠点。仕事、制作、交流が段階的に増殖する運営モデルを比較できる。",
+      "keywords_zh": [
+        "循环经济",
+        "修理工坊",
+        "再利用",
+        "创意产业",
+        "合作社"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "circular economy",
+        "repairworkshop",
+        "reuse",
+        "Design topic: 创意industry",
+        "Design topic: 合作社"
+      ],
+      "keywords_ja": [
+        "共創",
+        "再利用",
+        "小規模事業",
+        "制作",
+        "循環"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.hofvancartesius.nl/blog/hof-van-cartesius-a-place-where-people-thrive",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "fe73d607-773c-56b2-a2df-e10df13183a9",
+      "building_slug": "miyashita-park-2011",
+      "function_slug": "public-space",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.bow-wow.jp/profile/2011/MiyashitaPark/index.html",
+      "evidence_note": "Atelier Bow-Wow identifies the 2011 Shibuya project as Miyashita Park, designed with Tokyo Institute of Technology Tsukamoto Lab, with a 14,000 square metre park area. This historical 2011 park is distinct from the 2020 MIYASHITA PARK canonical building already in production. The image accurately shows the covered sports and circulation space of the 2011 park; Commons identifies Douglas P. Perkins as the own-work creator and licenses it CC BY 3.0.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "9f56bc37-7db9-5942-97df-db5e540e8f6c",
+      "building_slug": "pasona-urban-farm",
+      "function_slug": "mixed-use",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://konodesigns.com/urban-farm/",
+      "evidence_note": "Kono Designs identifies Pasona HQ as a nine-storey corporate office renovation integrating offices, auditorium, cafeterias, rooftop garden and urban farming facilities. Mixed-use is approved as the available function that accurately expresses the deliberate office, food, education and farming combination; the broad building type remains office. The local image clearly shows the exact Pasona building and planted facade; Commons identifies 螺钉 own work, 3648 by 2736, CC BY-SA 3.0.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b99e82b8-dfbe-5ada-8778-aa368b227f62",
+      "building_slug": "het-hof-van-cartesius",
+      "function_slug": "mixed-use",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.hofvancartesius.nl/blog/hof-van-cartesius-a-place-where-people-thrive",
+      "evidence_note": "The cooperative describes an affordable modular working environment for creative entrepreneurs, self-built from waste and second-hand materials around a regenerative garden. The official case study explicitly describes a publicly accessible courtyard and social-cultural events, supporting mixed-use primary and public-space secondary while the broad type remains office. The local image accurately shows the circular material facade and courtyard; the Flickr page identifies nandasluijsmans and CC BY-SA 2.0, with an original 3180 by 2580 image.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "b99e82b8-dfbe-5ada-8778-aa368b227f62",
+      "building_slug": "het-hof-van-cartesius",
+      "function_slug": "public-space",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.hofvancartesius.nl/blog/hof-van-cartesius-a-place-where-people-thrive",
+      "evidence_note": "The cooperative describes an affordable modular working environment for creative entrepreneurs, self-built from waste and second-hand materials around a regenerative garden. The official case study explicitly describes a publicly accessible courtyard and social-cultural events, supporting mixed-use primary and public-space secondary while the broad type remains office. The local image accurately shows the circular material facade and courtyard; the Flickr page identifies nandasluijsmans and CC BY-SA 2.0, with an original 3180 by 2580 image.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}
