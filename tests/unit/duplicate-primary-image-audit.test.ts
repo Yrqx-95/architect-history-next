@@ -17,19 +17,22 @@ const rollback003 = fs.readFileSync(path.join(process.cwd(), 'db/manual-operatio
 const decisions004 = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'db/review-decisions/duplicate-primary-image-review-004.json'), 'utf8'))
 const migration004 = fs.readFileSync(path.join(process.cwd(), 'supabase/migrations/20260713143457_duplicate_primary_image_review_004.sql'), 'utf8')
 const rollback004 = fs.readFileSync(path.join(process.cwd(), 'db/manual-operations/duplicate-primary-image-review-004-rollback.sql'), 'utf8')
+const decisions005 = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'db/review-decisions/duplicate-primary-image-review-005.json'), 'utf8'))
+const migration005 = fs.readFileSync(path.join(process.cwd(), 'supabase/migrations/20260713150551_duplicate_primary_image_review_005.sql'), 'utf8')
+const rollback005 = fs.readFileSync(path.join(process.cwd(), 'db/manual-operations/duplicate-primary-image-review-005-rollback.sql'), 'utf8')
 const localOverrides = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/lib/local-image-overrides.json'), 'utf8'))
 
 describe('duplicate primary image audit snapshot', () => {
   it('keeps every conflict in review-required state', () => {
     expect(queue.writes_database).toBe(false)
     expect(queue.summary).toMatchObject({
-      duplicate_primary_buildings: 489,
-      commons_vs_unsplash: 489,
+      duplicate_primary_buildings: 487,
+      commons_vs_unsplash: 487,
       commons_vs_commons: 0,
       safe_auto_apply: 0,
       formally_reviewed: 0,
     })
-    expect(queue.items).toHaveLength(489)
+    expect(queue.items).toHaveLength(487)
     expect(queue.items.every((item: { safe_auto_apply: boolean }) => item.safe_auto_apply === false)).toBe(true)
     expect(queue.items.every((item: { review_status: string }) => item.review_status === 'needs-visual-identity-review')).toBe(true)
   })
@@ -128,5 +131,23 @@ describe('duplicate primary image audit snapshot', () => {
     expect(migration004).toContain("RAISE EXCEPTION 'Reviewed image rows changed'")
     expect(migration004).toContain("RAISE EXCEPTION 'Unexpected primary image row exists in reviewed buildings'")
     expect(rollback004).toContain("RAISE EXCEPTION 'Reviewed image state changed; refusing rollback'")
+  })
+
+  it('records the fifth batch as two applied decisions and three strict deferrals', () => {
+    expect(decisions005.status).toBe('reviewed-applied')
+    expect(decisions005.scope).toMatchObject({
+      reviewed_buildings: 5,
+      approved_buildings: 2,
+      deferred_buildings: 3,
+      reviewed_rows: 4,
+    })
+    expect(decisions005.decisions.filter((item: { decision: string }) => item.decision === 'defer')).toHaveLength(3)
+    expect(decisions005.verification).toMatchObject({
+      production_written: true,
+      production_migration_version: '20260713150845',
+    })
+    expect(migration005).toContain("RAISE EXCEPTION 'Reviewed image rows changed'")
+    expect(migration005).toContain("RAISE EXCEPTION 'Unexpected primary image row exists in reviewed buildings'")
+    expect(rollback005).toContain("RAISE EXCEPTION 'Reviewed image state changed; refusing rollback'")
   })
 })
