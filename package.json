@@ -91,6 +91,8 @@
     "graduation:verify-acros-fukuoka-007": "GRADUATION_VERIFY_BATCH=acros-fukuoka-007 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:prepare-yu-no-eki-ohyu-008": "GRADUATION_REVIEW_BATCH=yu-no-eki-ohyu-008 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
     "graduation:verify-yu-no-eki-ohyu-008": "GRADUATION_VERIFY_BATCH=yu-no-eki-ohyu-008 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
+    "graduation:prepare-kait-workshop-009": "GRADUATION_REVIEW_BATCH=kait-workshop-009 node --env-file=.env.local scripts/prepare-graduation-library-batch-002.mjs",
+    "graduation:verify-kait-workshop-009": "GRADUATION_VERIFY_BATCH=kait-workshop-009 node scripts/verify-graduation-library-batch-002-dry-run.mjs",
     "graduation:images:dry-run": "node scripts/localize-graduation-case-images.mjs",
     "graduation:images:localize": "node scripts/localize-graduation-case-images.mjs --apply",
     "graduation:images:optimize": "node scripts/optimize-graduation-case-images.mjs --apply",
