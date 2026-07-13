@@ -8,6 +8,7 @@ const decisionPath = path.join(process.cwd(), 'db/review-decisions/duplicate-pri
 const decisions = JSON.parse(fs.readFileSync(decisionPath, 'utf8'))
 const migration = fs.readFileSync(path.join(process.cwd(), 'supabase/migrations/20260713113717_duplicate_primary_image_review_001.sql'), 'utf8')
 const rollback = fs.readFileSync(path.join(process.cwd(), 'db/manual-operations/duplicate-primary-image-review-001-rollback.sql'), 'utf8')
+const localOverrides = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src/lib/local-image-overrides.json'), 'utf8'))
 
 describe('duplicate primary image audit snapshot', () => {
   it('keeps every conflict in review-required state', () => {
@@ -51,5 +52,18 @@ describe('duplicate primary image audit snapshot', () => {
     expect(migration).toContain("'CC BY 2.5', true")
     expect(migration).toContain("'Tiia Monto', 'CC BY-SA 4.0', true")
     expect(migration).toContain("'Rs1421', 'CC BY-SA 3.0', true")
+  })
+
+  it('keeps runtime override attribution aligned with reviewed Commons metadata', () => {
+    expect(localOverrides['finlandia-hall']).toMatchObject({
+      cover_photographer: 'Thermos',
+      cover_license: 'CC BY 2.5',
+      cover_source_url: 'https://commons.wikimedia.org/wiki/File:Finlandia_Wiki.jpg',
+    })
+    expect(queue.items.every((item: { runtime_cover_source: string }) => [
+      'local-override',
+      'curated-override',
+      'supabase-primary-selection',
+    ].includes(item.runtime_cover_source))).toBe(true)
   })
 })

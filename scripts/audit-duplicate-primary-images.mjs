@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import { createClient } from '@supabase/supabase-js'
+import imageOverrides from '../src/lib/image-overrides.json' with { type: 'json' }
 import localImageOverrides from '../src/lib/local-image-overrides.json' with { type: 'json' }
 
 const PAGE_SIZE = 500
@@ -75,7 +76,14 @@ for (const [buildingId, images] of imagesByBuilding) {
   if (!building) throw new Error(`Missing building for duplicate primary group ${buildingId}`)
 
   const classes = [...new Set(images.map(sourceClass))]
-  const localOverride = localImageOverrides[building.slug] || null
+  const cachedOverride = localImageOverrides[building.slug] || null
+  const curatedOverride = imageOverrides[building.slug] || null
+  const runtimeOverride = cachedOverride || curatedOverride
+  const runtimeOverrideSource = cachedOverride
+    ? 'local-override'
+    : curatedOverride
+      ? 'curated-override'
+      : null
   const selectedDatabaseImage = currentPrimaryByBuilding.get(buildingId) || null
   const selectedDatabaseClass = selectedDatabaseImage ? sourceClass(selectedDatabaseImage) : null
   const conflictType = classes.length === 1 && classes[0] === 'commons'
@@ -83,7 +91,7 @@ for (const [buildingId, images] of imagesByBuilding) {
     : classes.includes('commons') && classes.includes('unsplash')
       ? 'commons-vs-unsplash'
       : 'other-source-conflict'
-  const priority = localOverride
+  const priority = runtimeOverride
     ? 'P2-override-shielded'
     : selectedDatabaseClass === 'unsplash' && classes.includes('commons')
       ? 'P0-visible-unsplash-with-commons-candidate'
@@ -105,10 +113,10 @@ for (const [buildingId, images] of imagesByBuilding) {
     conflict_type: conflictType,
     primary_count: images.length,
     source_classes: classes,
-    runtime_cover_source: localOverride ? 'local-override' : 'supabase-primary-selection',
+    runtime_cover_source: runtimeOverrideSource || 'supabase-primary-selection',
     selected_database_primary_id: selectedDatabaseImage?.id || null,
     selected_database_source_class: selectedDatabaseClass,
-    local_override: localOverride,
+    runtime_override: runtimeOverride,
     candidates: images.map(image => ({
       ...image,
       source_class: sourceClass(image),
@@ -199,7 +207,7 @@ Safe auto-apply candidates: **${summary.safe_auto_apply}**
 - ${summary.candidate_rows_missing_attribution} candidate rows are missing photographer, license or source URL.
 - ${summary.p0_visible_unsplash_with_commons_candidate} unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
 - ${summary.p1_primary_invariant_conflict} unshielded buildings already resolve to Commons but still violate the one-primary invariant.
-- ${summary.p2_override_shielded} buildings are currently shielded by a local cover override.
+- ${summary.p2_override_shielded} buildings are currently shielded by a runtime cover override.
 
 ## Decision
 
@@ -209,7 +217,7 @@ Priority order:
 
 1. **P0** — visible Unsplash with a complete Commons candidate: review the user-visible choice first.
 2. **P1** — unshielded invariant conflict: keep current display stable while deciding the canonical primary.
-3. **P2** — local override shields the conflict: lower immediate product risk, but database cleanup is still required.
+3. **P2** — runtime override shields the conflict: lower immediate product risk, but database cleanup is still required.
 
 ## First 25 P0 Review Items
 

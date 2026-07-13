@@ -15,7 +15,7 @@ Safe auto-apply candidates: **0**
 - 0 candidate rows are missing photographer, license or source URL.
 - 234 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
 - 122 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
-- 142 buildings are currently shielded by a local cover override.
+- 142 buildings are currently shielded by a runtime cover override.
 
 ## Decision
 
@@ -25,7 +25,7 @@ Priority order:
 
 1. **P0** — visible Unsplash with a complete Commons candidate: review the user-visible choice first.
 2. **P1** — unshielded invariant conflict: keep current display stable while deciding the canonical primary.
-3. **P2** — local override shields the conflict: lower immediate product risk, but database cleanup is still required.
+3. **P2** — runtime override shields the conflict: lower immediate product risk, but database cleanup is still required.
 
 ## First 25 P0 Review Items
 

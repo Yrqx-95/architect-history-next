@@ -31,6 +31,6 @@ The migration passed an isolated PostgreSQL 18.3 dry-run with two forward/rollba
 
 Write verification found exactly one primary image for each reviewed building, with the reviewed photographer, license and reachable thumbnail. The current production audit now reports 1,444 primary rows, 498 duplicate-primary buildings and zero buildings without a primary image. All remaining conflicts are Commons-vs-Unsplash and still require visual review.
 
-No frontend code changed, but building pages are statically generated. A reviewed production release and live-page verification are still required after the PR merges.
+Reviewed production release `29247544053` completed the clean quality gate, full test suite, Cloudflare deployment and route-semantics checks. Targeted live verification then found that Finlandia Hall's cached runtime override still exposed its old `CC BY-SA 3.0` value even though the database row had been corrected to Commons' current `CC BY 2.5`. The runtime-alignment follow-up corrects that override and makes the audit account for both cached and curated override layers; it requires one final Reviewed release.
 
 Machine-readable decision: `db/review-decisions/duplicate-primary-image-review-001.json`
