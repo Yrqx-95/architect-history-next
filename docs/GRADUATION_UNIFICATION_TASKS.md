@@ -403,6 +403,8 @@ G6 已完成。Final review batch 014 的 Reviewed release `29222694233` 在 10m
 
 G9 compatibility foundation 001 已完成本地准备。线上 101 个 published CASE 中，88 个已有 canonical profile，13 个因身份/图片证据缺口必须保留路由但不能伪造 building；因此建立 read-only Supabase compatibility payload table，承载全部 101 条精确兼容记录，再由 88 条 profile/building/image 覆盖 canonical 事实。隔离 PostgreSQL 已通过 101-row forward、注入第 102 行后的 guarded rollback refusal、精确 rollback 与 replay；RLS/published-only policy 和写权限撤销写入 SQL，migration `20260713042650_graduation_case_compatibility_001.sql` 与 reviewed apply byte-identical。尚未写生产，运行时读取未改变。详见 `GRADUATION_CASE_COMPATIBILITY_001_DRY_RUN.md`。
 
+G9 compatibility foundation 001 已完成生产写入。Supabase migration `graduation_case_compatibility_001`（`20260713043011`）写入 101 条 published payload；anon REST 与版本化 JSON 逐条 semantic deep equality 为 101/101，RLS 与 1 条 published-only policy 正常，advisors 保持 13 security / 27 performance。第一次工具传输因 153KB SQL 输出被截断而在解析前拒绝、未改变数据库；按行无损组装并核对字符数后成功应用。运行时 cutover 已改为只组合 Supabase compatibility/profile/building/image，构建使用显式数据版本缓存键避免历史 21-profile 快照；尚待 PR、发布和线上验收。详见 `GRADUATION_CASE_COMPATIBILITY_001_PRODUCTION.md`。
+
 ### G10 — 最终验收
 
 - [ ] 数据关系审计 0 error。

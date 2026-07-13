@@ -6,7 +6,7 @@ test.describe('graduation Supabase + JSON dual read', () => {
     expect(response.status()).toBe(200)
     const payload = await response.json()
 
-    expect(payload.source).toBe('supabase+json')
+    expect(payload.source).toBe('supabase')
     expect(payload.cases).toHaveLength(101)
     expect(payload.diagnostics.profileCount).toBe(88)
     expect(payload.diagnostics.unifiedCaseIds).toHaveLength(88)
@@ -88,7 +88,7 @@ test.describe('graduation Supabase + JSON dual read', () => {
     expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-068')).toMatchObject({ architect: 'Atelier Bow-Wow + Tokyo Institute of Technology Tsukamoto Lab', year: 2011 })
     expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-077')).toMatchObject({ architect: 'Kono Designs', year: 2010, image_license: 'CC BY-SA 3.0' })
     expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-089')).toMatchObject({ architect: 'Hof van Cartesius Cooperative', year: 2017, image_license: 'CC BY-SA 2.0' })
-    expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-100')).toMatchObject({ architect: 'Kengo Kuma and Associates', year: 2017, image_license: 'CC BY-SA 4.0' })
+    expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-100')).toMatchObject({ architect: 'Kengo Kuma', year: 2017, image_license: 'CC BY-SA 4.0' })
     expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-126')).toMatchObject({ architect: 'J. MAYER H. Architects', year: 2011, image_license: 'CC BY-SA 3.0' })
     expect(payload.cases.find((item: { id: string }) => item.id === 'CASE-136')).toMatchObject({ architect: 'Lab Architecture Studio + Bates Smart', year: 2002, image_license: 'CC BY-SA 2.0' })
 
