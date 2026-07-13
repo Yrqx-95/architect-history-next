@@ -304,6 +304,10 @@ Roadside Station Mashiko batch 010 已完成 CASE-043 正式只读审核。MOUNT
 
 下一个最小可验证步骤：通过 PR 固化 CASE-043 决策；随后生成 guarded migration/rollback，并执行全历史隔离 PostgreSQL dry-run。生产写入前必须重复冲突预检。
 
+CASE-043 Roadside Station Mashiko batch 010 migration pack 已生成：1 new architect / 1 building / 1 primary image / 1 published profile / 2 assignments，`transport-hub` primary、`retail` secondary。全历史隔离 PostgreSQL 18.3 forward、外部 curated-image rollback guard、精确 rollback/replay 全部通过。生产基线 80/934/7283/138，预期写后 81/935/7284/140；尚未写生产。详见 `GRADUATION_ROADSIDE_STATION_MASHIKO_BATCH_010_DRY_RUN.md`。
+
+下一个最小可验证步骤：通过 PR 合并 migration pack；随后重复生产冲突预检，仍为 0 才允许 apply。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。

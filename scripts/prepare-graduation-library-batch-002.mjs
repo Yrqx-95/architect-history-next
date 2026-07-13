@@ -216,6 +216,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=kait-workshop-009)',
     required_functions_note: 'university remains active',
   },
+  'roadside-station-mashiko-010': {
+    batch_id: 'graduation-roadside-station-mashiko-batch-010',
+    decision_path: 'db/review-decisions/graduation-new-buildings-roadside-station-mashiko-010.json',
+    output_path: 'db/review-packets/graduation-roadside-station-mashiko-batch-010.json',
+    apply_path: 'db/manual-operations/graduation-roadside-station-mashiko-batch-010-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-roadside-station-mashiko-batch-010-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'transport-hub',
+    interior_case_ids: [],
+    sql_title: 'Graduation Roadside Station Mashiko batch 010',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=roadside-station-mashiko-010)',
+    required_functions_note: 'transport-hub and retail remain active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -336,6 +350,12 @@ const architectDrafts = {
     name_en: 'Junya Ishigami',
     name_ja: '石上純也',
     official_url: 'https://jnyi.jp/',
+  },
+  'mount-fuji-architects-studio': {
+    name_zh: 'MOUNT FUJI ARCHITECTS STUDIO',
+    name_en: 'MOUNT FUJI ARCHITECTS STUDIO',
+    name_ja: 'MOUNT FUJI ARCHITECTS STUDIO',
+    official_url: 'https://www.fuji-studio.jp/',
   },
   'yasuda-atelier': {
     name_zh: '安田工作室', name_en: 'Yasuda Atelier', name_ja: '安田アトリエ', official_url: 'https://www.yasudaatelier.com/',
