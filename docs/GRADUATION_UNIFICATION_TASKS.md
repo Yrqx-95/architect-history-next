@@ -336,6 +336,10 @@ CASE-005 3331 Arts Chiyoda batch 011 已完成生产 migration。Supabase migrat
 
 下一个最小可验证步骤：合并 81→82 生产读取基线并运行一次 Reviewed production release；随后验收 CASE-005、`3331-arts-chiyoda` 三语路由、图片和 API diagnostics。成功后 G6 更新为已迁移 61/118、尚未迁移 57，正式未审核 34。
 
+CASE-005 3331 Arts Chiyoda batch 011 已完成生产迁移、发布和线上验收。Reviewed release `29220342065` 在 10m18s 内成功，publication quality gate、完整测试、Cloudflare deploy 与生产路由语义检查全部通过。CASE 与 building 中英日 6/6 HTTP 200，图片 HTTP 200（264036 bytes）；API 为 `supabase+json`、101 cases / 82 profiles / 0 missing fallback / 0 missing building relation，并返回准确联合建筑师、2010、Ootahara / Wikimedia Commons、CC0 和 2023 闭馆历史说明。G6 已迁移 61/118，尚未迁移 57；尚未正式审核队列 34。
+
+下一个最小可验证步骤：从剩余 34 条未正式审核记录中按 5–10 条组成下一批，优先选择身份、开放图片和既有 taxonomy 都完整的项目；同批完成只读决策、migration pack 与 dry-run，阻塞条目跳过并记录，不再逐条拆 PR。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。

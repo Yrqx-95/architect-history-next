@@ -18,6 +18,12 @@ Version: `20260713024654`
 - Their two established public-read policies remained present.
 - Advisors remained at the pre-existing 13 security notices and 27 performance notices, with no new target-object finding.
 
-## Remaining release gate
+## Release and live verification
 
-- Merge the production baseline update, run one Reviewed production release, and verify CASE-005 plus `3331-arts-chiyoda` in zh/en/ja, the image, and graduation API diagnostics.
+- Reviewed production release `29220342065` succeeded in 10m18s; publication quality gate, complete tests, Cloudflare Worker deployment and production route semantics all passed.
+- CASE-005 zh/en/ja routes and `3331-arts-chiyoda` zh/en/ja building routes returned HTTP 200 (6/6).
+- The local CC0 image returned HTTP 200 as `image/jpeg`, 264036 bytes.
+- Graduation API returned HTTP 200, `source=supabase+json`, 101 cases, 82 profiles, 0 missing fallback cases and 0 missing building relations.
+- Live CASE-005 returned canonical architect `Shinya Sato + Mejiro Studio`, year 2010, Ootahara / Wikimedia Commons, CC0, and the explicit 2023 closure statement.
+
+This batch is complete.
