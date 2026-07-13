@@ -8,8 +8,8 @@ test.describe('graduation Supabase + JSON dual read', () => {
 
     expect(payload.source).toBe('supabase+json')
     expect(payload.cases).toHaveLength(101)
-    expect(payload.diagnostics.profileCount).toBe(81)
-    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(81)
+    expect(payload.diagnostics.profileCount).toBe(82)
+    expect(payload.diagnostics.unifiedCaseIds).toHaveLength(82)
     expect(payload.diagnostics.unifiedCaseIds).toEqual(expect.arrayContaining([
       'CASE-018',
       'CASE-021',
@@ -71,12 +71,23 @@ test.describe('graduation Supabase + JSON dual read', () => {
       'CASE-033',
       'CASE-034',
       'CASE-043',
+      'CASE-005',
     ]))
     expect(payload.diagnostics.unifiedCaseIds).not.toContain('CASE-079')
     expect(payload.diagnostics.missingFallbackCaseIds).toEqual([])
     expect(payload.diagnostics.missingBuildingCaseIds).toEqual([])
     expect(payload.diagnostics.canonicalImageCaseIds).toEqual([])
-    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(81)
+    expect(payload.diagnostics.fallbackImageCaseIds).toHaveLength(82)
+
+    const artsChiyodaCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-005')
+    expect(artsChiyodaCase).toMatchObject({
+      name: '3331 Arts Chiyoda',
+      architect: 'Shinya Sato + Mejiro Studio',
+      year: 2010,
+      image_license: 'CC0',
+      image_credit: 'Ootahara / Wikimedia Commons',
+    })
+    expect(artsChiyodaCase.concept_en).toContain('closed in 2023')
 
     const libraryCase = payload.cases.find((item: { id: string }) => item.id === 'CASE-018')
     expect(libraryCase).toMatchObject({
