@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：从剩余 37 条尚未正式审核的 G6 队列中选择下一个边界清晰、身份与图片权利可验证的小批次。
+当前下一步：通过 PR 固化 CASE-034 KAIT Workshop batch 009 只读审核决策；合并后才准备 guarded migration、rollback 与全历史隔离 PostgreSQL dry-run。
 
 ## 最终目标
 
@@ -275,6 +275,10 @@ CASE-016 ACROS Fukuoka batch 007 migration pack 已生成。兼容数据 archite
 CASE-033 Yu no Eki Ohyu batch 008 已完成生产迁移、测试基线纠偏、发布和线上验收。Supabase migration `graduation_yu_no_eki_ohyu_batch_008`（`20260712231018`）复用 `kengo-kuma`，写入 1 building / 1 primary image / 1 published profile / 4 assignments；总数更新为 79/933/7282/137，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。第一次 Reviewed release `29213008830` 因渲染 E2E 仍硬编码旧 fallback 标题而在部署前停止；PR #97 将布局测试改为验证实际 H1 与 image alt 一致，同时保留 unified-read 的严格 canonical 断言。第二次 release `29213243381` 在 8m11s 内完整成功。6 个中英日 CASE/building 路由和图片全部 HTTP 200，API 为 101 cases / 79 profiles / 0 missing，并返回 Kengo Kuma 与掬茶 / CC BY-SA 4.0。G6 已迁移 58/118，尚未迁移 60；尚未正式审核队列 37。详见 `GRADUATION_YU_NO_EKI_OHYU_BATCH_008_PRODUCTION.md`。
 
 下一个最小可验证步骤：从剩余 37 条未正式审核记录中选择下一个不需降低身份或图片权利标准的边界清晰小批次，先完成只读调查和生产冲突预检。
+
+KAIT Workshop batch 009 已完成 CASE-034 的正式只读审核。神奈川工科大学确认该设施由 Junya Ishigami 设计、2008 年春完成、约 2,000 m²，是校园内支持学生自主制作的无隔墙开放工坊；对附近学生的科学活动只是附带开放，不扩大为 community center。broad type 决定为 `educational`，仅批准 `university` primary；当前没有 makerspace taxonomy，但不以 `mixed-use` 掩盖教育身份。Commons 图为 Epiq own work、3648×2736、CC BY-SA 3.0；仓库 1600×1200 文件人工确认准确展示 KAIT Workshop 室内柱林和制作设备。生产无 Junya Ishigami、target building/profile conflict，required function/type 各 1/1；尚未生成 migration 或写生产。G6 已迁移仍为 58/118，尚未迁移 60；尚未正式审核队列从 37 减至 36。详见 `GRADUATION_NEW_BUILDING_KAIT_WORKSHOP_009_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化 CASE-034 只读决策；合并后同步 compatibility architect，生成 1 architect / 1 building / 1 primary image / 1 profile / 1 assignment 的 guarded migration 与 rollback，并执行全历史隔离 PostgreSQL dry-run。
 
 CASE-016 ACROS Fukuoka batch 007 已完成生产迁移、发布和线上验收。Supabase migration `graduation_acros_fukuoka_batch_007`（`20260712153752`）写入 1 joint formal-design architect / 1 building / 1 primary image / 1 published profile / 4 assignments；总数更新为 78/932/7281/133，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。四条 assignment evidence 均保留 Emilio Ambasz 的 basic-concept 角色。PR #92 将生产基线更新为 78 并加入 canonical 回归；Reviewed release `29198674126` 在 8m11s 内成功。6 个中英日 CASE/building 路由和图片全部 HTTP 200，API 为 101 cases / 78 profiles / 0 missing，并返回 Nihon Sekkei + Takenaka Corporation 与 Kenta Mabuchi / CC BY-SA 2.0。G6 已迁移 57/118，尚未迁移 61；尚未正式审核队列 38。详见 `GRADUATION_ACROS_FUKUOKA_BATCH_007_PRODUCTION.md`。
 
