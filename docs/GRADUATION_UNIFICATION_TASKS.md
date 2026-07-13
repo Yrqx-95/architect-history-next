@@ -3,7 +3,7 @@
 更新时间：2026-07-12  
 状态：进行中  
 唯一主记录：本文件  
-当前下一步：G6 已完成，推进 G7 统一搜索与筛选；先让现有 `/api/search` 同时读取用途别名、approved assignments 与毕业分析关键词，再补齐用途/年代/国家/建筑师/毕业课题筛选和三语回归。
+当前下一步：G6–G10 已全部完成并通过最终发布/线上验收。后续只在出现新证据时处理 51 条明确拒绝或证据缺口，不得降低身份、图片或版权标准。
 
 ## 最终目标
 
@@ -392,12 +392,12 @@ G6 已完成。Final review batch 014 的 Reviewed release `29222694233` 在 10m
 
 ### G9 — 导出、兼容与退役旧数据
 
-- [ ] 保持 `public/data/graduation/cases.json` 和 CSV 的兼容输出。
-- [ ] 保持所有 `CASE-xxx` URL。
-- [ ] 对比旧 JSON 与新查询的字段和记录数。
-- [ ] 完成至少一个发布周期的双轨监测。
-- [ ] 只有在无差异且可回滚时，才停止把 `cases.json` 作为运行时来源。
-- [ ] 归档旧数据生成流程，不直接删除历史证据。
+- [x] 保持 `public/data/graduation/cases.json` 和 CSV 的兼容输出。
+- [x] 保持所有 `CASE-xxx` URL。
+- [x] 对比旧 JSON 与新查询的字段和记录数。
+- [x] 完成至少一个发布周期的双轨监测。
+- [x] 只有在无差异且可回滚时，才停止把 `cases.json` 作为运行时来源。
+- [x] 归档旧数据生成流程，不直接删除历史证据。
 
 完成条件：Supabase 成为唯一运行时事实源，旧入口仍正常，回滚演练通过。
 
@@ -405,17 +405,21 @@ G9 compatibility foundation 001 已完成本地准备。线上 101 个 published
 
 G9 compatibility foundation 001 已完成生产写入。Supabase migration `graduation_case_compatibility_001`（`20260713043011`）写入 101 条 published payload；anon REST 与版本化 JSON 逐条 semantic deep equality 为 101/101，RLS 与 1 条 published-only policy 正常，advisors 保持 13 security / 27 performance。第一次工具传输因 153KB SQL 输出被截断而在解析前拒绝、未改变数据库；按行无损组装并核对字符数后成功应用。运行时 cutover 已改为只组合 Supabase compatibility/profile/building/image，构建使用显式数据版本缓存键避免历史 21-profile 快照；尚待 PR、发布和线上验收。详见 `GRADUATION_CASE_COMPATIBILITY_001_PRODUCTION.md`。
 
+G9 已完成。双轨读取先后经过 G7 release `29223412628` 与 G8 release `29223855527` 两个成功发布周期；Supabase-only cutover release `29225114137` 的质量门、完整测试、Cloudflare deploy 和 route semantics 全部成功。线上 API 明确返回 `source=supabase`、101 cases / 88 profiles / 0 missing fallback / 0 missing building；JSON 与 CSV 旧入口 HTTP 200，未知 CASE 保持 404。旧数据生成流程已归档为 compatibility export/historical evidence，运行时代码不再 import `cases.json`；隔离 rollback 演练已通过。
+
 ### G10 — 最终验收
 
-- [ ] 数据关系审计 0 error。
-- [ ] 毕业内容 QA 0 problem。
-- [ ] 图片版权与建筑对应关系抽查通过。
-- [ ] unit、E2E、production build 全绿。
-- [ ] Cloudflare 发布成功。
-- [ ] 线上验证首页、主体建筑、毕业案例、智能搜索和未知路由。
-- [ ] 更新 `STATUS.md`、`PROJECT.md`、发布记录和本任务清单。
+- [x] 数据关系审计 0 error。
+- [x] 毕业内容 QA 0 problem。
+- [x] 图片版权与建筑对应关系抽查通过。
+- [x] unit、E2E、production build 全绿。
+- [x] Cloudflare 发布成功。
+- [x] 线上验证首页、主体建筑、毕业案例、智能搜索和未知路由。
+- [x] 更新 `STATUS.md`、`PROJECT.md`、发布记录和本任务清单。
 
 完成条件：本清单所有项目完成，目标才可标记 complete。
+
+完成证据：`npm run data:audit` 为 0 error，毕业 QA 为 0 problem；66 unit files / 227 tests 通过，Reviewed release `29225114137` 的 clean complete test suite、4449-page production build、Cloudflare deployment 与 route semantics 全绿。线上首页、Metropol Parasol 主体页、CASE-126、JSON/CSV 均 200，未知 building/CASE 均 404；毕业 API 为 Supabase-only 101/88/0/0；日语 `図書館` 返回 43 unique/43 total，组合筛选精确返回 `kanazawa-umimirai-library`。CASE-005/100/104/126/136 的身份、图片和许可抽查通过。最终报告见 `GRADUATION_UNIFICATION_FINAL_ACCEPTANCE_G10.md`。
 
 ## 每次继续工作的固定流程
 

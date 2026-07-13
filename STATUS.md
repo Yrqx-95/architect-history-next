@@ -1,6 +1,6 @@
 # Archistory Status
 
-Last updated: 2026-07-08
+Last updated: 2026-07-13
 
 ## Current Product Identity
 
@@ -14,15 +14,17 @@ It is not only a database and not yet a full study platform. The current product
 - Database: Supabase
 - Languages: zh / en / ja
 - Current data audit: 0 errors, with remaining warnings/info mainly about content completeness
-- Test safety net: unit tests and Playwright smoke tests exist
-- Current cleanup phase: local repository consolidation completed; awaiting push/deploy decision
+- Graduation runtime: Supabase-only compatibility/profile/building composition; 101 public CASE routes, 88 canonical profiles
+- Search: zh / en / ja function aliases, graduation keywords, five composable filters, duplicate-free building results
+- Test safety net: 66 unit files / 227 tests plus full Playwright production E2E
+- Current data audit: 0 errors; graduation content QA: 0 problems
+- Production deployment: reviewed Cloudflare release workflow
 
 ## Current Focus
 
-1. Keep the production surface stable.
-2. Reduce repository noise.
-3. Separate product code from experiments and historical reports.
-4. Continue data/content quality work only in controlled batches.
+1. Keep the unified graduation/building/search contract stable.
+2. Resolve explicit `no_safe_image_yet` evidence gaps only when new rights-safe evidence appears.
+3. Continue data/content quality work only in controlled reviewed batches.
 
 ## Paused
 
