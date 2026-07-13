@@ -202,6 +202,20 @@ const batchConfigs = {
     generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=yu-no-eki-ohyu-008)',
     required_functions_note: 'transport-hub, community-center, retail and public-space functions remain active',
   },
+  'kait-workshop-009': {
+    batch_id: 'graduation-kait-workshop-batch-009',
+    decision_path: 'db/review-decisions/graduation-new-buildings-kait-workshop-009.json',
+    output_path: 'db/review-packets/graduation-kait-workshop-batch-009.json',
+    apply_path: 'db/manual-operations/graduation-kait-workshop-batch-009-apply.sql',
+    rollback_path: 'db/manual-operations/graduation-kait-workshop-batch-009-rollback.sql',
+    expected_decisions: 1,
+    expected_excluded: [],
+    primary_function: 'university',
+    interior_case_ids: ['CASE-034'],
+    sql_title: 'Graduation KAIT Workshop batch 009',
+    generator_name: 'scripts/prepare-graduation-library-batch-002.mjs (GRADUATION_REVIEW_BATCH=kait-workshop-009)',
+    required_functions_note: 'university remains active',
+  },
 }
 const batchConfig = batchConfigs[batchKey]
 if (!batchConfig) throw new Error(`Unknown graduation review batch: ${batchKey}`)
@@ -316,6 +330,12 @@ const architectDrafts = {
     name_en: 'Nihon Sekkei + Takenaka Corporation',
     name_ja: '日本設計 + 竹中工務店',
     official_url: 'https://www.acros.or.jp/r_facilities/about.html',
+  },
+  'junya-ishigami': {
+    name_zh: '石上纯也',
+    name_en: 'Junya Ishigami',
+    name_ja: '石上純也',
+    official_url: 'https://jnyi.jp/',
   },
   'yasuda-atelier': {
     name_zh: '安田工作室', name_en: 'Yasuda Atelier', name_ja: '安田アトリエ', official_url: 'https://www.yasudaatelier.com/',

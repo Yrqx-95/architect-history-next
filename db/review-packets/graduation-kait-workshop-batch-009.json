@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-kait-workshop-batch-009",
+  "generated_at": "2026-07-13T00:22:02.215Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "university remains active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 1,
+    "new_architects": 1,
+    "buildings": 1,
+    "images": 1,
+    "profiles": 1,
+    "assignments": 1
+  },
+  "architects": [
+    {
+      "id": "22c1a5f8-b0ee-5d7b-9196-a8c1bd0505b6",
+      "slug": "junya-ishigami",
+      "name_zh": "石上纯也",
+      "name_en": "Junya Ishigami",
+      "name_ja": "石上純也",
+      "official_url": "https://jnyi.jp/",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "989ffbda-1f55-5e50-bf9b-45759994fa1b",
+      "case_id": "CASE-034",
+      "slug": "kait-workshop",
+      "name_zh": "KAIT 工坊",
+      "name_en": "KAIT Workshop",
+      "name_ja": "KAIT工房",
+      "year_start": 2008,
+      "city": "厚木",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "educational",
+      "architect_slug": "junya-ishigami",
+      "official_url": "https://en.kait.jp/facilities/kait-workshop.html",
+      "architect_id": "22c1a5f8-b0ee-5d7b-9196-a8c1bd0505b6",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "2f3ba479-63e2-5962-a767-58963b1ddd41",
+      "building_id": "989ffbda-1f55-5e50-bf9b-45759994fa1b",
+      "building_slug": "kait-workshop",
+      "case_id": "CASE-034",
+      "url_original": "/images/graduation/cases/case-034-kait-workshop.jpg",
+      "photographer": "Epiq",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:KAIT_Workshop_Junya_Ishigami_internal_view.JPG",
+      "img_type": "interior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-034",
+      "building_id": "989ffbda-1f55-5e50-bf9b-45759994fa1b",
+      "building_slug": "kait-workshop",
+      "concept_zh": "以一室空间和细柱林支持学生自由制作、学习与偶发交流，弱化固定功能边界。",
+      "concept_zh_hant": null,
+      "concept_en": "KAIT Workshop is a reference case for reading openworkshop, Design topic: 学生, making, learning. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "細い柱とガラスで構成された開放工房。制作、移動、視線が自由に交差し、学生の作業が互いに見える学習環境を読める。",
+      "keywords_zh": [
+        "开放工坊",
+        "学生",
+        "制作",
+        "学习",
+        "灵活空间"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "openworkshop",
+        "Design topic: 学生",
+        "making",
+        "learning",
+        "Design topic: 灵活space"
+      ],
+      "keywords_ja": [
+        "開放工房",
+        "学生",
+        "制作",
+        "学習",
+        "柔軟な空間"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://en.kait.jp/facilities/kait-workshop.html",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "989ffbda-1f55-5e50-bf9b-45759994fa1b",
+      "building_slug": "kait-workshop",
+      "function_slug": "university",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://en.kait.jp/facilities/kait-workshop.html",
+      "evidence_note": "Kanagawa Institute of Technology identifies KAIT Workshop as a circa 2,000 square metre open making facility planned by architect Junya Ishigami and supported by 305 columns. The university's Japanese page states that the facility was completed in spring 2008 and supports students' voluntary and creative making activities. The facility belongs to the university and serves university students as its core users. Outreach science activities for local school pupils are secondary and do not change the primary university function.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}
