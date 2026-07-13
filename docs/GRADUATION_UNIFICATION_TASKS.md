@@ -358,6 +358,8 @@ Final review batch 014 已完成最后 6 条正式只读审核。CASE-100/126/13
 
 Final review batch 014 migration pack 与全历史 dry-run 已完成。两张远程 Commons 图片已本地化为 1600×1066 和 1600×1200，来源、作者和许可同步到兼容数据；pack 包含 2 new architects / 3 buildings / 3 images / 3 profiles / 7 assignments。隔离 PostgreSQL 18.3 完成两次 forward、外部 curated-image rollback guard 与两次精确 rollback；migration `20260713033609_graduation_final_review_batch_014.sql` 与 reviewed apply byte-identical。生产尚未写入。详见 `GRADUATION_FINAL_REVIEW_BATCH_014_DRY_RUN.md`。
 
+Final review batch 014 已完成生产 migration。Supabase migration `graduation_final_review_batch_014`（`20260713034120`）复用 `kengo-kuma`，写入 2 architects / 3 buildings / 3 primary images / 3 profiles / 7 assignments；总数从 85/939/7288/145 精确更新为 88 profiles / 942 buildings / 7291 images / 152 assignments。目标计数 3/3/3/7，orphan profile 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。尚未运行最终 Reviewed release。详见 `GRADUATION_FINAL_REVIEW_BATCH_014_PRODUCTION.md`。
+
 下一个最小可验证步骤：合并 82→85 生产读取基线，运行一次 Reviewed production release，并验收三条 CASE/building 路由、图片、canonical architect 和 API diagnostics。
 
 ### G7 — 统一搜索与筛选
