@@ -35,6 +35,7 @@ Current docs under `docs/`:
 - `docs/TECH_DEBT.md` — older technical debt log; use `TECHNICAL_DEBT_REPORT.md` in archive for latest cleanup audit context.
 - `docs/LEARNING_MATERIAL_INVENTORY.md` — active/future/archive classification for learning and research material.
 - `docs/CONTENT_TRUST_NEXT_PHASE_P0.md` — current content-trust baseline, Top 50 review queue, first read-only batch, and execution boundaries.
+- `docs/CONTENT_TRUST_BATCH_001_REVIEW.md` — formal read-only review and routing decisions for the first eight non-graduation records.
 - `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
 - `docs/graduation/` — current V1 Graduation Inspiration Library handoff docs, including wireframes, random behavior, content guide, and source/image policy.
 
