@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T14:39:17.415Z",
+  "generated_at": "2026-07-13T15:09:55.493Z",
   "batch": "duplicate-primary-image-review-001",
   "status": "read-only-review-required",
   "writes_database": false,
@@ -13,85 +13,22 @@
     ]
   },
   "summary": {
-    "primary_rows": 1435,
+    "primary_rows": 1433,
     "buildings_with_primary": 942,
-    "duplicate_primary_buildings": 489,
-    "duplicate_primary_rows": 982,
+    "duplicate_primary_buildings": 487,
+    "duplicate_primary_rows": 978,
     "three_primary_buildings": 4,
-    "commons_vs_unsplash": 489,
+    "commons_vs_unsplash": 487,
     "commons_vs_commons": 0,
     "other_source_conflicts": 0,
-    "p0_visible_unsplash_with_commons_candidate": 219,
-    "p1_primary_invariant_conflict": 128,
+    "p0_visible_unsplash_with_commons_candidate": 215,
+    "p1_primary_invariant_conflict": 130,
     "p2_override_shielded": 142,
     "candidate_rows_missing_attribution": 0,
     "safe_auto_apply": 0,
     "formally_reviewed": 0
   },
   "items": [
-    {
-      "building_id": "18004093-762b-47fc-ac62-ccf401774d1f",
-      "building_slug": "centro-commerciale-le-torri",
-      "building": {
-        "name_zh": "",
-        "name_en": "Centro commerciale Le Torri",
-        "name_ja": "",
-        "architect_slug": "mario-botta",
-        "year_start": 1992,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "39dac153-dd14-5051-a731-c3230c693c59",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "218b6c10-2c81-5b4a-8c33-6f5662074bed",
-          "building_id": "18004093-762b-47fc-ac62-ccf401774d1f",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Centro_Commerciale_Le_Torri_%28Florence%29_-_Fountain_01.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Centro_Commerciale_Le_Torri_%28Florence%29_-_Fountain_01.jpg",
-          "photographer": "Cyberuly",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Centro_Commerciale_Le_Torri_(Florence)_-_Fountain_01.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "39dac153-dd14-5051-a731-c3230c693c59",
-          "building_id": "18004093-762b-47fc-ac62-ccf401774d1f",
-          "url_original": "https://images.unsplash.com/photo-1583338850703-bc602b103674?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1583338850703-bc602b103674?w=400&q=60",
-          "photographer": "Patrick Robert Doyle",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/_8bM_EqmFgM",
-          "img_type": "detail",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
     {
       "building_id": "6e14d3b4-56a0-4092-aceb-335c2cb86264",
       "building_slug": "club-house-du-golf-de-beauvallon",
@@ -271,69 +208,6 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "5d61b2c0-5d44-448b-83bc-57e5a3e3c467",
-      "building_slug": "former-tokyo-metropolitan-government-building",
-      "building": {
-        "name_zh": "",
-        "name_en": "Former Tokyo Metropolitan Government Building",
-        "name_ja": "",
-        "architect_slug": "kenzo-tange",
-        "year_start": 1957,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "e0fb2489-e8ba-5ea7-a1c4-9bead8688466",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "6a792d58-e85a-5ecd-984d-1eb6720b13e3",
-          "building_id": "5d61b2c0-5d44-448b-83bc-57e5a3e3c467",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/d9/TANGE-old-Tokyo-city-hall-1957.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/d/d9/TANGE-old-Tokyo-city-hall-1957.jpg",
-          "photographer": "Bigjap",
-          "source": "Wikimedia Commons",
-          "license": "CC0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:TANGE-old-Tokyo-city-hall-1957.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "e0fb2489-e8ba-5ea7-a1c4-9bead8688466",
-          "building_id": "5d61b2c0-5d44-448b-83bc-57e5a3e3c467",
-          "url_original": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=400&q=60",
-          "photographer": "Casey Horner",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/KR03PvYv3Fs",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
@@ -1526,69 +1400,6 @@
           "source": "Wikimedia Commons",
           "license": "CC BY-SA 2.0",
           "source_url": "https://commons.wikimedia.org/wiki/File:Armand_Thiery_Homme,_Italie_2,_Paris_5_April_2013.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "20e8cad6-740e-40d1-9893-2e81752e0c06",
-      "building_slug": "jc-decaux-bus-shelter-aachen",
-      "building": {
-        "name_zh": "",
-        "name_en": "JC Decaux Bus Shelter, Aachen",
-        "name_ja": "",
-        "architect_slug": "peter-eisenman",
-        "year_start": 1996,
-        "city": "Aachen",
-        "country": "Germany"
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "674ce93a-0787-57ae-b10b-fef75d6b550a",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "674ce93a-0787-57ae-b10b-fef75d6b550a",
-          "building_id": "20e8cad6-740e-40d1-9893-2e81752e0c06",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "a0818101-8a9a-5b4e-92c3-3c873b28d803",
-          "building_id": "20e8cad6-740e-40d1-9893-2e81752e0c06",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/da/Aachen_%22Frittezang%22_001.JPG",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Aachen_%22Frittezang%22_001.JPG/400px-Aachen_%22Frittezang%22_001.JPG",
-          "photographer": "Wolf Meusel",
-          "source": "Wikimedia Commons",
-          "license": "Public domain",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Aachen_%22Frittezang%22_001.JPG",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "commons",
@@ -13764,69 +13575,6 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
-      "building_id": "5a79b570-daba-4174-a55e-8adcfd35d1be",
-      "building_slug": "zenith-de-rouen",
-      "building": {
-        "name_zh": "",
-        "name_en": "Zénith de Rouen",
-        "name_ja": "",
-        "architect_slug": "bernard-tschumi",
-        "year_start": 2001,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "6b7ffbbe-83d4-56cf-9c7c-7a89d88a78ee",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "59b23ea1-b12f-5d0c-871b-eb89d0d40f42",
-          "building_id": "5a79b570-daba-4174-a55e-8adcfd35d1be",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/7/70/UFO_with_ufo_drivers_-_panoramio.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/UFO_with_ufo_drivers_-_panoramio.jpg/400px-UFO_with_ufo_drivers_-_panoramio.jpg",
-          "photographer": "Alkhimov Maxim",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:UFO_with_ufo_drivers_-_panoramio.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "6b7ffbbe-83d4-56cf-9c7c-7a89d88a78ee",
-          "building_id": "5a79b570-daba-4174-a55e-8adcfd35d1be",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
       "building_id": "433924b2-8266-4e3d-935d-e38fd1e2b589",
       "building_slug": "capela-do-monte",
       "building": {
@@ -14960,6 +14708,69 @@
           "source": "Wikimedia Commons",
           "license": "CC BY-SA 4.0",
           "source_url": "https://commons.wikimedia.org/wiki/File:Japanese_Sword_Museum-1.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "20e8cad6-740e-40d1-9893-2e81752e0c06",
+      "building_slug": "jc-decaux-bus-shelter-aachen",
+      "building": {
+        "name_zh": "",
+        "name_en": "JC Decaux Bus Shelter, Aachen",
+        "name_ja": "",
+        "architect_slug": "peter-eisenman",
+        "year_start": 1996,
+        "city": "Aachen",
+        "country": "Germany"
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "unsplash",
+        "commons"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "a0818101-8a9a-5b4e-92c3-3c873b28d803",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "674ce93a-0787-57ae-b10b-fef75d6b550a",
+          "building_id": "20e8cad6-740e-40d1-9893-2e81752e0c06",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        },
+        {
+          "id": "a0818101-8a9a-5b4e-92c3-3c873b28d803",
+          "building_id": "20e8cad6-740e-40d1-9893-2e81752e0c06",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/da/Aachen_%22Frittezang%22_001.JPG",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Aachen_%22Frittezang%22_001.JPG/400px-Aachen_%22Frittezang%22_001.JPG",
+          "photographer": "Wolf Meusel",
+          "source": "Wikimedia Commons",
+          "license": "Public domain",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Aachen_%22Frittezang%22_001.JPG",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "commons",
@@ -21847,6 +21658,69 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": true
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "5a79b570-daba-4174-a55e-8adcfd35d1be",
+      "building_slug": "zenith-de-rouen",
+      "building": {
+        "name_zh": "",
+        "name_en": "Zénith de Rouen",
+        "name_ja": "",
+        "architect_slug": "bernard-tschumi",
+        "year_start": 2001,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "59b23ea1-b12f-5d0c-871b-eb89d0d40f42",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "59b23ea1-b12f-5d0c-871b-eb89d0d40f42",
+          "building_id": "5a79b570-daba-4174-a55e-8adcfd35d1be",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/7/70/UFO_with_ufo_drivers_-_panoramio.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/UFO_with_ufo_drivers_-_panoramio.jpg/400px-UFO_with_ufo_drivers_-_panoramio.jpg",
+          "photographer": "Alkhimov Maxim",
+          "source": "Wikimedia Commons",
+          "license": "CC BY 3.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:UFO_with_ufo_drivers_-_panoramio.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "6b7ffbbe-83d4-56cf-9c7c-7a89d88a78ee",
+          "building_id": "5a79b570-daba-4174-a55e-8adcfd35d1be",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,
