@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import PageShell from '@/components/PageShell'
+import FeedbackContactCard from '@/components/FeedbackContactCard'
 
 const COPY = {
   zh: {
@@ -13,7 +15,8 @@ const COPY = {
     body: '请写下页面链接、问题内容，以及你希望我们如何修改：',
     back: '返回首页',
     notes: ['页面链接', '问题描述', '可参考的资料或图片来源'],
-    deliveryNote: '请确认域名邮箱已经配置收信；如果尚未配置，这个按钮只会打开邮件客户端。',
+    contextLabel: '正在反馈的页面',
+    deliveryNote: '按钮会打开本机邮件客户端并自动带入页面链接；也可以复制上面的邮箱地址。',
   },
   en: {
     title: 'Feedback',
@@ -25,7 +28,8 @@ const COPY = {
     body: 'Please include the page URL, the issue, and the change you suggest:',
     back: 'Back home',
     notes: ['Page URL', 'What is wrong or missing', 'Reference source or image link'],
-    deliveryNote: 'Make sure the domain mailbox is configured to receive mail; otherwise this button only opens an email draft.',
+    contextLabel: 'Page being reported',
+    deliveryNote: 'This button opens your email app with the page URL filled in. You can also copy the address above.',
   },
   ja: {
     title: 'フィードバック',
@@ -37,7 +41,8 @@ const COPY = {
     body: 'ページURL、問題点、希望する修正内容を書いてください：',
     back: 'ホームに戻る',
     notes: ['ページURL', '問題点または不足内容', '参考資料や画像リンク'],
-    deliveryNote: 'ドメインメールの受信設定を確認してください。未設定の場合、このボタンはメール作成画面を開くだけです。',
+    contextLabel: '報告するページ',
+    deliveryNote: 'ボタンを押すとページURLを入力した状態でメールアプリが開きます。上のアドレスをコピーすることもできます。',
   },
 }
 
@@ -58,8 +63,6 @@ export default async function FeedbackPage({ params }: { params: Promise<{ lang:
   const { lang } = await params
   const copy = copyFor(lang)
   const prefix = `/${lang}`
-  const href = `mailto:${copy.email}?subject=${encodeURIComponent(copy.subject)}&body=${encodeURIComponent(copy.body)}`
-
   return (
     <PageShell>
       <section className="section-sm grid gap-8 border-b border-subtle pb-10 pt-4 sm:pt-8 lg:grid-cols-[minmax(0,1fr)_24rem]">
@@ -69,18 +72,18 @@ export default async function FeedbackPage({ params }: { params: Promise<{ lang:
           <h1 className="mt-4 heading-display">{copy.title}</h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-secondary sm:text-lg">{copy.intro}</p>
         </div>
-        <div className="rounded-md border border-subtle bg-surface p-5 shadow-subtle">
-          <p className="label">{copy.emailLabel}</p>
-          <a href={href} className="mt-4 inline-flex rounded-full bg-[color:var(--ui-text-primary)] px-5 py-3 text-sm font-medium text-inverse transition-opacity hover:opacity-85">
-            {copy.email}
-          </a>
-          <p className="mt-4 text-xs leading-relaxed text-muted">{copy.deliveryNote}</p>
-          <div className="mt-6 grid gap-2">
-            {copy.notes.map(note => (
-              <p key={note} className="border-t border-subtle py-2.5 text-sm text-secondary">{note}</p>
-            ))}
-          </div>
-        </div>
+        <Suspense fallback={<div className="min-h-64 rounded-md border border-subtle bg-surface p-5 shadow-subtle" />}>
+          <FeedbackContactCard
+            lang={lang}
+            email={copy.email}
+            subject={copy.subject}
+            body={copy.body}
+            emailLabel={copy.emailLabel}
+            deliveryNote={copy.deliveryNote}
+            contextLabel={copy.contextLabel}
+            notes={copy.notes}
+          />
+        </Suspense>
       </section>
     </PageShell>
   )
