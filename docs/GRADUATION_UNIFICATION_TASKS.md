@@ -312,6 +312,10 @@ CASE-043 Roadside Station Mashiko batch 010 已完成生产迁移、发布和线
 
 下一个最小可验证步骤：从剩余 35 条未正式审核记录中选择身份与开放图片证据完整的下一条，先完成只读调查与生产冲突预检。
 
+3331 Arts Chiyoda batch 011 已完成 CASE-005 正式只读审核。3331 官方确认该设施由旧千代田区立练成中学校改修、2010 年开放、2023 年闭馆，并明确自称独立 art center；官方 Architectural Document 明确改修设计为 `Shinya Sato + Mejiro Studio`，不能继续保留空 architect。Commons 图为 Ootahara own work、4608×3440、CC0；仓库 1600×1194 文件人工确认准确展示旧校舍正立面、3331 入口和前庭。broad type 决定为 `cultural`，但现有 taxonomy 没有准确的 `art-center`；不以 `museum`、`mixed-use`、`community-center`、`retail` 或 `public-space` 掩盖核心用途，也不把更宽泛的 cultural-center 当成同义词。生产 architect/building/image/profile/function/alias conflicts 全部 0，required cultural type 1/1。本批身份与图片通过，但必须先建立窄义四语 `art-center` taxonomy；G6 已迁移仍为 60/118，尚未迁移 58；尚未正式审核队列从 35 减至 34。详见 `GRADUATION_NEW_BUILDING_3331_ARTS_CHIYODA_011_TRIAGE.md`。
+
+下一个最小可验证步骤：通过 PR 固化 CASE-005 只读决策；随后建立 `art-center` 四语 taxonomy 的 guarded apply、rollback 与隔离 PostgreSQL dry-run。taxonomy 完成生产验收前，不生成 CASE-005 建筑 migration。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
