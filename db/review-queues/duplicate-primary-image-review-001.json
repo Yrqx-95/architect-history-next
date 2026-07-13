@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T15:09:55.493Z",
+  "generated_at": "2026-07-13T15:35:12.810Z",
   "batch": "duplicate-primary-image-review-001",
   "status": "read-only-review-required",
   "writes_database": false,
@@ -13,16 +13,16 @@
     ]
   },
   "summary": {
-    "primary_rows": 1433,
+    "primary_rows": 1428,
     "buildings_with_primary": 942,
-    "duplicate_primary_buildings": 487,
-    "duplicate_primary_rows": 978,
+    "duplicate_primary_buildings": 482,
+    "duplicate_primary_rows": 968,
     "three_primary_buildings": 4,
-    "commons_vs_unsplash": 487,
+    "commons_vs_unsplash": 482,
     "commons_vs_commons": 0,
     "other_source_conflicts": 0,
-    "p0_visible_unsplash_with_commons_candidate": 215,
-    "p1_primary_invariant_conflict": 130,
+    "p0_visible_unsplash_with_commons_candidate": 206,
+    "p1_primary_invariant_conflict": 134,
     "p2_override_shielded": 142,
     "candidate_rows_missing_attribution": 0,
     "safe_auto_apply": 0,
@@ -271,321 +271,6 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "a49470cd-6dcc-4c9d-bd5a-ba88e810d02c",
-      "building_slug": "helsinki-university-of-technology-main",
-      "building": {
-        "name_zh": "",
-        "name_en": "Helsinki University of Technology Main Building",
-        "name_ja": "",
-        "architect_slug": "alvar-aalto",
-        "year_start": 1964,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "56a1cb17-561e-5e8c-b1af-a84b244b8127",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "56a1cb17-561e-5e8c-b1af-a84b244b8127",
-          "building_id": "a49470cd-6dcc-4c9d-bd5a-ba88e810d02c",
-          "url_original": "https://images.unsplash.com/photo-1518714049508-96a3054cdaef?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1518714049508-96a3054cdaef?w=400&q=60",
-          "photographer": "Bernard Hermant",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/OjwQ9WywGsw",
-          "img_type": "detail",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "bd0440a1-8b3f-54cb-b093-b65ac01cd01c",
-          "building_id": "a49470cd-6dcc-4c9d-bd5a-ba88e810d02c",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/6/60/Aalto_University_in_the_rain.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Aalto_University_in_the_rain.jpg/400px-Aalto_University_in_the_rain.jpg",
-          "photographer": "JIP",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Aalto_University_in_the_rain.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "8c62c0c1-3ac0-41b4-bfdd-077e1ae62b9f",
-      "building_slug": "hirosaki-city-hall",
-      "building": {
-        "name_zh": "",
-        "name_en": "Hirosaki City Hall",
-        "name_ja": "",
-        "architect_slug": "kunio-maekawa",
-        "year_start": 1958,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "c474f432-5979-51e7-9273-4d514b011032",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "1b6ae504-9176-5397-9865-b234d5da82a6",
-          "building_id": "8c62c0c1-3ac0-41b4-bfdd-077e1ae62b9f",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Christmas_illumination_in_Hirosaki_-_panoramio.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Christmas_illumination_in_Hirosaki_-_panoramio.jpg/400px-Christmas_illumination_in_Hirosaki_-_panoramio.jpg",
-          "photographer": "Feri88",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Christmas_illumination_in_Hirosaki_-_panoramio.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "c474f432-5979-51e7-9273-4d514b011032",
-          "building_id": "8c62c0c1-3ac0-41b4-bfdd-077e1ae62b9f",
-          "url_original": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=400&q=60",
-          "photographer": "Casey Horner",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/KR03PvYv3Fs",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "f2a9f74e-8341-46ff-9d2f-e44a7e5c1eda",
-      "building_slug": "hirosaki-city-museum",
-      "building": {
-        "name_zh": "",
-        "name_en": "Hirosaki City Museum",
-        "name_ja": "",
-        "architect_slug": "kunio-maekawa",
-        "year_start": 1977,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "cebf0bf2-69a7-5180-8b20-e138fabd451f",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "c2f23c2b-bd19-59cd-b413-0559214468af",
-          "building_id": "f2a9f74e-8341-46ff-9d2f-e44a7e5c1eda",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/1/1d/191207_Hirosaki_City_Museum_Hirosaki_Aomori_pref_Japan01s.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/191207_Hirosaki_City_Museum_Hirosaki_Aomori_pref_Japan01s.jpg/400px-191207_Hirosaki_City_Museum_Hirosaki_Aomori_pref_Japan01s.jpg",
-          "photographer": "663highland",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:191207_Hirosaki_City_Museum_Hirosaki_Aomori_pref_Japan01s.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "cebf0bf2-69a7-5180-8b20-e138fabd451f",
-          "building_id": "f2a9f74e-8341-46ff-9d2f-e44a7e5c1eda",
-          "url_original": "https://images.unsplash.com/photo-1569227997603-33b9f12af927?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1569227997603-33b9f12af927?w=400&q=60",
-          "photographer": "Alexander Abero",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/OypnYfdiQgg",
-          "img_type": "detail",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "da27b65f-e726-4a34-8765-43e04145b2fa",
-      "building_slug": "hiroshima-national-peace-memorial-hall",
-      "building": {
-        "name_zh": "",
-        "name_en": "Hiroshima National Peace Memorial Hall for the Atomic Bomb Victims",
-        "name_ja": "",
-        "architect_slug": "kenzo-tange",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "7c583722-483b-5c1b-ad99-dc7e5935f61c",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "7c583722-483b-5c1b-ad99-dc7e5935f61c",
-          "building_id": "da27b65f-e726-4a34-8765-43e04145b2fa",
-          "url_original": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=400&q=60",
-          "photographer": "Casey Horner",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/KR03PvYv3Fs",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "9f179db0-c6bd-56b8-b377-aa9a8f4037cf",
-          "building_id": "da27b65f-e726-4a34-8765-43e04145b2fa",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/de/EpicenterHiroshima.JPG",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/d/de/EpicenterHiroshima.JPG",
-          "photographer": "Jennie Kondo (Jennie Valdivieso Kondo - Grialte)",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:EpicenterHiroshima.JPG",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "773ad0c6-2006-496f-a365-8f81ad4d3cad",
-      "building_slug": "hiroshima-peace-memorial-museum",
-      "building": {
-        "name_zh": "",
-        "name_en": "Hiroshima Peace Memorial Museum",
-        "name_ja": "",
-        "architect_slug": "kenzo-tange",
-        "year_start": 1955,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "da2cae35-9fc1-56ed-b857-0d271c7f9688",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "c04a8847-db3a-52af-9b42-da503e426f99",
-          "building_id": "773ad0c6-2006-496f-a365-8f81ad4d3cad",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/d1/1_Nakajimach%C5%8D%2C_Naka-ku%2C_Hiroshima-shi%2C_Hiroshima-ken_730-0811%2C_Japan_-_panoramio_%283%29.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/1_Nakajimach%C5%8D%2C_Naka-ku%2C_Hiroshima-shi%2C_Hiroshima-ken_730-0811%2C_Japan_-_panoramio_%283%29.jpg/400px-1_Nakajimach%C5%8D%2C_Naka-ku%2C_Hiroshima-shi%2C_Hiroshima-ken_730-0811%2C_Japan_-_panoramio_%283%29.jpg",
-          "photographer": "warabi hatogaya",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:1_Nakajimach%C5%8D,_Naka-ku,_Hiroshima-shi,_Hiroshima-ken_730-0811,_Japan_-_panoramio_(3).jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "da2cae35-9fc1-56ed-b857-0d271c7f9688",
-          "building_id": "773ad0c6-2006-496f-a365-8f81ad4d3cad",
-          "url_original": "https://images.unsplash.com/photo-1768850489732-f29ee375f6bf?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1768850489732-f29ee375f6bf?w=400&q=60",
-          "photographer": "Matt Benson",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/_lXKIZm2u7k",
-          "img_type": "detail",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
@@ -1967,69 +1652,6 @@
           "source": "Wikimedia Commons",
           "license": "CC BY-SA 4.0",
           "source_url": "https://commons.wikimedia.org/wiki/File:Bouldering_Japa_Cup_200208a.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "5ec59e0a-2864-4f36-a912-69ec2c9c614d",
-      "building_slug": "kulttuuritalo",
-      "building": {
-        "name_zh": "",
-        "name_en": "Kulttuuritalo",
-        "name_ja": "",
-        "architect_slug": "alvar-aalto",
-        "year_start": 1957,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "756549a4-5329-5947-a6d8-05ff3fe48ed9",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "756549a4-5329-5947-a6d8-05ff3fe48ed9",
-          "building_id": "5ec59e0a-2864-4f36-a912-69ec2c9c614d",
-          "url_original": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=400&q=60",
-          "photographer": "Neon Wang",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/fUsxJC1KVGQ",
-          "img_type": "interior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        },
-        {
-          "id": "a51a7b3a-4e59-5f56-8227-80f9badd9b43",
-          "building_id": "5ec59e0a-2864-4f36-a912-69ec2c9c614d",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Aalto_cultural_house.JPG",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Aalto_cultural_house.JPG",
-          "photographer": "TTKK",
-          "source": "Wikimedia Commons",
-          "license": "Public domain",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Aalto_cultural_house.JPG",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "commons",
@@ -5941,69 +5563,6 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "87ce4fb4-2672-49e8-b921-2417d54bc412",
-      "building_slug": "one57",
-      "building": {
-        "name_zh": "",
-        "name_en": "One57",
-        "name_ja": "",
-        "architect_slug": "christian-de-portzamparc",
-        "year_start": 2014,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "f35af861-1054-5ebd-97ad-8a54e0669ffb",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "6fbefe8e-aecd-5014-8ba3-ffff7a45e901",
-          "building_id": "87ce4fb4-2672-49e8-b921-2417d54bc412",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/4/41/111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_%28rotated%29.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_%28rotated%29.jpg/400px-111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_%28rotated%29.jpg",
-          "photographer": "User:Jim.henderson",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_(rotated).jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "f35af861-1054-5ebd-97ad-8a54e0669ffb",
-          "building_id": "87ce4fb4-2672-49e8-b921-2417d54bc412",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
@@ -11937,69 +11496,6 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
-      "building_id": "1b496dc4-862c-4f9b-b8ad-71aa6407edb9",
-      "building_slug": "tschumi-pavilion",
-      "building": {
-        "name_zh": "",
-        "name_en": "Tschumi Pavilion",
-        "name_ja": "",
-        "architect_slug": "bernard-tschumi",
-        "year_start": 1990,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "f9ac1ce2-7d05-5285-93aa-61d817332885",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "127d9e65-c02a-5393-a426-4cb81729a9e0",
-          "building_id": "1b496dc4-862c-4f9b-b8ad-71aa6407edb9",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg/400px-Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg",
-          "photographer": "A. J. van der Wal",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "f9ac1ce2-7d05-5285-93aa-61d817332885",
-          "building_id": "1b496dc4-862c-4f9b-b8ad-71aa6407edb9",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
       "building_id": "90754111-76f2-4a49-b77e-f84454369560",
       "building_slug": "united-nations-university",
       "building": {
@@ -12871,69 +12367,6 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": false
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "a3d5da8b-38ef-42e5-a90e-00b91f5618a6",
-      "building_slug": "wexner-center-for-the-arts",
-      "building": {
-        "name_zh": "",
-        "name_en": "Wexner Center for the Arts",
-        "name_ja": "",
-        "architect_slug": "peter-eisenman",
-        "year_start": 1989,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "90ace68b-1365-503e-a399-31ac0afafc36",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "78bcd89d-c86e-5f5d-97aa-c2729d43d31a",
-          "building_id": "a3d5da8b-38ef-42e5-a90e-00b91f5618a6",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/4/40/%27Breaker%2C%27_public_work_by_sculptor%2C_David_Black%2C_installed_in_front_of_Wexner_Center_for_the_Arts%2C_Ohio_State_University.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/4/40/%27Breaker%2C%27_public_work_by_sculptor%2C_David_Black%2C_installed_in_front_of_Wexner_Center_for_the_Arts%2C_Ohio_State_University.jpg",
-          "photographer": "David Evans Black",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:%27Breaker,%27_public_work_by_sculptor,_David_Black,_installed_in_front_of_Wexner_Center_for_the_Arts,_Ohio_State_University.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "90ace68b-1365-503e-a399-31ac0afafc36",
-          "building_id": "a3d5da8b-38ef-42e5-a90e-00b91f5618a6",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
         }
       ],
       "safe_auto_apply": false,
@@ -15102,6 +14535,69 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
+      "building_id": "5ec59e0a-2864-4f36-a912-69ec2c9c614d",
+      "building_slug": "kulttuuritalo",
+      "building": {
+        "name_zh": "",
+        "name_en": "Kulttuuritalo",
+        "name_ja": "",
+        "architect_slug": "alvar-aalto",
+        "year_start": 1957,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "unsplash",
+        "commons"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "a51a7b3a-4e59-5f56-8227-80f9badd9b43",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "756549a4-5329-5947-a6d8-05ff3fe48ed9",
+          "building_id": "5ec59e0a-2864-4f36-a912-69ec2c9c614d",
+          "url_original": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1774516534097-76eb46de7229?w=400&q=60",
+          "photographer": "Neon Wang",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/fUsxJC1KVGQ",
+          "img_type": "interior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        },
+        {
+          "id": "a51a7b3a-4e59-5f56-8227-80f9badd9b43",
+          "building_id": "5ec59e0a-2864-4f36-a912-69ec2c9c614d",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Aalto_cultural_house.JPG",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Aalto_cultural_house.JPG",
+          "photographer": "TTKK",
+          "source": "Wikimedia Commons",
+          "license": "Public domain",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Aalto_cultural_house.JPG",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
       "building_id": "a0b9e9c8-72b4-4f8f-a375-158b96de1b92",
       "building_slug": "kursaal-convention-centre",
       "building": {
@@ -16740,6 +16236,69 @@
           "license": "Unsplash License",
           "source_url": "https://unsplash.com/photos/olhJRxPo770",
           "img_type": "interior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "87ce4fb4-2672-49e8-b921-2417d54bc412",
+      "building_slug": "one57",
+      "building": {
+        "name_zh": "",
+        "name_en": "One57",
+        "name_ja": "",
+        "architect_slug": "christian-de-portzamparc",
+        "year_start": 2014,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "6fbefe8e-aecd-5014-8ba3-ffff7a45e901",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "6fbefe8e-aecd-5014-8ba3-ffff7a45e901",
+          "building_id": "87ce4fb4-2672-49e8-b921-2417d54bc412",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/4/41/111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_%28rotated%29.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_%28rotated%29.jpg/400px-111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_%28rotated%29.jpg",
+          "photographer": "User:Jim.henderson",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:111_W57_%26_One57_%26_CP_Tower_fr_Col_Cir_jeh_(rotated).jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "f35af861-1054-5ebd-97ad-8a54e0669ffb",
+          "building_id": "87ce4fb4-2672-49e8-b921-2417d54bc412",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
           "is_primary": true,
           "source_class": "unsplash",
           "attribution_complete": true,
@@ -21102,6 +20661,69 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
+      "building_id": "1b496dc4-862c-4f9b-b8ad-71aa6407edb9",
+      "building_slug": "tschumi-pavilion",
+      "building": {
+        "name_zh": "",
+        "name_en": "Tschumi Pavilion",
+        "name_ja": "",
+        "architect_slug": "bernard-tschumi",
+        "year_start": 1990,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "127d9e65-c02a-5393-a426-4cb81729a9e0",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "127d9e65-c02a-5393-a426-4cb81729a9e0",
+          "building_id": "1b496dc4-862c-4f9b-b8ad-71aa6407edb9",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg/400px-Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg",
+          "photographer": "A. J. van der Wal",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Exterieur_KUNSTWERK_-_Groningen_-_20315114_-_RCE.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "f9ac1ce2-7d05-5285-93aa-61d817332885",
+          "building_id": "1b496dc4-862c-4f9b-b8ad-71aa6407edb9",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
       "building_id": "4fab4620-e089-493f-b4e8-d83a4bed11bf",
       "building_slug": "tv-asahi-headquarters",
       "building": {
@@ -21658,6 +21280,69 @@
           "source_class": "commons",
           "attribution_complete": true,
           "selected_by_current_database_strategy": true
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "a3d5da8b-38ef-42e5-a90e-00b91f5618a6",
+      "building_slug": "wexner-center-for-the-arts",
+      "building": {
+        "name_zh": "",
+        "name_en": "Wexner Center for the Arts",
+        "name_ja": "",
+        "architect_slug": "peter-eisenman",
+        "year_start": 1989,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "78bcd89d-c86e-5f5d-97aa-c2729d43d31a",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "78bcd89d-c86e-5f5d-97aa-c2729d43d31a",
+          "building_id": "a3d5da8b-38ef-42e5-a90e-00b91f5618a6",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/4/40/%27Breaker%2C%27_public_work_by_sculptor%2C_David_Black%2C_installed_in_front_of_Wexner_Center_for_the_Arts%2C_Ohio_State_University.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/4/40/%27Breaker%2C%27_public_work_by_sculptor%2C_David_Black%2C_installed_in_front_of_Wexner_Center_for_the_Arts%2C_Ohio_State_University.jpg",
+          "photographer": "David Evans Black",
+          "source": "Wikimedia Commons",
+          "license": "CC BY-SA 4.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:%27Breaker,%27_public_work_by_sculptor,_David_Black,_installed_in_front_of_Wexner_Center_for_the_Arts,_Ohio_State_University.jpg",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "90ace68b-1365-503e-a399-31ac0afafc36",
+          "building_id": "a3d5da8b-38ef-42e5-a90e-00b91f5618a6",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,
@@ -22441,8 +22126,8 @@
         "unsplash"
       ],
       "runtime_cover_source": "local-override",
-      "selected_database_primary_id": "bbc6b5ad-dbef-563b-b851-244252032854",
-      "selected_database_source_class": "unsplash",
+      "selected_database_primary_id": "441045d8-7de8-5029-b5d8-24a02d255c67",
+      "selected_database_source_class": "commons",
       "runtime_override": {
         "cover_url": "/images/curated/acropolis-museum-1024.jpg",
         "cover_photographer": "Holger Uwe Schmitt",
@@ -22463,7 +22148,7 @@
           "is_primary": true,
           "source_class": "commons",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": false
+          "selected_by_current_database_strategy": true
         },
         {
           "id": "bbc6b5ad-dbef-563b-b851-244252032854",
@@ -22478,7 +22163,7 @@
           "is_primary": true,
           "source_class": "unsplash",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": true
+          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,
