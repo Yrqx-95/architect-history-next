@@ -296,6 +296,10 @@ CASE-033 Yu no Eki Ohyu batch 008 migration pack 已生成。兼容数据 archit
 
 下一个最小可验证步骤：运行 unit、graduation QA、typecheck、lint、图片 QA 与 `git diff --check`；通过 PR 合并 migration pack 后立即重复生产冲突预检，仍为 0 才允许 apply。
 
+CASE-034 KAIT Workshop batch 009 已完成生产迁移、发布和线上验收。Supabase migration `graduation_kait_workshop_batch_009`（`20260713002530`）写入 1 architect / 1 building / 1 primary interior image / 1 published profile / 1 `university` primary assignment；总数更新为 80/934/7283/138，orphan、architect mismatch、primary image/function 异常均为 0，RLS/policy 正常，advisors 保持 13 security / 27 performance。PR #101 将生产读取基线更新为 80 并加入 canonical 回归；Reviewed release `29215437762` 在 8m38s 内完整成功。6 个中英日 CASE/building 路由和图片最终全部 HTTP 200，API 为 101 cases / 80 profiles / 0 missing，并返回 Junya Ishigami 与 Epiq / CC BY-SA 3.0。首次独立日文建筑请求在部署传播窗口短暂命中旧 edge 状态，随后的正文核对及连续三次请求均为 canonical HTTP 200。G6 已迁移 59/118，尚未迁移 59；尚未正式审核队列 36。详见 `GRADUATION_KAIT_WORKSHOP_BATCH_009_PRODUCTION.md`。
+
+下一个最小可验证步骤：从剩余 36 条未正式审核记录中选择下一个不需降低身份或图片权利标准的边界清晰小批次，先完成只读调查和生产冲突预检。
+
 ### G7 — 统一搜索与筛选
 
 - [ ] 搜索 API 同时读取建筑名称、别名、用途别名和毕业分析关键词。
