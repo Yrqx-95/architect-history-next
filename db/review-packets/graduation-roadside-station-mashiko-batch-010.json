@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "batch_id": "graduation-roadside-station-mashiko-batch-010",
+  "generated_at": "2026-07-13T01:32:42.531Z",
+  "mode": "reviewed-dry-run-output-no-database-write",
+  "prerequisites": [
+    "graduation unification foundation and batch 001 are applied",
+    "all new target UUIDs, slugs, CASE IDs and image source URLs are absent; reused building UUID/slug pairs still match production",
+    "transport-hub and retail remain active",
+    "existing architect UUID/slug pairs still match production"
+  ],
+  "counts": {
+    "architects": 1,
+    "new_architects": 1,
+    "buildings": 1,
+    "images": 1,
+    "profiles": 1,
+    "assignments": 2
+  },
+  "architects": [
+    {
+      "id": "a198873f-8ff8-5d45-bdc3-a803925f0afe",
+      "slug": "mount-fuji-architects-studio",
+      "name_zh": "MOUNT FUJI ARCHITECTS STUDIO",
+      "name_en": "MOUNT FUJI ARCHITECTS STUDIO",
+      "name_ja": "MOUNT FUJI ARCHITECTS STUDIO",
+      "official_url": "https://www.fuji-studio.jp/",
+      "is_new": true
+    }
+  ],
+  "buildings": [
+    {
+      "id": "c46006a0-e598-501a-a87d-ea00bdb898a9",
+      "case_id": "CASE-043",
+      "slug": "roadside-station-mashiko",
+      "name_zh": "道之驿益子",
+      "name_en": "Roadside Station Mashiko",
+      "name_ja": "道の駅ましこ",
+      "year_start": 2016,
+      "city": "益子",
+      "country": "日本",
+      "country_code": "JP",
+      "type_slug": "transportation",
+      "architect_slug": "mount-fuji-architects-studio",
+      "official_url": "https://www.fuji-studio.jp/index_E.html#section_works_Mashiko",
+      "architect_id": "a198873f-8ff8-5d45-bdc3-a803925f0afe",
+      "status": "published"
+    }
+  ],
+  "reused_buildings": [],
+  "images": [
+    {
+      "id": "ccbe5a95-6566-5129-9581-476108e12699",
+      "building_id": "c46006a0-e598-501a-a87d-ea00bdb898a9",
+      "building_slug": "roadside-station-mashiko",
+      "case_id": "CASE-043",
+      "url_original": "/images/graduation/cases/case-043-roadside-station-mashiko.jpg",
+      "photographer": "アラツク",
+      "source": "Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Michinoeki_Mashiko.jpg",
+      "img_type": "exterior",
+      "is_primary": true
+    }
+  ],
+  "profiles": [
+    {
+      "case_id": "CASE-043",
+      "building_id": "c46006a0-e598-501a-a87d-ea00bdb898a9",
+      "building_slug": "roadside-station-mashiko",
+      "concept_zh": "地方木材和土形成道之驿大屋顶，把农产销售、休息和地方象征整合在一起。",
+      "concept_zh_hant": null,
+      "concept_en": "Roadside Station Mashiko is a reference case for reading roadside station, local food, Design topic: local木材, transport. It can inform thesis thinking about mixed programs, operation, and place-making.",
+      "concept_ja": "道の駅を地域食、地域木材、交通の結節点として設計した事例。地域の入口となる小さな公共建築のつくり方を比較できる。",
+      "keywords_zh": [
+        "道之驿",
+        "地域食",
+        "地方木材",
+        "交通",
+        "地方服务"
+      ],
+      "keywords_zh_hant": [],
+      "keywords_en": [
+        "roadside station",
+        "local food",
+        "Design topic: local木材",
+        "transport",
+        "localservice"
+      ],
+      "keywords_ja": [
+        "道の駅",
+        "地域食",
+        "地域木材",
+        "交通",
+        "地域サービス"
+      ],
+      "plan_url": null,
+      "section_url": null,
+      "source_url": "https://www.fuji-studio.jp/index_E.html#section_works_Mashiko",
+      "publication_status": "published"
+    }
+  ],
+  "assignments": [
+    {
+      "building_id": "c46006a0-e598-501a-a87d-ea00bdb898a9",
+      "building_slug": "roadside-station-mashiko",
+      "function_slug": "transport-hub",
+      "is_primary": true,
+      "confidence": "1.000",
+      "evidence_url": "https://www.fuji-studio.jp/index_E.html#section_works_Mashiko",
+      "evidence_note": "MOUNT FUJI ARCHITECTS STUDIO identifies the project as Roadside Station in Mashiko, Tochigi, completed in 2016, with roadside station as its principal use. The official project data records one storey, 1,328.84 square metres total floor area and construction from September 2015 to September 2016. The official roadside-station operator and Kanto Michi-no-Eki listing confirm the Nagatsutsumi 2271 address, parking, restaurant and retail operation. These support transport-hub primary and retail secondary without expanding the building to community-center or public-space.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    },
+    {
+      "building_id": "c46006a0-e598-501a-a87d-ea00bdb898a9",
+      "building_slug": "roadside-station-mashiko",
+      "function_slug": "retail",
+      "is_primary": false,
+      "confidence": "1.000",
+      "evidence_url": "https://www.fuji-studio.jp/index_E.html#section_works_Mashiko",
+      "evidence_note": "MOUNT FUJI ARCHITECTS STUDIO identifies the project as Roadside Station in Mashiko, Tochigi, completed in 2016, with roadside station as its principal use. The official project data records one storey, 1,328.84 square metres total floor area and construction from September 2015 to September 2016. The official roadside-station operator and Kanto Michi-no-Eki listing confirm the Nagatsutsumi 2271 address, parking, restaurant and retail operation. These support transport-hub primary and retail secondary without expanding the building to community-center or public-space.",
+      "reviewed_at": "2026-07-12T00:00:00Z"
+    }
+  ]
+}
