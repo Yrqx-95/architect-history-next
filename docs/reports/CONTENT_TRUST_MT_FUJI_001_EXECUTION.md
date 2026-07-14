@@ -17,10 +17,10 @@ Migration `20260714033425_content_trust_mt_fuji_001.sql` requires the reviewed b
 
 ## Verification record
 
-- [ ] Isolated PGlite/PostgreSQL dry-run: forward, replay refusal, rollback
-- [ ] CI checks
-- [ ] Production precheck
-- [ ] Guarded production migration
-- [ ] Post-write SQL verification
-- [ ] Reviewed production release
-- [ ] Live HTTP verification
+- [x] Isolated PGlite/PostgreSQL dry-run: forward, replay refusal, rollback
+- [x] CI checks: PR #148 passed
+- [x] Production precheck: exact building snapshot and one primary matched
+- [x] Guarded production migration: `content_trust_mt_fuji_001`
+- [x] Post-write SQL verification: trilingual fields and one primary confirmed
+- [x] Reviewed production release: run `29304005544`, success
+- [x] Live HTTP verification: `/zh/building/mt-fuji-center` returned 200 and rendered the reviewed content
