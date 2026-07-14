@@ -14,8 +14,8 @@ export default function CinematicHero({ imageUrl, imageAlt = '', children }: Cin
   const hasImage = imageUrl && !imageFailed
 
   return (
-    <section className="relative mb-12 sm:mb-16">
-      <div className="relative h-[66vh] min-h-[500px] max-h-[760px] overflow-hidden bg-warm-900 dark:bg-charcoal-950 sm:h-[74vh] sm:min-h-[620px] sm:max-h-[820px]">
+    <section className="relative mb-8 sm:mb-16">
+      <div className="relative h-[56svh] min-h-[24rem] max-h-[30rem] overflow-hidden bg-warm-900 dark:bg-charcoal-950 sm:h-[74vh] sm:min-h-[620px] sm:max-h-[820px]">
         {hasImage ? (
           <Image
             src={imageUrl}
@@ -35,7 +35,7 @@ export default function CinematicHero({ imageUrl, imageAlt = '', children }: Cin
         <div className="absolute inset-4 border border-paper-100/12 dark:border-paper-100/8 sm:left-8 sm:right-8 sm:top-8 sm:bottom-8" />
 
         <div className="absolute inset-0 flex items-end">
-          <div className="w-full max-w-7xl mx-auto px-8 pb-14 sm:px-8 sm:pb-20 lg:px-12">
+          <div className="w-full max-w-7xl mx-auto px-4 pb-8 sm:px-8 sm:pb-20 lg:px-12">
             {children}
           </div>
         </div>

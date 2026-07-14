@@ -933,9 +933,9 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
   const sigText = hasLocalizedOverlay && contentOverlay
     ? localizedBuildingContent(contentOverlay.significance, lang)
     : localizedDatabaseSignificance || fallbackContent.significance
-  const spatialText = cleanText(displayText(building.spatial_feat, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.spatial)
-  const lightText = cleanText(displayText(building.light_feat, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.light)
-  const circulationText = cleanText(displayText(building.circulation, lang)) || (hasLocalizedOverlay ? '' : fallbackContent.circulation)
+  const spatialText = cleanText(displayText(building.spatial_feat, lang))
+  const lightText = cleanText(displayText(building.light_feat, lang))
+  const circulationText = cleanText(displayText(building.circulation, lang))
   const historicalOverride = historicalBuildingFactOverrides[building.slug]
   const designerValue = historicalOverride
     ? localizedOverrideText(historicalOverride.designer, lang)
@@ -1015,9 +1015,9 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
       <BuildingStudyMap
         lang={lang}
         building={building}
-        hasSpatial={Boolean(spatialText || hasLocalizedOverlay)}
-        hasLight={Boolean(lightText || hasLocalizedOverlay)}
-        hasCirculation={Boolean(circulationText || hasLocalizedOverlay)}
+        hasSpatial={Boolean(spatialText)}
+        hasLight={Boolean(lightText)}
+        hasCirculation={Boolean(circulationText)}
         hasSources={Boolean(contentOverlay?.sources.length)}
       />
 

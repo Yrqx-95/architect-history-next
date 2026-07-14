@@ -173,7 +173,7 @@ test.describe('core public routes', () => {
   test('graduation inspiration submenu routes render library content', async ({ page }) => {
     const response = await page.goto('/zh/graduation')
     expect(response?.status()).toBe(200)
-    await expect(page.getByRole('heading', { name: '不知道做什么，也可以先看日本正在发生的问题' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: '从课题、敷地和事例开始考虑毕业设计' })).toBeVisible()
     await expect(page.getByRole('link', { name: '进入社会问题页' })).toBeVisible()
     await expect(page.getByRole('link', { name: '老师资料' })).toBeVisible()
 

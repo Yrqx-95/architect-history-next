@@ -59,42 +59,42 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       <CinematicHero imageUrl={heroImage} imageAlt={heroName}>
         <div className="grid gap-6 sm:grid-cols-[minmax(0,1fr)_18rem] sm:items-end sm:gap-8">
           <div>
-            <p className="mb-4 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-paper-100/62 sm:text-xs">
+            <p className="mb-2 hidden text-[0.68rem] font-medium uppercase tracking-[0.16em] text-paper-100/62 sm:mb-4 sm:block sm:text-xs">
               {copy.featuredWork}
             </p>
-            <h1 className="max-w-4xl text-[2.35rem] font-semibold leading-[1.04] text-paper-100 sm:text-6xl sm:leading-[1.02] lg:text-7xl">
+            <h1 className="line-clamp-2 max-w-[20ch] text-[2.35rem] font-semibold leading-[1.04] text-paper-100 sm:max-w-4xl sm:line-clamp-none sm:text-6xl sm:leading-[1.02] lg:text-7xl">
               {heroName}
             </h1>
             {heroDescription && (
-              <p className="mt-5 max-w-2xl text-sm leading-relaxed text-paper-100/78 sm:mt-6 sm:text-base">
+              <p className="mt-3 line-clamp-2 max-w-[34ch] text-xs leading-relaxed text-paper-100/78 sm:mt-6 sm:max-w-2xl sm:line-clamp-none sm:text-base">
                 {heroDescription}
               </p>
             )}
           </div>
           {heroMeta.length > 0 && (
-            <dl className="grid grid-cols-2 gap-x-5 gap-y-4 rounded-sm border border-paper-100/18 bg-warm-950/12 p-4 text-paper-100/76 backdrop-blur-[2px] sm:block sm:border-l sm:border-t-0 sm:border-r-0 sm:border-b-0 sm:bg-transparent sm:p-0 sm:pl-6 sm:backdrop-blur-none">
+            <dl data-home-hero-meta className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-paper-100/22 pt-3 text-paper-100/76 sm:block sm:border-l sm:border-t-0 sm:border-r-0 sm:border-b-0 sm:pt-0 sm:pl-6">
               {heroArchitectName && (
-                <div className="sm:mb-5">
-                  <dt className="text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42">
+                <div className="flex items-center gap-1 sm:mb-5 sm:block">
+                  <dt className="sr-only text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42 sm:not-sr-only">
                     {copy.architect}
                   </dt>
-                  <dd className="mt-1 text-sm text-paper-100">{heroArchitectName}</dd>
+                  <dd className="text-xs text-paper-100 sm:mt-1 sm:text-sm">{heroArchitectName}</dd>
                 </div>
               )}
               {heroYear && (
-                <div className="sm:mb-5">
-                  <dt className="text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42">
+                <div className="flex items-center gap-1 sm:mb-5 sm:block">
+                  <dt className="sr-only text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42 sm:not-sr-only">
                     {copy.year}
                   </dt>
-                  <dd className="mt-1 text-sm text-paper-100">{heroYear}</dd>
+                  <dd className="text-xs text-paper-100 sm:mt-1 sm:text-sm">{heroYear}</dd>
                 </div>
               )}
               {heroLocation && (
-                <div className="col-span-2">
-                  <dt className="text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42">
+                <div className="flex items-center gap-1 sm:block">
+                  <dt className="sr-only text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42 sm:not-sr-only">
                     {copy.location}
                   </dt>
-                  <dd className="mt-1 text-sm text-paper-100">{heroLocation}</dd>
+                  <dd className="text-xs text-paper-100 sm:mt-1 sm:text-sm">{heroLocation}</dd>
                 </div>
               )}
             </dl>
@@ -111,32 +111,14 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </div>
       </CinematicHero>
 
-      <section className="section-sm pt-6 sm:pt-8">
-        <div className="border-y border-subtle py-5">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {[
-              [visibleBuildings.length, copy.stats.buildings, `${prefix}/browse/buildings`],
-              [architects.length, copy.stats.architects, `${prefix}/browse/architects`],
-              [styles.length, copy.stats.styles, `${prefix}/browse/style`],
-              [visibleCountries.size, copy.stats.countries, `${prefix}/browse/country`],
-            ].map(([value, label, href]) => (
-              <Link key={label} href={String(href)} className="interactive-row min-w-0 rounded-sm px-2 py-1">
-                <p className="font-serif-display text-2xl leading-none text-primary sm:text-3xl">{value}</p>
-                <p className="mt-1 truncate text-[0.68rem] text-muted">{label}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <HomeSectionReveal scale>
-        <section className="section">
-          <div className="mb-6 grid gap-3 md:grid-cols-[minmax(0,1fr)_22rem] md:items-end">
+        <section data-home-section="entry" className="mb-8 sm:mb-16">
+          <div className="mb-4 grid gap-3 md:mb-6 md:grid-cols-[minmax(0,1fr)_22rem] md:items-end">
             <div>
               <p className="eyebrow mb-3">{lang === 'en' ? 'Choose a path' : lang === 'ja' ? '入口を選ぶ' : '选择进入方式'}</p>
               <h2 className="heading-2">{lang === 'en' ? 'Find what you need without guessing' : lang === 'ja' ? '迷わずに探す' : '不用猜，从这里开始'}</h2>
             </div>
-            <p className="caption md:text-right">
+            <p className="caption line-clamp-2 md:text-right">
               {lang === 'en'
                 ? 'Start from the state you are in now: known target, open browsing, or thesis direction.'
                 : lang === 'ja'
@@ -167,27 +149,36 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 body: lang === 'en' ? 'Start from social issues, site types, programs, and reference cases.' : lang === 'ja' ? '社会課題、敷地、用途、事例から方向を探します。' : '从社会问题、场地、用途和案例里找方向。',
                 action: t(lang, 'graduation'),
               },
-            ].map(item => (
-              <Link key={item.href} href={item.href} className="interactive-row group flex min-h-[13rem] flex-col justify-between px-3 py-5 transition-colors hover:bg-surface-muted/45 sm:px-4">
-                <div>
-                  <p className="caption tabular-nums">{item.index}</p>
-                  <h3 className="mt-5 text-2xl font-semibold leading-tight text-primary transition-colors group-hover:text-accent">
+            ].map(item => {
+              const isPrimary = item.index === '01'
+              return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={isPrimary
+                  ? 'interactive-row group flex min-h-[10.5rem] flex-col justify-between px-3 py-4 transition-colors hover:bg-surface-muted/45 md:min-h-[13rem] md:px-4 md:py-5'
+                  : 'interactive-row group flex min-h-14 items-center justify-between gap-4 border-t border-subtle px-3 py-3 transition-colors hover:bg-surface-muted/45 md:min-h-[13rem] md:flex-col md:items-stretch md:justify-between md:border-t-0 md:px-4 md:py-5'}
+              >
+                <div className={isPrimary ? '' : 'min-w-0'}>
+                  <p className={isPrimary ? 'caption tabular-nums' : 'hidden caption tabular-nums md:block'}>{item.index}</p>
+                  <h3 className={isPrimary ? 'mt-3 text-2xl font-semibold leading-tight text-primary transition-colors group-hover:text-accent md:mt-5' : 'text-base font-semibold leading-tight text-primary transition-colors group-hover:text-accent md:mt-5 md:text-2xl'}>
                     {item.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-secondary">{item.body}</p>
+                  <p className={isPrimary ? 'mt-3 text-sm leading-relaxed text-secondary md:mt-4' : 'mt-4 hidden text-sm leading-relaxed text-secondary md:block'}>{item.body}</p>
                 </div>
-                <div className="mt-8 flex items-center justify-between border-t border-subtle pt-4 text-sm font-medium text-primary">
+                <div className={isPrimary ? 'mt-6 flex items-center justify-between border-t border-subtle pt-3 text-sm font-medium text-primary md:mt-8 md:pt-4' : 'flex items-center gap-3 text-sm font-medium text-primary md:mt-8 md:justify-between md:border-t md:border-subtle md:pt-4'}>
                   <span>{item.action}</span>
                   <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
                 </div>
               </Link>
-            ))}
+              )
+            })}
           </div>
         </section>
       </HomeSectionReveal>
 
       <HomeSectionReveal>
-        <section className="section">
+        <section data-home-section="featured" className="mb-8 sm:mb-16">
           <SectionHeading
             title={featuredLabel}
             description={learningCopy.latestDescription}
@@ -230,11 +221,11 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
               </article>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-                {secondaryFeatured.slice(0, 4).map(b => {
+                {secondaryFeatured.slice(0, 4).map((b, index) => {
                   const arch = architects.find(a => a.slug === b.architect_slug)
                   const desc = cleanSnippet(displayText(b.description, lang) || displayText(b.significance, lang))
                   return (
-                    <Link key={b.id} href={`${prefix}/building/${b.slug}`} className="interactive-row group grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-subtle px-2 py-4">
+                    <Link data-home-secondary-item key={b.id} href={`${prefix}/building/${b.slug}`} className={`${index >= 2 ? 'hidden lg:grid' : 'grid'} interactive-row group grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-subtle px-2 py-4`}>
                       <div className="image-frame aspect-[4/3] rounded-md">
                         <EditorialImage src={b.cover_url} alt={displayName(b, lang)} label={displayName(b, lang)} sizes="8rem" className="image-zoom h-full w-full" />
                       </div>
@@ -252,19 +243,30 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </section>
       </HomeSectionReveal>
 
+      <section data-home-section="stats" className="section-sm mx-auto max-w-7xl sm:w-full sm:max-w-none sm:pt-6">
+        <HomeStats
+          prefix={prefix}
+          copy={copy}
+          visibleBuildings={visibleBuildings.length}
+          architects={architects.length}
+          styles={styles.length}
+          countries={visibleCountries.size}
+        />
+      </section>
+
       <HomeSectionReveal>
-        <section className="section pb-8 sm:pb-10">
+        <section data-home-section="architects" className="mb-8 pb-4 sm:mb-16 sm:pb-10">
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
               <h2 className="heading-3">{t(lang, 'architects')}</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-secondary">{copy.architectsDescription}</p>
+              <p className="mt-2 hidden max-w-2xl text-sm leading-relaxed text-secondary sm:block">{copy.architectsDescription}</p>
             </div>
-            <Link href={`${prefix}/browse/architects`} className="hidden text-sm text-muted transition-colors hover:text-primary sm:inline-flex">
+            <Link href={`${prefix}/browse/architects`} className="inline-flex text-xs text-muted transition-colors hover:text-primary sm:text-sm">
               {t(lang, 'viewAll')} →
             </Link>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {majorArchitects.map(architect => (
+          <div className="grid gap-0 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3">
+            {majorArchitects.map((architect, index) => (
               <HomeArchitectCard
                 key={architect.id}
                 architect={architect}
@@ -272,11 +274,47 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                 prefix={prefix}
                 visualUrl={architectVisualBySlug.get(architect.slug)}
                 count={buildingCountByArchitect.get(architect.slug) || 0}
+                className={index >= 3 ? 'hidden sm:grid' : undefined}
               />
             ))}
           </div>
         </section>
       </HomeSectionReveal>
+    </div>
+  )
+}
+
+function HomeStats({
+  prefix,
+  copy,
+  visibleBuildings,
+  architects,
+  styles,
+  countries,
+}: {
+  prefix: string
+  copy: ReturnType<typeof getHomeCopy>
+  visibleBuildings: number
+  architects: number
+  styles: number
+  countries: number
+}) {
+  const items = [
+    [visibleBuildings, copy.stats.buildings, `${prefix}/browse/buildings`],
+    [architects, copy.stats.architects, `${prefix}/browse/architects`],
+    [styles, copy.stats.styles, `${prefix}/browse/style`],
+    [countries, copy.stats.countries, `${prefix}/browse/country`],
+  ] as const
+  return (
+    <div data-home-stats className="border-y border-subtle py-5">
+      <div className="grid grid-cols-4 gap-2 sm:gap-3">
+        {items.map(([value, label, href]) => (
+          <Link key={label} href={href} className="interactive-row min-w-0 rounded-sm px-2 py-1">
+            <p className="font-serif-display text-lg leading-none text-primary sm:text-3xl">{value}</p>
+            <p className="mt-1 truncate text-[0.58rem] text-muted sm:text-[0.68rem]">{label}</p>
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }
@@ -287,34 +325,36 @@ function HomeArchitectCard({
   prefix,
   visualUrl,
   count,
+  className,
 }: {
   architect: Architect
   lang: string
   prefix: string
   visualUrl?: string | null
   count: number
+  className?: string
 }) {
   const portrait = getArchitectImageOverride(architect.slug)
   const portraitAlt = portrait?.alt[lang as keyof typeof portrait.alt] || portrait?.alt.en || displayName(architect, lang)
   const years = architect.birth_year ? `${architect.birth_year}–${architect.death_year || (lang === 'en' ? 'present' : lang === 'ja' ? '現在' : '至今')}` : ''
   const country = architect.nationalities?.[0] ? localizedNationality(architect.nationalities[0], lang) : ''
   return (
-    <Link href={`${prefix}/architect/${architect.slug}`} className="group grid min-h-[10.5rem] grid-cols-[7rem_minmax(0,1fr)] overflow-hidden border-y border-subtle transition-colors hover:bg-surface-muted/45">
+    <Link data-home-architect href={`${prefix}/architect/${architect.slug}`} className={`group grid min-h-16 grid-cols-[3.5rem_minmax(0,1fr)] overflow-hidden border-y border-subtle transition-colors hover:bg-surface-muted/45 sm:min-h-[10.5rem] sm:grid-cols-[7rem_minmax(0,1fr)] ${className || ''}`}>
       <ArchitectPortraitThumb
         src={portrait?.url}
         fallbackSrc={visualUrl}
         alt={portraitAlt}
         fallback={displayName(architect, lang)}
         className="h-full rounded-none"
-        sizes="8rem"
+        sizes="(max-width: 640px) 4rem, 8rem"
       />
-      <div className="flex min-w-0 flex-col justify-between py-4 pl-4 pr-2">
+      <div className="flex min-w-0 flex-col justify-between py-3 pl-3 pr-2 sm:py-4 sm:pl-4">
         <div>
-          <p className="caption mb-2">{[years, country].filter(Boolean).join(' · ')}</p>
+          <p className="caption mb-1">{[years, country].filter(Boolean).join(' · ')}</p>
           <h3 className="text-lg font-medium leading-snug text-primary transition-colors group-hover:text-accent">{displayName(architect, lang)}</h3>
         </div>
         {count > 0 && (
-          <p className="mt-4 text-xs text-muted">{count} {lang === 'en' ? 'works' : lang === 'ja' ? '作品' : '作品'}</p>
+          <p className="mt-4 hidden text-xs text-muted sm:block">{count} {lang === 'en' ? 'works' : lang === 'ja' ? '作品' : '作品'}</p>
         )}
       </div>
     </Link>

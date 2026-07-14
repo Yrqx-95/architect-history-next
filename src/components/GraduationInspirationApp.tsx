@@ -6,6 +6,7 @@ import { Children, createContext, useContext, useEffect, useMemo, useState, useS
 import { createPortal } from 'react-dom'
 import { graduationIssueGuides, isPublicGraduationCase, type GraduationBrief, type GraduationCandidateLocation, type GraduationCase, type GraduationIssue, type GraduationIssueGuide, type GraduationLocalizedList, type GraduationLocalizedText, type GraduationProgram, type GraduationSiteType } from '@/lib/graduation'
 import { proxySrc } from '@/lib/proxy-image'
+import ContextualFeedbackLink from '@/components/ContextualFeedbackLink'
 
 type Props = {
   lang: string
@@ -56,8 +57,8 @@ const labels = {
     navCases: '案例库',
     navRandom: '随机入口',
     navBrief: '老师资料',
-    homeTitle: '不知道做什么，也可以先看日本正在发生的问题',
-    homeBody: '先不用决定题目。选一个入口，看见问题、用途、场地和案例之间的关系，再决定下一步调查什么。',
+    homeTitle: '从课题、敷地和事例开始考虑毕业设计',
+    homeBody: '这是决定方向之前的调查用档案。可以从感兴趣的入口比较资料。',
     goIssues: '看社会问题',
     goSites: '看场地库',
     goCases: '看案例库',
@@ -91,8 +92,8 @@ const labels = {
     navCases: 'Cases',
     navRandom: 'Random Entry',
     navBrief: 'Brief',
-    homeTitle: 'Start with Japan’s social issues when you do not know what to design yet',
-    homeBody: 'Enter through a social issue, a building program, or a possible site, then decide what is worth researching further.',
+    homeTitle: 'Think about a graduation project through issues, sites, and cases',
+    homeBody: 'An archive for research before choosing a direction. Compare sources through the entry point that interests you.',
     goIssues: 'Open issues',
     goSites: 'Open sites',
     goCases: 'Open cases',
@@ -126,8 +127,8 @@ const labels = {
     navCases: '事例',
     navRandom: 'ランダム入口',
     navBrief: '課題資料',
-    homeTitle: 'まだ決まっていない時こそ、日本の社会課題から見る',
-    homeBody: '社会課題、用途、敷地のどこからでも入り、空間で応答できる可能性を見つけていきます。',
+    homeTitle: '課題、敷地、事例から卒業設計を考える',
+    homeBody: '方向を決める前の調査用アーカイブです。気になる入口から資料を比較できます。',
     goIssues: '課題を見る',
     goSites: '敷地を見る',
     goCases: '事例を見る',
@@ -588,10 +589,16 @@ function ResearchBar({ prefix }: { prefix: string }) {
   const count = Number(Boolean(state.issueId)) + Number(Boolean(state.siteId)) + state.caseIds.length
 
   return (
-    <div className="graduation-research-bar flex min-h-14 items-center justify-between border-b border-subtle">
-      <p className="hidden text-xs text-muted sm:block">
-        {localizedUiText(lang, '把一个问题、一个场地和少量案例收在一起。', 'Keep one issue, one site, and a few cases together.', '一つの課題、一つの敷地、少数の事例をまとめます。')}
-      </p>
+    <div className="graduation-research-bar flex min-h-14 items-center justify-between gap-4 border-b border-subtle">
+      <div className="flex min-w-0 items-center gap-4">
+        <p className="hidden text-xs text-muted sm:block">
+          {localizedUiText(lang, '把一个问题、一个场地和少量案例收在一起。', 'Keep one issue, one site, and a few cases together.', '一つの課題、一つの敷地、少数の事例をまとめます。')}
+        </p>
+        <ContextualFeedbackLink
+          lang={lang}
+          className="inline-flex min-h-10 shrink-0 items-center border-b border-default text-xs font-semibold text-secondary transition-colors hover:border-[color:var(--ui-accent)] hover:text-accent"
+        />
+      </div>
       <button
         type="button"
         className="ml-auto inline-flex min-h-10 items-center gap-2 border-b border-default text-sm font-semibold text-primary transition-colors hover:border-[color:var(--ui-accent)] hover:text-accent"
@@ -722,13 +729,14 @@ function ResearchSaveButton({ kind, id, prefix }: { kind: 'issue' | 'site' | 'ca
   )
 }
 
-function GraduationHero({ copy, prefix, title, body, actions, aside }: {
+function GraduationHero({ copy, prefix, title, body, actions, aside, media }: {
   copy: Copy
   prefix: string
   title: string
   body: string
   actions?: ReactNode
   aside?: ReactNode
+  media?: ReactNode
 }) {
   return (
     <section className="graduation-hero grid gap-8 border-b border-subtle pb-10 lg:grid-cols-[minmax(0,1.1fr)_24rem] lg:items-end">
@@ -743,7 +751,29 @@ function GraduationHero({ copy, prefix, title, body, actions, aside }: {
           {aside}
         </aside>
       )}
+      {media && <div className="lg:col-span-2">{media}</div>}
     </section>
+  )
+}
+
+function GraduationHeroMedia({ lang }: { lang: GraduationLanguage }) {
+  return (
+    <figure>
+      <div className="relative aspect-[16/7] overflow-hidden bg-surface-muted">
+        <Image
+          src="/images/graduation/cases/case-002-kamikatsu-zero-waste-center.jpeg"
+          alt={localizedUiText(lang, '上胜零废弃中心', 'Kamikatsu Zero Waste Center', '上勝ゼロ・ウェイストセンター')}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+      <figcaption className="mt-2 text-xs leading-5 text-muted">
+        {localizedUiText(lang, '案例图片：上胜零废弃中心', 'Reference image: Kamikatsu Zero Waste Center', '事例画像：上勝ゼロ・ウェイストセンター')} ·{' '}
+        <a className="underline decoration-subtle underline-offset-4 hover:text-primary" href="https://commons.wikimedia.org/wiki/File:Kamikatsucho-zero-waste-center.jpeg" target="_blank" rel="noreferrer">Wikimedia Commons · CC0</a>
+      </figcaption>
+    </figure>
   )
 }
 
@@ -765,6 +795,7 @@ function HomePage({ copy, prefix, issues, programs, cases }: {
         prefix={prefix}
         title={copy.homeTitle}
         body={copy.homeBody}
+        media={<GraduationHeroMedia lang={lang} />}
         aside={(
           <>
             <h2 className="text-xl font-semibold text-primary">{copy.scope}</h2>
@@ -1052,36 +1083,21 @@ function ListPage({ copy, prefix, type, issues, sites, cases }: {
 
       <SubNav copy={copy} prefix={prefix} active={type} />
 
-      <section id="graduation-filters" className="graduation-filter-console scroll-mt-28 space-y-7 border border-subtle px-4 py-5 sm:px-5">
-        <div className="grid gap-4 border-b border-subtle pb-5 lg:grid-cols-[10rem_minmax(0,1fr)_auto] lg:items-end">
-          <div>
-            <p className="text-xs font-semibold text-primary">{copy.filters}</p>
-            <p className="mt-2 text-xs leading-5 text-muted">
-              {langAware(copy, '先缩小范围，再进入条目。', 'Narrow first, then open an item.', '先に絞り、項目を開く。')}
-            </p>
+      <section id="graduation-filters" className="scroll-mt-28 space-y-5 border-y border-subtle py-5">
+        <div className="flex flex-col gap-3 border-b border-subtle pb-4 sm:flex-row sm:items-end">
+          <div className="min-w-0 flex-1">
+            <label className="mb-2 block text-xs font-semibold text-primary" htmlFor="graduation-filter-query">{copy.filters}</label>
+            <input id="graduation-filter-query" className="min-h-10 w-full border-0 border-b border-default bg-transparent px-0 text-base font-medium text-primary outline-none transition-colors placeholder:text-soft focus:border-[color:var(--ui-accent)]" value={query} onChange={event => {
+              setFilterParam('q', event.target.value)
+            }} placeholder={filterPlaceholder} />
           </div>
-          <input className="min-h-12 border-0 border-b border-default bg-transparent px-0 text-base font-medium text-primary outline-none transition-colors placeholder:text-soft focus:border-[color:var(--ui-accent)]" value={query} onChange={event => {
-            setFilterParam('q', event.target.value)
-          }} placeholder={filterPlaceholder} />
-          <button className="min-h-11 border-b border-default px-0 text-sm font-semibold text-primary transition-colors hover:border-[color:var(--ui-accent)] hover:text-accent lg:px-1" onClick={() => downloadJson(exportName, items)}>{copy.exportJson}</button>
+          <button className="min-h-10 shrink-0 border-b border-default px-0 text-sm font-semibold text-primary transition-colors hover:border-[color:var(--ui-accent)] hover:text-accent" onClick={() => downloadJson(exportName, items)}>{copy.exportJson}</button>
         </div>
 
         {type === 'issues' ? (
-          <div className="grid gap-5 border-b border-subtle pb-5 lg:grid-cols-[10rem_minmax(0,1fr)]">
-            <div>
-              <h2 className="text-sm font-semibold text-primary">{langAware(copy, '先选一个大方向', 'Choose a broad direction', '大きな方向を選ぶ')}</h2>
-              <p className="mt-2 text-xs leading-5 text-muted">
-                {langAware(
-                  copy,
-                  '不确定时先点一个分类；之后再用标签、场地和用途缩小。',
-                  'If unsure, choose one category first, then narrow by tags, sites, and programs.',
-                  '迷う時は分類を一つ選び、その後タグ、敷地、用途で絞ります。'
-                )}
-              </p>
-            </div>
-            <div className="grid gap-x-5 gap-y-2 self-start sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-label={copy.filters}>
+          <div className="grid gap-x-4 gap-y-1 border-b border-subtle pb-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6" aria-label={copy.filters}>
               <button
-                className={`flex min-h-10 items-center justify-between gap-3 border-b px-0 text-left text-sm font-medium transition-colors ${category ? 'border-transparent text-secondary hover:border-default hover:text-primary' : 'border-[color:var(--ui-accent)] text-primary'}`}
+                className={`flex min-h-9 items-center justify-between gap-3 border-b px-0 text-left text-sm font-medium transition-colors ${category ? 'border-transparent text-secondary hover:border-default hover:text-primary' : 'border-[color:var(--ui-accent)] text-primary'}`}
                 onClick={() => setIssueCategory('')}
               >
                 <span>{langAware(copy, '全部', 'All', 'すべて')}</span> <span className="text-xs text-muted">{publicIssues.length}</span>
@@ -1089,14 +1105,13 @@ function ListPage({ copy, prefix, type, issues, sites, cases }: {
               {categoryOptions.map(item => (
                 <button
                   key={item.id}
-                  className={`flex min-h-10 items-center justify-between gap-3 border-b px-0 text-left text-sm font-medium transition-colors ${category === item.id ? 'border-[color:var(--ui-accent)] text-primary' : 'border-transparent text-secondary hover:border-default hover:text-primary'}`}
+                  className={`flex min-h-9 items-center justify-between gap-3 border-b px-0 text-left text-sm font-medium transition-colors ${category === item.id ? 'border-[color:var(--ui-accent)] text-primary' : 'border-transparent text-secondary hover:border-default hover:text-primary'}`}
                   onClick={() => setIssueCategory(category === item.id ? '' : item.id)}
                   title={categoryHint(item.id, lang)}
                 >
                   <span>{categoryLabel(item.id, lang)}</span> <span className="text-xs text-muted">{item.count}</span>
                 </button>
               ))}
-            </div>
           </div>
         ) : (
           <div className="grid gap-x-5 gap-y-2 border-b border-subtle pb-5 sm:grid-cols-2 lg:grid-cols-4" aria-label={copy.filters}>
@@ -1497,7 +1512,7 @@ function CaseDetail({ copy, prefix, item, issues }: {
       ]}
     >
       <section className="grid gap-5 md:grid-cols-[1fr_0.7fr]">
-        <CaseVisual item={item} />
+        <CaseVisual lang={lang} item={item} />
         <InfoBlock title={langAware(copy, '基本信息', 'Basic info', '基本情報')}>
           <p className="text-secondary">{caseLocation(item, lang)}{item.year ? ` · ${item.year}` : ''}</p>
           <p className="text-secondary">{item.architect || langAware(copy, '建筑师待补充', 'Architect to confirm', '建築家未確認')}</p>
@@ -2226,7 +2241,7 @@ function CaseCard({ prefix, item, relationNote, eager = false }: { prefix: strin
 
   return (
     <Link className="interactive-row group grid border-t border-subtle px-2 py-5 sm:grid-cols-[9.5rem_minmax(0,1fr)] sm:gap-4" href={`${prefix}/cases/${item.id}`}>
-      <CaseVisual compact item={item} eager={eager} />
+      <CaseVisual compact lang={lang} item={item} eager={eager} />
       <span className="min-w-0 pt-4 sm:pt-0">
         <span className="block text-lg font-semibold leading-snug text-primary transition-colors group-hover:text-accent">{caseName(item, lang)}</span>
         {meta && <span className="mt-2 block text-xs leading-5 text-muted">{meta}</span>}
@@ -2257,7 +2272,7 @@ function CaseArchiveRow({ prefix, item, relationNote, eager = false }: { prefix:
       className="interactive-row group grid gap-5 border-b border-subtle px-2 py-5 last:border-b-0 md:grid-cols-[15rem_minmax(0,1fr)] lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-7 lg:items-start"
       href={`${prefix}/cases/${item.id}`}
     >
-      <CaseVisual compact item={item} eager={eager} />
+      <CaseVisual compact lang={lang} item={item} eager={eager} />
       <span className="min-w-0">
         <span className="grid gap-2 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
           <span className="block text-xl font-semibold leading-snug text-primary transition-colors group-hover:text-accent">{caseName(item, lang)}</span>
@@ -2277,10 +2292,21 @@ function CaseArchiveRow({ prefix, item, relationNote, eager = false }: { prefix:
   )
 }
 
-function CaseVisual({ compact = false, item, eager = false }: { compact?: boolean; item?: GraduationCase; eager?: boolean }) {
-  const rawSrc = item?.image_url && item.image_url !== '/images/graduation/case-placeholder.svg'
-    ? item.image_url
-    : '/images/graduation/case-placeholder.svg'
+function CaseVisual({ compact = false, lang, item, eager = false }: { compact?: boolean; lang: GraduationLanguage; item?: GraduationCase; eager?: boolean }) {
+  const rawSrc = item?.image_url && item.image_url !== '/images/graduation/case-placeholder.svg' ? item.image_url : ''
+
+  if (!rawSrc) {
+    const pendingLabel = item?.id === 'CASE-031'
+      ? localizedUiText(lang, '项目包含多个地点，封面图待确认', 'Multiple locations; cover image pending review', '複数地点のプロジェクト。カバー画像は確認中')
+      : localizedUiText(lang, '封面图待确认', 'Cover image pending review', 'カバー画像は確認中')
+
+    return (
+      <div className={`image-frame flex items-center justify-center rounded-sm bg-surface-muted px-4 text-center text-xs leading-5 text-muted ${compact ? 'aspect-[5/3]' : 'aspect-[5/3]'}`}>
+        {pendingLabel}
+      </div>
+    )
+  }
+
   const src = proxySrc(rawSrc, compact ? 900 : 1400)
   const isProxiedImage = src.startsWith('/api/image-proxy')
 
