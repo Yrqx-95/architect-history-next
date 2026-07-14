@@ -1,6 +1,6 @@
 # Feature Status
 
-Last updated: 2026-06-10
+Last updated: 2026-07-15
 
 Purpose: identify what is production, what has been validated, what remains prototype, and what has been archived.
 
@@ -8,7 +8,7 @@ Purpose: identify what is production, what has been validated, what remains prot
 
 | Feature | Status | Notes |
 |---|---|---|
-| Home | Production | Main entry page |
+| Home | Production | Main entry page; PR #165 is merged and released in Reviewed production release `29349915435`. Homepage uses one semantic order, Hero → entry → featured → stats → architects, with one stats DOM block. |
 | Building detail | Production | Core archive/learning entry surface |
 | Architect detail | Production | Core archive/learning entry surface |
 | Search | Production | API and UI are live |
@@ -22,7 +22,7 @@ Purpose: identify what is production, what has been validated, what remains prot
 | Code topics | Production | Learning/code topic surface |
 | Image proxy | Production | Runtime image safety support |
 | Data audit | Production governance | Release/data safety gate, not user-facing |
-| Minimal tests | Production governance | Smoke safety net |
+| Minimal tests | Production governance | Current release baseline: 73 unit files / 250 tests, 29 / 29 production E2E, and 4,446 generated static pages. |
 
 ## Validated
 

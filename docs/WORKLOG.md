@@ -2,6 +2,45 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-15 - PR #165 Merged And Reviewed Production Released
+
+### Intent
+
+- Record the immutable merge and production-release facts for the visible-content and mobile-homepage hierarchy fix.
+- Establish the rollback points before the repository status documents are synchronized.
+
+### Changes
+
+- PR #165 was marked Ready and merged with ordinary merge commit `fb9a6f17fe7fbc904ee122b0d8db9fff08290381`; final PR head was `e2c605a805b46f7d0824d377a10d44d3e3a121cd`.
+- Reviewed production release `29349915435` ran from `2026-07-14T16:30:20Z` through `2026-07-14T16:41:47Z` and deployed the merge commit.
+- Cloudflare Worker `architect-history-next` deployed Version ID `7a3b6b82-738e-47ba-8687-6d24be3329db` to `archistory.app/*` and `www.archistory.app/*`.
+- Production homepage contract is one semantic order at every breakpoint: Hero → entry → featured → stats → architects, with one stats DOM block.
+
+### Validation
+
+- Release quality gate, complete test suite, build/deploy, and production route semantics all passed.
+- Current release baseline: 73 unit files / 250 tests, 29 / 29 production E2E, and 4,446 static pages.
+- Online QA passed at 320 x 568, 390 x 844, 430 x 932, and 1440 x 900: no horizontal overflow; mobile showed two secondary works and three architects; DOM, visual, and sampled Tab focus order matched.
+- `/zh`, `/en`, `/ja`, the three primary homepage entries, and the specified building, graduation, feedback, and browse smoke routes returned HTTP 200 with no console/page errors observed in the sample.
+
+### Remaining Risk
+
+- Cloudflare token lacks `All Zones` permissions; the release still succeeded for the target routes, but future route administration may be incomplete.
+- GitHub Actions reported Node 20 deprecation warnings for `actions/checkout@v4` and `actions/setup-node@v4`.
+- Full WebKit E2E was not run or added to CI; the one-off 390px WebKit check remains targeted evidence only.
+- This release QA was a bounded route and viewport sample, not a full-site audit or real screen-reader/iOS/Android Safari test.
+
+### Rollback Scope
+
+- Source rollback point: PR head `e2c605a805b46f7d0824d377a10d44d3e3a121cd`.
+- Production merge point: `fb9a6f17fe7fbc904ee122b0d8db9fff08290381`.
+- Cloudflare deployed version: `7a3b6b82-738e-47ba-8687-6d24be3329db`.
+- No rollback was executed.
+
+### Next Step
+
+- Synchronize the current status documents, then govern the next writer lane through read-only worktree inspection. Do not reopen Graduation G6–G10 or rebuild the Top 50 queue.
+
 ## 2026-07-15 - PR #165 Visible Content And Mobile Homepage Hierarchy
 
 ### Intent

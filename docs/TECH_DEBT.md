@@ -3,6 +3,32 @@
 > 按优先级分级：🔴 高 → 🟡 中 → 🟢 低  
 > 每个条目包含：问题、位置、影响、建议修复方向
 
+## 2026-07-15 生产发布后确认的运维债
+
+### A. Cloudflare token 的 route 管理权限不完整
+
+- **证据**：Reviewed production release `29349915435` 成功部署 `architect-history-next`，但 Wrangler 报告 token 没有 `All Zones` 权限。
+- **影响**：当前目标 routes 已成功部署并保持，但以后跨 zone 管理 routes 时可能无法完整读取或维护既有 route。
+- **下一步**：单独补齐最小必要的 Cloudflare zone 权限并重新验证；不在文档同步或 PR #165 范围内处理。
+
+### B. GitHub Actions 使用 Node 20 的 deprecation warning
+
+- **证据**：release run 对 `actions/checkout@v4` 与 `actions/setup-node@v4` 报 Node.js 20 deprecation warning；runner 强制使用 Node 24，本次 workflow 成功。
+- **影响**：未来 runner 兼容策略变化可能使发布工作流出现新的 warning 或失败。
+- **下一步**：单独评估 action 版本升级与 release workflow 回归，不在本阶段修改 workflow。
+
+### C. Full WebKit E2E 尚未进入 CI
+
+- **证据**：PR #165 只做了 390px WebKit 定向检查；完整 Playwright E2E 仍为 Chromium 29 / 29，WebKit 未永久加入项目或 release workflow。
+- **影响**：跨浏览器键盘、布局和字体差异仍有未覆盖面。
+- **下一步**：单独评估 CI 安装时间、缓存和失败诊断成本，再决定是否加入 WebKit 项目。
+
+### D. 图片权威未确定前不迁移
+
+- **证据**：当前发布与状态同步没有改变图片权威，也没有执行 curated image registry 迁移。
+- **影响**：`images` 表、JSON 注册表和 curated image 迁移之间仍需保持清晰边界。
+- **下一步**：先完成图片权威决策和 reviewed migration 设计；在此之前不得把“迁移 v3 并导入 JSON”当作当前默认动作。
+
 ---
 
 ## 🔴 高优先级（影响用户体验或数据正确性）
@@ -131,7 +157,7 @@
 - **位置**：`db/migrations/v3-curated-image-registry.sql`
 - **问题**：SQL 写了但表未在 Supabase 创建
 - **影响**：curated_images 数据继续以 JSON 文件形式存在
-- **建议**：执行迁移并将 JSON 数据导入
+- **当前决定**：图片权威未确定前不执行迁移，也不将 JSON 数据导入生产。待权威决策、dry-run、rollback 和 release 门禁齐备后再单独评估。
 
 ### 18. `db/image-registry.generated.json` 应加入 .gitignore
 
