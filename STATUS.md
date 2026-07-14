@@ -30,7 +30,7 @@ It is not only a database and not yet a full study platform. The current product
 - Graduation runtime: Supabase-only compatibility/profile/building composition
 - Search: zh / en / ja function aliases, graduation keywords, five composable filters, duplicate-free building results
 - Production deployment: reviewed Cloudflare release workflow
-- Content trust P0 baseline: 927 warnings / 2624 info; 38 buildings missing source metadata, 806 missing database source text; versioned Top 50 queue prepared
+- Versioned content-trust P0 snapshot (generated 2026-07-13T07:25:05.820Z at baseline commit `1e369888680245aa637dddabdf886cf9a7930af0`; not a live recount; source: `docs/CONTENT_TRUST_NEXT_PHASE_P0.md`): 0 errors / 927 warnings / 2624 info; 38 buildings missing source metadata; 806 missing database source text. The versioned Top 50 queue is prepared.
 
 ## Current Focus
 
