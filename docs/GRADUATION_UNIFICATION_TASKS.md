@@ -126,6 +126,8 @@ Library batch 002 已完成生产迁移与发布。Supabase migration `graduatio
 
 2026-07-14 后续人工审核发现 Library batch 002 的 CASE-130 Book Mountain 官方链接在建筑、profile、3 条 function assignment 和 compatibility payload 中被统一截断为 `.../book-`。独立修正批 `architect-intro-p0-data-001` 已完成生产迁移与发布：PR #162 合并后，Supabase migration `architect_intro_p0_data_001`（`20260714112158`）修复 Grafton / UNEMORI 身份、Town House 与 TSE 建筑数据、Book Mountain 六处链接，并删除 Town House 的 3 张错配 Unsplash 图片。写后旧 slug、错图与旧截断链接均为 0，RLS/policy 和 advisor 基线不变；Reviewed production release `29328686040` 成功，三语旧 Town House slug 与旧 API 均 308，新 Town House / TSE / Book Mountain 页面均 200。详见 `ARCHITECT_INTRO_P0_DATA_001.md`。
 
+2026-07-14 `architect-intro-p1-data-001` 已完成 reviewed 决策、guarded migration、精确 rollback、隔离 PostgreSQL dry-run 与生产前置检查，覆盖 6 位建筑师和 7 座既有建筑的中日显示名、年份、地点与官网来源。当前 6/6 + 7/7 生产快照仍精确匹配，写前基线为 148 architects / 942 buildings / 7289 images；本批明确不新增建筑或图片、不改 slug/type、不局部补 `architect_id`，并继续与 draft PR #160 解耦。生产尚未写入；下一步为合并本批 PR 后执行 migration、写后不变量验证与三语页面验证。详见 `ARCHITECT_INTRO_P1_DATA_001.md`。
+
 Museum batch 001 已建立只读审核队列，覆盖 CASE-041/045/047/051/052/053/054/055/058/060/109/118/124/132 共 14 条。实时核验确认 14 个 Commons 文件均存在且许可可追溯；13 张当前图片内容正确，CASE-051 的施工中图片被拒绝并找到 2024 年 Souka Kinmei / CC0 完工替代图。CASE-124 的旧官方 URL 404，已找到现行 Henning Larsen 页面；CASE-124/132 的准确作者与 CC BY-SA 4.0 许可已查清。该队列仍不授权数据库写入；下一步先查生产冲突并形成版本化正式决策。详见 `GRADUATION_NEW_BUILDING_MUSEUM_001_TRIAGE.md`。
 
 Museum batch 001 的生产只读预检为 0 building slug conflict、0 CASE profile conflict，`museum` function 已存在；Kengo Kuma、Shigeru Ban、Zaha Hadid 三个主体建筑师已存在，按姓名复查未发现其余九个建筑师的别名重复。14 条版本化正式决策已建立并通过结构测试：全部身份与 museum 用途批准，CASE-051 替换施工图，CASE-124/132 修正作者与许可，CASE-118/124 更新现行官方 URL；文件仍明确禁止生产写入。下一步准备 guarded migration、rollback 与 dry-run。

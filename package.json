@@ -27,6 +27,7 @@
     "data:audit": "tsx scripts/audit-data.ts",
     "data:verify-architect-identity-aravena-001": "node scripts/verify-architect-identity-aravena-001-dry-run.mjs",
     "data:verify-architect-intro-p0-001": "node scripts/verify-architect-intro-p0-data-001-dry-run.mjs",
+    "data:verify-architect-intro-p1-001": "node scripts/verify-architect-intro-p1-data-001-dry-run.mjs",
     "data:plan-eras": "tsx scripts/plan-era-slugs.ts",
     "data:review-era-identity": "tsx scripts/build-era-identity-cleanup-review.ts",
     "data:review-era-year-unique": "tsx scripts/build-era-remaining-year-unique-review-queue.ts",
