@@ -112,10 +112,10 @@
     },
     {
       "case_id": "CASE-130", "decision": "approved",
-      "canonical_building": {"slug": "book-mountain-spijkenisse", "name_zh": "斯派克尼瑟书山图书馆", "name_en": "Book Mountain Spijkenisse", "name_ja": "ブック・マウンテン・スパイケニッセ", "year_start": 2012, "city": "斯派克尼瑟", "country": "荷兰", "country_code": "NL", "type_slug": "cultural", "architect_slug": "mvrdv", "official_url": "https://www.mvrdv.com/projects/126/book-"},
+      "canonical_building": {"slug": "book-mountain-spijkenisse", "name_zh": "斯派克尼瑟书山图书馆", "name_en": "Book Mountain Spijkenisse", "name_ja": "ブック・マウンテン・スパイケニッセ", "year_start": 2012, "city": "斯派克尼瑟", "country": "荷兰", "country_code": "NL", "type_slug": "cultural", "architect_slug": "mvrdv", "official_url": "https://www.mvrdv.com/projects/126/book-mountain"},
       "function_slugs": ["library", "community-center", "mixed-use"],
       "identity_evidence": ["MVRDV records 2003–2012 realisation in Spijkenisse and library, education centre, auditorium, offices and retail uses."],
-      "evidence_urls": ["https://www.mvrdv.com/projects/126/book-"],
+      "evidence_urls": ["https://www.mvrdv.com/projects/126/book-mountain"],
       "image": {"status": "approved", "source_url": "https://commons.wikimedia.org/wiki/File:Boekenberg_DSCF1911.JPG", "license": "CC BY-SA 3.0", "credit": "G.Lanting / Wikimedia Commons", "visual_evidence": "High-resolution interior clearly shows the terraced book mountain beneath the glass roof."}
     },
     {

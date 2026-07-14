@@ -39,9 +39,9 @@
     {
       "id": "4ec76862-cf0a-505f-82fc-e01b8fca9274",
       "slug": "unemori-architects",
-      "name_zh": "畷森泰行建筑设计事务所",
+      "name_zh": "畝森泰行建筑设计事务所",
       "name_en": "UNEMORI ARCHITECTS",
-      "name_ja": "畷森泰行建築設計事務所",
+      "name_ja": "畝森泰行建築設計事務所",
       "official_url": "https://unemori-archi.com/",
       "is_new": true
     },
@@ -354,7 +354,7 @@
       "country_code": "NL",
       "type_slug": "cultural",
       "architect_slug": "mvrdv",
-      "official_url": "https://www.mvrdv.com/projects/126/book-",
+      "official_url": "https://www.mvrdv.com/projects/126/book-mountain",
       "architect_id": "4a1fdf1b-ed02-45f6-9b9c-95ae623972df",
       "status": "published"
     },
@@ -1013,7 +1013,7 @@
       ],
       "plan_url": null,
       "section_url": null,
-      "source_url": "https://www.mvrdv.com/projects/126/book-",
+      "source_url": "https://www.mvrdv.com/projects/126/book-mountain",
       "publication_status": "published"
     },
     {
@@ -1359,7 +1359,7 @@
       "function_slug": "library",
       "is_primary": true,
       "confidence": "1.000",
-      "evidence_url": "https://www.mvrdv.com/projects/126/book-",
+      "evidence_url": "https://www.mvrdv.com/projects/126/book-mountain",
       "evidence_note": "MVRDV records 2003–2012 realisation in Spijkenisse and library, education centre, auditorium, offices and retail uses.",
       "reviewed_at": "2026-07-12T00:00:00Z"
     },
@@ -1369,7 +1369,7 @@
       "function_slug": "community-center",
       "is_primary": false,
       "confidence": "1.000",
-      "evidence_url": "https://www.mvrdv.com/projects/126/book-",
+      "evidence_url": "https://www.mvrdv.com/projects/126/book-mountain",
       "evidence_note": "MVRDV records 2003–2012 realisation in Spijkenisse and library, education centre, auditorium, offices and retail uses.",
       "reviewed_at": "2026-07-12T00:00:00Z"
     },
@@ -1379,7 +1379,7 @@
       "function_slug": "mixed-use",
       "is_primary": false,
       "confidence": "1.000",
-      "evidence_url": "https://www.mvrdv.com/projects/126/book-",
+      "evidence_url": "https://www.mvrdv.com/projects/126/book-mountain",
       "evidence_note": "MVRDV records 2003–2012 realisation in Spijkenisse and library, education centre, auditorium, offices and retail uses.",
       "reviewed_at": "2026-07-12T00:00:00Z"
     },

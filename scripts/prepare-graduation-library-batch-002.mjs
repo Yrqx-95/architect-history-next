@@ -327,9 +327,9 @@ const architectDrafts = {
     official_url: 'https://www.c-and-a.co.jp/en/',
   },
   'unemori-architects': {
-    name_zh: '畷森泰行建筑设计事务所',
+    name_zh: '畝森泰行建筑设计事务所',
     name_en: 'UNEMORI ARCHITECTS',
-    name_ja: '畷森泰行建築設計事務所',
+    name_ja: '畝森泰行建築設計事務所',
     official_url: 'https://unemori-archi.com/',
   },
   'mitsuru-senda-environment-design-institute': {
