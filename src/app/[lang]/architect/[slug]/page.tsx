@@ -165,7 +165,7 @@ export default async function ArchitectPage({ params }: { params: Promise<{ lang
   const hasLocalizedBio = lang === 'en'
     ? rawBioClean.length >= 60
     : /[\u3400-\u9fffぁ-ゟァ-ヿ]/.test(rawBioClean) && rawBioClean.length >= 40
-  const usesFallbackBio = !contentOverlay && !hasLocalizedBio
+  const usesFallbackBio = contentOverlay?.maturity === 'introductory' || (!contentOverlay && !hasLocalizedBio)
   const bioText = contentOverlay ? (rawBioText || '') : (hasLocalizedBio ? rawBioClean : fallbackBioText)
   const coreIdeas: string[] = contentOverlay
     ? []

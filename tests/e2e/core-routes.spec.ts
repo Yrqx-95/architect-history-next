@@ -74,11 +74,16 @@ test.describe('core public routes', () => {
     await page.goto('/zh/building/auerbacher-home')
     await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')
 
-    await page.goto('/zh/architect/aldo-rossi')
+    await page.goto('/zh/architect/junya-ishigami')
     await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')
 
     await page.goto('/zh/building/church-of-light')
     await expect(page.getByTestId('content-maturity-note')).toHaveCount(0)
+  })
+
+  test('template-generated architect profiles remain disclosed as introductory guidance', async ({ page }) => {
+    await page.goto('/zh/architect/anna-heringer')
+    await expect(page.getByTestId('content-maturity-note')).toContainText('尚未完成逐条来源核查')
   })
 
   test('manually reviewed building content exposes its institutional source', async ({ page }) => {

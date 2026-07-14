@@ -1,6 +1,6 @@
 # Document Index
 
-Last updated: 2026-07-13
+Last updated: 2026-07-14
 
 Purpose: help a new developer understand what is current product documentation, what is archived history, and what has been superseded.
 
@@ -39,6 +39,7 @@ Current docs under `docs/`:
 - `docs/CONTENT_TRUST_3WTC_001_EXECUTION.md` — guarded 3 WTC metadata and primary-image repair, dry-run, rollback, and release gates.
 - `docs/DUPLICATE_PRIMARY_IMAGE_REVIEW_001.md` — formal keep/demote and attribution-repair decisions for the first four Commons-vs-Commons primary-image conflicts.
 - `docs/reports/DUPLICATE_PRIMARY_IMAGE_AUDIT_2026-07-13.md` — read-only production audit and review priorities for buildings with multiple primary image rows.
+- `docs/reports/ARCHITECT_INTRODUCTORY_REVIEW_2026-07-14.md` — read-only review of the 24 production architect profiles still marked introductory, including identity, relationship, localization, year, and source blockers.
 - `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
 - `docs/graduation/` — current V1 Graduation Inspiration Library handoff docs, including wireframes, random behavior, content guide, and source/image policy.
 
