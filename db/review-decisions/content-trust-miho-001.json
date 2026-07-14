@@ -1,0 +1,23 @@
+{
+  "decision": "approved",
+  "scope": "content-only",
+  "building_slug": "miho-museum",
+  "building_id": "425a209f-944d-4acf-88e0-695653e3e451",
+  "reviewed_at": "2026-07-14",
+  "sources": [
+    {
+      "url": "https://www.miho.jp/en/architecture/approach/",
+      "supports": ["architect", "location", "opening", "underground_strategy", "approach_sequence", "site_relationship"]
+    },
+    {
+      "url": "https://www.miho.jp/en/intro/history/",
+      "supports": ["opening", "collection_context", "location"]
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:241119_MIHO_MUSEUM_Koga_Shiga_pref_Japan08s3.jpg",
+      "supports": ["existing_primary_image_identity", "open_license_metadata"]
+    }
+  ],
+  "image_decision": "retain_existing_unique_primary; no image mutation",
+  "notes": "Add only names, official source, and trilingual content. Existing architect, year, city, country, type, era, and unique primary image remain unchanged."
+}
