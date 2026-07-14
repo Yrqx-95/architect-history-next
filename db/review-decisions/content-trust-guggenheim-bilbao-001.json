@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "batch_id": "content-trust-guggenheim-bilbao-001",
+  "reviewed_at": "2026-07-14",
+  "status": "reviewed",
+  "scope": {"building_slug": "guggenheim-bilbao", "graduation_linked": false},
+  "decision": "ready-for-content-preparation",
+  "confidence": "high",
+  "evidence": [
+    {"source_type": "official-institution", "url": "https://www.guggenheim-bilbao.eus/en/the-building", "claim": "The Guggenheim Museum Bilbao identifies Frank Gehry as architect and describes the museum as a sculptural building with titanium, limestone, glass, and a central atrium."},
+    {"source_type": "official-institution", "url": "https://www.guggenheim-bilbao.eus/en/the-building/the-construction", "claim": "The museum records construction between October 1993 and October 1997 and the riverfront industrial-site transformation."},
+    {"source_type": "open-license-image", "url": "https://commons.wikimedia.org/wiki/File:Museo_Guggenheim,_Bilbao_(31273245344).jpg", "claim": "The existing unique primary image identifies the building, photographer Fred Romero, and CC BY 2.0 license."}
+  ],
+  "required_actions": ["Add official source and trilingual description/significance; retain existing primary image and all existing metadata relations."]
+}
