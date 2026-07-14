@@ -1,7 +1,7 @@
 -- Guarded rollback for content_trust_miho_001.
 UPDATE public.buildings
 SET
-  name_zh = '',
+  name_zh = '美秀美术馆',
   name_ja = 'ミホ・ミュージアム',
   official_url = NULL,
   description = NULL,
@@ -21,7 +21,7 @@ BEGIN
     SELECT 1 FROM public.buildings
     WHERE id = '425a209f-944d-4acf-88e0-695653e3e451'::uuid
       AND slug = 'miho-museum'
-      AND name_zh = ''
+      AND name_zh = '美秀美术馆'
       AND name_ja = 'ミホ・ミュージアム'
       AND official_url IS NULL
       AND description IS NULL
