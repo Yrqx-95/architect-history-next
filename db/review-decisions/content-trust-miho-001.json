@@ -19,5 +19,5 @@
     }
   ],
   "image_decision": "retain_existing_unique_primary; no image mutation",
-  "notes": "Add only names, official source, and trilingual content. Existing architect, year, city, country, type, era, and unique primary image remain unchanged."
+  "notes": "Production recheck found the Japanese name already set to ミホ・ミュージアム after the original review snapshot. Preserve that value; add the Chinese name, official source, and trilingual content. Existing architect, year, city, country, type, era, and unique primary image remain unchanged."
 }

@@ -10,6 +10,7 @@ Content-only correction for `miho-museum`. No image mutation, no architect ident
 - Official architecture source: https://www.miho.jp/en/architecture/approach/
 - Collection/opening context: https://www.miho.jp/en/intro/history/
 - Existing primary image review: Wikimedia Commons, CC BY-SA 4.0
+- Production recheck: `name_ja` was already `ミホ・ミュージアム`; the migration preserves it and only adds the missing Chinese name plus source/content fields.
 
 ## Guarded write
 
