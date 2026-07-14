@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "batch_id": "architect-intro-p1-data-001",
+  "reviewed_at": "2026-07-14",
+  "status": "approved-for-production",
+  "scope": {
+    "architect_slugs": [
+      "anna-heringer",
+      "geoffrey-bawa",
+      "pierre-chareau",
+      "studio-mumbai",
+      "tod-williams-billie-tsien-architects",
+      "vo-trong-nghia"
+    ],
+    "building_slugs": [
+      "barack-obama-presidential-center",
+      "c-v-starr-east-asian",
+      "club-house-du-golf-de-beauvallon",
+      "lunuganga-country-estate",
+      "maison-de-verre",
+      "meti-handmade-school",
+      "sri-lankan-parliament-building"
+    ],
+    "new_buildings": 0,
+    "image_changes": 0,
+    "production_write_authorized": true,
+    "content_pr_160_merge_authorized": false
+  },
+  "architect_decisions": [
+    {
+      "slug": "anna-heringer",
+      "approved": {
+        "name_zh": "安娜·赫林格",
+        "name_ja": "アンナ・ヘリンガー",
+        "official_url": "https://www.anna-heringer.com/"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "geoffrey-bawa",
+      "approved": {
+        "name_zh": "杰弗里·巴瓦",
+        "name_ja": "ジェフリー・バワ",
+        "official_url": "https://geoffreybawa.com/"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "pierre-chareau",
+      "approved": {
+        "name_zh": "皮埃尔·夏洛",
+        "name_ja": "ピエール・シャロー",
+        "official_url": "https://www.centrepompidou.fr/fr/ressources/personne/cjyyKbM"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "studio-mumbai",
+      "approved": {
+        "name_zh": "Studio Mumbai",
+        "name_ja": "スタジオ・ムンバイ",
+        "official_url": "https://studiomumbai.com/"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "tod-williams-billie-tsien-architects",
+      "approved": {
+        "name_zh": "Tod Williams Billie Tsien Architects",
+        "name_ja": "トッド・ウィリアムズ・ビリー・ツィアン建築事務所",
+        "official_url": "https://twbta.com/"
+      },
+      "confidence": "high",
+      "reason": "The production Japanese name contains only Billie Tsien and is not the full practice identity. The Chinese field keeps the official brand rather than introducing an uncertain transliteration."
+    },
+    {
+      "slug": "vo-trong-nghia",
+      "approved": {
+        "name_zh": "武重义",
+        "name_ja": "ヴォ・チョン・ギア",
+        "official_url": "http://vtnarchitects.net/"
+      },
+      "confidence": "high",
+      "reason": "The official HTTPS entry currently redirects to the practice's HTTP canonical site."
+    }
+  ],
+  "building_decisions": [
+    {
+      "slug": "meti-handmade-school",
+      "approved": {
+        "name_zh": "METI 手工学校",
+        "name_ja": "METIハンドメイド・スクール",
+        "year_start": 2005,
+        "year_end": null,
+        "city": "鲁德拉普尔",
+        "country": "孟加拉国",
+        "country_code": "BD",
+        "official_url": "https://www.anna-heringer.com/projects/meti-school-bangladesh/"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "maison-de-verre",
+      "approved": {
+        "name_zh": "玻璃之家",
+        "name_ja": "ガラスの家",
+        "year_start": 1928,
+        "year_end": 1931,
+        "city": "巴黎",
+        "country": "法国",
+        "country_code": "FR",
+        "official_url": "https://www.centrepompidou.fr/fr/ressources/oeuvre/cKxjGX8"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "club-house-du-golf-de-beauvallon",
+      "approved": {
+        "name_zh": "博瓦隆高尔夫俱乐部会所",
+        "name_ja": "ボーヴァロン・ゴルフクラブハウス",
+        "year_start": 1927,
+        "year_end": null,
+        "city": "格里莫",
+        "country": "法国",
+        "country_code": "FR",
+        "official_url": "https://www.culture.gouv.fr/regions/drac-provence-alpes-cote-d-azur/politique-et-actions-culturelles/architecture-contemporaine-remarquable-en-provence-alpes-cote-d-azur/le-label-architecture-contemporaine-remarquable-en-provence-alpes-cote-d-azur/label-acr-var/grimaud/grimaud-club-house-du-golf-de-beauvallon"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "lunuganga-country-estate",
+      "approved": {
+        "name_zh": "卢努甘加庄园",
+        "name_ja": "ルヌガンガ",
+        "year_start": 1948,
+        "year_end": null,
+        "city": "本托塔",
+        "country": "斯里兰卡",
+        "country_code": "LK",
+        "official_url": "https://geoffreybawa.com/lunuganga"
+      },
+      "confidence": "high",
+      "year_semantics": "Preserve 1948 as the beginning of Bawa's transformation of the acquired plantation, not as a claim that the evolving estate was completed in one year."
+    },
+    {
+      "slug": "sri-lankan-parliament-building",
+      "approved": {
+        "name_zh": "斯里兰卡议会大厦",
+        "name_ja": "スリランカ国会議事堂",
+        "year_start": 1982,
+        "year_end": null,
+        "city": "斯里贾亚瓦德纳普拉科特",
+        "country": "斯里兰卡",
+        "country_code": "LK",
+        "official_url": "https://www.parliament.lk/en/learn/handbook-of-parliament/evolution-of-the-parliamentary-system"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "barack-obama-presidential-center",
+      "approved": {
+        "name_zh": "奥巴马总统中心",
+        "name_ja": "オバマ大統領センター",
+        "year_start": 2026,
+        "year_end": null,
+        "city": "芝加哥",
+        "country": "美国",
+        "country_code": "US",
+        "official_url": "https://twbta.com/work/cultural/the-obama-presidential-center/"
+      },
+      "confidence": "high"
+    },
+    {
+      "slug": "c-v-starr-east-asian",
+      "approved": {
+        "name_zh": "C. V. 斯塔尔东亚图书馆",
+        "name_ja": "C・V・スター東アジア図書館",
+        "year_start": 2008,
+        "year_end": null,
+        "city": "伯克利",
+        "country": "美国",
+        "country_code": "US",
+        "official_url": "https://twbta.com/work/academic/c-v-starr-east-asian-library/"
+      },
+      "confidence": "high"
+    }
+  ],
+  "evidence": [
+    {
+      "source_type": "official-practice",
+      "url": "https://www.anna-heringer.com/about/",
+      "supports": ["Anna Heringer identity", "METI realization in 2005"]
+    },
+    {
+      "source_type": "official-practice-project",
+      "url": "https://www.anna-heringer.com/projects/meti-school-bangladesh/",
+      "supports": ["METI School", "Rudrapur", "Anna Heringer and Eike Roswag attribution"]
+    },
+    {
+      "source_type": "official-museum",
+      "url": "https://www.centrepompidou.fr/fr/ressources/oeuvre/cKxjGX8",
+      "supports": ["Maison de verre", "Paris", "realized 1928-1931", "Pierre Chareau and Bernard Bijvoet"]
+    },
+    {
+      "source_type": "official-government-heritage",
+      "url": "https://www.culture.gouv.fr/regions/drac-provence-alpes-cote-d-azur/politique-et-actions-culturelles/architecture-contemporaine-remarquable-en-provence-alpes-cote-d-azur/le-label-architecture-contemporaine-remarquable-en-provence-alpes-cote-d-azur/label-acr-var/grimaud/grimaud-club-house-du-golf-de-beauvallon",
+      "supports": ["Beauvallon club house", "Grimaud", "1927", "Pierre Chareau and Bernard Bijvoet"]
+    },
+    {
+      "source_type": "official-trust",
+      "url": "https://geoffreybawa.com/lunuganga",
+      "supports": ["Lunuganga", "Bentota", "Bawa acquired the estate in 1948"]
+    },
+    {
+      "source_type": "official-parliament",
+      "url": "https://www.parliament.lk/en/learn/handbook-of-parliament/evolution-of-the-parliamentary-system",
+      "supports": ["new Parliament completion in 1982", "Sri Jayewardenepura Kotte", "Geoffrey Bawa attribution"]
+    },
+    {
+      "source_type": "official-practice-project",
+      "url": "https://twbta.com/work/cultural/the-obama-presidential-center/",
+      "supports": ["Obama Presidential Center", "Chicago", "2026"]
+    },
+    {
+      "source_type": "official-foundation",
+      "url": "https://www.obama.org/visit/grand-opening/faq/",
+      "supports": ["Obama Presidential Center public opening on 2026-06-19"]
+    },
+    {
+      "source_type": "official-practice-project",
+      "url": "https://twbta.com/work/academic/c-v-starr-east-asian-library/",
+      "supports": ["C.V. Starr East Asian Library", "Berkeley", "2008"]
+    },
+    {
+      "source_type": "official-practice",
+      "url": "https://studiomumbai.com/",
+      "supports": ["Studio Mumbai official identity and website"]
+    },
+    {
+      "source_type": "official-practice",
+      "url": "http://vtnarchitects.net/",
+      "supports": ["VTN Architects official identity and website"]
+    }
+  ],
+  "deferred": [
+    {
+      "issue": "architect_id normalization",
+      "reason": "856 of 942 production buildings use architect_slug with architect_id null. Updating only these seven would create a misleading partial invariant."
+    },
+    {
+      "issue": "Studio Mumbai and Vo Trong Nghia representative works",
+      "reason": "No likely representative works exist in the current 942-building production corpus. Adding them is a new-building curation batch, not a relationship repair."
+    },
+    {
+      "issue": "C.V. Starr slug canonicalization",
+      "reason": "The current public slug is incomplete but changing it requires a separately reviewed redirect and route-compatibility decision."
+    },
+    {
+      "issue": "building type expansion",
+      "reason": "No type changes are required to repair the reviewed identity and source gaps."
+    },
+    {
+      "issue": "global year_start semantics",
+      "reason": "This batch uses source-specific reviewed decisions and does not define a universal meaning for all 942 buildings."
+    }
+  ],
+  "guardrails": [
+    "Lock and match the exact six architect and seven building production snapshots before writing.",
+    "Do not change any slug, image, type assignment, or building count.",
+    "Do not set architect_id in this batch.",
+    "Do not add representative buildings for Studio Mumbai or Vo Trong Nghia.",
+    "Keep PR #160 draft and independent from this data batch."
+  ],
+  "production": {
+    "written": false,
+    "migration_file": "supabase/migrations/20260714123500_architect_intro_p1_data_001.sql",
+    "rollback_file": "db/manual-operations/architect-intro-p1-data-001-rollback.sql",
+    "isolated_postgres_dry_run": "passed",
+    "production_preflight": "passed-2026-07-14",
+    "post_write_verified": false
+  }
+}

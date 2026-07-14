@@ -1,6 +1,6 @@
 # Document Index
 
-Last updated: 2026-07-13
+Last updated: 2026-07-14
 
 Purpose: help a new developer understand what is current product documentation, what is archived history, and what has been superseded.
 
@@ -37,6 +37,7 @@ Current docs under `docs/`:
 - `docs/CONTENT_TRUST_NEXT_PHASE_P0.md` — current content-trust baseline, Top 50 review queue, first read-only batch, and execution boundaries.
 - `docs/CONTENT_TRUST_BATCH_001_REVIEW.md` — formal read-only review and routing decisions for the first eight non-graduation records.
 - `docs/CONTENT_TRUST_3WTC_001_EXECUTION.md` — guarded 3 WTC metadata and primary-image repair, dry-run, rollback, and release gates.
+- `docs/ARCHITECT_INTRO_P1_DATA_001.md` — reviewed six-architect / seven-building localization and source repair, guarded migration, rollback, and production gates.
 - `docs/DUPLICATE_PRIMARY_IMAGE_REVIEW_001.md` — formal keep/demote and attribution-repair decisions for the first four Commons-vs-Commons primary-image conflicts.
 - `docs/reports/DUPLICATE_PRIMARY_IMAGE_AUDIT_2026-07-13.md` — read-only production audit and review priorities for buildings with multiple primary image rows.
 - `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
