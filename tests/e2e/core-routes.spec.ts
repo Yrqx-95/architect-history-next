@@ -47,6 +47,15 @@ test.describe('core public routes', () => {
     expect(missing.status()).toBe(404)
   })
 
+  test('legacy misspelled Aravena route redirects to the canonical architect', async ({ request }) => {
+    const response = await request.get('/zh/architect/alejandro-alavena', {
+      maxRedirects: 0,
+    })
+
+    expect(response.status()).toBe(308)
+    expect(response.headers().location).toContain('/zh/architect/aravena')
+  })
+
   test('fallback building and architect copy is disclosed as introductory guidance', async ({ page }) => {
     await page.goto('/zh/building/auerbacher-home')
     await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')

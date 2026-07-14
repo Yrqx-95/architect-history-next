@@ -1,0 +1,78 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { describe, expect, it } from 'vitest'
+import decision from '../../db/review-decisions/architect-identity-aravena-001.json'
+import overrides from '../../src/lib/architect-image-overrides.json'
+
+const root = process.cwd()
+const migration = fs.readFileSync(
+  path.join(root, 'supabase/migrations/20260714073151_architect_identity_aravena_001.sql'),
+  'utf8',
+)
+const rollback = fs.readFileSync(
+  path.join(root, 'db/manual-operations/architect-identity-aravena-001-rollback.sql'),
+  'utf8',
+)
+const nextConfig = fs.readFileSync(path.join(root, 'next.config.ts'), 'utf8')
+
+describe('Alejandro Aravena identity review', () => {
+  it('keeps the complete canonical identity and limits the merge to two reviewed buildings', () => {
+    expect(decision.status).toBe('reviewed-applied')
+    expect(decision.decision).toMatchObject({
+      action: 'merge-duplicate-identity',
+      keep_architect_id: '5000f72e-c893-4df6-84fe-33617581cd24',
+      remove_architect_id: '4a93c6b4-c020-4291-bbbf-cb2bd94f5257',
+      canonical_name: 'Alejandro Aravena',
+      reassign_buildings_to_slug: 'aravena',
+      confidence: 'high',
+    })
+    expect(decision.scope.reviewed_building_slugs).toEqual([
+      'center-of-innovation-anacleto-angelini',
+      'edp-headquarters-ii',
+    ])
+    expect(decision.evidence.some(item => item.url === 'https://www.elementalchile.cl/en/works/edp-headquarters')).toBe(true)
+    expect(decision.production).toMatchObject({
+      written: true,
+      migration_version: '20260714074424',
+      post_write_verified: true,
+      isolated_postgres_dry_run: 'passed',
+      verification: {
+        architects: 148,
+        buildings: 942,
+        images: 7292,
+        graduation_case_profiles: 88,
+        canonical_count: 1,
+        duplicate_architect_count: 0,
+        old_building_slug_count: 0,
+        reviewed_buildings_on_canonical_slug: 2,
+        search_vectors_refreshed: true,
+        security_advisors: 13,
+        performance_advisors: 27,
+      },
+    })
+  })
+
+  it('guards the production migration and rollback against snapshot drift and replay', () => {
+    expect(migration).toContain('Reviewed Aravena building set changed')
+    expect(migration).toContain('Misspelled Aravena duplicate gained protected references')
+    expect(migration).toContain('Aravena identity merge postcondition failed')
+    expect(rollback).toContain('Rollback refused: duplicate or conflicting Aravena record already exists')
+    expect(rollback).toContain('Rollback Aravena identity postcondition failed')
+  })
+
+  it('removes the duplicate portrait override while preserving the canonical portrait', () => {
+    expect(overrides.aravena).toMatchObject({
+      author: 'Centro de Políticas Públicas UC',
+      license: 'CC BY 3.0',
+      wikidata_id: 'Q3609433',
+    })
+    expect('alejandro-alavena' in overrides).toBe(false)
+  })
+
+  it('preserves the misspelled public URL as a permanent redirect in every language', () => {
+    expect(nextConfig).toContain("return ['zh', 'en', 'ja'].map")
+    expect(nextConfig).toContain('source: `/${lang}/architect/alejandro-alavena`')
+    expect(nextConfig).toContain('destination: `/${lang}/architect/aravena`')
+    expect(nextConfig).toContain('permanent: true')
+  })
+})
