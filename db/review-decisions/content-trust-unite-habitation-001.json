@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "batch_id": "content-trust-unite-habitation-001",
+  "reviewed_at": "2026-07-14",
+  "status": "reviewed",
+  "scope": {"building_slug": "unite-habitation", "graduation_linked": false},
+  "decision": "ready-for-content-preparation",
+  "confidence": "high",
+  "evidence": [
+    {"source_type": "official-institution", "url": "https://www.fondationlecorbusier.fr/en/work-architecture/achievements-unite-dhabitation-marseille-france-1945-1952/", "claim": "Fondation Le Corbusier identifies Le Corbusier's Marseille Unité d'Habitation, its 1945–1952 period, 330 apartments, collective spaces, pilotis, interior streets, and roof terrace."},
+    {"source_type": "open-license-image", "url": "https://commons.wikimedia.org/wiki/File:Unit%C3%A9_d%27Habitation_Marseille.jpg", "claim": "Existing primary image identifies the building, photographer G. Kopp, and CC BY-SA 3.0."}
+  ],
+  "required_actions": ["Add official source and trilingual description/significance; replace the non-English significance.en placeholder; retain existing primary image."]
+}
