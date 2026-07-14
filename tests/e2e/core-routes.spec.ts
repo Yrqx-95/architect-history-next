@@ -60,7 +60,7 @@ test.describe('core public routes', () => {
     await page.goto('/zh/building/auerbacher-home')
     await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')
 
-    await page.goto('/zh/architect/aldo-rossi')
+    await page.goto('/zh/architect/junya-ishigami')
     await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')
 
     await page.goto('/zh/building/church-of-light')

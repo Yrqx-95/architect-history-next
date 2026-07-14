@@ -6715,8 +6715,8 @@ const overlays: Record<string, ArchitectContentOverlay> = {
       { title: 'Wikidata: Vitruvius', url: 'https://www.wikidata.org/wiki/Q189306' },
     ],
   },
-  'alejandro-alavena': {
-    slug: 'alejandro-alavena',
+  aravena: {
+    slug: 'aravena',
     summary: {
       zh: '亚历杭德罗·阿拉维纳以“把资源不足当成设计条件”而闻名。他与 ELEMENTAL 将住房、公共空间、基础设施和重建问题放在同一张桌子上：建筑师不只设计完成的物体，也设计可由居民、制度与时间共同推进的过程。',
       ja: 'アレハンドロ・アラベナは、限られた資源を設計条件として扱う建築家である。ELEMENTAL とともに住宅、公共空間、インフラ、復興を同じ問題として考え、完成した物だけでなく、住民、制度、時間がともに進める過程を設計する。',
@@ -7106,7 +7106,6 @@ const overlays: Record<string, ArchitectContentOverlay> = {
 
 const overlayAliases: Record<string, string> = {
   aalto: 'alvar-aalto',
-  aravena: 'alejandro-alavena',
   'lacaton-vassal': 'anne-lacaton',
 }
 

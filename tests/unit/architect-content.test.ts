@@ -66,7 +66,11 @@ describe('architect content overlays', () => {
 
   it('preserves public aliases', () => {
     expect(getArchitectContent('aalto')?.slug).toBe('alvar-aalto')
-    expect(getArchitectContent('aravena')?.slug).toBe('alejandro-alavena')
     expect(getArchitectContent('lacaton-vassal')?.slug).toBe('anne-lacaton')
+  })
+
+  it('uses the canonical Aravena identity directly', () => {
+    expect(getArchitectContent('aravena')?.slug).toBe('aravena')
+    expect(getArchitectContent('alejandro-alavena')).toBeNull()
   })
 })
