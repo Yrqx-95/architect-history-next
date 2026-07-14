@@ -65,14 +65,14 @@ export default async function FeedbackPage({ params }: { params: Promise<{ lang:
   const prefix = `/${lang}`
   return (
     <PageShell>
-      <section className="section-sm grid gap-8 border-b border-subtle pb-10 pt-4 sm:pt-8 lg:grid-cols-[minmax(0,1fr)_24rem]">
+      <section className="section-sm grid gap-8 border-b border-subtle pb-10 pt-0 lg:grid-cols-[minmax(0,1fr)_24rem]">
         <div>
           <Link href={`${prefix}/`} className="caption transition-colors hover:text-primary">← {copy.back}</Link>
           <p className="eyebrow mt-6">{copy.eyebrow}</p>
           <h1 className="mt-4 heading-display">{copy.title}</h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-secondary sm:text-lg">{copy.intro}</p>
         </div>
-        <Suspense fallback={<div className="min-h-64 rounded-md border border-subtle bg-surface p-5 shadow-subtle" />}>
+        <Suspense fallback={<div className="min-h-32 rounded-md border border-subtle bg-surface p-5 shadow-subtle" />}>
           <FeedbackContactCard
             lang={lang}
             email={copy.email}

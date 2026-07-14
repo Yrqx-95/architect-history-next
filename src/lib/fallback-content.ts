@@ -206,9 +206,6 @@ export function getBuildingFallbackContent({
     return {
       summary: `${name}${facts ? ` is ${facts}` : ' is part of the Archistory building archive'}. The entry can be read through ${joinParts([eraName, styleNames.join(', '), type], ', ') || 'its date, place, authorship, and building type'}.`,
       significance: `${name} is useful as a node in the architectural history network: it links an author, a period, a region, and a building category instead of standing as an isolated image.`,
-      spatial: `Begin the spatial reading by comparing the building type, site, and date. Notice how the project organizes public and private zones, how it meets the ground, and how its plan may reflect the social program behind the commission.`,
-      light: `Use the image record as a first clue for material and light. Look for shadow, facade depth, roof form, openings, and the way the building mediates between exterior climate and interior use.`,
-      circulation: `Read circulation through approach, threshold, sequence, and gathering space. Even when detailed drawings are not yet available, the archive facts help position the work within a broader network of comparable buildings.`,
     }
   }
 
@@ -217,9 +214,6 @@ export function getBuildingFallbackContent({
     return {
       summary: `${name}は${facts || 'Archistory の建築アーカイブに収録された作品'}です。${joinParts([eraName, styleNames.join('、'), type], '、') || '年代、場所、設計者、用途'}を手がかりに読むことで、単独の写真ではなく建築史の中の位置が見えてきます。`,
       significance: `${name}は、設計者、時代、地域、建築タイプを結ぶ知識ネットワーク上のノードとして読むことができます。`,
-      spatial: `空間を読むときは、まず用途、敷地、年代を比較してください。公共性と私的領域、地面との接し方、平面が社会的なプログラムをどう受け止めるかが入口になります。`,
-      light: `画像資料は、素材と光を読むための最初の手がかりです。影、外壁の奥行き、屋根、開口部、外部環境と内部利用の関係に注目してください。`,
-      circulation: `動線は、接近、入口、移動の順序、滞留する場所から読むことができます。詳細図面が未整理でも、年代や用途、地域との比較によって作品の位置づけが見えてきます。`,
     }
   }
 
@@ -227,8 +221,5 @@ export function getBuildingFallbackContent({
   return {
     summary: `${name}${facts ? `是一座${facts}的建筑` : '是 Archistory 建筑档案中的一座作品'}。阅读时可以把它放在${joinParts([eraName, styleNames.join('、'), type], '、') || '年代、地点、作者和建筑类型'}之间，而不是只把它当成一张建筑照片。`,
     significance: `${name}的档案价值在于它把作者、时代、地域和建筑类型连接起来，让使用者能继续追踪同一建筑师、同一时期或相近用途的其他作品。`,
-    spatial: `从空间角度阅读这座建筑，可以先看它的用途、场地和建成时间：入口如何组织，公共与私密区域如何分配，建筑怎样与地面、街道或景观发生关系。`,
-    light: `从光线与材料角度，可以先结合图片观察阴影、立面厚度、屋顶形式、开口比例，以及建筑如何在外部气候和内部使用之间建立过渡。`,
-    circulation: `从动线角度，可以追踪接近建筑、进入门厅、穿过主要空间、停留或离开的顺序。即使详细图纸尚未整理，年代、地点和用途也能帮助判断它在建筑史网络中的位置。`,
   }
 }

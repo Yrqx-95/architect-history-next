@@ -175,12 +175,16 @@ function FeatureBuilding({ item, lang }: { item: BuildingExplorerItem; lang: str
 }
 
 function CompactBuilding({ item, lang }: { item: BuildingExplorerItem; lang: string }) {
+  const hasImage = Boolean(item.imageUrl)
+
   return (
-    <Link href={`/${lang}/building/${item.slug}`} className="motion-reveal-row group grid min-h-16 grid-cols-[3.75rem_minmax(0,1fr)] border-b border-subtle py-2 transition-colors hover:border-default">
-      <div className="image-frame h-14 w-14 overflow-hidden rounded-sm">
-        <ResilientBuildingImage item={item} sizes="6rem" />
-      </div>
-      <div className="flex min-w-0 flex-col justify-center">
+    <Link href={`/${lang}/building/${item.slug}`} className={`motion-reveal-row group border-b border-subtle py-2 transition-colors hover:border-default ${hasImage ? 'grid min-h-16 grid-cols-[3.75rem_minmax(0,1fr)]' : 'block'}`}>
+      {hasImage && (
+        <div className="image-frame h-14 w-14 overflow-hidden rounded-sm">
+          <ResilientBuildingImage item={item} sizes="6rem" />
+        </div>
+      )}
+      <div className={`flex min-w-0 flex-col justify-center ${hasImage ? '' : 'min-h-12'}`}>
         <p className="caption mb-1 truncate">{[item.architectName, item.year].filter(Boolean).join(' · ')}</p>
         <h4 className="line-clamp-2 text-sm font-semibold leading-snug text-primary transition-colors group-hover:text-accent">{item.name}</h4>
         {item.meta && <p className="caption mt-1 truncate">{item.meta}</p>}
