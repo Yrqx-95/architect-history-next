@@ -20,6 +20,50 @@ After meaningful product or design changes, simulate a real visitor using Archis
 - Do not invent visual taste from scratch; compare against mature public references when aesthetics are being changed.
 - If a design choice is below about 90% confidence, ask before making expensive or hard-to-reverse changes.
 
+## 2026-07-15 - Simulation 60: PR #165 Homepage Hierarchy And Mobile Content Density
+
+Status: local responsive and release-candidate QA passed; awaiting consultant review before merge or deploy.
+
+Persona: architecture student entering Archistory to search for a known building, then scan selected works and architects on a phone.
+
+Goal: confirm that the homepage tells the same story to visual users, keyboard users, and screen-reader users while remaining usable at short mobile heights.
+
+Path simulated:
+
+1. `/zh` at 320 x 568, 390 x 844, and 430 x 932.
+2. `/zh` at 1440 x 900.
+3. `/en` and `/ja` at 390 x 844.
+4. Click the primary search entry from the mobile `/zh` homepage.
+
+User-view findings:
+
+1. The mobile hero shows the H1, compact metadata, and the main search entry without horizontal overflow.
+2. Mobile reading order is hero -> entry -> selected works -> statistics -> architects; only two secondary selected works and three architect entries are visible at the sampled 390px viewport.
+3. Desktop reading order is hero -> statistics -> entry -> selected works -> architects. The DOM order and visual order now agree, so focus traversal starts in statistics and proceeds through the same major sections.
+4. The primary search entry resolves to `/zh/search` when clicked.
+5. Chinese, English, and Japanese home routes returned 200. The English hero title `Barack Obama Presidential Center` stayed within its viewport.
+
+Validation evidence:
+
+- In-app Browser screenshots captured for the 390px and 1440px homepage states.
+- In-app Browser layout snapshots: 390px `384/384` client/scroll width; 1440px `1434/1434` client/scroll width.
+- Chromium regression suite: 4 / 4 targeted tests passed; production E2E: 29 / 29 passed.
+- WebKit one-off DOM validation at 390px passed the same hierarchy, count, metadata, and overflow checks. WebKit screenshot capture timed out while waiting for fonts, so that screenshot is not treated as evidence.
+
+Remaining risk:
+
+- The WebKit check was intentionally targeted once and is not part of CI; full WebKit coverage remains unverified.
+- The local worktree depends on process-scoped environment variables from the existing main worktree for local server/build validation.
+- This simulation checks the homepage contract and sampled routes, not every building, archive, or graduation route.
+
+Rollback scope:
+
+- `src/app/[lang]/page.tsx`
+- `tests/e2e/home-responsive.spec.ts`
+- the matching `docs/WORKLOG.md` and `docs/USER_SIMULATION_LOG.md` entries
+
+Next recommended step: consultant review of the diff, CI checks, and PR #165 metadata; keep the PR unmerged and undeployed until that review completes.
+
 ## 2026-07-10 - Simulation 59: Graduation Cases 046-047 Local Images
 
 Status: local user-simulation QA passed before release gates.

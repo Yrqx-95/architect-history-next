@@ -72,7 +72,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
             )}
           </div>
           {heroMeta.length > 0 && (
-            <dl className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-paper-100/22 pt-3 text-paper-100/76 sm:block sm:border-l sm:border-t-0 sm:border-r-0 sm:border-b-0 sm:pt-0 sm:pl-6">
+            <dl data-home-hero-meta className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-paper-100/22 pt-3 text-paper-100/76 sm:block sm:border-l sm:border-t-0 sm:border-r-0 sm:border-b-0 sm:pt-0 sm:pl-6">
               {heroArchitectName && (
                 <div className="flex items-center gap-1 sm:mb-5 sm:block">
                   <dt className="sr-only text-[0.62rem] uppercase tracking-[0.16em] text-paper-100/42 sm:not-sr-only">
@@ -111,8 +111,19 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </div>
       </CinematicHero>
 
+      <section data-home-section="stats" className="section-sm order-5 mx-auto max-w-7xl sm:order-2 sm:w-full sm:max-w-none sm:pt-6">
+        <HomeStats
+          prefix={prefix}
+          copy={copy}
+          visibleBuildings={visibleBuildings.length}
+          architects={architects.length}
+          styles={styles.length}
+          countries={visibleCountries.size}
+        />
+      </section>
+
       <HomeSectionReveal scale className="order-3">
-        <section className="mb-8 sm:mb-16">
+        <section data-home-section="entry" className="mb-8 sm:mb-16">
           <div className="mb-4 grid gap-3 md:mb-6 md:grid-cols-[minmax(0,1fr)_22rem] md:items-end">
             <div>
               <p className="eyebrow mb-3">{lang === 'en' ? 'Choose a path' : lang === 'ja' ? '入口を選ぶ' : '选择进入方式'}</p>
@@ -178,7 +189,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
       </HomeSectionReveal>
 
       <HomeSectionReveal className="order-4">
-        <section className="mb-8 sm:mb-16">
+        <section data-home-section="featured" className="mb-8 sm:mb-16">
           <SectionHeading
             title={featuredLabel}
             description={learningCopy.latestDescription}
@@ -225,7 +236,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
                   const arch = architects.find(a => a.slug === b.architect_slug)
                   const desc = cleanSnippet(displayText(b.description, lang) || displayText(b.significance, lang))
                   return (
-                    <Link key={b.id} href={`${prefix}/building/${b.slug}`} className={`${index >= 2 ? 'hidden lg:grid' : 'grid'} interactive-row group grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-subtle px-2 py-4`}>
+                    <Link data-home-secondary-item key={b.id} href={`${prefix}/building/${b.slug}`} className={`${index >= 2 ? 'hidden lg:grid' : 'grid'} interactive-row group grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-subtle px-2 py-4`}>
                       <div className="image-frame aspect-[4/3] rounded-md">
                         <EditorialImage src={b.cover_url} alt={displayName(b, lang)} label={displayName(b, lang)} sizes="8rem" className="image-zoom h-full w-full" />
                       </div>
@@ -243,19 +254,8 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </section>
       </HomeSectionReveal>
 
-      <section className="section-sm order-5 mx-auto max-w-7xl sm:order-2 sm:w-full sm:max-w-none sm:pt-6">
-        <HomeStats
-          prefix={prefix}
-          copy={copy}
-          visibleBuildings={visibleBuildings.length}
-          architects={architects.length}
-          styles={styles.length}
-          countries={visibleCountries.size}
-        />
-      </section>
-
       <HomeSectionReveal className="order-6">
-        <section className="mb-8 pb-4 sm:mb-16 sm:pb-10">
+        <section data-home-section="architects" className="mb-8 pb-4 sm:mb-16 sm:pb-10">
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
               <h2 className="heading-3">{t(lang, 'architects')}</h2>
@@ -306,7 +306,7 @@ function HomeStats({
     [countries, copy.stats.countries, `${prefix}/browse/country`],
   ] as const
   return (
-    <div className="border-y border-subtle py-5">
+    <div data-home-stats className="border-y border-subtle py-5">
       <div className="grid grid-cols-4 gap-2 sm:gap-3">
         {items.map(([value, label, href]) => (
           <Link key={label} href={href} className="interactive-row min-w-0 rounded-sm px-2 py-1">
@@ -339,7 +339,7 @@ function HomeArchitectCard({
   const years = architect.birth_year ? `${architect.birth_year}–${architect.death_year || (lang === 'en' ? 'present' : lang === 'ja' ? '現在' : '至今')}` : ''
   const country = architect.nationalities?.[0] ? localizedNationality(architect.nationalities[0], lang) : ''
   return (
-    <Link href={`${prefix}/architect/${architect.slug}`} className={`group grid min-h-16 grid-cols-[3.5rem_minmax(0,1fr)] overflow-hidden border-y border-subtle transition-colors hover:bg-surface-muted/45 sm:min-h-[10.5rem] sm:grid-cols-[7rem_minmax(0,1fr)] ${className || ''}`}>
+    <Link data-home-architect href={`${prefix}/architect/${architect.slug}`} className={`group grid min-h-16 grid-cols-[3.5rem_minmax(0,1fr)] overflow-hidden border-y border-subtle transition-colors hover:bg-surface-muted/45 sm:min-h-[10.5rem] sm:grid-cols-[7rem_minmax(0,1fr)] ${className || ''}`}>
       <ArchitectPortraitThumb
         src={portrait?.url}
         fallbackSrc={visualUrl}
