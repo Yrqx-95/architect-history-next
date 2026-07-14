@@ -10,7 +10,7 @@ BEGIN
     AND slug = 'miho-museum'
     AND architect_slug = 'im-pei'
     AND year_start = 1997
-    AND name_zh = ''
+    AND name_zh = '美秀美术馆'
     AND name_ja = 'ミホ・ミュージアム'
     AND official_url IS NULL
     AND description IS NULL
