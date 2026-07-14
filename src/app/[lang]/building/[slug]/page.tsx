@@ -884,7 +884,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
         source: 'curated',
         license: buildingWithCover.cover_license || null,
         source_url: buildingWithCover.cover_source_url || '',
-        img_type: 'exterior',
+        img_type: buildingWithCover.cover_img_type || 'exterior',
         is_primary: true,
       }
     : null

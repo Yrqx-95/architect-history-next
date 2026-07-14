@@ -15,10 +15,11 @@ type ImageOverride = {
   cover_photographer?: string | null
   cover_license?: string | null
   cover_source_url?: string | null
+  cover_img_type?: string | null
 }
 
 type PrimaryImage = Pick<BuildingImage,
-  'id' | 'building_id' | 'url_original' | 'photographer' | 'license' | 'source_url'
+  'id' | 'building_id' | 'url_original' | 'photographer' | 'license' | 'source_url' | 'img_type'
 >
 
 const curatedImageOverrides = imageOverrides as Record<string, ImageOverride>
@@ -110,7 +111,7 @@ async function fetchAllPrimaryImages(): Promise<PrimaryImage[]> {
     let error: { message: string } | null = null
     for (let attempt = 0; attempt < FETCH_MAX_ATTEMPTS; attempt += 1) {
       const query = supabase.from('images')
-        .select('id,building_id,url_original,photographer,license,source_url')
+        .select('id,building_id,url_original,photographer,license,source_url,img_type')
         .eq('is_primary', true)
       const response = ordered
         ? await query.order('building_id', { ascending: true }).order('id', { ascending: true }).range(from, to)
@@ -220,6 +221,7 @@ export async function getBuildingsWithCovers(): Promise<BuildingWithCover[]> {
         cover_photographer: useOverride ? override?.cover_photographer || null : useImage ? image?.photographer as string || null : null,
         cover_license: useOverride ? override?.cover_license || null : useImage ? image?.license as string || null : null,
         cover_source_url: useOverride ? override?.cover_source_url || null : useImage ? image?.source_url as string || null : null,
+        cover_img_type: useOverride ? override?.cover_img_type || null : useImage ? image?.img_type as string || null : null,
       }
     })
   })
@@ -285,6 +287,7 @@ export async function getSearchIndex(): Promise<{ architects: SearchArchitect[];
           cover_photographer: useOverride ? override?.cover_photographer || null : useImage ? image?.photographer as string || null : null,
           cover_license: useOverride ? override?.cover_license || null : useImage ? image?.license as string || null : null,
           cover_source_url: useOverride ? override?.cover_source_url || null : useImage ? image?.source_url as string || null : null,
+          cover_img_type: useOverride ? override?.cover_img_type || null : useImage ? image?.img_type as string || null : null,
           function_slugs: functionSlugs,
           function_aliases: functionSlugs.flatMap(slug => functionNames.get(slug) || []),
           graduation_case_ids: caseIds,
