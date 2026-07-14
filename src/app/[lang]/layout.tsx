@@ -63,6 +63,8 @@ export default async function LangLayout({ children, params }: {
     { href: `${prefix}/graph`, label: lang === 'en' ? 'Relations' : lang === 'ja' ? '関係図' : '关系图' },
   ]
   const studyLabel = lang === 'en' ? 'Study' : lang === 'ja' ? '学ぶ' : '学习'
+  const commonLabel = lang === 'en' ? 'Start here' : lang === 'ja' ? '入口' : '常用入口'
+  const allIndexLabel = lang === 'en' ? 'All indexes' : lang === 'ja' ? 'すべての索引' : '全部索引'
   return (
     <html lang={lang} suppressHydrationWarning>
       <head>
@@ -130,8 +132,8 @@ export default async function LangLayout({ children, params }: {
 
           <main className="container-wide pt-20 pb-4 sm:pt-24 sm:pb-8">{children}</main>
 
-          <footer className="mt-10 border-t border-subtle py-6 sm:mt-14 sm:py-8">
-            <div className="container-wide grid grid-cols-2 gap-6 text-sm sm:grid-cols-4 sm:gap-8">
+          <footer className="mt-8 border-t border-subtle py-6 sm:mt-14 sm:py-8">
+            <div className="container-wide hidden grid-cols-2 gap-6 text-sm sm:grid sm:grid-cols-4 sm:gap-8">
               <div>
                 <h4 className="mb-3 font-medium text-primary">{t(lang, 'browse')}</h4>
                 <div className="space-y-1.5">
@@ -169,6 +171,32 @@ export default async function LangLayout({ children, params }: {
                   <p className="caption mt-3">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>
                 </div>
               </div>
+            </div>
+            <div className="container-wide sm:hidden">
+              <div className="grid grid-cols-2 gap-6 text-sm">
+                <div>
+                  <h4 className="mb-3 font-medium text-primary">{commonLabel}</h4>
+                  <div className="space-y-1.5">
+                    <Link href={`${prefix}/search`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'search')}</Link>
+                    <Link href={`${prefix}/browse`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'browse')}</Link>
+                    <Link href={`${prefix}/graduation`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'graduation')}</Link>
+                    <ContextualFeedbackLink lang={lang} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary" />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="mb-3 font-medium text-primary">{studyLabel}</h4>
+                  <div className="space-y-1.5">
+                    <Link href={`${prefix}/code`} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{t(lang, 'code')}</Link>
+                    {learnLinks.map(item => (
+                      <Link key={item.label} href={item.href} className="flex min-h-9 items-center text-secondary transition-colors hover:text-primary">{item.label}</Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <Link href={`${prefix}/browse`} className="mt-6 flex min-h-10 items-center border-y border-subtle text-sm font-medium text-primary transition-colors hover:text-accent">
+                {allIndexLabel} →
+              </Link>
+              <p className="caption mt-4">Archistory &copy; 2026<br />{t(lang, 'siteName')}</p>
             </div>
           </footer>
       </body>

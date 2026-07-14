@@ -187,6 +187,8 @@ html.dark {
 /* Homepage keeps its full-bleed editorial layout while following app theme tokens. */
 .home-editorial-surface {
   -webkit-text-size-adjust: 100%;
+  display: flex;
+  flex-direction: column;
   width: var(--viewport-inline-safe);
   min-height: 100vh;
   margin-left: calc(50% - var(--viewport-inline-safe) / 2);
@@ -204,8 +206,8 @@ html.dark {
   max-width: var(--container-wide);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 @media (min-width: 640px) {
