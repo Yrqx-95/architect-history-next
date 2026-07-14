@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T15:35:12.810Z",
+  "generated_at": "2026-07-14T06:35:41.585Z",
   "batch": "duplicate-primary-image-review-001",
   "status": "read-only-review-required",
   "writes_database": false,
@@ -13,17 +13,17 @@
     ]
   },
   "summary": {
-    "primary_rows": 1428,
+    "primary_rows": 1426,
     "buildings_with_primary": 942,
-    "duplicate_primary_buildings": 482,
-    "duplicate_primary_rows": 968,
+    "duplicate_primary_buildings": 480,
+    "duplicate_primary_rows": 964,
     "three_primary_buildings": 4,
-    "commons_vs_unsplash": 482,
+    "commons_vs_unsplash": 480,
     "commons_vs_commons": 0,
     "other_source_conflicts": 0,
-    "p0_visible_unsplash_with_commons_candidate": 206,
-    "p1_primary_invariant_conflict": 134,
-    "p2_override_shielded": 142,
+    "p0_visible_unsplash_with_commons_candidate": 205,
+    "p1_primary_invariant_conflict": 135,
+    "p2_override_shielded": 140,
     "candidate_rows_missing_attribution": 0,
     "safe_auto_apply": 0,
     "formally_reviewed": 0
@@ -2345,69 +2345,6 @@
           "source": "Unsplash",
           "license": "Unsplash License",
           "source_url": "https://unsplash.com/photos/JjDQeWWCbpI",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "7e19593b-5df3-480e-aa9f-9984cf529ffd",
-      "building_slug": "les-champs-libres",
-      "building": {
-        "name_zh": "",
-        "name_en": "Les Champs Libres",
-        "name_ja": "",
-        "architect_slug": "christian-de-portzamparc",
-        "year_start": null,
-        "city": null,
-        "country": null
-      },
-      "priority": "P0-visible-unsplash-with-commons-candidate",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "supabase-primary-selection",
-      "selected_database_primary_id": "641a6f6b-e8bb-5440-94df-b0e4025ad633",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": null,
-      "candidates": [
-        {
-          "id": "2e32ea5c-77eb-59e1-933b-b50b2d69ffc8",
-          "building_id": "7e19593b-5df3-480e-aa9f-9984cf529ffd",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/4/41/Esplanade_des_champs_libres_%2C_le_soir._-_panoramio.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Esplanade_des_champs_libres_%2C_le_soir._-_panoramio.jpg/400px-Esplanade_des_champs_libres_%2C_le_soir._-_panoramio.jpg",
-          "photographer": "chisloup",
-          "source": "Wikimedia Commons",
-          "license": "CC BY 3.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Esplanade_des_champs_libres_,_le_soir._-_panoramio.jpg",
-          "img_type": "floor_plan",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "641a6f6b-e8bb-5440-94df-b0e4025ad633",
-          "building_id": "7e19593b-5df3-480e-aa9f-9984cf529ffd",
-          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
-          "photographer": "Nuno Antunes",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "unsplash",
@@ -14834,6 +14771,69 @@
           "source": "Unsplash",
           "license": "Unsplash License",
           "source_url": "https://unsplash.com/photos/xUCYN4GPePI",
+          "img_type": "exterior",
+          "is_primary": true,
+          "source_class": "unsplash",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": false
+        }
+      ],
+      "safe_auto_apply": false,
+      "review_status": "needs-visual-identity-review",
+      "blocking_reasons": [
+        "building identity and composition have not been compared visually",
+        "a primary-image change must preserve photographer, source and open-license evidence"
+      ],
+      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
+    },
+    {
+      "building_id": "7e19593b-5df3-480e-aa9f-9984cf529ffd",
+      "building_slug": "les-champs-libres",
+      "building": {
+        "name_zh": "",
+        "name_en": "Les Champs Libres",
+        "name_ja": "",
+        "architect_slug": "christian-de-portzamparc",
+        "year_start": null,
+        "city": null,
+        "country": null
+      },
+      "priority": "P1-primary-invariant-conflict",
+      "conflict_type": "commons-vs-unsplash",
+      "primary_count": 2,
+      "source_classes": [
+        "commons",
+        "unsplash"
+      ],
+      "runtime_cover_source": "supabase-primary-selection",
+      "selected_database_primary_id": "2e32ea5c-77eb-59e1-933b-b50b2d69ffc8",
+      "selected_database_source_class": "commons",
+      "runtime_override": null,
+      "candidates": [
+        {
+          "id": "2e32ea5c-77eb-59e1-933b-b50b2d69ffc8",
+          "building_id": "7e19593b-5df3-480e-aa9f-9984cf529ffd",
+          "url_original": "https://upload.wikimedia.org/wikipedia/commons/4/41/Esplanade_des_champs_libres_%2C_le_soir._-_panoramio.jpg",
+          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Esplanade_des_champs_libres_%2C_le_soir._-_panoramio.jpg/400px-Esplanade_des_champs_libres_%2C_le_soir._-_panoramio.jpg",
+          "photographer": "chisloup",
+          "source": "Wikimedia Commons",
+          "license": "CC BY 3.0",
+          "source_url": "https://commons.wikimedia.org/wiki/File:Esplanade_des_champs_libres_,_le_soir._-_panoramio.jpg",
+          "img_type": "floor_plan",
+          "is_primary": true,
+          "source_class": "commons",
+          "attribution_complete": true,
+          "selected_by_current_database_strategy": true
+        },
+        {
+          "id": "641a6f6b-e8bb-5440-94df-b0e4025ad633",
+          "building_id": "7e19593b-5df3-480e-aa9f-9984cf529ffd",
+          "url_original": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=1200&q=85",
+          "url_thumb_400": "https://images.unsplash.com/photo-1636308721961-e5fec02b7355?w=400&q=60",
+          "photographer": "Nuno Antunes",
+          "source": "Unsplash",
+          "license": "Unsplash License",
+          "source_url": "https://unsplash.com/photos/SadTuzSiRfE",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "unsplash",
@@ -29810,8 +29810,8 @@
         "unsplash"
       ],
       "runtime_cover_source": "local-override",
-      "selected_database_primary_id": "c6d2ae56-c0e6-5a8a-8911-f17c56676042",
-      "selected_database_source_class": "unsplash",
+      "selected_database_primary_id": "78f46e3b-c76b-5860-9a3e-3e921711f8e8",
+      "selected_database_source_class": "commons",
       "runtime_override": {
         "cover_url": "/images/curated/french-embassy-building-1024.jpg",
         "cover_photographer": "Foto: Bernd Schwabe",
@@ -29832,7 +29832,7 @@
           "is_primary": true,
           "source_class": "commons",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": false
+          "selected_by_current_database_strategy": true
         },
         {
           "id": "c6d2ae56-c0e6-5a8a-8911-f17c56676042",
@@ -29847,7 +29847,7 @@
           "is_primary": true,
           "source_class": "unsplash",
           "attribution_complete": true,
-          "selected_by_current_database_strategy": true
+          "selected_by_current_database_strategy": false
         }
       ],
       "safe_auto_apply": false,
@@ -30607,74 +30607,6 @@
       "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
     },
     {
-      "building_id": "fb120ed1-c70c-463b-a743-75f654e81cf0",
-      "building_slug": "james-simon-gallery",
-      "building": {
-        "name_zh": "",
-        "name_en": "James Simon Gallery",
-        "name_ja": "",
-        "architect_slug": "david-chipperfield",
-        "year_start": 2019,
-        "city": null,
-        "country": null
-      },
-      "priority": "P2-override-shielded",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "commons",
-        "unsplash"
-      ],
-      "runtime_cover_source": "local-override",
-      "selected_database_primary_id": "a5953bc7-2c56-538f-8448-6ddfed17d25d",
-      "selected_database_source_class": "unsplash",
-      "runtime_override": {
-        "cover_url": "/images/curated/james-simon-gallery-1024.jpg",
-        "cover_photographer": "Gunnar Klack",
-        "cover_license": "CC BY-SA 4.0",
-        "cover_source_url": "https://commons.wikimedia.org/wiki/File:2019-04-26-James-Simon-Galerie.jpg"
-      },
-      "candidates": [
-        {
-          "id": "12458ba9-5ee6-5609-975b-e5496166a5a4",
-          "building_id": "fb120ed1-c70c-463b-a743-75f654e81cf0",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/8/85/2019-04-26-James-Simon-Galerie.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/2019-04-26-James-Simon-Galerie.jpg/400px-2019-04-26-James-Simon-Galerie.jpg",
-          "photographer": "Gunnar Klack",
-          "source": "Wikimedia Commons",
-          "license": "CC BY-SA 4.0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:2019-04-26-James-Simon-Galerie.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "a5953bc7-2c56-538f-8448-6ddfed17d25d",
-          "building_id": "fb120ed1-c70c-463b-a743-75f654e81cf0",
-          "url_original": "https://images.unsplash.com/photo-1508965199542-13e186cf8ba3?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1508965199542-13e186cf8ba3?w=400&q=60",
-          "photographer": "Sam Poullain",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/w737molHzkw",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
       "building_id": "296fb90b-a2ca-4438-864a-8b80c178c196",
       "building_slug": "lloyds-building",
       "building": {
@@ -30946,74 +30878,6 @@
           "source": "Wikimedia Commons",
           "license": "CC BY 2.0",
           "source_url": "https://commons.wikimedia.org/wiki/File:Dangsan_Railway_Bridge_Morning_View.jpg",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "commons",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": true
-        }
-      ],
-      "safe_auto_apply": false,
-      "review_status": "needs-visual-identity-review",
-      "blocking_reasons": [
-        "building identity and composition have not been compared visually",
-        "a primary-image change must preserve photographer, source and open-license evidence"
-      ],
-      "recommended_action": "Compare the Commons candidate with the current Unsplash candidate; do not demote either row until the Commons file is visually verified as the building."
-    },
-    {
-      "building_id": "c2991ac8-3dec-4033-9e81-70aab038c774",
-      "building_slug": "reinhard-ernst-museum",
-      "building": {
-        "name_zh": "",
-        "name_en": "Reinhard Ernst Museum",
-        "name_ja": "",
-        "architect_slug": "fumihiko-maki",
-        "year_start": 2024,
-        "city": null,
-        "country": null
-      },
-      "priority": "P2-override-shielded",
-      "conflict_type": "commons-vs-unsplash",
-      "primary_count": 2,
-      "source_classes": [
-        "unsplash",
-        "commons"
-      ],
-      "runtime_cover_source": "local-override",
-      "selected_database_primary_id": "47fa4a36-934a-53f4-9e85-957a4c6c6f0d",
-      "selected_database_source_class": "commons",
-      "runtime_override": {
-        "cover_url": "/images/curated/reinhard-ernst-museum-1024.jpg",
-        "cover_photographer": "Gerda Arendt",
-        "cover_license": "CC0",
-        "cover_source_url": "https://commons.wikimedia.org/wiki/File:Ernst_Museum,_Wiesbaden,_atrium.jpg"
-      },
-      "candidates": [
-        {
-          "id": "0e6b2f3b-9eab-5983-9b9c-772ba382bc96",
-          "building_id": "c2991ac8-3dec-4033-9e81-70aab038c774",
-          "url_original": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=1200&q=85",
-          "url_thumb_400": "https://images.unsplash.com/photo-1508826882284-54625969a042?w=400&q=60",
-          "photographer": "Casey Horner",
-          "source": "Unsplash",
-          "license": "Unsplash License",
-          "source_url": "https://unsplash.com/photos/KR03PvYv3Fs",
-          "img_type": "exterior",
-          "is_primary": true,
-          "source_class": "unsplash",
-          "attribution_complete": true,
-          "selected_by_current_database_strategy": false
-        },
-        {
-          "id": "47fa4a36-934a-53f4-9e85-957a4c6c6f0d",
-          "building_id": "c2991ac8-3dec-4033-9e81-70aab038c774",
-          "url_original": "https://upload.wikimedia.org/wikipedia/commons/8/88/Ernst_Museum%2C_Wiesbaden%2C_atrium.jpg",
-          "url_thumb_400": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ernst_Museum%2C_Wiesbaden%2C_atrium.jpg/400px-Ernst_Museum%2C_Wiesbaden%2C_atrium.jpg",
-          "photographer": "Gerda Arendt",
-          "source": "Wikimedia Commons",
-          "license": "CC0",
-          "source_url": "https://commons.wikimedia.org/wiki/File:Ernst_Museum,_Wiesbaden,_atrium.jpg",
           "img_type": "exterior",
           "is_primary": true,
           "source_class": "commons",
