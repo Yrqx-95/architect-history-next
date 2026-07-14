@@ -7,7 +7,18 @@ const nextConfig: NextConfig = {
       source: `/${lang}/architect/alejandro-alavena`,
       destination: `/${lang}/architect/aravena`,
       permanent: true,
-    }))
+    })).concat(
+      ['zh', 'en', 'ja'].map(lang => ({
+        source: `/${lang}/building/q135641257`,
+        destination: `/${lang}/building/kingston-university-town-house`,
+        permanent: true,
+      })),
+      [{
+        source: '/api/v1/buildings/q135641257',
+        destination: '/api/v1/buildings/kingston-university-town-house',
+        permanent: true,
+      }],
+    )
   },
   images: {
     localPatterns: [
