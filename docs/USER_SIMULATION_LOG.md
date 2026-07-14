@@ -20,6 +20,54 @@ After meaningful product or design changes, simulate a real visitor using Archis
 - Do not invent visual taste from scratch; compare against mature public references when aesthetics are being changed.
 - If a design choice is below about 90% confidence, ask before making expensive or hard-to-reverse changes.
 
+## 2026-07-15 - Simulation 62: PR #165 Production Homepage And Release Smoke
+
+Status: production release and bounded online QA passed; recorded after merge, without changing the earlier local-review simulations.
+
+Persona: architecture student entering Archistory on a narrow phone, then switching to desktop to search, browse the archive, and find graduation-design references.
+
+Goal: confirm that the released homepage keeps one semantic story across viewport sizes and languages, and that the main entry paths still lead to usable production pages.
+
+Path simulated:
+
+1. `/zh` at 320 x 568, 390 x 844, 430 x 932, and 1440 x 900.
+2. `/zh`, `/en`, and `/ja` at 390 x 844.
+3. Click the three primary homepage entries from `/zh`: search, archive, and graduation.
+4. Smoke-test the released building, graduation, feedback, and browse routes listed below.
+
+User-view findings:
+
+1. All four viewports returned HTTP 200 with no horizontal overflow.
+2. The major order was identical in DOM, bounding-box visual order, and sampled Tab focus order: Hero → entry → featured → stats → architects.
+3. Mobile showed two visible secondary works and three visible architects; desktop showed one stats section and the expanded desktop content count.
+4. The zh hero showed `奥巴马总统中心`; the en hero showed `Barack Obama Presidential Center` without title overflow; the ja hero showed `オバマ大統領センター`.
+5. The three primary entries landed at `/zh/search`, `/zh/browse`, and `/zh/graduation`.
+
+Validation evidence:
+
+- Production release run `29349915435` passed its quality gate, complete test suite, build/deploy, and route semantics checks.
+- Release baseline: 73 unit files / 250 tests, 29 / 29 production E2E, and 4,446 static pages.
+- Smoke routes all returned HTTP 200 with a valid title/H1 and no console/page errors observed:
+  - `/ja/building/nakanoshima-childrens-book-forest`
+  - `/zh/building/villa-savoye`
+  - `/ja/graduation`
+  - `/ja/graduation/issues`
+  - `/ja/graduation/cases/CASE-031`
+  - `/ja/feedback?from=%2Fja%2Fgraduation`
+  - `/ja/browse/buildings`
+- Additional entry destinations `/zh/search`, `/zh/browse`, and `/zh/graduation` also returned HTTP 200.
+- Evidence for this entry is the exact Chromium DOM/layout/focus and HTTP observation from the release QA; no new screenshot was generated during this docs-only synchronization pass.
+
+Remaining risk:
+
+- The sample does not equal a full-site audit, a real screen-reader voice test, or iOS/Android Safari coverage.
+- Full WebKit E2E remains outside CI; the targeted 390px WebKit result is retained in Simulation 61 and the worklog.
+- Cloudflare route administration still has the documented `All Zones` permission debt.
+
+Rollback scope: no product files were changed in this simulation entry. If the released product must be rolled back, use the merge commit `fb9a6f17fe7fbc904ee122b0d8db9fff08290381` and Cloudflare Version ID `7a3b6b82-738e-47ba-8687-6d24be3329db` as the traceable release points.
+
+Next recommended step: finish repository status synchronization, then perform read-only worktree governance before the next reviewed Top 50 small batch.
+
 ## 2026-07-15 - Simulation 60: PR #165 Homepage Hierarchy And Mobile Content Density
 
 Status: local responsive and release-candidate QA passed; awaiting consultant review before merge or deploy.

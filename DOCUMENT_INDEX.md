@@ -1,6 +1,6 @@
 # Document Index
 
-Last updated: 2026-07-14
+Last updated: 2026-07-15
 
 Purpose: help a new developer understand what is current product documentation, what is archived history, and what has been superseded.
 
@@ -31,8 +31,10 @@ Current docs under `docs/`:
 - `docs/UI_RULES.md` — UI rules.
 - `docs/AI_AGENT_RULES.md` — agent workflow.
 - `docs/FILE_STRUCTURE.md` — file structure reference.
-- `docs/HANDOFF.md` — handoff notes.
-- `docs/TECH_DEBT.md` — older technical debt log; use `TECHNICAL_DEBT_REPORT.md` in archive for latest cleanup audit context.
+- `docs/WORKLOG.md` — immutable implementation, release, rollback, and validation log.
+- `docs/USER_SIMULATION_LOG.md` — user-view simulations and production QA evidence.
+- `docs/HANDOFF.md` — historical/archive snapshot; not the current handoff. It intentionally retains old Vercel and page-count facts.
+- `docs/TECH_DEBT.md` — active technical debt and operational risk list; older entries remain as history.
 - `docs/LEARNING_MATERIAL_INVENTORY.md` — active/future/archive classification for learning and research material.
 - `docs/CONTENT_TRUST_NEXT_PHASE_P0.md` — current content-trust baseline, Top 50 review queue, first read-only batch, and execution boundaries.
 - `docs/CONTENT_TRUST_BATCH_001_REVIEW.md` — formal read-only review and routing decisions for the first eight non-graduation records.
@@ -42,6 +44,10 @@ Current docs under `docs/`:
 - `docs/reports/DUPLICATE_PRIMARY_IMAGE_AUDIT_2026-07-13.md` — read-only production audit and review priorities for buildings with multiple primary image rows.
 - `docs/reports/` — current human-readable cleanup and audit reports that still guide active maintenance.
 - `docs/graduation/` — current V1 Graduation Inspiration Library handoff docs, including wireframes, random behavior, content guide, and source/image policy.
+
+## Current-state routing
+
+- The current entry point is `STATUS.md`, followed by `ROADMAP.md`, `FEATURE_STATUS.md`, `docs/WORKLOG.md`, and `docs/USER_SIMULATION_LOG.md`. `docs/HANDOFF.md` is retained as a historical/archive snapshot and must not be used as the current production handoff.
 
 ## Archived
 

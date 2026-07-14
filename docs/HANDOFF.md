@@ -2,6 +2,8 @@
 
 > 最后更新：2026-05-26 | 下次更新触发条件：完成任何重要修改后
 
+> **历史 / archive snapshot：不是当前 handoff。** 本文件保留 2026-05-26 时的 Vercel、页面规模和阶段判断，不能用来判断当前生产状态。当前入口请先读 [`STATUS.md`](../STATUS.md)、[`ROADMAP.md`](../ROADMAP.md)、[`FEATURE_STATUS.md`](../FEATURE_STATUS.md)、[`DOCUMENT_INDEX.md`](../DOCUMENT_INDEX.md)、[`WORKLOG.md`](WORKLOG.md) 和 [`USER_SIMULATION_LOG.md`](USER_SIMULATION_LOG.md)。当前生产基线是 PR #165 已合并并发布到 Cloudflare：merge commit `fb9a6f17fe7fbc904ee122b0d8db9fff08290381`，release run `29349915435`。
+
 ---
 
 ## 项目速览

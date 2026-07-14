@@ -1,8 +1,17 @@
 # Archistory Roadmap
 
-Last updated: 2026-07-13
+Last updated: 2026-07-15
 
 Goal: make the project converge into a stable product repository.
+
+## Current Execution Order
+
+1. **Repository status synchronization** — the production baseline after PR #165 is now recorded in the current status documents.
+2. **Read-only worktree governance** — inspect ownership and branch state before opening another writer lane; do not append work to the merged PR #165 branch.
+3. **Top 50 small batch** — the queue already contains 25 `trust-repair` and 25 `product-core` records. Execute a reviewed batch of 5–10; do not rebuild the queue.
+4. **One learning path** — choose and productize one V1 learning path only after the first three steps remain stable.
+
+Completed checkpoint: PR #165 is merged and released on Cloudflare. Its homepage semantic order is Hero → entry → featured → stats → architects at every breakpoint, with one statistics DOM block. Graduation G6–G10 are complete and should not be reopened without new evidence.
 
 ## P0
 
@@ -27,6 +36,7 @@ Goal: make the project converge into a stable product repository.
 5. **Release hygiene**
    - Keep `data:audit`, `typecheck`, `build`, and tests as release gates.
    - Group future commits by production code, data governance, docs, and generated artifacts.
+   - PR #165 is complete: merge commit `fb9a6f17fe7fbc904ee122b0d8db9fff08290381`; Reviewed production release `29349915435` passed.
 
 ## P1
 
@@ -52,3 +62,4 @@ Goal: make the project converge into a stable product repository.
 - CMS implementation
 - Bulk image migration
 - Broad refactor
+- Reopening Graduation G6–G10 without new evidence
