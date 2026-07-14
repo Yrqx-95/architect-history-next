@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "batch_id": "content-trust-reinhard-ernst-museum-001",
+  "reviewed_at": "2026-07-14",
+  "status": "reviewed-for-guarded-migration",
+  "scope": {
+    "building_slug": "reinhard-ernst-museum",
+    "building_id": "c2991ac8-3dec-4033-9e81-70aab038c774",
+    "production_write_authorized_after_pr_merge": true,
+    "excludes_graduation_records": true,
+    "excludes_protected_image_fill_work": true
+  },
+  "decision": {
+    "confidence": "high",
+    "metadata": "approve",
+    "content": "approve",
+    "primary_image": "retain-reviewed-cc0-and-demote-ambiguous-unsplash"
+  },
+  "evidence": [
+    {
+      "source_type": "official-institution",
+      "url": "https://www.museum-re.de/en/museum/architecture/",
+      "supports": [
+        "Fumihiko Maki attribution",
+        "Wiesbaden address and urban response",
+        "public ground floor",
+        "inside-outside continuity",
+        "column-free museum area and varied gallery heights"
+      ]
+    },
+    {
+      "source_type": "architect-project",
+      "url": "https://www.maki-and-associates.co.jp/projects/WTM?lang=en",
+      "supports": [
+        "2024 completion",
+        "Wiesbaden, Germany location",
+        "museum use",
+        "central courtyard and public-space organization"
+      ]
+    },
+    {
+      "source_type": "architect-project-ja",
+      "url": "https://www.maki-and-associates.co.jp/projects/WTM",
+      "supports": [
+        "official Japanese name ラインハルト・エルンスト美術館"
+      ]
+    },
+    {
+      "source_type": "open-license-image",
+      "url": "https://commons.wikimedia.org/wiki/File:Ernst_Museum,_Wiesbaden,_atrium.jpg",
+      "supports": [
+        "Museum Reinhard Ernst atrium identity",
+        "Gerda Arendt authorship",
+        "CC0 1.0 public-domain dedication"
+      ]
+    }
+  ],
+  "locked_pre_state": {
+    "building_updated_at": "2026-07-08T16:11:20.896254+00:00",
+    "primary_image_ids": [
+      "0e6b2f3b-9eab-5983-9b9c-772ba382bc96",
+      "47fa4a36-934a-53f4-9e85-957a4c6c6f0d"
+    ],
+    "reviewed_primary_id": "47fa4a36-934a-53f4-9e85-957a4c6c6f0d",
+    "demoted_primary_id": "0e6b2f3b-9eab-5983-9b9c-772ba382bc96"
+  },
+  "approved_changes": [
+    "Add Chinese and official Japanese names.",
+    "Set Wiesbaden and Germany while preserving country code DE.",
+    "Add source-backed descriptions and significance in Chinese, English and Japanese.",
+    "Set the official institution architecture page as official_url.",
+    "Keep the reviewed Gerda Arendt CC0 atrium image as the sole primary image.",
+    "Correct the reviewed atrium image type from exterior to interior.",
+    "Demote the unrelated Unsplash primary without deleting it."
+  ]
+}
