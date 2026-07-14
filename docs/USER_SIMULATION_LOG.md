@@ -64,6 +64,49 @@ Rollback scope:
 
 Next recommended step: consultant review of the diff, CI checks, and PR #165 metadata; keep the PR unmerged and undeployed until that review completes.
 
+## 2026-07-15 - Simulation 61: PR #165 Semantic Order Correction Follow-up
+
+Status: correction QA passed locally; awaiting consultant review before merge or deploy.
+
+Review finding:
+
+1. The `edbfb6f` version showed desktop statistics before the entry visually, but its real DOM still placed statistics before entry everywhere.
+2. Mobile order classes made the screen look like entry -> featured -> statistics, but did not change mobile keyboard or screen-reader traversal.
+3. The previous mobile regression only checked bounding-box order and therefore missed the semantic failure.
+
+Product decision:
+
+1. Accept the desktop information hierarchy change and use one order at every breakpoint: Hero -> entry -> featured -> statistics -> architects.
+2. Treat statistics as supporting information that belongs after selected works on desktop as well as mobile.
+3. Preserve one stats DOM and avoid duplicate nodes, positive tabindex, aria-flowto, client-side relocation, portals, or hydration-time reordering.
+
+Correction path:
+
+1. `/zh` at 320 x 568, 390 x 844, and 430 x 932.
+2. `/zh` at 1440 x 900.
+3. `/en` and `/ja` at 390 x 844.
+4. Primary search entry click from mobile `/zh`.
+
+Validation:
+
+- In-app Browser at 390px: DOM and visual order `entry -> featured -> stats -> architects`; client/scroll width `384/384`; one stats section; two visible secondary works; three visible architects.
+- In-app Browser at 1440px: DOM and visual order `entry -> featured -> stats -> architects`; client/scroll width `1434/1434`; one stats section.
+- Chromium targeted E2E: 4 / 4 passed. The mobile test performs real Tab traversal at 320px, 390px, and 430px; the desktop test does the same at 1440px.
+- Full E2E: 29 / 29 passed. Unit tests: 73 files / 250 tests passed. Typecheck, lint, and build passed; build generated 4,446 static pages.
+- WebKit one-off 390px check: HTTP 200, DOM/visual order `entry -> featured -> stats -> architects`, no horizontal overflow, one stats section; screenshot saved to `/tmp/archistory-pr165-correction-webkit-390.png`.
+
+Remaining risk:
+
+- Full WebKit E2E was not run and WebKit was not added to CI; the one-off DOM/layout result passed, while Chromium remains the authoritative real-focus regression run.
+- The dedicated worktree still needs process-scoped environment variables for local server/build checks because it has no `.env.local`.
+- This simulation verifies the homepage contract and sampled languages/routes, not every archive or graduation route.
+
+Rollback scope:
+
+- `src/app/[lang]/page.tsx`
+- `tests/e2e/home-responsive.spec.ts`
+- this correction entry and the matching correction entry in `docs/WORKLOG.md`
+
 ## 2026-07-10 - Simulation 59: Graduation Cases 046-047 Local Images
 
 Status: local user-simulation QA passed before release gates.

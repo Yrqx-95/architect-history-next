@@ -111,18 +111,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </div>
       </CinematicHero>
 
-      <section data-home-section="stats" className="section-sm order-5 mx-auto max-w-7xl sm:order-2 sm:w-full sm:max-w-none sm:pt-6">
-        <HomeStats
-          prefix={prefix}
-          copy={copy}
-          visibleBuildings={visibleBuildings.length}
-          architects={architects.length}
-          styles={styles.length}
-          countries={visibleCountries.size}
-        />
-      </section>
-
-      <HomeSectionReveal scale className="order-3">
+      <HomeSectionReveal scale>
         <section data-home-section="entry" className="mb-8 sm:mb-16">
           <div className="mb-4 grid gap-3 md:mb-6 md:grid-cols-[minmax(0,1fr)_22rem] md:items-end">
             <div>
@@ -188,7 +177,7 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </section>
       </HomeSectionReveal>
 
-      <HomeSectionReveal className="order-4">
+      <HomeSectionReveal>
         <section data-home-section="featured" className="mb-8 sm:mb-16">
           <SectionHeading
             title={featuredLabel}
@@ -254,7 +243,18 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
         </section>
       </HomeSectionReveal>
 
-      <HomeSectionReveal className="order-6">
+      <section data-home-section="stats" className="section-sm mx-auto max-w-7xl sm:w-full sm:max-w-none sm:pt-6">
+        <HomeStats
+          prefix={prefix}
+          copy={copy}
+          visibleBuildings={visibleBuildings.length}
+          architects={architects.length}
+          styles={styles.length}
+          countries={visibleCountries.size}
+        />
+      </section>
+
+      <HomeSectionReveal>
         <section data-home-section="architects" className="mb-8 pb-4 sm:mb-16 sm:pb-10">
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>

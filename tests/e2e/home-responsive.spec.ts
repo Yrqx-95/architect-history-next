@@ -8,7 +8,7 @@ const mobileViewports = [
 
 async function getHomeLayout(page: Page) {
   return page.evaluate(() => {
-    const names = ['stats', 'entry', 'featured', 'architects'] as const
+    const names = ['entry', 'featured', 'stats', 'architects'] as const
     const sections = names.map(name => {
       const element = document.querySelector<HTMLElement>(`[data-home-section="${name}"]`)
       const rect = element?.getBoundingClientRect()
@@ -28,8 +28,22 @@ async function getHomeLayout(page: Page) {
   })
 }
 
+async function getFocusSectionOrder(page: Page, startSelector: string, tabCount = 40) {
+  await page.locator(startSelector).first().focus()
+  const focusOrder: string[] = []
+  for (let index = 0; index < tabCount; index += 1) {
+    const section = await page.evaluate(() =>
+      document.activeElement?.closest<HTMLElement>('[data-home-section]')?.dataset.homeSection || null,
+    )
+    if (section && !focusOrder.includes(section)) focusOrder.push(section)
+    await page.keyboard.press('Tab')
+  }
+  return focusOrder
+}
+
 test.describe('homepage responsive hierarchy', () => {
-  test('mobile home fits 320/390/430 and keeps entry, featured, stats, architect order', async ({ page }) => {
+  test('mobile home keeps one DOM, visual, and focus order at 320/390/430', async ({ page }) => {
+    const expectedOrder = ['entry', 'featured', 'stats', 'architects']
     for (const viewport of mobileViewports) {
       await page.setViewportSize(viewport)
       await page.goto('/zh')
@@ -41,46 +55,39 @@ test.describe('homepage responsive hierarchy', () => {
 
       const layout = await getHomeLayout(page)
       expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth)
+      const domOrder = await page.locator('main [data-home-section]').evaluateAll(elements =>
+        elements.map(element => element.getAttribute('data-home-section')),
+      )
+      expect(domOrder).toEqual(expectedOrder)
       expect(layout.sections.slice().sort((a, b) => a.top - b.top).map(item => item.name)).toEqual([
         'entry',
         'featured',
         'stats',
         'architects',
       ])
+      const focusOrder = await getFocusSectionOrder(page, '[data-home-section="entry"] a[href="/zh/search"]')
+      expect(focusOrder.slice(0, 4)).toEqual(expectedOrder)
       expect(await page.locator('[data-home-secondary-item]:visible').count()).toBe(2)
       expect(await page.locator('[data-home-architect]:visible').count()).toBe(3)
     }
   })
 
-  test('desktop home uses one DOM order for stats, entry, featured, and architects', async ({ page }) => {
+  test('desktop home keeps one DOM, visual, and focus order', async ({ page }) => {
+    const expectedOrder = ['entry', 'featured', 'stats', 'architects']
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('/zh')
 
     const domOrder = await page.locator('main [data-home-section]').evaluateAll(elements =>
       elements.map(element => element.getAttribute('data-home-section')),
     )
-    expect(domOrder).toEqual(['stats', 'entry', 'featured', 'architects'])
+    expect(domOrder).toEqual(expectedOrder)
 
     const layout = await getHomeLayout(page)
     expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth)
-    expect(layout.sections.slice().sort((a, b) => a.top - b.top).map(item => item.name)).toEqual([
-      'stats',
-      'entry',
-      'featured',
-      'architects',
-    ])
+    expect(layout.sections.slice().sort((a, b) => a.top - b.top).map(item => item.name)).toEqual(expectedOrder)
 
-    const statsLink = page.locator('[data-home-section="stats"] a').first()
-    await statsLink.focus()
-    const focusOrder: string[] = []
-    for (let index = 0; index < 32; index += 1) {
-      const section = await page.evaluate(() =>
-        document.activeElement?.closest<HTMLElement>('[data-home-section]')?.dataset.homeSection || null,
-      )
-      if (section && !focusOrder.includes(section)) focusOrder.push(section)
-      await page.keyboard.press('Tab')
-    }
-    expect(focusOrder.slice(0, 4)).toEqual(['stats', 'entry', 'featured', 'architects'])
+    const focusOrder = await getFocusSectionOrder(page, '[data-home-section="entry"] a[href="/zh/search"]')
+    expect(focusOrder.slice(0, 4)).toEqual(expectedOrder)
   })
 
   test('primary search entry is clickable on mobile', async ({ page }) => {

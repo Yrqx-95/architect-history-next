@@ -45,6 +45,49 @@ This file is the handoff log for future Codex/chat windows. Read it before conti
 
 - Keep PR #165 open and draft for consultant review; do not merge or deploy from this window.
 
+## 2026-07-15 - PR #165 Correction Follow-up: One Semantic Homepage Order
+
+### Review Finding
+
+- Consultant review found that the `edbfb6f` implementation only corrected the desktop visual presentation. Its real DOM remained `stats -> entry -> featured -> architects`, so mobile order classes moved the statistics visually after featured works while mobile keyboard and screen-reader users still encountered statistics first.
+- The previous regression test checked mobile bounding-box order but only checked DOM and focus order on desktop, so it did not catch this transfer of the semantic mismatch from desktop to mobile.
+
+### Product Decision
+
+- Use one simple order at every breakpoint: `Hero -> entry -> featured -> stats -> architects`.
+- Statistics are supporting information and can move below featured works on desktop. This is an intentional product trade-off in favor of one maintainable semantic order.
+- Keep one statistics DOM block. Do not use duplicate nodes, positive tabindex, `aria-flowto`, client-side `matchMedia` relocation, portals, or hydration-time reordering.
+
+### Correction Changes
+
+- Moved the single statistics section back between featured works and architects in `src/app/[lang]/page.tsx`.
+- Removed the homepage `order-*` classes so DOM, visual, keyboard, and screen-reader inferred order are identical at all breakpoints.
+- Expanded `tests/e2e/home-responsive.spec.ts` so 320 x 568, 390 x 844, 430 x 932, and 1440 x 900 all assert DOM order, bounding-box order, one stats node, and real Tab focus order.
+
+### Validation
+
+- `npm run typecheck`: passed.
+- `npm run lint`: passed.
+- `npm run test:unit`: 73 files / 250 tests passed.
+- `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:e2e -- tests/e2e/home-responsive.spec.ts`: 4 / 4 passed; mobile 320/390/430 and desktop all passed DOM, visual, and real Tab focus order checks.
+- `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3100 npm run test:e2e`: 29 / 29 passed.
+- `npm run build` with process-scoped local environment variables: passed; 4,446 static pages generated. Existing middleware deprecation warning remained; no new build error.
+- In-app Browser at 390px: DOM and visual order `entry -> featured -> stats -> architects`; `clientWidth 384`, `scrollWidth 384`, one stats section, two secondary works, three visible architects.
+- In-app Browser at 1440px: DOM and visual order `entry -> featured -> stats -> architects`; `clientWidth 1434`, `scrollWidth 1434`, one stats section.
+- Direct WebKit run at 390px: HTTP 200, DOM and visual order `entry -> featured -> stats -> architects`, `clientWidth 384`, `scrollWidth 384`, one stats section; screenshot saved to `/tmp/archistory-pr165-correction-webkit-390.png`.
+
+### Rollback Scope
+
+- `src/app/[lang]/page.tsx`
+- `tests/e2e/home-responsive.spec.ts`
+- this correction entry and the matching correction entry in `docs/USER_SIMULATION_LOG.md`
+
+### Remaining Risk
+
+- Full WebKit E2E was not run and WebKit was not added to the permanent Playwright project or CI. The one-off WebKit run confirmed DOM/layout; its focus sequence was not used as the authoritative cross-browser result because the main regression suite covers real Tab traversal in Chromium.
+- The dedicated worktree has no `.env.local`; local build/server checks used process-scoped variables from the existing main worktree without copying or committing environment files.
+- The focus helper samples the first 40 Tab transitions from the primary entry and verifies the first four major sections; it does not exhaustively model every future interactive descendant.
+
 ## 2026-07-10 - Graduation Image Retry Pass 046-047
 
 ### Intent
