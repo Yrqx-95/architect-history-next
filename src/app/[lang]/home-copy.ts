@@ -64,7 +64,7 @@ export const HOME_COPY: Record<Lang, HomeCopy> = {
     year: '年份',
     location: '地点',
     stats: {
-      buildings: '建筑',
+      buildings: '可浏览建筑',
       architects: '建筑师',
       styles: '风格',
       countries: '国家 / 地区',
@@ -82,7 +82,7 @@ export const HOME_COPY: Record<Lang, HomeCopy> = {
     year: 'Year',
     location: 'Location',
     stats: {
-      buildings: 'Buildings',
+      buildings: 'Browsable buildings',
       architects: 'Architects',
       styles: 'Styles',
       countries: 'Countries',
@@ -100,7 +100,7 @@ export const HOME_COPY: Record<Lang, HomeCopy> = {
     year: '竣工年',
     location: '所在地',
     stats: {
-      buildings: '建築',
+      buildings: '閲覧できる建築',
       architects: '建築家',
       styles: '様式',
       countries: '地域',
