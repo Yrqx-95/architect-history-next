@@ -73,4 +73,9 @@ describe('architect content overlays', () => {
     expect(getArchitectContent('aravena')?.slug).toBe('aravena')
     expect(getArchitectContent('alejandro-alavena')).toBeNull()
   })
+
+  it('keeps template-generated catalog profiles visibly introductory', () => {
+    expect(getArchitectContent('anna-heringer')?.maturity).toBe('introductory')
+    expect(getArchitectContent('aravena')?.maturity).not.toBe('introductory')
+  })
 })

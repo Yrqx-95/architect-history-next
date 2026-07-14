@@ -25,6 +25,7 @@ export interface ArchitectSource {
 
 export interface ArchitectContentOverlay {
   slug: string
+  maturity?: 'reviewed' | 'introductory'
   summary: Record<ContentLang, string>
   core_ideas: Record<ContentLang, string[]>
   portrait?: ArchitectPortrait
@@ -70,6 +71,7 @@ function catalogArchitectProfile(
 ): ArchitectContentOverlay {
   return compactArchitectProfile({
     slug,
+    maturity: 'introductory',
     summary: {
       zh: `${names.zh}的资料以${theme.zh}为线索，关注建筑如何在具体场地、使用与建造条件中成立。`,
       ja: `${names.ja}の建築は、${theme.ja}を手がかりに、場所、使われ方、建設条件の関係を考える。`,

@@ -67,6 +67,11 @@ test.describe('core public routes', () => {
     await expect(page.getByTestId('content-maturity-note')).toHaveCount(0)
   })
 
+  test('template-generated architect profiles remain disclosed as introductory guidance', async ({ page }) => {
+    await page.goto('/zh/architect/anna-heringer')
+    await expect(page.getByTestId('content-maturity-note')).toContainText('尚未完成逐条来源核查')
+  })
+
   test('manually reviewed building content exposes its institutional source', async ({ page }) => {
     await page.goto('/zh/building/acropolis-museum')
     await expect(page.getByTestId('content-maturity-note')).toHaveCount(0)
