@@ -70,6 +70,7 @@ export interface BuildingWithCover extends Building {
   cover_photographer?: string | null
   cover_license?: string | null
   cover_source_url?: string | null
+  cover_img_type?: string | null
 }
 
 export interface Style {
