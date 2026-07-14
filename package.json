@@ -41,6 +41,7 @@
     "content:next-phase-queue": "tsx --env-file=.env.local scripts/build-next-phase-content-queue.ts",
     "content:verify-3wtc-001": "node scripts/verify-content-trust-3wtc-001-dry-run.mjs",
     "content:verify-reinhard-ernst-museum-001": "node scripts/verify-content-trust-reinhard-ernst-museum-001-dry-run.mjs",
+    "content:verify-product-core-batch-002": "node scripts/verify-content-trust-product-core-batch-002-dry-run.mjs",
     "content:review-sources": "tsx --env-file=.env.local scripts/build-content-source-review-queue.ts",
     "quality:gate": "npm run data:audit && npm run content:audit && npm run content:audit-display && npm run graduation:audit && node scripts/build-publication-readiness.mjs",
     "content:portraits": "node --env-file=.env.local scripts/build-architect-portraits.mjs",
