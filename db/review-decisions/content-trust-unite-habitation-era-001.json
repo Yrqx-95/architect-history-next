@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "batch_id": "content-trust-unite-habitation-era-001",
+  "reviewed_at": "2026-07-14",
+  "status": "reviewed",
+  "scope": {"building_slug": "unite-habitation", "graduation_linked": false},
+  "decision": "ready-for-metadata-write",
+  "confidence": "high",
+  "evidence": [
+    {"source_type": "official-institution", "url": "https://www.fondationlecorbusier.fr/en/work-architecture/achievements-unite-dhabitation-marseille-france-1945-1952/", "claim": "The Fondation Le Corbusier identifies the Marseille Unité d'Habitation as a 1945–1952 Le Corbusier collective-housing work."},
+    {"source_type": "production-snapshot", "claim": "The existing production record has year_start 1952, a complete trilingual description and significance, one primary image, and only era_slug missing."}
+  ],
+  "required_actions": ["Set only era_slug to the existing canonical era slug modern; retain all existing content, source, names, images, and relations."]
+}
