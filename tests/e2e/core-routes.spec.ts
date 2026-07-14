@@ -5,6 +5,7 @@ test.describe('core public routes', () => {
     const response = await page.goto('/zh')
     expect(response?.status()).toBe(200)
     await expect(page).toHaveTitle(/Archistory/)
+    await expect(page.getByText('可浏览建筑', { exact: true })).toBeVisible()
   })
 
   test('learn page exposes the archive room', async ({ page }) => {
