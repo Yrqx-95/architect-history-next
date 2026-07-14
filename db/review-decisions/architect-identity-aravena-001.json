@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "architect-identity-aravena-001",
   "reviewed_at": "2026-07-14",
-  "status": "reviewed-ready-for-production",
+  "status": "reviewed-applied",
   "scope": {
     "canonical_architect_slug": "aravena",
     "duplicate_architect_slug": "alejandro-alavena",
@@ -54,9 +54,23 @@
     "Keep a permanent redirect from the misspelled public route to /architect/aravena."
   ],
   "production": {
-    "written": false,
-    "migration_version": null,
-    "post_write_verified": false,
-    "isolated_postgres_dry_run": "passed"
+    "written": true,
+    "migration_version": "20260714074424",
+    "post_write_verified": true,
+    "verified_at": "2026-07-14T07:45:02.166664+00:00",
+    "isolated_postgres_dry_run": "passed",
+    "verification": {
+      "architects": 148,
+      "buildings": 942,
+      "images": 7292,
+      "graduation_case_profiles": 88,
+      "canonical_count": 1,
+      "duplicate_architect_count": 0,
+      "old_building_slug_count": 0,
+      "reviewed_buildings_on_canonical_slug": 2,
+      "search_vectors_refreshed": true,
+      "security_advisors": 13,
+      "performance_advisors": 27
+    }
   }
 }

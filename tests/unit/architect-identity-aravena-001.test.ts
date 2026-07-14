@@ -17,7 +17,7 @@ const nextConfig = fs.readFileSync(path.join(root, 'next.config.ts'), 'utf8')
 
 describe('Alejandro Aravena identity review', () => {
   it('keeps the complete canonical identity and limits the merge to two reviewed buildings', () => {
-    expect(decision.status).toBe('reviewed-ready-for-production')
+    expect(decision.status).toBe('reviewed-applied')
     expect(decision.decision).toMatchObject({
       action: 'merge-duplicate-identity',
       keep_architect_id: '5000f72e-c893-4df6-84fe-33617581cd24',
@@ -32,9 +32,23 @@ describe('Alejandro Aravena identity review', () => {
     ])
     expect(decision.evidence.some(item => item.url === 'https://www.elementalchile.cl/en/works/edp-headquarters')).toBe(true)
     expect(decision.production).toMatchObject({
-      written: false,
-      post_write_verified: false,
+      written: true,
+      migration_version: '20260714074424',
+      post_write_verified: true,
       isolated_postgres_dry_run: 'passed',
+      verification: {
+        architects: 148,
+        buildings: 942,
+        images: 7292,
+        graduation_case_profiles: 88,
+        canonical_count: 1,
+        duplicate_architect_count: 0,
+        old_building_slug_count: 0,
+        reviewed_buildings_on_canonical_slug: 2,
+        search_vectors_refreshed: true,
+        security_advisors: 13,
+        performance_advisors: 27,
+      },
     })
   })
 
