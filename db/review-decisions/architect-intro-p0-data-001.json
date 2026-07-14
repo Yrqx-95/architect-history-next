@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "batch_id": "architect-intro-p0-data-001",
+  "reviewed_at": "2026-07-14",
+  "status": "applied-and-verified",
+  "scope": {
+    "architect_slugs": [
+      "grafton-architects",
+      "unemori-architects"
+    ],
+    "building_slugs_before": [
+      "q135641257",
+      "toulouse-school-of-economics",
+      "book-mountain-spijkenisse"
+    ],
+    "graduation_case_ids": [
+      "CASE-130"
+    ],
+    "production_write_authorized": true,
+    "content_pr_160_merge_authorized": false
+  },
+  "decisions": [
+    {
+      "entity": "architect",
+      "id": "a6c98656-452a-4fb5-98c3-01b371e3ee41",
+      "slug": "grafton-architects",
+      "action": "complete-localized-identity",
+      "approved": {
+        "name_zh": "格拉夫顿建筑事务所",
+        "official_url": "https://www.graftonarchitects.ie/"
+      },
+      "confidence": "high"
+    },
+    {
+      "entity": "architect",
+      "id": "4ec76862-cf0a-505f-82fc-e01b8fca9274",
+      "slug": "unemori-architects",
+      "action": "correct-name-typo",
+      "approved": {
+        "name_zh": "畝森泰行建筑设计事务所",
+        "name_ja": "畝森泰行建築設計事務所"
+      },
+      "confidence": "high"
+    },
+    {
+      "entity": "building",
+      "id": "f393a02c-4c5d-4683-9a32-fda4c04f185b",
+      "slug_before": "q135641257",
+      "action": "canonicalize-raw-import",
+      "approved": {
+        "slug": "kingston-university-town-house",
+        "name_zh": "金斯顿大学 Town House",
+        "name_en": "Kingston University Town House",
+        "name_ja": "キングストン大学タウンハウス",
+        "architect_id": "a6c98656-452a-4fb5-98c3-01b371e3ee41",
+        "architect_slug": "grafton-architects",
+        "year_start": 2020,
+        "city": "金斯顿",
+        "country": "英国",
+        "country_code": "GB",
+        "type_slug": "educational",
+        "official_url": "https://www.kingston.ac.uk/about/news/kingston-universitys-flagship-town-house-building-wins-2021-riba-stirling-prize"
+      },
+      "image_decision": {
+        "action": "delete-three-confirmed-mismatches",
+        "replacement": "no_safe_image_yet",
+        "deleted_image_ids": [
+          "e4278dee-4a40-58b2-9b40-9c8cc04075d9",
+          "e49e961b-f159-56ca-9e1b-07726ed95cf7",
+          "f04ca9bc-34e1-5a43-9f48-c1c901e8ec6c"
+        ],
+        "reason": "One original image endpoint returns 404 and the other two reviewed images visibly depict unrelated buildings. No exact open-license Town House image was confirmed during this review."
+      },
+      "preserve_legacy_page_and_api_redirect": true,
+      "confidence": "high"
+    },
+    {
+      "entity": "building",
+      "id": "dd094698-5762-467a-b967-c9651ddd8c1b",
+      "slug": "toulouse-school-of-economics",
+      "action": "repair-building-facts",
+      "approved": {
+        "name_zh": "图卢兹经济学院新楼",
+        "name_ja": "トゥールーズ経済学院新校舎",
+        "architect_id": "a6c98656-452a-4fb5-98c3-01b371e3ee41",
+        "year_start": 2019,
+        "city": "图卢兹",
+        "country": "法国",
+        "country_code": "FR",
+        "official_url": "https://www.tse-fr.eu/tse-building"
+      },
+      "year_semantics": "Use the building completion/occupation year for a single-year built-work record. TSE documents moving into the new building in November 2019; the September 2020 date refers to public Heritage Days access, not construction completion.",
+      "confidence": "high"
+    },
+    {
+      "entity": "book-mountain-source-chain",
+      "building_id": "7cdda9cd-7b2c-57b0-8b29-db78d2ff7248",
+      "case_id": "CASE-130",
+      "action": "replace-truncated-url-atomically",
+      "before": "https://www.mvrdv.com/projects/126/book-",
+      "after": "https://www.mvrdv.com/projects/126/book-mountain",
+      "live_rows": {
+        "buildings": 1,
+        "graduation_case_profiles": 1,
+        "building_function_assignments": 3,
+        "graduation_case_compatibility": 1
+      },
+      "confidence": "high"
+    }
+  ],
+  "evidence": [
+    {
+      "source_type": "official-award-zh",
+      "url": "https://www.pritzkerprize.com/cn/laureates/2020",
+      "supports": [
+        "格拉夫顿建筑事务所 Chinese practice name",
+        "Grafton Architects identity"
+      ]
+    },
+    {
+      "source_type": "official-practice",
+      "url": "https://www.graftonarchitects.ie/",
+      "supports": [
+        "Grafton Architects official website"
+      ]
+    },
+    {
+      "source_type": "official-university",
+      "url": "https://www.kingston.ac.uk/about/news/kingston-universitys-flagship-town-house-building-wins-2021-riba-stirling-prize",
+      "supports": [
+        "Kingston University Town House identity",
+        "Grafton Architects attribution",
+        "January 2020 opening"
+      ]
+    },
+    {
+      "source_type": "official-school",
+      "url": "https://www.tse-fr.eu/tse-building",
+      "supports": [
+        "new Toulouse School of Economics building identity",
+        "Grafton Architects attribution",
+        "Toulouse, France location"
+      ]
+    },
+    {
+      "source_type": "official-school-publication",
+      "url": "https://www.tse-fr.eu/sites/default/files/TSE/images/tse_mag_20_covid.pdf",
+      "supports": [
+        "TSE moved into the new building in November 2019"
+      ]
+    },
+    {
+      "source_type": "official-practice-ja",
+      "url": "https://unemori-archi.com/?page_id=26",
+      "supports": [
+        "畝森泰行 personal name",
+        "畝森泰行建築設計事務所 official Japanese name"
+      ]
+    },
+    {
+      "source_type": "official-practice-office",
+      "url": "https://unemori-archi.com/?page_id=23",
+      "supports": [
+        "株式会社 畝森泰行建築設計事務所 legal office name"
+      ]
+    },
+    {
+      "source_type": "official-practice-project",
+      "url": "https://www.mvrdv.com/projects/126/book-mountain",
+      "supports": [
+        "Book Mountain canonical source URL",
+        "2003-2012 realisation",
+        "Spijkenisse location and programmes"
+      ]
+    }
+  ],
+  "guardrails": [
+    "Lock and match exact production UUIDs, identity fields, URLs and reviewed timestamps before writing.",
+    "Refuse if the canonical Town House slug already exists.",
+    "Refuse unless the exact three reviewed Town House image rows are still the complete image set.",
+    "Do not insert a replacement Town House image without exact identity and open-license evidence.",
+    "Refuse rollback if Town House gains any image after the repair.",
+    "Update all six live Book Mountain URL-bearing rows in one transaction.",
+    "Keep applied historical migrations immutable; correct active source inputs and add this explicit correction batch."
+  ],
+  "production": {
+    "written": true,
+    "migration_file": "supabase/migrations/20260714103105_architect_intro_p0_data_001.sql",
+    "migration_version": "20260714112158",
+    "rollback_file": "db/manual-operations/architect-intro-p0-data-001-rollback.sql",
+    "isolated_postgres_dry_run": "passed",
+    "post_write_verified": true,
+    "merge_pr": 162,
+    "merge_commit": "19a94a1e458dda00746fa8d4aa62847b133e3a62",
+    "release_run": 29328686040,
+    "release_status": "success",
+    "live_route_verification": "passed"
+  }
+}

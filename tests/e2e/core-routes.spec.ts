@@ -56,6 +56,20 @@ test.describe('core public routes', () => {
     expect(response.headers().location).toContain('/zh/architect/aravena')
   })
 
+  test('legacy raw Town House routes redirect to the canonical building slug', async ({ request }) => {
+    const pageResponse = await request.get('/zh/building/q135641257', {
+      maxRedirects: 0,
+    })
+    const apiResponse = await request.get('/api/v1/buildings/q135641257', {
+      maxRedirects: 0,
+    })
+
+    expect(pageResponse.status()).toBe(308)
+    expect(pageResponse.headers().location).toContain('/zh/building/kingston-university-town-house')
+    expect(apiResponse.status()).toBe(308)
+    expect(apiResponse.headers().location).toContain('/api/v1/buildings/kingston-university-town-house')
+  })
+
   test('fallback building and architect copy is disclosed as introductory guidance', async ({ page }) => {
     await page.goto('/zh/building/auerbacher-home')
     await expect(page.getByTestId('content-maturity-note')).toContainText('入门导读')
