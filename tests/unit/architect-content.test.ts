@@ -78,4 +78,22 @@ describe('architect content overlays', () => {
     expect(getArchitectContent('anna-heringer')?.maturity).toBe('introductory')
     expect(getArchitectContent('aravena')?.maturity).not.toBe('introductory')
   })
+
+  it('promotes the first reviewed introductory batch with production-linked works', () => {
+    const reviewedBatch = {
+      'mitsuru-senda-environment-design-institute': [
+        'ishikawa-prefectural-library',
+        'nakajima-library-akita-international-university',
+      ],
+      'ryue-nishizawa': ['teshima-art-museum', 'towada-art-center'],
+      snohetta: ['bibliotheca-alexandrina', 'oslo-opera-house'],
+    }
+
+    for (const [slug, workSlugs] of Object.entries(reviewedBatch)) {
+      const content = getArchitectContent(slug)
+      expect(content?.maturity, slug).toBe('reviewed')
+      expect(content?.representative_works.map(work => work.slug), slug).toEqual(workSlugs)
+      expect(content?.sources.length, slug).toBeGreaterThanOrEqual(3)
+    }
+  })
 })

@@ -7079,12 +7079,249 @@ const overlays: Record<string, ArchitectContentOverlay> = {
   'mikami-architects': catalogArchitectProfile('mikami-architects', { zh: '三上建筑事务所', ja: 'MIKAMI Architects', en: 'MIKAMI Architects' }, { zh: '小尺度公共性与环境回应', ja: '小さな公共性と環境への応答', en: 'small-scale publicness and environmental response' }, { title: 'MIKAMI Architects', url: 'https://mikami-arc.co.jp/' }),
   'coelacanth-associates-nagoya': catalogArchitectProfile('coelacanth-associates-nagoya', { zh: 'Coelacanth and Associates Nagoya', ja: 'コエラカント・アンド・アソシエイツ名古屋', en: 'Coelacanth and Associates Nagoya' }, { zh: '教育空间与城市生活', ja: '教育空間と都市生活', en: 'learning space and urban life' }, { title: 'C+A Nagoya: Kozakai Kifukan', url: 'https://www.c-and-a.co.jp/en/projects/kozakaikifukan/' }),
   'unemori-architects': catalogArchitectProfile('unemori-architects', { zh: '畝森泰行建筑设计事务所', ja: 'UNEMORI ARCHITECTS', en: 'UNEMORI ARCHITECTS' }, { zh: '狭小用地与开放边界', ja: '狭小敷地と開かれた境界', en: 'small sites and open boundaries' }, { title: 'UNEMORI ARCHITECTS', url: 'https://unemori-archi.com/' }),
-  'mitsuru-senda-environment-design-institute': catalogArchitectProfile('mitsuru-senda-environment-design-institute', { zh: '仙田满／环境设计研究所', ja: '仙田満／環境デザイン研究所', en: 'Mitsuru Senda / Environment Design Institute' }, { zh: '儿童环境与游戏空间', ja: '子どもの環境と遊びの空間', en: 'children’s environment and play space' }, { title: 'Environment Design Institute', url: 'https://www.ms-edi.co.jp/' }),
+  'mitsuru-senda-environment-design-institute': {
+    slug: 'mitsuru-senda-environment-design-institute',
+    maturity: 'reviewed',
+    summary: {
+      zh: '仙田满于 1968 年创立环境设计研究所，并以儿童成长与游戏环境研究为长期基础。事务所把建筑、景观、游具、室内、产品与城市设计放在同一个环境系统中思考，重点不是制造孤立造型，而是让身体能够移动、选择、停留并与他人相遇。',
+      ja: '仙田満が1968年に設立した環境デザイン研究所は、子どもの成育環境と遊びの研究を長期的な基盤としてきた。建築、造園、遊具、インテリア、プロダクト、都市デザインを一つの環境として扱い、身体が動き、選び、留まり、他者と出会える場をつくる。',
+      en: 'Founded by Mitsuru Senda in 1968, Environment Design Institute builds on long-term research into children’s growth and play environments, joining architecture, landscape, play equipment, interiors, products, and urban design into one field.',
+    },
+    core_ideas: {
+      zh: [
+        '以儿童成长与游戏环境研究作为设计基础',
+        '跨越建筑、景观、游具、室内与城市设计',
+        '用“游环结构”提供循环、分岔与自主选择',
+        '把图书馆理解为阅读、活动与相遇共存的公共环境',
+      ],
+      ja: [
+        '子どもの成育環境と遊びの研究を設計の基盤にする',
+        '建築、造園、遊具、内装、都市デザインを横断する',
+        '「遊環構造」で循環、分岐、自主的な選択をつくる',
+        '図書館を読書、活動、出会いが共存する公共環境として考える',
+      ],
+      en: [
+        'Research-led design for children’s growth and play',
+        'Architecture, landscape, play, interiors, and urban design as one field',
+        'Looped circulation that supports choice and discovery',
+        'Libraries as public environments for reading, activity, and encounter',
+      ],
+    },
+    sections: [
+      {
+        title: {
+          zh: '从儿童环境研究到综合环境设计',
+          ja: '子どもの環境研究から総合環境デザインへ',
+          en: 'From children’s environments to integrated design',
+        },
+        paragraphs: {
+          zh: [
+            '环境设计研究所把儿童成长环境列为研究与设计的中心，同时扩展到体育、教育、文化社区、医疗福利、景观与改造。“儿童环境”不是一种建筑类型，而是一种观察方法：从身体尺度、活动方式、照护关系与自主探索出发，再把建筑和周边环境组织成连续的使用系统。',
+          ],
+          ja: [
+            '環境デザイン研究所は、子どもの成育環境を研究・設計の中心に置きながら、スポーツ、教育、文化コミュニティ、医療福祉、ランドスケープ、改修へ領域を広げてきた。「子どもの環境」は一つの用途ではなく、身体尺度、活動、ケア、自主的な探索から環境全体を組み立てる方法として読める。',
+          ],
+          en: [
+            'The practice treats children’s environments not as one building type but as a method: begin with bodily scale, activity, care, and self-directed exploration, then organize architecture and its surroundings as a continuous system of use.',
+          ],
+        },
+      },
+      {
+        title: {
+          zh: '“游环结构”：让路径产生选择',
+          ja: '「遊環構造」：経路に選択を生む',
+          en: 'Looped circulation as a field of choice',
+        },
+        paragraphs: {
+          zh: [
+            '石川县立图书馆的中央大阅览空间以环形分层书架、坡道、桥和短路径连接不同高度。研究所把这种组织说明为“游环结构”：它的价值不在圆形本身，而在路径怎样同时支持漫游、快速到达、观看他人和选择安静或活跃的场所。',
+          ],
+          ja: [
+            '石川県立図書館の大閲覧空間では、円形に段状配置された書架をスロープが結び、橋や階段が短絡経路を加える。「遊環構造」の要点は円形そのものではなく、回遊、目的地へのアクセス、他者を見ること、静かな場所と活動的な場所の選択を同時に成立させることにある。',
+          ],
+          en: [
+            'At Ishikawa Prefectural Library, tiered circular shelves, ramps, bridges, and shortcuts create a looped field. The lesson is not the circle as an image, but circulation that supports wandering, direct access, social awareness, and different degrees of activity.',
+          ],
+        },
+      },
+      {
+        title: {
+          zh: '两座图书馆：相遇与专注并存',
+          ja: '二つの図書館：出会いと集中を共存させる',
+          en: 'Two libraries balancing encounter and concentration',
+        },
+        paragraphs: {
+          zh: [
+            '国际教养大学中岛纪念图书馆把秋田杉与伞状屋顶围成“书之竞技场”，学生全年全天可在其中学习，也能看见彼此的专注状态。石川县立图书馆则把主阅览区、活动区和儿童区分开又连接。两者共同显示：公共学习空间不是单一安静大厅，而是为不同节奏建立可选择又能彼此感知的场所。',
+          ],
+          ja: [
+            '国際教養大学の中嶋記念図書館は、秋田杉と傘状屋根による「本のコロセウム」で、学生が一年中いつでも学び、互いの集中する姿を感じられる。石川県立図書館は、閲覧、活動、子どもの領域を分けつつ結ぶ。両者は、異なるリズムを選びながら共有できる学習環境を示す。',
+          ],
+          en: [
+            'Nakajima Library forms a “Book Coliseum” beneath an umbrella-like Akita cedar roof, while Ishikawa connects reading, activity, and children’s areas. Together they show learning space as a choice among visible settings for concentration, exchange, and play.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      {
+        slug: 'ishikawa-prefectural-library',
+        note: {
+          zh: '以分层环形书架、坡道和多条捷径构成可回游的知识与活动中心。',
+          ja: '段状の円形書架、スロープ、複数の近道で、回遊できる知識と活動の中心をつくる。',
+          en: 'A looped knowledge and activity hub formed by tiered shelves, ramps, and shortcuts.',
+        },
+      },
+      {
+        slug: 'nakajima-library-akita-international-university',
+        note: {
+          zh: '以秋田杉、伞状屋顶和“书之竞技场”把全天候学习转化为共享经验。',
+          ja: '秋田杉、傘状屋根、「本のコロセウム」によって、24時間の学びを共有される経験にする。',
+          en: 'Akita cedar, an umbrella roof, and the “Book Coliseum” make continuous study a shared experience.',
+        },
+      },
+    ],
+    sources: [
+      {
+        title: 'Environment Design Institute: Company profile',
+        url: 'https://www.ms-edi.co.jp/company/',
+      },
+      {
+        title: 'Environment Design Institute: Ishikawa Prefectural Library AACA Award',
+        url: 'https://www.ms-edi.co.jp/topics/2039/',
+      },
+      {
+        title: 'Ishikawa Prefectural Library: About the library',
+        url: 'https://www.library.pref.ishikawa.lg.jp/category/aboutlibrary/2983.html',
+      },
+      {
+        title: 'Akita International University: Nakajima Library',
+        url: 'https://web.aiu.ac.jp/en/education/support/library/outline/',
+      },
+    ],
+  },
   'ala-architects': catalogArchitectProfile('ala-architects', { zh: 'ALA Architects', ja: 'ALA Architects', en: 'ALA Architects' }, { zh: '北欧公共文化与木构', ja: '北欧の公共文化と木構造', en: 'Nordic public culture and timber' }, { title: 'ALA Architects', url: 'https://ala.fi/' }),
   'schmidt-hammer-lassen': catalogArchitectProfile('schmidt-hammer-lassen', { zh: '施密特·哈姆·拉森', ja: 'シュミット・ハマー・ラッセン', en: 'Schmidt Hammer Lassen' }, { zh: '图书馆与开放公共性', ja: '図書館と開かれた公共性', en: 'libraries and open publicness' }, { title: 'Schmidt Hammer Lassen', url: 'https://www.shl.dk/' }),
   'lundhagem-atelier-oslo': catalogArchitectProfile('lundhagem-atelier-oslo', { zh: 'Lundhagem + Atelier Oslo', ja: 'ルンドハーゲム + アトリエ・オスロ', en: 'Lundhagem + Atelier Oslo' }, { zh: '景观、改造与低碳材料', ja: '景観、改修、低炭素素材', en: 'landscape, reuse, and low-carbon material' }, { title: 'Atelier Oslo: Deichman Bjørvika with Lundhagem', url: 'https://atelieroslo.no/project/deichman' }),
   'alsop-stormer': catalogArchitectProfile('alsop-stormer', { zh: 'Alsop and Störmer', ja: 'アルソップ・アンド・ストーマー', en: 'Alsop and Störmer' }, { zh: '色彩、艺术与城市公共性', ja: '色彩、芸術、都市の公共性', en: 'color, art, and urban publicness' }, { title: 'Störmer Murphy and Partners: Studio history', url: 'https://now-near-next.com/studios/st%C3%B6rmer-murphy-and-partners/' }),
-  'snohetta': catalogArchitectProfile('snohetta', { zh: 'Snøhetta', ja: 'スノヘッタ', en: 'Snøhetta' }, { zh: '建筑、景观与品牌的跨界协作', ja: '建築、景観、グラフィックの横断協働', en: 'architecture, landscape, and graphic collaboration' }, { title: 'Snøhetta', url: 'https://snohetta.com/' }),
+  'snohetta': {
+    slug: 'snohetta',
+    maturity: 'reviewed',
+    summary: {
+      zh: 'Snøhetta 是以对话和跨专业协作为核心的设计事务所，工作横跨建筑、景观、室内、艺术与产品设计。其重要性不在固定造型，而在于把文化建筑、公共地面和人的身体活动组织成连续经验。',
+      ja: 'スノヘッタは、対話と領域横断の協働を核とし、建築、ランドスケープ、インテリア、アート、プロダクトを扱う設計組織である。固定した形ではなく、文化施設、公共の地面、身体の活動を連続する経験へ組み立てる。',
+      en: 'Snøhetta is a dialogue-driven transdisciplinary practice spanning architecture, landscape, interiors, art, and product design. Its work is best read through the continuity it creates between cultural buildings, public ground, and bodily movement.',
+    },
+    core_ideas: {
+      zh: [
+        '建筑、景观、室内与艺术从早期共同工作',
+        '用对话与水平协作代替单一作者叙事',
+        '把屋顶、广场和路径变成可进入的公共地面',
+        '以场地的文化、环境与社会关系建立概念',
+      ],
+      ja: [
+        '建築、ランドスケープ、内装、アートを初期から統合する',
+        '単独作者の物語より対話と水平的協働を重視する',
+        '屋根、広場、経路を歩ける公共の地面にする',
+        '敷地の文化、環境、社会関係から概念をつくる',
+      ],
+      en: [
+        'Architecture, landscape, interiors, and art working together from the outset',
+        'Dialogue and horizontal collaboration over single-author narratives',
+        'Roofs, plazas, and paths as accessible public ground',
+        'Concepts rooted in cultural, environmental, and social context',
+      ],
+    },
+    sections: [
+      {
+        title: {
+          zh: '跨专业不是后期拼接',
+          ja: '領域横断は後付けではない',
+          en: 'Transdisciplinary from the beginning',
+        },
+        paragraphs: {
+          zh: [
+            'Snøhetta 将自己定义为由对话驱动的跨专业实践，建筑、景观、室内、艺术与产品设计从概念阶段共同塑造场地经验。其公开工作方法强调水平协作、工作坊和不同专业之间的信息流动，因此学习重点应放在“关系如何被设计”，而不是寻找一种可复制的 Snøhetta 形式。',
+          ],
+          ja: [
+            'スノヘッタは自らを対話主導の領域横断的実践と位置づける。建築を完成してから景観やアートを加えるのではなく、概念段階から各領域が場所の経験を共につくる。学ぶべきなのは特定の形ではなく、異なる関係をどのように設計へ変えるかである。',
+          ],
+          en: [
+            'Snøhetta describes a horizontal, dialogue-driven process in which disciplines shape the concept together. The transferable lesson is not a house style, but how relationships among disciplines and users become design decisions.',
+          ],
+        },
+      },
+      {
+        title: {
+          zh: '亚历山大图书馆：文化记忆与公共地形',
+          ja: '新アレクサンドリア図書館：文化記憶と公共地形',
+          en: 'Bibliotheca Alexandrina: memory as public terrain',
+        },
+        paragraphs: {
+          zh: [
+            '亚历山大图书馆来自 1989 年国际竞赛，是 Snøhetta 的第一项重要委托。倾斜圆形体量一部分深入地下，周围由开放广场、映水池和连接城市与大学的步行桥组成；馆内叠合图书馆、博物馆、天文馆、信息科学与保存设施。项目没有复原古代图书馆的样式，而是以当代公共学习设施重新连接城市记忆、研究和文化交流。',
+          ],
+          ja: [
+            '新アレクサンドリア図書館は1989年の国際コンペから始まった最初の重要な委託である。傾いた円形の建物は地中へ沈み、広場、反射池、都市と大学を結ぶ歩道橋に囲まれる。図書館、博物館、プラネタリウム、研究、保存機能を重ね、古代図書館の形ではなく現代の学習と文化交流によって記憶を継承する。',
+          ],
+          en: [
+            'Won through the 1989 competition, Bibliotheca Alexandrina combines a tilting circular volume with a plaza, reflecting pool, and bridge to the university. Library, museum, planetarium, research, and conservation programs revive the civic idea of the ancient library without copying its form.',
+          ],
+        },
+      },
+      {
+        title: {
+          zh: '奥斯陆歌剧院：把建筑还给城市',
+          ja: 'オスロ・オペラハウス：建築を都市へ返す',
+          en: 'Oslo Opera House: giving the building back to the city',
+        },
+        paragraphs: {
+          zh: [
+            '奥斯陆歌剧院把挪威“自由漫游权”的观念转化为城市空间：白色大理石屋顶从滨水广场连续上升，公众即使不看演出也能走上屋面、眺望峡湾并参加户外活动。室内大厅、工作坊的街面视线、公共艺术和可步行屋顶共同削弱了文化殿堂与日常城市之间的边界。',
+          ],
+          ja: [
+            'オスロ・オペラハウスは、ノルウェーの「自由に歩く権利」を都市空間へ翻訳した。白い大理石の屋根は水辺の広場から連続して立ち上がり、観劇しない人も屋上を歩き、フィヨルドを眺め、屋外活動に参加できる。ロビー、通りから見える工房、公共芸術、歩ける屋根が文化施設と日常の境界を薄くする。',
+          ],
+          en: [
+            'At the Oslo Opera House, the Norwegian right to roam becomes urban form: the marble roof rises from the waterfront so people can walk over the building without attending a performance. Lobby, visible workshops, public art, and roof plaza make cultural infrastructure part of everyday city life.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      {
+        slug: 'bibliotheca-alexandrina',
+        note: {
+          zh: '以倾斜圆形体量、广场和复合文化功能，把历史记忆转译为当代公共学习设施。',
+          ja: '傾いた円形、広場、複合文化機能によって、歴史的記憶を現代の公共学習施設へ変換した。',
+          en: 'A public-learning complex that translates historical memory through form, plaza, and mixed cultural programs.',
+        },
+      },
+      {
+        slug: 'oslo-opera-house',
+        note: {
+          zh: '可步行屋顶把歌剧院、滨水景观和城市公共生活连接为同一块地面。',
+          ja: '歩ける屋根が、オペラ、水辺の景観、都市の日常を同じ地面として結ぶ。',
+          en: 'A walkable roof joins opera, waterfront landscape, and everyday public life into one ground plane.',
+        },
+      },
+    ],
+    sources: [
+      { title: 'Snøhetta: About', url: 'https://www.snohetta.com/about' },
+      {
+        title: 'Snøhetta: Our Process',
+        url: 'https://www.snohetta.com/process',
+      },
+      {
+        title: 'Snøhetta: Bibliotheca Alexandrina',
+        url: 'https://www.snohetta.com/projects/bibliotheca-alexandrina',
+      },
+      {
+        title: 'Snøhetta: Norwegian National Opera and Ballet',
+        url: 'https://www.snohetta.com/projects/norwegian-national-opera-and-ballet',
+      },
+    ],
+  },
   'civic-architects': catalogArchitectProfile('civic-architects', { zh: 'Civic Architects', ja: 'Civic Architects', en: 'Civic Architects' }, { zh: '公民空间与既有建筑再利用', ja: '市民空間と既存建築の再利用', en: 'civic space and adaptive reuse' }, { title: 'Civic Architects', url: 'https://civicarchitects.eu/' }),
   'adjaye-associates': catalogArchitectProfile('adjaye-associates', { zh: 'Adjaye Associates', ja: 'アジャイ・アソシエイツ', en: 'Adjaye Associates' }, { zh: '文化机构、身份与全球城市', ja: '文化施設、アイデンティティ、グローバル都市', en: 'cultural institutions, identity, and global cities' }, { title: 'Adjaye Associates', url: 'https://www.adjaye.com/' }),
   'mecanoo': catalogArchitectProfile('mecanoo', { zh: 'Mecanoo', ja: 'メカノー', en: 'Mecanoo' }, { zh: '公共建筑、基础设施与城市连接', ja: '公共建築、インフラ、都市の接続', en: 'public buildings, infrastructure, and urban connection' }, { title: 'Mecanoo', url: 'https://www.mecanoo.nl/' }),
@@ -7098,7 +7335,123 @@ const overlays: Record<string, ArchitectContentOverlay> = {
   'sarah-wigglesworth': catalogArchitectProfile('sarah-wigglesworth', { zh: '莎拉·威格尔斯沃思', ja: 'サラ・ウィグルスワース', en: 'Sarah Wigglesworth' }, { zh: '材料实验、低碳建造与居住研究', ja: '素材実験、低炭素建設、居住研究', en: 'material experiment, low-carbon construction, and dwelling research' }, { title: 'Sarah Wigglesworth Architects', url: 'https://www.swarch.co.uk/' }),
   'peter-zumthor': catalogArchitectProfile('peter-zumthor', { zh: '彼得·卒姆托', ja: 'ペーター・ツムトア', en: 'Peter Zumthor' }, { zh: '氛围、材料与场所经验', ja: '雰囲気、素材、場所の経験', en: 'atmosphere, material, and place experience' }, { title: 'The Pritzker Architecture Prize: Peter Zumthor', url: 'https://www.pritzkerprize.com/laureates/2009' }),
   'kazuyo-sejima': catalogArchitectProfile('kazuyo-sejima', { zh: '妹岛和世', ja: '妹島和世', en: 'Kazuyo Sejima' }, { zh: '轻盈、透明与非等级空间', ja: '軽さ、透明性、非階層的空間', en: 'lightness, transparency, and non-hierarchical space' }, { title: 'The Pritzker Architecture Prize: Kazuyo Sejima and Ryue Nishizawa', url: 'https://www.pritzkerprize.com/laureates/2010' }),
-  'ryue-nishizawa': catalogArchitectProfile('ryue-nishizawa', { zh: '西泽立卫', ja: '西沢立衛', en: 'Ryue Nishizawa' }, { zh: '轻盈、透明与非等级空间', ja: '軽さ、透明性、非階層的空間', en: 'lightness, transparency, and non-hierarchical space' }, { title: 'The Pritzker Architecture Prize: Kazuyo Sejima and Ryue Nishizawa', url: 'https://www.pritzkerprize.com/laureates/2010' }),
+  'ryue-nishizawa': {
+    slug: 'ryue-nishizawa',
+    maturity: 'reviewed',
+    summary: {
+      zh: '西泽立卫同时通过个人事务所与 SANAA 展开实践：1995 年与妹岛和世成立 SANAA，1997 年成立个人事务所。其作品以轻薄结构、连续空间和开放边界，让艺术、自然、城市活动与人的移动彼此进入。',
+      ja: '西沢立衛は、1995年に妹島和世とSANAAを設立し、1997年に個人事務所を開設した。薄い構造、連続する空間、開かれた境界を通して、アート、自然、都市活動、人の動きを相互に入り込ませる。',
+      en: 'Ryue Nishizawa works through both his independent office, founded in 1997, and SANAA, established with Kazuyo Sejima in 1995. Thin structures, continuous space, and open boundaries bring art, nature, city life, and movement into contact.',
+    },
+    core_ideas: {
+      zh: [
+        '清楚区分个人事务所与 SANAA 的合作作品',
+        '以轻薄结构和开口调节光、风、声音与视线',
+        '用非中心化的房间与路径支持自由移动',
+        '把美术馆连接到景观、街道和社区活动',
+      ],
+      ja: [
+        '個人事務所とSANAAの共同作品を明確に区別する',
+        '薄い構造と開口で光、風、音、視線を調整する',
+        '中心を固定しない部屋と経路で自由な移動を支える',
+        '美術館を風景、街路、地域活動へつなぐ',
+      ],
+      en: [
+        'Distinguish independent authorship from SANAA collaboration',
+        'Thin structure and openings modulating light, air, sound, and view',
+        'Decentered rooms and paths supporting free movement',
+        'Museums connected to landscape, street, and community activity',
+      ],
+    },
+    sections: [
+      {
+        title: {
+          zh: '个人实践与 SANAA 的协作边界',
+          ja: '個人実践とSANAAの協働を分けて読む',
+          en: 'Reading independent and collaborative practice',
+        },
+        paragraphs: {
+          zh: [
+            '2010 年普利兹克奖授予妹岛和世与西泽立卫，认可的是两人在 SANAA 中共同形成的实践；奖项资料也明确记录西泽另设个人事务所。理解他的作品时必须保留这条边界：金泽 21 世纪美术馆等是 SANAA 合作成果，十和田市现代美术馆与丰岛美术馆则属于个人事务所的重要项目。',
+          ],
+          ja: [
+            '2010年プリツカー賞は、妹島和世と西沢立衛がSANAAで築いた共同実践に与えられた。一方、公式資料は西沢が個人事務所を設立したことも明記する。金沢21世紀美術館などのSANAA作品と、十和田市現代美術館、豊島美術館などの個人作品を区別することが重要である。',
+          ],
+          en: [
+            'The 2010 Pritzker Prize recognized Sejima and Nishizawa’s collaborative work through SANAA, while the official record also notes Nishizawa’s independent office. Keeping those authorship lines visible prevents collaborative projects from being reduced to an individual style.',
+          ],
+        },
+      },
+      {
+        title: {
+          zh: '丰岛美术馆：让环境进入室内',
+          ja: '豊島美術館：環境を内部へ入れる',
+          en: 'Teshima Art Museum: environment entering the room',
+        },
+        paragraphs: {
+          zh: [
+            '丰岛美术馆把内藤礼的作品、西泽立卫的建筑与修复后的梯田环境结合在一起。约 40×60 米的低矮混凝土壳没有柱子，两处椭圆开口直接引入风、声音、光和雨；地面持续涌出的水又使内部随时间和季节变化。这里的“轻”不是材料重量小，而是建筑尽量减少对环境的隔断。',
+          ],
+          ja: [
+            '豊島美術館は、内藤礼の作品、西沢立衛の建築、再生された棚田の環境を一つにする。約40×60メートルの低いコンクリートシェルには柱がなく、二つの楕円形開口から風、音、光、雨が直接入る。床から湧く水とともに内部は時間と季節で変化する。',
+          ],
+          en: [
+            'Teshima Art Museum unites Rei Naito’s work, Nishizawa’s architecture, and restored rice terraces. A low column-free concrete shell with two openings admits wind, sound, light, and rain, while water emerging from the floor makes environmental change the content of the room.',
+          ],
+        },
+      },
+      {
+        title: {
+          zh: '十和田：把房间、街道与艺术交错',
+          ja: '十和田：部屋、街路、アートを交差させる',
+          en: 'Towada: interspersing rooms, street, and art',
+        },
+        paragraphs: {
+          zh: [
+            '十和田市现代美术馆把独立展室作为“艺术之家”散布在基地中，再以玻璃走廊连接。大小体量、室内展室、户外艺术和活动空间像城市街区一样交错，多个大开口又让作品朝向街道。分散体量不是形式游戏，而是让馆内活动延续到官庁街通，并进入 Arts Towada 的城市更新网络。',
+          ],
+          ja: [
+            '十和田市現代美術館では、独立した展示室を「アートのための家」として敷地に散在させ、ガラスの廊下で結ぶ。大小の量塊、屋内展示、屋外アート、イベント空間が街区のように交差する。分散配置は、館内活動を官庁街通りへ連続させ、Arts Towadaの都市再生へ美術館を組み込む方法である。',
+          ],
+          en: [
+            'Towada Art Center scatters independent “houses for art” and connects them with glass corridors. Indoor galleries, outdoor works, event spaces, and street views interlock so museum activity continues into Kanchogai Avenue and the wider Arts Towada regeneration project.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      {
+        slug: 'teshima-art-museum',
+        note: {
+          zh: '无柱混凝土壳与两处开口让风、光、声音和水成为艺术空间本身。',
+          ja: '無柱のコンクリートシェルと二つの開口が、風、光、音、水を空間そのものにする。',
+          en: 'A column-free shell whose openings make wind, light, sound, and water part of the art space.',
+        },
+      },
+      {
+        slug: 'towada-art-center',
+        note: {
+          zh: '分散展室、玻璃走廊与户外艺术把美术馆活动延伸到街道和城市更新。',
+          ja: '分散した展示室、ガラス廊下、屋外アートが、美術館の活動を街路と都市再生へ広げる。',
+          en: 'Scattered galleries, glass corridors, and outdoor art extend museum activity into the street and city.',
+        },
+      },
+    ],
+    sources: [
+      {
+        title: 'The Pritzker Architecture Prize: Kazuyo Sejima and Ryue Nishizawa',
+        url: 'https://www.pritzkerprize.com/laureates/2010',
+      },
+      {
+        title: 'Benesse Art Site Naoshima: Teshima Art Museum',
+        url: 'https://benesse-artsite.jp/en/art/teshima-artmuseum.html',
+      },
+      {
+        title: 'Towada Art Center: About the building',
+        url: 'https://towadaartcenter.com/en/about/',
+      },
+    ],
+  },
   'herzog-de-meuron': catalogArchitectProfile('herzog-de-meuron', { zh: '赫尔佐格与德梅隆', ja: 'ヘルツォーク＆ド・ムーロン', en: 'Herzog & de Meuron' }, { zh: '材料表皮、艺术协作与城市转化', ja: '素材の表皮、芸術協働、都市変容', en: 'material skin, art collaboration, and urban transformation' }, { title: 'Herzog & de Meuron', url: 'https://www.herzogdemeuron.com/' }),
   'thom-mayne': catalogArchitectProfile('thom-mayne', { zh: '汤姆·梅恩', ja: 'トム・メイン', en: 'Thom Mayne' }, { zh: '复杂系统、城市冲突与制度建筑', ja: '複雑なシステム、都市の衝突、制度建築', en: 'complex systems, urban conflict, and institutional architecture' }, { title: 'Morphosis', url: 'https://www.morphosis.com/' }),
   'wang-shu-lu-wenyu': catalogArchitectProfile('wang-shu-lu-wenyu', { zh: '王澍与陆文宇', ja: '王澍と陸文宇', en: 'Wang Shu and Lu Wenyu' }, { zh: '手工建造、再利用与中国当代性', ja: '手仕事、再利用、中国の現代性', en: 'craft, reuse, and contemporary China' }, { title: 'Amateur Architecture Studio', url: 'http://www.aaastudio.com/' }),
