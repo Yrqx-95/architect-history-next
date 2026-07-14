@@ -1,7 +1,7 @@
 # Architect introductory P0 data batch 001
 
 日期：2026-07-14  
-状态：reviewed migration pack；尚未写入生产
+状态：生产迁移、Reviewed release 与线上验收已完成
 
 ## 结论
 
@@ -59,7 +59,15 @@ Town House 的生产记录目前有 3 张 Unsplash 图片：
 - production build：4446 个静态页面生成通过
 - E2E：完整 24/24 通过；新增 Town House 页面/API 308 用例单独通过
 - 生产只读冲突复查：通过；2 architect、3 building、3 Town House image、1 profile、3 assignment、1 compatibility 行全部与 migration 锁定快照一致，canonical slug 冲突为 0
-- 生产写入：未授权、未执行
+- PR #162：已 squash merge，commit `19a94a1e458dda00746fa8d4aa62847b133e3a62`
+- 生产 migration：`architect_intro_p0_data_001`，版本 `20260714112158`，已应用
+- 写后数据：Grafton / UNEMORI、Town House、TSE 与 Book Mountain 全部符合 reviewed postcondition；Town House 旧 slug 和 3 张错图均为 0，Book Mountain 旧截断链接为 0
+- 稳定总量：148 architects、942 buildings、88 graduation profiles；images 仅按决策从 7292 降为 7289
+- RLS / policy：6 张涉及表均保持 RLS 开启且各有 1 条只读策略
+- Supabase advisors：维持迁移前基线 13 security / 27 performance，本批没有新增
+- Reviewed production release：run [`29328686040`](https://github.com/Yrqx-95/architect-history-next/actions/runs/29328686040) 成功，用时 10m49s
+- 线上路由：三语旧 Town House slug 与旧 v1 API 均永久 308；三语新 Town House、TSE 与 Book Mountain 页面均 200
+- 线上 API：Town House / TSE 返回规范 UUID、slug 与三语标题；Book Mountain 返回完整 MVRDV 官方来源；错误 Unsplash ID 不再出现
 
 ## 明确不做
 
