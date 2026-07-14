@@ -18,10 +18,10 @@ Migration `20260714041451_content_trust_miho_001.sql` requires the reviewed buil
 
 ## Verification record
 
-- [ ] Isolated PGlite/PostgreSQL dry-run: forward, replay refusal, rollback
-- [ ] CI checks
-- [ ] Production precheck
-- [ ] Guarded production migration
-- [ ] Post-write SQL verification
-- [ ] Reviewed production release
-- [ ] Live HTTP verification
+- [x] Isolated PGlite/PostgreSQL dry-run: forward, replay refusal, rollback
+- [x] CI checks: PR #151 and follow-up PR #155 passed
+- [x] Production precheck: current localized names and one primary matched
+- [x] Guarded production migration: `content_trust_miho_001`
+- [x] Post-write SQL verification: trilingual fields and one primary confirmed
+- [x] Reviewed production release: run `29306217212`, success
+- [x] Live HTTP verification: `/zh/building/miho-museum` returned 200 and rendered the reviewed content
