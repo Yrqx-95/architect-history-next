@@ -8,14 +8,14 @@ Safe auto-apply candidates: **0**
 
 ## Result
 
-- 1428 rows currently have `is_primary=true` across 942 buildings.
-- 482 buildings have more than one primary row; 4 have three.
-- 482 are Commons vs Unsplash conflicts.
+- 1426 rows currently have `is_primary=true` across 942 buildings.
+- 480 buildings have more than one primary row; 4 have three.
+- 480 are Commons vs Unsplash conflicts.
 - 0 are Commons vs Commons conflicts.
 - 0 candidate rows are missing photographer, license or source URL.
-- 206 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
-- 134 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
-- 142 buildings are currently shielded by a runtime cover override.
+- 205 unshielded buildings currently resolve to Unsplash while a Commons candidate also exists.
+- 135 unshielded buildings already resolve to Commons but still violate the one-primary invariant.
+- 140 buildings are currently shielded by a runtime cover override.
 
 ## Decision
 

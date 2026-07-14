@@ -42,7 +42,22 @@ async function acquireLock() {
   } catch (error) {
     if (error?.code !== 'EEXIST') throw error
     const stat = await fs.stat(lockPath).catch(() => null)
-    if (stat && Date.now() - stat.mtimeMs < staleLockMs) {
+    const previousLock = await fs.readFile(lockPath, 'utf8')
+      .then(value => JSON.parse(value))
+      .catch(() => null)
+    const previousPid = Number(previousLock?.pid)
+    const previousPidIsValid = Number.isInteger(previousPid) && previousPid > 0
+    let previousProcessIsRunning = false
+    if (previousPidIsValid) {
+      try {
+        process.kill(previousPid, 0)
+        previousProcessIsRunning = true
+      } catch (pidError) {
+        previousProcessIsRunning = pidError?.code === 'EPERM'
+      }
+    }
+    const lockIsFresh = stat && Date.now() - stat.mtimeMs < staleLockMs
+    if (previousProcessIsRunning || (!previousPidIsValid && lockIsFresh)) {
       console.log(JSON.stringify({
         skipped: true,
         reason: 'previous-image-fill-queue-run-still-active',

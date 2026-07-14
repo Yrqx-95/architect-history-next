@@ -29,13 +29,13 @@ describe('duplicate primary image audit snapshot', () => {
   it('keeps every conflict in review-required state', () => {
     expect(queue.writes_database).toBe(false)
     expect(queue.summary).toMatchObject({
-      duplicate_primary_buildings: 482,
-      commons_vs_unsplash: 482,
+      duplicate_primary_buildings: 480,
+      commons_vs_unsplash: 480,
       commons_vs_commons: 0,
       safe_auto_apply: 0,
       formally_reviewed: 0,
     })
-    expect(queue.items).toHaveLength(482)
+    expect(queue.items).toHaveLength(480)
     expect(queue.items.every((item: { safe_auto_apply: boolean }) => item.safe_auto_apply === false)).toBe(true)
     expect(queue.items.every((item: { review_status: string }) => item.review_status === 'needs-visual-identity-review')).toBe(true)
   })
