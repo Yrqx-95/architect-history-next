@@ -27,7 +27,7 @@ export interface ArchitectContentOverlay {
   slug: string
   summary: Record<ContentLang, string>
   core_ideas: Record<ContentLang, string[]>
-  portrait: ArchitectPortrait
+  portrait?: ArchitectPortrait
   sections: ArchitectArticleSection[]
   representative_works: ArchitectRepresentativeWork[]
   sources: ArchitectSource[]
@@ -37,6 +37,61 @@ export function localizedContent<T>(value: Record<ContentLang, T>, lang: string)
   if (lang === 'ja') return value.ja
   if (lang === 'en') return value.en
   return value.zh
+}
+
+type CompactArchitectProfile = Omit<ArchitectContentOverlay, 'sections' | 'representative_works' | 'portrait'> & {
+  portrait?: ArchitectPortrait
+  focus: Record<ContentLang, string>
+  legacy: Record<ContentLang, string>
+}
+
+function compactArchitectProfile({ focus, legacy, ...profile }: CompactArchitectProfile): ArchitectContentOverlay {
+  return {
+    ...profile,
+    sections: [
+      {
+        title: { zh: '设计方法', ja: '設計の方法', en: 'Design method' },
+        paragraphs: { zh: [focus.zh], ja: [focus.ja], en: [focus.en] },
+      },
+      {
+        title: { zh: '理解其影响', ja: '影響を読む', en: 'Reading the legacy' },
+        paragraphs: { zh: [legacy.zh], ja: [legacy.ja], en: [legacy.en] },
+      },
+    ],
+    representative_works: [],
+  }
+}
+
+function catalogArchitectProfile(
+  slug: string,
+  names: Record<ContentLang, string>,
+  theme: Record<ContentLang, string>,
+  source: ArchitectSource,
+): ArchitectContentOverlay {
+  return compactArchitectProfile({
+    slug,
+    summary: {
+      zh: `${names.zh}的资料以${theme.zh}为线索，关注建筑如何在具体场地、使用与建造条件中成立。`,
+      ja: `${names.ja}の建築は、${theme.ja}を手がかりに、場所、使われ方、建設条件の関係を考える。`,
+      en: `${names.en} is documented here through ${theme.en}, with attention to site, use, and construction.`,
+    },
+    core_ideas: {
+      zh: [theme.zh, '从具体使用与场地出发', '以材料、结构和动线建立空间体验'],
+      ja: [theme.ja, '使われ方と場所から考える', '素材、構造、動線で空間経験をつくる'],
+      en: [theme.en, 'Start with use and site', 'Space through material, structure, and circulation'],
+    },
+    focus: {
+      zh: `${names.zh}的设计线索不应被简化为单一形式标签；${theme.zh}需要与项目的功能、气候、材料和使用者经验一起理解。`,
+      ja: `${names.ja}を単一の形式記号へ縮めず、${theme.ja}を機能、気候、素材、利用者の経験とともに読む必要がある。`,
+      en: `${names.en} should not be reduced to a formal label: ${theme.en} must be read with program, climate, material, and lived experience.`,
+    },
+    legacy: {
+      zh: `学习${names.zh}的价值，在于把${theme.zh}转化为可检验的空间判断，而不是复制表面风格。`,
+      ja: `${names.ja}から学ぶ価値は、${theme.ja}を検証できる空間判断へ変え、表面的な様式を複製しないことにある。`,
+      en: `The value of studying ${names.en} is to turn ${theme.en} into testable spatial judgment rather than surface imitation.`,
+    },
+    sources: [source],
+  })
 }
 
 const overlays: Record<string, ArchitectContentOverlay> = {
@@ -6022,10 +6077,1037 @@ const overlays: Record<string, ArchitectContentOverlay> = {
     ],
   },
 
+  'toyo-ito': {
+    slug: 'toyo-ito',
+    summary: {
+      zh: '伊东丰雄持续尝试让建筑接近空气、流动与人的非固定行为。他从轻盈的住宅实验出发，发展出以管束、网格与连续曲面组织公共空间的方法，使图书馆、媒体中心与歌剧院不再是功能分区的容器，而成为可被自由穿行和重新解释的环境。',
+      ja: '伊東豊雄は、建築を空気、流動、人の固定されない行為に近づけようとし続けてきた。軽やかな住宅実験から出発し、チューブ、ネットワーク、連続曲面によって公共空間を組織する方法を展開した。図書館、メディア施設、劇場を機能分区の容器ではなく、自由に通り抜け、読み替えられる環境にする。',
+      en: 'Toyo Ito continually seeks architecture closer to air, flow, and unfixed human behavior. From light domestic experiments, he developed tubes, networks, and continuous surfaces for public space, making libraries, media centers, and opera houses into environments to move through and reinterpret rather than containers of fixed program.',
+    },
+    core_ideas: {
+      zh: ['以轻盈、透明和流动挑战固定房间', '让结构同时成为空间、设备与交通的媒介', '保留公共行为的模糊性与自由度', '从自然现象中寻找表皮与体量的组织方式'],
+      ja: ['軽さ、透明性、流動性で固定された部屋を問い直す', '構造を空間、設備、動線の媒体にする', '公共行為の曖昧さと自由を残す', '自然現象から表皮と量塊の組織を探る'],
+      en: ['Lightness, transparency, and flow against fixed rooms', 'Structure as space, services, and circulation', 'Ambiguity and freedom of public behavior', 'Natural phenomena informing skin and volume'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Toyo_ito.jpg',
+      author: 'Alexzein',
+      license: 'CC BY-SA 4.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Toyo_ito.jpg',
+      alt: { zh: '伊东丰雄肖像', ja: '伊東豊雄の肖像', en: 'Portrait of Toyo Ito' },
+    },
+    sections: [
+      {
+        title: { zh: '建筑不必被固定功能填满', ja: '建築を固定機能で満たさない', en: 'Architecture beyond fixed function' },
+        paragraphs: {
+          zh: ['伊东丰雄并不把程序理解为一组必须被隔墙分开的房间。他关心人在城市与建筑中不断变化的交流、停留、观看和移动，并用开放平面、透明表皮与可交叉的流线为这种不确定性留下余地。功能的模糊不是缺乏秩序，而是让公共生活能够产生新的使用方式。'],
+          ja: ['伊東豊雄はプログラムを壁で分けるべき部屋の集合として捉えない。都市と建築の中で変化し続ける交流、滞在、見ること、移動に関心を持ち、開放的な平面、透明な表皮、交差する動線で不確定さの余地を残す。機能の曖昧さは秩序の欠如ではなく、公共生活が新しい使い方を生むための条件である。'],
+          en: ['Ito does not understand program as rooms that must be separated by walls. He designs for changing patterns of meeting, staying, looking, and moving, using open plans, transparent skins, and intersecting routes to leave room for uncertainty. Functional ambiguity is not disorder; it enables new forms of public use.'],
+        },
+      },
+      {
+        title: { zh: '仙台媒体中心：结构成为自由空间的条件', ja: 'せんだいメディアテーク：構造が自由な空間を可能にする', en: 'Sendai Mediatheque' },
+        paragraphs: {
+          zh: ['仙台媒体中心以楼板与 13 个管束构成简单而强大的系统。管束同时承担结构、竖向交通、设备与光线通道，因而减少了传统楼层中固定核心筒与隔墙的支配。图书馆、展览与媒体活动可以在连续楼层上重新布置，建筑以结构性秩序换取使用上的自由。'],
+          ja: ['せんだいメディアテークは、床板と13本のチューブ群による単純で強力なシステムである。チューブは構造、垂直動線、設備、光の通路を同時に担い、固定コアや間仕切りの支配を減らす。図書館、展示、メディア活動は連続する床の上で組み替えられ、構造の秩序が使い方の自由を支える。'],
+          en: ['Sendai Mediatheque uses floor plates and thirteen tubes as a simple, powerful system. The tubes carry structure, vertical movement, services, and light, reducing the dominance of fixed cores and partitions. Library, exhibition, and media activity can be rearranged across continuous floors: structural order supports freedom of use.'],
+        },
+      },
+      {
+        title: { zh: '台中国家歌剧院：连续孔洞与相遇空间', ja: '台中国家歌劇院：連続する孔と出会いの空間', en: 'Taichung National Theater' },
+        paragraphs: {
+          zh: ['台中国家歌剧院以连续曲面和孔洞般的空间网络取代传统“盒中盒”剧场逻辑。水平与垂直方向的空隙既连接不同节目空间，也创造意外相遇、停留和观看的机会。它将复杂结构转译为可感知的洞穴式环境，说明伊东如何让技术与公共体验同时成为建筑形式。'],
+          ja: ['台中国家歌劇院は、連続曲面と孔のような空間ネットワークで、従来の「箱の中の箱」という劇場の論理を置き換える。水平・垂直方向の隙間は異なるプログラムをつなぎ、偶然の出会い、滞在、眺めの機会をつくる。複雑な構造を体験できる洞窟のような環境へ翻訳し、技術と公共経験を同時に形にする。'],
+          en: ['Taichung National Theater replaces the conventional theater “box in a box” with continuous surfaces and a network of cave-like voids. Horizontal and vertical openings connect programs while creating encounters, pauses, and views. Complex structure becomes a perceptible environment where technology and public experience take one architectural form.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'sendai-mediatheque', note: { zh: '以 13 个管束整合结构、交通、设备与光线，为图书馆和媒体活动保留连续而可变的楼层。', ja: '13本のチューブが構造、動線、設備、光を統合し、図書館とメディア活動に連続的で可変な床を与える。', en: 'Thirteen tubes integrate structure, circulation, services, and light across adaptable continuous floors.' } },
+      { slug: 'taichung-metropolitan-opera', note: { zh: '通过连续曲面与孔洞网络，让剧场之外的行走、停留和相遇成为建筑经验。', ja: '連続曲面と孔のネットワークによって、劇場外の歩行、滞在、出会いも建築経験にする。', en: 'Continuous surfaces and voids make movement, pause, and encounter part of the theater experience.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Toyo Ito biography', url: 'https://www.pritzkerprize.com/biography-toyo-ito' },
+      { title: 'The Pritzker Architecture Prize: Toyo Ito, 2013 Laureate', url: 'https://www.pritzkerprize.com/laureates/2013' },
+      { title: 'Sendai Mediatheque: Toyo Ito exhibition profile', url: 'https://www.smt.jp/newreal/profile/index.html' },
+      { title: 'Wikimedia Commons: Toyo Ito portrait', url: 'https://commons.wikimedia.org/wiki/File:Toyo_ito.jpg' },
+      { title: 'Wikidata: Toyo Ito', url: 'https://www.wikidata.org/wiki/Q369560' },
+    ],
+  },
+
+  'wang-shu': {
+    slug: 'wang-shu',
+    summary: {
+      zh: '王澍与陆文宇共同创办业余建筑工作室，以手工、旧材料、地方工法和缓慢建造回应中国快速城市化。他的建筑不是把传统复制成符号，而是把瓦片、砖、地形、院落和工匠劳动重新组织为当代公共空间。',
+      ja: '王澍は陸文宇とともにアマチュア建築スタジオを設立し、手仕事、古材、地域の工法、ゆっくりした建設を通じて中国の急速な都市化に応答してきた。伝統を記号として複製するのではなく、瓦、レンガ、地形、中庭、職人の労働を現代の公共空間へ組み替える。',
+      en: 'Wang Shu, with Lu Wenyu at Amateur Architecture Studio, responds to rapid urbanization through handwork, reclaimed material, local craft, and slow construction. Rather than copying tradition as image, their work reorganizes tile, brick, terrain, courtyard, and labor into contemporary public space.',
+    },
+    core_ideas: {
+      zh: ['以旧砖瓦和建造痕迹抵抗无差别拆建', '把手工劳动视为设计知识', '以地形、院落与行走组织公共建筑', '让当代形式与地方记忆同时存在'],
+      ja: ['古い瓦と建設の痕跡で画一的な解体・再開発に応答する', '手仕事を設計知として扱う', '地形、中庭、歩行によって公共建築を組織する', '現代的な形と地域の記憶を共存させる'],
+      en: ['Reclaimed tile and construction traces against generic redevelopment', 'Handwork as design knowledge', 'Terrain, courtyard, and walking in public buildings', 'Contemporary form with local memory'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/0/06/Wang-Shu_Taipei.jpg',
+      author: 'Movez; derivative uploaded by Kuebi',
+      license: 'CC BY 2.0 / CC0 source',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Wang-Shu_Taipei.jpg',
+      alt: { zh: '王澍肖像', ja: '王澍の肖像', en: 'Portrait of Wang Shu' },
+    },
+    sections: [
+      {
+        title: { zh: '“业余”是一种建造立场', ja: '「アマチュア」は建設への立場である', en: '“Amateur” as a building position' },
+        paragraphs: {
+          zh: ['王澍与陆文宇在 1997 年创办业余建筑工作室。“业余”并不表示缺乏专业性，而是拒绝把建筑完全交给速度、标准化和市场图像；它强调亲手研究材料、在现场学习、尊重已有地形与生活方式，并允许设计在建造过程中继续被修正。'],
+          ja: ['王澍と陸文宇は1997年にアマチュア建築スタジオを設立した。「アマチュア」は専門性の不足を意味しない。建築を速度、標準化、市場のイメージだけに委ねず、材料を手で研究し、現場で学び、既存の地形と生活を尊重し、建設の過程で設計を修正し続ける立場である。'],
+          en: ['Wang Shu and Lu Wenyu founded Amateur Architecture Studio in 1997. “Amateur” does not mean unskilled; it resists handing architecture entirely to speed, standardization, and market image. It means studying material by hand, learning on site, respecting terrain and ways of life, and allowing design to keep changing during construction.'],
+        },
+      },
+      {
+        title: { zh: '宁波博物馆：把拆建材料变成城市记忆', ja: '寧波博物館：解体材を都市の記憶へ変える', en: 'Ningbo Museum and urban memory' },
+        paragraphs: {
+          zh: ['宁波博物馆以回收的砖瓦和层叠墙面面对城市扩张中的拆除现实。材料并未被处理成怀旧装饰，而是保留色差、尺寸与施工痕迹，让建筑表面记录不同来源与时间。体量沿地形展开，内部的行走、坡道和视线把博物馆从封闭容器转化为可穿行的城市地景。'],
+          ja: ['寧波博物館は、回収したレンガと瓦、重なる壁面によって都市拡張に伴う解体の現実に向き合う。素材は懐古的な装飾ではなく、色の違い、寸法、施工の痕跡を残し、異なる場所と時間を建築表面に記録する。量塊は地形に沿って展開し、歩行、坂道、視線が博物館を閉じた容器から通り抜けられる都市の地景へ変える。'],
+          en: ['Ningbo Museum uses reclaimed brick and tile in layered walls to confront the demolition accompanying urban expansion. The material is not nostalgic decoration: differences of color, size, and construction trace record multiple origins and times. The mass follows terrain, while walking routes, ramps, and views turn the museum into an inhabitable urban landscape.'],
+        },
+      },
+      {
+        title: { zh: '散落的房子：让当代建筑回到园林与地形', ja: '五散房：現代建築を庭園と地形へ戻す', en: 'Five Scattered Houses' },
+        paragraphs: {
+          zh: ['五散房不以单一完整体量占据场地，而把若干小体量放入地形、树木与水边之间。院落、墙体、屋顶和路径形成断续的行走经验，使建筑更像与环境共同生长的片段。它说明地方性不只是材料标签，也来自建筑如何分配视线、停留与人与自然之间的距离。'],
+          ja: ['五散房は一つの完結した量塊で敷地を占めるのではなく、複数の小さな建物を地形、樹木、水辺のあいだに置く。中庭、壁、屋根、道が断続的な歩行経験をつくり、建築は環境とともに育つ断片のようになる。地域性は材料のラベルだけでなく、視線、滞在、人と自然の距離をどう配分するかから生まれる。'],
+          en: ['Five Scattered Houses does not occupy its site with one complete object. Smaller volumes sit among terrain, trees, and water; courtyards, walls, roofs, and paths make a discontinuous walking experience. Locality emerges not only from material but from how architecture distributes view, pause, and distance between people and nature.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'ningbo-museum', note: { zh: '以回收砖瓦、层叠墙面与地形化行走空间，把城市拆建的记忆纳入博物馆。', ja: '回収レンガ、重なる壁、地形的な歩行空間によって、都市の解体と建設の記憶を博物館に取り込む。', en: 'Reclaimed tile, layered walls, and terrain-like circulation bring urban demolition memory into a museum.' } },
+      { slug: 'five-scattered-houses-ningbo', note: { zh: '将多个小体量放入地形与水边，以院落和路径组织分散而连续的居住体验。', ja: '複数の小さな量塊を地形と水辺に置き、中庭と道で分散しながら連続する住まいの経験を組織する。', en: 'Small volumes among terrain and water, joined by courtyards and paths into a dispersed continuity.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Wang Shu biography', url: 'https://www.pritzkerprize.com/biography-wang-shu' },
+      { title: 'The Pritzker Architecture Prize: Wang Shu, 2012 Laureate', url: 'https://www.pritzkerprize.com/laureates/2012' },
+      { title: 'Wikimedia Commons: Wang Shu portrait', url: 'https://commons.wikimedia.org/wiki/File:Wang-Shu_Taipei.jpg' },
+      { title: 'Wikidata: Wang Shu', url: 'https://www.wikidata.org/wiki/Q336620' },
+    ],
+  },
+
+  'hassan-fathi': {
+    slug: 'hassan-fathi',
+    summary: {
+      zh: '哈桑·法帝以埃及乡土建造、土坯技术和气候经验反思现代建筑对昂贵材料与机械空调的依赖。他主张从当地材料、工匠知识和居民参与出发，使住房与公共建筑成为适应环境、维持尊严并传递建造能力的社会过程。',
+      ja: 'ハッサン・ファティは、エジプトの民俗的な建設、日干しレンガ、気候への経験から、近代建築が高価な材料や機械空調に依存することを問い直した。地域の材料、職人の知恵、住民参加から出発し、住宅と公共建築を環境に適応し、尊厳を保ち、建設技術を伝える社会的な過程として考えた。',
+      en: 'Hassan Fathy used Egyptian vernacular building, earth construction, and climatic knowledge to question architecture’s dependence on expensive materials and mechanical cooling. He began with local materials, craft, and participation, treating housing and civic building as social processes of adaptation, dignity, and skill transfer.',
+    },
+    core_ideas: {
+      zh: ['用土坯、穹顶与庭院回应干热气候', '让居民与工匠成为建造主体', '以低成本技术维护空间尊严', '从传统中提取可继续发展的环境智慧'],
+      ja: ['日干しレンガ、ドーム、中庭で乾燥暑熱気候に応答する', '住民と職人を建設の主体にする', '低コストの技術で空間の尊厳を守る', '伝統から更新可能な環境知を引き出す'],
+      en: ['Earth, domes, and courtyards for hot-dry climates', 'Residents and craftspeople as builders', 'Low-cost technique with spatial dignity', 'Tradition as renewable environmental knowledge'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Hassan_Fathy_in_Cairo_(cropped).jpg',
+      author: 'Dimitri Papadimos personal archive / Ioannis D. Papadimos',
+      license: 'CC BY-SA 3.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Hassan_Fathy_in_Cairo_(cropped).jpg',
+      alt: { zh: '哈桑·法帝肖像', ja: 'ハッサン・ファティの肖像', en: 'Portrait of Hassan Fathy' },
+    },
+    sections: [
+      {
+        title: { zh: '乡土知识不是怀旧', ja: '民俗知は懐古ではない', en: 'Vernacular knowledge is not nostalgia' },
+        paragraphs: {
+          zh: ['法帝重视土坯、拱券、穹顶、庭院和遮阳，并非要复刻一个理想化的过去，而是因为这些方法在干热环境中积累了可验证的热工与建造经验。他关心的是如何让材料来源、施工能力、维护成本和室内舒适度彼此一致，而不是把传统当作表面风格。'],
+          ja: ['ファティが日干しレンガ、ヴォールト、ドーム、中庭、日除けを重視したのは、理想化された過去を再現するためではない。乾燥暑熱環境で蓄積された熱的・建設的な経験を使うためである。材料の入手、施工能力、維持費、室内の快適さを一致させ、伝統を表面的な様式にしないことが重要だった。'],
+          en: ['Fathy’s interest in earth, vaults, domes, courtyards, and shade was not nostalgia. These methods held tested climatic and construction knowledge for hot-dry conditions. His concern was to align material supply, building skill, maintenance, and indoor comfort rather than turn tradition into surface style.'],
+        },
+      },
+      {
+        title: { zh: '新古尔纳：建筑、迁居与社会复杂性', ja: 'ニュー・グルナ：建築、移住、社会の複雑さ', en: 'New Gourna and the complexity of resettlement' },
+        paragraphs: {
+          zh: ['新古尔纳计划受埃及文物部门委托，意在安置帝王谷附近的居民。法帝用土坯、穹顶和公共设施提出一种可由当地人参与建造的聚落方案。项目并未完整实现，这正提醒我们：建筑能提出环境与空间的答案，却不能单独解决迁居、行政与生计等社会问题。'],
+          ja: ['ニュー・グルナ計画は、王家の谷周辺の住民を移すためにエジプト考古局から委託された。ファティは日干しレンガ、ドーム、公共施設によって、地域の人々が建設に参加できる集落を提案した。計画は完全には実現しなかった。この事実は、建築が環境と空間の答えを出せても、移住、行政、生計といった社会問題を単独では解決できないことを示す。'],
+          en: ['New Gourna was commissioned to resettle residents near the Valley of the Kings. Fathy proposed an earth-built settlement with public facilities that local people could help construct. Its incomplete realization is important: architecture can offer environmental and spatial answers, but cannot by itself resolve resettlement, administration, and livelihood.'],
+        },
+      },
+      {
+        title: { zh: '达尔·伊斯兰：把方法带入新的语境', ja: 'ダール・アル・イスラム：方法を新しい文脈へ運ぶ', en: 'Dar al-Islam in a new context' },
+        paragraphs: {
+          zh: ['达尔·伊斯兰清真寺位于美国新墨西哥州，说明法帝的方法不等于复制埃及形象。拱券、厚墙和土质材料被重新组织为适应当地气候与宗教教育社区的空间。跨地域使用的关键不是把形式搬运过去，而是重新理解材料、太阳、劳作与集体生活的关系。'],
+          ja: ['ニューメキシコ州のダール・アル・イスラム・モスクは、ファティの方法がエジプトの形を複製することではないと示す。ヴォールト、厚い壁、土の材料は、当地の気候と宗教教育共同体に合わせて再構成された。重要なのは形式の移植ではなく、材料、太陽、労働、共同生活の関係を読み直すことである。'],
+          en: ['Dar al-Islam Mosque in New Mexico shows that Fathy’s method was not a copy of Egyptian imagery. Vaults, thick walls, and earth materials were reorganized for a different climate and religious learning community. The transferable element is not form, but a renewed reading of material, sun, labor, and collective life.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'dar-al-islam', note: { zh: '在新墨西哥州以土质材料、拱券和厚墙重新解释法帝的气候与社区方法。', ja: 'ニューメキシコで土の材料、ヴォールト、厚い壁を用い、気候と共同体の方法を再解釈した。', en: 'An earth-built reinterpretation of Fathy’s climate and community method in New Mexico.' } },
+      { slug: 'stoppelaere-house', note: { zh: '将传统材料与手工建造带入卢克索文物环境中的小型建筑实践。', ja: '伝統素材と手仕事の建設を、ルクソールの文化財環境における小規模建築へ持ち込んだ。', en: 'Traditional material and craft applied to a small building in Luxor’s heritage setting.' } },
+    ],
+    sources: [
+      { title: 'Egypt State Information Service: Hassan Fathy', url: 'https://sis.gov.eg/en/egypt/egyptian-figures/hassan-fathy/' },
+      { title: 'Mathaf Encyclopedia: Hassan Fathy', url: 'https://mathaf.org.qa/en/encyclopedia/artists-biographies/hassan-fathy/' },
+      { title: 'Wikimedia Commons: Hassan Fathy portrait', url: 'https://commons.wikimedia.org/wiki/File:Hassan_Fathy_in_Cairo_(cropped).jpg' },
+      { title: 'Wikidata: Hassan Fathy', url: 'https://www.wikidata.org/wiki/Q560101' },
+    ],
+  },
+
+  'eileen-gray': {
+    slug: 'eileen-gray',
+    summary: {
+      zh: 'Eileen Gray 将漆艺、家具、室内与建筑视为同一套生活设计。她的住宅不是把家具放进预先完成的容器，而是从身体姿态、储物、光线、视线和可变使用中逐步生成空间，使现代主义获得更细腻、更具日常性的尺度。',
+      ja: 'アイリーン・グレイは、漆芸、家具、インテリア、建築を一つの生活のための設計として考えた。彼女の住宅は完成した容器に家具を置くのではなく、身体の姿勢、収納、光、視線、変化する使い方から空間を組み立て、近代主義に繊細で日常的な尺度を与えた。',
+      en: 'Eileen Gray treated lacquer, furniture, interiors, and architecture as one design for living. Her houses do not place furniture into finished containers; they grow from posture, storage, light, view, and changing use, giving modernism a more intimate everyday scale.',
+    },
+    core_ideas: {
+      zh: ['从家具与身体尺度生成建筑', '让收纳、遮阳与可变装置参与空间构成', '以精确细部服务日常使用', '把现代主义从抽象形式带回居住经验'],
+      ja: ['家具と身体の尺度から建築を生成する', '収納、日除け、可変装置を空間構成に参加させる', '精密な細部を日常使用に役立てる', '近代主義を抽象形態から居住経験へ戻す'],
+      en: ['Architecture generated from furniture and body scale', 'Storage, shade, and adjustable devices as spatial structure', 'Precise detail serving daily use', 'Modernism returned from abstraction to dwelling experience'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Eileen_Gray.jpg',
+      author: 'Unknown photographer',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Eileen_Gray.jpg',
+      alt: { zh: 'Eileen Gray 肖像', ja: 'アイリーン・グレイの肖像', en: 'Portrait of Eileen Gray' },
+    },
+    sections: [
+      {
+        title: { zh: '从漆艺与家具进入建筑', ja: '漆芸と家具から建築へ', en: 'From lacquer and furniture to architecture' },
+        paragraphs: {
+          zh: ['Gray 先以漆艺与家具设计建立职业实践，后来才转向建筑。这条路径使她格外关注手感、姿态、可移动性和物品如何被使用。对她而言，建筑不是宏大形式先行，而是让椅子、桌子、屏风、收纳和窗边活动共同组织居住生活。'],
+          ja: ['グレイは漆芸と家具から職業を始め、後に建築へ進んだ。この経歴は触覚、姿勢、可動性、物がどう使われるかへの鋭い関心につながる。建築は大きな形が先にあるのではなく、椅子、机、スクリーン、収納、窓辺の行為が住まいを一緒につくるものだった。'],
+          en: ['Gray began in lacquer and furniture before turning to architecture. That path sharpened her attention to touch, posture, mobility, and use. Architecture did not begin with a grand form for her; chairs, tables, screens, storage, and life near a window all helped organize dwelling.'],
+        },
+      },
+      {
+        title: { zh: 'E-1027：住宅作为可调节的生活机器', ja: 'E-1027：調整可能な生活の装置としての住宅', en: 'E-1027 as adjustable living' },
+        paragraphs: {
+          zh: ['E-1027 位于地中海海岸，Gray 与 Jean Badovici 合作完成。住宅把可移动家具、可调节桌面、遮阳、储物与海景关系织入同一套使用逻辑。它的现代性不在于纯白体量本身，而在于空间如何允许住者读书、休息、进食、观看与改变布置。'],
+          ja: ['E-1027は地中海沿岸でジャン・バドヴィチと協働して完成した。可動家具、調節可能なテーブル、日除け、収納、海への視線を一つの使用の論理へ編み込む。近代性は白い量塊そのものではなく、読む、休む、食べる、眺める、配置を変える行為を空間がどう許すかにある。'],
+          en: ['E-1027, made with Jean Badovici on the Mediterranean coast, links movable furniture, adjustable tables, shade, storage, and sea views into one logic of use. Its modernity lies not simply in a white volume but in how it permits reading, resting, eating, looking, and rearranging.'],
+        },
+      },
+      {
+        title: { zh: 'Tempe à Pailla：小住宅的精密度', ja: 'タンプ・ア・パイヤ：小さな住宅の精度', en: 'Tempe à Pailla and compact precision' },
+        paragraphs: {
+          zh: ['Tempe à Pailla 是 Gray 为自己设计的更小住宅。有限面积迫使每一件家具、每一道开口和每一段储物都承担多重作用。她在这里把 E-1027 的经验进一步压缩为可变、节省空间而不牺牲舒适感的日常系统，显示住宅创新可以来自细部而非体量。'],
+          ja: ['タンプ・ア・パイヤはグレイが自分のために設計したさらに小さな住宅である。限られた面積のため、家具、開口、収納のすべてが複数の役割を担う。E-1027の経験を可変性、省スペース、快適さを両立する日常のシステムへ凝縮し、住宅の革新が体量ではなく細部から生まれることを示す。'],
+          en: ['Tempe à Pailla was Gray’s smaller house for herself. Limited area asked every piece of furniture, opening, and storage element to do several jobs. It compresses lessons from E-1027 into an adjustable, space-saving, comfortable everyday system, showing residential innovation can come from detail rather than size.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'villa-e-1027', note: { zh: '通过家具、遮阳、储物与海景把现代住宅组织为可调节的日常生活系统。', ja: '家具、日除け、収納、海への視線を通して、近代住宅を調整可能な日常のシステムにした。', en: 'Furniture, shade, storage, and sea views organize a modern house for adjustable daily life.' } },
+      { slug: 'villa-tempe-a-paia', note: { zh: '在紧凑住宅中以可变家具和精确收纳，把有限面积转化为丰富居住体验。', ja: 'コンパクトな住宅で可変家具と精密な収納を用い、限られた面積を豊かな居住経験へ変える。', en: 'Adjustable furniture and precise storage turn a compact house into rich dwelling experience.' } },
+    ],
+    sources: [
+      { title: 'Design Museum: Eileen Gray', url: 'https://designmuseum.org/designers/eileen-gray' },
+      { title: 'Bard Graduate Center: Eileen Gray', url: 'https://www.bgc.bard.edu/exhibitions/exhibitions/99/eileen-gray' },
+      { title: 'MoMA: Eileen Gray, Tempe a Pailla', url: 'https://www.moma.org/collection/works/437921' },
+      { title: 'Wikimedia Commons: Eileen Gray portrait', url: 'https://commons.wikimedia.org/wiki/File:Eileen_Gray.jpg' },
+      { title: 'Wikidata: Eileen Gray', url: 'https://www.wikidata.org/wiki/Q233873' },
+    ],
+  },
+
+  'michelangelo': {
+    slug: 'michelangelo',
+    summary: {
+      zh: '米开朗基罗把雕塑家的体量感带入建筑，使墙、柱、楼梯和穹顶具有近乎身体性的张力。他不把古典秩序当作固定语法，而是通过压缩、拉伸和错位，制造从人体尺度到城市尺度都可感知的力量。',
+      ja: 'ミケランジェロは彫刻家の量塊感を建築に持ち込み、壁、柱、階段、ドームに身体的な緊張を与えた。古典秩序を固定された文法として扱わず、圧縮、引き伸ばし、ずらしによって、身体から都市まで感じられる力をつくった。',
+      en: 'Michelangelo brought a sculptor’s sense of mass into architecture, giving walls, columns, stairs, and domes a nearly bodily tension. He treated classical order not as fixed grammar but as material to compress, stretch, and displace across scales.',
+    },
+    core_ideas: {
+      zh: ['以雕塑性体量重构建筑构件', '把古典秩序转化为张力与冲突', '用楼梯、墙体和光线组织身体运动', '将建筑从室内延伸到城市空间'],
+      ja: ['彫刻的な量塊で建築要素を組み替える', '古典秩序を緊張と衝突へ変える', '階段、壁、光によって身体の動きを組織する', '建築を内部から都市空間へ広げる'],
+      en: ['Sculptural mass in architectural elements', 'Classical order transformed into tension', 'Stairs, walls, and light choreographing the body', 'Architecture extending from room to city'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Michelangelo.jpg',
+      author: 'Unknown; Portrait Gallery, University of Texas Libraries',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Michelangelo.jpg',
+      alt: { zh: '米开朗基罗肖像', ja: 'ミケランジェロの肖像', en: 'Portrait of Michelangelo' },
+    },
+    sections: [
+      {
+        title: { zh: '把古典构件变成有力量的身体', ja: '古典要素を力のある身体へ変える', en: 'Classical elements as bodies in tension' },
+        paragraphs: {
+          zh: ['米开朗基罗的建筑常使熟悉的柱式、壁龛和檐口显得不再安稳：柱子嵌进墙体，构件被拉长或压缩，重与轻、支撑与被支撑的关系被故意变得暧昧。这不是任意破坏规则，而是把古典语言从静态比例转变为可感知的力量和运动。'],
+          ja: ['ミケランジェロの建築では、馴染み深い柱式、壁龕、コーニスがもはや安定して見えない。柱は壁に埋め込まれ、要素は引き伸ばされたり圧縮されたりし、支えるものと支えられるものの関係が意図的に曖昧になる。これは規則の破壊ではなく、古典語彙を静的な比例から感じられる力と運動へ変える試みである。'],
+          en: ['Michelangelo makes familiar columns, niches, and cornices unstable: columns sink into walls, elements stretch or compress, and the relation between support and load becomes deliberately ambiguous. This is not arbitrary rule-breaking but a shift from static proportion to felt force and movement.'],
+        },
+      },
+      {
+        title: { zh: '劳伦齐亚纳图书馆：楼梯作为空间事件', ja: 'ラウレンツィアーナ図書館：空間的事件としての階段', en: 'The Laurentian Library staircase' },
+        paragraphs: {
+          zh: ['劳伦齐亚纳图书馆的入口前厅狭高、构件密集，通往阅览室的楼梯却像从上方流下的体量，改变了人对地面、墙面和入口的判断。图书馆因此不只是保存手稿的容器，而成为一段从压迫到展开的身体经验，也预示了后来的矫饰主义建筑。'],
+          ja: ['ラウレンツィアーナ図書館の前室は狭く高く、要素が密集する。一方で閲覧室へ向かう階段は上から流れ落ちる量塊のように見え、床、壁、入口の認識を変える。図書館は写本を収める容器ではなく、圧迫から展開へ向かう身体経験となり、後のマニエリスムを予告する。'],
+          en: ['The Laurentian Library’s vestibule is tall, compressed, and crowded with elements, while the stair to the reading room appears to flow downward as mass. The library becomes a bodily sequence from compression to release, anticipating later Mannerist architecture.'],
+        },
+      },
+      {
+        title: { zh: '卡比托利欧广场与圣彼得穹顶：建筑的城市尺度', ja: 'カンピドリオ広場とサン・ピエトロのドーム：都市の尺度', en: 'Campidoglio and the dome of St Peter’s' },
+        paragraphs: {
+          zh: ['在卡比托利欧广场，米开朗基罗通过坡道、台阶、对称立面和椭圆形铺地图案，把山顶空间重新定向为面向罗马的城市舞台。圣彼得大教堂穹顶则将集中式体量抬升为城市天际线的标志。两者共同说明，他的建筑不止塑造房间，也重新组织观看、到达与城市认同。'],
+          ja: ['カンピドリオ広場では、坂道、階段、対称的な立面、楕円形の舗装によって丘の頂をローマへ開く都市の舞台へ再構成した。サン・ピエトロ大聖堂のドームは集中式の量塊を都市のスカイラインの標識へ持ち上げる。彼の建築は部屋をつくるだけでなく、見ること、到達すること、都市の自己認識を組み替える。'],
+          en: ['At the Campidoglio, ramps, stairs, symmetric facades, and an oval pavement reorient the hilltop into an urban stage facing Rome. St Peter’s dome raises centralized mass into a civic skyline marker. Together they show architecture reorganizing arrival, view, and urban identity.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'piazza-del-campidoglio', note: { zh: '以坡道、台阶和椭圆铺地图案重组山顶广场，令城市观看成为空间主题。', ja: '坂道、階段、楕円舗装によって丘の広場を再構成し、都市を見る行為を空間の主題にした。', en: 'A hilltop piazza reshaped through ramps, stairs, and oval paving.' } },
+      { slug: 'laurentian-library', note: { zh: '以狭高前厅和如体量流动的楼梯，把进入阅览室转化为强烈身体经验。', ja: '狭く高い前室と流れる量塊のような階段により、閲覧室への到達を強い身体経験へ変える。', en: 'A compressed vestibule and flowing stair turn entry into a bodily event.' } },
+      { slug: 'st-peters-dome', note: { zh: '以集中式穹顶将圣彼得大教堂塑造成罗马天际线的持久标志。', ja: '集中式ドームによってサン・ピエトロ大聖堂をローマの持続的な標識にした。', en: 'A centralized dome made into Rome’s enduring skyline marker.' } },
+    ],
+    sources: [
+      { title: 'Vatican Library: Michelangelo’s mature years', url: 'https://www.vaticanlibrary.va/newsletter/202410EN.pdf' },
+      { title: 'Smarthistory: Michelangelo, Laurentian Library', url: 'https://smarthistory.org/michelangelo-laurentian-library/' },
+      { title: 'Michelangelo.org: Michelangelo as architect', url: 'https://www.michelangelo.org/michelangelo-architect.jsp' },
+      { title: 'Wikimedia Commons: Michelangelo portrait', url: 'https://commons.wikimedia.org/wiki/File:Michelangelo.jpg' },
+      { title: 'Wikidata: Michelangelo', url: 'https://www.wikidata.org/wiki/Q5592' },
+    ],
+  },
+
+  'diebedo-francis-kere': {
+    slug: 'diebedo-francis-kere',
+    summary: {
+      zh: '迪页贝杜·Francis Kéré 从布基纳法索甘多的气候、材料与社区组织出发，证明高质量建筑不必依赖高成本或外来技术。他将当地土材、被动降温、工匠培训和集体参与结合，使学校与公共建筑同时成为社会能力建设的过程。',
+      ja: 'ディエベド・フランシス・ケレは、ブルキナファソのガンドにおける気候、材料、共同体の組織から出発し、高品質な建築が高コストや外来技術に依存しないことを示した。地域の土、受動的冷却、職人の育成、集団的な参加を結び、学校や公共建築を社会的能力を育てる過程にした。',
+      en: 'Diébédo Francis Kéré begins with climate, material, and community organization in Gando, Burkina Faso, showing that high-quality architecture need not rely on high cost or imported technology. His schools and civic buildings combine local earth, passive cooling, training, and collective participation.',
+    },
+    core_ideas: {
+      zh: ['把社区参与视为设计与建造的一部分', '用土材和被动通风回应炎热气候', '让有限资源转化为耐久而有尊严的空间', '将教育、建造培训和公共生活相互连接'],
+      ja: ['共同体の参加を設計と建設の一部にする', '土と受動換気で暑い気候に応答する', '限られた資源を耐久性と尊厳のある空間へ変える', '教育、建設技術、公共生活を結びつける'],
+      en: ['Participation as part of design and construction', 'Earth and passive ventilation for hot climates', 'Limited resources turned into durable dignity', 'Education, construction skills, and public life linked together'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Francis_Kere%2C_2019_%28cropped%29.jpg',
+      author: 'Astrid Eckert / Technical University of Munich',
+      license: 'CC BY-SA 3.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Francis_Kere,_2019_(cropped).jpg',
+      alt: { zh: 'Francis Kéré 肖像', ja: 'フランシス・ケレの肖像', en: 'Portrait of Francis Kéré' },
+    },
+    sections: [
+      {
+        title: { zh: '从甘多出发：建筑作为共同建设', ja: 'ガンドから始める：共同でつくる建築', en: 'Starting from Gando' },
+        paragraphs: {
+          zh: ['Kéré 在甘多没有学校的现实中认识到，建筑问题同时也是教育、资源与尊严问题。他建立基金会为小学筹款，并让当地居民参与制砖和建造。项目的价值不只在一栋教室，而在于把知识、劳动机会和对公共空间的所有感留在社区中。'],
+          ja: ['ケレは、ガンドに学校がない現実から、建築の問題が教育、資源、尊厳の問題でもあると考えた。小学校の資金を集め、住民がレンガづくりと建設に参加できる仕組みをつくった。価値は教室一棟だけでなく、知識、仕事、公共空間への所有感を共同体に残す点にある。'],
+          en: ['Kéré understood the absence of a school in Gando as a question of education, resources, and dignity. He raised funds and involved residents in making bricks and building. The result was not only classrooms, but skills, work, and a lasting sense of collective ownership.'],
+        },
+      },
+      {
+        title: { zh: '气候不是限制，而是设计出发点', ja: '気候を制約ではなく出発点にする', en: 'Climate as a starting point' },
+        paragraphs: {
+          zh: ['甘多小学用压制土砖提供热容量，以悬挑金属屋顶遮阳并带走热空气，让教室在高温条件下仍可使用。Kéré 的方法并不把“可持续”当作附加技术标签，而是从材料可得性、维护能力、风、阴影和使用习惯中建立结构与空间。'],
+          ja: ['ガンド小学校は圧縮土レンガの熱容量、張り出した金属屋根の影、屋根下の通気を組み合わせ、高温でも使える教室をつくる。ケレにとって持続可能性は追加技術ではなく、材料の入手性、維持能力、風、日陰、使い方から構造と空間を組み立てることである。'],
+          en: ['Gando Primary School combines compressed earth blocks, a shading roof, and ventilation beneath it to make classrooms usable in intense heat. For Kéré, sustainability is not an added technical label; it begins with available materials, maintenance capacity, wind, shade, and everyday use.'],
+        },
+      },
+      {
+        title: { zh: '公共性可以临时、轻盈而开放', ja: '仮設性、軽さ、開放性としての公共性', en: 'Public space can be temporary and open' },
+        paragraphs: {
+          zh: ['2017 年蛇形画廊凉亭把 Kéré 的公共性带到伦敦：中央开口收集雨水，蓝色屋顶在树冠般的结构下提供遮阴，周边空间鼓励停留和对话。即使项目是临时建筑，它仍延续了他的核心方法——让气候、聚集和共同使用决定形式。'],
+          ja: ['2017年のサーペンタイン・パヴィリオンは、ケレの公共性をロンドンへ持ち込んだ。中央の開口は雨を受け、青い屋根は樹冠のような構造の下に日陰をつくり、周辺の空間は滞在と対話を促す。仮設建築でも、気候、集まり、共同利用が形を決めるという方法は一貫している。'],
+          en: ['The 2017 Serpentine Pavilion brought Kéré’s idea of publicness to London: a central opening receives rain, a blue canopy provides shade like a tree crown, and the perimeter encourages staying and conversation. Even as a temporary structure, climate, gathering, and shared use determine form.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'elementary-school', note: { zh: '甘多小学将当地制砖、被动降温与居民参与结合，使教育建筑成为社区能力建设。', ja: '地域のレンガづくり、受動的冷却、住民参加を結び、教育建築を共同体の力を育てる場にした。', en: 'A school combining local brickmaking, passive cooling, and community participation.' } },
+      { slug: 'serpentine-gallery-pavilion-2017', note: { zh: '以树冠般屋顶、雨水开口和开放边界，把临时凉亭变成停留与对话的公共场所。', ja: '樹冠のような屋根、雨を受ける開口、開かれた境界により、仮設パヴィリオンを滞在と対話の場にした。', en: 'A temporary pavilion shaped by canopy, rain opening, and open social edges.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Diébédo Francis Kéré biography', url: 'https://www.pritzkerprize.com/biography-diebedo-francis-kere' },
+      { title: 'The Pritzker Architecture Prize: 2022 Laureate', url: 'https://www.pritzkerprize.com/laureates/diebedo-francis-kere' },
+      { title: 'Kéré Foundation: About us', url: 'https://www.kerefoundation.com/en/about-us' },
+      { title: 'Yale School of Architecture: Francis Kéré', url: 'https://www.architecture.yale.edu/people/858-francis-kere' },
+      { title: 'Wikimedia Commons: Francis Kéré portrait', url: 'https://commons.wikimedia.org/wiki/File:Francis_Kere,_2019_(cropped).jpg' },
+      { title: 'Wikidata: Diébédo Francis Kéré', url: 'https://www.wikidata.org/wiki/Q1204590' },
+    ],
+  },
+
+  'bernini': {
+    slug: 'bernini',
+    summary: {
+      zh: '吉安·洛伦佐·贝尼尼把建筑、雕塑、绘画、光线与城市仪式编织成统一场景。他的作品不把建筑视为静止物体，而是通过轴线、椭圆、柱廊和观看顺序，引导身体与情绪共同进入巴洛克空间。',
+      ja: 'ジャン・ロレンツォ・ベルニーニは、建築、彫刻、絵画、光、都市の儀礼を一つの場面へ統合した。軸線、楕円、列柱、見る順序を通して身体と感情を導き、建築を静止した物体ではなくバロック的な経験として構成した。',
+      en: 'Gian Lorenzo Bernini fused architecture, sculpture, painting, light, and urban ritual into unified scenes. Through axes, ovals, colonnades, and choreographed views, he made Baroque architecture an emotional and bodily experience.',
+    },
+    core_ideas: {
+      zh: ['建筑、雕塑与绘画的整体艺术', '以椭圆、轴线和透视组织运动', '把宗教仪式转化为城市空间', '用光线和材料制造情绪高潮'],
+      ja: ['建築・彫刻・絵画を統合する総合芸術', '楕円・軸線・遠近法による動きの構成', '宗教儀礼を都市空間へ変換する', '光と素材によって感情の頂点をつくる'],
+      en: ['Architecture as total art', 'Movement through oval geometry and perspective', 'Religious ritual as urban space', 'Light and material as emotional instruments'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Gianlorenzo_Bernini_-_Self-Portrait_-_WGA01973.jpg',
+      author: 'Gian Lorenzo Bernini; digital reproduction via Web Gallery of Art',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Gianlorenzo_Bernini_-_Self-Portrait_-_WGA01973.jpg',
+      alt: { zh: '吉安·洛伦佐·贝尼尼自画像', ja: 'ジャン・ロレンツォ・ベルニーニの自画像', en: 'Self-portrait of Gian Lorenzo Bernini' },
+    },
+    sections: [
+      {
+        title: { zh: '巴洛克的整体艺术', ja: 'バロックの総合芸術', en: 'The Baroque total work of art' },
+        paragraphs: {
+          zh: ['贝尼尼首先以雕塑成名，但他的建筑思维从不把艺术门类分开。科尔纳罗礼拜堂等作品把人物、彩色石材、隐藏光源和观看席位组织成戏剧场景；建筑不再只是雕塑的背景，而是控制观看距离、光线方向和仪式节奏的完整装置。'],
+          ja: ['ベルニーニは彫刻家として名声を得たが、建築では芸術分野を切り離さなかった。コルナーロ礼拝堂などでは、人物像、色彩ある石材、隠された光源、観覧席を劇的な場面へ統合し、建築を彫刻の背景ではなく、距離、光、儀礼の速度を制御する装置にした。'],
+          en: ['Bernini first became famous as a sculptor, yet his architecture refuses to separate the arts. Works such as the Cornaro Chapel coordinate figures, colored stone, concealed light, and spectator positions, turning architecture into an apparatus that controls distance, illumination, and ritual tempo.'],
+        },
+      },
+      {
+        title: { zh: '圣彼得广场：拥抱城市的人群', ja: 'サン・ピエトロ広場：群衆を迎える抱擁', en: 'St Peter’s Square and the urban crowd' },
+        paragraphs: {
+          zh: ['圣彼得广场用巨大的椭圆柱廊接纳来自罗马城市的朝圣者。四排、共 284 根柱子形成既庄严又可穿越的边界，广场与教堂之间的梯形空间则校正视线和尺度。柱廊被解释为教会张开的双臂，说明贝尼尼如何把象征、交通、人群与城市构图合并为同一个空间决定。'],
+          ja: ['サン・ピエトロ広場は、巨大な楕円形の列柱によってローマから来る巡礼者を迎える。四列・284本の柱は荘厳でありながら通り抜けられる境界をつくり、教会前の台形空間が視線と尺度を調整する。列柱を教会の開かれた腕とみなす象徴は、交通、群衆、都市構成を一つの空間判断へ統合したことを示す。'],
+          en: ['St Peter’s Square receives pilgrims through a vast oval colonnade. Its four rows and 284 columns make a boundary that is monumental yet permeable, while the trapezoidal space toward the basilica corrects view and scale. The image of the colonnade as open arms shows how Bernini joined symbolism, circulation, crowds, and urban composition.'],
+        },
+      },
+      {
+        title: { zh: '圣安德烈教堂：压缩尺度，放大体验', ja: 'サンタンドレア教会：小さな尺度、大きな経験', en: 'Sant’Andrea al Quirinale' },
+        paragraphs: {
+          zh: ['圣安德烈教堂以横向椭圆平面把入口、祭坛和穹顶组织成紧密的观看序列。进入后，视线越过彩色大理石空间抵达祭坛，再沿雕塑与光线向穹顶上升。项目规模不大，却说明巴洛克的力量并不取决于体量，而来自平面几何、材料、图像与运动的精确协作。'],
+          ja: ['サンタンドレア・アル・クイリナーレは横長の楕円平面によって、入口、祭壇、ドームを緊密な視線の連続へまとめる。視線は色彩ある大理石の内部から祭壇へ進み、彫刻と光に導かれて上昇する。小規模でも、幾何、素材、図像、動きの協働によって大きな経験をつくれることを示す。'],
+          en: ['Sant’Andrea al Quirinale uses a transverse oval to bind entrance, altar, and dome into a compressed visual sequence. The eye crosses a richly colored interior toward the altar, then rises through sculpture and light. Its modest size shows that Baroque intensity comes from coordination of geometry, material, image, and movement rather than sheer mass.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'st-peters-square', note: { zh: '以椭圆柱廊把朝圣者、人流、象征和城市轴线组织成巨大的公共仪式空间。', ja: '楕円形の列柱によって巡礼者、動線、象徴、都市軸を巨大な公共儀礼の場へまとめた。', en: 'An oval colonnade joining pilgrims, circulation, symbolism, and urban axis.' } },
+      { slug: 'sant-andrea-al-quirinale', note: { zh: '在紧凑椭圆空间中整合祭坛、雕塑、彩色材料和隐藏光源。', ja: 'コンパクトな楕円空間に祭壇、彫刻、色彩素材、隠された光を統合した。', en: 'A compact oval integrating altar, sculpture, colored material, and concealed light.' } },
+      { slug: 'palazzo-barberini', note: { zh: '展示贝尼尼、马代尔诺与博罗米尼共同参与的罗马宫殿建造过程。', ja: 'ベルニーニ、マデルノ、ボッロミーニが関わったローマ宮殿の複合的な建設過程を示す。', en: 'A Roman palace shaped through the work of Maderno, Bernini, and Borromini.' } },
+    ],
+    sources: [
+      { title: 'National Gallery: Gian Lorenzo Bernini', url: 'https://www.nationalgallery.org.uk/artists/gian-lorenzo-bernini' },
+      { title: 'British Museum: Gian Lorenzo Bernini biography', url: 'https://www.britishmuseum.org/collection/term/BIOG19392' },
+      { title: 'Fabric of Saint Peter: The Square', url: 'https://www.basilicasanpietro.va/en/san-pietro/the-square' },
+      { title: 'Treccani: Gian Lorenzo Bernini', url: 'https://www.treccani.it/enciclopedia/gian-lorenzo-bernini/' },
+      { title: 'Wikimedia Commons: Bernini self-portrait', url: 'https://commons.wikimedia.org/wiki/File:Gianlorenzo_Bernini_-_Self-Portrait_-_WGA01973.jpg' },
+      { title: 'Wikidata: Gian Lorenzo Bernini', url: 'https://www.wikidata.org/wiki/Q160538' },
+    ],
+  },
+
+  'borromini': {
+    slug: 'borromini',
+    summary: {
+      zh: '弗朗切斯科·博罗米尼以凹凸墙面、复杂几何与连续曲面重新定义了巴洛克空间。他不依赖豪华材料，而是让平面、结构、光线和细部相互变形，使狭小而受限的场地获得强烈的运动感与精神性。',
+      ja: 'フランチェスコ・ボッロミーニは、凹凸する壁、複合幾何、連続曲面によってバロック空間を再定義した。豪華な素材に頼らず、平面、構造、光、細部を相互に変形させ、狭く制約された敷地に強い運動感と精神性を与えた。',
+      en: 'Francesco Borromini redefined Baroque space through concave and convex walls, compound geometry, and continuous surfaces. Rather than relying on lavish materials, he transformed plan, structure, light, and detail to give constrained sites extraordinary movement and intensity.',
+    },
+    core_ideas: {
+      zh: ['以凹凸曲面制造连续运动', '从几何关系生成平面、立面与穹顶', '用白色表面和自然光强化结构', '在极小场地中创造空间深度'],
+      ja: ['凹凸する曲面によって連続した動きをつくる', '幾何関係から平面・立面・ドームを生成する', '白い表面と自然光で構造を強調する', '小さな敷地に空間的な奥行きをつくる'],
+      en: ['Continuous motion through concave and convex form', 'Geometry generating plan, facade, and dome', 'White surfaces and daylight clarifying structure', 'Spatial depth within constrained sites'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Francesco_Borromini.jpg',
+      author: 'Unknown engraver; digital reproduction via e-rara',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Francesco_Borromini.jpg',
+      alt: { zh: '弗朗切斯科·博罗米尼肖像', ja: 'フランチェスコ・ボッロミーニの肖像', en: 'Portrait of Francesco Borromini' },
+    },
+    sections: [
+      {
+        title: { zh: '几何不是装饰，而是空间发动机', ja: '装飾ではなく空間を動かす幾何', en: 'Geometry as a spatial engine' },
+        paragraphs: {
+          zh: ['博罗米尼的几何并不是给平面套上复杂图案，而是让墙、柱、穹顶和光线产生连续关系。圆、椭圆、三角形与星形经过切割、叠加和圆角处理，转化为凹凸交替的边界。人在移动时不断感到空间收缩、展开和旋转，结构与知觉因此难以分开。'],
+          ja: ['ボッロミーニの幾何は、平面に複雑な図柄を載せることではなく、壁、柱、ドーム、光を連続させる仕組みである。円、楕円、三角形、星形を切り、重ね、丸めることで凹凸する境界へ変え、移動する身体に収縮、展開、回転を感じさせる。'],
+          en: ['Borromini’s geometry is not a pattern applied to plan; it is a mechanism joining walls, columns, dome, and light. Circles, ovals, triangles, and stars are cut, overlaid, and rounded into alternating boundaries, so movement produces repeated sensations of compression, release, and rotation.'],
+        },
+      },
+      {
+        title: { zh: '圣卡洛教堂：在极小基地中建立宇宙', ja: 'サン・カルロ教会：小さな敷地の宇宙', en: 'San Carlo alle Quattro Fontane' },
+        paragraphs: {
+          zh: ['圣卡洛教堂面积很小，却通过椭圆内部、连续檐口和逐渐缩小的穹顶格纹获得超出实际尺寸的深度。白色表面让几何与阴影成为主角，外立面的波动曲线则把内部运动延伸到街道。博罗米尼证明，纪念性可以来自比例、连续性和光，而不必依赖巨大体量。'],
+          ja: ['サン・カルロ・アッレ・クアトロ・フォンターネは小規模だが、楕円の内部、連続するコーニス、上部へ縮小するドーム格子によって実寸以上の奥行きを得る。白い表面は幾何と陰影を主役にし、波打つ外観は内部の運動を街路へ伸ばす。'],
+          en: ['San Carlo alle Quattro Fontane is small, yet its oval interior, continuous entablature, and diminishing dome coffers create depth beyond its dimensions. White surfaces make geometry and shadow primary, while the undulating facade carries interior movement into the street.'],
+        },
+      },
+      {
+        title: { zh: '圣伊沃教堂：平面、穹顶与灯塔', ja: 'サンティーヴォ教会：平面・ドーム・灯火', en: 'Sant’Ivo alla Sapienza' },
+        paragraphs: {
+          zh: ['圣伊沃教堂在既有大学庭院尽端展开，以两个三角形及凹凸圆弧生成六角星式平面。墙体的连续节奏向上汇入穹顶，再由螺旋灯塔突破罗马天际线。复杂几何在白色室内中显得轻盈，说明博罗米尼能把结构、象征和城市标志压缩为同一条垂直运动。'],
+          ja: ['サンティーヴォ・アッラ・サピエンツァは既存の大学中庭の奥に建ち、二つの三角形と凹凸する円弧から六芒星状の平面をつくる。壁の連続したリズムはドームへ集まり、螺旋形のランタンがローマの空へ伸びる。白い内部では複雑な幾何が軽やかに見える。'],
+          en: ['Sant’Ivo alla Sapienza rises at the end of an existing university courtyard. Two triangles and alternating arcs generate a six-pointed plan; the wall rhythm gathers into the dome and then breaks into Rome’s skyline through a spiral lantern. Structure, symbolism, and urban marker become one vertical movement.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'san-carlo-alle-quattro-fontane', note: { zh: '以椭圆内部、连续檐口和波动立面，在极小尺度中创造强烈空间深度。', ja: '楕円内部、連続コーニス、波打つ外観によって小さな尺度に強い奥行きをつくる。', en: 'An oval interior and undulating facade producing exceptional depth at a tiny scale.' } },
+      { slug: 'sant-ivo-alla-sapienza', note: { zh: '将星形几何、白色穹顶和螺旋灯塔连接为完整的垂直空间运动。', ja: '星形幾何、白いドーム、螺旋ランタンを一つの垂直運動へ結ぶ。', en: 'Star geometry, white dome, and spiral lantern joined as one vertical movement.' } },
+      { slug: 'oratorio-dei-filippini', note: { zh: '以柔和凹曲砖立面回应城市街道，并把复杂机构组织成清晰整体。', ja: '穏やかに凹むレンガ外観で街路に応答し、複合施設を明快な全体へまとめる。', en: 'A gently concave brick facade joining urban response and institutional order.' } },
+    ],
+    sources: [
+      { title: 'Treccani: Francesco Borromini', url: 'https://www.treccani.it/enciclopedia/francesco-borromini/' },
+      { title: 'Turismo Roma: Borromini’s locations', url: 'https://www.turismoroma.it/en/itineraries/i-luoghi-di-borromini' },
+      { title: 'Turismo Roma: San Carlo alle Quattro Fontane', url: 'https://www.turismoroma.it/en/places/church-san-carlo-alle-quattro-fontane' },
+      { title: 'Vatican Museums: Francesco Borromini 1599–1667 catalogue', url: 'https://m.museivaticani.va/content/dam/museivaticani/pdf/eventi_novita/iniziative/novita_editoriali/70_scheda_catalogo_borromini.pdf' },
+      { title: 'Wikimedia Commons: Francesco Borromini portrait', url: 'https://commons.wikimedia.org/wiki/File:Francesco_Borromini.jpg' },
+      { title: 'Wikidata: Francesco Borromini', url: 'https://www.wikidata.org/wiki/Q160956' },
+    ],
+  },
+
+  'riken-yamamoto': {
+    slug: 'riken-yamamoto',
+    summary: {
+      zh: '山本理显把建筑视为连接个人、家庭与社区的社会基础设施。他持续研究公共与私人之间的“阈限”，通过透明边界、共享空间和可见的日常活动，让住宅、学校、市政厅与美术馆成为关系发生的场所。',
+      ja: '山本理顕は、建築を個人・家族・地域社会を結ぶ社会基盤として捉える。公共と私的領域のあいだにある「閾」を探究し、透明な境界、共有空間、見える日常活動を通して、住宅、学校、市庁舎、美術館を関係が生まれる場所へ変えてきた。',
+      en: 'Riken Yamamoto treats architecture as social infrastructure connecting individuals, families, and communities. His work focuses on thresholds between public and private life, using visible boundaries and shared space to support everyday relationships.',
+    },
+    core_ideas: {
+      zh: ['把公共与私人的边界设计成交流的阈限', '以共享空间对抗封闭、孤立的居住单元', '让建筑制度和日常活动对社区保持可见', '从住宅到公共建筑持续研究社区如何形成'],
+      ja: ['公共と私的領域の境界を交流の閾として設計する', '共有空間によって閉鎖的で孤立した住戸を開く', '制度と日常活動を地域社会に対して見えるものにする', '住宅から公共建築まで共同体の形成を問い続ける'],
+      en: ['Thresholds between public and private life', 'Shared space against isolated dwelling units', 'Visible institutions and everyday activity', 'Community formation across housing and public architecture'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Riken_Yamamoto_2016_%28cropped%29.jpg',
+      author: 'Instituto Cervantes de Tokio',
+      license: 'CC BY-SA 2.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Riken_Yamamoto_2016_(cropped).jpg',
+      alt: {
+        zh: '山本理显肖像',
+        ja: '山本理顕の肖像',
+        en: 'Portrait of Riken Yamamoto',
+      },
+    },
+    sections: [
+      {
+        title: { zh: '从“阈限”理解社区', ja: '「閾」から共同体を考える', en: 'Community through the threshold' },
+        paragraphs: {
+          zh: [
+            '山本理显的核心问题不是如何制造醒目的造型，而是建筑怎样组织人与人之间的关系。他把公共与私人之间的边界称为“阈限”：它既不是完全开放的广场，也不是封闭房间，而是允许家庭生活与社区相互感知、保持距离又建立联系的中间地带。',
+            '这一思考与他的成长经验有关。他童年居住的町屋前部是母亲经营的药房，后部是家庭空间，自己则常处在两者之间。后来与原广司一起考察不同地区的聚落时，他进一步认识到，家庭与社区之间的过渡空间并非日本特例，而是各地共同生活的重要结构。',
+          ],
+          ja: [
+            '山本理顕の中心的な問いは、目立つ造形をつくることではなく、建築が人と人の関係をどう組織するかにある。彼が公共と私的領域の境界を「閾」と呼ぶのは、そこが完全に開かれた広場でも閉ざされた部屋でもなく、家族生活と地域社会が互いを感じ、距離を保ちながら関係を結ぶ中間領域だからである。',
+            'この考えは、前に母親の薬局、奥に家族の居住空間がある町家で育った経験とつながる。その後、原広司と各地の集落を調査し、家族と共同体をつなぐ移行空間が日本固有ではなく、さまざまな文化に共通する生活構造だと理解した。',
+          ],
+          en: [
+            'Yamamoto’s central question is not how to produce an iconic form, but how architecture organizes relationships. He calls the boundary between public and private life a threshold: an intermediate realm where households and communities can remain distinct while still perceiving and engaging one another.',
+            'The idea connects to his childhood in a machiya-like home, with his mother’s pharmacy facing the street and family life behind it. Later journeys with Hiroshi Hara through settlements across several continents reinforced his view that transitional space between family and community is a widespread social structure.',
+          ],
+        },
+      },
+      {
+        title: { zh: '让制度与日常生活保持可见', ja: '制度と日常を見えるものにする', en: 'Making institutions and daily life visible' },
+        paragraphs: {
+          zh: [
+            '在山本的住宅与公共建筑中，透明并不只是玻璃带来的视觉效果，而是一种社会组织方式。学校、消防站、市政厅和集合住宅中的共享区域被放到容易看见、容易经过的位置，使使用者知道其他人正在做什么，也让制度不再以封闭后台的形式存在。',
+            '这种开放不是取消隐私，而是重新分配隐私。私人空间仍然受到保护，但入口、走廊、庭院、露台和公共房间承担更多交流功能。建筑因此不只容纳既有社区，还为偶遇、协作与互助提供具体条件。',
+          ],
+          ja: [
+            '山本の住宅や公共建築において、透明性はガラスによる視覚効果だけではなく、社会を組織する方法である。学校、消防署、市庁舎、集合住宅の共有領域を見えやすく通りやすい場所に置き、人々が互いの活動を知り、制度が閉ざされた裏側だけに存在しないようにする。',
+            'この開放性はプライバシーをなくすことではなく、組み替えることである。私的空間を守りながら、入口、廊下、中庭、テラス、公共室に交流の役割を与える。建築は既存の共同体を収容するだけでなく、偶然の出会い、協働、相互扶助が起こる条件をつくる。',
+          ],
+          en: [
+            'Transparency in Yamamoto’s work is not merely a glass effect; it is a way of organizing society. Shared areas in housing, schools, fire stations, and civic buildings are placed where activities can be seen and crossed, making both everyday life and public institutions more legible.',
+            'This does not eliminate privacy. It redistributes it, protecting private rooms while asking entrances, corridors, courtyards, terraces, and common rooms to carry more social responsibility. Architecture becomes a framework for encounter, cooperation, and mutual support.',
+          ],
+        },
+      },
+      {
+        title: { zh: '横须贺美术馆：景观、保护与开放性', ja: '横須賀美術館：風景、保護、開放性', en: 'Yokosuka Museum of Art' },
+        paragraphs: {
+          zh: [
+            '横须贺美术馆把山本的社会思想与严苛的临海环境结合起来。建筑大部分埋入地下，以降低体量并保持海、山与屋顶广场之间的连续景观。外层玻璃与内层铁板形成双重表皮，既控制自然光和盐害，也把需要稳定环境的展览、收藏空间包裹在中央。',
+            '较开放的餐厅、工作坊和公共活动布置在外围，使参观者在观看艺术品之外，也能感知海景、天气和其他人的活动。美术馆不再只是保护展品的封闭容器，而成为艺术、自然与社区活动相互重叠的公共场所。',
+          ],
+          ja: [
+            '横須賀美術館は、山本の社会的な思想を厳しい臨海環境と結びつけた建築である。建物の大部分を地下に埋め、量塊を低く抑えながら、海、山、屋上広場の風景を連続させる。外側のガラスと内側の鉄板による二重の外皮は、自然光と塩害を制御し、安定した環境を必要とする展示・収蔵空間を中央に包み込む。',
+            'レストラン、ワークショップ、公共活動の場を外周に配置することで、来館者は作品だけでなく、海、天候、他者の活動を感じる。美術館は作品を守る閉じた容器ではなく、芸術、自然、地域の出来事が重なる公共の場所となる。',
+          ],
+          en: [
+            'Yokosuka Museum of Art joins Yamamoto’s social concerns to a demanding seaside site. Much of the volume is embedded in the ground to preserve continuity between sea, hills, and roof landscape. A double skin of exterior glass and interior steel moderates light and protects the central exhibition and collection spaces.',
+            'Restaurants, workshops, and other open activities occupy the perimeter, allowing visitors to register weather, landscape, and other people alongside the art. The museum becomes more than a sealed container for objects: it is a public overlap of culture, nature, and community life.',
+          ],
+        },
+      },
+    ],
+    representative_works: [
+      {
+        slug: 'yokosuka-museum-of-art',
+        note: {
+          zh: '以半地下体量和玻璃—铁板双重表皮回应海边环境，把展览保护、景观体验与公共活动组织在同一系统中。',
+          ja: '半地下の量塊とガラス・鉄板の二重外皮によって臨海環境に応答し、展示保護、風景体験、公共活動を一つのシステムにまとめる。',
+          en: 'A semi-buried museum whose glass-and-steel double skin integrates environmental protection, landscape, and public activity.',
+        },
+      },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: 2024 Laureate Media Kit', url: 'https://www.pritzkerprize.com/sites/default/files/2024-02/Pritzker%20Prize%20Media%20Kit%202024.pdf' },
+      { title: 'The Pritzker Architecture Prize: 2024 Laureate Lecture Announcement', url: 'https://www.pritzkerprize.com/news-2024-laureate-lecture-announcement' },
+      { title: 'Riken Yamamoto & Field Shop: Biography', url: 'https://riken-yamamoto.co.jp/index.html?lng=_Eng&page=ry_prof_bio' },
+      { title: 'Riken Yamamoto & Field Shop: Yokosuka Museum of Art', url: 'https://www.riken-yamamoto.co.jp/index.html?id=150&lng=_Eng&page=ry_proj_detail' },
+      { title: 'Yokosuka Museum of Art: Architecture', url: 'https://www.yokosuka-moa.jp/museum/architecture.html' },
+      { title: 'Wikimedia Commons: Riken Yamamoto portrait', url: 'https://commons.wikimedia.org/wiki/File:Riken_Yamamoto_2016_(cropped).jpg' },
+      { title: 'Wikidata: Riken Yamamoto', url: 'https://www.wikidata.org/wiki/Q3432036' },
+    ],
+  },
+
+  'vitruvius': {
+    slug: 'vitruvius',
+    summary: {
+      zh: '维特鲁威是罗马时代的建筑师与工程师，其《建筑十书》把建筑置于比例、材料、城市、机械、健康与美学的共同框架中。他留下的不是一套可直接套用的古典样式，而是西方建筑史上最早、最完整的跨学科建筑论述之一。',
+      ja: 'ウィトルウィウスはローマ時代の建築家・技術者であり、『建築十書』で建築を比例、材料、都市、機械、衛生、美学を結ぶ枠組みとして論じた。古典様式の定型を残したというより、西洋建築史でもっとも早く包括的な建築論を示した人物である。',
+      en: 'Vitruvius was a Roman architect and engineer whose De architectura connected proportion, materials, cities, machines, health, and beauty in one architectural framework.',
+    },
+    core_ideas: {
+      zh: ['坚固、适用与美观必须同时成立', '比例是人体、构件与整体秩序的关系', '建筑知识涉及材料、结构、气候、城市与技术', '建筑师应以跨学科判断服务公共生活'],
+      ja: ['強さ、用途、美しさを同時に満たす', '比例を人体・部材・全体秩序の関係として考える', '材料、構造、気候、都市、技術を横断して建築を考える', '建築家は横断的な判断で公共生活に奉仕する'],
+      en: ['Firmness, utility, and beauty together', 'Proportion as relations among body, parts, and whole', 'Architecture spans material, structure, climate, city, and technology', 'The architect as a cross-disciplinary civic thinker'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Marcus_Vitruvius_Roman._portrait.jpg',
+      author: 'Unknown author',
+      license: 'Public domain (imaginary portrait engraving)',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Marcus_Vitruvius_Roman._portrait.jpg',
+      alt: { zh: '维特鲁威的后世想象性肖像版画', ja: 'ウィトルウィウスの後世の想像肖像版画', en: 'Later imaginary engraved portrait of Vitruvius' },
+    },
+    sections: [
+      {
+        title: { zh: '《建筑十书》：把建筑当作完整知识体系', ja: '『建築十書』：建築を総合的知識として捉える', en: 'Architecture as a complete field of knowledge' },
+        paragraphs: {
+          zh: [
+            '《建筑十书》（De architectura）写于奥古斯都时代，是古代留存至今最具系统性的建筑论著之一。它讨论城市选址、神庙与公共建筑、住宅、材料、供水、机械和舞台装置；这意味着建筑在维特鲁威那里从来不只是立面风格，而是一种组织自然条件、技术能力与公共秩序的实践。',
+            '他对建筑师知识范围的要求尤其重要：绘图、几何、历史、哲学、音乐、医学、法律和天文学都与建筑判断相关。今天这些领域已高度专业化，但这段论述仍提醒人们，建筑的核心能力不是掌握单一形式语言，而是理解不同知识如何在一个具体场所相互制约。',
+          ],
+          ja: [
+            '『建築十書』（De architectura）はアウグストゥス時代に書かれた、古代から伝わるもっとも体系的な建築論の一つである。都市の立地、神殿と公共建築、住宅、材料、給水、機械、舞台装置までを扱う。つまりウィトルウィウスにとって建築は立面様式ではなく、自然条件、技術、公共秩序を組織する実践だった。',
+            '建築家に求めた知識の幅も重要である。製図、幾何、歴史、哲学、音楽、医学、法、天文学はすべて設計判断に関わる。今日では専門が分かれているが、建築の核心は単一の形を操ることではなく、異なる知識が場所でどう制約し合うかを理解することだという指摘は残る。',
+          ],
+          en: ['De architectura treats architecture as a civic and technical field spanning buildings, cities, materials, water, and machines.'],
+        },
+      },
+      {
+        title: { zh: '坚固、适用、美观：一组相互制约的品质', ja: '強さ・用途・美しさ：相互に関わる品質', en: 'Firmness, utility, and beauty together' },
+        paragraphs: {
+          zh: [
+            '维特鲁威最常被引用的原则是 firmitas、utilitas、venustas，通常译为坚固、适用与美观。它们不应被理解为先满足功能、再附加审美的检查表：材料与结构是否可靠，会改变使用与维护；空间是否合用，会决定比例和路径；美感则来自构件、尺度、光线和秩序与用途之间的协调。',
+            '“维特鲁威人”后来常被简化为人体比例图，但他关心的并不是把人体当成唯一尺度。人体在论述中提供了一种关系模型：局部与整体、几何与感知、测量与经验需要彼此校正。这一思考经文艺复兴的再阐释，持续影响建筑比例和人体尺度的讨论。',
+          ],
+          ja: [
+            'ウィトルウィウスのもっとも有名な原則は firmitas、utilitas、venustas、すなわち強さ、用途、美である。機能を満たし、その後に美を加えるチェックリストではない。材料と構造の確かさは使用と維持を変え、使いやすさは比例と動線を決め、美は部材、尺度、光、秩序と用途の調和から生まれる。',
+            '「ウィトルウィウス的人体図」は人体比例の図として単純化されがちだが、人体を唯一の尺度にしたわけではない。人体は部分と全体、幾何と知覚、計測と経験を相互に検証するための関係モデルだった。この考えはルネサンスで再解釈され、比例と人体尺度の議論に影響を与え続けた。',
+          ],
+          en: ['For Vitruvius, firmness, utility, and beauty are interdependent qualities, not separate boxes to tick.'],
+        },
+      },
+      {
+        title: { zh: '法诺巴西利卡：理论与公共建筑实践', ja: 'ファノのバシリカ：理論と公共建築の実践', en: 'The Basilica at Fano' },
+        paragraphs: {
+          zh: [
+            '法诺巴西利卡是维特鲁威在书中亲自描述、并称自己参与设计和建造的公共建筑。第五卷把它放在关于广场和巴西利卡的讨论中：比例、柱列、采光和法庭、商业活动之间的关系被一并处理。这个案例最直接地显示他的文字不是抽象规范，而与实际公共建筑经验相连。',
+            '因此，《建筑十书》不应被当作不变的规则手册。它更像一份早期的设计论证：每一项形式判断都应说明其与材料、气候、身体、制度和建造的关系。对今天的建筑学习而言，最值得继承的是这种把审美判断放回可解释条件中的方法。',
+          ],
+          ja: [
+            'ファノのバシリカは、ウィトルウィウスが自ら設計・建設に関与したと記した公共建築である。第五巻では広場とバシリカについて、比例、列柱、採光、法廷や商業活動との関係を一体に扱う。この事例は彼の文章が抽象的な規範ではなく、実際の公共建築の経験に結びつくことを最も直接に示す。',
+            'ゆえに『建築十書』を不変の規則集として読む必要はない。むしろ各々の形の判断が、材料、気候、身体、制度、建設との関係を説明すべきだという初期の設計論証として読める。今日の建築学習で受け継ぐべきなのは、美的判断を説明可能な条件に戻す方法である。',
+          ],
+          en: ['The Basilica at Fano links Vitruvius’s theoretical account to the design of a real Roman civic building.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'basilica-fano', note: { zh: '维特鲁威在《建筑十书》第五卷中描述并自称参与设计建造的罗马公共巴西利卡，是其理论与实践相接的关键案例。', ja: '『建築十書』第五巻で記述され、本人が設計・建設に関与したとしたローマの公共バシリカ。理論と実践をつなぐ重要な事例である。', en: 'The Roman civic basilica described by Vitruvius in Book V, connecting his theory with architectural practice.' } },
+    ],
+    sources: [
+      { title: 'Folger Shakespeare Library: On Architecture', url: 'https://catalog.folger.edu/record/731261' },
+      { title: 'Project Gutenberg: The Ten Books on Architecture', url: 'https://www.gutenberg.org/ebooks/20239' },
+      { title: 'Wikimedia Commons: Marcus Vitruvius portrait', url: 'https://commons.wikimedia.org/wiki/File:Marcus_Vitruvius_Roman._portrait.jpg' },
+      { title: 'Wikidata: Vitruvius', url: 'https://www.wikidata.org/wiki/Q189306' },
+    ],
+  },
+  'alejandro-alavena': {
+    slug: 'alejandro-alavena',
+    summary: {
+      zh: '亚历杭德罗·阿拉维纳以“把资源不足当成设计条件”而闻名。他与 ELEMENTAL 将住房、公共空间、基础设施和重建问题放在同一张桌子上：建筑师不只设计完成的物体，也设计可由居民、制度与时间共同推进的过程。',
+      ja: 'アレハンドロ・アラベナは、限られた資源を設計条件として扱う建築家である。ELEMENTAL とともに住宅、公共空間、インフラ、復興を同じ問題として考え、完成した物だけでなく、住民、制度、時間がともに進める過程を設計する。',
+      en: 'Alejandro Aravena and ELEMENTAL treat limited resources as a design condition, linking housing, public space, infrastructure, and reconstruction through processes that can evolve with residents and time.',
+    },
+    core_ideas: {
+      zh: ['从真实预算、土地与法规出发，而非从形式先行', '把居民可参与的增量建设纳入设计', '以公共空间和基础设施组织公平性', '让工程、气候与空间体验共同决定建筑形态'],
+      ja: ['実際の予算、土地、法規から出発する', '住民が参加できる段階的な成長を設計に組み込む', '公共空間とインフラによって公平性を組織する', '工学、気候、空間経験を建築形態に結びつける'],
+      en: ['Start from actual budget, land, and regulation', 'Design for incremental resident participation', 'Use public space and infrastructure to organize equity', 'Join engineering, climate, and spatial experience'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Premio_Abd%C3%B3n_Cifuentes_2015_-_Alejandro_Aravena_02_%283x4_cropped%29.jpg',
+      author: 'Centro de Políticas Públicas UC',
+      license: 'CC BY 3.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Premio_Abd%C3%B3n_Cifuentes_2015_-_Alejandro_Aravena_02_(3x4_cropped).jpg',
+      alt: { zh: '亚历杭德罗·阿拉维纳肖像', ja: 'アレハンドロ・アラベナの肖像', en: 'Portrait of Alejandro Aravena' },
+    },
+    sections: [
+      {
+        title: { zh: '从“解决问题”而非造型开始', ja: '造形ではなく問題から始める', en: 'Beginning with the problem' },
+        paragraphs: {
+          zh: [
+            '阿拉维纳 1994 年成立自己的事务所，2001 年起领导 ELEMENTAL。这个团队自称为“行动智库”（Do Tank），其工作范围横跨住房、公共空间、交通与基础设施。关键不在于把社会议题包装成建筑主题，而是把预算、用地、产权、风险和施工能力视为设计本身的材料。',
+            '因此，他的项目经常同时面对多个相互冲突的问题：如何保留居民与工作机会的区位联系，如何在有限补贴下获得耐久的基本单元，又如何让公共投资形成长期价值。建筑师在这里既要提出空间方案，也要让不同参与者能够理解、协商和继续执行方案。',
+          ],
+          ja: [
+            'アラベナは1994年に自身の事務所を設立し、2001年からELEMENTALを率いる。このチームは自らを「Do Tank」と呼び、住宅、公共空間、交通、インフラを横断する。社会課題を建築のテーマに飾り付けるのではなく、予算、土地、所有、リスク、施工能力を設計の材料として扱う点に特徴がある。',
+            'そのため彼のプロジェクトは、居住者と仕事の場所の関係、限られた補助金での耐久的な基本単位、公共投資の長期的価値といった、しばしば衝突する問題を同時に扱う。建築家は空間案を出すだけでなく、異なる当事者が理解し、交渉し、実行を続けられる仕組みをつくる。',
+          ],
+          en: ['Aravena’s work begins with budgets, land, risk, and construction capacity as design material, not constraints added after form-making.'],
+        },
+      },
+      {
+        title: { zh: '增量住房：为时间与住民留下位置', ja: '増分住宅：時間と住民のための余地', en: 'Incremental housing' },
+        paragraphs: {
+          zh: [
+            'ELEMENTAL 最广为人知的策略是“增量住房”：在一次性资金不足以建设完整住宅时，先集中资源完成最难、最昂贵且必须合规的部分——结构、卫生设施、厨房、基础连接和可扩展框架——再让住民在规则明确的条件下逐步完成其余空间。它不是把责任简单转移给住民，而是试图把不可避免的自建过程变得更安全、更有空间质量。',
+            '这种方法的价值在于改变“交付完成品”的单一标准。住房会随着家庭规模、收入和生活方式变化，建筑若把未来改造视为异常，往往会很快失效；若在一开始就预留结构、采光、边界和扩建逻辑，则能让有限公共投入支持更长的生活周期。',
+          ],
+          ja: [
+            'ELEMENTALのもっとも知られた戦略は「増分住宅」である。一度の資金で完全な住宅をつくれない場合、構造、衛生設備、台所、インフラ接続、増築の骨格といった最も難しく高価で法規上不可欠な部分に資源を集中し、残りを住民が明確なルールのもとで段階的に完成できるようにする。自助を住民へ丸投げするのではなく、避けられない自力建設をより安全で質の高いものにしようとする方法である。',
+            'ここでは完成品の引き渡しだけが基準ではない。住宅は家族、所得、生活の変化とともに変わる。将来の改修を例外とみなす建築は早く破綻しやすいが、構造、光、境界、増築の論理を最初から残せば、限られた公共投資でより長い生活の時間を支えられる。',
+          ],
+          en: ['Incremental housing directs scarce funding to durable, regulated essentials while leaving safe room for residents to complete and adapt their homes over time.'],
+        },
+      },
+      {
+        title: { zh: '创新中心：用体量与剖面调节环境', ja: 'イノベーションセンター：量塊と断面で環境を調整する', en: 'Innovation Center: climate through mass and section' },
+        paragraphs: {
+          zh: [
+            '智利天主教大学 Anacleto Angelini 创新中心把阿拉维纳的社会议题转到研究与协作空间。建筑并未选择全玻璃办公塔的轻薄形象，而以厚重的混凝土外壳、深窗洞与中央中庭控制日照和热负荷；各层的共享空间围绕中庭展开，使不同研究者和访客有机会彼此看见与相遇。',
+            '这座建筑说明，社会性不只来自住宅类型。一个面向创新的机构同样需要把气候、能耗、动线、偶遇与组织边界一起设计。体量的厚度既是环境策略，也为内部多样的工作与交流提供了稳定背景。',
+          ],
+          ja: [
+            'チリ・カトリック大学のアナクレト・アンヘリーニ・イノベーションセンターは、アラベナの社会的関心を研究と協働の場へ移した。全面ガラスのオフィスタワーではなく、厚いコンクリートの外皮、深い開口、中央のアトリウムによって日射と熱負荷を調整する。各階の共用空間はアトリウムの周りに展開し、研究者と来訪者が互いの存在を感じ、出会えるようにしている。',
+            'この建築は、社会性が住宅の類型だけから生まれるのではないことを示す。イノベーションのための機関でも、気候、エネルギー、動線、偶発的な出会い、組織の境界を同時に設計する必要がある。量塊の厚みは環境戦略であると同時に、多様な仕事と交流を支える背景となる。',
+          ],
+          en: ['At the UC Innovation Center, deep concrete mass, shaded openings, and an atrium link environmental control with collaborative visibility.'],
+        },
+      },
+    ],
+    representative_works: [
+      { slug: 'center-of-innovation-anacleto-angelini', note: { zh: '以厚重混凝土外壳、深窗洞与中庭降低环境负荷，并组织跨学科相遇与协作。', ja: '厚いコンクリート外皮、深い開口、アトリウムで環境負荷を抑え、分野を越えた出会いと協働を組織する。', en: 'A deep concrete envelope and atrium combine environmental moderation with interdisciplinary encounter.' } },
+      { slug: 'edp-headquarters-ii', note: { zh: 'ELEMENTAL 的企业总部作品，显示其环境、结构与组织效率并行的设计取向。', ja: '環境、構造、組織効率を並行して扱うELEMENTALの企業本社作品。', en: 'An ELEMENTAL headquarters project joining environmental response, structure, and organizational efficiency.' } },
+    ],
+    sources: [
+      { title: 'The Pritzker Architecture Prize: Alejandro Aravena', url: 'https://www.pritzkerprize.com/laureates/ale-jan-dro-ara-ve-na' },
+      { title: 'The Pritzker Architecture Prize: Alejandro Aravena, Jury Chair', url: 'https://www.pritzkerprize.com/jury' },
+      { title: 'UC Anacleto Angelini Innovation Center: Architecture', url: 'https://centrodeinnovacion.uc.cl/en/arquitectura-2/' },
+      { title: 'Wikimedia Commons: Alejandro Aravena portrait', url: 'https://commons.wikimedia.org/wiki/File:Premio_Abd%C3%B3n_Cifuentes_2015_-_Alejandro_Aravena_02_(3x4_cropped).jpg' },
+      { title: 'Wikidata: Alejandro Aravena', url: 'https://www.wikidata.org/wiki/Q3609433' },
+    ],
+  },
+  'charles-rennie-mackintosh': {
+    slug: 'charles-rennie-mackintosh',
+    summary: {
+      zh: '查尔斯·伦尼·麦金托什把苏格兰的地方感、工艺美术和新艺术运动转化为一种高度克制的整体设计。他的建筑不是由装饰附加而成：体量、窗格、家具、灯具、文字和花卉图案共同组织人的行动、视线与情绪。',
+      ja: 'チャールズ・レニー・マッキントッシュは、スコットランドの地域性、アーツ・アンド・クラフツ、新芸術を、抑制の効いた総合デザインへと変えた。量塊、窓、家具、照明、文字、植物文様は付加的な装飾ではなく、人の動き、視線、感情をともに組織する。',
+      en: 'Charles Rennie Mackintosh transformed Scottish identity, Arts and Crafts, and Art Nouveau into a restrained total design in which building, furniture, light, lettering, and pattern work together.',
+    },
+    core_ideas: {
+      zh: ['建筑、室内、家具与图形是一件整体作品', '以直线秩序容纳植物般的曲线与象征', '用光、色彩和门槛控制日常体验', '与 Margaret Macdonald 的协作是其作品不可分割的一部分'],
+      ja: ['建築、内装、家具、グラフィックを一つの作品として考える', '直線的な秩序の中に植物的な曲線と象徴を置く', '光、色、しきいで日常の経験を調整する', 'マーガレット・マクドナルドとの協働を作品から切り離さない'],
+      en: ['Architecture, interior, furniture, and graphics as one work', 'Geometric order with vegetal curves and symbolism', 'Light, color, and thresholds shaping daily experience', 'Collaboration with Margaret Macdonald as integral to the work'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Charles-Rennie-Mackintosh.jpg',
+      author: 'James Craig Annan',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Charles-Rennie-Mackintosh.jpg',
+      alt: { zh: '查尔斯·伦尼·麦金托什肖像', ja: 'チャールズ・レニー・マッキントッシュの肖像', en: 'Portrait of Charles Rennie Mackintosh' },
+    },
+    sections: [
+      {
+        title: { zh: '从格拉斯哥走向“整体设计”', ja: 'グラスゴーから総合デザインへ', en: 'Total design from Glasgow' },
+        paragraphs: {
+          zh: [
+            '麦金托什的作品很难按“建筑师、家具设计师或艺术家”分开理解。在格拉斯哥的实践中，他常把房间视为连续的场景：墙面比例、门的开合、座椅高度、灯光、壁炉与装饰图形共同决定一个空间的节奏。建筑因而不是外壳，而是从城市入口一直延续到手指接触的把手的环境。',
+            '这种整体性并不等于把每个表面塞满图案。相反，他经常用近乎严峻的几何、白墙和细长的垂直线，衬托玫瑰、格纹、彩色玻璃和少量精确的装饰。克制与浓度之间的张力，使空间既有秩序，也保留了私密而戏剧性的感受。',
+          ],
+          ja: [
+            'マッキントッシュの仕事は、建築家、家具デザイナー、芸術家に分けて理解しにくい。グラスゴーでの実践では、部屋を連続する場面として扱い、壁の比率、扉の開閉、椅子の高さ、照明、暖炉、装飾図形が空間のリズムを決めた。建築は外皮ではなく、都市の入口から手が触れる把手まで続く環境となる。',
+            'この総合性は、すべての面を文様で満たすことではない。厳しいほどの幾何、白い壁、細長い垂直線を背景に、薔薇、格子、色ガラス、少数の精確な装飾を置く。抑制と濃密さの緊張が、秩序と私的で劇的な感覚を同時に生む。',
+          ],
+          en: ['Mackintosh designed rooms as continuous environments, from architectural proportion to furniture, fittings, and graphic detail.'],
+        },
+      },
+      {
+        title: { zh: 'Hill House：居住中的协作与细部', ja: 'ヒル・ハウス：暮らしの中の協働と細部', en: 'Hill House: collaboration in domestic life' },
+        paragraphs: {
+          zh: [
+            'Hill House 最能说明这种方法。它为出版商 Walter Blackie 一家而建，外观以厚重、近乎城堡般的灰色体量回应苏格兰气候，室内却通过明暗、浅色墙面、细长家具与精细图案形成不同的私密层次。空间不是单一“风格”的展示，而是对起居、待客、阅读与家庭成员关系的编排。',
+            '这里必须把 Margaret Macdonald Mackintosh 放在同等重要的位置。她参与了室内、纺织与装饰性构图；两人的合作让建筑和艺术不再是主从关系。理解麦金托什，并不是只记住高背椅或玫瑰图案，而是理解这种跨媒介协作怎样赋予日常住宅完整的感知秩序。',
+          ],
+          ja: [
+            'ヒル・ハウスはこの方法をよく示す。出版社主ウォルター・ブラッキー一家のために建てられ、外観は厚く城のような灰色の量塊でスコットランドの気候に応答する。内側では明暗、淡い壁、細長い家具、精密な文様が、異なる私的な層をつくる。そこでは一つの様式を見せるのではなく、居住、来客、読書、家族の関係を編成している。',
+            'ここではマーガレット・マクドナルド・マッキントッシュを同等に重要な協働者として捉える必要がある。彼女は内装、テキスタイル、装飾構成に関わり、二人の協働は建築と芸術を主従関係から解放した。高い背の椅子や薔薇の文様だけでなく、この横断的な協働が住宅にどのような感覚の秩序を与えたかを読むことが重要である。',
+          ],
+          en: ['At Hill House, Mackintosh and Margaret Macdonald shaped building, furniture, textiles, and ornament into one domestic experience.'],
+        },
+      },
+      {
+        title: { zh: '公共室内：茶室与学校', ja: '公共の室内：ティールームと学校', en: 'Public interiors: tea rooms and school' },
+        paragraphs: {
+          zh: [
+            '在茶室与格拉斯哥艺术学院中，麦金托什把这种细致控制带入公共空间。茶室并不是住宅装饰的缩小版，而以座位、屏风、采光和动线营造可停留、交谈和观看的社会场景；艺术学院则把工作室、走廊、图书馆与楼梯组织成学习共同体的日常基础设施。',
+            '他的遗产也提醒我们：整体设计并非意味着控制欲，而是要对使用者的身体经验承担责任。最有力量的细部不独立炫耀，而是让人在走、坐、等候、阅读和交谈时，感到空间的尺度与氛围被认真处理。',
+          ],
+          ja: [
+            'ティールームとグラスゴー美術学校では、この細やかな制御を公共空間へ持ち込んだ。ティールームは住宅装飾の縮小版ではなく、座席、スクリーン、採光、動線によって、滞在し、話し、見るための社会的場面をつくる。美術学校ではアトリエ、廊下、図書室、階段を、学びの共同体の日常的インフラとして組織した。',
+            'その遺産は、総合デザインが支配欲ではなく、利用者の身体経験への責任だと教える。強い細部は単独で誇示されず、歩く、座る、待つ、読む、話すときに、尺度と雰囲気が真剣に扱われていると感じさせる。',
+          ],
+          en: ['In tea rooms and schools, Mackintosh used furniture, light, circulation, and detail to create public settings for learning and sociability.'],
+        },
+      },
+    ],
+    representative_works: [],
+    sources: [
+      { title: 'National Trust for Scotland: Mackintosh and the Hill House', url: 'https://www.nts.org.uk/visit/places/the-hill-house/mackintosh-and-the-hill-house?lang=en_gb' },
+      { title: 'National Trust for Scotland: The Hill House', url: 'https://www.nts.org.uk/visit/places/the-hill-house/highlights/the-house' },
+      { title: 'Mackintosh at the Willow: Visitor Information', url: 'https://www.mackintoshatthewillow.com/visitorinformation/' },
+      { title: 'Wikimedia Commons: Charles Rennie Mackintosh portrait', url: 'https://commons.wikimedia.org/wiki/File:Charles-Rennie-Mackintosh.jpg' },
+      { title: 'Wikidata: Charles Rennie Mackintosh', url: 'https://www.wikidata.org/wiki/Q5541' },
+    ],
+  },
+  'victor-horta': {
+    slug: 'victor-horta',
+    summary: {
+      zh: '维克多·奥塔是布鲁塞尔新艺术运动的关键开创者之一。他把铁、玻璃、自然光、楼梯与植物性线条结合为连续的空间系统，使传统狭长联排住宅从封闭房间的排列转变为由光、结构和流动组织的内部城市。',
+      ja: 'ヴィクトール・オルタはブリュッセルにおけるアール・ヌーヴォーの重要な創始者の一人である。鉄、ガラス、自然光、階段、植物的な線を連続する空間システムへ結び、細長い都市住宅を閉じた部屋の列から、光、構造、動きによって組織される内部の都市へ変えた。',
+      en: 'Victor Horta was a key initiator of Brussels Art Nouveau, joining iron, glass, daylight, stairs, and vegetal line into continuous spatial systems within the narrow urban house.',
+    },
+    core_ideas: {
+      zh: ['让结构、采光与装饰成为同一套语言', '以中庭、楼梯与天窗重塑狭长住宅的内部', '把铁与玻璃从隐藏技术转化为空间经验', '将建筑、室内、家具与五金细部整体设计'],
+      ja: ['構造、採光、装飾を同じ言語にする', '中庭、階段、天窓で細長い住宅の内部を組み替える', '鉄とガラスを隠れた技術から空間経験へ変える', '建築、内装、家具、金物を一体に設計する'],
+      en: ['Structure, light, and ornament as one language', 'Courtyards, stairs, and skylights remaking the deep urban house', 'Iron and glass as spatial experience', 'Total design from architecture to fittings'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Victor_Horta_seated_at_own_house_%28veranda%29.jpg',
+      author: 'Unknown author; digitized by Sam Donvil',
+      license: 'CC0 1.0',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Victor_Horta_seated_at_own_house_(veranda).jpg',
+      alt: { zh: '维克多·奥塔坐在自宅阳台的肖像', ja: '自宅のベランダに座るヴィクトール・オルタ', en: 'Victor Horta seated on the veranda of his own house' },
+    },
+    sections: [
+      {
+        title: { zh: '新艺术不是贴在立面上的曲线', ja: 'アール・ヌーヴォーは立面に貼る曲線ではない', en: 'Art Nouveau beyond surface curves' },
+        paragraphs: {
+          zh: [
+            '奥塔的重要性不只在于植物般的栏杆和墙面图案。对他而言，线条从结构、扶手、地面镶嵌、门把手和采光顶中连续生长；装饰因此不是最后加上的图案，而是让材料、受力和人的移动变得可感知的媒介。',
+            '铁与玻璃尤其改变了住宅内部。它们使较少承重的隔断、更大的开口和更深处的采光成为可能；奥塔没有把这种技术藏起来，而是让细柱、梁、玻璃顶和楼梯成为空间的骨架与视觉节奏。',
+          ],
+          ja: [
+            'オルタの重要性は植物的な手すりや壁面模様だけにない。線は構造、手すり、床の象嵌、把手、天窓を通って連続し、装飾は最後に加える図案ではなく、材料、力、人の動きを感じさせる媒体になる。',
+            '鉄とガラスは住宅内部を大きく変えた。より自由な間仕切り、大きな開口、奥まで届く光を可能にし、オルタはその技術を隠さず、細い柱、梁、ガラス屋根、階段を空間の骨格と視覚的リズムにした。',
+          ],
+          en: ['For Horta, ornament was not applied after construction: it made structure, material, and movement perceptible.'],
+        },
+      },
+      {
+        title: { zh: '把城市住宅做成光的剖面', ja: '都市住宅を光の断面としてつくる', en: 'The urban house as a section of light' },
+        paragraphs: {
+          zh: [
+            '布鲁塞尔联排住宅往往临街面窄、进深很长，中部容易昏暗。奥塔以采光顶、楼梯井、中庭和分层平台改变这一条件：光不再只从前后窗进入，而是沿剖面落下，把客厅、走廊、楼梯和较深处的房间连成可连续阅读的空间。',
+            'Hôtel Tassel、Hôtel Solvay、Hôtel van Eetvelde 以及奥塔自宅与工作室共同显示了这一突破。UNESCO 将这四座建筑认定为新艺术运动的重要范例，正因为它们同时改变了空间、结构、材料和室内装饰之间的关系。',
+          ],
+          ja: [
+            'ブリュッセルの連棟住宅は間口が狭く奥行きが深いため、中央部が暗くなりやすい。オルタは天窓、階段室、中庭、段状の床でこの条件を変えた。光は前後の窓だけから入るのではなく、断面を伝って落ち、居間、廊下、階段、奥の部屋を連続して読める空間にする。',
+            'タッセル邸、ソルヴェイ邸、ヴァン・エトヴェルデ邸、そして自邸兼アトリエはこの突破を示す。UNESCOがこの四作品をアール・ヌーヴォーの重要な例と認めたのは、空間、構造、材料、内装の関係を同時に変えたからである。',
+          ],
+          en: ['Skylights, stair halls, and layered floors turned the deep Brussels townhouse into a continuous section of light.'],
+        },
+      },
+      {
+        title: { zh: '从自宅到城市遗产', ja: '自邸から都市遺産へ', en: 'From personal house to urban heritage' },
+        paragraphs: {
+          zh: [
+            '奥塔的自宅与工作室今天作为 Horta Museum 保存，这一点尤其有启发性：它并非一栋只看外观的纪念建筑，而保留了工作、接待、生活与制作相互交织的室内世界。建筑师的日常工具、空间细部和城市生活在这里没有被拆开。',
+            '学习奥塔时，最值得避免的误解是把新艺术简化为模仿自然的风格。真正可继承的是他的组织方法：让结构解决问题，让光建立空间层次，再让细部把技术和情感连接起来。',
+          ],
+          ja: [
+            'オルタの自邸兼アトリエは現在オルタ美術館として保存されている。外観だけを見る記念建築ではなく、仕事、接客、生活、制作が交差する内部世界を残している点が重要である。建築家の日常的な道具、空間の細部、都市生活はここで分離されていない。',
+            'オルタを学ぶ際、新芸術を自然模倣の様式に縮めないことが大切である。受け継げるのは、構造に問題を解かせ、光で空間の層をつくり、細部で技術と感情をつなぐ組織の方法である。',
+          ],
+          en: ['Horta’s legacy is a method: structure solves problems, light builds spatial hierarchy, and detail connects technique with feeling.'],
+        },
+      },
+    ],
+    representative_works: [],
+    sources: [
+      { title: 'UNESCO: Major Town Houses of the Architect Victor Horta', url: 'https://whc.unesco.org/en/list/1005/' },
+      { title: 'City of Brussels: Art Nouveau, Public Art', url: 'https://www.brussels.be/art-nouveau-public-art' },
+      { title: 'Brussels Museums: Horta Museum', url: 'https://www.brusselsmuseums.be/fr/musees/musee-horta' },
+      { title: 'Wikimedia Commons: Victor Horta seated at own house', url: 'https://commons.wikimedia.org/wiki/File:Victor_Horta_seated_at_own_house_(veranda).jpg' },
+      { title: 'Wikidata: Victor Horta', url: 'https://www.wikidata.org/wiki/Q49744' },
+    ],
+  },
+  'adolf-loos': {
+    slug: 'adolf-loos',
+    summary: {
+      zh: '阿道夫·路斯以对表面装饰的尖锐批评和 Raumplan（空间规划）闻名，但他的建筑并非简单的极简主义。他以精确的材料、不同高度的房间和复杂的视线关系，构造出外观克制、内部高度浓密的居住空间。',
+      ja: 'アドルフ・ロースは表層的な装飾への鋭い批判とラウムプランで知られるが、単純なミニマリストではない。正確な素材、異なる高さの部屋、複雑な視線の関係によって、外側は抑制され内側は濃密な住空間をつくった。',
+      en: 'Adolf Loos is known for his critique of applied ornament and for the Raumplan, yet his work is not simple minimalism: precise materials, varied room heights, and framed views create rich interiors behind restrained exteriors.',
+    },
+    core_ideas: {
+      zh: ['反对无意义的表面装饰，但重视材料与工艺', 'Raumplan：按活动配置不同高度与体量的房间', '外部克制，内部以材料、视线和家具建立丰富性', '把住宅理解为连续的空间序列而非标准楼层叠加'],
+      ja: ['無意味な表層装飾を批判しつつ、素材と工芸を重視する', 'ラウムプラン：活動ごとに異なる高さと容積を与える', '外部を抑え、内部は素材、視線、家具で豊かにする', '住宅を標準階の積層ではなく連続する空間列として考える'],
+      en: ['Critique empty applied ornament while valuing material and craft', 'Raumplan: volumes and heights fitted to activity', 'Restrained exterior, rich interior material and views', 'House as spatial sequence rather than stacked standard floors'],
+    },
+    portrait: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Portrait_of_Adolf_Loos_%281870%E2%80%931933%29.jpg',
+      author: 'Unknown photographer',
+      license: 'Public domain',
+      source_url: 'https://commons.wikimedia.org/wiki/File:Portrait_of_Adolf_Loos_(1870%E2%80%931933).jpg',
+      alt: { zh: '阿道夫·路斯肖像', ja: 'アドルフ・ロースの肖像', en: 'Portrait of Adolf Loos' },
+    },
+    sections: [
+      {
+        title: { zh: '“去装饰”不是去材料', ja: '「装飾をなくす」は素材をなくすことではない', en: 'Not ornamentless, but material-conscious' },
+        paragraphs: {
+          zh: [
+            '路斯常被压缩为“装饰即罪恶”的口号，但这种理解容易错过他的重点。他批评的是与用途、材料和制作无关、只为制造时髦效果的表面装饰；与此同时，他对石材、木材、黄铜、织物和细木工的质感极为敏感。简化的是无意义的图案，不是空间的感受密度。',
+            '因此，路斯的室内往往比外观更复杂。外立面可以近乎沉默，室内却通过石材纹理、木饰面、壁炉、座位和门洞的尺度，建立不同程度的亲密、正式或停留感。这种反差不是矛盾，而是他把公共城市面与私人生活面区分开来的方式。',
+          ],
+          ja: [
+            'ロースは「装飾は犯罪」という標語に縮められがちだが、それでは要点を逃す。彼が批判したのは、用途、素材、制作と関係なく流行の効果だけを狙う表層装飾である。一方で石、木、真鍮、織物、木工の質感にはきわめて敏感だった。単純化したのは意味のない文様であり、空間の感覚密度ではない。',
+            'そのためロースの内部は外観より複雑なことが多い。立面はほとんど沈黙していても、内部では石の模様、木の仕上げ、暖炉、座席、開口の尺度が、親密さ、儀礼性、滞在の度合いをつくる。この対比は矛盾ではなく、都市に向けた面と私生活の面を分ける方法である。',
+          ],
+          en: ['Loos rejected empty applied decoration, not sensory richness; his interiors rely on material, craft, and calibrated degrees of privacy.'],
+        },
+      },
+      {
+        title: { zh: 'Raumplan：从楼层逻辑转向体量逻辑', ja: 'ラウムプラン：階の論理から容積の論理へ', en: 'Raumplan: volume rather than floor' },
+        paragraphs: {
+          zh: [
+            'Raumplan 的关键不是把平面画得更复杂，而是拒绝所有房间都服从同一层高。路斯按照活动与仪式性分配体量：起居空间可以更高、更居中，服务性房间更紧凑，房间之间再由短楼梯、转角与门洞连接。人对家的理解由此来自不断变化的高度、视野和停留位置。',
+            'Villa Müller 是这一方法最清晰的案例之一。其外部看似严格的功能主义体块，内部却由不同标高的房间编织而成。Prague City Museum 对它的说明也强调：Raumplan 使每个房间拥有与自身用途相称的高度和尺度，而非被标准楼层切成均质盒子。',
+          ],
+          ja: [
+            'ラウムプランの要点は平面を複雑に描くことではなく、すべての部屋を同じ階高に従わせないことにある。ロースは活動と儀礼性に応じて容積を配分した。居間は高く中心的に、サービス空間はコンパクトにし、短い階段、角、開口でつなぐ。家の理解は、変化する高さ、視野、滞在位置から生まれる。',
+            'ミュラー邸はこの方法を最も明快に示す一例である。外側は厳格な機能主義の量塊に見えるが、内部は異なる標高の部屋で織られている。プラハ市博物館の説明も、ラウムプランが標準階で均質な箱にする代わりに、各室へ用途にふさわしい高さと尺度を与えることを強調する。',
+          ],
+          en: ['Raumplan assigns each activity an appropriate volume and height, linking rooms through short changes of level rather than standard floors.'],
+        },
+      },
+      {
+        title: { zh: '把批评写进可居住的细部', ja: '批評を住める細部にする', en: 'Making criticism inhabitable' },
+        paragraphs: {
+          zh: [
+            '路斯的文章影响很大，但只有与建筑一起阅读才不至于变成教条。他的住宅既有严格的秩序，也有柔软的座位、厚实的材料和戏剧性的视线；批评不是一句否定，而是对“什么值得被长期建造、维护和使用”的判断。',
+            '这也是他今天仍具价值的原因。面对快速消费的图像化建筑，路斯提醒我们问：一个细部是否来自材料与使用的必要性？一个空间是否允许生活在时间中变得更丰富？这些问题比复制某种“无装饰风格”更接近他的实践。',
+          ],
+          ja: [
+            'ロースの文章は大きな影響をもつが、建築とともに読まなければ教条になりうる。住宅には厳しい秩序と同時に、柔らかな座席、厚い素材、劇的な視線がある。批評は一言の否定ではなく、何が長く建設され、維持され、使われる価値をもつかという判断である。',
+            '速く消費されるイメージ建築に対して、ロースは細部が材料と使用の必然から出ているか、空間が時間の中で生活を豊かにできるかを問わせる。この問いの方が、ある種の「無装飾スタイル」を複製することより彼の実践に近い。',
+          ],
+          en: ['Loos’s critique matters when read through inhabitation: durable detail, use, maintenance, and the changing experience of life over time.'],
+        },
+      },
+    ],
+    representative_works: [],
+    sources: [
+      { title: 'Museum of Prague: Villa Müller', url: 'https://prague.eu/en/objevujte/the-prague-city-museum-villa-muller-mullerova-vila/' },
+      { title: 'MAK Museum Vienna: Adolf Loos, Private Houses', url: 'https://www.mak.at/en/program/exhibitions/adolf_loos' },
+      { title: 'Architekturzentrum Wien: Adolf Loos—Afterlife', url: 'https://www.azw.at/en/event/adolf-loos-nachleben/' },
+      { title: 'Wikimedia Commons: Portrait of Adolf Loos', url: 'https://commons.wikimedia.org/wiki/File:Portrait_of_Adolf_Loos_(1870%E2%80%931933).jpg' },
+      { title: 'Wikidata: Adolf Loos', url: 'https://www.wikidata.org/wiki/Q153537' },
+    ],
+  },
+  'sinan': compactArchitectProfile({
+    slug: 'sinan',
+    summary: { zh: '米马尔·希南是奥斯曼帝国最重要的建筑师之一，以清真寺、桥梁、供水与公共建筑构成的城市基础设施体系闻名。', ja: 'ミマール・スィナンは、モスク、橋、給水、公共建築を都市基盤として結びつけたオスマン帝国を代表する建築家である。', en: 'Mimar Sinan was a leading Ottoman architect whose mosques, bridges, waterworks, and civic buildings formed a metropolitan infrastructure.' },
+    core_ideas: { zh: ['圆顶与支撑体系的整体协调', '以光、庭院与动线组织宗教公共空间', '建筑、工程与城市基础设施不可分割'], ja: ['ドームと支持構造を一体に組織する', '光、中庭、動線で宗教的公共空間をつくる', '建築、工学、都市基盤を分けない'], en: ['Dome and support as one system', 'Light, court, and movement in civic worship space', 'Architecture inseparable from infrastructure'] },
+    portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Mimar_Sinan%2C_architecte_de_Soliman_le_Magnifique.jpg', author: 'Hazan Riza', license: 'Public domain', source_url: 'https://commons.wikimedia.org/wiki/File:Mimar_Sinan,_architecte_de_Soliman_le_Magnifique.jpg', alt: { zh: '米马尔·希南想象肖像', ja: 'ミマール・スィナンの想像肖像', en: 'Imaginary portrait of Mimar Sinan' } },
+    focus: { zh: '希南把巨大穹顶看作一套连续的受力与空间系统：半穹顶、墩柱、拱与开窗共同分担重量，并把自然光引入礼拜空间。', ja: 'スィナンは大ドームを連続する構造と空間の体系として扱い、半ドーム、柱、アーチ、開口を通じて荷重と光を組織した。', en: 'Sinan treated the great dome as a continuous structural and spatial system of half-domes, piers, arches, and light.' },
+    legacy: { zh: '读希南不应只记住宏大的穹顶；他的价值还在于把宗教建筑、公共福利与城市工程放在同一尺度上思考。', ja: 'スィナンは大ドームだけで読むべきではない。宗教建築、公共福祉、都市工学を同じ尺度で考えた点に重要性がある。', en: 'Sinan matters not only for monumental domes but for joining worship, public welfare, and urban engineering.' },
+    sources: [{ title: 'Aga Khan Trust for Culture: Sinan', url: 'https://www.akdn.org/architecture' }, { title: 'Wikimedia Commons: Mimar Sinan portrait', url: 'https://commons.wikimedia.org/wiki/File:Mimar_Sinan,_architecte_de_Soliman_le_Magnifique.jpg' }],
+  }),
+  'schinkel': compactArchitectProfile({
+    slug: 'schinkel',
+    summary: { zh: '卡尔·弗里德里希·申克尔以新古典主义建筑、城市远景、舞台设计与公共机构作品塑造了19世纪早期柏林的文化形象。', ja: 'カール・フリードリヒ・シンケルは、新古典主義建築、都市の構想、舞台美術、公共建築を通して19世紀初頭のベルリンの文化的姿をつくった。', en: 'Karl Friedrich Schinkel shaped early nineteenth-century Berlin through neoclassical architecture, urban visions, scenography, and public institutions.' },
+    core_ideas: { zh: ['古典秩序服务现代公共机构', '建筑、城市远景与舞台想象相互关联', '以构造和比例而非表面仿古建立纪念性'], ja: ['古典秩序を近代の公共機関に用いる', '建築、都市の遠景、舞台的想像を結ぶ', '表面模倣ではなく構成と比例で記念性をつくる'], en: ['Classical order for modern institutions', 'Architecture linked to urban vision and scenography', 'Monumentality through construction and proportion'] },
+    portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Schinkel1.jpg', author: 'Carl Joseph Begas', license: 'Public domain', source_url: 'https://commons.wikimedia.org/wiki/File:Schinkel1.jpg', alt: { zh: '卡尔·弗里德里希·申克尔肖像', ja: 'カール・フリードリヒ・シンケルの肖像', en: 'Portrait of Karl Friedrich Schinkel' } },
+    focus: { zh: '申克尔并非简单复刻古希腊形式；他通过柱廊、台基、清晰体量和城市轴线，把博物馆、剧院等新型公共机构塑造成可被市民阅读的场所。', ja: 'シンケルは古代ギリシアを単に複製したのではない。列柱、基壇、明快な量塊、都市軸線で、美術館や劇場を市民が読める公共機関にした。', en: 'Schinkel did not simply copy Greece; he made museums and theatres legible civic institutions through clear mass, colonnade, base, and urban axis.' },
+    legacy: { zh: '他的草图与舞台经验提醒我们，建筑的公共性也来自对远景、进入过程和集体想象的组织。', ja: '彼のスケッチと舞台経験は、建築の公共性が遠景、進入、集合的想像の組織からも生まれることを示す。', en: 'His drawings and scenography show that public architecture also organizes distant view, approach, and collective imagination.' },
+    sources: [{ title: 'Staatliche Museen zu Berlin: Schinkel', url: 'https://www.smb.museum/en/museums-institutions/altes-museum/home/' }, { title: 'Wikimedia Commons: Schinkel portrait', url: 'https://commons.wikimedia.org/wiki/File:Schinkel1.jpg' }],
+  }),
+  'gerrit-rietveld': compactArchitectProfile({
+    slug: 'gerrit-rietveld', summary: { zh: '赫里特·里特维尔德把 De Stijl 的抽象构成推进到家具和住宅中，以平面、线条、色彩与可变边界重新理解空间。', ja: 'ヘリット・リートフェルトはデ・ステイルの抽象構成を家具と住宅へ押し広げ、面、線、色、可変の境界によって空間を捉え直した。', en: 'Gerrit Rietveld brought De Stijl abstraction into furniture and houses, redefining space through planes, lines, color, and movable boundaries.' },
+    core_ideas: { zh: ['构件彼此独立又形成整体', '空间可由滑动与旋转构件改变', '家具是建筑思考的实验场'], ja: ['部材を独立させつつ全体をつくる', '可動部材で空間を変える', '家具を建築思考の実験場にする'], en: ['Independent elements forming a whole', 'Movable components transform space', 'Furniture as architectural experiment'] },
+    portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/0/0a/Gerrit_Thomas_Rietveld.jpg', author: 'Oscar at Dutch Wikipedia', license: 'CC BY-SA 3.0', source_url: 'https://commons.wikimedia.org/wiki/File:Gerrit_Thomas_Rietveld.jpg', alt: { zh: '赫里特·里特维尔德肖像', ja: 'ヘリット・リートフェルトの肖像', en: 'Portrait of Gerrit Rietveld' } },
+    focus: { zh: '在里特维尔德的住宅与家具中，墙、梁、柜体和色块不再被合并成单一体量；它们保持可读的独立性，从而让空间像一幅可进入的构成画。', ja: 'リートフェルトの住宅と家具では、壁、梁、収納、色面は一つの塊に溶けず、独立して読める。空間は入り込める構成画のようになる。', en: 'Walls, beams, storage, and color remain legible as independent elements, making space an inhabitable composition.' },
+    legacy: { zh: '他的重要性不在于复制红蓝黄，而在于用构件关系、可变边界与使用尺度来测试抽象如何成为生活环境。', ja: '重要なのは赤青黄を複製することではなく、部材関係、可変の境界、使用の尺度で抽象を生活環境にする方法である。', en: 'His legacy is not primary colors but the testing of abstraction through component relationships, adaptable boundaries, and use.' },
+    sources: [{ title: 'UNESCO: Rietveld Schröderhuis', url: 'https://whc.unesco.org/en/list/965/' }, { title: 'Wikimedia Commons: Gerrit Rietveld portrait', url: 'https://commons.wikimedia.org/wiki/File:Gerrit_Thomas_Rietveld.jpg' }],
+  }),
+  'james-stirling': compactArchitectProfile({
+    slug: 'james-stirling', summary: { zh: '詹姆斯·斯特林以大胆的体量、工业材料、历史引用和复杂动线挑战战后现代主义的单一语言。', ja: 'ジェームズ・スターリングは、大胆な量塊、工業材料、歴史的引用、複雑な動線で、戦後モダニズムの単一言語を問い直した。', en: 'James Stirling challenged postwar modernism through bold massing, industrial materials, historical reference, and complex circulation.' },
+    core_ideas: { zh: ['把历史类型重新拼接为当代机构', '用坡道、楼梯和剖面制造叙事性动线', '接受建筑的矛盾、拼贴与粗粝感'], ja: ['歴史的類型を現代の制度へ組み替える', 'ランプ、階段、断面で物語的な動線をつくる', '矛盾、コラージュ、粗さを建築に受け入れる'], en: ['Reassemble historical types for institutions', 'Narrative circulation through ramps and section', 'Embrace contradiction, collage, and roughness'] },
+    portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/2/20/James_Stirling_01.jpg', author: 'Gorup de Besanez', license: 'CC BY-SA 3.0', source_url: 'https://commons.wikimedia.org/wiki/File:James_Stirling_01.jpg', alt: { zh: '詹姆斯·斯特林肖像', ja: 'ジェームズ・スターリングの肖像', en: 'Portrait of James Stirling' } },
+    focus: { zh: '斯特林常从图书馆、工厂、庭院或古典纪念建筑中提取类型，再以夸张的剖面、色彩和工程构件把它们变成新的公共体验。', ja: 'スターリングは図書館、工場、中庭、古典的記念建築から類型を取り出し、誇張した断面、色、工業部材で新しい公共経験へ変えた。', en: 'Stirling drew on libraries, factories, courts, and monuments, transforming them through exaggerated section, color, and engineering parts.' },
+    legacy: { zh: '他的作品提示：现代建筑不必假装没有历史；关键是历史引用是否能重组使用、城市与空间体验。', ja: '彼の仕事は、近代建築が歴史を消す必要はないと示す。重要なのは歴史的引用が使用、都市、空間経験を組み替えられるかである。', en: 'His work shows that modern architecture need not erase history; references must reorganize use, city, and experience.' },
+    sources: [{ title: 'The Pritzker Architecture Prize: James Stirling', url: 'https://www.pritzkerprize.com/laureates/1981' }, { title: 'Wikimedia Commons: James Stirling portrait', url: 'https://commons.wikimedia.org/wiki/File:James_Stirling_01.jpg' }],
+  }),
+  'aldo-rossi': compactArchitectProfile({
+    slug: 'aldo-rossi', summary: { zh: '阿尔多·罗西以城市记忆、类型学与朴素几何重建建筑的集体维度，是战后意大利建筑理论的重要人物。', ja: 'アルド・ロッシは、都市の記憶、類型学、素朴な幾何によって建築の集合的な側面を捉え直した、戦後イタリアの重要な建築家・理論家である。', en: 'Aldo Rossi reasserted architecture’s collective dimension through urban memory, typology, and elementary geometry.' },
+    core_ideas: { zh: ['城市由持久的类型与记忆构成', '简洁几何可承载复杂的历史联想', '建筑既是日常设施也是集体记忆的容器'], ja: ['都市は持続する類型と記憶から成る', '単純な幾何は複雑な歴史的連想を担える', '建築は日常の施設であり集合記憶の容器でもある'], en: ['City made of enduring types and memory', 'Simple geometry carrying historical association', 'Building as everyday facility and collective memory'] },
+    portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/AldoRossi.jpg', author: 'Unknown author', license: 'Public domain', source_url: 'https://commons.wikimedia.org/wiki/File:AldoRossi.jpg', alt: { zh: '阿尔多·罗西肖像', ja: 'アルド・ロッシの肖像', en: 'Portrait of Aldo Rossi' } },
+    focus: { zh: '罗西关注的不是为每个功能发明一种新形，而是辨认剧院、墓园、街道、庭院等类型如何在城市中积累意义。', ja: 'ロッシは機能ごとに新しい形を発明するより、劇場、墓地、街路、中庭のような類型が都市で意味を蓄積する仕方を読んだ。', en: 'Rossi asked how types such as theatre, cemetery, street, and court accumulate meaning in the city.' },
+    legacy: { zh: '学习罗西时应警惕把他的建筑缩成“几何图标”；真正的问题是形式如何与时间、事件和共同记忆发生关系。', ja: 'ロッシを幾何学的アイコンへ縮めないことが重要である。問われるのは、形が時間、出来事、共同記憶とどう関わるかである。', en: 'Rossi should not be reduced to geometric icons; the question is how form relates to time, events, and collective memory.' },
+    sources: [{ title: 'MAXXI: Aldo Rossi', url: 'https://www.maxxi.art/en/' }, { title: 'Wikimedia Commons: Aldo Rossi portrait', url: 'https://commons.wikimedia.org/wiki/File:AldoRossi.jpg' }],
+  }),
+  'philip-johnson': compactArchitectProfile({ slug: 'philip-johnson', summary: { zh: '菲利普·约翰逊既是建筑师、策展人也是制度推动者，深刻影响了美国现代建筑的传播与企业建筑的形象。', ja: 'フィリップ・ジョンソンは建築家、キュレーター、制度的推進者として、アメリカにおける近代建築の受容と企業建築の像に影響した。', en: 'Philip Johnson shaped American modernism as architect, curator, and institutional advocate.' }, core_ideas: { zh: ['展览与写作也能塑造建筑文化', '透明与结构可成为住宅实验', '历史引用可重返当代高层建筑'], ja: ['展覧会と文章も建築文化をつくる', '透明性と構造を住宅で実験する', '歴史的引用を現代の高層建築へ戻す'], en: ['Exhibition as architectural culture', 'Glass and structure as domestic experiment', 'Historical reference in contemporary towers'] }, portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/0/07/Philip_Johnson.2002.FILARDO.jpg', author: 'B. Pietro Filardo', license: 'CC BY-SA 3.0', source_url: 'https://commons.wikimedia.org/wiki/File:Philip_Johnson.2002.FILARDO.jpg', alt: { zh: '菲利普·约翰逊肖像', ja: 'フィリップ・ジョンソンの肖像', en: 'Portrait of Philip Johnson' } }, focus: { zh: '约翰逊把建筑设计、展览策划和公共论述并行推进，既推广国际风格，也在后期以历史语言挑战正统现代主义。', ja: 'ジョンソンは設計、展覧会、公共的言説を並行させ、国際様式を広める一方、後年には歴史的言語で正統モダニズムを問い直した。', en: 'Johnson joined design, exhibitions, and public argument, promoting modernism and later challenging its orthodoxy.' }, legacy: { zh: '他的生涯说明，建筑影响力不仅来自单体作品，也来自策展、机构与媒体如何定义“什么算现代”。', ja: '彼の経歴は、建築の影響が建物だけでなく、キュレーション、制度、メディアが「近代」をどう定義するかにもあると示す。', en: 'His career shows that architectural influence also comes from institutions and media defining what counts as modern.' }, sources: [{ title: 'MoMA: Philip Johnson', url: 'https://www.moma.org/artists/2926-philip-johnson' }, { title: 'Wikimedia Commons: Philip Johnson portrait', url: 'https://commons.wikimedia.org/wiki/File:Philip_Johnson.2002.FILARDO.jpg' }] }),
+  'sverre-fehn': compactArchitectProfile({ slug: 'sverre-fehn', summary: { zh: '斯维尔·费恩以北欧景观、材料触感和精确构造为媒介，探索现代建筑如何安静地嵌入场地。', ja: 'スヴェレ・フェーンは北欧の風景、素材の触覚、精密な構法を媒介に、近代建築が静かに場所へ根づく方法を探った。', en: 'Sverre Fehn explored how modern architecture can settle quietly into landscape through material and construction.' }, core_ideas: { zh: ['建筑是地景与人的中介', '光线让混凝土与木材获得时间感', '细部服务于行走与停留'], ja: ['建築は風景と人の媒介', '光がコンクリートと木に時間を与える', '細部は歩行と滞在に奉仕する'], en: ['Architecture mediates land and people', 'Light gives material time', 'Detail serves movement and stay'] }, portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Sverre_Fehn_DEX_T_1954_006_%28cropped%29.jpg', author: 'Teigens Fotoatelier / Dextra Photo', license: 'CC BY-SA 4.0', source_url: 'https://commons.wikimedia.org/wiki/File:Sverre_Fehn_DEX_T_1954_006_(cropped).jpg', alt: { zh: '斯维尔·费恩肖像', ja: 'スヴェレ・フェーンの肖像', en: 'Portrait of Sverre Fehn' } }, focus: { zh: '费恩不把地域性理解为复制传统形式，而是通过屋顶、地面、开口和材料，让气候、地形与身体感受进入构造。', ja: 'フェーンは地域性を伝統形態の複製とは考えず、屋根、地面、開口、素材を通して気候、地形、身体感覚を構法に入れた。', en: 'Fehn made locality through roof, ground, opening, and material rather than copied tradition.' }, legacy: { zh: '他的作品提醒我们，低声量的建筑并不等于缺乏力量；精准的场地关系本身可以形成纪念性。', ja: '静かな建築は弱い建築ではない。正確な場所との関係そのものが記念性になり得る。', en: 'His work shows that precise relation to site can be monumental without being loud.' }, sources: [{ title: 'The Pritzker Architecture Prize: Sverre Fehn', url: 'https://www.pritzkerprize.com/laureates/1997' }, { title: 'Wikimedia Commons: Sverre Fehn portrait', url: 'https://commons.wikimedia.org/wiki/File:Sverre_Fehn_DEX_T_1954_006_(cropped).jpg' }] }),
+  'balkrishna-doshi': compactArchitectProfile({ slug: 'balkrishna-doshi', summary: { zh: '巴克里希纳·多西把现代主义与印度的气候、聚落和日常生活连接起来，长期探索可负担住房与教育空间。', ja: 'バルクリシュナ・ドーシは近代主義をインドの気候、集落、日常生活へ結び、手の届く住宅と教育空間を探究した。', en: 'Balkrishna Doshi connected modernism with Indian climate, settlement, and everyday life.' }, core_ideas: { zh: ['以庭院、遮阳和步行回应气候', '住房随家庭与时间增长', '教育与实践相互塑造'], ja: ['中庭、日除け、歩行で気候に応答する', '住宅は家族と時間に合わせて成長する', '教育と実践を相互に育てる'], en: ['Climate through court, shade, and walking', 'Housing grows with life', 'Teaching and practice together'] }, portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/0/0e/Balkrishna_Doshi.JPG', author: 'Sanyam Bahga', license: 'CC BY-SA 3.0', source_url: 'https://commons.wikimedia.org/wiki/File:Balkrishna_Doshi.JPG', alt: { zh: '巴克里希纳·多西肖像', ja: 'バルクリシュナ・ドーシの肖像', en: 'Portrait of Balkrishna Doshi' } }, focus: { zh: '多西把建筑看成可被生活不断完成的框架，重视阴影、风、路径、庭院和邻里关系，而不把现代性等同于孤立物体。', ja: 'ドーシは建築を生活によって完成され続ける枠組みと捉え、影、風、道、中庭、近隣関係を重視した。', en: 'Doshi saw architecture as a frame completed by life, emphasizing shade, wind, paths, courts, and neighbors.' }, legacy: { zh: '他的价值在于证明社会性与诗意并不冲突：资源有限时，空间秩序更需要服务于成长、共享和尊严。', ja: '資源が限られるほど、空間秩序は成長、共有、尊厳を支えるべきだという点に彼の価値がある。', en: 'His work proves that social responsibility and poetry can coexist under limited resources.' }, sources: [{ title: 'The Pritzker Architecture Prize: Balkrishna Doshi', url: 'https://www.pritzkerprize.com/laureates/balkrishna-doshi' }, { title: 'Wikimedia Commons: Balkrishna Doshi portrait', url: 'https://commons.wikimedia.org/wiki/File:Balkrishna_Doshi.JPG' }] }),
+  'calatrava': compactArchitectProfile({ slug: 'calatrava', summary: { zh: '圣地亚哥·卡拉特拉瓦以工程、雕塑和人体运动之间的转换著称，常把桥梁、车站与文化建筑处理成可读的结构形象。', ja: 'サンティアゴ・カラトラバは工学、彫刻、身体運動の変換で知られ、橋、駅、文化施設を読める構造の像として扱う。', en: 'Santiago Calatrava translates engineering, sculpture, and bodily movement into legible structures.' }, core_ideas: { zh: ['结构同时承担形象与受力', '运动与生物形态启发构件', '基础设施可以成为公共地标'], ja: ['構造が像と荷重を同時に担う', '運動と生物形態が部材を導く', 'インフラを公共のランドマークにする'], en: ['Structure as image and support', 'Movement informs members', 'Infrastructure as landmark'] }, portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Santiago_Calatrava_%28cropped%29.jpg', author: 'Wilson Center', license: 'CC BY-SA 3.0', source_url: 'https://commons.wikimedia.org/wiki/File:Santiago_Calatrava_(cropped).jpg', alt: { zh: '圣地亚哥·卡拉特拉瓦肖像', ja: 'サンティアゴ・カラトラバの肖像', en: 'Portrait of Santiago Calatrava' } }, focus: { zh: '卡拉特拉瓦常从桥梁工程出发，把拱、索、肋和可动部件发展为视觉上的骨骼，使结构逻辑直接参与空间体验。', ja: 'カラトラバは橋梁工学から出発し、アーチ、索、リブ、可動部を視覚的な骨格にして、構造論理を空間経験へ参加させる。', en: 'Calatrava develops arches, cables, ribs, and moving parts into visible skeletons that shape experience.' }, legacy: { zh: '评价他的作品时，形式感染力与维护、造价、城市使用必须一起讨论；结构表现不是免于公共责任的理由。', ja: '作品は形の力だけでなく、維持、費用、都市での使用とともに評価すべきである。構造表現は公共的責任を免れる理由ではない。', en: 'His expressive structures must be read together with cost, maintenance, and public use.' }, sources: [{ title: 'Santiago Calatrava: Official Website', url: 'https://calatrava.com/' }, { title: 'Wikimedia Commons: Santiago Calatrava portrait', url: 'https://commons.wikimedia.org/wiki/File:Santiago_Calatrava_(cropped).jpg' }] }),
+  'chipperfield': compactArchitectProfile({ slug: 'chipperfield', summary: { zh: '大卫·奇普菲尔德以克制的体量、材料的耐久性和对既有城市织理的尊重，持续讨论建筑的公共责任。', ja: 'デイヴィッド・チッパーフィールドは、抑制された量塊、素材の耐久性、既存の都市組織への敬意を通して、建築の公共的責任を問い続けている。', en: 'David Chipperfield advances architecture’s civic responsibility through restraint, durable material, and respect for urban fabric.' }, core_ideas: { zh: ['修复与新建同样是文化行动', '比例、材料与构造优先于图像', '公共建筑应长期服务城市'], ja: ['修復と新築を等しく文化的行為とみなす', '画像より比例、素材、構法を優先する', '公共建築は長く都市に奉仕する'], en: ['Repair and new build as cultural acts', 'Proportion and material before image', 'Civic buildings serve over time'] }, portrait: { url: 'https://upload.wikimedia.org/wikipedia/commons/4/47/David_Chipperfield.JPG', author: 'Bruno Cordioli', license: 'CC BY-SA 3.0', source_url: 'https://commons.wikimedia.org/wiki/File:David_Chipperfield.JPG', alt: { zh: '大卫·奇普菲尔德肖像', ja: 'デイヴィッド・チッパーフィールドの肖像', en: 'Portrait of David Chipperfield' } }, focus: { zh: '奇普菲尔德不把安静等同于中性：他通过厚度、开口、台阶和材料接缝，明确建筑与街道、历史和制度之间的关系。', ja: 'チッパーフィールドにとって静けさは中立ではない。厚み、開口、段、素材の継ぎ目によって、建築と街路、歴史、制度の関係を明確にする。', en: 'For Chipperfield, restraint is active: thickness, openings, steps, and joints clarify relations to street, history, and institution.' }, legacy: { zh: '他的实践提示，在图像饱和的时代，建筑的品质也可来自可维护性、清晰性与对既有环境的耐心回应。', ja: 'イメージ過多の時代に、建築の質は維持可能性、明快さ、既存環境への忍耐強い応答からも生まれる。', en: 'His work argues for quality through maintainability, clarity, and patient response to what already exists.' }, sources: [{ title: 'The Pritzker Architecture Prize: David Chipperfield', url: 'https://www.pritzkerprize.com/laureates/sir-david-alan-chipperfield-ch' }, { title: 'Wikimedia Commons: David Chipperfield portrait', url: 'https://commons.wikimedia.org/wiki/File:David_Chipperfield.JPG' }] }),
+  'jean-nouvel': compactArchitectProfile({ slug:'jean-nouvel', summary:{zh:'让·努维尔以光、表皮、技术与场地叙事不断改变建筑的可见性。',ja:'ジャン・ヌーヴェルは、光、表皮、技術、場所の物語によって建築の見え方を変え続ける。',en:'Jean Nouvel uses light, skin, technology, and site narrative to transform architectural perception.'}, core_ideas:{zh:['光是构成材料','表皮调节环境与意义','每个场地需要不同回应'],ja:['光を構成素材にする','表皮で環境と意味を調整する','場所ごとに異なる応答'],en:['Light as material','Skin moderates climate and meaning','Each site needs a distinct response']}, portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/9/9f/JEAN_NOUVEL_w.jpg',author:'ERIO TAC - France',license:'CC BY-SA 3.0',source_url:'https://commons.wikimedia.org/wiki/File:JEAN_NOUVEL_w.jpg',alt:{zh:'让·努维尔肖像',ja:'ジャン・ヌーヴェルの肖像',en:'Portrait of Jean Nouvel'}}, focus:{zh:'努维尔常以筛光、反射、透明度和技术装置让建筑表皮成为观看城市与调节气候的界面。',ja:'ヌーヴェルは光のフィルター、反射、透明度、技術装置で、表皮を都市を見る界面かつ環境調整装置にする。',en:'Nouvel makes skin an interface for light, climate, and viewing the city.'}, legacy:{zh:'其价值不在于复制高技感，而在于把形式问题重新放回光、文化与场所条件。',ja:'価値はハイテクの見た目ではなく、形を光、文化、場所の条件へ戻す点にある。',en:'His legacy is to return form to conditions of light, culture, and place.'}, sources:[{title:'The Pritzker Architecture Prize: Jean Nouvel',url:'https://www.pritzkerprize.com/laureates/2008'},{title:'Wikimedia Commons: Jean Nouvel portrait',url:'https://commons.wikimedia.org/wiki/File:JEAN_NOUVEL_w.jpg'}]}),
+  'richard-meier': compactArchitectProfile({ slug:'richard-meier',summary:{zh:'理查德·迈耶以白色体量、清晰几何和精确采光持续发展现代主义语言。',ja:'リチャード・マイヤーは白い量塊、明快な幾何、精密な採光で近代主義の言語を展開した。',en:'Richard Meier developed modernism through white volumes, clear geometry, and calibrated light.'},core_ideas:{zh:['几何秩序','白色与自然光','公共路径清晰'],ja:['幾何的秩序','白と自然光','明快な公共動線'],en:['Geometric order','White and daylight','Legible public routes']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/2/23/Richard_Meier_at_the_2009_Tribeca_Film_Festival.jpg',author:'David Shankbone',license:'CC BY 3.0',source_url:'https://commons.wikimedia.org/wiki/File:Richard_Meier_at_the_2009_Tribeca_Film_Festival.jpg',alt:{zh:'理查德·迈耶肖像',ja:'リチャード・マイヤーの肖像',en:'Portrait of Richard Meier'}},focus:{zh:'迈耶以网格、坡道、庭院与白色表面组织光线，使行进中的视野成为建筑经验。',ja:'マイヤーはグリッド、ランプ、中庭、白い表面で光を組織し、移動する視線を建築経験にする。',en:'Meier uses grid, ramp, court, and white surface to make moving vision architectural experience.'},legacy:{zh:'理解他时，白色不该被当作风格标签，而应被看作几何、光与城市背景之间的工作关系。',ja:'白は様式記号ではなく、幾何、光、都市の背景を働かせる関係として読むべきである。',en:'White should be read as a working relation among geometry, light, and city.'},sources:[{title:'The Pritzker Architecture Prize: Richard Meier',url:'https://www.pritzkerprize.com/laureates/1984'},{title:'Wikimedia Commons: Richard Meier portrait',url:'https://commons.wikimedia.org/wiki/File:Richard_Meier_at_the_2009_Tribeca_Film_Festival.jpg'}]}),
+  'anne-lacaton': compactArchitectProfile({slug:'anne-lacaton',summary:{zh:'安妮·拉卡顿以“绝不拆除、绝不减损”为立场，与瓦萨尔共同把住房改造视为增加空间、自由与尊严的机会。',ja:'アンヌ・ラカトンは「壊さない、減らさない」を掲げ、ヴァッサルとともに住宅改修を空間、自由、尊厳を増やす機会と捉える。',en:'Anne Lacaton treats housing transformation as an opportunity to add space, freedom, and dignity.'},core_ideas:{zh:['保留并扩展','低成本的空间慷慨','居民生活优先'],ja:['残して拡張する','低コストで空間を豊かにする','居住者の生活を優先する'],en:['Keep and extend','Generosity on a budget','Life before image']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/d/dd/Anne_Lacaton.jpg',author:'GSAPPstudent',license:'CC BY-SA 4.0',source_url:'https://commons.wikimedia.org/wiki/File:Anne_Lacaton.jpg',alt:{zh:'安妮·拉卡顿肖像',ja:'アンヌ・ラカトンの肖像',en:'Portrait of Anne Lacaton'}},focus:{zh:'她把冬园、阳台和可占用的余量视为住宅的基本品质，而不是可删去的附加物。',ja:'冬庭、バルコニー、占有できる余白を、削れる付加物ではなく住宅の基本的質と捉える。',en:'Winter gardens, balconies, and usable surplus are basic housing qualities, not extras.'},legacy:{zh:'她的实践把可持续性从节能口号推进到“少拆、少浪费、让人住得更好”的社会判断。',ja:'持続可能性を省エネの標語から、壊さず、無駄にせず、よりよく住める社会的判断へ進めた。',en:'Her work makes sustainability a social judgment: demolish less, waste less, live better.'},sources:[{title:'The Pritzker Architecture Prize: Lacaton & Vassal',url:'https://www.pritzkerprize.com/laureates/anne-lacaton-and-jean-philippe-vassal'},{title:'Wikimedia Commons: Anne Lacaton portrait',url:'https://commons.wikimedia.org/wiki/File:Anne_Lacaton.jpg'}]}),
+  'antonin-raymond': compactArchitectProfile({slug:'antonin-raymond',summary:{zh:'安东宁·雷蒙德是连接欧洲现代主义与日本建造文化的重要建筑师，长期在日本探索混凝土、木材与气候的关系。',ja:'アントニン・レーモンドはヨーロッパ近代主義と日本の建築文化を結んだ建築家で、コンクリート、木、気候の関係を日本で探究した。',en:'Antonin Raymond connected European modernism with Japanese building culture.'},core_ideas:{zh:['现代构造与地方工艺对话','结构与气候共同决定形式','跨文化合作'],ja:['近代構法と地域の工芸の対話','構造と気候が形を決める','越境する協働'],en:['Modern construction with local craft','Structure and climate shape form','Cross-cultural collaboration']},portrait:{url:'https://commons.wikimedia.org/wiki/Special:FilePath/Anton%C3%ADn%20Raymond%20%281888-1976%29.jpg',author:'Unknown author',license:'Public domain',source_url:'https://commons.wikimedia.org/wiki/File:Anton%C3%ADn_Raymond_(1888-1976).jpg',alt:{zh:'安东宁·雷蒙德肖像',ja:'アントニン・レーモンドの肖像',en:'Portrait of Antonin Raymond'}},focus:{zh:'雷蒙德把现代建筑理解为可与当地材料、工匠和生活方式协商的过程，而非可直接移植的样式。',ja:'レーモンドは近代建築を、移植可能な様式ではなく、地域の素材、職人、生活と協議する過程と考えた。',en:'Raymond treated modern architecture as negotiation with local material, craft, and life.'},legacy:{zh:'他的经历说明，跨文化建筑的价值不在“混合风格”，而在建立持续协作的建造关系。',ja:'越境する建築の価値は様式の混合ではなく、継続する協働の建設関係にある。',en:'Cross-cultural architecture matters through durable collaboration, not stylistic fusion.'},sources:[{title:'Antonin Raymond Architectural Design Office',url:'https://www.raymond.or.jp/en/'},{title:'Wikimedia Commons: Antonin Raymond portrait',url:'https://commons.wikimedia.org/wiki/File:Anton%C3%ADn_Raymond_(1888-1976).jpg'}]}),
+  'michele-de-lucchi': compactArchitectProfile({slug:'michele-de-lucchi',summary:{zh:'Michele De Lucchi 在激进设计、孟菲斯、产品设计与公共建筑之间工作，持续把技术转为可感知的日常环境。',ja:'ミケーレ・デ・ルッキはラディカルデザイン、メンフィス、プロダクト、公共建築を横断し、技術を感覚できる日常環境へ変える。',en:'Michele De Lucchi works across radical design, Memphis, products, and civic architecture.'},core_ideas:{zh:['跨尺度设计','技术的日常化','模型与手工思考'],ja:['スケールを横断する設計','技術を日常へ近づける','模型と手仕事による思考'],en:['Cross-scale design','Technology made everyday','Thinking through models and craft']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/9/9e/Michele_de_Lucchi-67592.jpg',author:'Harald Krichel',license:'CC BY-SA 4.0',source_url:'https://commons.wikimedia.org/wiki/File:Michele_de_Lucchi-67592.jpg',alt:{zh:'Michele De Lucchi肖像',ja:'ミケーレ・デ・ルッキの肖像',en:'Portrait of Michele De Lucchi'}},focus:{zh:'他把从家具到车站的尺度视为同一设计问题：物、人、技术和叙事如何在使用中建立关系。',ja:'家具から駅までを同じ設計問題として扱い、物、人、技術、物語が使用の中でどう関係を結ぶかを考える。',en:'He treats furniture and stations as one question of relations among object, person, technology, and story.'},legacy:{zh:'其跨界实践提醒我们，建筑的独特性不必来自孤立形式，也可来自跨尺度的一致判断。',ja:'建築の固有性は孤立した形でなく、スケールを横断する一貫した判断からも生まれる。',en:'Architectural identity can come from consistent judgment across scales.'},sources:[{title:'AMDL CIRCLE: Michele De Lucchi',url:'https://amdlcircle.com/'},{title:'Wikimedia Commons: Michele De Lucchi portrait',url:'https://commons.wikimedia.org/wiki/File:Michele_de_Lucchi-67592.jpg'}]}),
+  'bijoy-jain': compactArchitectProfile({slug:'bijoy-jain',summary:{zh:'Bijoy Jain 与 Studio Mumbai 以现场制作、材料试验和工匠协作发展缓慢而具体的建筑方法。',ja:'ビジョイ・ジェインとStudio Mumbaiは、現場制作、素材実験、職人との協働から、ゆっくりと具体的な建築方法を育てる。',en:'Bijoy Jain and Studio Mumbai develop architecture through making, material experiment, and craft collaboration.'},core_ideas:{zh:['现场即设计场','工艺知识具有创造性','材料与气候塑造形式'],ja:['現場を設計の場にする','工芸知を創造性として尊重する','素材と気候が形をつくる'],en:['Site as design workshop','Craft knowledge as creative knowledge','Material and climate shape form']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/f/f9/Bijoy_Jain%2C_Dhaka.jpg',author:'Rossi101',license:'CC BY-SA 3.0',source_url:'https://commons.wikimedia.org/wiki/File:Bijoy_Jain,_Dhaka.jpg',alt:{zh:'Bijoy Jain肖像',ja:'ビジョイ・ジェインの肖像',en:'Portrait of Bijoy Jain'}},focus:{zh:'Jain 让图纸、样品、工匠判断和现场变化反复往返，建筑因而不是预先完成的图像。',ja:'図面、試作、職人の判断、現場の変化を往復させ、建築を事前に完結したイメージにしない。',en:'Jain moves between drawing, sample, craft judgment, and site change rather than fixing an image in advance.'},legacy:{zh:'其价值在于把“慢”理解为知识生产，而不是怀旧的手工风格。',ja:'「遅さ」を懐古的な手仕事の様式ではなく、知識を生む方法として捉える点に価値がある。',en:'His value lies in slowness as knowledge production, not nostalgic craft style.'},sources:[{title:'Studio Mumbai',url:'https://studiomumbai.in/'},{title:'Wikimedia Commons: Bijoy Jain portrait',url:'https://commons.wikimedia.org/wiki/File:Bijoy_Jain,_Dhaka.jpg'}]}),
+  'yvonne-farrell': compactArchitectProfile({slug:'yvonne-farrell',summary:{zh:'伊冯娜·法雷尔与 Shelley McNamara 共同创立 Grafton Architects，以厚重构造、复杂剖面和公共学习空间著称。',ja:'イヴォンヌ・ファレルはシェリー・マクナマラとGrafton Architectsを創設し、重厚な構成、複雑な断面、公共的な学びの場で知られる。',en:'Yvonne Farrell co-founded Grafton Architects, known for weighty construction, complex section, and public learning space.'},core_ideas:{zh:['大尺度中保持人的尺度','剖面让光和公共性深入内部','合作与教学并行'],ja:['大きな建築で人の尺度を保つ','断面で光と公共性を内部へ導く','協働と教育を並行する'],en:['Human scale within large institutions','Section brings light and public life deep inside','Collaboration with teaching']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/8/88/Yvonne_Farrell_at_arcVision_2015.jpg',author:'Amor Vacui',license:'CC BY 3.0',source_url:'https://commons.wikimedia.org/wiki/File:Yvonne_Farrell_at_arcVision_2015.jpg',alt:{zh:'伊冯娜·法雷尔肖像',ja:'イヴォンヌ・ファレルの肖像',en:'Portrait of Yvonne Farrell'}},focus:{zh:'她以不同尺度的房间、厚墙、开口和阶梯把大型教育建筑分解为可停留、相遇和辨认的空间。',ja:'異なる大きさの部屋、厚い壁、開口、階段で、大きな教育施設を滞在、出会い、認識できる場に分ける。',en:'She breaks large education buildings into rooms, thick edges, openings, and steps for encounter and orientation.'},legacy:{zh:'她的工作说明，纪念性不必压倒使用者；可由材料重量、光和可共享的空间产生。',ja:'記念性は利用者を圧倒する必要はなく、素材の重さ、光、共有できる空間から生まれる。',en:'Monumentality can arise from weight, light, and shared space without overwhelming users.'},sources:[{title:'The Pritzker Architecture Prize: Yvonne Farrell and Shelley McNamara',url:'https://www.pritzkerprize.com/laureates/2020'},{title:'Wikimedia Commons: Yvonne Farrell portrait',url:'https://commons.wikimedia.org/wiki/File:Yvonne_Farrell_at_arcVision_2015.jpg'}]}),
+  'daniel-libeskind': compactArchitectProfile({slug:'daniel-libeskind',summary:{zh:'丹尼尔·里伯斯金以断裂的几何、叙事动线和历史记忆为线索，讨论建筑如何面对创伤与公共记忆。',ja:'ダニエル・リベスキンドは断裂した幾何、物語的動線、歴史の記憶を通して、建築がトラウマと公共記憶に向き合う方法を問う。',en:'Daniel Libeskind uses fractured geometry and narrative circulation to confront trauma and public memory.'},core_ideas:{zh:['建筑可承载难以言说的历史','动线是叙事工具','形式的断裂需要与内容相连'],ja:['建築は語りにくい歴史を担える','動線を物語の道具にする','形の断裂を内容につなぐ'],en:['Architecture can carry difficult history','Circulation as narrative','Formal fracture tied to content']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/1/11/Daniel_Libeskind.jpg',author:'Ishmael Orendain',license:'CC BY 2.0',source_url:'https://commons.wikimedia.org/wiki/File:Daniel_Libeskind.jpg',alt:{zh:'丹尼尔·里伯斯金肖像',ja:'ダニエル・リベスキンドの肖像',en:'Portrait of Daniel Libeskind'}},focus:{zh:'里伯斯金将轴线、空洞、倾斜面与行走过程组织为理解历史的非文字化经验。',ja:'軸線、空隙、傾斜面、歩行の過程を、歴史を理解する非言語的経験として組織する。',en:'Libeskind organizes axes, voids, inclines, and walking as nonverbal historical experience.'},legacy:{zh:'读他的作品时，形式并非目的；关键是空间是否让历史叙事保持复杂、可被质疑而非被消费。',ja:'形式自体が目的ではない。歴史の物語を単純化せず、問い続けられる空間になるかが重要である。',en:'The test is whether form keeps historical narratives complex and open to question.'},sources:[{title:'Jewish Museum Berlin: Daniel Libeskind',url:'https://www.jmberlin.de/en/libeskind-building'},{title:'Wikimedia Commons: Daniel Libeskind portrait',url:'https://commons.wikimedia.org/wiki/File:Daniel_Libeskind.jpg'}]}),
+  'glenn-murcutt': compactArchitectProfile({slug:'glenn-murcutt',summary:{zh:'格伦·默科特以轻盈结构、气候响应和对澳大利亚地景的长期观察，发展出“触碰大地要轻”的建筑伦理。',ja:'グレン・マーカットは軽い構造、気候への応答、オーストラリアの風景への長い観察から、「大地に軽く触れる」建築倫理を展開した。',en:'Glenn Murcutt developed an ethic of lightly touching the earth through climate-responsive structures and landscape observation.'},core_ideas:{zh:['先读风、光、雨与地形','轻型构件便于调节','住宅是环境仪器'],ja:['風、光、雨、地形を先に読む','軽い部材で調整する','住宅を環境の装置にする'],en:['Read wind, light, rain, and ground first','Lightweight elements enable adjustment','House as environmental instrument']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/8/8d/27-11-04_Murcutt_y_yo_022.jpg',author:'ArquiWHAT',license:'Public domain',source_url:'https://commons.wikimedia.org/wiki/File:27-11-04_Murcutt_y_yo_022.jpg',alt:{zh:'格伦·默科特肖像',ja:'グレン・マーカットの肖像',en:'Portrait of Glenn Murcutt'}},focus:{zh:'他通过屋顶、百叶、雨水排放和细长平面，把建筑变成可随季节和使用者调节的气候装置。',ja:'屋根、ルーバー、雨水排水、細長い平面で、季節と利用者に調整できる気候装置として建築をつくる。',en:'Roof, louvers, water, and thin plan make architecture adjustable to season and user.'},legacy:{zh:'默科特提醒我们，生态建筑的起点不是添加设备，而是先让构造本身认真回应场地。',ja:'エコロジー建築は設備の追加ではなく、まず構法自体が場所へ応答することから始まる。',en:'Ecological architecture begins with construction responding to site, not added gadgets.'},sources:[{title:'The Pritzker Architecture Prize: Glenn Murcutt',url:'https://www.pritzkerprize.com/laureates/2002'},{title:'Wikimedia Commons: Glenn Murcutt portrait',url:'https://commons.wikimedia.org/wiki/File:27-11-04_Murcutt_y_yo_022.jpg'}]}),
+  'jean-philippe-vassal': compactArchitectProfile({slug:'jean-philippe-vassal',summary:{zh:'让-菲利普·瓦萨尔与安妮·拉卡顿共同发展“更多且更好”的住房与公共建筑策略，反对以拆除代替改善。',ja:'ジャン＝フィリップ・ヴァッサルはアンヌ・ラカトンとともに、解体でなく改善を選び、住宅と公共建築に「より多く、よりよく」を求めた。',en:'Jean-Philippe Vassal co-developed an architecture of more space and better life rather than demolition.'},core_ideas:{zh:['保留既有资源','空间余量即自由','技术应降低门槛而非制造排除'],ja:['既存の資源を残す','空間の余白を自由とする','技術で排除を減らす'],en:['Keep existing resources','Surplus space as freedom','Technology lowers barriers']},portrait:{url:'https://upload.wikimedia.org/wikipedia/commons/c/cd/Jean-Philippe_Vassal.png',author:'GSAPPstudent',license:'CC BY-SA 4.0',source_url:'https://commons.wikimedia.org/wiki/File:Jean-Philippe_Vassal.png',alt:{zh:'让-菲利普·瓦萨尔肖像',ja:'ジャン＝フィリップ・ヴァッサルの肖像',en:'Portrait of Jean-Philippe Vassal'}},focus:{zh:'瓦萨尔将温室、阳台和既有结构转化为可用余量，让改造优先增加使用可能，而非只提升外观。',ja:'温室、バルコニー、既存構造を使える余白へ変え、改修で見た目だけでなく使用の可能性を増やす。',en:'Vassal turns winter gardens, balconies, and existing structure into usable surplus.'},legacy:{zh:'他的工作要求建筑师先问“能否保留并增加”，再问“是否需要拆除重建”。',ja:'建築家に「残して増やせるか」を先に問い、「壊して建て直すか」を後に問わせる。',en:'His work asks architects to ask first: can we keep and add?'},sources:[{title:'The Pritzker Architecture Prize: Lacaton & Vassal',url:'https://www.pritzkerprize.com/laureates/anne-lacaton-and-jean-philippe-vassal'},{title:'Wikimedia Commons: Jean-Philippe Vassal portrait',url:'https://commons.wikimedia.org/wiki/File:Jean-Philippe_Vassal.png'}]}),
+  'anna-heringer': catalogArchitectProfile('anna-heringer', { zh: '安娜·赫林格', ja: 'アンナ・ヘリンガー', en: 'Anna Heringer' }, { zh: '本地材料、手工艺与社会公平', ja: '地域素材、工芸、社会的公正', en: 'local material, craft, and social equity' }, { title: 'Anna Heringer', url: 'https://www.anna-heringer.com/' }),
+  'mvrdv': catalogArchitectProfile('mvrdv', { zh: 'MVRDV', ja: 'MVRDV', en: 'MVRDV' }, { zh: '数据、密度与城市情景', ja: 'データ、密度、都市シナリオ', en: 'data, density, and urban scenarios' }, { title: 'MVRDV', url: 'https://www.mvrdv.com/' }),
+  'tod-williams-billie-tsien-architects': catalogArchitectProfile('tod-williams-billie-tsien-architects', { zh: 'Tod Williams Billie Tsien Architects', ja: 'トッド・ウィリアムズ・ビリー・ツィアン建築事務所', en: 'Tod Williams Billie Tsien Architects' }, { zh: '材料、制度与公共文化', ja: '素材、制度、公共文化', en: 'material, institution, and public culture' }, { title: 'Tod Williams Billie Tsien Architects', url: 'https://twbta.com/' }),
+  'geoffrey-bawa': catalogArchitectProfile('geoffrey-bawa', { zh: '杰弗里·巴瓦', ja: 'ジェフリー・バワ', en: 'Geoffrey Bawa' }, { zh: '热带景观与开放式居住', ja: '熱帯の風景と開放的な居住', en: 'tropical landscape and open living' }, { title: 'Geoffrey Bawa Trust', url: 'https://geoffreybawa.com/' }),
+  'pierre-chareau': catalogArchitectProfile('pierre-chareau', { zh: '皮埃尔·夏洛', ja: 'ピエール・シャロー', en: 'Pierre Chareau' }, { zh: '玻璃、金属与室内构造', ja: 'ガラス、金属、室内構成', en: 'glass, metal, and interior construction' }, { title: 'Centre Pompidou: Pierre Chareau', url: 'https://www.centrepompidou.fr/en/' }),
+  'studio-mumbai': catalogArchitectProfile('studio-mumbai', { zh: 'Studio Mumbai', ja: 'スタジオ・ムンバイ', en: 'Studio Mumbai' }, { zh: '现场制作与工匠协作', ja: '現場制作と職人協働', en: 'making on site and craft collaboration' }, { title: 'Studio Mumbai', url: 'https://studiomumbai.in/' }),
+  'grafton-architects': catalogArchitectProfile('grafton-architects', { zh: 'Grafton Architects', ja: 'グラフトン・アーキテクツ', en: 'Grafton Architects' }, { zh: '厚重构造与公共学习空间', ja: '重厚な構成と公共的な学びの場', en: 'weighty construction and public learning' }, { title: 'The Pritzker Architecture Prize: 2020 Laureates', url: 'https://www.pritzkerprize.com/laureates/2020' }),
+  'vo-trong-nghia': catalogArchitectProfile('vo-trong-nghia', { zh: '武重义', ja: 'ヴォ・チョン・ギア', en: 'Vo Trong Nghia' }, { zh: '竹、植被与热带气候调节', ja: '竹、植栽、熱帯気候の調整', en: 'bamboo, vegetation, and tropical climate' }, { title: 'VTN Architects', url: 'https://www.vtnarchitects.net/' }),
+  'coelacanth-kh': catalogArchitectProfile('coelacanth-kh', { zh: 'Coelacanth K&H Architects', ja: 'コエラカントK&H', en: 'Coelacanth K&H Architects' }, { zh: '日常尺度与住宅类型', ja: '日常の尺度と住宅類型', en: 'everyday scale and housing type' }, { title: 'Coelacanth K&H Architects', url: 'https://www.coelacanth.jp/' }),
+  'kw-hg-architects': catalogArchitectProfile('kw-hg-architects', { zh: 'kw+hg architects', ja: 'kw+hg architects', en: 'kw+hg architects' }, { zh: '紧凑空间与城市改造', ja: 'コンパクトな空間と都市改修', en: 'compact space and urban renewal' }, { title: 'kw+hg architects', url: 'https://www.kw-hg.com/' }),
+  'mari-ito-uao': catalogArchitectProfile('mari-ito-uao', { zh: '伊藤麻理 + UAo', ja: '伊藤麻理 + UAo', en: 'Mari Ito + UAo' }, { zh: '居住、社区与细部', ja: '居住、コミュニティ、細部', en: 'dwelling, community, and detail' }, { title: 'Mari Ito + UAo', url: 'https://www.uao.jp/' }),
+  'mikami-architects': catalogArchitectProfile('mikami-architects', { zh: '三上建筑事务所', ja: 'MIKAMI Architects', en: 'MIKAMI Architects' }, { zh: '小尺度公共性与环境回应', ja: '小さな公共性と環境への応答', en: 'small-scale publicness and environmental response' }, { title: 'MIKAMI Architects', url: 'https://mikami-architects.com/' }),
+  'coelacanth-associates-nagoya': catalogArchitectProfile('coelacanth-associates-nagoya', { zh: 'Coelacanth and Associates Nagoya', ja: 'コエラカント・アンド・アソシエイツ名古屋', en: 'Coelacanth and Associates Nagoya' }, { zh: '教育空间与城市生活', ja: '教育空間と都市生活', en: 'learning space and urban life' }, { title: 'Coelacanth and Associates', url: 'https://www.coelacanth.jp/' }),
+  'unemori-architects': catalogArchitectProfile('unemori-architects', { zh: '畝森泰行建筑设计事务所', ja: 'UNEMORI ARCHITECTS', en: 'UNEMORI ARCHITECTS' }, { zh: '狭小用地与开放边界', ja: '狭小敷地と開かれた境界', en: 'small sites and open boundaries' }, { title: 'UNEMORI ARCHITECTS', url: 'https://unemori-architects.com/' }),
+  'mitsuru-senda-environment-design-institute': catalogArchitectProfile('mitsuru-senda-environment-design-institute', { zh: '仙田满／环境设计研究所', ja: '仙田満／環境デザイン研究所', en: 'Mitsuru Senda / Environment Design Institute' }, { zh: '儿童环境与游戏空间', ja: '子どもの環境と遊びの空間', en: 'children’s environment and play space' }, { title: 'Environment Design Institute', url: 'https://www.ms-edi.co.jp/' }),
+  'ala-architects': catalogArchitectProfile('ala-architects', { zh: 'ALA Architects', ja: 'ALA Architects', en: 'ALA Architects' }, { zh: '北欧公共文化与木构', ja: '北欧の公共文化と木構造', en: 'Nordic public culture and timber' }, { title: 'ALA Architects', url: 'https://ala.fi/' }),
+  'schmidt-hammer-lassen': catalogArchitectProfile('schmidt-hammer-lassen', { zh: '施密特·哈姆·拉森', ja: 'シュミット・ハマー・ラッセン', en: 'Schmidt Hammer Lassen' }, { zh: '图书馆与开放公共性', ja: '図書館と開かれた公共性', en: 'libraries and open publicness' }, { title: 'Schmidt Hammer Lassen', url: 'https://www.shl.dk/' }),
+  'lundhagem-atelier-oslo': catalogArchitectProfile('lundhagem-atelier-oslo', { zh: 'Lundhagem + Atelier Oslo', ja: 'ルンドハーゲム + アトリエ・オスロ', en: 'Lundhagem + Atelier Oslo' }, { zh: '景观、改造与低碳材料', ja: '景観、改修、低炭素素材', en: 'landscape, reuse, and low-carbon material' }, { title: 'Atelier Oslo', url: 'https://atelieroslo.no/' }),
+  'alsop-stormer': catalogArchitectProfile('alsop-stormer', { zh: 'Alsop and Störmer', ja: 'アルソップ・アンド・ストーマー', en: 'Alsop and Störmer' }, { zh: '色彩、艺术与城市公共性', ja: '色彩、芸術、都市の公共性', en: 'color, art, and urban publicness' }, { title: 'Will Alsop Trust', url: 'https://willalsoptrust.org/' }),
+  'snohetta': catalogArchitectProfile('snohetta', { zh: 'Snøhetta', ja: 'スノヘッタ', en: 'Snøhetta' }, { zh: '建筑、景观与品牌的跨界协作', ja: '建築、景観、グラフィックの横断協働', en: 'architecture, landscape, and graphic collaboration' }, { title: 'Snøhetta', url: 'https://snohetta.com/' }),
+  'civic-architects': catalogArchitectProfile('civic-architects', { zh: 'Civic Architects', ja: 'Civic Architects', en: 'Civic Architects' }, { zh: '公民空间与既有建筑再利用', ja: '市民空間と既存建築の再利用', en: 'civic space and adaptive reuse' }, { title: 'Civic Architects', url: 'https://civicarchitects.eu/' }),
+  'adjaye-associates': catalogArchitectProfile('adjaye-associates', { zh: 'Adjaye Associates', ja: 'アジャイ・アソシエイツ', en: 'Adjaye Associates' }, { zh: '文化机构、身份与全球城市', ja: '文化施設、アイデンティティ、グローバル都市', en: 'cultural institutions, identity, and global cities' }, { title: 'Adjaye Associates', url: 'https://www.adjaye.com/' }),
+  'mecanoo': catalogArchitectProfile('mecanoo', { zh: 'Mecanoo', ja: 'メカノー', en: 'Mecanoo' }, { zh: '公共建筑、基础设施与城市连接', ja: '公共建築、インフラ、都市の接続', en: 'public buildings, infrastructure, and urban connection' }, { title: 'Mecanoo', url: 'https://www.mecanoo.nl/' }),
+  'tatiana-bilbao': catalogArchitectProfile('tatiana-bilbao', { zh: '塔蒂亚娜·毕尔包', ja: 'タティアナ・ビルバオ', en: 'Tatiana Bilbao' }, { zh: '社会住房、景观与参与式设计', ja: '社会住宅、景観、参加型デザイン', en: 'social housing, landscape, and participatory design' }, { title: 'Tatiana Bilbao ESTUDIO', url: 'https://tatianabilbao.com/' }),
+  'charles-correa': catalogArchitectProfile('charles-correa', { zh: '查尔斯·柯里亚', ja: 'チャールズ・コレア', en: 'Charles Correa' }, { zh: '热带城市、住房与公共领域', ja: '熱帯都市、住宅、公共領域', en: 'tropical cities, housing, and public realm' }, { title: 'Charles Correa Foundation', url: 'https://charlescorreafoundation.org/' }),
+  'louis-sullivan': catalogArchitectProfile('louis-sullivan', { zh: '路易斯·沙利文', ja: 'ルイス・サリヴァン', en: 'Louis Sullivan' }, { zh: '高层建筑、功能与有机装饰', ja: '高層建築、機能、有機的装飾', en: 'tall buildings, function, and organic ornament' }, { title: 'The Art Institute of Chicago: Louis H. Sullivan', url: 'https://www.artic.edu/artists/32803/louis-h-sullivan' }),
+  'peter-behrens': catalogArchitectProfile('peter-behrens', { zh: '彼得·贝伦斯', ja: 'ペーター・ベーレンス', en: 'Peter Behrens' }, { zh: '工业设计、企业形象与现代构造', ja: '工業デザイン、企業像、近代構法', en: 'industrial design, corporate identity, and modern construction' }, { title: 'Bauhaus Kooperation: Peter Behrens', url: 'https://www.bauhauskooperation.com/' }),
+  'lina-gotmeh': catalogArchitectProfile('lina-gotmeh', { zh: '莉娜·戈特梅', ja: 'リナ・ゴットメ', en: 'Lina Ghotmeh' }, { zh: '考古学、材料记忆与低碳建造', ja: '考古学、素材の記憶、低炭素建設', en: 'archaeology, material memory, and low-carbon construction' }, { title: 'Lina Ghotmeh Architecture', url: 'https://www.lina-ghotmeh.com/' }),
+  'farshid-moussavi': catalogArchitectProfile('farshid-moussavi', { zh: '法希德·穆萨维', ja: 'ファルシッド・ムサヴィ', en: 'Farshid Moussavi' }, { zh: '形式、材料与城市公共性', ja: '形、素材、都市の公共性', en: 'form, material, and urban publicness' }, { title: 'Farshid Moussavi Architecture', url: 'https://farg.com/' }),
+  'moshe-safdie': catalogArchitectProfile('moshe-safdie', { zh: '摩西·萨夫迪', ja: 'モシェ・サフディ', en: 'Moshe Safdie' }, { zh: '高密度居住、公共空间与模块化', ja: '高密度居住、公共空間、モジュール', en: 'dense housing, public space, and modularity' }, { title: 'Safdie Architects', url: 'https://www.safdiearchitects.com/' }),
+  'sarah-wigglesworth': catalogArchitectProfile('sarah-wigglesworth', { zh: '莎拉·威格尔斯沃思', ja: 'サラ・ウィグルスワース', en: 'Sarah Wigglesworth' }, { zh: '材料实验、低碳建造与居住研究', ja: '素材実験、低炭素建設、居住研究', en: 'material experiment, low-carbon construction, and dwelling research' }, { title: 'Sarah Wigglesworth Architects', url: 'https://www.swarch.co.uk/' }),
+  'peter-zumthor': catalogArchitectProfile('peter-zumthor', { zh: '彼得·卒姆托', ja: 'ペーター・ツムトア', en: 'Peter Zumthor' }, { zh: '氛围、材料与场所经验', ja: '雰囲気、素材、場所の経験', en: 'atmosphere, material, and place experience' }, { title: 'The Pritzker Architecture Prize: Peter Zumthor', url: 'https://www.pritzkerprize.com/laureates/2009' }),
+  'kazuyo-sejima': catalogArchitectProfile('kazuyo-sejima', { zh: '妹岛和世', ja: '妹島和世', en: 'Kazuyo Sejima' }, { zh: '轻盈、透明与非等级空间', ja: '軽さ、透明性、非階層的空間', en: 'lightness, transparency, and non-hierarchical space' }, { title: 'The Pritzker Architecture Prize: Kazuyo Sejima and Ryue Nishizawa', url: 'https://www.pritzkerprize.com/laureates/2010' }),
+  'ryue-nishizawa': catalogArchitectProfile('ryue-nishizawa', { zh: '西泽立卫', ja: '西沢立衛', en: 'Ryue Nishizawa' }, { zh: '轻盈、透明与非等级空间', ja: '軽さ、透明性、非階層的空間', en: 'lightness, transparency, and non-hierarchical space' }, { title: 'The Pritzker Architecture Prize: Kazuyo Sejima and Ryue Nishizawa', url: 'https://www.pritzkerprize.com/laureates/2010' }),
+  'herzog-de-meuron': catalogArchitectProfile('herzog-de-meuron', { zh: '赫尔佐格与德梅隆', ja: 'ヘルツォーク＆ド・ムーロン', en: 'Herzog & de Meuron' }, { zh: '材料表皮、艺术协作与城市转化', ja: '素材の表皮、芸術協働、都市変容', en: 'material skin, art collaboration, and urban transformation' }, { title: 'Herzog & de Meuron', url: 'https://www.herzogdemeuron.com/' }),
+  'thom-mayne': catalogArchitectProfile('thom-mayne', { zh: '汤姆·梅恩', ja: 'トム・メイン', en: 'Thom Mayne' }, { zh: '复杂系统、城市冲突与制度建筑', ja: '複雑なシステム、都市の衝突、制度建築', en: 'complex systems, urban conflict, and institutional architecture' }, { title: 'Morphosis', url: 'https://www.morphosis.com/' }),
+  'wang-shu-lu-wenyu': catalogArchitectProfile('wang-shu-lu-wenyu', { zh: '王澍与陆文宇', ja: '王澍と陸文宇', en: 'Wang Shu and Lu Wenyu' }, { zh: '手工建造、再利用与中国当代性', ja: '手仕事、再利用、中国の現代性', en: 'craft, reuse, and contemporary China' }, { title: 'Amateur Architecture Studio', url: 'http://www.aaastudio.com/' }),
+  'alejandro-zaera-polo': catalogArchitectProfile('alejandro-zaera-polo', { zh: '亚历杭德罗·萨埃拉-波洛', ja: 'アレハンドロ・サエラ＝ポロ', en: 'Alejandro Zaera-Polo' }, { zh: '表皮、政治经济与全球城市', ja: '表皮、政治経済、グローバル都市', en: 'envelope, political economy, and global city' }, { title: 'Alejandro Zaera-Polo Architecture', url: 'https://www.azpa.eu/' }),
+  'jeanne-gang': catalogArchitectProfile('jeanne-gang', { zh: '珍妮·冈', ja: 'ジーン・ギャング', en: 'Jeanne Gang' }, { zh: '生态性能、社会关系与高层建筑', ja: '生態性能、社会関係、高層建築', en: 'ecological performance, social relation, and tall buildings' }, { title: 'Studio Gang', url: 'https://studiogang.com/' }),
 }
 
 const overlayAliases: Record<string, string> = {
   aalto: 'alvar-aalto',
+  aravena: 'alejandro-alavena',
+  'lacaton-vassal': 'anne-lacaton',
 }
 
 export function getArchitectContent(slug: string): ArchitectContentOverlay | null {
