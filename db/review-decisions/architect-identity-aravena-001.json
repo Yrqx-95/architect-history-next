@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "batch_id": "architect-identity-aravena-001",
+  "reviewed_at": "2026-07-14",
+  "status": "reviewed-ready-for-production",
+  "scope": {
+    "canonical_architect_slug": "aravena",
+    "duplicate_architect_slug": "alejandro-alavena",
+    "reviewed_building_slugs": [
+      "center-of-innovation-anacleto-angelini",
+      "edp-headquarters-ii"
+    ]
+  },
+  "decision": {
+    "action": "merge-duplicate-identity",
+    "keep_architect_id": "5000f72e-c893-4df6-84fe-33617581cd24",
+    "remove_architect_id": "4a93c6b4-c020-4291-bbbf-cb2bd94f5257",
+    "canonical_name": "Alejandro Aravena",
+    "reassign_buildings_to_slug": "aravena",
+    "preserve_legacy_route_redirect": true,
+    "confidence": "high"
+  },
+  "evidence": [
+    {
+      "source_type": "official-award",
+      "url": "https://www.pritzkerprize.com/biography-ale-jan-dro-ara-ve-na",
+      "claim": "The Pritzker Architecture Prize identifies the architect as Alejandro Aravena, born in 1967, and records his leadership of ELEMENTAL."
+    },
+    {
+      "source_type": "official-practice",
+      "url": "https://www.elementalchile.cl/en/works/centro-de-innovacion-uc-anacleto-angelini",
+      "claim": "ELEMENTAL lists the UC Anacleto Angelini Innovation Center in its official project archive."
+    },
+    {
+      "source_type": "official-practice",
+      "url": "https://www.elementalchile.cl/en/works/edp-headquarters",
+      "claim": "ELEMENTAL lists EDP Headquarters in its official project archive."
+    },
+    {
+      "source_type": "project-engineer",
+      "url": "https://www.afaconsult.com/projects/category/en/office/280",
+      "claim": "The project engineering consultant identifies EDP Headquarters II in Lisbon and credits Architecture to Elemental S.A."
+    },
+    {
+      "source_type": "production-read-only-snapshot",
+      "claim": "The canonical aravena row contains the full multilingual biography and all three style/era relations. The misspelled duplicate contains only a one-line English biography, has no UUID relations, and is referenced only by the two reviewed building slugs."
+    }
+  ],
+  "guardrails": [
+    "Refuse if either architect row differs from the reviewed production IDs and identity fields.",
+    "Refuse unless exactly the two reviewed buildings still reference the misspelled slug.",
+    "Refuse if the duplicate architect gains any UUID foreign-key relation.",
+    "Do not alter building identity, content, image, taxonomy, or graduation data.",
+    "Keep a permanent redirect from the misspelled public route to /architect/aravena."
+  ],
+  "production": {
+    "written": false,
+    "migration_version": null,
+    "post_write_verified": false,
+    "isolated_postgres_dry_run": "passed"
+  }
+}

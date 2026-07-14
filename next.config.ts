@@ -2,6 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['127.0.0.1'],
+  async redirects() {
+    return ['zh', 'en', 'ja'].map(lang => ({
+      source: `/${lang}/architect/alejandro-alavena`,
+      destination: `/${lang}/architect/aravena`,
+      permanent: true,
+    }))
+  },
   images: {
     localPatterns: [
       { pathname: '/api/image-proxy' },
