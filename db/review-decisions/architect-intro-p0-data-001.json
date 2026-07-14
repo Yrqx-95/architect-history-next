@@ -2,7 +2,7 @@
   "schema_version": 1,
   "batch_id": "architect-intro-p0-data-001",
   "reviewed_at": "2026-07-14",
-  "status": "reviewed-for-guarded-migration",
+  "status": "applied-and-verified",
   "scope": {
     "architect_slugs": [
       "grafton-architects",
@@ -16,7 +16,7 @@
     "graduation_case_ids": [
       "CASE-130"
     ],
-    "production_write_authorized": false,
+    "production_write_authorized": true,
     "content_pr_160_merge_authorized": false
   },
   "decisions": [
@@ -184,10 +184,16 @@
     "Keep applied historical migrations immutable; correct active source inputs and add this explicit correction batch."
   ],
   "production": {
-    "written": false,
+    "written": true,
     "migration_file": "supabase/migrations/20260714103105_architect_intro_p0_data_001.sql",
+    "migration_version": "20260714112158",
     "rollback_file": "db/manual-operations/architect-intro-p0-data-001-rollback.sql",
     "isolated_postgres_dry_run": "passed",
-    "post_write_verified": false
+    "post_write_verified": true,
+    "merge_pr": 162,
+    "merge_commit": "19a94a1e458dda00746fa8d4aa62847b133e3a62",
+    "release_run": 29328686040,
+    "release_status": "success",
+    "live_route_verification": "passed"
   }
 }
