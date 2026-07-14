@@ -11,7 +11,7 @@ BEGIN
     AND architect_slug = 'im-pei'
     AND year_start = 1997
     AND name_zh = ''
-    AND name_ja = ''
+    AND name_ja = 'ミホ・ミュージアム'
     AND official_url IS NULL
     AND description IS NULL
     AND significance = jsonb_build_object('en', '桃花源记的建筑转译——隧道与桥的仪式性抵达')
@@ -28,7 +28,7 @@ END $$;
 UPDATE public.buildings
 SET
   name_zh = '美秀美术馆',
-  name_ja = 'MIHO MUSEUM',
+  name_ja = 'ミホ・ミュージアム',
   official_url = 'https://www.miho.jp/en/architecture/approach/',
   description = jsonb_build_object(
     'zh', '美秀美术馆位于日本滋贺县甲贺市信乐山区，由贝聿铭设计并于 1997 年开放。建筑约八成位于地下，以隧道、吊桥和山谷入口组织从自然景观到展厅的抵达过程，收藏日本及古代世界艺术。',
@@ -53,7 +53,7 @@ BEGIN
     WHERE id = '425a209f-944d-4acf-88e0-695653e3e451'::uuid
       AND slug = 'miho-museum'
       AND name_zh = '美秀美术馆'
-      AND name_ja = 'MIHO MUSEUM'
+      AND name_ja = 'ミホ・ミュージアム'
       AND official_url = 'https://www.miho.jp/en/architecture/approach/'
       AND description ?& ARRAY['zh', 'en', 'ja']
       AND significance ?& ARRAY['zh', 'en', 'ja']

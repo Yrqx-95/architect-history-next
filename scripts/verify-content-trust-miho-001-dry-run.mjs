@@ -16,7 +16,7 @@ try {
     );
     CREATE TABLE public.images (id uuid primary key, building_id uuid, is_primary boolean);
     INSERT INTO public.buildings VALUES (
-      '425a209f-944d-4acf-88e0-695653e3e451', 'miho-museum', '', '', 'im-pei', 1997,
+      '425a209f-944d-4acf-88e0-695653e3e451', 'miho-museum', '', 'ミホ・ミュージアム', 'im-pei', 1997,
       NULL, NULL, jsonb_build_object('en', '桃花源记的建筑转译——隧道与桥的仪式性抵达'),
       '2026-07-08T23:13:38.866069+00:00'
     );
@@ -24,14 +24,14 @@ try {
   `);
 
   await db.exec(migration);
-  if (await scalar("select count(*) from public.buildings where name_zh='美秀美术馆' and name_ja='MIHO MUSEUM' and official_url is not null and description ?& array['zh','en','ja'] and significance ?& array['zh','en','ja']") !== 1) throw new Error('forward content verification failed');
+  if (await scalar("select count(*) from public.buildings where name_zh='美秀美术馆' and name_ja='ミホ・ミュージアム' and official_url is not null and description ?& array['zh','en','ja'] and significance ?& array['zh','en','ja']") !== 1) throw new Error('forward content verification failed');
 
   let replayRefused = false;
   try { await db.exec(migration); } catch { replayRefused = true; }
   if (!replayRefused) throw new Error('replay was not refused');
 
   await db.exec(rollback);
-  if (await scalar("select count(*) from public.buildings where name_zh='' and name_ja='' and official_url is null and description is null and significance = jsonb_build_object('en', '桃花源记的建筑转译——隧道与桥的仪式性抵达')") !== 1) throw new Error('rollback verification failed');
+  if (await scalar("select count(*) from public.buildings where name_zh='' and name_ja='ミホ・ミュージアム' and official_url is null and description is null and significance = jsonb_build_object('en', '桃花源记的建筑转译——隧道与桥的仪式性抵达')") !== 1) throw new Error('rollback verification failed');
   console.log('Miho Museum isolated PostgreSQL dry-run passed.');
 } finally {
   await db.close();
