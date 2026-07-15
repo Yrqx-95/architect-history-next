@@ -69,7 +69,7 @@ test.describe('content-trust Parc.1 and NMWA runtime boundaries', () => {
   test('ordinary building galleries keep a visible hero image and controls', async ({ page }) => {
     for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 }]) {
       await page.setViewportSize(viewport)
-      const response = await page.goto('/zh/building/villa-savoye')
+      const response = await page.goto('/zh/building/villa-savoye', { waitUntil: 'domcontentloaded' })
       expect(response?.status()).toBe(200)
       await expect(page.locator('main img').first()).toBeVisible()
       await expect(page.getByRole('button', { name: '查看大图' })).toBeVisible()
