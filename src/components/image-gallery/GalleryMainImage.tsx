@@ -39,6 +39,7 @@ export default function GalleryMainImage({
   return (
     <div className="mb-3">
       <button
+        type="button"
         onClick={() => !hasError && onOpen()}
         className={`group block w-full overflow-hidden rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 ${hasError ? 'cursor-default' : 'cursor-zoom-in'}`}
         aria-label={viewLabel}

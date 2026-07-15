@@ -15,6 +15,7 @@ const homeSource = readFileSync('src/app/[lang]/home-data.ts', 'utf8')
 const browseSource = readFileSync('src/app/[lang]/browse/buildings/page.tsx', 'utf8')
 const detailSource = readFileSync('src/app/[lang]/building/[slug]/page.tsx', 'utf8')
 const gallerySource = readFileSync('src/components/ImageGallery.tsx', 'utf8')
+const galleryMainSource = readFileSync('src/components/image-gallery/GalleryMainImage.tsx', 'utf8')
 const migrationSource = readFileSync('supabase/migrations/20260715033636_content_trust_parc1_nmwa_001.sql', 'utf8')
 const applySource = readFileSync('db/manual-operations/content-trust-parc1-nmwa-001-apply.sql', 'utf8')
 const rollbackSource = readFileSync('db/manual-operations/content-trust-parc1-nmwa-001-rollback.sql', 'utf8')
@@ -100,6 +101,12 @@ describe('Parc.1 no-safe-primary-image policy', () => {
     expect(shouldRenderNoSafeImageState(0, false)).toBe(false)
     expect(shouldRenderNoSafeImageState(0, true)).toBe(true)
     expect(shouldRenderNoSafeImageState(1, true)).toBe(false)
+  })
+
+  it('keeps the gallery trigger as a native button for pointer and keyboard activation', () => {
+    expect(galleryMainSource).toContain('<button')
+    expect(galleryMainSource).toContain('type="button"')
+    expect(galleryMainSource).toContain('onClick={() => !hasError && onOpen()}')
   })
 
   it('renders the normal gallery for non-empty images, even with the reviewed flag set', () => {

@@ -26,6 +26,59 @@ test.describe('core public routes', () => {
     expect(missing.status()).toBe(404)
   })
 
+  test('unmatched building routes keep the locale and offer recovery CTAs', async ({ page }) => {
+    const pageErrors: string[] = []
+    page.on('pageerror', error => pageErrors.push(error.message))
+    const copy = {
+      zh: { title: '页面没有找到', home: '回到首页', browse: '进入档案', search: '搜索' },
+      en: { title: 'Page not found', home: 'Home', browse: 'Archive', search: 'Search' },
+      ja: { title: 'ページが見つかりません', home: 'ホーム', browse: 'アーカイブ', search: '検索' },
+    } as const
+
+    for (const [lang, text] of Object.entries(copy)) {
+      for (const viewport of [
+        { width: 320, height: 568 },
+        { width: 390, height: 844 },
+        { width: 1440, height: 900 },
+      ]) {
+        await page.setViewportSize(viewport)
+        const response = await page.goto(`/${lang}/building/ux-missing-route-20260715`, { waitUntil: 'domcontentloaded' })
+        expect(response?.status()).toBe(404)
+        await expect(page).toHaveTitle(`${text.title} | Archistory`)
+        await expect(page.getByRole('heading', { name: text.title, exact: true })).toBeVisible()
+
+        for (const [label, href] of [
+          [text.home, `/${lang}`],
+          [text.browse, `/${lang}/browse`],
+          [text.search, `/${lang}/search`],
+        ] as const) {
+          const link = page.getByRole('link', { name: label, exact: true })
+          await expect(link).toHaveCount(1)
+          await expect(link).toBeVisible()
+          await expect(link).toHaveAttribute('href', href)
+        }
+
+        const layout = await page.evaluate(() => ({
+          clientWidth: document.documentElement.clientWidth,
+          scrollWidth: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth),
+        }))
+        expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth)
+      }
+
+      await page.goto(`/${lang}/building/ux-missing-route-20260715`, { waitUntil: 'domcontentloaded' })
+      await page.getByRole('link', { name: text.home, exact: true }).click()
+      await expect(page).toHaveURL(new RegExp(`/${lang}/?$`))
+      await expect(page).toHaveTitle(/Archistory/)
+
+      await page.goto(`/${lang}/building/ux-missing-route-20260715`, { waitUntil: 'domcontentloaded' })
+      await page.getByRole('link', { name: text.search, exact: true }).click()
+      await expect(page).toHaveURL(new RegExp(`/${lang}/search/?$`))
+      await expect(page).toHaveTitle(/搜索|Search|検索|Archistory/)
+    }
+
+    expect(pageErrors).toEqual([])
+  })
+
   test('building feedback carries the current page into the email draft', async ({ page }) => {
     await page.goto('/zh/building/villa-savoye', { waitUntil: 'domcontentloaded' })
     const reportLink = page.getByRole('link', { name: '反馈当前页面' })
