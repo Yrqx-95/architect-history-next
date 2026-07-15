@@ -2,6 +2,31 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-15 - E4/E5 Parc.1 + NMWA Migration, Release, And Production QA
+
+### Immutable timeline
+
+- PR #167 merged with ordinary merge commit `2d26a5253b1ab1813ea84c893d51056d7781c07f`; its reviewed content-trust package covered exactly Parc.1 and the National Museum of Western Art.
+- The guarded production migration `content_trust_parc1_nmwa_001` was applied once in the authorized E4 cutover. Supabase remote migration history records version `20260715052644` exactly once. Fresh anon-only post-verification matched the reviewed Parc.1 and NMWA states; no database rollback was executed.
+- The first post-apply release attempt, run `29391558592`, failed because the old Parc.1 browse E2E locator expected `Parc1` while the reviewed Chinese display name was `Parc.1`. It did not deploy, and the database was not rolled back. This is retained as a historical release event, not the current production state.
+- PR #168 was a test-only correction: stable Parc.1 browse href/text/img assertions and `domcontentloaded` waits for the three Villa Savoye navigation cases. It did not change product behavior or database content. It merged as `e89767356cb605424d22b26a831a95e91eccb345`.
+- Reviewed production release `29394373142` then ran once from e8976735 and succeeded: quality gate, 74 unit files / 260 tests, 33 / 33 E2E, 4,446 / 4,446 static pages, deploy, and route semantics.
+- Cloudflare Worker `architect-history-next` deployed Version ID `f5a753ea-a798-4767-ac74-25227b1d0345` to `archistory.app/*` and `www.archistory.app/*`.
+
+### Production QA and warnings
+
+- Chromium QA covered Parc.1 and NMWA in zh/en/ja at 390 x 844 and 1440 x 900, the homepage at 320 x 568 / 390 x 844 / 430 x 932 / 1440 x 900, Villa Savoye, graduation, CASE-104, search, browse, feedback, and the expected missing-route 404.
+- Parc.1 showed exactly one reviewed no-safe-image state, no image fallback, search `cover_url=null`, and no browse thumbnail. NMWA showed the canonical Le Corbusier identity, existing gallery image, and Alexander Abero / Unsplash attribution/source.
+- E5 screenshots: `/tmp/archistory-e5-after-parc1-zh-390.png`, `/tmp/archistory-e5-after-parc1-zh-1440.png`, `/tmp/archistory-e5-after-nmwa-zh-390.png`, `/tmp/archistory-e5-after-nmwa-zh-1440.png`; full machine detail is in `/tmp/archistory-content-trust-e5-release-20260715.json`.
+- Warnings retained as open debt: Cloudflare token lacks All Zones permissions; Actions report Node 20 deprecation; post-job reports punycode deprecation; full E2E logs contain NoFallbackError although 33 / 33 passed; two zh detail checks saw cancelled internal RSC glossary prefetches without pageerror; RSHP bounded curl returned 403.
+
+### Rollback points and boundary
+
+- Current code release: e8976735 / Cloudflare Version `f5a753ea-a798-4767-ac74-25227b1d0345`.
+- Previous successful code release: fb9a6f17 / Cloudflare Version `7a3b6b82-738e-47ba-8687-6d24be3329db`.
+- Database migration trace: `content_trust_parc1_nmwa_001` / remote version `20260715052644`.
+- These are traceable rollback points only; no automatic database rollback was implied or executed. NMWA image authority remains open, and Parc.1 `name_en=Parc1` remains a separate consistency debt.
+
 ## 2026-07-15 - E2 Correction-2: Final ImageGallery Regression Pass
 
 ### Review finding

@@ -6,12 +6,12 @@ Goal: make the project converge into a stable product repository.
 
 ## Current Execution Order
 
-1. **Repository status synchronization** — the production baseline after PR #165 is now recorded in the current status documents.
+1. **Repository status synchronization** — the PR #165 / PR #167 / PR #168 production baseline is being closed in the current status documents; E5 release and QA are complete.
 2. **Read-only worktree governance** — inspect ownership and branch state before opening another writer lane; do not append work to the merged PR #165 branch.
-3. **Top 50 small batch** — the queue already contains 25 `trust-repair` and 25 `product-core` records. Execute a reviewed batch of 5–10; do not rebuild the queue.
+3. **Top 50 small batch** — the queue already contains 25 `trust-repair` and 25 `product-core` records. Select a second read-only shortlist of no more than 5–10 candidates, then review only evidence-backed records; do not rebuild the queue or lower the acceptance bar to fill a count.
 4. **One learning path** — choose and productize one V1 learning path only after the first three steps remain stable.
 
-Completed checkpoint: PR #165 is merged and released on Cloudflare. Its homepage semantic order is Hero → entry → featured → stats → architects at every breakpoint, with one statistics DOM block. Graduation G6–G10 are complete and should not be reopened without new evidence.
+Completed checkpoint: PR #165 is merged and released on Cloudflare. PR #167's Parc.1 + NMWA reviewed migration is applied and verified in production; PR #168 is a test-only release correction and is also merged. Release `29394373142` deployed e8976735 with 74 / 260 unit baseline, 33 / 33 E2E, and 4,446 static pages. The homepage semantic order is Hero → entry → featured → stats → architects at every breakpoint, with one statistics DOM block. Graduation G6–G10 are complete and should not be reopened without new evidence.
 
 ## P0
 
@@ -36,7 +36,7 @@ Completed checkpoint: PR #165 is merged and released on Cloudflare. Its homepage
 5. **Release hygiene**
    - Keep `data:audit`, `typecheck`, `build`, and tests as release gates.
    - Group future commits by production code, data governance, docs, and generated artifacts.
-   - PR #165 is complete: merge commit `fb9a6f17fe7fbc904ee122b0d8db9fff08290381`; Reviewed production release `29349915435` passed.
+   - PR #165 is complete: merge commit `fb9a6f17fe7fbc904ee122b0d8db9fff08290381`; Reviewed production release `29349915435` passed. PR #167 content-trust migration and PR #168 test-only correction are complete; release `29394373142` passed from e8976735.
 
 ## P1
 
