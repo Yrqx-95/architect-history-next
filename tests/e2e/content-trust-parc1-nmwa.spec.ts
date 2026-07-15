@@ -40,8 +40,10 @@ test.describe('content-trust Parc.1 and NMWA runtime boundaries', () => {
     expect(await page.locator('[data-home-section="featured"] a[href="/zh/building/parc1"]').count()).toBe(0)
 
     await page.goto('/zh/browse/buildings')
-    const parcLink = page.getByRole('link', { name: /Parc1/ }).first()
+    const parcLink = page.locator('a[href="/zh/building/parc1"]')
+    expect(await parcLink.count()).toBe(1)
     await expect(parcLink).toBeVisible()
+    await expect(parcLink).toContainText('Parc.1')
     expect(await parcLink.locator('img').count()).toBe(0)
   })
 
