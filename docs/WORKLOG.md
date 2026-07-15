@@ -2,6 +2,35 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-15 - E2 Correction-2: Final ImageGallery Regression Pass
+
+### Review finding
+
+- The `085f9fb` predicate extraction accidentally promoted the reviewed no-safe predicate to a whole-component early return. As a result, every non-empty `ImageGallery` returned `null`; the earlier build/full-E2E evidence was from `5d15523` and did not prove the final `085f9fb` runtime behavior.
+
+### Correction
+
+- Kept `shouldRenderNoSafeImageState` as the explicit empty-state predicate, but now evaluates it only inside the `images.length === 0` branch.
+- Restored the normal non-empty gallery path for all buildings, including the defensive case `images.length > 0` with `reviewedNoSafeImage=true`.
+- Preserved ordinary empty-gallery `null` behavior and Parc.1's explicit trilingual reviewed no-safe state. SQL, decisions, suppression policy, NMWA image decision, and production data were unchanged.
+- Added component-level server-render tests for normal galleries, ordinary empty galleries, localized reviewed empty states, and the non-empty defensive flag case.
+- Added E2E assertions for visible NMWA hero/source attribution at 390px and 1440px, visible Villa Savoye hero/view/source controls, and the existing Parc.1 no-safe state.
+
+### Final-head validation
+
+- Passed on the post-fix final head: `npm run typecheck`, `npm run lint`, full unit (`74` files / `260` tests), `npm run content:verify-parc1-nmwa-001`, migration/apply byte parity, decision JSON parse/scope check, sensitive-value scan, and `git diff --check`.
+- Targeted Chromium content-trust E2E: `4/4` passed, including Parc.1 at all existing language/viewports, NMWA image/source visibility at 390px and 1440px, and ordinary Villa Savoye gallery visibility.
+- Production-like build: first attempt passed with `4446/4446` static pages. Two pages exceeded Next's per-page 60-second threshold and were retried internally; the build completed successfully, so no second build attempt was run.
+- Final-head full E2E: `33/33` passed. The count includes the new ordinary-gallery regression. The dev server emitted the existing middleware deprecation warning and intermittent `NoFallbackError` logs during expected fallback/404 activity; neither caused a test failure.
+- Existing Parc.1 screenshots remain valid because its visible reviewed empty state did not change; no migration-after NMWA screenshot is claimed.
+- PR #167 remains Draft. No Ready transition, merge, production migration/apply, database write, deploy, or release was performed.
+
+### Remaining risk and rollback
+
+- Full WebKit E2E remains outside CI; this correction used the existing Chromium path for the new runtime assertions. Production data and NMWA image selection remain intentionally unchanged.
+- The build passed after transient page-generation retries, so a separate build-read reliability change is not justified by this correction alone; the existing retry/noise remains an operational risk.
+- Rollback scope is limited to the ImageGallery implementation, its unit/E2E regression tests, and this correction record.
+
 ## 2026-07-15 - E2 Correction: NMWA Architect Identity And Explicit Empty State
 
 ### Correction
@@ -19,7 +48,7 @@ This file is the handoff log for future Codex/chat windows. Read it before conti
 - Production CASE-104 check: page HTTP 200, API HTTP 200, API JSON valid with `.cases` array.
 - Detached `origin/main` base `52293f5` CASE-104 targeted test: `1/1` passed; temporary worktree was removed cleanly and the count returned from 28 to 27.
 - Branch production-like build attempt `1/1`: passed compilation, TypeScript, `4446/4446` static pages, and optimization; no second attempt was run.
-- Final full E2E after correction and green build: `32/32` passed. Next dev-server emitted intermittent `NoFallbackError` logs for expected fallback/404 activity, but no test failed.
+- Superseded pre-correction validation on `5d15523`: the build passed `4446/4446` and full E2E passed `32/32`, but that result did not cover the final `085f9fb` ImageGallery guard and is not final-head evidence. The final-head result is recorded in the Correction-2 entry above.
 - PR #167 remains Draft. No production migration, database write, deployment, or release was performed.
 - PR #167 remains Draft. No production migration, database write, deployment, or release was performed.
 

@@ -12,6 +12,41 @@ After meaningful product or design changes, simulate a real visitor using Archis
 4. Capture screenshot evidence outside the repo, usually under `/tmp`.
 5. Record findings, remaining risk, rollback scope if edits were made, and the next recommended step.
 
+## 2026-07-15 - Simulation: Final ImageGallery Runtime Regression
+
+Status: final-head local regression passed; PR #167 remains Draft and production is unchanged.
+
+Review finding:
+
+- The `085f9fb` ImageGallery guard returned `null` for every non-empty image list. This was a component-level regression that the earlier page-level tests did not exercise.
+
+Path simulated:
+
+1. Parc.1 at the existing 320/390/430/1440 Chromium matrix in zh/en/ja.
+2. NMWA at 390 x 844 and 1440 x 900 in zh/en/ja.
+3. Villa Savoye at 390 x 844 and 1440 x 900 in zh.
+
+User-view findings:
+
+1. Parc.1 continues to show the explicit localized reviewed no-safe message with no image fallback.
+2. NMWA now has a visible hero image, author/source attribution, and source link at both required widths.
+3. Villa Savoye retains a visible normal hero image, `查看大图` control, and source link at both widths.
+4. The component-level render tests also prove that a normal non-empty gallery remains visible even if the reviewed flag is defensively true, while ordinary empty galleries remain silent.
+
+Validation:
+
+- Targeted Chromium E2E: `4/4` passed with the real image visibility assertions.
+- Full final-head E2E: `33/33` passed after a `4446/4446` production-like build.
+- Unit tests: `74` files / `260` tests passed; typecheck, lint, content verifier, migration/apply parity, JSON check, sensitive-value scan, and diff check passed.
+- Existing Parc.1 screenshots remain the visual evidence for the unchanged empty state. No NMWA migration-after screenshot is claimed because production was not written.
+
+Remaining risk:
+
+- Full WebKit E2E is still outside CI. The new regression is covered by Chromium; the build had two internally retried slow page generations before completing successfully.
+- No production migration/apply, database write, deployment, release, or PR merge was performed.
+
+Rollback scope: `src/components/ImageGallery.tsx`, the two targeted regression test files, and this simulation entry.
+
 ## 2026-07-15 - E2 Correction: Explicit Reviewed Empty State And NMWA Architect ID
 
 Correction to the earlier E2-prep simulation:

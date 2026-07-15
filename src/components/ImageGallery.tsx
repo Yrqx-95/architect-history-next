@@ -66,11 +66,10 @@ export default function ImageGallery({ images, alt, lang, reviewedNoSafeImage = 
     touchStart.current = null
   }
 
-  if (!shouldRenderNoSafeImageState(images.length, reviewedNoSafeImage)) return null
-
-  const labels = getImageGalleryLabels(lang)
-
   if (!images.length) {
+    if (!shouldRenderNoSafeImageState(images.length, reviewedNoSafeImage)) return null
+
+    const labels = getImageGalleryLabels(lang)
     return (
       <section data-testid="no-safe-image-state" aria-label={labels.noSafeImageTitle} className="border-y border-subtle px-4 py-8 text-center sm:px-6 sm:py-10">
         <p className="eyebrow">{labels.noSafeImageTitle}</p>
@@ -79,6 +78,7 @@ export default function ImageGallery({ images, alt, lang, reviewedNoSafeImage = 
     )
   }
 
+  const labels = getImageGalleryLabels(lang)
   const current = images[active]
   const hasError = errors[active]
   const typeLabel = tImageType(lang, current.img_type)

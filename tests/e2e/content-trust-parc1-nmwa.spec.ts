@@ -53,11 +53,30 @@ test.describe('content-trust Parc.1 and NMWA runtime boundaries', () => {
         expect(response?.status()).toBe(200)
         await expect(page.locator('main')).toContainText('National Museum of Western Art')
         await expect(page.locator('main')).toContainText(/Alexander Abero|アレクサンダー|Unsplash|画像資料|图片来源|Image source/)
+        await expect(page.locator('main img').first()).toBeVisible()
+        await expect(page.locator('main').getByText(/Alexander Abero|Unsplash/).first()).toBeVisible()
+        await expect(page.locator('main').getByRole('link', { name: /来源|出典|Source/ }).first()).toBeVisible()
         const errors = await page.evaluate(() => ({
           horizontalOverflow: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) > document.documentElement.clientWidth,
         }))
         expect(errors.horizontalOverflow).toBe(false)
       }
+    }
+  })
+
+  test('ordinary building galleries keep a visible hero image and controls', async ({ page }) => {
+    for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 }]) {
+      await page.setViewportSize(viewport)
+      const response = await page.goto('/zh/building/villa-savoye')
+      expect(response?.status()).toBe(200)
+      await expect(page.locator('main img').first()).toBeVisible()
+      await expect(page.getByRole('button', { name: '查看大图' })).toBeVisible()
+      await expect(page.locator('main').getByRole('link', { name: '来源' }).first()).toBeVisible()
+      const layout = await page.evaluate(() => ({
+        clientWidth: document.documentElement.clientWidth,
+        scrollWidth: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth),
+      }))
+      expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth)
     }
   })
 })

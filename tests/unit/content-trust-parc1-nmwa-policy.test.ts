@@ -1,7 +1,9 @@
 import { readFileSync } from 'node:fs'
+import { renderToStaticMarkup } from 'react-dom/server'
+import { createElement } from 'react'
 import { describe, expect, it } from 'vitest'
 import localImageOverrides from '@/lib/local-image-overrides.json'
-import { shouldRenderNoSafeImageState } from '@/components/ImageGallery'
+import ImageGallery, { shouldRenderNoSafeImageState } from '@/components/ImageGallery'
 import {
   hasNoSafePrimaryImage,
   resolveBuildingGalleryImages,
@@ -35,6 +37,21 @@ const parcImage = {
 } as const
 
 const ordinaryImage = { ...parcImage, id: 'ordinary-image', building_id: 'ordinary-building' } as const
+
+function renderGallery(
+  images: typeof ordinaryImage[] = [ordinaryImage],
+  reviewedNoSafeImage = false,
+  lang = 'en',
+) {
+  return renderToStaticMarkup(
+    createElement(ImageGallery, {
+      images,
+      alt: 'Ordinary building',
+      lang,
+      reviewedNoSafeImage,
+    }),
+  )
+}
 
 describe('Parc.1 no-safe-primary-image policy', () => {
   it('marks only the reviewed slug as image-suppressed', () => {
@@ -83,6 +100,39 @@ describe('Parc.1 no-safe-primary-image policy', () => {
     expect(shouldRenderNoSafeImageState(0, false)).toBe(false)
     expect(shouldRenderNoSafeImageState(0, true)).toBe(true)
     expect(shouldRenderNoSafeImageState(1, true)).toBe(false)
+  })
+
+  it('renders the normal gallery for non-empty images, even with the reviewed flag set', () => {
+    const markup = renderGallery([ordinaryImage], true)
+
+    expect(markup).toContain('aria-label="View full size"')
+    expect(markup).toContain('Ordinary building')
+    expect(markup).toContain('Example')
+    expect(markup).toContain('Source')
+    expect(markup).not.toContain('no-safe-image-state')
+  })
+
+  it('does not render a reviewed no-safe state for an ordinary empty gallery', () => {
+    const markup = renderGallery([], false)
+
+    expect(markup).toBe('')
+    expect(markup).not.toContain('no-safe-image-state')
+  })
+
+  it('renders the reviewed no-safe state with localized accessible labels', () => {
+    const expectedTitles = {
+      zh: '暂无已确认的安全主图',
+      en: 'No reviewed safe primary image',
+      ja: '確認済みの安全な主画像はありません',
+    }
+
+    for (const [lang, title] of Object.entries(expectedTitles)) {
+      const markup = renderGallery([], true, lang)
+
+      expect(markup).toContain('data-testid="no-safe-image-state"')
+      expect(markup).toContain(`aria-label="${title}"`)
+      expect(markup).toContain(title)
+    }
   })
 
   it('keeps the reviewed decision scope and guarded SQL artifacts aligned', () => {
