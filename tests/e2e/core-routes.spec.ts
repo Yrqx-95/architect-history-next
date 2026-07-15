@@ -42,10 +42,22 @@ test.describe('core public routes', () => {
         { width: 1440, height: 900 },
       ]) {
         await page.setViewportSize(viewport)
-        const response = await page.goto(`/${lang}/building/ux-missing-route-20260715`, { waitUntil: 'domcontentloaded' })
+        const response = await page.goto(`/${lang}/building/ux-missing-route-20260715`, { waitUntil: 'commit' })
         expect(response?.status()).toBe(404)
+        const immediate = await page.evaluate(() => ({
+          bodyText: document.body?.innerText ?? '',
+          links: Array.from(document.querySelectorAll('a')).map(link => link.getAttribute('href')),
+          title: document.title,
+          lang: document.documentElement?.lang ?? '',
+        }))
+        if (lang !== 'zh') {
+          expect(immediate.bodyText).not.toContain('页面没有找到')
+          expect(immediate.links).not.toContain('/zh')
+        }
+        await page.waitForLoadState('domcontentloaded')
         await expect(page).toHaveTitle(`${text.title} | Archistory`)
         await expect(page.getByRole('heading', { name: text.title, exact: true })).toBeVisible()
+        await expect(page.locator('html')).toHaveAttribute('lang', lang)
 
         for (const [label, href] of [
           [text.home, `/${lang}`],

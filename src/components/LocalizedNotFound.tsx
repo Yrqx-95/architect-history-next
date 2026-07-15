@@ -42,30 +42,37 @@ export default function LocalizedNotFound({ standalone = false }: { standalone?:
     () => true,
     () => false,
   )
-  const lang = hydrated ? currentLang(pathname) : 'zh'
-  const prefix = `/${lang}`
-  const text = labels[lang]
+  const lang = hydrated ? currentLang(pathname) : null
+  const text = lang ? labels[lang] : null
 
   useEffect(() => {
+    if (!lang || !text) return
     document.title = `${text.title} | Archistory`
-  }, [text.title])
+    document.documentElement.lang = lang
+  }, [lang, text])
 
   return (
     <div className={`mx-auto py-20 text-center ${standalone ? 'min-h-screen max-w-none bg-app px-4 text-primary' : 'max-w-2xl'}`}>
       <p className="eyebrow mb-4">404</p>
-      <h1 className="heading-1 mb-4">{text.title}</h1>
-      <p className="body mx-auto max-w-xl text-secondary">{text.body}</p>
-      <div className="mt-8 flex flex-wrap justify-center gap-3">
-        <Link href={prefix} className="rounded-full bg-[color:var(--ui-text-primary)] px-4 py-2 text-sm text-inverse transition-opacity hover:opacity-85">
-          {text.home}
-        </Link>
-        <Link href={`${prefix}/browse`} className="rounded-full border border-default px-4 py-2 text-sm text-primary transition-colors hover:bg-surface-muted">
-          {text.browse}
-        </Link>
-        <Link href={`${prefix}/search`} className="rounded-full border border-default px-4 py-2 text-sm text-primary transition-colors hover:bg-surface-muted">
-          {text.search}
-        </Link>
-      </div>
+      {text && lang ? (
+        <>
+          <h1 className="heading-1 mb-4">{text.title}</h1>
+          <p className="body mx-auto max-w-xl text-secondary">{text.body}</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link href={`/${lang}`} className="rounded-full bg-[color:var(--ui-text-primary)] px-4 py-2 text-sm text-inverse transition-opacity hover:opacity-85">
+              {text.home}
+            </Link>
+            <Link href={`/${lang}/browse`} className="rounded-full border border-default px-4 py-2 text-sm text-primary transition-colors hover:bg-surface-muted">
+              {text.browse}
+            </Link>
+            <Link href={`/${lang}/search`} className="rounded-full border border-default px-4 py-2 text-sm text-primary transition-colors hover:bg-surface-muted">
+              {text.search}
+            </Link>
+          </div>
+        </>
+      ) : (
+        <div className="min-h-32" aria-hidden="true" />
+      )}
     </div>
   )
 }

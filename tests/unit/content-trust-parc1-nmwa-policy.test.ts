@@ -106,7 +106,13 @@ describe('Parc.1 no-safe-primary-image policy', () => {
   it('keeps the gallery trigger as a native button for pointer and keyboard activation', () => {
     expect(galleryMainSource).toContain('<button')
     expect(galleryMainSource).toContain('type="button"')
-    expect(galleryMainSource).toContain('onClick={() => !hasError && onOpen()}')
+    expect(galleryMainSource).toContain('const openIfAvailable = () =>')
+    expect(galleryMainSource).toContain('if (!hasError) onOpen()')
+    expect(galleryMainSource).toContain('const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) =>')
+    expect(galleryMainSource).toContain("if (event.key !== 'Enter' && event.key !== ' ') return")
+    expect(galleryMainSource).toContain('event.preventDefault()')
+    expect(galleryMainSource).toContain('onClick={openIfAvailable}')
+    expect(galleryMainSource).toContain('onKeyDown={handleKeyDown}')
   })
 
   it('renders the normal gallery for non-empty images, even with the reviewed flag set', () => {

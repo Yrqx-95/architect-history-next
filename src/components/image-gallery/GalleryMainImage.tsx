@@ -1,4 +1,4 @@
-import type { TouchEvent } from 'react'
+import type { KeyboardEvent, TouchEvent } from 'react'
 import SafeImage from '@/components/SafeImage'
 import type { BuildingImage } from '@/lib/types'
 import ImageSkeleton from './ImageSkeleton'
@@ -36,11 +36,22 @@ export default function GalleryMainImage({
   onTouchStart,
   onTouchEnd,
 }: GalleryMainImageProps) {
+  const openIfAvailable = () => {
+    if (!hasError) onOpen()
+  }
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    event.preventDefault()
+    openIfAvailable()
+  }
+
   return (
     <div className="mb-3">
       <button
         type="button"
-        onClick={() => !hasError && onOpen()}
+        onClick={openIfAvailable}
+        onKeyDown={handleKeyDown}
         className={`group block w-full overflow-hidden rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-400 ${hasError ? 'cursor-default' : 'cursor-zoom-in'}`}
         aria-label={viewLabel}
       >
