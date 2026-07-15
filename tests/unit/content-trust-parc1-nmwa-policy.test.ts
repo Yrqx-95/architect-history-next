@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import localImageOverrides from '@/lib/local-image-overrides.json'
+import { shouldRenderNoSafeImageState } from '@/components/ImageGallery'
 import {
   hasNoSafePrimaryImage,
   resolveBuildingGalleryImages,
@@ -70,12 +71,18 @@ describe('Parc.1 no-safe-primary-image policy', () => {
 
   it('requires explicit reviewed suppression before rendering the no-safe empty state', () => {
     expect(gallerySource).toContain('reviewedNoSafeImage?: boolean')
-    expect(gallerySource).toContain('if (!images.length && !reviewedNoSafeImage) return null')
+    expect(gallerySource).toContain('shouldRenderNoSafeImageState(images.length, reviewedNoSafeImage)')
     expect(gallerySource).toContain('data-testid="no-safe-image-state"')
     expect(gallerySource).toContain('aria-label={labels.noSafeImageTitle}')
     expect(gallerySource).toContain('labels.noSafeImageDescription')
     expect(detailSource).toContain('const reviewedNoSafeImage = hasNoSafePrimaryImage(building.slug)')
     expect(detailSource).toContain('reviewedNoSafeImage={reviewedNoSafeImage}')
+  })
+
+  it('distinguishes ordinary empty, reviewed empty, and non-empty gallery states', () => {
+    expect(shouldRenderNoSafeImageState(0, false)).toBe(false)
+    expect(shouldRenderNoSafeImageState(0, true)).toBe(true)
+    expect(shouldRenderNoSafeImageState(1, true)).toBe(false)
   })
 
   it('keeps the reviewed decision scope and guarded SQL artifacts aligned', () => {

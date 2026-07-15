@@ -14,7 +14,7 @@ This file is the handoff log for future Codex/chat windows. Read it before conti
 
 ### Correction validation status
 
-- Passed: `npm run typecheck`, `npm run lint`, full unit (`74` files / `256` tests), `npm run content:verify-parc1-nmwa-001`, migration/apply parity, JSON validation, and sensitive-value scan.
+- Passed: `npm run typecheck`, `npm run lint`, full unit (`74` files / `257` tests), `npm run content:verify-parc1-nmwa-001`, migration/apply parity, JSON validation, and sensitive-value scan.
 - Passed: correction targeted Chromium E2E, `3/3`; Parc.1 explicit state and ordinary NMWA gallery behavior remained correct.
 - Production CASE-104 check: page HTTP 200, API HTTP 200, API JSON valid with `.cases` array.
 - Detached `origin/main` base `52293f5` CASE-104 targeted test: `1/1` passed; temporary worktree was removed cleanly and the count returned from 28 to 27.
