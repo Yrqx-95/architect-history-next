@@ -10,7 +10,8 @@ It is not only a database and not yet a full study platform. The current product
 
 ## Current Production Baseline
 
-- Production/main commit: `e89767356cb605424d22b26a831a95e91eccb345` (PR #168 merge commit; PR #167 content-trust code is included in the reviewed release).
+- Production code commit: `e89767356cb605424d22b26a831a95e91eccb345` (PR #168 merge commit and E5 deployed head; PR #167 content-trust code is included in the reviewed release).
+- Repository `main` may advance beyond the deployed production code through docs-only commits or merges. Do not infer deployment from the latest `main` SHA; use the Reviewed production release head and Cloudflare Version ID as the production authority.
 - PR #167 and PR #168 are merged. PR #167 introduced the reviewed Parc.1 + NMWA package; PR #168 is the test-only Parc.1 browse locator and navigation-wait correction.
 - Reviewed production release `29394373142` completed successfully from `e8976735`, including quality gate, complete tests, build/deploy, and route semantics.
 - Cloudflare Worker: `architect-history-next`; current Version ID `f5a753ea-a798-4767-ac74-25227b1d0345`; routes are `archistory.app/*` and `www.archistory.app/*`.
@@ -38,10 +39,10 @@ It is not only a database and not yet a full study platform. The current product
 
 Follow this order:
 
-1. Close this E5 release documentation synchronization.
+1. Keep the deployed production release head and later docs-only repository `main` advances explicitly separate.
 2. Govern worktrees through read-only inspection and explicit ownership before any writer lane.
 3. Execute read-only candidate selection for the second small Top 50 batch; do not rebuild the queue.
-4. Productize one learning path only after the preceding work is stable.
+4. Enter the next reviewed small batch only for evidence-backed objects, then productize one learning path after the preceding work is stable.
 
 ## Paused / Out of Scope
 

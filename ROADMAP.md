@@ -6,7 +6,7 @@ Goal: make the project converge into a stable product repository.
 
 ## Current Execution Order
 
-1. **Repository status synchronization** — the PR #165 / PR #167 / PR #168 production baseline is being closed in the current status documents; E5 release and QA are complete.
+1. **Repository status discipline** — keep the deployed production head separate from later docs-only `main` advances; the PR #165 / PR #167 / PR #168 baseline, E5 release, and QA are recorded.
 2. **Read-only worktree governance** — inspect ownership and branch state before opening another writer lane; do not append work to the merged PR #165 branch.
 3. **Top 50 small batch** — the queue already contains 25 `trust-repair` and 25 `product-core` records. Select a second read-only shortlist of no more than 5–10 candidates, then review only evidence-backed records; do not rebuild the queue or lower the acceptance bar to fill a count.
 4. **One learning path** — choose and productize one V1 learning path only after the first three steps remain stable.
