@@ -29,6 +29,14 @@
 - **影响**：`images` 表、JSON 注册表和 curated image 迁移之间仍需保持清晰边界。
 - **下一步**：先完成图片权威决策和 reviewed migration 设计；在此之前不得把“迁移 v3 并导入 JSON”当作当前默认动作。
 
+### E. E5 release 后的新增运行时与内容债
+
+- **Full E2E 的 NoFallbackError 噪音**：E5 release 的完整 E2E 为 33 / 33，但日志仍出现过 `NoFallbackError`。它没有阻塞本次发布，仍需要单独定位触发路径，不应被历史 warning 误写成 release failure。
+- **内部 RSC glossary 预取取消**：两个 zh detail QA 观察到 `net::ERR_ABORTED` 的内部 Next RSC glossary prefetch；页面仍 HTTP 200、主体完整且无 pageerror，精确根因尚未确认。先保留观察，不在此 docs-only PR 中修改 fetch/retry。
+- **Parc.1 英文名称一致性**：本次 reviewed migration 有意只修改 `name_zh` / `name_ja` 等字段；生产英文显示仍为 `Parc1`，若要统一为 `Parc.1` 需要另一个 reviewed decision。
+- **NMWA image authority / crop**：当前生产仍使用已有 Alexander Abero / Unsplash gallery，image selection 与 crop authority 尚未关闭；不因当前 QA 通过就宣称图片治理完成。
+- **RSHP 外部可达性不确定**：bounded curl 对 RSHP 官方 URL 返回 403；页面中的 official source link 存在。该结果记录为外部反爬/权限不确定，不写成官方来源失效。
+
 ---
 
 ## 🔴 高优先级（影响用户体验或数据正确性）

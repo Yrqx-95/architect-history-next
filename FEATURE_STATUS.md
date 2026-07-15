@@ -8,8 +8,8 @@ Purpose: identify what is production, what has been validated, what remains prot
 
 | Feature | Status | Notes |
 |---|---|---|
-| Home | Production | Main entry page; PR #165 is merged and released in Reviewed production release `29349915435`. Homepage uses one semantic order, Hero → entry → featured → stats → architects, with one stats DOM block. |
-| Building detail | Production | Core archive/learning entry surface |
+| Home | Production | Main entry page; current production commit `e8976735`, released in Reviewed production release `29394373142`. E5 Chromium QA confirmed one semantic order, Hero → entry → featured → stats → architects, with one stats DOM block and matching DOM/visual/Tab order. |
+| Building detail | Production | Core archive/learning entry surface; Parc.1 no-safe policy and NMWA canonical identity/content were verified in production after the reviewed migration. NMWA image authority remains a separate follow-up. |
 | Architect detail | Production | Core archive/learning entry surface |
 | Search | Production | API and UI are live |
 | Browse by country | Production | Includes country index/detail |
@@ -22,7 +22,7 @@ Purpose: identify what is production, what has been validated, what remains prot
 | Code topics | Production | Learning/code topic surface |
 | Image proxy | Production | Runtime image safety support |
 | Data audit | Production governance | Release/data safety gate, not user-facing |
-| Minimal tests | Production governance | Current release baseline: 73 unit files / 250 tests, 29 / 29 production E2E, and 4,446 generated static pages. |
+| Minimal tests | Production governance | Current release baseline: 74 unit files / 260 tests, 33 / 33 production E2E, and 4,446 generated static pages. |
 
 ## Validated
 

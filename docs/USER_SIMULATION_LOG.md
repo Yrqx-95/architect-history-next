@@ -12,6 +12,49 @@ After meaningful product or design changes, simulate a real visitor using Archis
 4. Capture screenshot evidence outside the repo, usually under `/tmp`.
 5. Record findings, remaining risk, rollback scope if edits were made, and the next recommended step.
 
+## Simulation 63: E5 Migrated Content And Reviewed Production Release
+
+Status: production migration post-state, Reviewed production release, and bounded Chromium QA passed. This entry is appended as the next simulation number; earlier Simulation 60–62 entries retain their historical pre-release wording.
+
+Persona: architecture student who finds a building on a phone, checks its image trust status, then switches to desktop for a source-backed reading path.
+
+Goal: confirm that the reviewed Parc.1 and National Museum of Western Art package is visible in production without image fallback, while the homepage and key routes remain usable after the release.
+
+Path simulated:
+
+1. Parc.1 `/zh`, `/en`, `/ja` building detail at 390 x 844 and 1440 x 900.
+2. NMWA `/zh`, `/en`, `/ja` building detail at 390 x 844 and 1440 x 900.
+3. `/zh` homepage at 320 x 568, 390 x 844, 430 x 932, and 1440 x 900.
+4. `/api/search?q=parc1`, `/zh/browse/buildings`, `/zh/building/villa-savoye`, `/ja/graduation`, `/ja/graduation/cases/CASE-104`, `/zh/search`, and the expected missing route.
+
+User-view findings:
+
+1. Parc.1 returns HTTP 200 in all three languages and both widths, shows exactly one localized reviewed no-safe-image state, has no main image or supporting-image fallback, and does not expose Dangsan Railway Bridge, Tony, or the old Railway Bridge image text.
+2. Parc.1 search returns the object with `cover_url=null`; browse keeps one visible `/zh/building/parc1` text link with `Parc.1` and zero internal images; homepage featured excludes Parc.1 as a cover.
+3. NMWA returns HTTP 200 in all language/width combinations, shows Le Corbusier as the canonical architect, retains supervisor facts as sourced content, and shows the existing Alexander Abero / Unsplash image attribution and source link. Its image authority was not declared resolved.
+4. Homepage DOM order, bounding-box visual order, and real Tab focus order match at all four exact viewports: `entry → featured → stats → architects`. Mobile shows two secondary works and three architects.
+5. Villa Savoye retains a visible hero image, view-large control, source link, and feedback entry. Graduation, CASE-104, search, and browse smoke routes returned HTTP 200; the missing route returned the expected 404.
+
+Validation evidence:
+
+- Reviewed production release `29394373142`: quality gate passed, 74 unit files / 260 tests passed, 33 / 33 E2E passed, build generated 4,446 / 4,446 static pages, deploy and route semantics passed.
+- Current Cloudflare Version ID: `f5a753ea-a798-4767-ac74-25227b1d0345`; routes: `archistory.app/*` and `www.archistory.app/*`.
+- Fresh anon-only database checks before release and after QA each returned 2 buildings, 1 architect, and 36 images with exact reviewed values; migration history contains `content_trust_parc1_nmwa_001` / `20260715052644` exactly once.
+- Chromium screenshots were manually reviewed: `/tmp/archistory-e5-after-parc1-zh-390.png`, `/tmp/archistory-e5-after-parc1-zh-1440.png`, `/tmp/archistory-e5-after-nmwa-zh-390.png`, `/tmp/archistory-e5-after-nmwa-zh-1440.png`.
+- Machine detail: `/tmp/archistory-content-trust-e5-release-20260715.json`; homepage exact-size/focus detail: `/tmp/archistory-e5-home-focus-20260715.json`.
+
+Remaining risk:
+
+- QA is Chromium-only; WebKit is not permanently in CI.
+- RSHP bounded curl returned HTTP 403, recorded as external availability uncertainty rather than an invalid source claim.
+- Two zh detail checks observed cancelled internal RSC glossary prefetch requests (`net::ERR_ABORTED`) without pageerror; exact root cause remains unconfirmed.
+- Release logs retain Cloudflare All Zones, Actions Node 20, punycode, and NoFallbackError warnings; none blocked this release.
+- Parc.1 English display remains `Parc1` because `name_en` was intentionally outside the reviewed migration; NMWA image authority/crop remains a separate follow-up.
+
+Rollback scope: code release e8976735 / Cloudflare Version `f5a753ea-a798-4767-ac74-25227b1d0345`, previous successful release fb9a6f17 / Version `7a3b6b82-738e-47ba-8687-6d24be3329db`, and database migration trace `20260715052644`. No rollback was executed.
+
+Next recommended step: finish this docs-only synchronization, then perform read-only candidate selection for the second Top 50 small batch. Do not rebuild the queue or reopen already reconciled objects.
+
 ## 2026-07-15 - Simulation: Final ImageGallery Runtime Regression
 
 Status: final-head local regression passed; PR #167 remains Draft and production is unchanged.

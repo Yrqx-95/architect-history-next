@@ -10,13 +10,16 @@ It is not only a database and not yet a full study platform. The current product
 
 ## Current Production Baseline
 
-- Production/main commit: `fb9a6f17fe7fbc904ee122b0d8db9fff08290381` (PR #165 merge commit).
-- PR #165 is merged; its final head is `e2c605a805b46f7d0824d377a10d44d3e3a121cd`.
-- Reviewed production release `29349915435` completed successfully from the merge commit.
-- Cloudflare Worker: `architect-history-next`; deployed Version ID `7a3b6b82-738e-47ba-8687-6d24be3329db`; routes are `archistory.app/*` and `www.archistory.app/*`.
-- Homepage hierarchy is one semantic order at every breakpoint: Hero → entry → featured → stats → architects. The statistics section has one DOM block.
-- The release baseline is 73 unit files / 250 tests, 29 / 29 production E2E, and 4,446 generated static pages.
-- The 320 / 390 / 430 / 1440 homepage checks, zh / en / ja home routes, three primary entries, and the specified production smoke routes passed. No console or page errors were observed during that QA sample.
+- Production code commit: `e89767356cb605424d22b26a831a95e91eccb345` (PR #168 merge commit and E5 deployed head; PR #167 content-trust code is included in the reviewed release).
+- Repository `main` may advance beyond the deployed production code through docs-only commits or merges. Do not infer deployment from the latest `main` SHA; use the Reviewed production release head and Cloudflare Version ID as the production authority.
+- PR #167 and PR #168 are merged. PR #167 introduced the reviewed Parc.1 + NMWA package; PR #168 is the test-only Parc.1 browse locator and navigation-wait correction.
+- Reviewed production release `29394373142` completed successfully from `e8976735`, including quality gate, complete tests, build/deploy, and route semantics.
+- Cloudflare Worker: `architect-history-next`; current Version ID `f5a753ea-a798-4767-ac74-25227b1d0345`; routes are `archistory.app/*` and `www.archistory.app/*`.
+- Homepage hierarchy is one semantic order at every breakpoint: Hero → entry → featured → stats → architects. The statistics section has one DOM block; E5 Chromium QA confirmed DOM, visual, and Tab order.
+- Current release baseline is 74 unit files / 260 tests, 33 / 33 production E2E, and 4,446 generated static pages.
+- Supabase migration `content_trust_parc1_nmwa_001` / remote version `20260715052644` appears exactly once in migration history and has been applied. E5 anon-only post-QA verification remained exact.
+- Parc.1 is production-verified with the centralized no-safe-primary-image policy, no image fallback, `cover_url=null` in search, and no browse thumbnail. NMWA is production-verified with canonical Le Corbusier identity/content and its existing gallery attribution; its image-authority decision remains open.
+- The 320 / 390 / 430 / 1440 homepage checks, zh / en / ja object routes, three primary entries, and specified production smoke routes passed. The bounded sample had no product page errors; expected 404 console output, two cancelled internal RSC prefetches, and release warnings remain documented.
 - PR #160 remains Draft and is out of scope.
 - Graduation G6–G10 are complete; do not reopen them without new evidence.
 - Top 50 is already established as 25 `trust-repair` records plus 25 `product-core` records. The next action is a small reviewed batch, not a queue rebuild.
@@ -36,10 +39,10 @@ It is not only a database and not yet a full study platform. The current product
 
 Follow this order:
 
-1. Keep the repository status documents synchronized with the production baseline.
+1. Keep the deployed production release head and later docs-only repository `main` advances explicitly separate.
 2. Govern worktrees through read-only inspection and explicit ownership before any writer lane.
-3. Execute the next small reviewed Top 50 batch.
-4. Productize one learning path only after the preceding work is stable.
+3. Execute read-only candidate selection for the second small Top 50 batch; do not rebuild the queue.
+4. Enter the next reviewed small batch only for evidence-backed objects, then productize one learning path after the preceding work is stable.
 
 ## Paused / Out of Scope
 
