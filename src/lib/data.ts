@@ -4,7 +4,7 @@ import type {
   Era, Style, BuildingType,
 } from './types'
 import { isMinimallyComplete, isWikidataId } from './quality'
-import { isTrustedEditorialImage } from './image-policy'
+import { isTrustedEditorialImage, shouldSuppressBuildingCover } from './image-policy'
 import imageOverrides from './image-overrides.json'
 import localImageOverrides from './local-image-overrides.json'
 import graduationCases from '@/content/graduation/cases.json'
@@ -210,9 +210,10 @@ export async function getBuildingsWithCovers(): Promise<BuildingWithCover[]> {
     images.forEach(i => imgMap.set(i.building_id, i))
     return buildings.map(b => {
       const image = imgMap.get(b.id)
-      const override = cachedImageOverrides[b.slug] || curatedImageOverrides[b.slug]
+      const suppressCover = shouldSuppressBuildingCover(b.slug)
+      const override = suppressCover ? null : cachedImageOverrides[b.slug] || curatedImageOverrides[b.slug]
       const overrideCoverUrl = isDisplayableImageUrl(override?.cover_url) ? override.cover_url : null
-      const imageCoverUrl = isDisplayableImageUrl(image?.url_original) ? image?.url_original as string : null
+      const imageCoverUrl = !suppressCover && isDisplayableImageUrl(image?.url_original) ? image?.url_original as string : null
       const useOverride = Boolean(overrideCoverUrl)
       const useImage = !useOverride && Boolean(imageCoverUrl)
       return {
@@ -273,9 +274,10 @@ export async function getSearchIndex(): Promise<{ architects: SearchArchitect[];
       architects,
       buildings: buildings.map(building => {
         const image = imageByBuilding.get(building.id)
-        const override = cachedImageOverrides[building.slug] || curatedImageOverrides[building.slug]
+        const suppressCover = shouldSuppressBuildingCover(building.slug)
+        const override = suppressCover ? null : cachedImageOverrides[building.slug] || curatedImageOverrides[building.slug]
         const overrideCoverUrl = isDisplayableImageUrl(override?.cover_url) ? override.cover_url : null
-        const imageCoverUrl = isDisplayableImageUrl(image?.url_original) ? image?.url_original as string : null
+        const imageCoverUrl = !suppressCover && isDisplayableImageUrl(image?.url_original) ? image?.url_original as string : null
         const useOverride = Boolean(overrideCoverUrl)
         const useImage = !useOverride && Boolean(imageCoverUrl)
         const functionSlugs = functionsByBuilding.get(building.id) || []

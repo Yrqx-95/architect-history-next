@@ -1,0 +1,160 @@
+{
+  "batch_id": "content-trust-parc1-nmwa-001",
+  "reviewed_at": "2026-07-15T03:32:51.129Z",
+  "scope": [
+    "parc1",
+    "national-museum-of-western-art"
+  ],
+  "production_write": {
+    "applied": false,
+    "database_write_performed": false,
+    "release_or_deploy_performed": false
+  },
+  "supabase_tooling": {
+    "cli_version": "2.109.1",
+    "migration_created_by_cli": true,
+    "official_docs_checked": true,
+    "relevant_changelog_notices": [
+      "future TypeScript 5 requirement for supabase-js",
+      "Node 20 support/deprecation notice"
+    ],
+    "dependency_change_made": false,
+    "remote_apply_performed": false
+  },
+  "preflight": {
+    "method": "Supabase anon-only REST read with explicit fields and exact slug/building-id filters",
+    "evidence_file": "/tmp/archistory-e2-anon-preflight-20260715.json",
+    "security": {
+      "env_names_accessed": [
+        "NEXT_PUBLIC_SUPABASE_URL",
+        "NEXT_PUBLIC_SUPABASE_ANON_KEY"
+      ],
+      "persist_session": false,
+      "auto_refresh_token": false,
+      "detect_session_in_url": false,
+      "credentials_printed": false
+    },
+    "building_rows": 2,
+    "image_rows": 36,
+    "errors": []
+  },
+  "decisions": [
+    {
+      "building_slug": "parc1",
+      "building_id": "39a3d5b5-0308-47e3-b2fe-aebb164353bf",
+      "review_status": "metadata-ready-image-suppressed",
+      "before": {
+        "name_zh": "",
+        "name_ja": "",
+        "architect_slug": "richard-rogers",
+        "city": null,
+        "country": null,
+        "country_code": "KR",
+        "type_slug": null,
+        "era_slug": "contemporary",
+        "description": null,
+        "significance": null,
+        "official_url": null,
+        "updated_at": "2026-07-08T16:11:20.896254+00:00"
+      },
+      "after": {
+        "name_zh": "Parc.1",
+        "name_ja": "Parc.1",
+        "architect_slug": "richard-rogers",
+        "city": "Seoul",
+        "country": "South Korea",
+        "country_code": "KR",
+        "type_slug": "mixed-use",
+        "era_slug": "contemporary",
+        "official_url": "https://rshp.com/projects/mixed-use/parc-1/",
+        "description_languages": ["zh", "en", "ja"],
+        "significance_languages": ["zh", "en", "ja"]
+      },
+      "attribution_boundary": "Keep project-level evidence at RSHP / Richard Rogers; do not convert the co-architect and project-team evidence into unconditional sole-person authorship.",
+      "sources": [
+        {
+          "url": "https://rshp.com/projects/mixed-use/parc-1/",
+          "supports": ["project identity", "Seoul, South Korea", "2003-2021", "mixed-use composition", "RSHP project-team and co-architect context", "description and significance claims"]
+        },
+        {
+          "url": "https://www.parc1.com/",
+          "supports": ["project identity and owner-side context"]
+        }
+      ],
+      "image_decision": {
+        "decision": "no-safe-image-yet",
+        "unsafe_primary_ids": [
+          "e93d4cdd-cc96-5de1-94a9-f1f545ece711",
+          "648c05b4-77a9-58ec-b7b7-5e6969b4852c",
+          "06dfee2c-4c2f-5dd3-8d25-8e3c0c27f6c3"
+        ],
+        "preflight_primary_count": 3,
+        "migration_action": "Set the three confirmed unsafe is_primary flags false; do not delete image rows or curated binary.",
+        "runtime_action": "Remove the parc1 local-image-overrides mapping and route all cover/gallery consumers through the shared no-safe-primary-image policy."
+      }
+    },
+    {
+      "building_slug": "national-museum-of-western-art",
+      "building_id": "17b396f4-6a4c-4e33-963d-dcc697879221",
+      "review_status": "canonical-content-ready-image-follow-up",
+      "before": {
+        "name_zh": "",
+        "name_ja": "",
+        "architect_slug": "kunio-maekawa",
+        "city": null,
+        "country": null,
+        "country_code": "JP",
+        "type_slug": "cultural",
+        "era_slug": null,
+        "description": null,
+        "significance": null,
+        "official_url": null,
+        "updated_at": "2026-05-24T00:02:34.681443+00:00"
+      },
+      "after": {
+        "name_zh": "国立西洋美术馆",
+        "name_ja": "国立西洋美術館",
+        "architect_slug": "le-corbusier",
+        "city": "Tokyo",
+        "country": "Japan",
+        "country_code": "JP",
+        "type_slug": "cultural",
+        "era_slug": "modern",
+        "official_url": "https://www.nmwa.go.jp/en/about/building.html",
+        "description_languages": ["zh", "en", "ja"],
+        "significance_languages": ["zh", "en", "ja"]
+      },
+      "attribution_boundary": "Le Corbusier is the museum's designer for the 1959 Main Building; Junzo Sakakura, Kunio Maekawa, and Takamasa Yoshizaka are supervisors, not co-equal sole designers.",
+      "sources": [
+        {
+          "url": "https://www.nmwa.go.jp/en/about/building.html",
+          "supports": ["Tokyo location", "Main Building designer Le Corbusier", "March 1959 completion", "supervisor roles", "World Heritage and postwar Japan-France context"]
+        },
+        {
+          "url": "https://commons.wikimedia.org/wiki/File:The_Architectural_Work_of_Le_Corbusier_banner.jpg",
+          "supports": ["NMWA subject identity", "663highland author", "Tmv crop attribution", "CC BY 2.5 option", "3200x492 source dimensions"]
+        }
+      ],
+      "image_decision": {
+        "decision": "retain-existing-rows-follow-up",
+        "preflight_row_count": 6,
+        "preflight_primary_ids": [
+          "cbf9a81a-c87d-51d2-8da0-954cce0d7f5e",
+          "f8a78374-d972-5da2-8d2f-9204a7a68310"
+        ],
+        "reason": "The Commons banner is identity and license clear but 3200x492; the production 16:9/2:1 object-cover crop is not acceptable as a reviewed primary without a dedicated presentation decision. The current Unsplash interior is not the canonical building hero. No image row is changed in this batch."
+      }
+    }
+  ],
+  "artifacts": {
+    "migration": "supabase/migrations/20260715033636_content_trust_parc1_nmwa_001.sql",
+    "apply_sql": "db/manual-operations/content-trust-parc1-nmwa-001-apply.sql",
+    "rollback_sql": "db/manual-operations/content-trust-parc1-nmwa-001-rollback.sql",
+    "dry_run_verifier": "scripts/verify-content-trust-parc1-nmwa-001-dry-run.mjs"
+  },
+  "stopping_conditions": [
+    "Any building before value, updated_at, image row count, target image id, or is_primary flag differs from the fresh anon preflight.",
+    "Any NMWA image candidate is selected without separate subject, crop, attribution, and license approval.",
+    "Any production apply, service-role credential request, or remote database mutation is proposed."
+  ]
+}

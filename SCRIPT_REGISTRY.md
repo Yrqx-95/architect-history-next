@@ -1,6 +1,6 @@
 # Script Registry
 
-Last updated: 2026-07-13
+Last updated: 2026-07-15
 
 Purpose: clarify which scripts support production, which govern data quality, which were one-off sprint tools, and which can be archived after confirmation.
 
@@ -22,6 +22,7 @@ Purpose: clarify which scripts support production, which govern data quality, wh
 | `scripts/audit-data.ts` | Main data quality audit | Keep as release/data gate |
 | `scripts/build-next-phase-content-queue.ts` | Builds the versioned 25 trust-repair / 25 product-core content queue from current audits and product exposure signals | Read-only against Supabase; writes only the reviewed packet and P0 Markdown plan after prerequisite audits |
 | `scripts/verify-content-trust-3wtc-001-dry-run.mjs` | Runs the reviewed 3 WTC metadata and primary-image repair plus guarded rollback in isolated PostgreSQL | Keep with batch 001 migration history; no production connection or write |
+| `scripts/verify-content-trust-parc1-nmwa-001-dry-run.mjs` | Replays the reviewed Parc.1 metadata/image suppression and NMWA canonical metadata package plus guarded rollback in isolated PostgreSQL 18 | No production connection or write; includes replay, building/image drift, and extra-row refusal checks |
 | `scripts/verify-duplicate-primary-image-review-001-dry-run.mjs` | Replays the first reviewed duplicate-primary migration and guarded rollback in isolated PostgreSQL | Covers four Commons-vs-Commons decisions; no production connection or write |
 | `scripts/report-orphan-style-slugs.ts` | Reports orphan style assignments | Keep until style taxonomy remains stable over time |
 | `scripts/normalize-style-slugs.ts` | Dry-run/write style alias normalization | Keep for repeatability and rollback context |
@@ -96,6 +97,7 @@ From `package.json`:
 - `content:audit-display` → one-off or periodic governance
 - `content:next-phase-queue` → governance / read-only Top 50 planning
 - `content:verify-3wtc-001` → governance / isolated PostgreSQL migration and rollback verification
+- `content:verify-parc1-nmwa-001` → governance / isolated PostgreSQL migration and rollback verification
 - `content:portraits` → runtime-support
 - `graduation:data` → graduation
 - `graduation:data:from-json` → graduation

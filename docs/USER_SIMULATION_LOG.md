@@ -3794,6 +3794,35 @@ Production evidence:
   - empty text `見つかりません`
   - clear-detail buttons visible
 - Production console warnings/errors during sampled QA: 0.
+
+## Simulation - 2026-07-15 - E2-prep Parc.1 and NMWA Review
+
+Scope was limited to a guarded preparation package for `parc1` and `national-museum-of-western-art`; no production write or deployment occurred.
+
+### Parc.1 local review behavior
+
+1. User opens the Parc.1 detail route in zh, en, or ja.
+2. The detail gallery does not show the Dangsan Railway Bridge, Unsplash, curated, or supporting-image fallback.
+3. The page presents a localized, accessible no-safe-primary-image state.
+4. Cover data used by search, browse, homepage/featured selection, and detail resolution suppresses the unsafe primary instead of returning a misleading cover.
+5. Chromium checks at 320×568, 390×844, 430×932, and 1440×900 found no horizontal overflow; the targeted package/responsive suite passed 7/7.
+
+### NMWA production read-only review
+
+1. User opens `/zh/building/national-museum-of-western-art`, `/en/building/national-museum-of-western-art`, or `/ja/building/national-museum-of-western-art`.
+2. At 390×844 and 1440×900, all three routes returned successfully and displayed the current Alexander Abero Unsplash interior with visible attribution/source text.
+3. No console or page errors were observed in these six checks, and no horizontal overflow was observed.
+4. The 3200×492 Commons banner was inspected from its original file page and downloaded pixels. It clearly represents the museum and has a usable license option, but its extreme ratio is not approved as a production primary under the current crop behavior.
+5. Production screenshot capture timed out; the result above is DOM/attribution/pixel evidence, not a production screenshot claim.
+
+### Package validation and boundaries
+
+- Fresh anon-only preflight returned 2 building rows and 36 image rows without errors; only the two public Supabase environment names were accessed.
+- The isolated PostgreSQL 18 forward/rollback verifier passed replay and drift refusal cases.
+- Typecheck, lint, and targeted Chromium E2E passed. Full E2E completed 31/32 because the unrelated CASE-104 route returned 500 from malformed JSON. Build was attempted but stopped at an existing malformed buildings JSON during prerender.
+- Final unit suite passed `74` files / `255` tests. Local screenshots were captured at `/tmp/archistory-e2-parc1-zh-390.png`, `/tmp/archistory-e2-parc1-zh-1440.png`, `/tmp/archistory-e2-nmwa-zh-390.png`, and `/tmp/archistory-e2-nmwa-zh-1440.png`.
+- Production migration apply, database write, deploy/release, WebKit, and report-generating audits were not run.
+- Remaining uncertainty: NMWA still needs a dedicated crop/presentation decision; Parc.1 remains intentionally without a safe primary image until a separately reviewed candidate is found.
 - Production hydration mismatch after stable option sorting: 0.
 
 ## Simulation - 2026-07-05 - Graduation Tag Dropdown Reduced to 20

@@ -8299,3 +8299,60 @@ If rejected, revert only:
   - `/ja/graduation/random` at `390x844` has no horizontal overflow
   - random hero actions visible: `もう一度`, JSON export, CSV export
   - console warnings/errors: `0`
+
+## 2026-07-15 - E2-prep Reviewed Package: Parc.1 + National Museum of Western Art
+
+### Intent
+
+- Prepare a guarded, reviewed package for exactly two Top 50 objects: `parc1` and `national-museum-of-western-art`.
+- Keep production unchanged. This worktree contains review artifacts, a migration, a manual apply parity file, rollback guards, runtime policy code, and tests; no production apply, deploy, release, or database write was performed.
+
+### Isolation and fresh preflight
+
+- Worktree: `/Users/liquanxing/Downloads/codex产出/archistory-content-trust-parc1-nmwa-001`
+- Branch: `agent/content-trust-parc1-nmwa-001`
+- Base at creation: `origin/main` `52293f5fea2d21a7570023324e9e158d71f2058c`
+- Fresh anon-only preflight: `2026-07-15T03:32:51.129Z`
+- The helper accessed only `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`, with session persistence, refresh, and URL-session detection disabled. No service-role credential was read or used; sensitive-value scan passed.
+- Returned 2 exact building rows and 36 exact image rows with no query errors. Parc.1 had 30 image rows and the three expected unsafe primary IDs, all still primary. NMWA had 6 image rows and the same two duplicate primary IDs observed in E1.5.
+- Evidence: `/tmp/archistory-e2-anon-preflight-20260715.json`.
+
+### Reviewed decisions and implementation
+
+- Parc.1: prepared `name_zh`/`name_ja`, Seoul, South Korea, `KR`, `mixed-use`, RSHP official URL, and concise trilingual description/significance. The attribution boundary remains project-level RSHP / Richard Rogers evidence and does not assert unconditional sole authorship. The three confirmed unsafe primary flags are guarded for suppression only; rows and curated binary remain. The `parc1` local image override was removed.
+- Parc.1 runtime: added one shared no-safe-primary-image policy. Cover data, search index, homepage/featured cover selection, browse cover data, detail gallery resolution, and the gallery empty state all use the suppression path. Supporting images are not promoted as a fallback, and the accessible empty state is rendered in zh/en/ja.
+- NMWA: prepared `architect_slug=le-corbusier`, Tokyo, Japan, `era_slug=modern`, official museum URL, and trilingual content. The text explicitly distinguishes Le Corbusier as the 1959 Main Building designer from Junzo Sakakura, Kunio Maekawa, and Takamasa Yoshizaka as supervisors.
+- NMWA image: no image row was changed. The Commons banner is clearly identified and licensed but is 3200×492 and does not pass the current production crop/presentation bar without a dedicated presentation decision. The current Unsplash interior remains observed, not canonicalized.
+- Official evidence reviewed: [RSHP Parc.1](https://rshp.com/projects/mixed-use/parc-1/), [NMWA building page](https://www.nmwa.go.jp/en/about/building.html), and [Commons banner file page](https://commons.wikimedia.org/wiki/File:The_Architectural_Work_of_Le_Corbusier_banner.jpg).
+
+### Guarded database artifacts
+
+- Migration was created by the Supabase CLI as `supabase/migrations/20260715033636_content_trust_parc1_nmwa_001.sql`; the manual apply SQL is byte-identical.
+- Forward guards pin the fresh building values, timestamps, exact image row counts, target IDs, and primary flags. It updates only the two reviewed buildings and sets the three Parc.1 unsafe primary flags false; it does not delete rows or alter NMWA image rows.
+- Rollback restores the exact preflight metadata and Parc.1 primary flags, leaves NMWA image rows unchanged, and refuses post-apply building text/city, image-count, primary-state, or extra-row drift.
+- Isolated PostgreSQL 18 verifier passed forward → verify → replay refusal → rollback → verify, including building-field, primary-state, extra-row, rollback-building, rollback-text, and rollback-extra-row drift refusal.
+
+### Validation
+
+- Passed: `npm run typecheck`.
+- Passed: `npm run lint`.
+- Passed: full unit suite, `74` files / `255` tests, including the decision-artifact and guarded-SQL assertion.
+- Passed: targeted Chromium E2E for content-trust and responsive home coverage, `7/7`, including Parc.1 at 320/390/430/1440 and all three languages.
+- Passed in the local public-env dev-server lane: Parc.1 no-safe state, no image fallback, search cover `null`, homepage exclusion, browse behavior, and NMWA 390/1440 smoke.
+- Full E2E executed: `31/32` passed. The unrelated existing `tests/e2e/graduation-unified-read.spec.ts` CASE-104 check returned HTTP 500 with `Unexpected end of JSON input` while `/api/v1/graduation/cases` returned 200.
+- Build executed and blocked during prerender by the existing malformed buildings JSON (`Bad control character in string literal`, `/zh/architect/aalto`); no unrelated data repair was attempted.
+- Production read-only checks covered NMWA `/zh`, `/en`, and `/ja` at 390 and 1440. The current Unsplash interior and attribution were visible, with no observed console/page errors. Production screenshot capture timed out, so no production screenshot is claimed.
+- Local screenshots captured from the isolated dev server: `/tmp/archistory-e2-parc1-zh-390.png`, `/tmp/archistory-e2-parc1-zh-1440.png`, `/tmp/archistory-e2-nmwa-zh-390.png`, and `/tmp/archistory-e2-nmwa-zh-1440.png`.
+
+### Not run and remaining risk
+
+- Not run: production migration apply, remote database write, deployment/release, audit/queue/report generators, WebKit E2E, or unrelated CASE-104/data-source repair.
+- Production still has the old Parc.1 metadata/image flags and old NMWA canonical fields until a separately authorized production apply.
+- The no-safe policy is intentionally slug-backed for the reviewed decision; a future content-trust registry could replace it, but that is outside this package.
+- NMWA needs a separate image presentation decision; choosing the banner only because its license is clear would risk an unusable or misleading crop.
+- No schema change was made for multi-author attribution; future co-authored projects remain outside this package.
+
+### Rollback and handoff
+
+- Rollback scope is limited to the two building rows and the three Parc.1 `is_primary` flags captured by the fresh preflight. NMWA image rows are not touched.
+- Draft PR will state the exact reviewed scope and that production apply has not occurred. No PR was made Ready, merged, deployed, or used to write the database in this stage.
