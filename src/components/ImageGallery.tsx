@@ -12,9 +12,10 @@ interface ImageGalleryProps {
   images: BuildingImage[]
   alt: string
   lang: string
+  reviewedNoSafeImage?: boolean
 }
 
-export default function ImageGallery({ images, alt, lang }: ImageGalleryProps) {
+export default function ImageGallery({ images, alt, lang, reviewedNoSafeImage = false }: ImageGalleryProps) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const [loaded, setLoaded] = useState<Record<number, boolean>>({})
@@ -60,6 +61,8 @@ export default function ImageGallery({ images, alt, lang }: ImageGalleryProps) {
     }
     touchStart.current = null
   }
+
+  if (!images.length && !reviewedNoSafeImage) return null
 
   const labels = getImageGalleryLabels(lang)
 

@@ -2,6 +2,27 @@
 
 This file is the handoff log for future Codex/chat windows. Read it before continuing product work.
 
+## 2026-07-15 - E2 Correction: NMWA Architect Identity And Explicit Empty State
+
+### Correction
+
+- Fresh anon-only read at `2026-07-15T04:25:51.875Z` confirmed NMWA `architect_id = NULL`, `architect_slug = kunio-maekawa`, target architect `le-corbusier` id `fbdda76b-fde9-4203-8b68-475d7e40e09a`, and the expected 36 image rows / primary counts. Evidence: `/tmp/archistory-e2-correction-anon-preflight-20260715.json`.
+- Migration and manual apply now guard `architect_id IS NULL`, verify the target architect row, set both `architect_id` and `architect_slug`, and verify both after the forward update.
+- Rollback now guards the post-apply architect ID and restores `architect_id = NULL` plus `architect_slug = kunio-maekawa`.
+- The isolated PostgreSQL verifier schema now includes an `architects` table and `buildings.architect_id` foreign key. It covers forward/rollback/replay and architect-id drift rejection in both directions.
+- `ImageGallery` now renders the reviewed no-safe message only when the explicit `reviewedNoSafeImage` prop is true. Ordinary `images=[]` still returns `null`; BuildingPage derives the prop only from the centralized Parc.1 policy.
+
+### Correction validation status
+
+- Passed: `npm run typecheck`, `npm run lint`, full unit (`74` files / `256` tests), `npm run content:verify-parc1-nmwa-001`, migration/apply parity, JSON validation, and sensitive-value scan.
+- Passed: correction targeted Chromium E2E, `3/3`; Parc.1 explicit state and ordinary NMWA gallery behavior remained correct.
+- Production CASE-104 check: page HTTP 200, API HTTP 200, API JSON valid with `.cases` array.
+- Detached `origin/main` base `52293f5` CASE-104 targeted test: `1/1` passed; temporary worktree was removed cleanly and the count returned from 28 to 27.
+- Branch production-like build attempt `1/1`: passed compilation, TypeScript, `4446/4446` static pages, and optimization; no second attempt was run.
+- Final full E2E after correction and green build: `32/32` passed. Next dev-server emitted intermittent `NoFallbackError` logs for expected fallback/404 activity, but no test failed.
+- PR #167 remains Draft. No production migration, database write, deployment, or release was performed.
+- PR #167 remains Draft. No production migration, database write, deployment, or release was performed.
+
 ## 2026-07-15 - PR #165 Merged And Reviewed Production Released
 
 ### Intent

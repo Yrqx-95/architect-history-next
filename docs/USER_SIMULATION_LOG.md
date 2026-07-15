@@ -12,6 +12,18 @@ After meaningful product or design changes, simulate a real visitor using Archis
 4. Capture screenshot evidence outside the repo, usually under `/tmp`.
 5. Record findings, remaining risk, rollback scope if edits were made, and the next recommended step.
 
+## 2026-07-15 - E2 Correction: Explicit Reviewed Empty State And NMWA Architect ID
+
+Correction to the earlier E2-prep simulation:
+
+- Fresh anon-only preflight at `2026-07-15T04:25:51.875Z` confirmed NMWA `architect_id=null`, `architect_slug=kunio-maekawa`, the Le Corbusier architect row `fbdda76b-fde9-4203-8b68-475d7e40e09a`, and the expected image row/primary counts.
+- The reviewed package now prepares both canonical fields, rather than updating only the slug.
+- Parc.1 still receives the localized no-safe-primary-image state through an explicit prop. A normal building with `images=[]` does not receive reviewed no-safe wording or the `no-safe-image-state` test id.
+- The previous four screenshots remain valid for the visual behavior; no NMWA migration-after screenshot is claimed because production was not written.
+- Production CASE-104 page/API checks both returned HTTP 200; the API body was valid JSON with a `cases` array. The same targeted test passed 1/1 on detached `origin/main`.
+- Correction targeted E2E passed 3/3; the final full E2E passed 32/32 after the production-like build passed 4,446/4,446 static pages.
+- Production remains unchanged, and PR #167 remains Draft.
+
 ## Standing Lens
 
 - The product direction is an archive room, not a study planner.

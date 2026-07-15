@@ -33,6 +33,8 @@ const parcImage = {
   is_primary: true,
 } as const
 
+const ordinaryImage = { ...parcImage, id: 'ordinary-image', building_id: 'ordinary-building' } as const
+
 describe('Parc.1 no-safe-primary-image policy', () => {
   it('marks only the reviewed slug as image-suppressed', () => {
     expect(hasNoSafePrimaryImage('parc1')).toBe(true)
@@ -48,6 +50,14 @@ describe('Parc.1 no-safe-primary-image policy', () => {
     })).toEqual([])
   })
 
+  it('keeps the normal non-empty gallery resolver behavior for other buildings', () => {
+    expect(resolveBuildingGalleryImages({
+      slug: 'ordinary-building',
+      images: [ordinaryImage],
+      curatedCoverImage: null,
+    })).toEqual([ordinaryImage])
+  })
+
   it('removes the local override and keeps cover consumers on the shared suppression path', () => {
     expect(localImageOverrides).not.toHaveProperty('parc1')
     expect(dataSource).toContain('shouldSuppressBuildingCover')
@@ -58,10 +68,14 @@ describe('Parc.1 no-safe-primary-image policy', () => {
     expect(detailSource).not.toContain('supportingImages.slice(0, 1)')
   })
 
-  it('renders an accessible empty state instead of hiding a suppressed gallery', () => {
-    expect(gallerySource).toContain('if (!images.length)')
+  it('requires explicit reviewed suppression before rendering the no-safe empty state', () => {
+    expect(gallerySource).toContain('reviewedNoSafeImage?: boolean')
+    expect(gallerySource).toContain('if (!images.length && !reviewedNoSafeImage) return null')
+    expect(gallerySource).toContain('data-testid="no-safe-image-state"')
     expect(gallerySource).toContain('aria-label={labels.noSafeImageTitle}')
     expect(gallerySource).toContain('labels.noSafeImageDescription')
+    expect(detailSource).toContain('const reviewedNoSafeImage = hasNoSafePrimaryImage(building.slug)')
+    expect(detailSource).toContain('reviewedNoSafeImage={reviewedNoSafeImage}')
   })
 
   it('keeps the reviewed decision scope and guarded SQL artifacts aligned', () => {
@@ -74,9 +88,12 @@ describe('Parc.1 no-safe-primary-image policy', () => {
     expect(migrationSource).toBe(applySource)
     expect(migrationSource).toContain('Parc.1 building precondition drifted')
     expect(migrationSource).toContain('NMWA building precondition drifted')
+    expect(migrationSource).toContain('architect_id IS NULL')
+    expect(migrationSource).toContain("architect_id = 'fbdda76b-fde9-4203-8b68-475d7e40e09a'::uuid")
     expect(migrationSource).toContain('Parc.1 unsafe primary suppression postcondition failed')
     expect(rollbackSource).toContain('Parc.1 rollback refused')
     expect(rollbackSource).toContain('NMWA rollback refused')
+    expect(rollbackSource).toContain('architect_id = NULL')
     expect(rollbackSource).toContain('Parc.1 primary restoration postcondition failed')
     expect(migrationSource).not.toMatch(/apple[- ]park|l[- ]arbre[- ]blanc|fallingwater/i)
   })

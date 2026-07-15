@@ -8,6 +8,7 @@ DO $$
 DECLARE
   parc_id uuid := '39a3d5b5-0308-47e3-b2fe-aebb164353bf'::uuid;
   nmwa_id uuid := '17b396f4-6a4c-4e33-963d-dcc697879221'::uuid;
+  le_corbusier_id uuid := 'fbdda76b-fde9-4203-8b68-475d7e40e09a'::uuid;
   parc_unsafe_ids uuid[] := ARRAY[
     'e93d4cdd-cc96-5de1-94a9-f1f545ece711'::uuid,
     '648c05b4-77a9-58ec-b7b7-5e6969b4852c'::uuid,
@@ -38,12 +39,18 @@ BEGIN
   IF (SELECT count(*) FROM public.buildings
       WHERE id = nmwa_id AND slug = 'national-museum-of-western-art'
         AND name_zh = '' AND name_ja = ''
+        AND architect_id IS NULL
         AND architect_slug = 'kunio-maekawa'
         AND country_code = 'JP' AND era_slug IS NULL
         AND city IS NULL AND country IS NULL AND type_slug = 'cultural'
         AND description IS NULL AND significance IS NULL AND official_url IS NULL
         AND updated_at = '2026-05-24T00:02:34.681443+00:00'::timestamptz) <> 1 THEN
     RAISE EXCEPTION 'NMWA building precondition drifted from anon preflight';
+  END IF;
+
+  IF (SELECT count(*) FROM public.architects
+      WHERE id = le_corbusier_id AND slug = 'le-corbusier') <> 1 THEN
+    RAISE EXCEPTION 'NMWA target architect row is missing or drifted';
   END IF;
 
   IF (SELECT count(*) FROM public.images WHERE building_id = nmwa_id) <> 6
@@ -79,6 +86,7 @@ UPDATE public.buildings
 SET
   name_zh = '国立西洋美术馆',
   name_ja = '国立西洋美術館',
+  architect_id = 'fbdda76b-fde9-4203-8b68-475d7e40e09a'::uuid,
   architect_slug = 'le-corbusier',
   city = 'Tokyo',
   country = 'Japan',
@@ -122,6 +130,7 @@ BEGIN
   IF (SELECT count(*) FROM public.buildings
       WHERE id = '17b396f4-6a4c-4e33-963d-dcc697879221'::uuid
         AND name_zh = '国立西洋美术馆' AND name_ja = '国立西洋美術館'
+        AND architect_id = 'fbdda76b-fde9-4203-8b68-475d7e40e09a'::uuid
         AND architect_slug = 'le-corbusier' AND city = 'Tokyo' AND country = 'Japan'
         AND era_slug = 'modern'
         AND official_url = 'https://www.nmwa.go.jp/en/about/building.html'

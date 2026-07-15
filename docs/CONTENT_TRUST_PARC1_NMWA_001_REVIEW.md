@@ -1,7 +1,7 @@
 # Content Trust Review: Parc.1 + National Museum of Western Art
 
 Reviewed package: `content-trust-parc1-nmwa-001`
-Reviewed at: `2026-07-15T03:32:51.129Z`
+Reviewed at: `2026-07-15T04:25:51.875Z`
 Production apply: **not performed**
 
 ## Scope and safety
@@ -13,7 +13,7 @@ This package contains exactly two buildings:
 
 The preflight used an explicit-field Supabase anon-only read for the two exact slugs and their image rows. It accessed only `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`, with session persistence, token refresh, and URL session detection disabled. The helper did not print credentials, and no database write, migration apply, deploy, or release was performed.
 
-Fresh evidence is retained at `/tmp/archistory-e2-anon-preflight-20260715.json`.
+Fresh correction evidence is retained at `/tmp/archistory-e2-correction-anon-preflight-20260715.json`. It returned 2 building rows, 3 architect rows, and 36 image rows without errors; the target Le Corbusier row is `fbdda76b-fde9-4203-8b68-475d7e40e09a`. Parc.1 still has 30 rows / 3 primaries, and NMWA still has 6 rows / 2 primaries.
 
 ## Supabase tooling check
 
@@ -59,7 +59,7 @@ Metadata changes:
 | Field | Before | Reviewed after |
 | --- | --- | --- |
 | `name_zh` / `name_ja` | empty | `国立西洋美术馆` / `国立西洋美術館` |
-| `architect_slug` | `kunio-maekawa` | `le-corbusier` |
+| `architect_id` / `architect_slug` | `null` / `kunio-maekawa` | `fbdda76b-fde9-4203-8b68-475d7e40e09a` / `le-corbusier` |
 | `city` / `country` | null / null | `Tokyo` / `Japan` |
 | `country_code` / `type_slug` | `JP` / `cultural` | unchanged |
 | `era_slug` | null | `modern` |
@@ -78,7 +78,11 @@ Commons evidence: <https://commons.wikimedia.org/wiki/File:The_Architectural_Wor
 - Guarded rollback: `db/manual-operations/content-trust-parc1-nmwa-001-rollback.sql`
 - Isolated PostgreSQL verifier: `scripts/verify-content-trust-parc1-nmwa-001-dry-run.mjs`
 
-The forward migration is guarded by the fresh building values, timestamps, exact image row counts, target image IDs, and primary flags. The rollback restores the actual preflight primary state for Parc.1 and the prior NMWA metadata state. Both paths reject replay or drift rather than silently overwriting changes. NMWA image rows are deliberately excluded from the forward update.
+The forward migration is guarded by the fresh building values, timestamps, exact image row counts, target image IDs, primary flags, and the existence of the target architect row. It sets both NMWA `architect_id` and `architect_slug`. The rollback restores `architect_id = NULL` and `architect_slug = 'kunio-maekawa'`, plus the actual preflight primary state for Parc.1. Both paths reject replay or drift rather than silently overwriting changes. NMWA image rows are deliberately excluded from the forward update.
+
+## E2 correction: explicit empty-gallery state
+
+`ImageGallery` now requires the explicit `reviewedNoSafeImage` prop before rendering the reviewed no-safe message. A normal `images=[]` result still returns `null`, preserving the pre-package behavior for ordinary missing data or query failures. Building detail derives the prop only through `hasNoSafePrimaryImage(building.slug)`, so Parc.1 receives the reviewed state and other buildings do not inherit it from an empty array.
 
 ## Risks and stopping conditions
 

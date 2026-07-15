@@ -1,6 +1,6 @@
 {
   "batch_id": "content-trust-parc1-nmwa-001",
-  "reviewed_at": "2026-07-15T03:32:51.129Z",
+  "reviewed_at": "2026-07-15T04:25:51.875Z",
   "scope": [
     "parc1",
     "national-museum-of-western-art"
@@ -23,7 +23,7 @@
   },
   "preflight": {
     "method": "Supabase anon-only REST read with explicit fields and exact slug/building-id filters",
-    "evidence_file": "/tmp/archistory-e2-anon-preflight-20260715.json",
+    "evidence_file": "/tmp/archistory-e2-correction-anon-preflight-20260715.json",
     "security": {
       "env_names_accessed": [
         "NEXT_PUBLIC_SUPABASE_URL",
@@ -35,7 +35,12 @@
       "credentials_printed": false
     },
     "building_rows": 2,
+    "architect_rows": 3,
     "image_rows": 36,
+    "architect_target": {
+      "slug": "le-corbusier",
+      "id": "fbdda76b-fde9-4203-8b68-475d7e40e09a"
+    },
     "errors": []
   },
   "decisions": [
@@ -46,6 +51,7 @@
       "before": {
         "name_zh": "",
         "name_ja": "",
+        "architect_id": null,
         "architect_slug": "richard-rogers",
         "city": null,
         "country": null,
@@ -100,6 +106,7 @@
       "before": {
         "name_zh": "",
         "name_ja": "",
+        "architect_id": null,
         "architect_slug": "kunio-maekawa",
         "city": null,
         "country": null,
@@ -114,6 +121,7 @@
       "after": {
         "name_zh": "国立西洋美术馆",
         "name_ja": "国立西洋美術館",
+        "architect_id": "fbdda76b-fde9-4203-8b68-475d7e40e09a",
         "architect_slug": "le-corbusier",
         "city": "Tokyo",
         "country": "Japan",
@@ -153,7 +161,7 @@
     "dry_run_verifier": "scripts/verify-content-trust-parc1-nmwa-001-dry-run.mjs"
   },
   "stopping_conditions": [
-    "Any building before value, updated_at, image row count, target image id, or is_primary flag differs from the fresh anon preflight.",
+    "Any building before value, architect_id, updated_at, image row count, target image id, or is_primary flag differs from the fresh anon preflight.",
     "Any NMWA image candidate is selected without separate subject, crop, attribution, and license approval.",
     "Any production apply, service-role credential request, or remote database mutation is proposed."
   ]

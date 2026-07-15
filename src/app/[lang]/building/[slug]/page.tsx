@@ -15,7 +15,7 @@ import { buildingLearningMapBySlug, type BuildingLearningMapRecord } from '@/con
 import PageShell from '@/components/PageShell'
 import Breadcrumb from '@/components/Breadcrumb'
 import ImageGallery from '@/components/ImageGallery'
-import { resolveBuildingGalleryImages } from '@/lib/image-policy'
+import { hasNoSafePrimaryImage, resolveBuildingGalleryImages } from '@/lib/image-policy'
 import ImageBreak from '@/components/ImageBreak'
 import MetadataPanel from '@/components/MetadataPanel'
 import PullQuote from '@/components/PullQuote'
@@ -894,6 +894,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
     images,
     curatedCoverImage,
   })
+  const reviewedNoSafeImage = hasNoSafePrimaryImage(building.slug)
   const contextEra = era || findEraForBuildingYear(building, allEras)
   const timelinePeriod = contextEra
     ? findTimelinePeriodForEra(contextEra)
@@ -975,7 +976,7 @@ export default async function BuildingPage({ params }: { params: Promise<{ lang:
 
       {/* Hero: image gallery */}
       <div className="section-sm">
-        <ImageGallery images={galleryImages} alt={nameText} lang={lang} />
+        <ImageGallery images={galleryImages} alt={nameText} lang={lang} reviewedNoSafeImage={reviewedNoSafeImage} />
       </div>
 
       {/* Title + metadata */}
