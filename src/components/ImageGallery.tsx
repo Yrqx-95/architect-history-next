@@ -12,9 +12,14 @@ interface ImageGalleryProps {
   images: BuildingImage[]
   alt: string
   lang: string
+  reviewedNoSafeImage?: boolean
 }
 
-export default function ImageGallery({ images, alt, lang }: ImageGalleryProps) {
+export function shouldRenderNoSafeImageState(imagesLength: number, reviewedNoSafeImage: boolean) {
+  return imagesLength === 0 && reviewedNoSafeImage
+}
+
+export default function ImageGallery({ images, alt, lang, reviewedNoSafeImage = false }: ImageGalleryProps) {
   const [active, setActive] = useState(0)
   const [lightbox, setLightbox] = useState(false)
   const [loaded, setLoaded] = useState<Record<number, boolean>>({})
@@ -61,13 +66,22 @@ export default function ImageGallery({ images, alt, lang }: ImageGalleryProps) {
     touchStart.current = null
   }
 
-  if (!images.length) return null
+  if (!images.length) {
+    if (!shouldRenderNoSafeImageState(images.length, reviewedNoSafeImage)) return null
 
+    const labels = getImageGalleryLabels(lang)
+    return (
+      <section data-testid="no-safe-image-state" aria-label={labels.noSafeImageTitle} className="border-y border-subtle px-4 py-8 text-center sm:px-6 sm:py-10">
+        <p className="eyebrow">{labels.noSafeImageTitle}</p>
+        <p className="mt-3 text-sm leading-relaxed text-secondary">{labels.noSafeImageDescription}</p>
+      </section>
+    )
+  }
+
+  const labels = getImageGalleryLabels(lang)
   const current = images[active]
   const hasError = errors[active]
   const typeLabel = tImageType(lang, current.img_type)
-  const labels = getImageGalleryLabels(lang)
-
   return (
     <>
       <GalleryMainImage

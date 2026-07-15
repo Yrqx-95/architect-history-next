@@ -12,6 +12,53 @@ After meaningful product or design changes, simulate a real visitor using Archis
 4. Capture screenshot evidence outside the repo, usually under `/tmp`.
 5. Record findings, remaining risk, rollback scope if edits were made, and the next recommended step.
 
+## 2026-07-15 - Simulation: Final ImageGallery Runtime Regression
+
+Status: final-head local regression passed; PR #167 remains Draft and production is unchanged.
+
+Review finding:
+
+- The `085f9fb` ImageGallery guard returned `null` for every non-empty image list. This was a component-level regression that the earlier page-level tests did not exercise.
+
+Path simulated:
+
+1. Parc.1 at the existing 320/390/430/1440 Chromium matrix in zh/en/ja.
+2. NMWA at 390 x 844 and 1440 x 900 in zh/en/ja.
+3. Villa Savoye at 390 x 844 and 1440 x 900 in zh.
+
+User-view findings:
+
+1. Parc.1 continues to show the explicit localized reviewed no-safe message with no image fallback.
+2. NMWA now has a visible hero image, author/source attribution, and source link at both required widths.
+3. Villa Savoye retains a visible normal hero image, `查看大图` control, and source link at both widths.
+4. The component-level render tests also prove that a normal non-empty gallery remains visible even if the reviewed flag is defensively true, while ordinary empty galleries remain silent.
+
+Validation:
+
+- Targeted Chromium E2E: `4/4` passed with the real image visibility assertions.
+- Full final-head E2E: `33/33` passed after a `4446/4446` production-like build.
+- Unit tests: `74` files / `260` tests passed; typecheck, lint, content verifier, migration/apply parity, JSON check, sensitive-value scan, and diff check passed.
+- Existing Parc.1 screenshots remain the visual evidence for the unchanged empty state. No NMWA migration-after screenshot is claimed because production was not written.
+
+Remaining risk:
+
+- Full WebKit E2E is still outside CI. The new regression is covered by Chromium; the build had two internally retried slow page generations before completing successfully.
+- No production migration/apply, database write, deployment, release, or PR merge was performed.
+
+Rollback scope: `src/components/ImageGallery.tsx`, the two targeted regression test files, and this simulation entry.
+
+## 2026-07-15 - E2 Correction: Explicit Reviewed Empty State And NMWA Architect ID
+
+Correction to the earlier E2-prep simulation:
+
+- Fresh anon-only preflight at `2026-07-15T04:25:51.875Z` confirmed NMWA `architect_id=null`, `architect_slug=kunio-maekawa`, the Le Corbusier architect row `fbdda76b-fde9-4203-8b68-475d7e40e09a`, and the expected image row/primary counts.
+- The reviewed package now prepares both canonical fields, rather than updating only the slug.
+- Parc.1 still receives the localized no-safe-primary-image state through an explicit prop. A normal building with `images=[]` does not receive reviewed no-safe wording or the `no-safe-image-state` test id.
+- The previous four screenshots remain valid for the visual behavior; no NMWA migration-after screenshot is claimed because production was not written.
+- Production CASE-104 page/API checks both returned HTTP 200; the API body was valid JSON with a `cases` array. The same targeted test passed 1/1 on detached `origin/main`.
+- Correction targeted E2E passed 3/3; the final full E2E passed 32/32 after the production-like build passed 4,446/4,446 static pages.
+- Production remains unchanged, and PR #167 remains Draft.
+
 ## Standing Lens
 
 - The product direction is an archive room, not a study planner.
@@ -3794,6 +3841,35 @@ Production evidence:
   - empty text `見つかりません`
   - clear-detail buttons visible
 - Production console warnings/errors during sampled QA: 0.
+
+## Simulation - 2026-07-15 - E2-prep Parc.1 and NMWA Review
+
+Scope was limited to a guarded preparation package for `parc1` and `national-museum-of-western-art`; no production write or deployment occurred.
+
+### Parc.1 local review behavior
+
+1. User opens the Parc.1 detail route in zh, en, or ja.
+2. The detail gallery does not show the Dangsan Railway Bridge, Unsplash, curated, or supporting-image fallback.
+3. The page presents a localized, accessible no-safe-primary-image state.
+4. Cover data used by search, browse, homepage/featured selection, and detail resolution suppresses the unsafe primary instead of returning a misleading cover.
+5. Chromium checks at 320×568, 390×844, 430×932, and 1440×900 found no horizontal overflow; the targeted package/responsive suite passed 7/7.
+
+### NMWA production read-only review
+
+1. User opens `/zh/building/national-museum-of-western-art`, `/en/building/national-museum-of-western-art`, or `/ja/building/national-museum-of-western-art`.
+2. At 390×844 and 1440×900, all three routes returned successfully and displayed the current Alexander Abero Unsplash interior with visible attribution/source text.
+3. No console or page errors were observed in these six checks, and no horizontal overflow was observed.
+4. The 3200×492 Commons banner was inspected from its original file page and downloaded pixels. It clearly represents the museum and has a usable license option, but its extreme ratio is not approved as a production primary under the current crop behavior.
+5. Production screenshot capture timed out; the result above is DOM/attribution/pixel evidence, not a production screenshot claim.
+
+### Package validation and boundaries
+
+- Fresh anon-only preflight returned 2 building rows and 36 image rows without errors; only the two public Supabase environment names were accessed.
+- The isolated PostgreSQL 18 forward/rollback verifier passed replay and drift refusal cases.
+- Typecheck, lint, and targeted Chromium E2E passed. Full E2E completed 31/32 because the unrelated CASE-104 route returned 500 from malformed JSON. Build was attempted but stopped at an existing malformed buildings JSON during prerender.
+- Final unit suite passed `74` files / `255` tests. Local screenshots were captured at `/tmp/archistory-e2-parc1-zh-390.png`, `/tmp/archistory-e2-parc1-zh-1440.png`, `/tmp/archistory-e2-nmwa-zh-390.png`, and `/tmp/archistory-e2-nmwa-zh-1440.png`.
+- Production migration apply, database write, deploy/release, WebKit, and report-generating audits were not run.
+- Remaining uncertainty: NMWA still needs a dedicated crop/presentation decision; Parc.1 remains intentionally without a safe primary image until a separately reviewed candidate is found.
 - Production hydration mismatch after stable option sorting: 0.
 
 ## Simulation - 2026-07-05 - Graduation Tag Dropdown Reduced to 20
