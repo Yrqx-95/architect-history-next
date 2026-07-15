@@ -17,7 +17,7 @@ test.describe('core public routes', () => {
   })
 
   test('building detail returns 200 and missing building returns 404', async ({ page, request }) => {
-    const response = await page.goto('/zh/building/villa-savoye')
+    const response = await page.goto('/zh/building/villa-savoye', { waitUntil: 'domcontentloaded' })
     expect(response?.status()).toBe(200)
     await expect(page).toHaveTitle(/萨伏伊别墅|Villa Savoye|Archistory/)
     await expect(page.getByRole('heading', { name: '继续阅读这座建筑' })).toBeVisible()
@@ -27,7 +27,7 @@ test.describe('core public routes', () => {
   })
 
   test('building feedback carries the current page into the email draft', async ({ page }) => {
-    await page.goto('/zh/building/villa-savoye')
+    await page.goto('/zh/building/villa-savoye', { waitUntil: 'domcontentloaded' })
     const reportLink = page.getByRole('link', { name: '反馈当前页面' })
     await expect(reportLink).toHaveAttribute('href', '/zh/feedback?from=%2Fzh%2Fbuilding%2Fvilla-savoye')
     await reportLink.click()
