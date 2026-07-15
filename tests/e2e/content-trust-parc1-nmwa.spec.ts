@@ -74,6 +74,23 @@ test.describe('content-trust Parc.1 and NMWA runtime boundaries', () => {
       await expect(page.locator('main img').first()).toBeVisible()
       await expect(page.getByRole('button', { name: '查看大图' })).toBeVisible()
       await expect(page.locator('main').getByRole('link', { name: '来源' }).first()).toBeVisible()
+
+      const openButton = page.getByRole('button', { name: '查看大图' })
+      await openButton.click()
+      await expect(page.getByRole('button', { name: '关闭' })).toBeVisible()
+      await page.getByRole('button', { name: '关闭' }).click()
+
+      await openButton.focus()
+      await page.keyboard.press('Enter')
+      await expect(page.getByRole('button', { name: '关闭' })).toBeVisible()
+      await page.getByRole('button', { name: '关闭' }).click()
+
+      await openButton.focus()
+      await page.keyboard.press('Space')
+      await expect(page.getByRole('button', { name: '关闭' })).toBeVisible()
+      await page.keyboard.press('Escape')
+      await expect(page.getByRole('button', { name: '关闭' })).toHaveCount(0)
+
       const layout = await page.evaluate(() => ({
         clientWidth: document.documentElement.clientWidth,
         scrollWidth: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth),
